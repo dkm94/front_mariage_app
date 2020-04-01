@@ -1,0 +1,49 @@
+
+@media only screen and (max-width: 450px) {
+
+html, body {
+    background-color: lightgray;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+.home {
+   height: 100vh;
+   width: 100%; 
+   background-color: green;
+}
+
+.navbar {
+    height: 10%;
+    width: 100%;
+    background-color: lightpink;
+}
+
+.footer {
+    height: 20%;
+    width: 100%;
+    background-color: peru;
+}
+
+.register {
+    height: 70%;
+    width: 100%;
+    background-color: rosybrown;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.registerBox {
+    height: 84%;
+    width: 80%;
+    padding: 30px;
+    background-color: grey;
+}
+
+.registerBox h1 {
+    text-align: center;
+}
+
+}

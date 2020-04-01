@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 
-class Navbar extends Component {
+class Footer extends Component {
 
     render(){
 
         return (
-            <div className="navbar">
+            <div className="footer">
                 
             </div>
         )
     }
 }
 
-export default withRouter(Navbar);
+export default withRouter(Footer);
