@@ -2,48 +2,94 @@
 @media only screen and (max-width: 450px) {
 
 html, body {
-    background-color: lightgray;
+    /* background-color: lightgray; */
     height: 100%;
     width: 100%;
     margin: 0;
+    font-family: 'Crimson Text', serif;
+
+}
+
+h1 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    font-style: italic;
+    line-height: 1.6;
 }
 
 .home {
    height: 100vh;
    width: 100%; 
-   background-color: green;
+   /* background-color: green; */
+}
+
+.header {
+    height: 10%;
+    width: 100%;
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header img {
+    height: 100%;
 }
 
 .navbar {
-    height: 10%;
+    height: 6%;
     width: 100%;
-    background-color: lightpink;
+    background-color: #E7E7E7;
+}
+
+.button {
+    height: fit-content;
+}
+
+.button-center {
+    text-align: center;
+}
+
+.button button {
+    border-style: none;
+    height: 30px;
+    padding: 3px 6px;
+    font: unset;
 }
 
 .footer {
-    height: 20%;
+    height: 17vh;
     width: 100%;
-    background-color: peru;
+    background-color: #000000;
 }
 
 .register {
-    height: 70%;
+    height: 67%;
     width: 100%;
-    background-color: rosybrown;
+    /* background-color: rosybrown; */
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .registerBox {
-    height: 84%;
-    width: 80%;
+    height: fit-content;
+    width: 70%;
     padding: 30px;
-    background-color: grey;
+    border-radius: 10% 0px;
+    background-color: #FFF5F1;
+}
+
+.registerBox input {
+    margin-top: 5px;
 }
 
 .registerBox h1 {
     text-align: center;
+}
+
+.reg-input {
+    margin-bottom: 10px;
 }
 
 }

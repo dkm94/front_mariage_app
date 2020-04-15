@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
+import Button from './Button';
 
 class RegisterBox extends Component {
 
@@ -54,11 +55,11 @@ class RegisterBox extends Component {
 
         return (
             <div className="registerBox">
-                <h1>SIGN UP</h1>
+                <h1>Inscription</h1>
 
                 <form onSubmit={this.handleSubmit}>
 
-                    <div className="input-title">
+                    <div className="reg-input input-title">
                     <label>Title of event</label><br />
                     <input
                     name="title"
@@ -69,7 +70,7 @@ class RegisterBox extends Component {
                     />
                     </div>
                 
-                    <div className="input-person">
+                    <div className="reg-input input-person">
                         <label>First Person</label><br />
                         <input
                         name="firstPerson"
@@ -81,7 +82,7 @@ class RegisterBox extends Component {
                     </div>
 
                     
-                    <div className="input-person">
+                    <div className="reg-input input-person">
                         <label>Second Person</label><br />
                         <input
                         name="secondPerson"
@@ -92,7 +93,7 @@ class RegisterBox extends Component {
                         />
                     </div>
 
-                    <div className="input-mail">
+                    <div className="reg-input input-mail">
                         <label>Email address</label><br />
                         <input
                         name="email"
@@ -103,7 +104,7 @@ class RegisterBox extends Component {
                         />
                     </div>
 
-                    <div className="input-password">
+                    <div className="reg-input input-password">
                         <label>Password</label><br />
                         <input
                         name="password"
@@ -113,8 +114,7 @@ class RegisterBox extends Component {
                         placeholder="Enter a password"
                         />
                     </div>
-            
-                <button type="submit">Submit</button>
+                    <Button />
             </form>
             </div>
         )
