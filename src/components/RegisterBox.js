@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import Button from './Button';
+import decode from "jwt-decode"; // permet de decoder un token directement sur le front
+
 
 class RegisterBox extends Component {
 
@@ -18,6 +20,35 @@ class RegisterBox extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
 }
+
+    
+  getToken() {
+    return localStorage.getItem("token");
+  }
+
+  loggedIn() {
+    const token = this.getToken(); 
+    return !!token && !this.isTokenExpired(token); 
+  }
+
+  isTokenExpired(token) {
+    try {
+      const decoded = decode(token);
+      console.log(" decoded ", decoded);
+      if (decoded.exp < Date.now() / 1000) {
+        // on check la date d'expiration qui est dans le token 
+        return true; // token expiré
+      } else return false;
+    } catch (err) {
+      return false;
+    }
+  }
+
+  componentDidMount() {
+    if (this.loggedIn()) {
+      this.props.history.replace("/menuAdm");
+    }
+  }
 
     handleChange(e) {
         this.setState({ [e.target.name]: e.target.value });
@@ -47,7 +78,8 @@ class RegisterBox extends Component {
         .then(res => res.json())
         .then(res => {
           console.log("resultat du fetch : ", res);
-        //   localStorage.setItem("token", res.token);
+            localStorage.setItem("token", res.token);
+            this.props.history.replace("/menuAdm");
         });
       }
 
