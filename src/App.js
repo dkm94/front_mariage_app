@@ -4,6 +4,10 @@ import { Switch } from "react-router-dom";
 import Home from './components/Home';
 import MenuAdm from './components/MenuAdm';
 import EspacePersonnalisé from './components/EspacePersonnalisé';
+import Groupes from './components/Groupes';
+import Tables from './components/Tables';
+import Menus from './components/Menus';
+import Cake from './components/Gâteau';
 import './App.css';
 
 function App() {
@@ -14,6 +18,10 @@ function App() {
           <Route exact path="/" component={Home}/>
           <Route path="/menuAdm" component={MenuAdm}/>
           <Route path="/espacePerso" component={EspacePersonnalisé}/>
+          <Route path="/groupes" component={Groupes}/>
+          <Route path="/tables" component={Tables}/>
+          <Route path="/menus" component={Menus}/>
+          <Route path="/gâteau" component={Cake}/>
         </Switch>
       </Router>
     </div>

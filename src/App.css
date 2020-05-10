@@ -1,6 +1,7 @@
 
 @media only screen and (max-width: 450px) {
 
+/* Mise en forme */
 html, body {
     /* background-color: lightgray; */
     height: 100%;
@@ -15,20 +16,10 @@ h1 {
     font-weight: 600;
     font-style: italic;
     line-height: 1.6;
+    text-align: center;
 }
 
-.home {
-   height: 100vh;
-   width: 100%; 
-   /* background-color: green; */
-}
-
-.menuAdm {
-    height: 100vh;
-    width: 100%; 
-    background-color: green;
- }
-
+/* Header */
 .header {
     height: 10%;
     width: 100%;
@@ -48,6 +39,7 @@ h1 {
     background-color: #E7E7E7;
 }
 
+/* Boutons */
 .button {
     height: fit-content;
 }
@@ -63,11 +55,12 @@ h1 {
     font: unset;
 }
 
-.footer {
-    height: 17vh;
-    width: 100%;
-    background-color: #000000;
-}
+/* Accueil Register */
+.home {
+    height: 100vh;
+    width: 100%; 
+    /* background-color: green; */
+ }
 
 .register {
     height: 67%;
@@ -98,9 +91,12 @@ h1 {
     margin-bottom: 10px;
 }
 
+/* Menu Adm  */
 .menuAdm {
+    height: 100vh;
+    width: 100%; 
     background-color: #FFF5F1;
-}
+ }
 
 .menuAdmBox {
     height: 67%;
@@ -112,6 +108,7 @@ h1 {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    padding: 0;
 }
 
 .ongletMenu {
@@ -123,6 +120,7 @@ h1 {
     align-items: center;
     border: red;
     border-style: dotted;
+    list-style: none;
 }
 
 .ongletMenu h2 {
@@ -130,6 +128,13 @@ h1 {
     font-size: 18px;
 }
 
+a:-webkit-any-link {
+    color: black;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+/* Espace Perso */
 .espacePersoBox {
     height: 67%;
     width: 100%;
@@ -140,5 +145,133 @@ h1 {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+}
+
+/* Menu groupes */
+.groupes {
+    height: 100vh;
+    width: 100%; 
+    background-color: green;
+}
+
+.groupesBox {
+    height: 67%;
+    width: 100%;
+}
+
+.addGroup {
+    height: 22%;
+    width: 30%;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: red;
+    border-style: dotted;
+    list-style: none;
+    margin: 10%;
+}
+
+.addGroupCroix {
+    font-size: 63px;
+    margin-bottom: 15px;
+}
+
+
+/* Menu tables */
+.tables {
+    height: 100vh;
+    width: 100%; 
+    background-color: green;
+}
+
+.tablesBox {
+    height: 67%;
+    width: 100%;
+}
+
+.addTable {
+    height: 22%;
+    width: 30%;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: red;
+    border-style: dotted;
+    list-style: none;
+    margin: 10%;
+}
+
+.addTableCroix {
+    font-size: 63px;
+    margin-bottom: 15px;
+}
+
+/* Menu menus */
+.menus {
+    height: 100vh;
+    width: 100%; 
+    background-color: green;
+}
+
+.menusBox {
+    height: 67%;
+    width: 100%;
+}
+
+.addMenu {
+    height: 22%;
+    width: 30%;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: red;
+    border-style: dotted;
+    list-style: none;
+    margin: 10%;
+}
+
+.addMenuCroix {
+    font-size: 63px;
+    margin-bottom: 15px;
+}
+
+/* Menu gâteau */
+/* Menu menus */
+.cake {
+    height: 100vh;
+    width: 100%; 
+    background-color: green;
+}
+
+.cakeBox {
+    height: 67%;
+    width: 100%;
+}
+
+.addCake {
+    height: 22%;
+    width: 30%;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: red;
+    border-style: dotted;
+    list-style: none;
+    margin: 10%;
+}
+
+.addCakeCroix {
+    font-size: 63px;
+    margin-bottom: 15px;
+}
+
+.footer {
+    height: 17vh;
+    width: 100%;
+    background-color: #000000;
 }
 }

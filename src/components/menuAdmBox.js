@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 
 class MenuAdmBox extends Component {
 
     render(){
 
         return (
-            <div className="menuAdmBox">
-                <section className="ongletMenu"><h2>GROUPE</h2></section>
-                <section className="ongletMenu"><h2>TABLE</h2></section>
-                <section className="ongletMenu"><h2>MENU</h2></section>
-                <section className="ongletMenu"><h2>GÂTEAU</h2></section>
-            </div>
+            <ul className="menuAdmBox">
+                <li className="ongletMenu"><Link to="/Groupes"><h2>GROUPE</h2></Link></li>
+                <li className="ongletMenu"><Link to="/Tables"><h2>TABLE</h2></Link></li>
+                <li className="ongletMenu"><Link to="/Menus"><h2>MENU</h2></Link></li>
+                <li className="ongletMenu"><Link to="/Gâteau"><h2>GÂTEAU</h2></Link></li>
+            </ul>
         )
     }
 }
