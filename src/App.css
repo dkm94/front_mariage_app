@@ -177,6 +177,10 @@ a:-webkit-any-link {
     margin-bottom: 15px;
 }
 
+.divSelectGroup {
+    text-align: center;
+}
+
 
 /* Menu tables */
 .tables {
