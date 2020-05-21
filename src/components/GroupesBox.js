@@ -24,16 +24,25 @@ class GroupesBox extends Component {
         
     }
 
+    componentDidMount() {
+        const token = localStorage.getItem("token")
+        console.log(token)
+        axios.get("http://localhost:3050/groups", 
+        {headers: { Authorization: "Bearer " + token}})
+          .then(res => {
+            return res
+          })
+          .then(res => {
+            const groups = res.data;
+            this.setState({ groups });
+            console.log(res)
+          })
+      }
+    
     render(){
-        const group = axios.get("http://wwww.localhost:3050/getAllGroups")
-        .then(group => group.data)
-        .then(a => {if (a) {
-            this.setState({group: a})
-        }}
-             )
+    
         const groupName = this.state.group.map(item => <option value={item.id}>{item.name}</option>)
-        // console.log(group)
-        // .then(b => console.log(b.name))
+      
         return (
             <div className="groupesBox">
                 <h1>Mes groupes</h1>

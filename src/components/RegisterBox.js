@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import Button from './Button';
-import decode from "jwt-decode"; // permet de decoder un token directement sur le front
+// import decode from "jwt-decode"; // permet de decoder un token directement sur le front
 
 
 class RegisterBox extends Component {
@@ -22,33 +22,27 @@ class RegisterBox extends Component {
 }
 
     
-  getToken() {
-    return localStorage.getItem("token");
-  }
+  // getToken() {
+  //   return localStorage.getItem("token");
+  // }
 
-  loggedIn() {
-    const token = this.getToken(); 
-    return !!token && !this.isTokenExpired(token); 
-  }
+  // loggedIn() {
+  //   const token = this.getToken(); 
+  //   return !!token && !this.isTokenExpired(token); 
+  // }
 
-  isTokenExpired(token) {
-    try {
-      const decoded = decode(token);
-      console.log(" decoded ", decoded);
-      if (decoded.exp < Date.now() / 1000) {
-        // on check la date d'expiration qui est dans le token 
-        return true; // token expiré
-      } else return false;
-    } catch (err) {
-      return false;
-    }
-  }
-
-  componentDidMount() {
-    if (this.loggedIn()) {
-      this.props.history.replace("/menuAdm");
-    }
-  }
+  // isTokenExpired(token) {
+  //   try {
+  //     const decoded = decode(token);
+  //     console.log(" decoded ", decoded);
+  //     if (decoded.exp < Date.now() / 1000) {
+  //       // on check la date d'expiration qui est dans le token 
+  //       return true; // token expiré
+  //     } else return false;
+  //   } catch (err) {
+  //     return false;
+  //   }
+  // }
 
     handleChange(e) {
         this.setState({ [e.target.name]: e.target.value });
@@ -60,7 +54,7 @@ class RegisterBox extends Component {
     
         const { title, firstPerson, secondPerson, password, email, mariageID} = this.state;
     
-        fetch(`http://localhost:3050/auth/register`, {
+        fetch('http://localhost:3050/auth/register', {
           headers : {
             Accept: "application/json",
             "Content-Type": "application/json"
