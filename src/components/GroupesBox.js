@@ -13,7 +13,8 @@ class GroupesBox extends Component {
             group: []
         };
       
-        this.showForm = this.showForm.bind(this)
+        this.showForm = this.showForm.bind(this);
+        this.getGroup = this.getGroup.bind(this);
     }
 
     showForm = () => {
@@ -24,24 +25,32 @@ class GroupesBox extends Component {
         
     }
 
-    componentDidMount() {
+    getGroup = () => {
         const token = localStorage.getItem("token")
         console.log(token)
-        axios.get("http://localhost:3050/groups", 
-        {headers: { Authorization: "Bearer " + token}})
+        axios.get("http://127.0.0.1:3050/groups",
+        {headers: {Accept: "application/json",
+                'Content-Type': 'application/json',
+                Authorization: "Bearer " + token} })
           .then(res => {
-            return res
+            return res.data
           })
-          .then(res => {
-            const groups = res.data;
-            this.setState({ groups });
-            console.log(res)
+          .then(group => {
+            // const groups = res.data;
+            this.setState({ group });
+            console.log(group)
           })
+          .catch((err)=>console.log('err:' + err));
       }
+
+    componentDidMount(){
+        this.getGroup()
+    }
     
     render(){
     
         const groupName = this.state.group.map(item => <option value={item.id}>{item.name}</option>)
+        console.log(this.state.group)
       
         return (
             <div className="groupesBox">
@@ -49,7 +58,7 @@ class GroupesBox extends Component {
                 {/* {group} */}
                 <div className="divSelectGroup">
                 <label>Sélectionner un groupe</label><br/>
-                <select className="selectGroup">
+                <select className="selectGroup" onClick={this.getGroup}>
                 {groupName}
                 {/* <option value="volvo">Volvo</option>
                 <option value="saab">Saab</option>

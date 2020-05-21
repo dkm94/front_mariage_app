@@ -37,8 +37,8 @@ class AddGroupForm extends Component {
                 headers: {Accept: "application/json",
                 'Content-Type': 'application/json',
                 Authorization: "Bearer " + token} })
-            .then(res => res.json()) 
-            .then(this.props.history.replace('/menuAdm'))
+            .then(res => res.json())
+            this.setState({name: "", mail: ""})
         }   
     
     render(){
