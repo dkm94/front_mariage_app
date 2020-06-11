@@ -21,28 +21,6 @@ class RegisterBox extends Component {
         this.handleChange = this.handleChange.bind(this);
 }
 
-    
-  // getToken() {
-  //   return localStorage.getItem("token");
-  // }
-
-  // loggedIn() {
-  //   const token = this.getToken(); 
-  //   return !!token && !this.isTokenExpired(token); 
-  // }
-
-  // isTokenExpired(token) {
-  //   try {
-  //     const decoded = decode(token);
-  //     console.log(" decoded ", decoded);
-  //     if (decoded.exp < Date.now() / 1000) {
-  //       // on check la date d'expiration qui est dans le token 
-  //       return true; // token expiré
-  //     } else return false;
-  //   } catch (err) {
-  //     return false;
-  //   }
-  // }
 
     handleChange(e) {
         this.setState({ [e.target.name]: e.target.value });

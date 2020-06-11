@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import AddGroupForm from "./AddGroupForm";
+// import GroupID from "./GroupID";
 import axios from "axios";
 
 class GroupesBox extends Component {
@@ -9,23 +10,16 @@ class GroupesBox extends Component {
     
         this.state = {
             visible: false,
-            value: " ",
-            group: []
+            groups: [],
+            guests: [],
         };
-      
-        this.showForm = this.showForm.bind(this);
-        this.getGroup = this.getGroup.bind(this);
+        this.myRef = React.createRef();
+        this.getGuests = this.getGuests.bind(this)
     }
 
-    showForm = () => {
+    
 
-        this.setState({
-            visible : true
-        })
-        
-    }
-
-    getGroup = () => {
+    componentDidMount(){
         const token = localStorage.getItem("token")
         console.log(token)
         axios.get("http://127.0.0.1:3050/groups",
@@ -35,40 +29,80 @@ class GroupesBox extends Component {
           .then(res => {
             return res.data
           })
-          .then(group => {
-            // const groups = res.data;
-            this.setState({ group });
-            console.log(group)
+          .then(groups => {
+            this.setState({ groups });
+            // console.log(group[0].guestID[0].name)
+            console.log(groups)
           })
           .catch((err)=>console.log('err:' + err));
-      }
+}
 
-    componentDidMount(){
-        this.getGroup()
+
+    showForm = () => {
+
+        this.setState({
+            visible : true
+        })
+        console.log('oui')
     }
+
+
+    getGuests(e) {
+        const token = localStorage.getItem("token")
+        const id = e.currentTarget
+        console.log(id)
+
+        const children = id.childNodes[1].value
+        console.log(children)
+        // const node = this.myRef.current
+        // const id = node.value
+        // console.log(id)
     
+        // const id = node.getAttribute('value')
+        axios.get("http://127.0.0.1:3050/group/" + children,
+        {headers: {Accept: "application/json",
+                'Content-Type': 'application/json',
+                Authorization: "Bearer " + token} },
+        {params: children})
+          .then(res => {
+            return res.data
+          })
+          .then(guests => {
+            const guestsID = this.state.guests.map((guest) => guest.name);
+            console.log(guestsID)
+            this.setState({ guests });
+            // console.log(group[0].guestID[0].name)
+            console.log(guests)
+          })
+          .catch((err)=>console.log('err:' + err));
+    }
+
     render(){
     
-        const groupName = this.state.group.map(item => <option value={item.id}>{item.name}</option>)
-        console.log(this.state.group)
-      
+        const groupName = this.state.groups.map((item, i) => (<option ref={this.myRef} key={item._id} value={item._id}>{item.name}</option>))
+        // const groupName = this.state.group.map((item, i) => Object.keys(item))
+        // const groupGuests = this.state.guests.map(item => (<div key={item._id}>{item.name}</div>))
+        // const guests = this.state.guest.map((item, i) => item.forEach(b => <GroupID guestID = {b.name}/>))
+        // console.log(guests)
+        // console.log(this.state.group + " boucle group")
+        // console.log(this.state.guests + " boucle guests")
         return (
             <div className="groupesBox">
                 <h1>Mes groupes</h1>
-                {/* {group} */}
                 <div className="divSelectGroup">
+
                 <label>Sélectionner un groupe</label><br/>
-                <select className="selectGroup" onClick={this.getGroup}>
+
+                <select className="selectGroup" onClick={this.getGuests}>
                 {groupName}
-                {/* <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="opel">Opel</option>
-                <option value="audi">Audi</option> */}
                 </select>
+
                 <button type="button" onClick={this.showForm}>+</button>
                 </div>
-                
+                                
+                {/* {groupGuests} */}
                 <AddGroupForm visible={this.state.visible}/>
+                
             </div>
         )
     }
