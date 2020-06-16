@@ -47,11 +47,11 @@ class AddGroupForm extends Component {
             <div className="groupesBox" style={{display: this.props.visible ? 'flex' : 'none'}}>
                 <form encType="application/x-www-form-urlencoded" method="post" onSubmit={this.handleSubmit}>
                     <label>Nom <br />
-                    <input type="text" name="name" value={this.state.name} onChange={this.handleChange}/>
+                    <input type="text" name="name" value={this.state.name} onChange={this.handleChange} required/>
                     </label><br />
 
                     <label>Email <br />
-                    <input type="email" name="mail" value={this.state.mail} onChange={this.handleChange}/>
+                    <input type="email" name="mail" value={this.state.mail} onChange={this.handleChange} required/>
                     </label>
                     <Button />
                 </form>
