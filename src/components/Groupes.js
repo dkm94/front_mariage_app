@@ -3,7 +3,6 @@ import { withRouter } from "react-router-dom";
 import Header from './Header';
 import Navbar from './Navbar';
 import GroupesBox from './GroupesBox';
-import Footer from './Footer';
 
 class Groupes extends Component {
 
@@ -14,7 +13,6 @@ class Groupes extends Component {
                 <Header />
                 <Navbar />
                 <GroupesBox />
-                <Footer />
             </div>
         )
     }

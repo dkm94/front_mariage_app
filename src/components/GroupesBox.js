@@ -91,29 +91,27 @@ class GroupesBox extends Component {
         return (
             <div className="groupesBox">
                 <h1>Mes groupes</h1>
-                <div className="divSelectGroup">
-
+            
                 {/* <label>Sélectionner un groupe</label><br/>
 
                 <select className="selectGroup" onChange={this.getGuests}>
                 {groupName}
                 </select> */}
                 <button type="button" onClick={this.showForm}>Ajouter un nouveau groupe+</button>
-                </div>
 
-                <div>
+                <AddGroupForm visible={this.state.visible}/>
+
+                <div className="divGroupbox">
                     {this.state.groups.map(({name, guestID}, i) => {
-                        return <div key={i}>
-                            <div>
+                        return <div key={i} className="divGroup">
                             <h1>{name}</h1>
                             {guestID.map((guest, j) => {
                                 return <p key={j}>{guest.name}</p>
                             })}
-                            </div>
+                            <p>Modifier</p>
                     </div>
                     })}
                 </div>
-                <AddGroupForm visible={this.state.visible}/>
                 
             </div>
         )

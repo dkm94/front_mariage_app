@@ -38,7 +38,11 @@ class AddGroupForm extends Component {
                 'Content-Type': 'application/json',
                 Authorization: "Bearer " + token} })
             .then(res => res.json())
-            this.setState({name: "", mail: ""})
+            .then(newGroup => {
+                this.setState({name: "", mail: ""});
+                console.log(newGroup)
+            })
+            .then(window.location.reload(false))
         }   
     
     render(){
