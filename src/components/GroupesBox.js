@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import AddGroupForm from "./AddGroupForm";
+import jwt from "jwt-decode";
 // import GroupID from "./GroupID";
-import axios from "axios";
+// import axios from "axios";
 
 class GroupesBox extends Component {
     constructor(props) {
@@ -21,17 +22,18 @@ class GroupesBox extends Component {
 
     componentDidMount(){
         const token = localStorage.getItem("token")
+        const user = jwt(token);
         console.log(token)
-        axios.get("http://127.0.0.1:3050/groups",
+        console.log(user)
+        fetch("http://localhost:3050/groups/" + user.mariageID,
         {headers: {Accept: "application/json",
-                'Content-Type': 'application/json',
-                Authorization: "Bearer " + token} })
+                Authorization: "Bearer " + token},
+        method: "GET" })
           .then(res => {
-            return res.data
+              return res.json()
           })
           .then(groups => {
             this.setState({ groups });
-            // console.log(group[0].guestID[0].name)
             console.log(groups)
           })
           .catch((err)=>console.log('err:' + err));
