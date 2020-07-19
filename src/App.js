@@ -9,6 +9,7 @@ import Groupes from './components/Groupes';
 import Tables from './components/Tables';
 import Menus from './components/Menus';
 import Cake from './components/Gâteau';
+import Profil from './components/Profile';
 import './App.css';
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/tables" component={Tables}/>
           <Route path="/menus" component={Menus}/>
           <Route path="/gâteau" component={Cake}/>
+          <Route path="/profil" component ={Profil}/>
         </Switch>
       </Router>
     </div>

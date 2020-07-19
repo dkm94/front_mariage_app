@@ -37,7 +37,7 @@ class GroupesBox extends Component {
             console.log(groups)
           })
           .catch((err)=>console.log('err:' + err));
-}
+    }
 
 
     showForm = () => {
@@ -49,38 +49,26 @@ class GroupesBox extends Component {
 
     }
 
+    openProfile = (e) => {
+        const token = localStorage.getItem("token")
+        var guest = e.target
+        console.log(guest)
+        var guestID = guest.getAttribute('data-id');
+        console.log(guestID)  
 
-    // getGuests(e) {
-    //     const token = localStorage.getItem("token")
-    //     const id = e.currentTarget
-    //     console.log(id)
+         fetch("http://localhost:3050/guest/" + guestID,
+         {headers: {Accept: "application/json",
+                 Authorization: "Bearer " + token},
+         method: "GET" })
+           .then(res => {
+               return res.json()
+           })
+           .then(groups => {
+            this.props.history.replace("/profil");
+           })
+           .catch((err)=>console.log('err:' + err));
+}
 
-
-    //     // const children = id.childNodes[1].value
-    //     // console.log(children)
-    //     // const node = this.myRef.current
-    //     // const id = node.value
-    //     // console.log(id)
-    
-    //     // const id = node.getAttribute('value')
-
-    //     axios.get("http://127.0.0.1:3050/group/" + id,
-    //     {headers: {Accept: "application/json",
-    //             'Content-Type': 'application/json',
-    //             Authorization: "Bearer " + token} },
-    //     {params: id})
-    //       .then(res => {
-    //         return res.data
-    //       })
-    //       .then(guests => {
-    //         const guestsID = this.state.guests.map((guest) => guest.name);
-    //         console.log(guestsID)
-    //         this.setState({ guests });
-    //         // console.log(group[0].guestID[0].name)
-    //         console.log(this.state.guests)
-    //       })
-    //       .catch((err)=>console.log('err:' + err));
-    // }
 
     render(){
     
@@ -106,7 +94,7 @@ class GroupesBox extends Component {
                         return <div key={i} className="divGroup">
                             <h1>{name}</h1>
                             {guestID.map((guest, j) => {
-                                return <p key={j}>{guest.name}</p>
+                                return <p key={j} onClick={this.openProfile} data-id={guest._id}>{guest.name}</p>
                             })}
                             <p>Modifier</p>
                     </div>
