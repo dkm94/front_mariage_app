@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import Button from './Button';
 // import decode from "jwt-decode"; // permet de decoder un token directement sur le front
 
 
-class LoginBox extends Component {
+class LoginForm extends Component {
 
     constructor(props) {
         super(props);
@@ -77,9 +77,10 @@ class LoginBox extends Component {
                     </div>
                     <Button />
             </form>
+            <Link>Vous n'avez pas encore de compte ? Inscrivez-vous.</Link>
             </div>
         )
     }
 }
 
-export default withRouter(LoginBox);
+export default withRouter(LoginForm);

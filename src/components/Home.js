@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import Header from './Header';
-import Navbar from './Navbar';
-import Register from './Register';
+import HomePicture from "../img/book.jpg";
+import LoginAdmin from "./loginAdmin";
 import Footer from './Footer';
 
 class Home extends Component {
@@ -12,8 +12,10 @@ class Home extends Component {
         return (
             <div className="home">
                 <Header />
-                <Navbar />
-                <Register />
+                <div className="homePicture">
+                    <img alt="logo" src={HomePicture} />
+                </div>
+                <LoginAdmin />
                 <Footer />
             </div>
         )
