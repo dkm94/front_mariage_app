@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import AddGroupForm from "./AddGroupForm";
 import jwt from "jwt-decode";
-// import GroupID from "./GroupID";
 // import axios from "axios";
 
 class GroupesBox extends Component {
@@ -14,11 +13,8 @@ class GroupesBox extends Component {
             groups: []
             // guests: []
         };
-        // this.myRef = React.createRef();
-        // this.getGuests = this.getGuests.bind(this)
     }
 
-    
 
     componentDidMount(){
         const token = localStorage.getItem("token")
@@ -67,40 +63,39 @@ class GroupesBox extends Component {
             this.props.history.replace("/profil");
            })
            .catch((err)=>console.log('err:' + err));
-}
-
+    }
 
     render(){
     
-        // const groupName = this.state.groups.map((item, i) => (<option key={item._id} value={item._id}>{item.name}</option>))
-        // console.log(groupName)
-
+        const randomColor = Math.floor(Math.random()*16777215).toString(16);
 
         return (
             <div className="groupesBox">
-                <h1>Mes groupes</h1>
+                <h1 className="titleSection">Mes groupes</h1>
             
                 {/* <label>Sélectionner un groupe</label><br/>
 
                 <select className="selectGroup" onChange={this.getGuests}>
                 {groupName}
                 </select> */}
+                <div className="addGroupBtn">
                 <button type="button" onClick={this.showForm}>Ajouter un nouveau groupe+</button>
+                </div>
 
                 <AddGroupForm visible={this.state.visible}/>
 
                 <div className="divGroupbox">
                     {this.state.groups.map(({name, guestID}, i) => {
                         return <div key={i} className="divGroup">
-                            <h1>{name}</h1>
+                            <div className="groupName" style={{backgroundColor: "#" + randomColor}}><h1>{name}</h1></div>
+                          
                             {guestID.map((guest, j) => {
-                                return <p key={j} onClick={this.openProfile} data-id={guest._id}>{guest.name}</p>
+                                return <div className="groupGuests"><p key={j} onClick={this.openProfile} data-id={guest._id}>{guest.name}</p></div>
                             })}
                             <p>Modifier</p>
-                    </div>
+                        </div>
                     })}
                 </div>
-                
             </div>
         )
     }

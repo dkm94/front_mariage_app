@@ -3,7 +3,7 @@
 
 /* Mise en forme */
 html, body {
-    background-color: lightseagreen;
+    /* background-color: lightseagreen; */
     /* height: 100%; */
     width: 100%;
     margin: 0;
@@ -21,16 +21,16 @@ h1 {
 
 /* Header */
 .header {
-    height: 15vh;
+    height: 20vh;
     width: 100%;
-    background-color: #FFFFFF;
+    background-color: #f5e2d5;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .header img {
-    height: 100%;
+    height: 75%;
 }
 
 .navbar {
@@ -188,10 +188,29 @@ a:-webkit-any-link {
     align-items: center;
 }
 
+.groupesBox form {
+    width: 60%;
+    height: 148px;
+    display: flex;
+    border: black;
+    border-style: solid;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.titleSection {
+    font-size: 2.25rem;
+}
+
 .groupID {
     height: 20px;
     width: 100%;
     background-color: orange;
+}
+
+.addGroupBtn {
+    height: 50px;
 }
 
 .addGroup {
@@ -224,12 +243,20 @@ a:-webkit-any-link {
 }
 
 .divGroup {
+    display: flex;
+    flex-direction: column;
     height: 200px;
     width: 200px;
     margin: 20px;
-    background-color: orange;
+    -webkit-box-shadow: 10px 10px 34px -1px rgba(166,154,166,1);
+    -moz-box-shadow: 10px 10px 34px -1px rgba(166,154,166,1);
+    box-shadow: 10px 10px 34px -1px rgba(166,154,166,1);
+    /* background-color: orange; */
 }
 
+.groupName h1 {
+    margin: 0;
+}
 
 /* Menu tables */
 .tables {

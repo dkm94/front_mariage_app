@@ -9,7 +9,7 @@ import Groupes from './components/Groupes';
 import Tables from './components/Tables';
 import Menus from './components/Menus';
 import Cake from './components/Gâteau';
-import Profil from './components/Profile';
+import Profil from './components/Profil';
 import './App.css';
 
 function App() {
