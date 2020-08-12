@@ -63,8 +63,8 @@ class RegisterBox extends Component {
 
                 <form onSubmit={this.handleSubmit}>
 
-                    <div className="reg-input input-title">
-                    <label>Title of event</label><br />
+                    <div className="reg-input input-title dims-input">
+                    <label>Title of event</label>
                     <input
                     name="title"
                     type="text"
@@ -73,9 +73,10 @@ class RegisterBox extends Component {
                     placeholder="Choose a title for your event"
                     />
                     </div>
-                
-                    <div className="reg-input input-person">
-                        <label>First Person</label><br />
+
+                    <section>
+                    <div className="reg-input input-person dims-input w-input">
+                        <label>First Person</label>
                         <input
                         name="firstPerson"
                         type="text"
@@ -86,8 +87,8 @@ class RegisterBox extends Component {
                     </div>
 
                     
-                    <div className="reg-input input-person">
-                        <label>Second Person</label><br />
+                    <div className="reg-input input-person dims-input w-input">
+                        <label>Second Person</label>
                         <input
                         name="secondPerson"
                         type="text"
@@ -96,9 +97,11 @@ class RegisterBox extends Component {
                         placeholder="Enter a name"
                         />
                     </div>
+                    </section>
 
-                    <div className="reg-input input-mail">
-                        <label>Email address</label><br />
+                    <section>
+                    <div className="reg-input input-mail dims-input w-input">
+                        <label>Email address</label>
                         <input
                         name="email"
                         type="email"
@@ -108,8 +111,8 @@ class RegisterBox extends Component {
                         />
                     </div>
 
-                    <div className="reg-input input-password">
-                        <label>Password</label><br />
+                    <div className="reg-input input-password dims-input w-input">
+                        <label>Password</label>
                         <input
                         name="password"
                         type="password"
@@ -118,6 +121,7 @@ class RegisterBox extends Component {
                         placeholder="Enter a password"
                         />
                     </div>
+                    </section>
                     <Button />
             </form>
             </div>

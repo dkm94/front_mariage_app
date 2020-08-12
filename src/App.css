@@ -54,12 +54,16 @@ h1 {
     height: 30px;
     padding: 3px 6px;
     font: unset;
+    margin: 20px 0px 20px 0px;
 }
 
 /* Accueil Register */
 .home {
-    height: 100vh;
-    width: 100%; 
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     /* background-color: green; */
  }
  
@@ -92,8 +96,22 @@ h1 {
 .registerBox {
     height: fit-content;
     width: 100%;
-    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: #FFF5F1;
+    padding: 50px 0px 50px 0px;
+}
+
+.registerBox form {
+    width: 65%;
+}
+
+.register section {
+    display: flex;
+    text-align: justify;
+    justify-content: flex-end;
+    margin-bottom: 20px;
 }
 
 .registerBox input {
@@ -104,8 +122,27 @@ h1 {
     text-align: center;
 }
 
+.input-title {
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
 .reg-input {
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
+    display: flex;
+    flex-direction: column;
+}
+
+.w-input {
+    width: 45%;
+}
+
+.dims-input input {
+    border-radius: 2px;
+    border: solid 1px rgb(151, 151, 151, 0.28);
+    height: 25px;
+    width: 70%;
 }
 
 

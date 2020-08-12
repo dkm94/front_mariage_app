@@ -38,7 +38,7 @@ class LoginForm extends Component {
             password
           })
         })
-        .then(res => res.json())
+        .then(res => res.json(), console.log("res json ok"))
         .then(res => {
           console.log("resultat du fetch : ", res);
             localStorage.setItem("token", res.token);
@@ -77,7 +77,7 @@ class LoginForm extends Component {
                     </div>
                     <Button />
             </form>
-            <Link>Vous n'avez pas encore de compte ? Inscrivez-vous.</Link>
+            <Link to={"/register"}>Vous n'avez pas encore de compte ? Inscrivez-vous.</Link>
             </div>
         )
     }
