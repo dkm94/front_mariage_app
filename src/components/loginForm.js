@@ -28,21 +28,22 @@ class LoginForm extends Component {
     
         const { email, password } = this.state;
     
-        // fetch('https://backend-mywedding-app.herokuapp.com/auth/adminLogin', {
-        //   headers : {
-        //     Accept: "application/json",
-        //     "Content-Type": "application/json"
-        //   },
-        //   method: "POST",
-        //   body: JSON.stringify({
-        //     email,
-        //     password
-        //   })
-        // })
-        axios.post('https://backend-mywedding-app.herokuapp.com/auth/adminLogin', {
-         withcredentials: true
-        }, {email, password})
-        // .then(res => res.json(), console.log("res json ok"))
+        fetch('https://backend-mywedding-app.herokuapp.com/auth/adminLogin', {
+        credentials: 'include',  
+        headers : {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          },
+          method: "POST",
+          body: JSON.stringify({
+            email,
+            password
+          })
+        })
+        // axios.post('https://backend-mywedding-app.herokuapp.com/auth/adminLogin', {
+        //  withcredentials: true
+        // }, {email, password})
+        .then(res => res.json(), console.log("res json ok"))
         .then(res => {
           console.log("resultat du fetch : ", res);
             localStorage.setItem("token", res.token);
