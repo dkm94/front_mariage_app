@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from "react-router-dom";
 import Button from './Button';
-import axios from 'axios';
+// import axios from 'axios';
 // import decode from "jwt-decode"; // permet de decoder un token directement sur le front
 
 
