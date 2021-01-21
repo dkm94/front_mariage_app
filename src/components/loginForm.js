@@ -27,7 +27,7 @@ class LoginForm extends Component {
     
         const { email, password } = this.state;
     
-        fetch('http://localhost:3050/auth/adminLogin', {
+        fetch('https://backend-mywedding-app.herokuapp.com/auth/adminLogin', {
           headers : {
             Accept: "application/json",
             "Content-Type": "application/json"

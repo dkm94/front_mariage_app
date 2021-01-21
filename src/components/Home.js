@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
-import Header from './Header';
 import HomePicture from "../img/book.jpg";
 // import LoginAdmin from "./loginAdmin";
 import LoginForm from "./loginForm";
@@ -13,7 +12,6 @@ class Home extends Component {
 
         return (
             <div className="home">
-                <Header />
                 <div className="homePicture">
                     <img alt="logo" src={HomePicture} />
                 </div>

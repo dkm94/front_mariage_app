@@ -20,7 +20,7 @@ class GroupID extends Component {
         
             const { guestID } = this.state;
         
-            fetch('http://localhost:3050/guest/:id', 
+            fetch('https://backend-mywedding-app.herokuapp.com/guest/:id', 
             { method: 'POST', 
             body: JSON.stringify({
                 guestID}),

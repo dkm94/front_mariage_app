@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
-import Logo from '../img/logo.png';
+import Logo from '../..//img/logo.png';
+import "./Header.css";
 
 class Header extends Component {
     constructor(props) {
@@ -17,7 +18,13 @@ class Header extends Component {
 
         return (
             <div className="header">
-                <img alt="logo" src={Logo} onClick={this.handleClick}/>
+                <div>
+                    <span>Qui sommes-nous ?</span>
+                </div>
+                <div className="logo"><img alt="logo" src={Logo} onClick={this.handleClick}/></div>
+                <div>
+                    <span>Connexion/Deconnexion</span>
+                </div>
             </div>
         )
     }

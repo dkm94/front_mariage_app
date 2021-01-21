@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
-import Header from "./Header";
 import Navbar from "./Navbar";
 import ProfilBox from "./ProfilBox";
 
@@ -16,7 +15,7 @@ class Profil extends Component {
     // componentDidMount(){
     //     const token = localStorage.getItem("token")
 
-    //      fetch("http://localhost:3050/guest/:id",
+    //      fetch("https://backend-mywedding-app.herokuapp.com/guest/:id",
     //      {headers: {Accept: "application/json", Authorization: "Bearer " + token},
     //      method: "GET" },
     //     //  params: {id: }
@@ -33,7 +32,6 @@ class Profil extends Component {
     render() {
         return (
             <div>
-                <Header />
                 <Navbar />
                 <ProfilBox />
             </div>

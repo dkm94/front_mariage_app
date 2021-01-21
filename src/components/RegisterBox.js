@@ -32,7 +32,7 @@ class RegisterBox extends Component {
     
         const { title, firstPerson, secondPerson, password, email, mariageID} = this.state;
     
-        fetch('http://localhost:3050/auth/register', {
+        fetch('https://backend-mywedding-app.herokuapp.com/auth/register', {
           headers : {
             Accept: "application/json",
             "Content-Type": "application/json"

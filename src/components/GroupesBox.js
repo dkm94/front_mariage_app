@@ -21,7 +21,7 @@ class GroupesBox extends Component {
         const user = jwt(token);
         console.log(token)
         console.log(user)
-        fetch("http://localhost:3050/groups/" + user.mariageID,
+        fetch("https://backend-mywedding-app.herokuapp.com/groups/" + user.mariageID,
         {headers: {Accept: "application/json",
                 Authorization: "Bearer " + token},
         method: "GET" })
@@ -52,7 +52,7 @@ class GroupesBox extends Component {
         var guestID = guest.getAttribute('data-id');
         console.log(guestID)  
 
-         fetch("http://localhost:3050/guest/" + guestID,
+         fetch("https://backend-mywedding-app.herokuapp.com/guest/" + guestID,
          {headers: {Accept: "application/json",
                  Authorization: "Bearer " + token},
          method: "GET" })

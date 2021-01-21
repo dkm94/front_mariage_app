@@ -30,7 +30,7 @@ class AddGroupForm extends Component {
         
             const { name, mail } = this.state;
         
-            fetch('http://localhost:3050/admin/newGroup', 
+            fetch('https://backend-mywedding-app.herokuapp.com/admin/newGroup', 
             { method: 'POST', 
             body: JSON.stringify({
                 name, mail}),
