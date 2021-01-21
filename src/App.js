@@ -16,7 +16,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Navigation>
+        <Navigation />
           <Switch>
             <Route exact path="/" component={Home}/>
             <Route path="/register" component={Register}/>
@@ -29,7 +29,7 @@ function App() {
             <Route path="/gâteau" component={Cake}/>
             <Route path="/profil" component ={Profil}/>
           </Switch>
-        </Navigation>
+ 
       </Router>
     </div>
   );
