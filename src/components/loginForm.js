@@ -41,7 +41,7 @@ class LoginForm extends Component {
         // })
         axios.post('https://backend-mywedding-app.herokuapp.com/auth/adminLogin', {
          withcredentials: true
-        })
+        }, {email, password})
         // .then(res => res.json(), console.log("res json ok"))
         .then(res => {
           console.log("resultat du fetch : ", res);
