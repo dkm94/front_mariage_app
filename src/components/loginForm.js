@@ -44,17 +44,12 @@ class LoginForm extends Component {
         // axios.post('https://backend-mywedding-app.herokuapp.com/auth/adminLogin', {
         //  withcredentials: true
         // }, {email, password})
-        .then(res => {
-          res.json()
-          console.log(res)
-          localStorage.setItem("token", res.token);
-          this.props.history.replace("/menuAdm");
-        })
-        // .then(user => {
-        //   console.log("resultat du fetch : ", user);
-        //     localStorage.setItem("token", user.token);
-        //     this.props.history.replace("/menuAdm");
-        // });
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("resultat du fetch : ", data);
+            // localStorage.setItem("token", user.token);
+            // this.props.history.replace("/menuAdm");
+        });
       }
 
     render(){
