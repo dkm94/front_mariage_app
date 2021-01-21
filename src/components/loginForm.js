@@ -47,7 +47,7 @@ class LoginForm extends Component {
         .then(res => {
           res.json()
           console.log(res)
-          localStorage.setItem("token", user.token);
+          localStorage.setItem("token", res.token);
           this.props.history.replace("/menuAdm");
         })
         // .then(user => {
