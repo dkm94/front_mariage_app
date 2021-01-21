@@ -32,7 +32,8 @@ class LoginForm extends Component {
         credentials: 'include',  
         headers : {
             Accept: "application/json",
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            mode: 'no-cors'
           },
           method: "POST",
           body: JSON.stringify({
