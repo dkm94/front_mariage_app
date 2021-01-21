@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from "react-router-dom";
 import Button from './Button';
+import axios from 'axios';
 // import decode from "jwt-decode"; // permet de decoder un token directement sur le front
 
 
@@ -27,18 +28,21 @@ class LoginForm extends Component {
     
         const { email, password } = this.state;
     
-        fetch('https://backend-mywedding-app.herokuapp.com/auth/adminLogin', {
-          headers : {
-            Accept: "application/json",
-            "Content-Type": "application/json"
-          },
-          method: "POST",
-          body: JSON.stringify({
-            email,
-            password
-          })
+        // fetch('https://backend-mywedding-app.herokuapp.com/auth/adminLogin', {
+        //   headers : {
+        //     Accept: "application/json",
+        //     "Content-Type": "application/json"
+        //   },
+        //   method: "POST",
+        //   body: JSON.stringify({
+        //     email,
+        //     password
+        //   })
+        // })
+        axios.post('https://backend-mywedding-app.herokuapp.com/auth/adminLogin', {
+         withcredentials: true
         })
-        .then(res => res.json(), console.log("res json ok"))
+        // .then(res => res.json(), console.log("res json ok"))
         .then(res => {
           console.log("resultat du fetch : ", res);
             localStorage.setItem("token", res.token);
