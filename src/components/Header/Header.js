@@ -18,13 +18,11 @@ class Header extends Component {
 
         return (
             <div className="header">
-                <div>
-                    <span>Qui sommes-nous ?</span>
-                </div>
-                <div className="logo"><img alt="logo" src={Logo} onClick={this.handleClick}/></div>
-                <div>
-                    <span>Connexion/Deconnexion</span>
-                </div>
+                <ul>
+                    <li className="li-text"><span>Qui sommes-nous ?</span></li>
+                    <li className="logo"><img alt="logo" src={Logo} onClick={this.handleClick}/></li>
+                    <li className="li-text"><span>Connexion/Deconnexion</span></li>
+                </ul>
             </div>
         )
     }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navigation from "./components/Header/Header";
-import Home from './components/Home';
+import Home from './components/Home/Home';
 import Register from './components/Register';
 import MenuAdm from './components/MenuAdm';
 import EspacePersonnalisé from './components/EspacePersonnalisé';

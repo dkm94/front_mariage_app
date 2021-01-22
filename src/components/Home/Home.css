@@ -1,0 +1,36 @@
+.home {
+    height: 85vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url('./../../img/aisle.jpg');
+    background-size: cover;
+    position: absolute;
+ }
+
+.home-desc {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    color: black;
+    background: rgba(255,255,255,0.5);
+    padding: 2rem;
+}
+
+.home-btn {
+    position: relative;
+    bottom: 30%;
+    transform: translateY(-30%);
+    color: black;
+}
+
+.home-link {
+    position: relative;
+    top: 50%;
+}
+
+.home-link > a {
+    color: whitesmoke;
+    text-decoration: none;
+}
