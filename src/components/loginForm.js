@@ -24,35 +24,42 @@ class LoginForm extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
+        
+        const { email, password } = this.state;
         console.log("Login Submitted");
     
-        const { email, password } = this.state;
-    
+        // fetch('https://backend-mywedding-app.herokuapp.com/auth/adminLogin', {
+        // mode: 'no-cors',
+        // credentials: 'include',  
+        // headers : {
+        //     Accept: "application/json",
+        //     "Content-Type": "application/json",
+        //   },
+        //   method: "POST",
+        //   body: JSON.stringify({
+        //     email,
+        //     password
+        //   })
+        // })
+        // .then((response) => response.json())
+        // .then((data) => {
+        //   console.log(data);
+        // })
         fetch('https://backend-mywedding-app.herokuapp.com/auth/adminLogin', {
-        mode: 'no-cors',
-        credentials: 'include',  
-        headers : {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          method: "POST",
-          body: JSON.stringify({
-            email,
-            password
+            crossDomain:true,
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({
+              email,
+              password
           })
         })
-        // axios.post('https://backend-mywedding-app.herokuapp.com/auth/adminLogin', {
-        //  withcredentials: true
-        // }, {email, password})
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-        })
-        // .then(res => {
-        //   console.log("resultat du fetch : ", res);
-        //     localStorage.setItem("token", res.token);
-        //     this.props.history.replace("/menuAdm");
-        // });
+        .then(res => res.json())
+        .then(response => {
+          console.log("resultat du fetch : ", response);
+            localStorage.setItem("token", response.token);
+            this.props.history.replace("/menuAdm");
+        });
       }
 
     render(){
