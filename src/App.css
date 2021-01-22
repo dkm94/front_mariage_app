@@ -34,43 +34,6 @@ html, body {
     margin: 20px 0px 20px 0px;
 }
 
-.register section {
-    display: flex;
-    text-align: justify;
-    justify-content: flex-end;
-}
-
-.registerBox input {
-    margin-top: 5px;
-}
-
-.registerBox h1 {
-    text-align: center;
-}
-
-.input-title {
-    align-items: center;
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-.reg-input {
-    /* margin-bottom: 10px; */
-    display: flex;
-    flex-direction: column;
-}
-
-.w-input {
-    width: 45%;
-}
-
-.dims-input input {
-    border-radius: 2px;
-    border: solid 1px rgb(151, 151, 151, 0.28);
-    height: 25px;
-    width: 80%;
-}
-
 
 
 /* Admin Login */
