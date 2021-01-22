@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
-// import Button from './Button';
+import Button from "../LargeButton/LargeButton";
+import "../LargeButton/LargeButton.css";
 // import decode from "jwt-decode"; // permet de decoder un token directement sur le front
 
 
@@ -122,7 +123,7 @@ class RegisterBox extends Component {
                         />
                     </div>
                     </section>
-                    {/* <Button /> */}
+                    <Button title="Valider"/>
             </form>
             </div>
         )

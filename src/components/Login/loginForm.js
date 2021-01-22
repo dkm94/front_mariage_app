@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter} from "react-router-dom";
-import Button from '../Button';
+import Button from "../LargeButton/LargeButton";
+import "../LargeButton/LargeButton.css";
+
 // import axios from 'axios';
 // import decode from "jwt-decode"; // permet de decoder un token directement sur le front
 
@@ -91,7 +93,9 @@ class LoginForm extends Component {
                         placeholder="Enter a password"
                         />
                     </div>
-                    <Button />
+                    <div className="center-x">
+                        <Button title="Valider"/>
+                    </div>
             </form>
             {/* <Link to={"/register"}>Vous n'avez pas encore de compte ? Inscrivez-vous.</Link> */}
             </div>

@@ -13,10 +13,14 @@ h1 {
 
 .registerBox form {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .registerBox section {
     margin-bottom: 5px;
+    width: 100%;
 }
 
 .registerBox {
