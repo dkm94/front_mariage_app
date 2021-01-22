@@ -28,35 +28,10 @@ html, body {
     margin: 20px 0px 20px 0px;
 }
 
-.register {
-    height: fit-content;
-    width: 100%;
-    /* background-color: rosybrown; */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.registerBox {
-    height: fit-content;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #FFF5F1;
-    padding: 50px 0px 50px 0px;
-}
-
-.registerBox form {
-    width: 65%;
-}
-
 .register section {
     display: flex;
     text-align: justify;
     justify-content: flex-end;
-    margin-bottom: 20px;
 }
 
 .registerBox input {
@@ -106,17 +81,6 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.loginForm {
-    height: fit-content;
-    width: 350px;
-    margin: 40px;
-    padding: 30px;
-    background-color: #FFF5F1;
-    border-style: solid;
-    border-width: thin;
-    border-color: #E8E8E8;
 }
 
 .loginForm form {

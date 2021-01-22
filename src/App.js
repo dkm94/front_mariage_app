@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navigation from "./components/Header/Header";
 import Home from './components/Home/Home';
-import Register from './components/Register';
+import Register from './components/Register/Register';
 import MenuAdm from './components/MenuAdm';
 import EspacePersonnalisé from './components/EspacePersonnalisé';
 import Groupes from './components/Groupes';

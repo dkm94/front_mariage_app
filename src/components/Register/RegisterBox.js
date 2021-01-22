@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
-import Button from './Button';
+// import Button from './Button';
 // import decode from "jwt-decode"; // permet de decoder un token directement sur le front
 
 
@@ -64,55 +64,55 @@ class RegisterBox extends Component {
                 <form onSubmit={this.handleSubmit}>
 
                     <div className="reg-input input-title dims-input">
-                    <label>Title of event</label>
+                    <label>Thème de la cérémonie</label>
                     <input
                     name="title"
                     type="text"
                     value={this.state.title}
                     onChange={this.handleChange}
-                    placeholder="Choose a title for your event"
+                    placeholder="Exemple: La vie en rose"
                     />
                     </div>
 
                     <section>
                     <div className="reg-input input-person dims-input w-input">
-                        <label>First Person</label>
+                        <label>Epoux.se 1</label>
                         <input
                         name="firstPerson"
                         type="text"
                         value={this.state.firstPerson}
                         onChange={this.handleChange}
-                        placeholder="Enter a name"
+                        placeholder="Votre prénom"
                         />
                     </div>
 
                     
                     <div className="reg-input input-person dims-input w-input">
-                        <label>Second Person</label>
+                        <label>Epoux.se 2</label>
                         <input
                         name="secondPerson"
                         type="text"
                         value={this.state.secondPerson}
                         onChange={this.handleChange}
-                        placeholder="Enter a name"
+                        placeholder="Votre prénom"
                         />
                     </div>
                     </section>
 
                     <section>
                     <div className="reg-input input-mail dims-input w-input">
-                        <label>Email address</label>
+                        <label>Adrese mail</label>
                         <input
                         name="email"
                         type="email"
                         value={this.state.email}
                         onChange={this.handleChange}
-                        placeholder="Enter an email"
+                        placeholder="example@example.com"
                         />
                     </div>
 
                     <div className="reg-input input-password dims-input w-input">
-                        <label>Password</label>
+                        <label>Mot de passe</label>
                         <input
                         name="password"
                         type="password"
@@ -122,7 +122,7 @@ class RegisterBox extends Component {
                         />
                     </div>
                     </section>
-                    <Button />
+                    {/* <Button /> */}
             </form>
             </div>
         )

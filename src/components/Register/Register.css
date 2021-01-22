@@ -1,0 +1,79 @@
+h1 {
+    font-family: 'Open Sans', helvetica, arial, sans-serif;
+    font-size: 2rem;
+}
+
+.register {
+    height: fit-content;
+}
+
+.register > section {
+    margin: 0px;
+}
+
+.registerBox form {
+    width: 100%;
+}
+
+.registerBox section {
+    margin-bottom: 5px;
+}
+
+.registerBox {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* background-color: #FFF5F1; */
+    padding: 50px 0px 50px 0px;
+}
+
+.register-row {
+    height: 25rem;
+    /* background: lightpink; */
+    /* border: 1px solid; */
+}
+
+.square-img {
+    /* background: lightblue; */
+    width: 50%;
+    /* padding: 15px; */
+}
+
+.square-img > img {
+    height: -webkit-fill-available;
+    width: 100%;
+}
+
+.square-text {
+    /* background: lightgrey; */
+    width: 50%;
+    /* padding: 15px; */
+}
+
+.reverse {
+    flex-direction: row-reverse;
+}
+
+.loginForm {
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* background-color: #FFF5F1; */
+    padding: 50px 0px 50px 0px;
+}
+
+.loginForm > h1 {
+    text-transform: uppercase;
+}
+
+.loginForm > form {
+    width: 60%;
+}
+
+.registerBox > h1 {
+    text-transform: uppercase;
+}

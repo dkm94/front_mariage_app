@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
-import Navbar from './Navbar';
+import Navbar from '../Navbar';
 import LoginAdmin from './loginAdmin';
-import Footer from './Footer';
+import Footer from '../Footer';
 
 class Home extends Component {
 

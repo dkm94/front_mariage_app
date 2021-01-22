@@ -1,9 +1,10 @@
 .header {
     height: 15vh;
     width: 100%;
-    /* background-color: #f5e2d5; */
+    /* background-color: #f5e2d5; */;
     display: flex;
     align-items: center;
+    border-bottom: 1px solid lightgrey;
     /* justify-content: center; */
 }
 
