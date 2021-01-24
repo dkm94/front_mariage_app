@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
-import Button from "./Button";
+import Button from "../../Button";
+import "./AddGroup.css"
 // import axios from "axios";
 
 class AddGroupForm extends Component {
@@ -43,20 +44,28 @@ class AddGroupForm extends Component {
                 console.log(newGroup)
             })
             .then(window.location.reload(false))
-        }   
+        }
+        
+        newInput(){
+            
+        }
     
     render(){
 
         return (
-            <div className="groupesBox" style={{display: this.props.visible ? 'flex' : 'none'}}>
+            // <div className="groupesBox" style={{display: this.props.visible ? 'flex' : 'none'}}>
+            <div className="add-group-form">
+                <div className="group-form-label"><span>Nouveau groupe</span></div>
                 <form encType="application/x-www-form-urlencoded" method="post" onSubmit={this.handleSubmit}>
-                    <label>Nom <br />
-                    <input type="text" name="name" value={this.state.name} onChange={this.handleChange} required/>
+
+                    <label>Nom du groupe<br />
+                    <input type="text" name="name" value={this.state.name} onChange={this.handleChange} placeholder="Exemple: Famille Durand" required/>
                     </label><br />
 
                     <label>Email <br />
                     <input type="email" name="mail" value={this.state.mail} onChange={this.handleChange} required/>
                     </label>
+
                     <Button />
                 </form>
             </div>

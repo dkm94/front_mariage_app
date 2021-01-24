@@ -1,0 +1,12 @@
+.guests {
+    height: fit-content;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+    padding: 0px 5%;
+    display: flex;
+}
+
+.guest-form {
+    width: 20rem;
+    padding: 10px;
+}

@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
-import Navbar from "./Navbar";
-import ProfilBox from "./ProfilBox";
 
 class Profil extends Component {
     constructor(props) {
@@ -32,8 +30,7 @@ class Profil extends Component {
     render() {
         return (
             <div>
-                <Navbar />
-                <ProfilBox />
+
             </div>
         )
     }

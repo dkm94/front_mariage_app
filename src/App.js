@@ -6,7 +6,7 @@ import HomeGuest from './components/Home_Guest/Home_guest';
 import Register from './components/Register/Register';
 import MenuAdm from './components/Menu_Adm/Menu';
 import EspacePersonnalisé from './components/EspacePersonnalisé';
-import Groupes from './components/Groupes';
+import Groupes from './components/Invités/Invités';
 import Tables from './components/Tables';
 import Menus from './components/Menus';
 import Cake from './components/Gâteau';

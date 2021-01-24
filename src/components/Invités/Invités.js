@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
-import AddGroupForm from "./AddGroupForm";
+import AddGroupForm from "./AddGroup/AddGroupForm";
+import AddGuestForm from "./AddGuest/AddGuest";
 import jwt from "jwt-decode";
+import "./Invités.css"
 // import axios from "axios";
 
-class GroupesBox extends Component {
+class Invités extends Component {
     constructor(props) {
         super(props);
     
@@ -36,14 +38,14 @@ class GroupesBox extends Component {
     }
 
 
-    showForm = () => {
+    // showForm = () => {
 
-        this.setState(prevState => ({
-            visible: !prevState.visible
-        })
-        )
+    //     this.setState(prevState => ({
+    //         visible: !prevState.visible
+    //     })
+    //     )
 
-    }
+    // }
 
     openProfile = (e) => {
         const token = localStorage.getItem("token")
@@ -70,35 +72,44 @@ class GroupesBox extends Component {
         const randomColor = Math.floor(Math.random()*16777215).toString(16);
 
         return (
-            <div className="groupesBox">
-                <h1 className="titleSection">Mes groupes</h1>
+            <div className="guests container-fluid">
             
                 {/* <label>Sélectionner un groupe</label><br/>
 
                 <select className="selectGroup" onChange={this.getGuests}>
                 {groupName}
                 </select> */}
-                <div className="addGroupBtn">
-                <button type="button" onClick={this.showForm}>Ajouter un nouveau groupe+</button>
-                </div>
+                <section className="guest-form">
+                    
+                    {/* <div className="addGroupBtn">
+                        <button type="button" onClick={this.showForm}>Ajouter un nouveau groupe+</button>
+                    </div> */}
 
-                <AddGroupForm visible={this.state.visible}/>
+                    {/* <AddGroupForm visible={this.state.visible}/> */}
+                    <AddGroupForm/>
+                    <AddGuestForm />
+                </section>
+                
 
-                <div className="divGroupbox">
-                    {this.state.groups.map(({name, guestID}, i) => {
-                        return <div key={i} className="divGroup">
-                            <div className="groupName" style={{backgroundColor: "#" + randomColor}}><h1>{name}</h1></div>
-                          
-                            {guestID.map((guest, j) => {
-                                return <div className="groupGuests"><p key={j} onClick={this.openProfile} data-id={guest._id}>{guest.name}</p></div>
-                            })}
-                            <p>Modifier</p>
-                        </div>
-                    })}
-                </div>
+                <section className="guest-list">
+                    <span>List</span>
+                    <div className="divGroupbox">
+                        {this.state.groups.map(({name, guestID}, i) => {
+                            return <div key={i} className="divGroup">
+                                <div className="groupName" style={{backgroundColor: "#" + randomColor}}><h1>{name}</h1></div>
+                            
+                                {guestID.map((guest, j) => {
+                                    return <div className="groupGuests"><p key={j} onClick={this.openProfile} data-id={guest._id}>{guest.name}</p></div>
+                                })}
+                                <p>Modifier</p>
+                            </div>
+                        })}
+                    </div>
+                </section>
+                
             </div>
         )
     }
 }
 
-export default withRouter(GroupesBox);
+export default withRouter(Invités);

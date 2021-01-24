@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
-import Navbar from './Navbar';
+
 import TablesBox from './TablesBox';
-import Footer from './Footer';
+
 
 class Tables extends Component {
 
@@ -10,9 +10,9 @@ class Tables extends Component {
 
         return (
             <div className="tables">
-                <Navbar />
+
                 <TablesBox />
-                <Footer />
+
             </div>
         )
     }

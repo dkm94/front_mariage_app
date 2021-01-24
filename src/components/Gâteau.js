@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
-import Navbar from './Navbar';
 import CakeBox from './Gâteau';
-import Footer from './Footer';
 
 class Cake extends Component {
 
@@ -10,9 +8,9 @@ class Cake extends Component {
 
         return (
             <div className="cake">
-                <Navbar />
+  
                 <CakeBox />
-                <Footer />
+
             </div>
         )
     }
