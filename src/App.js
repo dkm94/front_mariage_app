@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navigation from "./components/Header/Header";
 import Home from './components/Home/Home';
+import HomeGuest from './components/Home_Guest/Home_guest';
 import Register from './components/Register/Register';
 import MenuAdm from './components/MenuAdm';
 import EspacePersonnalisé from './components/EspacePersonnalisé';
@@ -19,6 +20,7 @@ function App() {
         <Navigation />
           <Switch>
             <Route exact path="/" component={Home}/>
+            <Route path="/homeGuest" component={HomeGuest}/>
             <Route path="/register" component={Register}/>
             <Route path="/menuAdm" component={MenuAdm}/>
             <Route path="/espacePerso" component={EspacePersonnalisé}/>
