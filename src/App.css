@@ -61,49 +61,6 @@ a:-webkit-any-link {
     text-decoration: none ;
 }
 
-/* Menu Adm  */
-.menuAdm {
-    height: 100vh;
-    width: 100%; 
-    background-color: #FFF5F1;
- }
-
-.menuAdmBox {
-    height: 67%;
-    width: 100%;
-    /* background-color: rosybrown; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    padding: 0;
-}
-
-.ongletMenu {
-    height: 10%;
-    width: 30%;
-    background-color: #FFFFFF;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: red;
-    border-style: dotted;
-    list-style: none;
-}
-
-.ongletMenu h2 {
-    margin: 0;
-    font-size: 18px;
-}
-/* 
-a:-webkit-any-link {
-    color: black;
-    cursor: pointer;
-    text-decoration: none;
-} */
-
 /* Espace Perso */
 .espacePersoBox {
     height: 67%;
