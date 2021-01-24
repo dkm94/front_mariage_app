@@ -1,0 +1,257 @@
+
+
+
+/* Mise en forme */
+html, body {
+    /* background-color: lightseagreen; */
+    /* height: 100%; */
+    width: 100%;
+    margin: 0;
+    font-family: 'Crimson Text', serif;
+    background: whitesmoke;
+}
+
+.center-x {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Boutons */
+.button {
+    height: fit-content;
+}
+
+.button-center {
+    text-align: center;
+}
+
+.button button {
+    border-style: none;
+    height: 30px;
+    padding: 3px 6px;
+    font: unset;
+    margin: 20px 0px 20px 0px;
+}
+
+
+
+/* Admin Login */
+.loginAdmin {
+    height: 100vh;
+    width: 100%; 
+    /* background-color: green; */
+ }
+
+.adminForm {
+    height: fit-content;
+    width: 100%;
+    /* background-color: rosybrown; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginForm form {
+    margin-bottom: 15px ;
+}
+
+a:-webkit-any-link {
+    cursor: pointer;
+    text-decoration: none ;
+}
+
+/* Espace Perso */
+.espacePersoBox {
+    height: 67%;
+    width: 100%;
+    /* background-color: rosybrown; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+/* Menu groupes */
+.groupes {
+    /* height: 100vh; */
+    width: 100%; 
+    /* background-color: green; */
+}
+
+.groupesBox {
+    /* height: 67%; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.groupesBox form {
+    width: 60%;
+    height: 148px;
+    display: flex;
+    border: black;
+    border-style: solid;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.titleSection {
+    font-size: 2.25rem;
+}
+
+.groupID {
+    height: 20px;
+    width: 100%;
+    background-color: orange;
+}
+
+.addGroupBtn {
+    height: 50px;
+}
+
+.addGroup {
+    height: 22%;
+    width: 30%;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: red;
+    border-style: dotted;
+    list-style: none;
+    margin: 10%;
+}
+
+.addGroupCroix {
+    font-size: 63px;
+    margin-bottom: 15px;
+}
+
+.divSelectGroup {
+    text-align: center;
+}
+
+.divGroupbox {
+    width: 90%;
+    display: flex;
+    height: fit-content;
+    flex-wrap: wrap;
+}
+
+.divGroup {
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+    width: 200px;
+    margin: 20px;
+    -webkit-box-shadow: 10px 10px 34px -1px rgba(166,154,166,1);
+    -moz-box-shadow: 10px 10px 34px -1px rgba(166,154,166,1);
+    box-shadow: 10px 10px 34px -1px rgba(166,154,166,1);
+    /* background-color: orange; */
+}
+
+.groupName h1 {
+    margin: 0;
+}
+
+/* Menu tables */
+.tables {
+    height: 100vh;
+    width: 100%; 
+    background-color: green;
+}
+
+.tablesBox {
+    height: 67%;
+    width: 100%;
+}
+
+.addTable {
+    height: 22%;
+    width: 30%;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: red;
+    border-style: dotted;
+    list-style: none;
+    margin: 10%;
+}
+
+.addTableCroix {
+    font-size: 63px;
+    margin-bottom: 15px;
+}
+
+/* Menu menus */
+.menus {
+    height: 100vh;
+    width: 100%; 
+    background-color: green;
+}
+
+.menusBox {
+    height: 67%;
+    width: 100%;
+}
+
+.addMenu {
+    height: 22%;
+    width: 30%;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: red;
+    border-style: dotted;
+    list-style: none;
+    margin: 10%;
+}
+
+.addMenuCroix {
+    font-size: 63px;
+    margin-bottom: 15px;
+}
+
+/* Menu gâteau */
+/* Menu menus */
+.cake {
+    height: 100vh;
+    width: 100%; 
+    background-color: green;
+}
+
+.cakeBox {
+    height: 67%;
+    width: 100%;
+}
+
+.addCake {
+    height: 22%;
+    width: 30%;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: red;
+    border-style: dotted;
+    list-style: none;
+    margin: 10%;
+}
+
+.addCakeCroix {
+    font-size: 63px;
+    margin-bottom: 15px;
+}
+
+.footer {
+    height: 60px;
+    width: 100%;
+    background-color: #000000;
+}

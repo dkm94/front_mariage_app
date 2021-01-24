@@ -1,0 +1,63 @@
+.menu-adm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+}
+
+.menu-adm-desc {
+    font-size: 1.5em;
+}
+
+.grid-container {
+    display: grid;
+    grid-gap: 5rem;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.grid-item {
+    display: flex;
+    flex-direction: column;
+    height: 12rem;
+}
+
+.item1 {
+    background-image: url("../../img/faire-part.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.item2 {
+    background-image: url("../../img/cartes.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.item3 {
+    background-image: url("../../img/tables.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.item4 {
+    background-image: url("../../img/cake.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.grid-item > .grid-item-title {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    color: black;
+    background: rgba(255,255,255,0.5);
+    padding: 2rem;
+    text-align: center;
+}
+
+.grid-item-title > a {
+    color: black;
+}

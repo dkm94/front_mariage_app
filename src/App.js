@@ -1,16 +1,37 @@
 import React from 'react';
-import { Route, BrowserRouter as Router } from  'react-router-dom';
-import { Switch } from "react-router-dom";
-import Home from './components/Home';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Navigation from "./components/Header/Header";
+import Home from './components/Home/Home';
+import HomeGuest from './components/Home_Guest/Home_guest';
+import Register from './components/Register/Register';
+import MenuAdm from './components/Menu_Adm/Menu';
+import EspacePersonnalisé from './components/EspacePersonnalisé';
+import Groupes from './components/Groupes';
+import Tables from './components/Tables';
+import Menus from './components/Menus';
+import Cake from './components/Gâteau';
+import Profil from './components/Profil';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <Switch>
-          <Route exact path="/" component={Home}/>
-        </Switch>
+        <Navigation />
+          <Switch>
+            <Route exact path="/" component={Home}/>
+            <Route path="/homeGuest" component={HomeGuest}/>
+            <Route path="/register" component={Register}/>
+            <Route path="/menuAdm" component={MenuAdm}/>
+            <Route path="/espacePerso" component={EspacePersonnalisé}/>
+            <Route path="/groupes" component={Groupes}/>
+            {/* <Route path="/guest/:id" component={Guest}/> */}
+            <Route path="/tables" component={Tables}/>
+            <Route path="/menus" component={Menus}/>
+            <Route path="/gâteau" component={Cake}/>
+            <Route path="/profil" component ={Profil}/>
+          </Switch>
+ 
       </Router>
     </div>
   );

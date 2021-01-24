@@ -1,0 +1,45 @@
+.header {
+    height: 15vh;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid lightgrey;
+    /* justify-content: center; */
+}
+
+.header > ul {
+    height: 100%;
+    margin: 0;
+    width: 100%;
+    display: inline-flex;
+    padding: 0;
+}
+
+.header > ul > li {
+    list-style: none;
+}
+
+.li-text {
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header img {
+    height: 75%;
+}
+
+.navbar {
+    height: 6%;
+    width: 100%;
+    background-color: #E7E7E7;
+}

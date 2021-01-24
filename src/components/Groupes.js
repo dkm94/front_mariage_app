@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import Navbar from './Navbar';
+import GroupesBox from './GroupesBox';
 
-class Home extends Component {
+class Groupes extends Component {
 
     render(){
 
         return (
-            <div>
+            <div className="groupes">
                 <Navbar />
-                <Register />
+                <GroupesBox />
             </div>
         )
     }
 }
 
-export default withRouter(Home);
+export default withRouter(Groupes);

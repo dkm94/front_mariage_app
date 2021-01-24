@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 
-class Register extends Component {
+class EspacePersoBox extends Component {
 
     render(){
 
         return (
-            <div>
+            <div className="espacePersoBox">
                 
             </div>
         )
     }
 }
 
-export default withRouter(Register);
+export default withRouter(EspacePersoBox);
