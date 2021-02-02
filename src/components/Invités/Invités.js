@@ -2,28 +2,32 @@ import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import AddGroupForm from "./AddGroup/AddGroupForm";
 import AddGuestForm from "./AddGuest/AddGuest";
-import jwt from "jwt-decode";
+import decode from "jwt-decode";
 import "./Invités.css"
-// import axios from "axios";
+import axios from "axios";
 
 class Invités extends Component {
     constructor(props) {
         super(props);
     
         this.state = {
+            groups: [],
             visible: false,
-            groups: []
-            // guests: []
+            groupName: "",
+            mail: "",
+            guests: [],
+            guestName: "",
+            selectedGroup: ""
         };
     }
 
 
     componentDidMount(){
         const token = localStorage.getItem("token")
-        const user = jwt(token);
+        const admin = decode(token);
         console.log(token)
-        console.log(user)
-        fetch("https://backend-mywedding-app.herokuapp.com/groups/" + user.mariageID,
+        console.log(admin)
+        fetch("https://backend-mywedding-app.herokuapp.com/groups/" + admin.mariageID,
         {headers: {Accept: "application/json",
                 Authorization: "Bearer " + token},
         method: "GET" })
@@ -35,6 +39,77 @@ class Invités extends Component {
             console.log(groups)
           })
           .catch((err)=>console.log('err:' + err));
+    }
+
+    handleChange = (name, value) => {
+        this.setState({
+            [name]: value
+        })
+    }
+
+    splitKeywords = () => {
+        const guestArray = this.state.guests.split(','); 
+        this.setState({ 
+            guests: guestArray
+        }); 
+    }
+
+    submitNewGroup = () => {
+        alert("TRIGGERED");
+        const token = localStorage.getItem("token")
+        const admin = decode(token);
+        console.log(token)
+        console.log(admin)
+        fetch("https://backend-mywedding-app.herokuapp.com/admin/newGroup/",
+        {headers: {Accept: "application/json",
+                Authorization: "Bearer " + token},
+        method: "POST" })
+          .then(res => {
+              return res.json()
+          })
+          .then(groups => {
+            this.setState({ groups });
+            console.log(groups)
+          })
+          .catch((err)=>console.log('err:' + err));
+    }
+
+    submitNewGuests = () => {
+        alert("TRIGGERED");
+
+        const token = localStorage.getItem("token");
+        // const admin = decode(token);
+        // const mariageID = admin.mariageID
+    
+        const guest = {
+            name: this.state.guestName,
+            groupID: this.state.selectedGroup
+        }
+
+        const config = {
+            headers: { Authorization: 'Bearer '+ token }
+        };
+
+        axios.post("https://backend-mywedding-app.herokuapp.com/admin/newGuest/" + guest.groupID, guest , config)
+        .then(res => {
+            console.log("success:", res.status)
+            console.log(res.data)
+            this.setState(this.state)
+            // window.location.reload(false);
+         })
+        .catch(error => {
+            if (error.response) {
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+              } else if (error.request) {
+                console.log(error.request);
+              } else {
+                console.log('Error', error.message);
+              }
+              console.log(error.config);
+        })
+  
     }
 
 
@@ -68,26 +143,12 @@ class Invités extends Component {
     }
 
     render(){
-    
-        const randomColor = Math.floor(Math.random()*16777215).toString(16);
 
         return (
             <div className="guests container-fluid">
-            
-                {/* <label>Sélectionner un groupe</label><br/>
-
-                <select className="selectGroup" onChange={this.getGuests}>
-                {groupName}
-                </select> */}
                 <section className="guest-form">
-                    
-                    {/* <div className="addGroupBtn">
-                        <button type="button" onClick={this.showForm}>Ajouter un nouveau groupe+</button>
-                    </div> */}
-
-                    {/* <AddGroupForm visible={this.state.visible}/> */}
-                    <AddGroupForm/>
-                    <AddGuestForm />
+                    <AddGroupForm onSubmit={this.submitNewGroup}/>
+                    <AddGuestForm groups={this.state.groups} onSubmit={this.submitNewGuests}/>
                 </section>
                 
 
@@ -96,7 +157,7 @@ class Invités extends Component {
                     <div className="divGroupbox">
                         {this.state.groups.map(({name, guestID}, i) => {
                             return <div key={i} className="divGroup">
-                                <div className="groupName" style={{backgroundColor: "#" + randomColor}}><h1>{name}</h1></div>
+                                <div className="groupName"><h1>{name}</h1></div>
                             
                                 {guestID.map((guest, j) => {
                                     return <div className="groupGuests"><p key={j} onClick={this.openProfile} data-id={guest._id}>{guest.name}</p></div>

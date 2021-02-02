@@ -3,7 +3,7 @@ import { withRouter} from "react-router-dom";
 import Button from "../LargeButton/LargeButton";
 import "../LargeButton/LargeButton.css";
 
-// import axios from 'axios';
+import axios from 'axios';
 // import decode from "jwt-decode"; // permet de decoder un token directement sur le front
 
 
@@ -29,39 +29,44 @@ class LoginForm extends Component {
         
         const { email, password } = this.state;
         console.log("Login Submitted");
-    
-        // fetch('https://backend-mywedding-app.herokuapp.com/auth/adminLogin', {
-        // mode: 'no-cors',
-        // credentials: 'include',  
-        // headers : {
-        //     Accept: "application/json",
-        //     "Content-Type": "application/json",
-        //   },
-        //   method: "POST",
-        //   body: JSON.stringify({
-        //     email,
-        //     password
+
+        // fetch('https://backend-mywedding-app.herokuapp.com/api/auth/adminLogin', {
+        //     crossDomain:true,
+        //     method: 'POST',
+        //     headers: {'Content-Type':'application/json', 'Access-Control-Allow-Origin': '*'},
+        //     body: JSON.stringify({
+        //       email,
+        //       password
         //   })
         // })
-        // .then((response) => response.json())
-        // .then((data) => {
-        //   console.log(data);
-        // })
-        fetch('https://backend-mywedding-app.herokuapp.com/auth/adminLogin', {
-            crossDomain:true,
-            method: 'POST',
-            headers: {'Content-Type':'application/json'},
-            body: JSON.stringify({
-              email,
-              password
-          })
-        })
-        .then(res => res.json())
-        .then(response => {
-          console.log("resultat du fetch : ", response);
-            localStorage.setItem("token", response.token);
-            this.props.history.replace("/menuAdm");
-        });
+        // .then(res => res.json())
+        // .then(response => {
+        //   console.log("resultat du fetch : ", response);
+        //     localStorage.setItem("token", response.token);
+        //     this.props.history.replace("/menuAdm");
+        // });
+
+        axios.post('/api/auth/adminLogin', {
+            email, password
+          }, {headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+            }})
+            // .then(res => res.json())
+            .then((response) => {
+                console.log("resultat du fetch : ", response.data)
+                let token;
+                localStorage.setItem("token", response.data.token)
+                token = localStorage.getItem('token')
+                console.log(token)
+                if(token){
+                    console.log("coucou")
+                    this.props.history.replace("/menuAdm")
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
       }
 
     render(){

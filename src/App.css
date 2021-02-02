@@ -159,36 +159,6 @@ a:-webkit-any-link {
     margin: 0;
 }
 
-/* Menu tables */
-.tables {
-    height: 100vh;
-    width: 100%; 
-    background-color: green;
-}
-
-.tablesBox {
-    height: 67%;
-    width: 100%;
-}
-
-.addTable {
-    height: 22%;
-    width: 30%;
-    background-color: #FFFFFF;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: red;
-    border-style: dotted;
-    list-style: none;
-    margin: 10%;
-}
-
-.addTableCroix {
-    font-size: 63px;
-    margin-bottom: 15px;
-}
-
 /* Menu menus */
 .menus {
     height: 100vh;

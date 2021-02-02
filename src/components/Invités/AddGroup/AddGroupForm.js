@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
-import Button from "../../Button";
+import Button from "../../LargeButton/LargeButton";
 import "./AddGroup.css"
 // import axios from "axios";
 
@@ -24,31 +24,36 @@ class AddGroupForm extends Component {
             console.log(name)
         }
 
-        handleSubmit(e) {
-            e.preventDefault();
-            const token = localStorage.getItem("token")
-            console.log("Submit ok");
-        
-            const { name, mail } = this.state;
-        
-            fetch('https://backend-mywedding-app.herokuapp.com/admin/newGroup', 
-            { method: 'POST', 
-            body: JSON.stringify({
-                name, mail}),
-                headers: {Accept: "application/json",
-                'Content-Type': 'application/json',
-                Authorization: "Bearer " + token} })
-            .then(res => res.json())
-            .then(newGroup => {
-                this.setState({name: "", mail: ""});
-                console.log(newGroup)
-            })
-            .then(window.location.reload(false))
+        handleSubmit = () => {
+            console.log("triggered");
+            this.props.onSubmit();
         }
+
+        // handleSubmit(e) {
+        //     e.preventDefault();
+        //     const token = localStorage.getItem("token")
+        //     console.log("Submit ok");
         
-        newInput(){
+        //     const { name, mail } = this.state;
+        
+        //     fetch('https://backend-mywedding-app.herokuapp.com/admin/newGroup', 
+        //     { method: 'POST', 
+        //     body: JSON.stringify({
+        //         name, mail}),
+        //         headers: {Accept: "application/json",
+        //         'Content-Type': 'application/json',
+        //         Authorization: "Bearer " + token} })
+        //     .then(res => res.json())
+        //     .then(newGroup => {
+        //         this.setState({name: "", mail: ""});
+        //         console.log(newGroup)
+        //     })
+        //     .then(window.location.reload(false))
+        // }
+        
+        // newInput(){
             
-        }
+        // }
     
     render(){
 
@@ -65,8 +70,7 @@ class AddGroupForm extends Component {
                     <label>Email <br />
                     <input type="email" name="mail" value={this.state.mail} onChange={this.handleChange} required/>
                     </label>
-
-                    <Button />
+                    <Button title="Valider"/>
                 </form>
             </div>
         )
