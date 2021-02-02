@@ -99,7 +99,7 @@ class LoginForm extends Component {
                         />
                     </div>
                     <div className="center-x">
-                        <Button title="Valider"/>
+                        <Button title="Valider" type="submit"/>
                     </div>
             </form>
             {/* <Link to={"/register"}>Vous n'avez pas encore de compte ? Inscrivez-vous.</Link> */}
