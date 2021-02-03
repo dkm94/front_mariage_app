@@ -30,7 +30,6 @@ const Tables = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        alert("submitted!")
         const token = localStorage.getItem("token");
         const config = {
             headers: { Authorization: 'Bearer '+ token }
@@ -40,7 +39,6 @@ const Tables = () => {
                 console.log(res.data)
             })
             .catch((err) => {
-                alert("Erreur", err)
                 console.log(err)})
     }
 

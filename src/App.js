@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route} from 'react-router-dom';
 import AdminRoute from "../src/ProtectedRoutes/Admin";
+import Invités from "../src/Pages/Invités/Invités";
 import Tables from "../src/Pages/Tables/Tables";
 // import Navigation from "./components/Header/Header";
 import Logout from "../src/components/Navigation/Log_out"
@@ -41,7 +42,8 @@ function App() {
             <Route path="/register" component={Register}/>
             <AdminRoute path="/menuAdm" component={MenuAdmin} isAuth={role}/>
             <AdminRoute path="/tables" component={Tables} isAuth={role}/>
-            <Route path="*" component={() => "Contenu introuvable"}/>
+            <AdminRoute path="/invités" component={Invités} isAuth={role}/>
+            {/* <Route path="*" component={() => "Contenu introuvable"}/> */}
           {/* </Switch> */}
  
       </Router>
