@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import Byguests from "../../components/Invités(affichage)/by_guests/guests";
 import Bygroups from "../../components/Invités(affichage)/by_groups/groups";

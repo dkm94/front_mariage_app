@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route} from 'react-router-dom';
 import AdminRoute from "../src/ProtectedRoutes/Admin";
 import Invités from "../src/Pages/Invités/Invités";
 import Tables from "../src/Pages/Tables/Tables";
+import Menu from "../src/Pages/Menu/Menu";
 // import Navigation from "./components/Header/Header";
 import Logout from "../src/components/Navigation/Log_out"
 import Login from "../src/components/Navigation/Log_in"
@@ -24,7 +25,7 @@ function App() {
     user = decode(token)
     console.log(user)
     role = user.role
-    console.log(role);
+    // console.log(role);
   }
 
   let navigation;
@@ -43,6 +44,7 @@ function App() {
             <AdminRoute path="/menuAdm" component={MenuAdmin} isAuth={role}/>
             <AdminRoute path="/tables" component={Tables} isAuth={role}/>
             <AdminRoute path="/invités" component={Invités} isAuth={role}/>
+            <AdminRoute path="/menu" component={Menu} isAuth={role}/>
             {/* <Route path="*" component={() => "Contenu introuvable"}/> */}
           {/* </Switch> */}
  

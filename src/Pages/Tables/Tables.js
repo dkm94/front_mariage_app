@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
-// import Card from "../../components/Tables/TablesBox";
 import axios from "axios";
 
 
@@ -42,7 +41,6 @@ const Tables = () => {
                 console.log(err)})
     }
 
-    const table = tables.map((table) => <li key={table.id}>{table.name}</li>)
     return(
         <div className="tables">
             <span>Tables</span>
@@ -59,9 +57,17 @@ const Tables = () => {
             </div>
 
             <div className="get-tables">
-                <ul>
-                    {table}
-                </ul>
+                    {tables.map(({name, _id, guestID}, i) => {
+                        return <div key={i} data-id={_id}>
+                            <span>{name}</span>
+                            {guestID.map((guest, j) => {
+                                console.log("guest ", guest)
+                                return <div key={j}>
+                                    <span>{guest.name}</span>
+                                </div>
+                            })}
+                        </div>
+                    })}
             </div>
         </div>
     )

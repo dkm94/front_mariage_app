@@ -8,7 +8,7 @@ const Bygroups = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            console.log("coucou")
+            // console.log("coucou")
             const token = localStorage.getItem("token");
             const config = {
                 headers: { Authorization: 'Bearer '+ token }
@@ -52,7 +52,7 @@ const Bygroups = () => {
                     <div className="groupName"><h1>{name}</h1></div>
                 
                     {guestID.map((guest, j) => {
-                        return <div className="groupGuests"><p key={j} data-id={guest._id}>{guest.name}</p><button>v</button><button>x</button></div>
+                        return <div key={j} className="groupGuests"><p data-id={guest._id}>{guest.name}</p><button>v</button><button>x</button></div>
                     })}
                 </div>
             })}
