@@ -197,50 +197,55 @@ const Menus = () => {
     const dessert_ = desserts.map((dessert) => <li key={dessert._id}>{dessert.name}<button onClick={() => {deleteDessert(dessert._id)}}>x</button></li>)
     return(
         <div>
-            <div className="starter">
-                <div className="starter-form">
-                    <form onSubmit={submitStarter}>
-                        <label>Ajouter une entrée</label>
-                        <input
-                        type="text"
-                        name="name" 
-                        value={starter.name} 
-                        onChange={handleStarter}/>
-                        <button type="submit">OK</button>
-                    </form>
-                </div>
-                <h2>Entrée(s)</h2>
-                <ul>{entrée}</ul>
+            <div className="menu-span">
+                <span>Constituez le menu de votre mariage: vous pouvez ajouter plusieurs entrées, plats ou desserts...</span>
             </div>
-            <div className="maincourse">
-                <div className="maincourse-form">
-                    <form onSubmit={submitMaincourse}>
-                        <label>Ajouter un plat</label>
-                        <input
-                        type="text"
-                        name="name" 
-                        value={maincourse.name} 
-                        onChange={handleMaincourse}/>
-                        <button type="submit">OK</button>
-                    </form>
+            <div className="menu-body">
+                <div className="starter forms">
+                    <h2>Entrée(s)</h2>
+                    <div className="starter-form form">
+                        <form onSubmit={submitStarter}>
+                            {/* <label>Ajouter une entrée</label> */}
+                            <input
+                            type="text"
+                            name="name" 
+                            value={starter.name} 
+                            onChange={handleStarter}/>
+                            <button type="submit">OK</button>
+                        </form>
+                    </div>
+                    <ul>{entrée}</ul>
                 </div>
-                <h2>Plat(s)</h2>
-                <ul>{plat}</ul>
-            </div>
-            <div className="dessert">
-                <div className="maincourse-form">
-                    <form onSubmit={submitDessert}>
-                        <label>Ajouter un dessert</label>
-                        <input
-                        type="text"
-                        name="name" 
-                        value={dessert.name} 
-                        onChange={handleDessert}/>
-                        <button type="submit">OK</button>
-                    </form>
+                <div className="maincourse forms">
+                    <h2>Plat(s)</h2>
+                    <div className="maincourse-form form">
+                        <form onSubmit={submitMaincourse}>
+                            {/* <label>Ajouter un plat</label> */}
+                            <input
+                            type="text"
+                            name="name" 
+                            value={maincourse.name} 
+                            onChange={handleMaincourse}/>
+                            <button type="submit">OK</button>
+                        </form>
+                    </div>
+                    <ul>{plat}</ul>
                 </div>
-                <h2>Dessert(s)</h2>
-                <ul>{dessert_}</ul>
+                <div className="dessert forms">
+                    <h2>Dessert(s)</h2>
+                    <div className="maincourse-form form">
+                        <form onSubmit={submitDessert}>
+                            {/* <label>Ajouter un dessert</label> */}
+                            <input
+                            type="text"
+                            name="name" 
+                            value={dessert.name} 
+                            onChange={handleDessert}/>
+                            <button type="submit">OK</button>
+                        </form>
+                    </div>
+                    <ul>{dessert_}</ul>
+                </div>
             </div>
         </div>
     )

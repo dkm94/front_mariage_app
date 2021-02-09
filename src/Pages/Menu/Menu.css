@@ -1,0 +1,33 @@
+.menu-span {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.menu-body {
+    display: flex;
+    margin-top: 50px;
+    justify-content: space-evenly;
+}
+
+ul {
+    padding: 0;
+}
+
+li {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+.forms {
+    padding: 2rem;
+    width: 20rem;
+    background-color: #FFFFFF;
+    -webkit-box-shadow: -20px 18px 46px -13px rgba(204,198,204,1);
+    -moz-box-shadow: -20px 18px 46px -13px rgba(204,198,204,1);
+    box-shadow: -20px 18px 46px -13px rgba(204,198,204,1);
+}
+
+.form {
+    margin-bottom: 1rem;
+}
