@@ -22,7 +22,7 @@ class MenuAdmBox extends Component {
                         <div className="grid-item-title"><Link to="/tables"><h2>Tables</h2></Link></div>
                     </div>
                     <div className="grid-item item4">
-                        <div className="grid-item-title"><Link to="/menus"><h2>Menu</h2></Link></div>
+                        <div className="grid-item-title"><Link to="/menu"><h2>Menu</h2></Link></div>
                     </div>
                 </section>
                 

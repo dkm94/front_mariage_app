@@ -147,10 +147,54 @@ const Menus = () => {
         })
     }
 
+    const deleteStarter = (id) => {
+        const token = localStorage.getItem("token");
+        const config = {
+            headers: { Authorization: 'Bearer '+ token }
+        };
+        axios.delete(`/api/admin/menu/starters/delete/${id}`, config)
+            .then(res => {
+                if(res.data != null) {
+                    alert("L'entrée a été supprimée.");
+                    setStarters(starters.filter(starter => starter._id !== id))
+                }
+            })
+    }
 
-    const entrée = starters.map((starter, i) => <li key={i} data-id={starter._id}>{starter.name}</li>)
-    const plat = maincourses.map((maincourse, i) => <li key={i} data-id={maincourse._id}>{maincourse.name}</li>)
-    const dessert_ = desserts.map((dessert, i) => <li key={i} data-id={dessert._id}>{dessert.name}</li>)
+    const deleteMaincourse = (id) => {
+        const token = localStorage.getItem("token");
+        const config = {
+            headers: { Authorization: 'Bearer '+ token }
+        };
+        axios.delete(`/api/admin/menu/maincourses/delete/${id}`, config)
+            .then(res => {
+                if(res.data != null) {
+                    alert("Le plat a été supprimé.");
+                    setMaincourses(maincourses.filter(maincourse => maincourse._id !== id))
+                }
+            })
+    }
+
+    const deleteDessert = (id) => {
+        const token = localStorage.getItem("token");
+        const config = {
+            headers: { Authorization: 'Bearer '+ token }
+        };
+        axios.delete(`/api/admin/menu/desserts/delete/${id}`, config)
+            .then(res => {
+                if(res.data != null) {
+                    alert("Le dessert a été supprimé.");
+                    setDesserts(desserts.filter(dessert => dessert._id !== id))
+                }
+            })
+    }
+
+   
+
+
+    const entrée = starters.map((starter) => <li key={starter._id} >{starter.name}<button onClick={() => {deleteStarter(starter._id)}}>x</button></li>)
+    const plat = maincourses.map((maincourse) => <li key={maincourse._id}>{maincourse.name}<button onClick={() => {deleteMaincourse(maincourse._id)}}>x</button></li>)
+    const dessert_ = desserts.map((dessert) => <li key={dessert._id}>{dessert.name}<button onClick={() => {deleteDessert(dessert._id)}}>x</button></li>)
     return(
         <div>
             <div className="starter">
