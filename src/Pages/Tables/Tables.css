@@ -2,7 +2,11 @@
 .tables {
     /* height: 100vh;
     width: 100%;  */
-    background-color: lightpink;
+    /* background-color: lightpink; */
+}
+
+.get-tables {
+    display: flex;
 }
 
 .tablesBox {
@@ -26,4 +30,10 @@
 .addTableCroix {
     font-size: 63px;
     margin-bottom: 15px;
+}
+
+.table-form {
+    width: 10rem;
+    background-color: lightblue;
+    margin-right: 20px;
 }

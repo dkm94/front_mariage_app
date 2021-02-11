@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
+import Select from "../../components/AsyncSelect";
+import "./Tables.css";
 
 
 const Tables = () => {
-    const [tables, setTables] = useState([])
-    const [name, setName] = useState("")
+    const [tables, setTables] = useState([]);
+    const [table, setTable] = useState({name:""});
    
     useEffect(() => {
         const fetchData = async () => {
@@ -16,26 +18,70 @@ const Tables = () => {
               };
             const result = await axios.get("/api/admin/tables/", config)
             setTables(result.data)
-            // console.log("updated")
         }
         fetchData();
-        // console.log("mounted")
     }, [])
 
+    // const handleChange = (e) => {
+    //     setTable(e.target.value)
+    // }
+
     const handleChange = (e) => {
-        setName(e.target.value)
-        console.log(e)
+        const {value, name} = e.target;
+        setTable(prevState => ({
+            ...prevState,
+            [name]: value
+        }))
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleSubmit = (table) => {
         const token = localStorage.getItem("token");
         const config = {
             headers: { Authorization: 'Bearer '+ token }
             };
-        axios.post("/api/admin/tables/add", {name}, config)
+        axios.post("/api/admin/tables/add", {name: table}, config)
+            .then((res) => {
+                if(res.data != null){
+                    const updatedTableList = [table, ...tables]
+                    setTables(updatedTableList)
+                }
+            })
+            .catch((err) => {
+                console.log(err)})
+    }
+
+    const deleteGuest = (guest, table) => {
+        console.log(guest);
+        console.log(table);
+        const token = localStorage.getItem("token");
+        const config = {
+            headers: { Authorization: 'Bearer '+ token }
+            };
+        axios.put(`/api/admin/tables/deleteGuest/${table}`, {guestID: guest}, config)
             .then((res) => {
                 console.log(res.data)
+                if(res.data != null){
+                    let guests;
+                    guests = tables.guestID;
+                    guests.filter(guest => guest._id !== guest)
+                }
+            })
+            .catch((err) => {
+                console.log(err)})
+    }
+
+    const deleteTable = (id) => {
+        console.log(id);
+        const token = localStorage.getItem("token");
+        const config = {
+            headers: { Authorization: 'Bearer '+ token }
+            };
+        axios.delete(`/api/admin/tables/delete/${id}`, config)
+            .then(res => {
+                if(res.data != null) {
+                    alert("La table a été supprimée.");
+                    setTables(tables.filter(table => table._id !== id))
+                }
             })
             .catch((err) => {
                 console.log(err)})
@@ -43,14 +89,13 @@ const Tables = () => {
 
     return(
         <div className="tables">
-            <span>Tables</span>
             <div className="tables-form">
-                <form onSubmit={handleSubmit}>
-                    <label>Ajouter un groupe</label>
+                <form onSubmit={() => handleSubmit(table.name)}>
+                    <label>Ajouter une table</label>
                     <input
                     type="text"
                     name="name" 
-                    value={name} 
+                    value={table.name} 
                     onChange={handleChange}/>
                     <button type="submit">OK</button>
                 </form>
@@ -58,12 +103,16 @@ const Tables = () => {
 
             <div className="get-tables">
                     {tables.map(({name, _id, guestID}, i) => {
-                        return <div key={i} data-id={_id}>
+                        return <div key={i} data-id={_id} className="table-form">
                             <span>{name}</span>
-                            {guestID.map((guest, j) => {
-                                console.log("guest ", guest)
-                                return <div key={j}>
+                            <button onClick={() => {deleteTable(_id, guestID)}}>x</button>
+
+                            <Select tableID={_id} tables={tables} setTables={setTables} guests={guestID}/>
+                            
+                            {guestID.map(guest => {
+                                return <div key={guest._id}>
                                     <span>{guest.name}</span>
+                                    <button onClick={() => {deleteGuest(guest._id, _id)}}>x</button>
                                 </div>
                             })}
                         </div>
