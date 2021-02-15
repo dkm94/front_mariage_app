@@ -7,7 +7,15 @@
 }
 
 .menu-adm-desc {
-    font-size: 1.5em;
+    font-size: 12px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 3.3px;
+    text-align: center;
+    color: #e4bdb7;
+    text-transform: uppercase;
 }
 
 .grid-container {

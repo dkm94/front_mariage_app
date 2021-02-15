@@ -13,12 +13,16 @@ export default function Login() {
 
  
         return (
-            <div className="header">
-                <div className="navigation">
+            <div className="header header-style">
+                <div className="navigation container">
                     <ul>
                         <li className="li-text"><span>Qui sommes-nous ?</span></li>
                         <li className="logo"><img alt="logo" src={Logo} /></li>
-                        <li className="li-text"><Link to={"/register"}>Déconnexion</Link></li>
+                        <ul>
+                            <li><Link to={"/menuAdm"}>Mariage</Link></li>
+                            <li>Mon compte</li>
+                            <li><Link to={"/register"}>Déconnexion</Link></li>
+                        </ul>
                     </ul>
                 </div>
             </div>
