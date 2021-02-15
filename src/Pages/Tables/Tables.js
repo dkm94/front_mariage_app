@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
-import Select from "../../components/AsyncSelect";
+import Select from "../../components/AsyncSelect/AsyncSelect";
+import Button from "../../components/LargeButton/LargeButton";
+
 import "./Tables.css";
 
 
@@ -88,10 +90,10 @@ const Tables = () => {
     }
 
     return(
-        <div className="tables">
+        <div className="tables container">
             <div className="tables-form">
                 <form onSubmit={() => handleSubmit(table.name)}>
-                    <label>Ajouter une table</label>
+                    <label>Créer une nouvelle table</label><br />
                     <input
                     type="text"
                     name="name" 
@@ -104,17 +106,23 @@ const Tables = () => {
             <div className="get-tables">
                     {tables.map(({name, _id, guestID}, i) => {
                         return <div key={i} data-id={_id} className="table-form">
-                            <span>{name}</span>
-                            <button onClick={() => {deleteTable(_id, guestID)}}>x</button>
-
+                            <div className="table-name">
+                                <span>{name}</span>
+                            </div>
+                            
                             <Select tableID={_id} tables={tables} setTables={setTables} guests={guestID}/>
                             
                             {guestID.map(guest => {
-                                return <div key={guest._id}>
+                                return <div key={guest._id} className="guest-del">
                                     <span>{guest.name}</span>
-                                    <button onClick={() => {deleteGuest(guest._id, _id)}}>x</button>
+                                    <i className="far fa-trash-alt icon-style"
+                                    onClick={() => {deleteGuest(guest._id, _id)}}></i>
                                 </div>
                             })}
+                            <div className="delete-table">
+                                <Button onClick={() => {deleteTable(_id, guestID)}} title="Supprimer la table"/>
+                            </div>
+                            
                         </div>
                     })}
             </div>

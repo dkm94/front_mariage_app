@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import AsyncSelect from "react-select/async";
 import axios from "axios";
+import "./AsyncSelect.css";
 
 const Select = ({ tableID, guests }) => {
 
@@ -70,14 +71,14 @@ const Select = ({ tableID, guests }) => {
         }, 1500);
     }
     return(
-        <div>
+        <div className="select-style" >
             <AsyncSelect 
             value={selectedGuest}
             loadOptions={loadOptions}
             onChange={e => onSearchChange(e)}
             defaultOptions={true}
             />
-            <button onClick={() => {addGuest(selectedGuest, tableID)}}>Ajouter</button>
+            <button className="add-btn" onClick={() => {addGuest(selectedGuest, tableID)}}>Ajouter</button>
         </div>
     )
 }

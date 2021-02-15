@@ -1,12 +1,37 @@
 /* Menu tables */
-.tables {
-    /* height: 100vh;
-    width: 100%;  */
-    /* background-color: lightpink; */
+.tables-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10rem;
+}
+
+.tables-form > form {
+    padding: 20px;
+    /* background-color: #ffffff; */
+    /* border: 1px solid lightgray; */
+    width: 50%;
+    text-align: center;
+}
+
+.tables-form > form > label {
+    font-size: 12px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 3.3px;
+    text-align: center;
+    color: #e4bdb7;
+    text-transform: uppercase;
 }
 
 .get-tables {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    grid-gap: 2rem;
+    padding: 1rem;
+    box-sizing: border-box;
 }
 
 .tablesBox {
@@ -33,7 +58,55 @@
 }
 
 .table-form {
-    width: 10rem;
-    background-color: lightblue;
-    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-shadow: 10px 10px 17px 0px rgba(230,221,230,1);
+    -moz-box-shadow: 10px 10px 17px 0px rgba(230,221,230,1);
+    box-shadow: 10px 10px 17px 0px rgba(230,221,230,1);
+    min-height: 300px;
+    background-color: #f7e8e4;
+    position: relative;
+    padding: 10px;
 }
+
+.table-name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    text-transform: uppercase;
+}
+
+.table-name > span {
+    font-weight: 100;
+    letter-spacing: 1.2px;
+}
+
+.delete-table {
+    /* width: 100%; */
+    align-items: center;
+    position: absolute;
+    top: 80%;
+    right: 10%;
+}
+/* 
+.delete-table > button {
+    background: white;
+    color: grey;
+    border: 1px solid lightgrey;
+    margin: 10px 0px;
+    padding: 7px;
+} */
+
+.icon-style {
+    cursor: pointer;
+}
+
+.guest-del {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* .del-btn {
+    font-weight: 400;
+} */
