@@ -13,7 +13,7 @@ class MenuAdmBox extends Component {
                 </div>
                 <section className="grid-container">
                     <div className="grid-item item1">
-                        <div className="grid-item-title"><h2>Faire-part</h2></div>
+                        <div className="grid-item-title"><Link to="/invitation"><h2>Faire-part</h2></Link></div>
                     </div>
                     <div className="grid-item item2">
                         <div className="grid-item-title"><Link to="/invités"><h2>Invités</h2></Link></div>

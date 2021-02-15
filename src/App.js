@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route} from 'react-router-dom';
 import AdminRoute from "../src/ProtectedRoutes/Admin";
+import Invitation from "../src/Pages/Landing_guest/Home_guest";
 import Invités from "../src/Pages/Invités/Invités";
 import Tables from "../src/Pages/Tables/Tables";
 import Menu from "../src/Pages/Menu/Menu";
@@ -42,6 +43,7 @@ function App() {
             <Route exact path="/" component={Home}/>
             <Route path="/register" component={Register}/>
             <AdminRoute path="/menuAdm" component={MenuAdmin} isAuth={role}/>
+            <AdminRoute path="/invitation" component={Invitation} isAuth={role}/>
             <AdminRoute path="/tables" component={Tables} isAuth={role}/>
             <AdminRoute path="/invités" component={Invités} isAuth={role}/>
             <AdminRoute path="/menu" component={Menu} isAuth={role}/>

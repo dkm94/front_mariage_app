@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import "./Home_guest.css";
-import FairePart from "./Faire-part/Faire-part.js";
-import SideTab from "./Side-tab/Side-tab";
+import FairePart from "./Home_Guest/Faire-part/Faire-part.js";
+import SideTab from "./Home_Guest/Side-tab/Side-tab";
 
 export default class Home_guest extends Component {
     render() {

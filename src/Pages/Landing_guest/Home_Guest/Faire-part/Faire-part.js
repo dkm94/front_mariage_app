@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import "./Faire-part.css";
-import couple from "../../../img/couple.jpg"
+import couple from "../../../../img/couple.jpg"
 
 export default class FairePart extends Component {
     render() {
