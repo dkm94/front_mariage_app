@@ -1,0 +1,80 @@
+h3 {
+    font-size: 12px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 3.3px;
+    text-align: center;
+    color: #000000;
+    text-transform: uppercase;
+}
+.wedding-img {
+    height: 40rem;
+    background-color: greenyellow;
+    background-image: url("../../img/couple.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.wedding-infos {
+    /* padding-top: 60px; */
+}
+
+.info {
+    padding: 50px;
+}
+
+.wedding-intro {
+    background: #FFFFFF;
+    text-align: center;
+}
+
+.intro {
+    padding: 16px;
+}
+
+.name {
+    font-family: 'Alex Brush', cursive;
+    font-size: 6em;
+    margin: 0;
+}
+
+.and {
+    font-family: 'Alex Brush', cursive;
+    font-size: 2em;
+    margin: 0px 10px;
+}
+
+.manuscrit {
+    font-family: 'Alex Brush', cursive;
+    font-size: 3em;
+    margin: 0px 10px;
+}
+
+.where-when {
+    background: #fcdccc;
+}
+
+.where-when-cols {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    grid-gap: 2rem;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.where-when-col {
+    /* background-color: antiquewhite; */
+    text-align: center;
+    padding: 20px 10px;
+}
+
+.additionnal-info {
+    background: #FFFFFF;
+}
+
+.additionnal-info > p {
+    padding: 16px;
+}
