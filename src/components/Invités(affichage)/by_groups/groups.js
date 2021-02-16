@@ -70,7 +70,7 @@ const Bygroups = () => {
             {/* <h1>Affichage par groupes</h1> */}
             <div className="guest-form">
                 <form onSubmit={() => handleSubmit(newGroup.name, newGroup.email)}>
-                    <span>Créer un nouveau groupe</span><br />
+                    <label>Créer un nouveau groupe</label><br />
                     <input
                     type="text"
                     name="name" 
@@ -86,7 +86,7 @@ const Bygroups = () => {
                     <button type="submit">OK</button>
                 </form>
             </div>
-            <div className="get-groups">
+            <div className="get-guests">
                 {groups.map(({name, _id, guestID}, i) => {
                 return <div key={i} className="div-group">
                     <div className="group-name">

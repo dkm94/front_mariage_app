@@ -1,0 +1,29 @@
+.div-guest {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 10px 10px 17px 0px rgb(230 221 230);
+    height: 200px;
+    background-color: #f7e8e4;
+    /* position: relative; */
+    align-items: center;
+    padding: 10px;
+}
+
+.group-name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    text-transform: uppercase;
+}
+
+.guest-picture > img {
+    height: 100px;
+}
+
+.del-guest {
+    /* align-items: center;
+    position: absolute;
+    top: 80%;
+    right: 27%; */
+}

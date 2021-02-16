@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Button from "../../LargeButton/LargeButton";
+import "./guests.css";
 import axios from "axios";
 
 const Byguests = () => {
@@ -67,7 +68,7 @@ const Byguests = () => {
             {/* <h1>Affichage par invités</h1> */}
             <div className="guest-form">
                 <form onSubmit={() => handleSubmit(newGuest.name)}>
-                    <label>Ajouter un nouvel invité</label>
+                    <label>Ajouter un nouvel invité</label><br />
                     <input
                     type="text"
                     name="name" 
@@ -76,11 +77,16 @@ const Byguests = () => {
                     <button type="submit">OK</button>
                 </form>
             </div>
-            <div>
-            {guests.map(({name, _id}, i) => {
-                return <div key={i} className="divGuest">
-                    <div className="guestName">
-                        <h1>{name}</h1>
+            <div className="get-guests">
+            {guests.map(({_id, name, media}, i) => {
+                return <div key={i} className="div-guest">
+                    <div className="guest-name">
+                        <span>{name}</span>
+                    </div>
+                    <div className="guest-picture">
+                        <img alt="avatar" src={require("../../../img/"+ media)}  />
+                    </div>
+                    <div className="del-guest">
                         <Button onClick={() => {deleteGuest(_id)}} title="Supprimer"/>
                     </div>
                 </div>
