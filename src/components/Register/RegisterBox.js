@@ -64,7 +64,7 @@ class RegisterBox extends Component {
 
                 <form onSubmit={this.handleSubmit}>
 
-                    <div className="reg-input input-title dims-input">
+                    {/* <div className="reg-input input-title dims-input">
                     <label>Thème de la cérémonie</label>
                     <input
                     name="title"
@@ -73,9 +73,9 @@ class RegisterBox extends Component {
                     onChange={this.handleChange}
                     placeholder="Exemple: La vie en rose"
                     />
-                    </div>
+                    </div> */}
 
-                    <section>
+                    {/* <section>
                     <div className="reg-input input-person dims-input w-input">
                         <label>Epoux.se 1</label>
                         <input
@@ -98,10 +98,8 @@ class RegisterBox extends Component {
                         placeholder="Votre prénom"
                         />
                     </div>
-                    </section>
-
-                    <section>
-                    <div className="reg-input input-mail dims-input w-input">
+                    </section> */}
+                    <div className="reg-input input-mail">
                         <label>Adrese mail</label>
                         <input
                         name="email"
@@ -112,7 +110,7 @@ class RegisterBox extends Component {
                         />
                     </div>
 
-                    <div className="reg-input input-password dims-input w-input">
+                    <div className="reg-input input-password">
                         <label>Mot de passe</label>
                         <input
                         name="password"
@@ -122,8 +120,9 @@ class RegisterBox extends Component {
                         placeholder="Enter a password"
                         />
                     </div>
-                    </section>
-                    <Button title="Valider"/>
+                    <div className="center-x">
+                        <Button title="Valider"/>
+                    </div>
             </form>
             </div>
         )

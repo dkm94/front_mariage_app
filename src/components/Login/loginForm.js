@@ -78,7 +78,7 @@ class LoginForm extends Component {
                 <form onSubmit={this.handleSubmit}>
                    
                     <div className="reg-input input-mail">
-                        <label>Email:</label>
+                        <label>Adresse e-mail</label>
                         <input
                         name="email"
                         type="email"
@@ -89,7 +89,7 @@ class LoginForm extends Component {
                     </div>
 
                     <div className="reg-input input-password">
-                        <label>Password:</label>
+                        <label>Mot de passe</label>
                         <input
                         name="password"
                         type="password"
