@@ -18,7 +18,7 @@ const Guests = () => {
         section = <Bygroups/>
  
     return(
-        <div className="guest-component">
+        <div className="guest-component container">
             <div className="select-section">
                 <label htmlFor="affichage-select">Affichage par:</label>
                 <select name="affichage" onChange={selectSection}>

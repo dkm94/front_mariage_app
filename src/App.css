@@ -137,29 +137,6 @@ a:-webkit-any-link {
     text-align: center;
 }
 
-.divGroupbox {
-    width: 90%;
-    display: flex;
-    height: fit-content;
-    flex-wrap: wrap;
-}
-
-.divGroup {
-    display: flex;
-    flex-direction: column;
-    height: 200px;
-    width: 200px;
-    margin: 20px;
-    -webkit-box-shadow: 10px 10px 34px -1px rgba(166,154,166,1);
-    -moz-box-shadow: 10px 10px 34px -1px rgba(166,154,166,1);
-    box-shadow: 10px 10px 34px -1px rgba(166,154,166,1);
-    /* background-color: orange; */
-}
-
-.groupName h1 {
-    margin: 0;
-}
-
 /* Menu menus */
 .menus {
     height: 100vh;

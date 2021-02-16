@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Button from "../../LargeButton/LargeButton";
 import axios from "axios";
 
 const Byguests = () => {
@@ -63,10 +64,10 @@ const Byguests = () => {
 
     return(
         <div className="byguests">
-            <h1>Affichage par invités</h1>
+            {/* <h1>Affichage par invités</h1> */}
             <div className="guest-form">
                 <form onSubmit={() => handleSubmit(newGuest.name)}>
-                    <label>Ajouter un groupe</label>
+                    <label>Ajouter un nouvel invité</label>
                     <input
                     type="text"
                     name="name" 
@@ -80,7 +81,7 @@ const Byguests = () => {
                 return <div key={i} className="divGuest">
                     <div className="guestName">
                         <h1>{name}</h1>
-                        <button onClick={() => {deleteGuest(_id)}}>x</button>
+                        <Button onClick={() => {deleteGuest(_id)}} title="Supprimer"/>
                     </div>
                 </div>
             })}

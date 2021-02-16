@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+import Button from "../../LargeButton/LargeButton";
 import axios from "axios";
+import "./groups.css";
 
 const Bygroups = () => {
     const [groups, setGroups] = useState([]);
@@ -65,34 +67,38 @@ const Bygroups = () => {
 
     return(
         <div className="bygroups">
-            <h1>Affichage par groupes</h1>
+            {/* <h1>Affichage par groupes</h1> */}
             <div className="guest-form">
                 <form onSubmit={() => handleSubmit(newGroup.name, newGroup.email)}>
-                    <label>Ajouter un groupe</label>
+                    <span>Créer un nouveau groupe</span><br />
                     <input
                     type="text"
                     name="name" 
-                    value={newGroup.name} 
+                    value={newGroup.name}
+                    placeholder="Nom du groupe" 
                     onChange={handleChange}/>
                     <input
                     type="email"
                     name="email" 
-                    value={newGroup.email} 
+                    value={newGroup.email}
+                    placeholder="Email associé au groupe"
                     onChange={handleChange}/>
                     <button type="submit">OK</button>
                 </form>
             </div>
-            <div>
+            <div className="get-groups">
                 {groups.map(({name, _id, guestID}, i) => {
-                return <div key={i} className="divGroup">
-                    <div className="groupName">
-                        <h1>{name}</h1>
-                        <button onClick={() => {deleteGroup(_id)}}>x</button>
+                return <div key={i} className="div-group">
+                    <div className="group-name">
+                        <span>{name}</span>
                     </div>
                 
                     {guestID.map((guest, j) => {
                         return <div key={j} className="groupGuests"><p data-id={guest._id}>{guest.name}</p><button>v</button><button>x</button></div>
                     })}
+                    <div className="del-group">
+                        <Button onClick={() => {deleteGroup(_id)}} title="Supprimer le groupe"/>
+                    </div>
             </div>
             })}
             </div>
