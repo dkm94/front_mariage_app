@@ -192,20 +192,20 @@ const Menus = () => {
    
 
 
-    const entrée = starters.map((starter) => <li key={starter._id} >{starter.name}<button onClick={() => {deleteStarter(starter._id)}}>x</button></li>)
-    const plat = maincourses.map((maincourse) => <li key={maincourse._id}>{maincourse.name}<button onClick={() => {deleteMaincourse(maincourse._id)}}>x</button></li>)
-    const dessert_ = desserts.map((dessert) => <li key={dessert._id}>{dessert.name}<button onClick={() => {deleteDessert(dessert._id)}}>x</button></li>)
+    const entrée = starters.map((starter) => <li key={starter._id} >{starter.name}<button onClick={() => {deleteStarter(starter._id)}}><i className="fas fa-trash"/></button></li>)
+    const plat = maincourses.map((maincourse) => <li key={maincourse._id}>{maincourse.name}<button onClick={() => {deleteMaincourse(maincourse._id)}}><i className="fas fa-trash"/></button></li>)
+    const dessert_ = desserts.map((dessert) => <li key={dessert._id}>{dessert.name}<button onClick={() => {deleteDessert(dessert._id)}}><i className="fas fa-trash"/></button></li>)
     return(
-        <div>
+        <div className="container">
             <div className="menu-span">
-                <span>Constituez le menu de votre mariage: vous pouvez ajouter plusieurs entrées, plats ou desserts...</span>
+                {/* <span>Constituez le menu de votre mariage: vous pouvez ajouter plusieurs entrées, plats ou desserts...</span> */}
+                <span>Constituez le menu de votre mariage</span>
             </div>
-            <div className="menu-body">
+            <div className="grid-container-menu">
                 <div className="starter forms">
                     <h2>Entrée(s)</h2>
                     <div className="starter-form form">
                         <form onSubmit={submitStarter}>
-                            {/* <label>Ajouter une entrée</label> */}
                             <input
                             type="text"
                             name="name" 
@@ -220,7 +220,6 @@ const Menus = () => {
                     <h2>Plat(s)</h2>
                     <div className="maincourse-form form">
                         <form onSubmit={submitMaincourse}>
-                            {/* <label>Ajouter un plat</label> */}
                             <input
                             type="text"
                             name="name" 
@@ -235,7 +234,6 @@ const Menus = () => {
                     <h2>Dessert(s)</h2>
                     <div className="maincourse-form form">
                         <form onSubmit={submitDessert}>
-                            {/* <label>Ajouter un dessert</label> */}
                             <input
                             type="text"
                             name="name" 
