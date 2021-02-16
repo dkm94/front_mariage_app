@@ -105,6 +105,7 @@
 .guest-del {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 5px;
 }
 
 /* .del-btn {

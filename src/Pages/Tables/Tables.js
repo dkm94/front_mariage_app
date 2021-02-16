@@ -115,8 +115,8 @@ const Tables = () => {
                             {guestID.map(guest => {
                                 return <div key={guest._id} className="guest-del">
                                     <span>{guest.name}</span>
-                                    <i className="far fa-trash-alt icon-style"
-                                    onClick={() => {deleteGuest(guest._id, _id)}}></i>
+                                    <button><i className="fas fa-trash"
+                                    onClick={() => {deleteGuest(guest._id, _id)}} /></button>
                                 </div>
                             })}
                             <div className="delete-table">
