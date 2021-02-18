@@ -1,17 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import "../Header/Header.css";
-import Logo from "../../img/logo.png";
+import { Link, useHistory } from 'react-router-dom';
+import "../Header.css";
+import Logo from "../../../img/logo.png";
 // import decode from "jwt-decode";
 
 export default function Login() {
 
-    // localStorage.getItem("token");
-    // const token = localStorage.getItem('token')
-    // const user = decode(token);
+    let history = useHistory()
 
+    const LogOut = () => {
+            console.log("déconnexion...")
+            localStorage.removeItem("token");
+            history.push("/");
+    };
 
- 
         return (
             <div className="header header-style">
                 <div className="navigation container">
@@ -21,7 +23,7 @@ export default function Login() {
                         <ul>
                             <li><Link to={"/menuAdm"}>Mariage</Link></li>
                             <li>Mon compte</li>
-                            <li><Link to={"/register"}>Déconnexion</Link></li>
+                            <li><button onClick={LogOut}>Déconnexion</button></li>
                         </ul>
                     </ul>
                 </div>

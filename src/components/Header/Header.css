@@ -73,6 +73,10 @@
     color: #837f7f;
 }
 
+/* .navigation > button {
+    border-style: none;
+} */
+
 .logo {
     width: 30%;
     display: flex;

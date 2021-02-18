@@ -1,7 +1,7 @@
  import React from 'react';
  import { Link } from 'react-router-dom';
- import "../Header/Header.css";
- import Logo from "../../img/logo.png"
+ import "../Header.css";
+ import Logo from "../../../img/logo.png"
  
  export default function Logout(){
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter} from "react-router-dom";
+import { withRouter} from "react-router-dom";import {  } from 'react-router-dom';
 import Button from "../LargeButton/LargeButton";
 import "../LargeButton/LargeButton.css";
 
@@ -52,7 +52,6 @@ class LoginForm extends Component {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*'
             }})
-            // .then(res => res.json())
             .then((response) => {
                 console.log("resultat du fetch : ", response.data)
                 let token;
@@ -60,7 +59,6 @@ class LoginForm extends Component {
                 token = localStorage.getItem('token')
                 console.log(token)
                 if(token){
-                    console.log("coucou")
                     this.props.history.replace("/menuAdm")
                 }
             })
@@ -78,13 +76,16 @@ class LoginForm extends Component {
                 <form onSubmit={this.handleSubmit}>
                    
                     <div className="reg-input input-mail">
-                        <label>Adresse e-mail</label>
+                        <label htmlFor="floatingInput">Adresse e-mail</label>
                         <input
+                        className="form-control"
+                        // id="floatingInput"
                         name="email"
                         type="email"
                         value={this.state.email}
                         onChange={this.handleChange}
-                        placeholder="Enter an email"
+                        placeholder="name@example.com"
+                        autoComplete="email"
                         />
                     </div>
 
@@ -95,7 +96,8 @@ class LoginForm extends Component {
                         type="password"
                         value={this.state.password}
                         onChange={this.handleChange}
-                        placeholder="Enter a password"
+                        placeholder="Password"
+                        autoComplete="current-password"
                         />
                     </div>
                     <div className="center-x">

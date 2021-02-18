@@ -5,11 +5,7 @@ import Login from "../Navigation/Log_in";
 import Logout from "../Navigation/Log_out";
 
 class Header extends Component {
-    // constructor(props) {
-    //     super(props);
-     
 
-    // }
 
     render(){
 

@@ -1,14 +1,9 @@
 import React from 'react';
 import { withRouter, Link } from "react-router-dom";
 import './Home.css';
-import "../LargeButton/LargeButton.css"
+import "../../components/LargeButton/LargeButton.css"
 
 const Home = () => {
-
-    // function handleRedirection(e){
-    //     e.preventDefault();
-    //     alert("clicked!")
-    // }
 
         return (
             <div className="home">

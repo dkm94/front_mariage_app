@@ -9,11 +9,7 @@ const Byguests = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const token = localStorage.getItem("token");
-            const config = {
-                headers: { Authorization: 'Bearer '+ token }
-              };
-            const result = await axios.get("/api/admin/guests/", config)
+            const result = await axios.get("/api/admin/guests/")
             setGuests(result.data)
         }
         fetchData();
@@ -29,11 +25,7 @@ const Byguests = () => {
 
     const handleSubmit = (guest) => {
         alert("submitted!")
-        const token = localStorage.getItem("token");
-        const config = {
-            headers: { Authorization: 'Bearer '+ token }
-            };
-        axios.post("/api/admin/guests/add", {name: guest}, config)
+        axios.post("/api/admin/guests/add", {name: guest})
             .then((res) => {
                 console.log(res.data)
                 if(res.data != null){
@@ -47,11 +39,7 @@ const Byguests = () => {
 
     const deleteGuest = (id) => {
         console.log(id)
-        const token = localStorage.getItem("token");
-        const config = {
-            headers: { Authorization: 'Bearer '+ token }
-        };
-        axios.delete(`/api/admin/guests/delete/${id}`, config)
+        axios.delete(`/api/admin/guests/delete/${id}`)
             .then(result => {
                 console.log(result.data)
                 if(result.data != null) {
