@@ -10,6 +10,7 @@ import "./Tables.css";
 const Tables = () => {
     const [tables, setTables] = useState([]);
     const [table, setTable] = useState({name:""});
+    const [guests, setGuests] = useState([])
    
     useEffect(() => {
         const fetchData = async () => {
@@ -44,8 +45,8 @@ const Tables = () => {
         axios.post("/api/admin/tables/add", {name: table}, config)
             .then((res) => {
                 if(res.data != null){
-                    const updatedTableList = [table, ...tables]
-                    setTables(updatedTableList)
+                    setTables([...tables].concat(table))
+                    setTable({name:""})
                 }
             })
             .catch((err) => {
@@ -55,6 +56,7 @@ const Tables = () => {
     const deleteGuest = (guest, table) => {
         console.log(guest);
         console.log(table);
+        // console.log(guests)
         const token = localStorage.getItem("token");
         const config = {
             headers: { Authorization: 'Bearer '+ token }
@@ -63,9 +65,9 @@ const Tables = () => {
             .then((res) => {
                 console.log(res.data)
                 if(res.data != null){
-                    let guests;
-                    guests = tables.guestID;
-                    guests.filter(guest => guest._id !== guest)
+                    console.log(table)
+                    console.log(guest)
+                    setGuests(guests.filter(table => table._id !== table))
                 }
             })
             .catch((err) => {
@@ -104,23 +106,24 @@ const Tables = () => {
             </div>
 
             <div className="get-tables">
-                    {tables.map(({name, _id, guestID}, i) => {
-                        return <div key={i} data-id={_id} className="table-form">
+                    {tables.map((table, i) => {
+                        return <div key={i} data-id={table._id} className="table-form">
                             <div className="table-name">
-                                <span>{name}</span>
+                                <span>{table.name}</span>
                             </div>
                             
-                            <Select tableID={_id} tables={tables} setTables={setTables} guests={guestID}/>
-                            
-                            {guestID.map(guest => {
+                            {/* {console.log("log", guestID)} */}
+                            <Select table={table} tables={tables} setTables={setTables} guests={table.guestID}/>
+                            {table.guestID.map(guest => {
+                                
                                 return <div key={guest._id} className="guest-del">
                                     <span>{guest.name}</span>
                                     <button><i className="fas fa-trash"
-                                    onClick={() => {deleteGuest(guest._id, _id)}} /></button>
+                                    onClick={() => {deleteGuest(guest._id, table._id)}} /></button>
                                 </div>
                             })}
                             <div className="delete-table">
-                                <Button onClick={() => {deleteTable(_id, guestID)}} title="Supprimer la table"/>
+                                <Button handleClick={() => {deleteTable(table._id, table.guestID)}} title="Supprimer la table"/>
                             </div>
                             
                         </div>

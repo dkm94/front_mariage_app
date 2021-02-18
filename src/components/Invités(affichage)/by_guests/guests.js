@@ -9,7 +9,6 @@ const Byguests = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            console.log("coucou")
             const token = localStorage.getItem("token");
             const config = {
                 headers: { Authorization: 'Bearer '+ token }
@@ -38,8 +37,8 @@ const Byguests = () => {
             .then((res) => {
                 console.log(res.data)
                 if(res.data != null){
-                    const updatedGuestsList = [newGuest, ...guests]
-                    setGuests(updatedGuestsList)
+                    setGuests([...guests].concat(guest))
+                    setNewGuest({name: ''})
                 }
             })
             .catch((err) => {
@@ -47,7 +46,6 @@ const Byguests = () => {
     }
 
     const deleteGuest = (id) => {
-        alert("submitted !")
         console.log(id)
         const token = localStorage.getItem("token");
         const config = {
@@ -61,6 +59,8 @@ const Byguests = () => {
                     setGuests(guests.filter(guest => guest._id !== id))
                 }
             })
+            .catch((err) => {
+                console.log(err)})
     }
 
     return(
@@ -77,7 +77,7 @@ const Byguests = () => {
                     <button type="submit">OK</button>
                 </form>
             </div>
-            <div className="get-guests">
+            <div className="grid-container-guest">
             {guests.map(({_id, name, media}, i) => {
                 return <div key={i} className="div-guest">
                     <div className="guest-name">
@@ -87,7 +87,7 @@ const Byguests = () => {
                         <img alt="avatar" src={require("../../../img/"+ media)}  />
                     </div>
                     <div className="del-guest">
-                        <Button onClick={() => {deleteGuest(_id)}} title="Supprimer"/>
+                        <Button handleClick={() => {deleteGuest(_id)}} title="Supprimer"/>
                     </div>
                 </div>
             })}

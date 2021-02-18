@@ -10,6 +10,7 @@ const Menus = () => {
     const [maincourse, setMaincourse] = useState({name:""})
     const [desserts, setDesserts] = useState([]);
     const [dessert, setDessert] = useState({name:""})
+    const [toggle, setToggle] = useState(false)
 
     const handleStarter = (e) => {
         const {value, name} = e.target;
@@ -189,12 +190,14 @@ const Menus = () => {
             })
     }
 
-   
+   const showInput = (id) => {
+        setToggle(!toggle)
+   }
 
 
-    const entrée = starters.map((starter) => <li key={starter._id} >{starter.name}<button onClick={() => {deleteStarter(starter._id)}}><i className="fas fa-trash"/></button></li>)
-    const plat = maincourses.map((maincourse) => <li key={maincourse._id}>{maincourse.name}<button onClick={() => {deleteMaincourse(maincourse._id)}}><i className="fas fa-trash"/></button></li>)
-    const dessert_ = desserts.map((dessert) => <li key={dessert._id}>{dessert.name}<button onClick={() => {deleteDessert(dessert._id)}}><i className="fas fa-trash"/></button></li>)
+    const entrée = starters.map((starter) => <li key={starter._id} >{starter.name}<button onClick={() => {showInput(starter._id)}}>E</button><button onClick={() => {deleteStarter(starter._id)}}><i className="fas fa-trash"/></button></li>)
+    const plat = maincourses.map((maincourse) => <li key={maincourse._id}>{maincourse.name}<button>E</button><button onClick={() => {deleteMaincourse(maincourse._id)}}><i className="fas fa-trash"/></button></li>)
+    const dessert_ = desserts.map((dessert) => <li key={dessert._id}>{dessert.name}<button>E</button><button onClick={() => {deleteDessert(dessert._id)}}><i className="fas fa-trash"/></button></li>)
     return(
         <div className="container">
             <div className="menu-span">
@@ -227,6 +230,7 @@ const Menus = () => {
                             onChange={handleMaincourse}/>
                             <button type="submit">OK</button>
                         </form>
+
                     </div>
                     <ul>{plat}</ul>
                 </div>

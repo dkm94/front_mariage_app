@@ -1,3 +1,11 @@
+.grid-container-guest {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    grid-gap: 2rem;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
 .div-guest {
     display: flex;
     flex-direction: column;
