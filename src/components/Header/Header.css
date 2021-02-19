@@ -38,11 +38,18 @@
     color: #837f7f;
 }
 
-.li-text {
+.li-style {
     width: 35%;
-    display: inline-flex;
-    /* justify-content: center; */
     align-items: center;
+    text-transform: uppercase;
+}
+
+#about {
+    justify-content: flex-start;
+}
+
+#login {
+    justify-content: flex-end;
 }
 
 .navigation {

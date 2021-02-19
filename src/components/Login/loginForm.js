@@ -29,23 +29,7 @@ class LoginForm extends Component {
         
         const { email, password } = this.state;
         console.log("Login Submitted");
-
-        // fetch('https://backend-mywedding-app.herokuapp.com/api/auth/adminLogin', {
-        //     crossDomain:true,
-        //     method: 'POST',
-        //     headers: {'Content-Type':'application/json', 'Access-Control-Allow-Origin': '*'},
-        //     body: JSON.stringify({
-        //       email,
-        //       password
-        //   })
-        // })
-        // .then(res => res.json())
-        // .then(response => {
-        //   console.log("resultat du fetch : ", response);
-        //     localStorage.setItem("token", response.token);
-        //     this.props.history.replace("/menuAdm");
-        // });
-
+        
         axios.post('/api/auth/adminLogin', {
             email, password
           }, {headers: {

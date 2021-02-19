@@ -1,7 +1,7 @@
 import React from "react";
-// import RegisterForm from "./RegisterBox";
+import { withRouter } from "react-router-dom";
 import Registerform from "./Registerform/Registerform";
-import LoginForm from "../../components/Login/loginForm";
+import LoginForm from "./Loginform/Loginform";
 import "./Register.css";
 import bridesmaids from "../../img/demoiselles.jpg";
 import groom from "../../img/groom.jpg"
@@ -29,4 +29,4 @@ const Register = () => {
     )
 }
 
-export default Register;
+export default withRouter(Register);
