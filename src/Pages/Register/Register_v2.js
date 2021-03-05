@@ -3,6 +3,7 @@ import { Link, withRouter, useHistory } from "react-router-dom";
 import "./Register_v2.css";
 import Button from "../../components/LargeButton/LargeButton";
 // import "../../../components/LargeButton/LargeButton.css";
+import check from "../../img/check.png";
 import axios from "axios";
 
 const Register_v2 = props => {
@@ -47,7 +48,9 @@ const Register_v2 = props => {
             <div className="cont">
                 <div className="demo">
                     <div className="login">
-                        <div className="login__check"></div>
+                        <div className="login__check">
+                            <img alt="check" src={check}/>
+                        </div>
                         <div className="login__form">
                             <form onSubmit={handleSubmit}>
                                 <div className="login__row">
@@ -55,7 +58,7 @@ const Register_v2 = props => {
                                     <path d="M0,20 a10,8 0 0,1 20,0z M10,0 a4,4 0 0,1 0,8 a4,4 0 0,1 0,-8" />
                                 </svg>
                                 <input
-                                className="login__input name"
+                                className="login__input"
                                 name="email"
                                 type="email"
                                 value={admin.email}
@@ -69,7 +72,7 @@ const Register_v2 = props => {
                                     <path d="M0,20 20,20 20,8 0,8z M10,13 10,16z M4,8 a6,8 0 0,1 12,0" />
                                 </svg>
                                 <input
-                                className="login__input pass"
+                                className="login__input"
                                 name="password"
                                 type="password"
                                 value={admin.password}
@@ -79,7 +82,7 @@ const Register_v2 = props => {
                                 />
                                 </div>
                                 <Button title="Se connecter"/>
-                                <p className="login__signup">Don't have an account? &nbsp;<Link to={"/"}>Sign up</Link></p>
+                                <p className="login__signup">Pas encore membre? &nbsp;<Link to={"/"}>Inscrivez-vous</Link></p>
                             </form>
                         </div>
                     </div>
