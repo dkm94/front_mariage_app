@@ -1,9 +1,20 @@
+.grid-item-title > a > h2 {
+    font-family: 'Alex Brush', cursive;
+    text-align: center;
+    font-size: 4rem;
+    font-weight: 500;
+    text-shadow: 1px 1px 0px #fff;
+}
+
 .menu-adm {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 4rem;
-    margin-bottom: 4rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    background: white;
+    padding: 50px;
+    box-shadow: 10px 10px 13px -6px rgba(184,178,184,1);
 }
 
 .menu-adm-desc {
@@ -14,22 +25,28 @@
     line-height: normal;
     letter-spacing: 3.3px;
     text-align: center;
-    color: #e4bdb7;
+    /* color: #e4bdb7; */
+    color: #000000;
     text-transform: uppercase;
+}
+
+.menu-admin-container {
+    /* background-image: url("../../img/rose-bg.jpg"); */
 }
 
 .grid-container {
     display: grid;
-    grid-gap: 5rem;
+    grid-gap: 2rem;
     grid-template-columns: 1fr 1fr;
     width: 100%;
     margin-top: 2rem;
+    padding: 20px;
 }
 
 .grid-item {
     display: flex;
     flex-direction: column;
-    height: 12rem;
+    height: 8rem;
 }
 
 .item1 {

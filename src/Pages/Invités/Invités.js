@@ -19,7 +19,7 @@ const Guests = () => {
     section = <Byguests/>
  
     return(
-        <div className="guest-component container">
+        <div className="guest-container">
             {/* <div className="select-section">
                 <label htmlFor="affichage-select">Affichage par:</label>
                 <select name="affichage" onChange={selectSection}>
@@ -27,9 +27,9 @@ const Guests = () => {
                     <option value="guests">invités</option>
                 </select>
             </div> */}
-            <div className="section">
+            {/* <div className="section"> */}
                 {section}
-            </div>
+            {/* </div> */}
         </div>
     )
 }

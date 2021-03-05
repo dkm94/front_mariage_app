@@ -14,12 +14,7 @@ const Tables = () => {
    
     useEffect(() => {
         const fetchData = async () => {
-            console.log("coucou")
-            const token = localStorage.getItem("token");
-            const config = {
-                headers: { Authorization: 'Bearer '+ token }
-              };
-            const result = await axios.get("/api/admin/tables/", config)
+            const result = await axios.get("/api/admin/tables/")
             setTables(result.data)
         }
         fetchData();
@@ -92,42 +87,44 @@ const Tables = () => {
     }
 
     return(
-        <div className="tables container">
-            <div className="tables-form">
-                <form onSubmit={() => handleSubmit(table.name)}>
-                    <label>Créer une nouvelle table</label><br />
-                    <input
-                    type="text"
-                    name="name" 
-                    value={table.name} 
-                    onChange={handleChange}/>
-                    <button type="submit">OK</button>
-                </form>
-            </div>
+        <div className="tables-container">
+            <div className="tables container">
+                <div className="tables-form">
+                    <form onSubmit={() => handleSubmit(table.name)}>
+                        <label>Créer une nouvelle table</label><br />
+                        <input
+                        type="text"
+                        name="name" 
+                        value={table.name} 
+                        onChange={handleChange}/>
+                        <button type="submit">OK</button>
+                    </form>
+                </div>
 
-            <div className="get-tables">
-                    {tables.map((table, i) => {
-                        return <div key={i} data-id={table._id} className="table-form">
-                            <div className="table-name">
-                                <span>{table.name}</span>
-                            </div>
-                            
-                            {/* {console.log("log", guestID)} */}
-                            <Select table={table} tables={tables} setTables={setTables} guests={table.guestID}/>
-                            {table.guestID.map(guest => {
-                                
-                                return <div key={guest._id} className="guest-del">
-                                    <span>{guest.name}</span>
-                                    <button><i className="fas fa-trash"
-                                    onClick={() => {deleteGuest(guest._id, table._id)}} /></button>
+                <div className="get-tables">
+                        {tables.length === 0 || null ? <div className="block"><span>Vos tables ici.</span></div> : tables.map((table, i) => {
+                            return <div key={i} data-id={table._id} className="table-form">
+                                <div className="table-name">
+                                    <span>{table.name}</span>
                                 </div>
-                            })}
-                            <div className="delete-table">
-                                <Button handleClick={() => {deleteTable(table._id, table.guestID)}} title="Supprimer la table"/>
+                                
+                                {/* {console.log("log", guestID)} */}
+                                <Select table={table} tables={tables} setTables={setTables} guests={table.guestID}/>
+                                {table.guestID.map(guest => {
+                                    
+                                    return <div key={guest._id} className="guest-del">
+                                        <span>{guest.name}</span>
+                                        <button><i className="fas fa-trash"
+                                        onClick={() => {deleteGuest(guest._id, table._id)}} /></button>
+                                    </div>
+                                })}
+                                <div className="delete-table">
+                                    <Button handleClick={() => {deleteTable(table._id, table.guestID)}} title="Supprimer la table"/>
+                                </div>
+                                
                             </div>
-                            
-                        </div>
-                    })}
+                        })}
+                </div>
             </div>
         </div>
     )

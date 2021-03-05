@@ -9,7 +9,7 @@ import Menu from "../src/Pages/Menu/Menu";
 import Logout from "./components/Header/Navigation/Log_out"
 import Login from "./components/Header/Navigation/Log_in"
 import Home from './Pages/Homepage/Home';
-import Register from './Pages/Register/Register';
+import Register from './Pages/Register/Register_v2';
 import MenuAdmin from './Pages/MenuAdmin/Menu';
 import axios from "axios";
 import decode from "jwt-decode";
@@ -21,6 +21,7 @@ function App() {
   let role;
   if(token){
     user = decode(token)
+    console.log(user)
     role = user.role
   }
 

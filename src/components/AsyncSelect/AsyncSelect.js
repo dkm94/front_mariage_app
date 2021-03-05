@@ -30,11 +30,7 @@ const Select = ({ tables, table, guests, setTables }) => {
         selectedGuest = selectedGuest.value
         // console.log("table", table.id)
         console.log(selectedGuest)
-        const token = localStorage.getItem("token");
-        const config = {
-        headers: { Authorization: 'Bearer '+ token }
-        };
-        axios.put(`/api/admin/tables/addGuest/${tableID._id}`, {guestID: selectedGuest}, config)
+        axios.put(`/api/admin/tables/addGuest/${tableID._id}`, {guestID: selectedGuest})
             .then((res) => {
                 console.log(res.data)
                 if(res.data != null) {
@@ -54,11 +50,7 @@ const Select = ({ tables, table, guests, setTables }) => {
 
     const loadOptions = (inputText, callback) => {
         setTimeout(() => {
-            const token = localStorage.getItem("token");
-            const config = {
-            headers: { Authorization: 'Bearer '+ token }
-            };
-            axios.get(`api/admin/guests/${inputText}`, config)
+            axios.get(`api/admin/guests/${inputText}`)
             .then((res) => {
                 let array;
                 array = res.data;

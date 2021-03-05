@@ -1,9 +1,23 @@
-.grid-container-guest {
+.get-guestlist {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
     grid-gap: 2rem;
     padding: 1rem;
+    width: 100%;
     box-sizing: border-box;
+}
+
+.block {
+    position: relative;
+    margin: 0px 150px;
+    border-radius: 20px;
+}
+
+.empty-tab > span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .div-guest {

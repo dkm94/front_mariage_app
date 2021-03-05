@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useHistory, withRouter } from 'react-router-dom';
 import "../Header.css";
-import Logo from "../../../img/logo.png";
+import Logo from "../../../img/logo2.png";
 
 const Login = () => {
 
@@ -12,21 +12,21 @@ const Login = () => {
             localStorage.removeItem("token");
             setTimeout(()=>{
                 window.location.reload();
-                history.replace("/");
             }, 1000);
+            history.replace("/");
     };
 
         return (
             <div className="header header-style">
                 <div className="navigation container">
-                    <ul>
-                        <li className="li-style"><span>Qui sommes-nous ?</span></li>
-                        <li className="logo"><img alt="logo" src={Logo} /></li>
-                        <ul>
-                            <li><Link to={"/menuAdm"}>Mariage</Link></li>
-                            <li>Mon compte</li>
-                            <li><Link to={"/"} onClick={LogOut}>Déconnexion</Link></li>
-                        </ul>
+                    <div id="brand">
+                        <Link to={"/"}><img alt="logo" src={Logo} id="logo" /></Link>
+                    </div>
+                    <ul className="navbar-menu">
+                        <li className="li-style"><Link to={"/menuAdm"}>Mariage</Link></li>
+                        <li className="li-style">Mon compte</li>
+                        <li className="li-style" id="about"><span>Qui sommes-nous ?</span></li>
+                        <li><Link to={"/"} onClick={LogOut}>Déconnexion</Link></li>
                     </ul>
                 </div>
             </div>

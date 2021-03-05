@@ -7,25 +7,26 @@ class MenuAdmBox extends Component {
     render(){
 
         return (
-            <div className="menu-adm container">
-                <div className="menu-adm-desc">
-                    <span>Cliquez sur les ongles ci-dessous pour gérer les différents éléments de l'evènement:</span>
+            <div className="menu-admin-container">
+                <div className="menu-adm container">
+                    <div className="menu-adm-desc">
+                        <span>Cliquez sur les onglets ci-dessous pour gérer les différents éléments de l'evènement</span>
+                    </div>
+                    <section className="grid-container">
+                        <div className="grid-item item1">
+                            <div className="grid-item-title"><Link to="/invitation"><h2>Faire-part</h2></Link></div>
+                        </div>
+                        <div className="grid-item item2">
+                            <div className="grid-item-title"><Link to="/invités"><h2>Invités</h2></Link></div>
+                        </div>
+                        <div className="grid-item item3">
+                            <div className="grid-item-title"><Link to="/tables"><h2>Tables</h2></Link></div>
+                        </div>
+                        <div className="grid-item item4">
+                            <div className="grid-item-title"><Link to="/menu"><h2>Menu</h2></Link></div>
+                        </div>
+                    </section>
                 </div>
-                <section className="grid-container">
-                    <div className="grid-item item1">
-                        <div className="grid-item-title"><Link to="/invitation"><h2>Faire-part</h2></Link></div>
-                    </div>
-                    <div className="grid-item item2">
-                        <div className="grid-item-title"><Link to="/invités"><h2>Invités</h2></Link></div>
-                    </div>
-                    <div className="grid-item item3">
-                        <div className="grid-item-title"><Link to="/tables"><h2>Tables</h2></Link></div>
-                    </div>
-                    <div className="grid-item item4">
-                        <div className="grid-item-title"><Link to="/menu"><h2>Menu</h2></Link></div>
-                    </div>
-                </section>
-                
             </div>
         )
     }

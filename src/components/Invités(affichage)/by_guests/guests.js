@@ -52,7 +52,7 @@ const Byguests = () => {
     }
 
     return(
-        <div className="byguests">
+        <div className="byguests container">
             {/* <h1>Affichage par invités</h1> */}
             <div className="guest-form">
                 <form onSubmit={() => handleSubmit(newGuest.name)}>
@@ -65,8 +65,8 @@ const Byguests = () => {
                     <button type="submit">OK</button>
                 </form>
             </div>
-            <div className="grid-container-guest">
-            {guests.map(({_id, name, media}, i) => {
+            <div className="get-guestlist">
+                {guests.length === 0 || null ? <div className="block"><span>Vos invités ici.</span></div> : guests.map(({_id, name, media}, i) => {
                 return <div key={i} className="div-guest">
                     <div className="guest-name">
                         <span>{name}</span>

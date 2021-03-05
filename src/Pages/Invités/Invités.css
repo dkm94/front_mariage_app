@@ -1,3 +1,11 @@
+.guest-container {
+    background-image: url("../../img/invités/guests.jpg");
+    background-size: cover;
+    background-position: center;
+    min-height: 600px;
+    position: relative;
+}
+
 .select-section {
     text-align: end;
 }
@@ -6,11 +14,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 10rem;
+    /* height: 10rem; */
+    width: 50%;
 }
 .guest-form > form {
     padding: 20px;
-    width: 50%;
+    width: 100%;
     text-align: center;
 }
 
@@ -22,10 +31,25 @@
     line-height: normal;
     letter-spacing: 3.3px;
     text-align: center;
-    color: #e4bdb7;
+    /* color: #e4bdb7; */
+    color: #000000;
     text-transform: uppercase;
 }
 
 .guest-form > form > input {
     margin-right: 1rem;
+}
+
+.byguests {
+    border-radius: 20px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(312,312,312,0.85);
+    padding: 50px;
+    /* box-shadow: 10px 10px 13px -6px rgba(184,178,184,1); */
 }

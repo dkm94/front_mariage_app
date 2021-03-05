@@ -2,12 +2,30 @@ h2 {
     font-weight: 400;
 }
 
-.menu-span {
+.menu-container {
+    background-image: url("../../img/menus/lollipops.jpg");
+    background-size: cover;
+    background-position: center;
+    min-height: 600px;
+    position: relative;
+}
+
+.menu {
+    border-radius: 20px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
-    /* text-align: center; */
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    height: 8rem;
+    background: rgba(312,312,312,0.85);
+    padding: 50px;
+}
+
+.menu-span {
+    width: 100%;
+    text-align: center;
 }
 
 .menu-span > span {
@@ -18,12 +36,14 @@ h2 {
     line-height: normal;
     letter-spacing: 3.3px;
     text-align: center;
-    color: #e4bdb7;
+    /* color: #e4bdb7; */
+    color: #000000;
     text-transform: uppercase;
 }
 
 .grid-container-menu {
     display: grid;
+    width: 100%;
     grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
     grid-gap: 2rem;
     padding: 1rem;
@@ -51,6 +71,7 @@ button {
 .forms {
     padding: 2rem;
     /* width: 20rem; */
+    border-radius: 10px 0px;
     background-color: #FFFFFF;
     -webkit-box-shadow: -20px 18px 46px -13px rgba(204,198,204,1);
     -moz-box-shadow: -20px 18px 46px -13px rgba(204,198,204,1);
@@ -73,13 +94,13 @@ button {
 }
 
 .starter {
-    background-color: #ffeeeb;
+    background-color: #F2E2EE;
 }
 
 .maincourse {
-    background-color: #fcd6cf;
+    background-color: #E4D1E0;
 }
 
 .dessert {
-    background-color: #fab6aa;
+    background-color: #DABDD3;
 }
