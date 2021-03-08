@@ -1,7 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Faire-part.css";
+import axios from "axios";
+import decode from "jwt-decode";
 
 const Card = () => {
+    
+    const initialState = {
+        title: '', firstPerson: '', secondPerson: '', infos: ''
+    }
+    const [invitation, setinvitation] = useState(initialState);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const token = localStorage.getItem("token");
+            const decoded = decode(token);
+            const invitationID = decoded.invitationID;
+            const result = await axios.get(`/api/admin/invitation/${invitationID}`);
+            setinvitation(result.data)
+        }
+        fetchData();
+    }, [])
+
     return(
         <>
         <div className="wedding-img"></div>
@@ -10,11 +29,13 @@ const Card = () => {
                 <h3>Invitation</h3>
                 <div className="intro">
                     <span>Vous êtes cordialement invité.e.s au mariage de</span><br />
-                    <span className="name">Julie</span>
+                    <span className="name">{invitation.firstPerson}</span>
                     <span className="and">&</span>
-                    <span className="name">Martin</span><br />
+                    <span className="name">{invitation.secondPerson}</span><br />
                     <span>qui aura lieu le</span><br />
-                    <span className="manuscrit">Lundi 12 Novembre</span>
+                    <span className="manuscrit">Lundi 12 Novembre</span><br />
+                    <span>sur le thème</span><br />
+                    <span className="manuscrit">{invitation.title}</span>
                 </div>
             </div>
             <div className="where-when info">
@@ -45,14 +66,7 @@ const Card = () => {
             </div>
             <div className="additionnal-info info">
                 <h3>Informations complémentaires</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisl eros, 
-                pulvinar facilisis justo mollis, auctor consequat urna. Morbi a bibendum metus. 
-                Donec scelerisque sollicitudin enim eu venenatis. Duis tincidunt laoreet ex, 
-                in pretium orci vestibulum eget. Class aptent taciti sociosqu ad litora torquent
-                per conubia nostra, per inceptos himenaeos. Duis pharetra luctus lacus ut 
-                vestibulum. Maecenas ipsum lacus, lacinia quis posuere ut, pulvinar vitae dolor.
-                Integer eu nibh at nisi ullamcorper sagittis id vel leo. Integer feugiat 
-                faucibus libero, at maximus nisl suscipit posuere. </p>
+                <p>{invitation.infos}</p>
             </div>
         </div>
         </>

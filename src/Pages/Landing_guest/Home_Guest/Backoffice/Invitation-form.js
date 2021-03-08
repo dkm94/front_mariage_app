@@ -59,23 +59,12 @@ const Formulaire = () => {
 
     const [values, setValues] = useState({})
 
-    console.log(values)
-    
-    // const handleChange = (e) => {
-    //     const {name, value} = e.target;
-    //     alert("Touché !")
-    //     setInvitation(prevState => ({
-    //         ...prevState,
-    //         [name]: value
-    //     }))
-    // }
-
     useEffect(() => {
         const fetchData = async () => {
             const token = localStorage.getItem("token")
             const user = decode(token)
             const result = await axios.get(`/api/admin/invitation/${user.invitationID}`)
-            console.log(result.data)
+            // console.log(result.data)
             setValues(result.data)
         }
         fetchData();
@@ -95,18 +84,6 @@ const Formulaire = () => {
         date: Yup.date(),
         infos: Yup.string(),
     })
-    // const updateInvitation = (invitation) => {
-    //     const token = localStorage.getItem("token")
-    //     const user = decode(token)
-    //     axios.put(`/api/admin/invitation/edit/${user.invitationID}`, {invitation})
-    //         .then((res) => {
-    //             if(res.data != null){
-    //                 setInvitation(invitation)
-    //             }
-    //         })
-    //         .catch((err) => {
-    //             console.log(err)})
-    // }
 
     return(
         <div className="container">
@@ -115,42 +92,39 @@ const Formulaire = () => {
             </div>
             <div className="row invitation-form">
                 <div className="col-lg-8 col-lg-offset-2 ">
-                    {console.log(values)}
+                    {/* {console.log(values)} */}
                     <Formik
                         validateOnChange={true}
                         initialValues={initialValues}
                         enableReinitialize={true}
                         validationSchema={validationSchema}
                         onSubmit={async (values, { setSubmitting }) => {
-                            console.log("update data: ", values)
-                            const data = {
-                                title: values.title,
-                                firstPerson: values.firstPerson, 
-                                secondPerson: values.secondPerson, 
-                                infos: values.infos
-                            };
-                            console.log(data)
                             const token = localStorage.getItem("token");
                             const user = decode(token);
-                            await axios.put(`/api/admin/invitation/edit/${user.invitationID}`, {data})
+                            await axios.put(`/api/admin/invitation/edit/${user.invitationID}`,
+                            {title: values.title,
+                            firstPerson: values.firstPerson,
+                            secondPerson: values.secondPerson,
+                            infos: values.infos})
                                 .then((res) => {
                                     if(res.data != null){
-                                        setSubmitting(true)
+                                        alert("Modifications effectuées");
+                                        setSubmitting(true);
                                         setTimeout(() => {
-                                            alert(JSON.stringify(values, null, 2));
-                                            setSubmitting(false)
-                                            // window.location.reload();
+                                            // alert(JSON.stringify(values, null, 2));
+                                            setSubmitting(false);
                                         }, 3000);
                                     }
                                 })
                                 .catch((err) => {
+                                    alert(err);
                                     console.log(err)})
                         }}
                     >
                         {({ values, handleChange, isSubmitting, handleBlur, handleSubmit }) => {
                             return(
                                 <Form className="row g-3" onSubmit={() => handleSubmit(values)}>
-                                    {console.log("PROPS", values)}
+                                    {/* {console.log("PROPS", values)} */}
                                     <div className="col-12">
                                         <label htmlFor="inputAddress" className="form-label">Thème du mariage</label>
                                         <input 
@@ -222,43 +196,11 @@ const Formulaire = () => {
                     
                 </div>
             </div>
-            <div>
-                <span>Rendu</span>
-                <div>
-                    {values.title === "" ? <span>Null</span> : <span>{values.title}</span>}
-                </div>
-                <div>
-                    {values.firstPerson === "" ? <span>Null</span> : <span>{values.firstPerson}</span>}
-                </div>
-                <div>
-                    {values.secondPerson === "" ? <span>Null</span> : <span>{values.secondPerson}</span>}
-                </div>
-                <div>
-                    {values.infos === "" ? <span>Null</span> : <span>{values.infos}</span>}
-                </div>
-            </div>
         </div>
     )
 }
 
 export default Formulaire;
-
-// async (values, { setSubmitting }) => {
-//     console.log(values)
-//     const token = localStorage.getItem("token")
-//     const user = decode(token)
-//     await axios.put(`/api/admin/invitation/edit/${user.invitationID}`, {values})
-//         .then((res) => {
-//             if(res.data != null){
-//                 setTimeout(() => {
-//                     setValues(values);
-//                     setSubmitting(false);
-//                 }, 1500);
-//             }
-//         })
-//         .catch((err) => {
-//             console.log(err)})
-// }
 
 // {/* <Form 
 // method="PUT"

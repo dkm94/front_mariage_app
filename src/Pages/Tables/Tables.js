@@ -51,12 +51,7 @@ const Tables = () => {
     const deleteGuest = (guest, table) => {
         console.log(guest);
         console.log(table);
-        // console.log(guests)
-        const token = localStorage.getItem("token");
-        const config = {
-            headers: { Authorization: 'Bearer '+ token }
-            };
-        axios.put(`/api/admin/tables/deleteGuest/${table}`, {guestID: guest}, config)
+        axios.put(`/api/admin/tables/deleteGuest/${table}`, {guestID: guest})
             .then((res) => {
                 console.log(res.data)
                 if(res.data != null){
