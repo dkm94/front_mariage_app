@@ -12,7 +12,7 @@ const Logout = () => {
             </div>
             <ul className="navbar-menu">
                 <li className="li-style" id="about"><span>Qui sommes-nous ?</span></li>
-                <li className="li-style" id="login"><Link to={"/register"}>Connexion</Link></li>
+                <li className="li-style" id="login"><Link to={"/login"}>Connexion</Link></li>
             </ul>
         </div>
     </div>

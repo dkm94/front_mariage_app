@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Link, withRouter, useHistory } from "react-router-dom";
-import "./Register_v2.css";
-import Button from "../../components/LargeButton/LargeButton";
+import "./Login.css";
+import Button from "../../../components/LargeButton/LargeButton";
 // import "../../../components/LargeButton/LargeButton.css";
-import check from "../../img/check.png";
+import check from "../../../img/check.png";
 import axios from "axios";
 
-const Register_v2 = props => {
+const Login = props => {
     const history = useHistory();
     
     const [admin, setAdmin] = useState({email: '', password: ''})
@@ -33,7 +33,7 @@ const Register_v2 = props => {
                     console.log(token)
                     if(token){
                         setTimeout(() => {
-                            window.location.reload();
+                            window.location = "/menuAdm" ;
                             history.push("/menuAdm");
                         }, 1500);
                     }
@@ -44,8 +44,8 @@ const Register_v2 = props => {
     }
 
     return (
-        <div className="register-page">
-            <div className="cont">
+        <div className="login-page">
+            <div className="login-container">
                 <div className="demo">
                     <div className="login">
                         <div className="login__check">
@@ -82,7 +82,7 @@ const Register_v2 = props => {
                                 />
                                 </div>
                                 <Button title="Se connecter"/>
-                                <p className="login__signup">Pas encore membre? &nbsp;<Link to={"/"}>Inscrivez-vous</Link></p>
+                                <p className="login__signup">Pas encore membre? &nbsp;<Link to={"/register"}>Inscrivez-vous</Link></p>
                             </form>
                         </div>
                     </div>
@@ -92,4 +92,4 @@ const Register_v2 = props => {
     )
 }
 
-export default withRouter(Register_v2);
+export default withRouter(Login);

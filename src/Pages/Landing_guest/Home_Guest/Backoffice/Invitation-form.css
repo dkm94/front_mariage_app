@@ -1,5 +1,9 @@
+.invitation-form-container {
+    margin-bottom: 50px;
+}
+
 .title {
-    font-size: 12px;
+    font-size: 20px;
     font-weight: bold;
     font-style: normal;
     font-stretch: normal;
@@ -36,4 +40,12 @@
 
 .mb-3 > input {
     padding: 3px;
+}
+
+.event-form___add-btn {
+    text-align: end;
+}
+
+.event-form___submit {
+    text-align: end;
 }

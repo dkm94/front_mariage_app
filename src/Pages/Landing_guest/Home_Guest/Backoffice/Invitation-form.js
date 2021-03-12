@@ -56,43 +56,105 @@ import decode from "jwt-decode";
 
 
 const Formulaire = () => {
-
-    const [values, setValues] = useState({})
+  
+    const [invitation, setInvitation] = useState({})
+    const [eventForm, toggleEventForm] = useState(false)
+    const [events, setEvents] = useState([])
+    const [newEvent, setnewEvent] = useState({
+        // title: '',
+        // place: '',
+        // date: '',
+        // time: '',
+        // address: '',
+    })
 
     useEffect(() => {
         const fetchData = async () => {
             const token = localStorage.getItem("token")
             const user = decode(token)
-            const result = await axios.get(`/api/admin/invitation/${user.invitationID}`)
-            // console.log(result.data)
-            setValues(result.data)
+            const result = await axios.get(`/api/admin/invitation/page/${user.invitationID}`)
+            setInvitation(result.data)
         }
         fetchData();
     }, [])
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await axios.get(`/api/admin/invitation/events`)
+            setEvents(result.data)
+        }
+        fetchData();
+    }, [])
+
+    const deleteEvent = (id) => {
+        console.log(id);
+        axios.delete(`/api/admin/invitation/events/delete/${id}`)
+            .then(res => {
+                if(res.data != null) {
+                    alert("L'évènement a été supprimé.");
+                    setEvents(events.filter(event => event._id !== id))
+                }
+            })
+            .catch((err) => {
+                console.log(err)})
+    }
+
+    const eventsArr = events.map((obj, i) => {
+        return(
+            <li key={i} data-id={obj._id} className="col-6 mt-30">
+                <form>
+                    <input className="col-12 mt-30" type="text" value={obj.eventTitle}></input>
+                    <input className="col-12 mt-30" type="text" value={obj.eventPlace}></input>
+                    <input className="col-12 mt-30" type="text" value={obj.eventTime}></input>
+                    <input className="col-12 mt-30" type="text" value={obj.eventAddress}></input>
+                    <div style={{ marginTop: "10px", textAlign: "end"}}>
+                        <button>Modifier</button>
+                        <button onClick={() => {deleteEvent(obj._id)}}>Supprimer</button>
+                    </div>
+                </form>
+            </li>
+        )
+    })
     
     const initialValues = {
-        title: values.title, 
-        firstPerson: values.firstPerson, 
-        secondPerson: values.secondPerson, 
-        infos: values.infos
+        title: invitation.title, 
+        firstPerson: invitation.firstPerson, 
+        secondPerson: invitation.secondPerson,
+        places: invitation.places,
+        date: invitation.date,
+        infos: invitation.infos,
+        eventTitle: newEvent.eventTitle,
+        eventPlace: newEvent.eventPlace,
+        eventTime: newEvent.eventTime,
+        eventAddress: newEvent.eventAddress,
     }
 
     const validationSchema = Yup.object().shape({
         title: Yup.string(),
         firstPerson: Yup.string(),
         secondPerson: Yup.string(),
-        date: Yup.date(),
+        date: Yup.string(),
         infos: Yup.string(),
+        places: Yup.array(),
+        eventTitle: Yup.string(),
+        eventPlace: Yup.string(),
+        eventTime: Yup.string(),
+        eventAddress: Yup.string(),
     })
 
+    const newEventForm = (e) => {
+        e.preventDefault();
+        toggleEventForm(!eventForm);
+    }
+
     return(
-        <div className="container">
+        <div className="container invitation-form-container">
             <div className="title title-style">
                 <span>Créez votre faire-part de mariage</span>
             </div>
             <div className="row invitation-form">
                 <div className="col-lg-8 col-lg-offset-2 ">
-                    {/* {console.log(values)} */}
+
                     <Formik
                         validateOnChange={true}
                         initialValues={initialValues}
@@ -102,16 +164,20 @@ const Formulaire = () => {
                             const token = localStorage.getItem("token");
                             const user = decode(token);
                             await axios.put(`/api/admin/invitation/edit/${user.invitationID}`,
-                            {title: values.title,
-                            firstPerson: values.firstPerson,
-                            secondPerson: values.secondPerson,
-                            infos: values.infos})
+                            {
+                                title: values.title,
+                                firstPerson: values.firstPerson,
+                                secondPerson: values.secondPerson,
+                                places: values.places,
+                                date: values.date,
+                                infos: values.infos
+                            })
                                 .then((res) => {
                                     if(res.data != null){
                                         alert("Modifications effectuées");
                                         setSubmitting(true);
                                         setTimeout(() => {
-                                            // alert(JSON.stringify(values, null, 2));
+                                            alert(JSON.stringify(values, null, 2));
                                             setSubmitting(false);
                                         }, 3000);
                                     }
@@ -119,80 +185,186 @@ const Formulaire = () => {
                                 .catch((err) => {
                                     alert(err);
                                     console.log(err)})
+                                    
                         }}
                     >
-                        {({ values, handleChange, isSubmitting, handleBlur, handleSubmit }) => {
+                        {/* ({ values, handleChange, isSubmitting, handleBlur, handleSubmit }) */}
+                        {(formik) => {
                             return(
-                                <Form className="row g-3" onSubmit={() => handleSubmit(values)}>
-                                    {/* {console.log("PROPS", values)} */}
-                                    <div className="col-12">
-                                        <label htmlFor="inputAddress" className="form-label">Thème du mariage</label>
-                                        <input 
-                                        type="text"
-                                        name="title"
-                                        value={values.title || ""}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        className="form-control"
-                                        placeholder="Exemple: La vie en rose"/>
-                                    </div>
-                                    <div className="col-md-6 mt-30">
-                                        <label htmlFor="inputEmail4" className="form-label">Epoux.se 1</label>
-                                        <input 
-                                        type="text"
-                                        name="firstPerson"
-                                        value={values.firstPerson || ""}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        className="form-control" />
-                                    </div>
-                                    <div className="col-md-6 mt-30">
-                                        <label htmlFor="inputPassword4" className="form-label">Epoux.se 2</label>
-                                        <input 
-                                        type="text"
-                                        name="secondPerson"
-                                        value={values.secondPerson || ""}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        className="form-control" />
-                                    </div>
-                                    {/* <div className="mb-3 mt-30 plr-15">
+                                <div>
+                                    <Form className="row g-3" onSubmit={() => formik.handleSubmit(formik.values)}>
+                                        <div className="col-12">
+                                            <label htmlFor="inputAddress" className="form-label">Thème du mariage</label>
+                                            <input 
+                                            type="text"
+                                            name="title"
+                                            value={formik.values.title || ""}
+                                            onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
+                                            className="form-control"
+                                            placeholder="Exemple: La vie en rose"/>
+                                        </div>
+                                        <div className="col-md-6 mt-30">
+                                            <label htmlFor="inputEmail4" className="form-label">Epoux.se 1</label>
+                                            <input 
+                                            type="text"
+                                            name="firstPerson"
+                                            value={formik.values.firstPerson || ""}
+                                            onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
+                                            className="form-control" />
+                                        </div>
+                                        <div className="col-md-6 mt-30">
+                                            <label htmlFor="inputPassword4" className="form-label">Epoux.se 2</label>
+                                            <input 
+                                            type="text"
+                                            name="secondPerson"
+                                            value={formik.values.secondPerson || ""}
+                                            onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
+                                            className="form-control" />
+                                        </div>
+                                     {/* <div className="mb-3 mt-30 plr-15">
                                         <label htmlFor="formFile" className="form-label">Photo de mariage</label>
                                         <input 
                                         className="form-control form-control" 
                                         id="formFile" 
                                         type="file" />
                                     </div> */}
-                                    {/* <div className="col-4 mt-30">
-                                        <label htmlFor="inputAddress2" className="form-label">Date de l'évènement</label>
-                                        <input 
-                                        type="date" 
-                                        name="date"
-                                        value={values.date}
-                                        onChange={props.handleChange}
-                                        className="form-control"/>
-                                    </div> */}
-                                    <div className="col-md-6 mt-30">
-                                        <label htmlFor="exampleFormControlTextarea1" className="form-label">Informations complémentaires</label>
-                                        <textarea
-                                            className="form-control" 
-                                            id="exampleFormControlTextarea1" 
-                                            rows="3"
-                                            name="infos"
-                                            value={values.infos || ""}
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                        />
-                                    </div>
-                                    <div className="col-12">
-                                        <button type="submit" disabled={isSubmitting}>Valider</button>
-                                    </div>
-                                </Form>
+                    
+                                        <div className="col-4 mt-30">
+                                            <label htmlFor="inputAddress2" className="form-label">Date de l'évènement</label>
+                                            <input 
+                                            type="date" 
+                                            name="date"
+                                            value={formik.values.date || ""}
+                                            onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
+                                            className="form-control"/>
+                                        </div>
+                                        <div className="col-md-8 mt-30">
+                                            <label htmlFor="exampleFormControlTextarea1" className="form-label">Informations complémentaires</label>
+                                            <textarea
+                                                className="form-control" 
+                                                id="exampleFormControlTextarea1" 
+                                                rows="3"
+                                                name="infos"
+                                                value={formik.values.infos || ""}
+                                                onChange={formik.handleChange}
+                                                onBlur={formik.handleBlur}
+                                            />
+                                        </div>
+                                        <div className="col-12 event-form___submit mt-30">
+                                            <button type="submit" disabled={formik.isSubmitting}>Valider</button>
+                                        </div>
+                                    </Form>
+                                </div>
                             )
-                        }
-
-                        }
+                        }}        
                     </Formik>
+
+                    <Formik
+                    validateOnChange={true}
+                    initialValues={initialValues}
+                    enableReinitialize={true}
+                    validationSchema={validationSchema}
+                    onSubmit={async (values, { setSubmitting }) => {
+                        const token = localStorage.getItem("token");
+                        const user = decode(token);
+                        await axios.post(`/api/admin/invitation/events/add/${user.invitationID}`,
+                        {
+                            eventTitle: values.eventTitle,
+                            eventPlace: values.eventPlace,
+                            eventTime: values.eventTime,
+                            eventAddress: values.eventAddress
+                        })
+                            .then((res) => {
+                                if(res.data != null){
+                                    alert("Modifications effectuées");
+                                    setSubmitting(true);
+                                    setnewEvent(
+                                        newEvent
+                                    )
+                                    setTimeout(() => {
+                                        alert(JSON.stringify(values, null, 2));
+                                        setSubmitting(false);
+                                    }, 3000);
+                                }
+                            })
+                            .catch((err) => {
+                                alert(err);
+                                console.log(err)})
+                                
+                    }}
+                    >
+                        {(formik) => {
+                            return(
+                                <div className="event-form" style={{ marginTop: "50px"}}>
+                                    <h3>Votre programme</h3>
+                                    <div className="event-form___add-btn mt-30">
+                                        <button onClick={newEventForm}>Ajouter un évènement</button>
+                                    </div>
+                                    <Form className="row g-3" onSubmit={() => formik.handleSubmit(formik.values)} visible={eventForm} style={{display: eventForm ? 'flex' : 'none'}}>
+                                        <div className="col-md-6 mt-30">
+                                            <label>Evènement</label>
+                                            <input 
+                                            type="text" 
+                                            name="eventTitle"
+                                            value={formik.values.eventTitle || ""}
+                                            placeholder="Exemple: Réception"
+                                            onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
+                                            className="form-control"/>
+                                        </div>
+                                        <div className="col-md-6 mt-30">
+                                            <label>Lieu</label>
+                                            <input 
+                                            type="text" 
+                                            name="eventPlace"
+                                            value={formik.values.eventPlace || ""}
+                                            placeholder="Exemple: Salle des fêtes de la ville"
+                                            onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
+                                            className="form-control"/>
+                                        </div>
+                                        <div className="col-4 mt-30">
+                                            <label>Horaire</label>
+                                            <input 
+                                            type="datetime-local" 
+                                            name="eventTime"
+                                            value={formik.values.eventTime || ""}
+                                            onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
+                                            className="form-control"/>
+                                        </div>
+                                        <div className="col-md-8 mt-30">
+                                            <label>Adresse</label>
+                                            <input 
+                                            type="text" 
+                                            name="eventAddress"
+                                            value={formik.values.eventAddress || ""}
+                                            placeholder="Exemple: 12 rue du Général de Gaulle 75000"
+                                            onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
+                                            className="form-control"/>
+                                        </div>
+                                        <div className="col-12 event-form___submit mt-30">
+                                            <button type="submit" disabled={formik.isSubmitting}>
+                                                Valider
+                                            </button>
+                                        </div>
+                                    </Form>
+                                </div>
+                            )
+                        }}
+                                
+                    </Formik>               
+                
+                <div>
+                    <ul>
+                        {eventsArr}
+                    </ul>
+                </div>
                     
                 </div>
             </div>

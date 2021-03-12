@@ -1,19 +1,16 @@
 import React from 'react';
-import { Link, useHistory, withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import "../Header.css";
 import Logo from "../../../img/logo2.png";
 
 const Login = () => {
 
-    const history = useHistory()
+    // const history = useHistory()
 
-    const LogOut = () => {
+    const LogOut = async () => {
             console.log("déconnexion...")
-            localStorage.removeItem("token");
-            setTimeout(()=>{
-                window.location.reload();
-            }, 1000);
-            history.replace("/");
+            await localStorage.removeItem("token");
+            window.location = "/" ;
     };
 
         return (

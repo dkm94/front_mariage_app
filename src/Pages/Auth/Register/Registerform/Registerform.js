@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { withRouter, useHistory } from "react-router-dom";
-import Button from "../../../components/LargeButton/LargeButton";
-import "../../../components/LargeButton/LargeButton.css";
+import Button from "../../../../components/LargeButton/LargeButton";
+import "../../../../components/LargeButton/LargeButton.css";
 import axios from "axios";
 
 const Register = () => {

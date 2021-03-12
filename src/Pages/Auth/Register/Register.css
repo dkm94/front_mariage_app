@@ -37,10 +37,10 @@ input, button {
 	border: none;
 }
 
-.cont {
+.register-container {
 	position: relative;
 	height: 100%;
-	background-image: url("../../img/register-login.jpg");
+	background-image: url("../../../img/black-and-white.jpg");
 	position: relative;
     background-size: cover;
     /* overflow: initial; */
@@ -59,7 +59,7 @@ input, button {
 	/* overflow: hidden; */
 }
 
-.login {
+.register {
 	position: relative;
 	height: 100%;
 	background: linear-gradient(to bottom, rgba(146, 135, 187, 0.8) 0%, rgba(0, 0, 0, 0.6) 100%);
@@ -67,12 +67,12 @@ input, button {
 	transform: scale(1);
 }
 
-.login.inactive {
+.register.inactive {
 	opacity: 0;
 	transform: scale(1.1);
 }
 
-.login__check {
+.register__check {
 	height: 100%;
     position: absolute;
     bottom: 50%;
@@ -81,11 +81,11 @@ input, button {
     text-align: center;
 }
 
-.login__check > img {
+.register__check > img {
 	height: 100%;
 }
 
-.login__form {
+.register__form {
 	position: absolute;
 	top: 50%;
 	left: 0;
@@ -95,37 +95,37 @@ input, button {
 	text-align: center;
 }
 
-.login__form > form {
+.register__form > form {
 	display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
 }
 
-.login__row {
+.register__row {
 	height: 4rem;
 	padding: 1rem;
 	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.login__icon {
+.register__icon {
 	margin-bottom: -0.4rem;
 	margin-right: 0.5rem;
 }
 
-.login__icon.name path {
+.register__icon.name path {
 	stroke-dasharray: 73.50196075439453;
 	stroke-dashoffset: 73.50196075439453;
 	animation: animatePath 2s 0.5s forwards;
 }
 
-.login__icon.pass path {
+.register__icon.pass path {
 	stroke-dasharray: 92.10662841796875;
 	stroke-dashoffset: 92.10662841796875;
 	animation: animatePath 2s 0.5s forwards;
 }
 
-.login__input {
+.register__input {
 	display: inline-block;
 	/* width: 22rem;
 	height: 100%; */
@@ -136,7 +136,7 @@ input, button {
 	color: #FDFCFD;
 }
 
-.login__submit {
+.register__submit {
 	position: relative;
 	width: 100%;
 	height: 4rem;
@@ -150,7 +150,7 @@ input, button {
 	transition: width 0.3s 0.15s, font-size 0.1s 0.15s;
 }
 
-.login__submit:after {
+.register__submit:after {
 	content: "";
 	position: absolute;
 	top: 50%;
@@ -167,34 +167,34 @@ input, button {
 	opacity: 0;
 }
 
-.login__submit.processing {
+.register__submit.processing {
 	width: 4rem;
 	font-size: 0;
 }
 
-.login__submit.processing:after {
+.register__submit.processing:after {
 	opacity: 1;
 	animation: rotate 0.5s 0.4s infinite linear;
 }
 
-.login__submit.success {
+.register__submit.success {
 	transition: transform 0.3s 0.1s ease-out, opacity 0.1s 0.3s, background-color 0.1s 0.3s;
 	transform: scale(30);
 	opacity: 0.9;
 }
 
-.login__submit.success:after {
+.register__submit.success:after {
 	transition: opacity 0.1s 0s;
 	opacity: 0;
 	animation: none;
 }
 
-.login__signup {
+.register__signup {
 	font-size: 1.2rem;
 	color: #ABA8AE;
 }
 
-.login__signup a {
+.register__signup a {
 	color: #fff;
 	cursor: pointer;
 }

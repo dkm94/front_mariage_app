@@ -6,7 +6,7 @@ import decode from "jwt-decode";
 const Card = () => {
     
     const initialState = {
-        title: '', firstPerson: '', secondPerson: '', infos: ''
+        title: '', firstPerson: '', secondPerson: '', date: '', eventsID: [], infos: ''
     }
     const [invitation, setinvitation] = useState(initialState);
 
@@ -33,13 +33,16 @@ const Card = () => {
                     <span className="and">&</span>
                     <span className="name">{invitation.secondPerson}</span><br />
                     <span>qui aura lieu le</span><br />
-                    <span className="manuscrit">Lundi 12 Novembre</span><br />
+                    <span className="manuscrit">{invitation.date}</span><br />
                     <span>sur le thème</span><br />
                     <span className="manuscrit">{invitation.title}</span>
                 </div>
             </div>
+            <div>
+                {invitation.eventsID}
+            </div>
             <div className="where-when info">
-                <h3>Lieu et horaires</h3>
+                <h3>Programme</h3>
                 <div className="where-when-cols">
                     <div className="where-when-col">
                         <h4>Eglise</h4>

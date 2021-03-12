@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, withRouter, useHistory } from "react-router-dom";
-import Button from "../../../components/LargeButton/LargeButton";
+import Button from "../../../../components/LargeButton/LargeButton";
 import "../../../components/LargeButton/LargeButton.css";
 import axios from "axios";
 

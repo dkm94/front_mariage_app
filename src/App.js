@@ -1,16 +1,21 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route} from 'react-router-dom';
+
+import LoggedOutNavigation from "./components/Header/Navigation/Log_out"
+import LoggedInNavigation from "./components/Header/Navigation/Log_in"
+
 import ProtectedRoute from "../src/ProtectedRoutes/Admin";
+
+import Home from './Pages/Homepage/Home';
+import Register from './Pages/Auth/Register/Register';
+import Login from './Pages/Auth/Login/Login';
+import MenuAdmin from './Pages/MenuAdmin/Menu';
 import Invitation from "../src/Pages/Landing_guest/Home_guest";
 import Invités from "../src/Pages/Invités/Invités";
 import Tables from "../src/Pages/Tables/Tables";
 import Menu from "../src/Pages/Menu/Menu";
-import Logout from "./components/Header/Navigation/Log_out"
-import Login from "./components/Header/Navigation/Log_in"
-import Home from './Pages/Homepage/Home';
-import Register from './Pages/Register/Register_v2';
-import MenuAdmin from './Pages/MenuAdmin/Menu';
+
 import axios from "axios";
 import decode from "jwt-decode";
 
@@ -30,9 +35,9 @@ function App() {
 
   let navigation;
     if(!token) {
-        navigation =  <Logout />
+        navigation =  <LoggedOutNavigation />
     } else 
-        navigation =  <Login />
+        navigation =  <LoggedInNavigation />
 
   return (
     <div className="App">
@@ -40,6 +45,7 @@ function App() {
         {navigation}
           {/* <Switch> */}
             <Route exact path="/" component={Home}/>
+            <Route path="/login" component={Login}/>
             <Route path="/register" component={Register}/>
             <ProtectedRoute path="/menuAdm" component={MenuAdmin} isAuth={role}/>
             <ProtectedRoute path="/invitation" component={Invitation} isAuth={role}/>
