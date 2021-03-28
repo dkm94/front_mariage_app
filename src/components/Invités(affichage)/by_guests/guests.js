@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Button from "../../LargeButton/LargeButton";
 import "./guests.css";
+import avatar from "../../../img/avatar.jpg";
 import axios from "axios";
 
 const Byguests = () => {
@@ -29,7 +30,11 @@ const Byguests = () => {
             .then((res) => {
                 console.log(res.data)
                 if(res.data != null){
-                    setGuests([...guests].concat(guest))
+                    // alert("update guestlist...",
+                    // guest,
+                    // guests)
+                    // setGuests([...guests].concat(guest))
+                    setGuests([...guests, guest])
                     setNewGuest({name: ''})
                 }
             })
@@ -72,7 +77,8 @@ const Byguests = () => {
                         <span>{name}</span>
                     </div>
                     <div className="guest-picture">
-                        <img alt="avatar" src={require("../../../img/"+ media)}  />
+                        {/* <img alt="avatar" src={require("../../../img/"+ media)}  /> */}
+                        <img alt="avatar" src={avatar}  />
                     </div>
                     <div className="del-guest">
                         <Button handleClick={() => {deleteGuest(_id)}} title="Supprimer"/>

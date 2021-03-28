@@ -1,6 +1,7 @@
 .get-guestlist {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    /* grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); */
+    grid-template-columns: repeat(5, 1fr);
     grid-gap: 2rem;
     padding: 1rem;
     width: 100%;
@@ -10,7 +11,7 @@
 .block {
     position: relative;
     margin: 0px 150px;
-    border-radius: 20px;
+    border-radius: 10px;
 }
 
 .empty-tab > span {

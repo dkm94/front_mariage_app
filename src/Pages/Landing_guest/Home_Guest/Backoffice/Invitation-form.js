@@ -60,13 +60,7 @@ const Formulaire = () => {
     const [invitation, setInvitation] = useState({})
     const [eventForm, toggleEventForm] = useState(false)
     const [events, setEvents] = useState([])
-    const [newEvent, setnewEvent] = useState({
-        // title: '',
-        // place: '',
-        // date: '',
-        // time: '',
-        // address: '',
-    })
+    const [newEvent, setnewEvent] = useState({})
 
     useEffect(() => {
         const fetchData = async () => {
@@ -120,6 +114,7 @@ const Formulaire = () => {
         title: invitation.title, 
         firstPerson: invitation.firstPerson, 
         secondPerson: invitation.secondPerson,
+        picture: invitation.picture,
         places: invitation.places,
         date: invitation.date,
         infos: invitation.infos,
@@ -130,16 +125,29 @@ const Formulaire = () => {
     }
 
     const validationSchema = Yup.object().shape({
-        title: Yup.string(),
-        firstPerson: Yup.string(),
-        secondPerson: Yup.string(),
+        title: Yup.string()
+            .max(100, 'Le titre du thème ne doit pas dépasser 100 caractères.'),
+        firstPerson: Yup.string()
+            .max(100, 'Le nom ne peut excéder 100 caractères.')
+            .required('Merci de remplir ce champ'),
+        secondPerson: Yup.string()
+            .max(100, 'Le nom ne peut excéder 100 caractères.')
+            .required('Merci de remplir ce champ'),
+        picture: Yup.string(),
         date: Yup.string(),
-        infos: Yup.string(),
+        infos: Yup.string()
+            .max(1000, 'Vous avez atteint le seuil maximal de caractères (1000).'),
         places: Yup.array(),
-        eventTitle: Yup.string(),
-        eventPlace: Yup.string(),
+        eventTitle: Yup.string()
+            .max(50, 'Le titre ne peut dépasser 50 caractères')
+            .required('Merci de remplir ce champ'),
+        eventPlace: Yup.string()
+            .max(100, 'Le titre ne peut dépasser 100 caractères.')
+            .required('Merci de remplir ce champ'),
         eventTime: Yup.string(),
-        eventAddress: Yup.string(),
+        eventAddress: Yup.string()
+            .max(300, 'L\' adresse ne peut dépasser 300 caractères')
+            .required('Merci de remplir ce champ'),
     })
 
     const newEventForm = (e) => {
@@ -168,6 +176,7 @@ const Formulaire = () => {
                                 title: values.title,
                                 firstPerson: values.firstPerson,
                                 secondPerson: values.secondPerson,
+                                picture: values.picture,
                                 places: values.places,
                                 date: values.date,
                                 infos: values.infos
@@ -192,7 +201,7 @@ const Formulaire = () => {
                         {(formik) => {
                             return(
                                 <div>
-                                    <Form className="row g-3" onSubmit={() => formik.handleSubmit(formik.values)}>
+                                    <Form className="row g-3" onSubmit={() => formik.handleSubmit(formik.values)} encType="multipart/form-data">
                                         <div className="col-12">
                                             <label htmlFor="inputAddress" className="form-label">Thème du mariage</label>
                                             <input 
@@ -224,13 +233,19 @@ const Formulaire = () => {
                                             onBlur={formik.handleBlur}
                                             className="form-control" />
                                         </div>
-                                     {/* <div className="mb-3 mt-30 plr-15">
-                                        <label htmlFor="formFile" className="form-label">Photo de mariage</label>
-                                        <input 
-                                        className="form-control form-control" 
-                                        id="formFile" 
-                                        type="file" />
-                                    </div> */}
+                                        <div className="mb-3 mt-30 plr-15">
+                                            <label htmlFor="formFile" className="form-label">Photo de mariage</label>
+                                            <input 
+                                            className="form-control form-control" 
+                                            id="formFile" 
+                                            type="file"
+                                            name="picture"
+                                            // value={formik.values.picture}
+                                            onChange={(event) => {
+                                                formik.setFieldValue("picture", event.currentTarget.files[0]);
+                                              }}
+                                            />
+                                        </div>
                     
                                         <div className="col-4 mt-30">
                                             <label htmlFor="inputAddress2" className="form-label">Date de l'évènement</label>

@@ -2,70 +2,91 @@ import React, { useState, useEffect } from "react";
 import "./Faire-part.css";
 import axios from "axios";
 import decode from "jwt-decode";
+import couple from "../../../../img/couple.jpg";
 
 const Card = () => {
     
     const initialState = {
-        title: '', firstPerson: '', secondPerson: '', date: '', eventsID: [], infos: ''
+        title: '', firstPerson: '', secondPerson: '', picture: '', date: '', eventsID: [], infos: ''
     }
+    const [weddingImg, setweddingImg] = useState()
     const [invitation, setinvitation] = useState(initialState);
+    const [events, setEvents] = useState([])
 
     useEffect(() => {
         const fetchData = async () => {
             const token = localStorage.getItem("token");
             const decoded = decode(token);
             const invitationID = decoded.invitationID;
-            const result = await axios.get(`/api/admin/invitation/${invitationID}`);
+            const result = await axios.get(`/api/admin/invitation/page/${invitationID}`);
+            // const image = await axios.get(`/api/admin/invitation/page/picture/${result.data.picture}`);
             setinvitation(result.data)
+            // console.log(result.data.picture)
+            // setweddingImg(image)
         }
         fetchData();
     }, [])
 
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await axios.get(`/api/admin/invitation/events`);
+            setEvents(result.data)
+        }
+        fetchData();
+    }, [])
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const img = await axios.get(`/api/admin/invitation/page/picture/e2e54970a3d6d2b6edb450354298f4ff.jpg`);
+            setweddingImg(img)
+            console.log(img);
+        }
+        fetchData();
+    }, [])
+
+
+    const schedule = events.map((obj, i) => {
+        console.log(events)
+        return(
+            <li key={i} data-id={obj._id}>
+                <h4>{obj.eventTitle}</h4>
+                <p>{obj.eventPlace}</p>
+                <p>{obj.eventTime}</p>
+                <p>{obj.eventTime}</p>
+                <p>{obj.eventAddress}</p>
+            </li>
+        )
+    })
+    
     return(
         <>
-        <div className="wedding-img"></div>
+        <div className="wedding-img">
+            {invitation.picture === "" ? 
+            <img alt="notre mariage" src={couple}/> :
+            // <img alt="notre mariage" src={`/public/${invitation.picture}`}/>
+            
+            <img alt="notre mariage" src={`https://backend-mywedding-app.herokuapp.com/api/admin/invitation/page/picture/${weddingImg}`} />
+        }
+        </div>
         <div className="wedding-infos">
             <div className="wedding-intro info">
                 <h3>Invitation</h3>
-                <div className="intro">
+                <div className="wedding-card">
                     <span>Vous êtes cordialement invité.e.s au mariage de</span><br />
-                    <span className="name">{invitation.firstPerson}</span>
-                    <span className="and">&</span>
-                    <span className="name">{invitation.secondPerson}</span><br />
+                    <span className="wedding-card___name">{invitation.firstPerson}</span>
+                    <span className="wedding-card___and">&</span>s
+                    <span className="wedding-card___name">{invitation.secondPerson}</span><br />
                     <span>qui aura lieu le</span><br />
-                    <span className="manuscrit">{invitation.date}</span><br />
+                    <span className="wedding-card___date">{invitation.date}</span><br />
                     <span>sur le thème</span><br />
-                    <span className="manuscrit">{invitation.title}</span>
+                    <span className="wedding-card___title">{invitation.title}</span>
                 </div>
             </div>
-            <div>
-                {invitation.eventsID}
-            </div>
-            <div className="where-when info">
+            <div className="schedule info">
                 <h3>Programme</h3>
-                <div className="where-when-cols">
-                    <div className="where-when-col">
-                        <h4>Eglise</h4>
-                        <p>Eglise de Chateau-Thierry</p>
-                        <p>Lundi 12 Novembre</p>
-                        <p>11h00</p>
-                        <p>60 Rond-Point de la Madeleine, 68900</p>
-                    </div>
-                    <div className="where-when-col">
-                        <h4>Réception</h4>
-                        <p>Salle des Fêtes Louise Michel</p>
-                        <p>Lundi 12 Novembre</p>
-                        <p>13h00</p>
-                        <p>60 Rond-Point de la Madeleine, 68900</p>
-                    </div>
-                    <div className="where-when-col">
-                    <h4>Soirée</h4>
-                        <p>Salle des Fêtes Louise Michel</p>
-                        <p>Lundi 12 Novembre</p>
-                        <p>20h00</p>
-                        <p>60 Rond-Point de la Madeleine, 68900</p>
-                    </div>
-                </div>
+                <ul className="schedule-cols">
+                    {schedule}
+                </ul>
             </div>
             <div className="additionnal-info info">
                 <h3>Informations complémentaires</h3>

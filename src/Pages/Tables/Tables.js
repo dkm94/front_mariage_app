@@ -82,7 +82,7 @@ const Tables = () => {
     }
 
     return(
-        <div className="tables-container">
+        <div className="tables-container center-x">
             <div className="tables container">
                 <div className="tables-form">
                     <form onSubmit={() => handleSubmit(table.name)}>

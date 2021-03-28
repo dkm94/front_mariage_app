@@ -4,21 +4,22 @@
     background-size: cover;
     background-position: center;
     min-height: 600px;
-    position: relative;
+    /* position: relative; */
 }
 
 .tables {
-    border-radius: 20px;
-    position: absolute;
+    border-radius: 10px;
+    margin: 50px 0px;
+    /* position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); */
     display: flex;
     flex-direction: column;
     align-items: center;
     background: rgba(312,312,312,0.85);
     padding: 50px;
-    /* box-shadow: 10px 10px 13px -6px rgba(184,178,184,1); */
+    box-shadow: 10px 10px 13px -6px rgba(184,178,184,1);
 }
 
 .tables-form {
@@ -57,7 +58,8 @@
 
 .get-tables {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    /* grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); */
+    grid-template-columns: repeat(5, 1fr);
     grid-gap: 2rem;
     padding: 1rem;
     /* border: solid 3px beige; */
@@ -146,7 +148,7 @@
     position: relative;
     /* border: solid 3px #000000; */
     margin: 0px 150px ;
-    border-radius: 20px;
+    border-radius: 10px;
  }
 
  .block > span {

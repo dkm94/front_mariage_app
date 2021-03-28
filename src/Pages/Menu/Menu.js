@@ -199,7 +199,7 @@ const Menus = () => {
     const plat = maincourses.map((maincourse) => <li key={maincourse._id}>{maincourse.name}<button>E</button><button onClick={() => {deleteMaincourse(maincourse._id)}}><i className="fas fa-trash"/></button></li>)
     const dessert_ = desserts.map((dessert) => <li key={dessert._id}>{dessert.name}<button>E</button><button onClick={() => {deleteDessert(dessert._id)}}><i className="fas fa-trash"/></button></li>)
     return(
-        <div className="menu-container">
+        <div className="menu-container center-x">
             <div className="menu container">
                 <div className="menu-span container">
                     {/* <span>Constituez le menu de votre mariage: vous pouvez ajouter plusieurs entrées, plats ou desserts...</span> */}

@@ -12,10 +12,16 @@ h3 {
 .wedding-img {
     height: 40rem;
     background-color: greenyellow;
-    background-image: url("../../../../img/couple.jpg");
+    /* background-image: url("../../../../img/couple.jpg"); */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+.wedding-img > img {
+    height: inherit;
+    width: 100%;
+    object-fit: cover;
 }
 
 .wedding-infos {
@@ -31,44 +37,52 @@ h3 {
     text-align: center;
 }
 
-.intro {
+.wedding-card {
     padding: 16px;
 }
 
-.name {
+.wedding-card___name {
     font-family: 'Alex Brush', cursive;
     font-size: 6em;
     margin: 0;
 }
 
-.and {
+.wedding-card___and {
     font-family: 'Alex Brush', cursive;
     font-size: 2em;
     margin: 0px 10px;
 }
 
-.manuscrit {
+.wedding-card___date, .wedding-card___title {
     font-family: 'Alex Brush', cursive;
     font-size: 3em;
     margin: 0px 10px;
 }
 
-.where-when {
+
+
+.schedule {
     background: #fcdccc;
 }
 
-.where-when-cols {
+.schedule-cols {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
     grid-gap: 2rem;
     padding: 1rem;
+    margin-bottom: 0px;
     box-sizing: border-box;
 }
 
-.where-when-col {
-    /* background-color: antiquewhite; */
+.schedule-cols > li {
     text-align: center;
     padding: 20px 10px;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #000000;
+    margin-bottom: 5px;
 }
 
 .additionnal-info {
