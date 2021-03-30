@@ -9,7 +9,7 @@ const Card = () => {
     const initialState = {
         title: '', firstPerson: '', secondPerson: '', picture: '', date: '', eventsID: [], infos: ''
     }
-    const [weddingImg, setweddingImg] = useState()
+    const [weddingImg, setweddingImg] = useState({})
     const [invitation, setinvitation] = useState(initialState);
     const [events, setEvents] = useState([])
 
@@ -18,11 +18,49 @@ const Card = () => {
             const token = localStorage.getItem("token");
             const decoded = decode(token);
             const invitationID = decoded.invitationID;
+            // const config = {
+            //     headers: {
+
+            //         'Authorization': `Bearer ${token}`
+            //       //   Authorization: `Bearer ${token}`
+            //       }
+            // }
             const result = await axios.get(`/api/admin/invitation/page/${invitationID}`);
-            // const image = await axios.get(`/api/admin/invitation/page/picture/${result.data.picture}`);
+            // const image = await axios({
+            //     method: 'get',
+            //     url: `/api/admin/invitation/page/picture/`,
+            //     headers: {
+            //         'Authorization': `Bearer ${token}`
+            //     },
+            //     params: {
+            //         filename: result.data.picture
+            //     }
+            // })
+            const image = await axios.get(`/api/admin/invitation/page/picture/${result.data.picture}`)
+             .catch(function (error) {
+                if (error.response) {
+                    console.log(error.response);
+                  // The request was made and the server responded with a status code
+                  // that falls out of the range of 2xx
+                  console.log(error.response.data);
+                  console.log(error.response.status);
+                  console.log(error.response.headers);
+                } else if (error.request) {
+                  // The request was made but no response was received
+                  // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                  // http.ClientRequest in node.js
+                  console.log(error.request);
+                } else {
+                  // Something happened in setting up the request that triggered an Error
+                  console.log('Error', error.message);
+                }
+                console.log(error.config);
+              });
+              console.log(image)
+            //   console.log(result)
             setinvitation(result.data)
-            // console.log(result.data.picture)
-            // setweddingImg(image)
+            // console.log(image.config.url)
+            setweddingImg(image)
         }
         fetchData();
     }, [])
@@ -35,18 +73,26 @@ const Card = () => {
         fetchData();
     }, [])
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const img = await axios.get(`/api/admin/invitation/page/picture/e2e54970a3d6d2b6edb450354298f4ff.jpg`);
-            setweddingImg(img)
-            console.log(img);
-        }
-        fetchData();
-    }, [])
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         const img = await axios({
+    //             method: 'get',
+    //             url: `https://backend-mywedding-app.herokuapp.com/api/admin/invitation/page/picture/${invitation.picture}` ,
+    //             responseType: 'stream'
+    //           })
+    //             .then(res => {
+    //             //   res.data.pipe(fs.createWriteStream(invitation.picture))
+    //             })
+    //             .catch(err => console.log(err))
+    //         setweddingImg(img)
+    //         console.log(img);
+    //     }
+    //     fetchData();
+    // }, [])
 
 
     const schedule = events.map((obj, i) => {
-        console.log(events)
+        // console.log(events)
         return(
             <li key={i} data-id={obj._id}>
                 <h4>{obj.eventTitle}</h4>
@@ -58,6 +104,7 @@ const Card = () => {
         )
     })
     
+    console.log(weddingImg)
     return(
         <>
         <div className="wedding-img">
@@ -65,7 +112,7 @@ const Card = () => {
             <img alt="notre mariage" src={couple}/> :
             // <img alt="notre mariage" src={`/public/${invitation.picture}`}/>
             
-            <img alt="notre mariage" src={`https://backend-mywedding-app.herokuapp.com/api/admin/invitation/page/picture/${weddingImg}`} />
+            <img alt="notre mariage" src={`http://backend-mywedding-app.herokuapp.com${weddingImg}`} />
         }
         </div>
         <div className="wedding-infos">

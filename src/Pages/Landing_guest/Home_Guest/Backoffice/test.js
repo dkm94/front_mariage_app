@@ -7,29 +7,61 @@ import * as Yup from "yup";
 import axios from "axios";
 import decode from "jwt-decode";
 
+// interface Values {
+//     title: string, 
+//     firstPerson: string, 
+//     secondPerson: string, 
+//     date: string, 
+//     infos: string
+//   }
+
+// const CustomTextInput = ({ label, handleChange, values, ...props }) => {
+//     console.log(props);
+//     console.log(values)
+//     // let properties = props.name;
+//     // properties.forEach(el => console.log(el))
+//     // console.log(handleChange);
+//     const [field, meta] = useField(props);
+//     console.log(field)
+//     console.log(meta)
+
+//     // const getInputValue = (name, value) => {
+//     //     alert("Touché !")
+//     //     console.log(name, value)
+//     //     // const fieldName = e.target.name;
+//     //     // const fieldValue = e.target.value;
+//     //     // console.log(fieldValue)
+//     //     // handleChange(fieldName, fieldValue);
+//     // }
+
+
+//     return(
+//         <>
+//             <label htmlFor={props.name}>{label}</label><br />
+//            {/* { console.log("handle", handleChange)} */}
+//             <input
+//             name={props.name}
+//             type={props.type}
+//             className="text-input full-width"
+//             value={props.value}
+//             // onChange={() => handleChange(props.name, props.value)}
+//             onChange={handleChange}
+//             {...field} {...props}
+//             />
+//             {meta.touched && meta.error ? (
+//                 <div className="error">{meta.error}</div>
+//             ): null}
+//         </>
+//     )
+// }
+
+
 const Formulaire = () => {
   
-    const invitationValues = {
-        title: '', 
-        firstPerson: '', 
-        secondPerson: '',
-        // picture: '',
-        places: '',
-        date: '',
-        infos: '',
-    }
-
-    const newEventValues = {
-        eventTitle: '',
-        eventPlace: '',
-        eventTime: '',
-        eventAddress: '',
-    }
-
-    const [invitation, setInvitation] = useState(invitationValues)
+    const [invitation, setInvitation] = useState({})
     const [eventForm, toggleEventForm] = useState(false)
     const [events, setEvents] = useState([])
-    const [newEvent, setnewEvent] = useState(newEventValues)
+    const [newEvent, setnewEvent] = useState({})
 
     useEffect(() => {
         const fetchData = async () => {
@@ -83,7 +115,7 @@ const Formulaire = () => {
         title: invitation.title, 
         firstPerson: invitation.firstPerson, 
         secondPerson: invitation.secondPerson,
-        // picture: invitation.picture,
+        picture: invitation.picture,
         places: invitation.places,
         date: invitation.date,
         infos: invitation.infos,
@@ -94,29 +126,29 @@ const Formulaire = () => {
     }
 
     const validationSchema = Yup.object().shape({
-        title: Yup.string()
-            .max(100, 'Le titre du thème ne doit pas dépasser 100 caractères.'),
-        firstPerson: Yup.string()
-            .max(100, 'Le nom ne peut excéder 100 caractères.')
-            .required('Merci de remplir ce champ'),
-        secondPerson: Yup.string()
-            .max(100, 'Le nom ne peut excéder 100 caractères.')
-            .required('Merci de remplir ce champ'),
+        title: Yup.string(),
+            // .max(100, 'Le titre du thème ne doit pas dépasser 100 caractères.'),
+        firstPerson: Yup.string(),
+            // .max(100, 'Le nom ne peut excéder 100 caractères.')
+            // .required('Merci de remplir ce champ'),
+        secondPerson: Yup.string(),
+            // .max(100, 'Le nom ne peut excéder 100 caractères.')
+            // .required('Merci de remplir ce champ'),
         picture: Yup.string(),
         date: Yup.string(),
-        infos: Yup.string()
-            .max(1000, 'Vous avez atteint le seuil maximal de caractères (1000).'),
+        infos: Yup.string(),
+            // .max(1000, 'Vous avez atteint le seuil maximal de caractères (1000).'),
         places: Yup.array(),
-        eventTitle: Yup.string()
-            .max(50, 'Le titre ne peut dépasser 50 caractères')
-            .required('Merci de remplir ce champ'),
-        eventPlace: Yup.string()
-            .max(100, 'Le titre ne peut dépasser 100 caractères.')
-            .required('Merci de remplir ce champ'),
+        eventTitle: Yup.string(),
+            // .max(50, 'Le titre ne peut dépasser 50 caractères')
+            // .required('Merci de remplir ce champ'),
+        eventPlace: Yup.string(),
+            // .max(100, 'Le titre ne peut dépasser 100 caractères.')
+            // .required('Merci de remplir ce champ'),
         eventTime: Yup.string(),
         eventAddress: Yup.string()
-            .max(300, 'L\' adresse ne peut dépasser 300 caractères')
-            .required('Merci de remplir ce champ'),
+            // .max(300, 'L\' adresse ne peut dépasser 300 caractères')
+            // .required('Merci de remplir ce champ'),
     })
 
     const newEventForm = (e) => {
@@ -145,7 +177,7 @@ const Formulaire = () => {
                                 title: values.title,
                                 firstPerson: values.firstPerson,
                                 secondPerson: values.secondPerson,
-                                // picture: values.picture,
+                                picture: values.picture,
                                 places: values.places,
                                 date: values.date,
                                 infos: values.infos
@@ -172,74 +204,84 @@ const Formulaire = () => {
                             return(
                                 <div>
                                     <Form className="row g-3" onSubmit={() => formik.handleSubmit(formik.values)} encType="multipart/form-data">
-                                       
-                                        <TextField
+                                        <div className="col-12">
+                                            <label htmlFor="inputAddress" className="form-label">Thème du mariage</label>
+                                            <input 
+                                            type="text"
+                                            name="title"
+                                            value={formik.values.title || ""}
+                                            onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
+                                            className="form-control"
+                                            placeholder="Exemple: La vie en rose"/>
+                                        </div>
+                                        {/* <TextField
                                             size="col-12"
-                                            label="Thème du mariage" 
+                                            label="title" 
                                             name="title" 
                                             type="text" 
-                                            value={formik.values.title} 
+                                            value={formik.values.title || ""} 
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
                                             className="form-control col-12"
                                             placeholder="Exemple: La vie en rose" 
-                                        />
-                                        <TextField 
-                                            size="col-md-6 mt-30"
-                                            label="Epoux.se 1" 
-                                            name="firstPerson" 
-                                            type="text" 
-                                            value={formik.values.firstPerson} 
+                                        /> */}
+                                        <div className="col-md-6 mt-30">
+                                            <label htmlFor="inputEmail4" className="form-label">Epoux.se 1</label>
+                                            <input 
+                                            type="text"
+                                            name="firstPerson"
+                                            value={formik.values.firstPerson || ""}
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
-                                            className="form-control"
-                                        />
-                                        <TextField 
-                                            size="col-md-6 mt-30"
-                                            label="Epoux.se 2" 
-                                            name="secondPerson" 
-                                            type="text" 
-                                            value={formik.values.secondPerson} 
+                                            className="form-control" />
+                                        </div>
+                                        <div className="col-md-6 mt-30">
+                                            <label htmlFor="inputPassword4" className="form-label">Epoux.se 2</label>
+                                            <input 
+                                            type="text"
+                                            name="secondPerson"
+                                            value={formik.values.secondPerson || ""}
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
-                                            className="form-control"
-                                        />
-
-                                        {/* <div className="mb-3 mt-30 plr-15">
+                                            className="form-control" />
+                                        </div>
+                                        <div className="mb-3 mt-30 plr-15">
                                             <label htmlFor="formFile" className="form-label">Photo de mariage</label>
                                             <input 
                                             className="form-control form-control" 
                                             id="formFile" 
                                             type="file"
                                             name="picture"
-                                            // value={formik.values.picture}
+                                            // value={formik.values.picture || ""}
                                             onChange={(event) => {
                                                 formik.setFieldValue("picture", event.currentTarget.files[0]);
                                               }}
                                             />
-                                        </div> */}
-                                        <TextField 
-                                            size="col-4 mt-30"
-                                            label="Date de l'évènement" 
-                                            name="date" 
+                                        </div>
+                    
+                                        <div className="col-4 mt-30">
+                                            <label htmlFor="inputAddress2" className="form-label">Date de l'évènement</label>
+                                            <input 
                                             type="date" 
-                                            value={formik.values.date} 
+                                            name="date"
+                                            value={formik.values.date || ""}
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
-                                            className="form-control"
-                                        />
-                                        <TextField 
-                                            size="col-md-8 mt-30"
-                                            rows="3"
-                                            label="Informations complémentaires" 
-                                            name="infos" 
-                                            type="textarea" 
-                                            value={formik.values.infos} 
-                                            onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur}
-                                            className="form-control"
-                                        />
-                                        
+                                            className="form-control"/>
+                                        </div>
+                                        <div className="col-md-8 mt-30">
+                                            <label htmlFor="exampleFormControlTextarea1" className="form-label">Informations complémentaires</label>
+                                            <textarea
+                                                className="form-control" 
+                                                id="exampleFormControlTextarea1" 
+                                                rows="3"
+                                                name="infos"
+                                                value={formik.values.infos || ""}
+                                                onChange={formik.handleChange}
+                                                onBlur={formik.handleBlur}
+                                            />
+                                        </div>
                                         <div className="col-12 event-form___submit mt-30">
                                             <button type="submit" disabled={formik.isSubmitting}>Valider</button>
                                         </div>
@@ -290,48 +332,50 @@ const Formulaire = () => {
                                     <div className="event-form___add-btn mt-30">
                                         <button onClick={newEventForm}>Ajouter un évènement</button>
                                     </div>
-                                    <Form className="row g-3" onSubmit={() => formik.handleSubmit(formik.values)} style={{display: eventForm ? 'flex' : 'none'}}>
-                                        <TextField 
-                                            size="col-md-6 mt-30"
-                                            label="Evènement" 
-                                            name="eventTitle" 
+                                    <Form className="row g-3" onSubmit={() => formik.handleSubmit(formik.values)} visible={eventForm} style={{display: eventForm ? 'flex' : 'none'}}>
+                                        <div className="col-md-6 mt-30">
+                                            <label>Evènement</label>
+                                            <input 
                                             type="text" 
-                                            value={formik.values.eventTitle} 
+                                            name="eventTitle"
+                                            value={formik.values.eventTitle || ""}
+                                            placeholder="Exemple: Réception"
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
-                                            className="form-control"
-                                        />
-                                        <TextField 
-                                            size="col-md-6 mt-30"
-                                            label="Lieu" 
-                                            name="eventPlace" 
+                                            className="form-control"/>
+                                        </div>
+                                        <div className="col-md-6 mt-30">
+                                            <label>Lieu</label>
+                                            <input 
                                             type="text" 
-                                            value={formik.values.eventPlace} 
-                                            onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur}
-                                            className="form-control"
+                                            name="eventPlace"
+                                            value={formik.values.eventPlace || ""}
                                             placeholder="Exemple: Salle des fêtes de la ville"
-                                        />
-                                        <TextField 
-                                            size="col-4 mt-30"
-                                            label="Horaire" 
-                                            name="eventTime" 
+                                            onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
+                                            className="form-control"/>
+                                        </div>
+                                        <div className="col-4 mt-30">
+                                            <label>Horaire</label>
+                                            <input 
                                             type="datetime-local" 
-                                            value={formik.values.eventTime} 
+                                            name="eventTime"
+                                            value={formik.values.eventTime || ""}
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
-                                            className="form-control"
-                                        />
-                                        <TextField 
-                                            size="col-md-8 mt-30"
-                                            label="Adresse" 
-                                            name="eventAddress" 
+                                            className="form-control"/>
+                                        </div>
+                                        <div className="col-md-8 mt-30">
+                                            <label>Adresse</label>
+                                            <input 
                                             type="text" 
-                                            value={formik.values.eventAddress} 
+                                            name="eventAddress"
+                                            value={formik.values.eventAddress || ""}
+                                            placeholder="Exemple: 12 rue du Général de Gaulle 75000"
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
-                                            className="form-control"
-                                        />
+                                            className="form-control"/>
+                                        </div>
                                         <div className="col-12 event-form___submit mt-30">
                                             <button type="submit" disabled={formik.isSubmitting}>
                                                 Valider
@@ -357,3 +401,24 @@ const Formulaire = () => {
 }
 
 export default Formulaire;
+
+// {/* <Form 
+// method="PUT"
+// className="row g-3">
+//     <div className="col-12">
+//         <CustomTextInput label="Thème" name="title" type="text" values={values} value={values.title} />
+//     </div>
+//     <div className="col-md-6 mt-30">
+//         <CustomTextInput label="Époux.se 1" name="firstPerson" type="text" value={values.firstPerson}/>
+//     </div>
+//     <div className="col-md-6 mt-30">
+//         <CustomTextInput label="Époux.se 2" name="secondPerson" type="text" value={values.secondPerson}/>
+//     </div>
+//     {/* <div className="col-4 mt-30">
+//         <CustomTextInput label="Date" name="date" type="date" value={invitation.date}/>
+//     </div> */}
+//     <div className="col-md-6 mt-30">
+//         <CustomTextInput label="Informations complémentaires" name="infos" type="textarea" value={values.infos}/>
+//     </div><br />
+//     <button>{isSubmitting ? "Enregistrement..." : "Valider"}</button>
+// </Form> */}
