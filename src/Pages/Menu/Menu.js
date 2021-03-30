@@ -18,9 +18,6 @@ const Menus = () => {
     const [dessert, setDessert] = useState({name:""})
     const [dessertEditing, setdessertEditing] = useState(null)
 
-    // const [toggle, setToggle] = useState(false)
-
-    
     const handleStarter = (e) => {
         const {value, name} = e.target;
         setStarter(prevState => ({
@@ -71,7 +68,6 @@ const Menus = () => {
 
 
     const submitStarter = () => {
-        // alert("submitted!");
         axios.get("/api/admin/menu")
         .then((res) => {
             const data = res.data;
@@ -79,7 +75,6 @@ const Menus = () => {
             if(data){
                 axios.post(`/api/admin/menu/starters/add/${result}`,starter)
                 .then((res) => {
-                    console.log(res.data)
                     if(res.data != null){
                         setTimeout(() => {
                             setStarters([...starters, starter])
@@ -93,7 +88,6 @@ const Menus = () => {
     }
 
     const submitMaincourse = () => {
-        // alert("submitted!");
         axios.get("/api/admin/menu")
         .then((res) => {
             const data = res.data;
@@ -101,7 +95,6 @@ const Menus = () => {
             if(data){
                 axios.post(`/api/admin/menu/maincourses/add/${result}`,maincourse)
                 .then((res) => {
-                    console.log(res.data)
                     if(res.data != null){
                         setTimeout(() => {
                             setMaincourses([...maincourses, maincourse])
@@ -115,7 +108,6 @@ const Menus = () => {
     }
 
     const submitDessert = () => {
-        // alert("submitted!");
         axios.get("/api/admin/menu")
         .then((res) => {
             const data = res.data;
@@ -123,7 +115,6 @@ const Menus = () => {
             if(data){
                 axios.post(`/api/admin/menu/desserts/add/${result}`,dessert)
                 .then((res) => {
-                    console.log(res.data)
                     if(res.data != null){
                         setTimeout(() => {
                             setDesserts([...desserts, dessert])
@@ -145,7 +136,6 @@ const Menus = () => {
         })
         axios.put(`/api/admin/menu/starters/edit/${id}`, {name: editingText})
             .then((res) => {
-                alert(res)
                 if(res.data != null){
                     setTimeout(() => {
                         setStarters(updatedStarters)
@@ -168,7 +158,6 @@ const Menus = () => {
         })
         axios.put(`/api/admin/menu/maincourses/edit/${id}`, {name: editingText})
             .then((res) => {
-                alert(res)
                 if(res.data != null){
                     setTimeout(() => {
                         setMaincourses(updatedMaincourses)
@@ -191,7 +180,6 @@ const Menus = () => {
         })
         axios.put(`/api/admin/menu/desserts/edit/${id}`, {name: editingText})
             .then((res) => {
-                alert(res)
                 if(res.data != null){
                     setTimeout(() => {
                         setDesserts(updatedDesserts)
@@ -239,7 +227,6 @@ const Menus = () => {
         <div className="menu-container center-x">
             <div className="menu container">
                 <div className="menu-span container">
-                    {/* <span>Constituez le menu de votre mariage: vous pouvez ajouter plusieurs entrées, plats ou desserts...</span> */}
                     <span>Constituez le menu de votre mariage</span>
                 </div>
                 <div className="grid-container-menu">
