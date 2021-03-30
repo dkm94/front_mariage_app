@@ -80,10 +80,6 @@ button {
     box-shadow: -20px 18px 46px -13px rgba(204,198,204,1);
 }
 
-.form {
-    margin-bottom: 1rem;
-}
-
 .forms > h2 {
     font-family: 'Alex Brush', cursive;
     text-align: center;
@@ -97,6 +93,20 @@ button {
 
 .starter {
     background-color: #F2E2EE;
+}
+
+.menu___forms > form {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.menu___forms > form > input {
+    border-radius: 5px;
+}
+
+.menu___li-btns > .del-btn {
+    margin-left: 7px;
 }
 
 .maincourse {

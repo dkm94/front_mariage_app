@@ -4,14 +4,23 @@ import axios from "axios";
 import "./Menu.css";
 
 const Menus = () => {
+    const [starterEditing, setstarterEditing] = useState(null)
+
     const [starters, setStarters] = useState([]);
     const [starter, setStarter] = useState({name:""})
+    const [editingText, seteditingText] = useState('')
+
     const [maincourses, setMaincourses] = useState([]);
     const [maincourse, setMaincourse] = useState({name:""})
+    const [maincourseEditing, setmaincourseEditing] = useState(null)
+
     const [desserts, setDesserts] = useState([]);
     const [dessert, setDessert] = useState({name:""})
-    const [toggle, setToggle] = useState(false)
+    const [dessertEditing, setdessertEditing] = useState(null)
 
+    // const [toggle, setToggle] = useState(false)
+
+    
     const handleStarter = (e) => {
         const {value, name} = e.target;
         setStarter(prevState => ({
@@ -38,11 +47,7 @@ const Menus = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const token = localStorage.getItem("token");
-            const config = {
-                headers: { Authorization: 'Bearer '+ token }
-              };
-            const result = await axios.get("/api/admin/menu/starters/", config)
+            const result = await axios.get("/api/admin/menu/starters/")
             setStarters(result.data)
         }
         fetchData();
@@ -50,11 +55,7 @@ const Menus = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const token = localStorage.getItem("token");
-            const config = {
-                headers: { Authorization: 'Bearer '+ token }
-              };
-            const result = await axios.get("/api/admin/menu/maincourses/", config)
+            const result = await axios.get("/api/admin/menu/maincourses/")
             setMaincourses(result.data)
         }
         fetchData();
@@ -62,35 +63,28 @@ const Menus = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const token = localStorage.getItem("token");
-            const config = {
-                headers: { Authorization: 'Bearer '+ token }
-              };
-            const result = await axios.get("/api/admin/menu/desserts/", config)
+            const result = await axios.get("/api/admin/menu/desserts/")
             setDesserts(result.data)
         }
         fetchData();
     }, [])
 
 
-    const submitStarter = (e) => {
-        alert("submitted!");
-        e.preventDefault();
-        const token = localStorage.getItem("token");
-        const config = {
-            headers: { Authorization: 'Bearer '+ token }
-          };
-        axios.get("/api/admin/menu", config)
+    const submitStarter = () => {
+        // alert("submitted!");
+        axios.get("/api/admin/menu")
         .then((res) => {
-            console.log(res.data)
-            let data;
-            data = res.data;
+            const data = res.data;
             const result = data._id
-            console.log(result)
             if(data){
-                axios.post(`/api/admin/menu/starters/add/${result}`,starter, config)
+                axios.post(`/api/admin/menu/starters/add/${result}`,starter)
                 .then((res) => {
-                console.log(res.data)
+                    console.log(res.data)
+                    if(res.data != null){
+                        setTimeout(() => {
+                            setStarters([...starters, starter])
+                        }, 1500);
+                    }
                 })
                 .catch((err) => {
                     console.log(err)})
@@ -98,24 +92,21 @@ const Menus = () => {
         })
     }
 
-    const submitMaincourse = (e) => {
-        alert("submitted!");
-        e.preventDefault();
-        const token = localStorage.getItem("token");
-        const config = {
-            headers: { Authorization: 'Bearer '+ token }
-          };
-        axios.get("/api/admin/menu", config)
+    const submitMaincourse = () => {
+        // alert("submitted!");
+        axios.get("/api/admin/menu")
         .then((res) => {
-            console.log(res.data)
-            let data;
-            data = res.data;
+            const data = res.data;
             const result = data._id
-            console.log(result)
             if(data){
-                axios.post(`/api/admin/menu/maincourses/add/${result}`,maincourse, config)
+                axios.post(`/api/admin/menu/maincourses/add/${result}`,maincourse)
                 .then((res) => {
-                console.log(res.data)
+                    console.log(res.data)
+                    if(res.data != null){
+                        setTimeout(() => {
+                            setMaincourses([...maincourses, maincourse])
+                        }, 1500);
+                    }
                 })
                 .catch((err) => {
                     console.log(err)})
@@ -123,37 +114,99 @@ const Menus = () => {
         })
     }
 
-    const submitDessert = (e) => {
-        alert("submitted!");
-        e.preventDefault();
-        const token = localStorage.getItem("token");
-        const config = {
-            headers: { Authorization: 'Bearer '+ token }
-          };
-        axios.get("/api/admin/menu", config)
+    const submitDessert = () => {
+        // alert("submitted!");
+        axios.get("/api/admin/menu")
         .then((res) => {
-            console.log(res.data)
-            let data;
-            data = res.data;
+            const data = res.data;
             const result = data._id
-            console.log(result)
             if(data){
-                axios.post(`/api/admin/menu/desserts/add/${result}`,dessert, config)
+                axios.post(`/api/admin/menu/desserts/add/${result}`,dessert)
                 .then((res) => {
-                console.log(res.data)
+                    console.log(res.data)
+                    if(res.data != null){
+                        setTimeout(() => {
+                            setDesserts([...desserts, dessert])
+                        }, 1500);
+                    }
                 })
                 .catch((err) => {
                     console.log(err)})
                 }
         })
+    }
+
+    const editStarter = (id) => {
+        const updatedStarters = [...starters].map((starter) => {
+            if(starter._id === id) {
+                starter.name = editingText
+            }
+            return starter
+        })
+        axios.put(`/api/admin/menu/starters/edit/${id}`, {name: editingText})
+            .then((res) => {
+                alert(res)
+                if(res.data != null){
+                    setTimeout(() => {
+                        setStarters(updatedStarters)
+                        setstarterEditing(null)
+                        seteditingText('')
+                    }, 1000);
+                }
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+
+    const editMaincourse = (id) => {
+        const updatedMaincourses = [...maincourses].map((maincourse) => {
+            if(maincourse._id === id) {
+                maincourse.name = editingText
+            }
+            return maincourse
+        })
+        axios.put(`/api/admin/menu/maincourses/edit/${id}`, {name: editingText})
+            .then((res) => {
+                alert(res)
+                if(res.data != null){
+                    setTimeout(() => {
+                        setMaincourses(updatedMaincourses)
+                        setmaincourseEditing(null)
+                        seteditingText('')
+                    }, 1000);
+                }
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+
+    const editDessert = (id) => {
+        const updatedDesserts = [...desserts].map((dessert) => {
+            if(dessert._id === id) {
+                dessert.name = editingText
+            }
+            return dessert
+        })
+        axios.put(`/api/admin/menu/desserts/edit/${id}`, {name: editingText})
+            .then((res) => {
+                alert(res)
+                if(res.data != null){
+                    setTimeout(() => {
+                        setDesserts(updatedDesserts)
+                        setdessertEditing(null)
+                        seteditingText('')
+                    }, 1000);
+                }
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     }
 
     const deleteStarter = (id) => {
-        const token = localStorage.getItem("token");
-        const config = {
-            headers: { Authorization: 'Bearer '+ token }
-        };
-        axios.delete(`/api/admin/menu/starters/delete/${id}`, config)
+        axios.delete(`/api/admin/menu/starters/delete/${id}`)
             .then(res => {
                 if(res.data != null) {
                     alert("L'entrée a été supprimée.");
@@ -163,11 +216,7 @@ const Menus = () => {
     }
 
     const deleteMaincourse = (id) => {
-        const token = localStorage.getItem("token");
-        const config = {
-            headers: { Authorization: 'Bearer '+ token }
-        };
-        axios.delete(`/api/admin/menu/maincourses/delete/${id}`, config)
+        axios.delete(`/api/admin/menu/maincourses/delete/${id}`)
             .then(res => {
                 if(res.data != null) {
                     alert("Le plat a été supprimé.");
@@ -177,11 +226,7 @@ const Menus = () => {
     }
 
     const deleteDessert = (id) => {
-        const token = localStorage.getItem("token");
-        const config = {
-            headers: { Authorization: 'Bearer '+ token }
-        };
-        axios.delete(`/api/admin/menu/desserts/delete/${id}`, config)
+        axios.delete(`/api/admin/menu/desserts/delete/${id}`)
             .then(res => {
                 if(res.data != null) {
                     alert("Le dessert a été supprimé.");
@@ -190,14 +235,6 @@ const Menus = () => {
             })
     }
 
-   const showInput = (id) => {
-        setToggle(!toggle)
-   }
-
-
-    const entrée = starters.map((starter) => <li key={starter._id} >{starter.name}<button onClick={() => {showInput(starter._id)}}>E</button><button onClick={() => {deleteStarter(starter._id)}}><i className="fas fa-trash"/></button></li>)
-    const plat = maincourses.map((maincourse) => <li key={maincourse._id}>{maincourse.name}<button>E</button><button onClick={() => {deleteMaincourse(maincourse._id)}}><i className="fas fa-trash"/></button></li>)
-    const dessert_ = desserts.map((dessert) => <li key={dessert._id}>{dessert.name}<button>E</button><button onClick={() => {deleteDessert(dessert._id)}}><i className="fas fa-trash"/></button></li>)
     return(
         <div className="menu-container center-x">
             <div className="menu container">
@@ -208,7 +245,7 @@ const Menus = () => {
                 <div className="grid-container-menu">
                     <div className="starter forms">
                         <h2>Entrée(s)</h2>
-                        <div className="starter-form form">
+                        <div className="menu___forms">
                             <form onSubmit={submitStarter}>
                                 <input
                                 type="text"
@@ -218,11 +255,37 @@ const Menus = () => {
                                 <button type="submit">OK</button>
                             </form>
                         </div>
-                        <ul>{entrée}</ul>
+                        <ul>
+                            {
+                                starters.map((starter) => <li key={starter._id} >
+                                    {starterEditing === starter._id ? 
+                                    (<input 
+                                        type="text" 
+                                        onChange={(e) => {seteditingText(e.target.value)}} 
+                                        value={editingText}
+                                    />) : 
+                                    (<span>{starter.name}</span>)}
+                                    
+                                    <div className="menu___li-btns">
+                                        {starterEditing === starter._id ? 
+                                        (<button onClick={() => {editStarter(starter._id)}}>
+                                            <i className="fas fa-check"/>
+                                        </button>) : 
+                                        (<button onClick={() => setstarterEditing(starter._id)}>
+                                            <i className="fas fa-pencil-alt"/>
+                                        </button>)}
+                                        
+                                        <button className="del-btn" onClick={() => {deleteStarter(starter._id)}}>
+                                            <i className="fas fa-trash"/>
+                                        </button>
+                                    </div>
+                                </li>)
+                            }
+                        </ul>
                     </div>
                     <div className="maincourse forms">
                         <h2>Plat(s)</h2>
-                        <div className="maincourse-form form">
+                        <div className="menu___forms">
                             <form onSubmit={submitMaincourse}>
                                 <input
                                 type="text"
@@ -233,11 +296,37 @@ const Menus = () => {
                             </form>
 
                         </div>
-                        <ul>{plat}</ul>
+                        <ul>
+                            {
+                                maincourses.map((maincourse) => <li key={maincourse._id} >
+                                    {maincourseEditing === maincourse._id ? 
+                                    (<input 
+                                        type="text" 
+                                        onChange={(e) => {seteditingText(e.target.value)}} 
+                                        value={editingText}
+                                    />) : 
+                                    (<span>{maincourse.name}</span>)}
+                                    
+                                    <div className="menu___li-btns">
+                                        {maincourseEditing === maincourse._id ? 
+                                        (<button onClick={() => {editMaincourse(maincourse._id)}}>
+                                            <i className="fas fa-check"/>
+                                        </button>) : 
+                                        (<button onClick={() => setmaincourseEditing(maincourse._id)}>
+                                            <i className="fas fa-pencil-alt"/>
+                                        </button>)}
+                                        
+                                        <button className="del-btn" onClick={() => {deleteMaincourse(maincourse._id)}}>
+                                            <i className="fas fa-trash"/>
+                                        </button>
+                                    </div>
+                                </li>)
+                                }
+                        </ul>
                     </div>
                     <div className="dessert forms">
                         <h2>Dessert(s)</h2>
-                        <div className="maincourse-form form">
+                        <div className="menu___forms">
                             <form onSubmit={submitDessert}>
                                 <input
                                 type="text"
@@ -247,7 +336,33 @@ const Menus = () => {
                                 <button type="submit">OK</button>
                             </form>
                         </div>
-                        <ul>{dessert_}</ul>
+                        <ul>
+                            {
+                                desserts.map((dessert) => <li key={dessert._id} >
+                                    {dessertEditing === dessert._id ? 
+                                    (<input 
+                                        type="text" 
+                                        onChange={(e) => {seteditingText(e.target.value)}} 
+                                        value={editingText}
+                                    />) : 
+                                    (<span>{dessert.name}</span>)}
+                                    
+                                    <div className="menu___li-btns">
+                                        {dessertEditing === dessert._id ? 
+                                        (<button onClick={() => {editDessert(dessert._id)}}>
+                                            <i className="fas fa-check"/>
+                                        </button>) : 
+                                        (<button onClick={() => setdessertEditing(dessert._id)}>
+                                            <i className="fas fa-pencil-alt"/>
+                                        </button>)}
+                                        
+                                        <button className="del-btn" onClick={() => {deleteDessert(dessert._id)}}>
+                                            <i className="fas fa-trash"/>
+                                        </button>
+                                    </div>
+                                </li>)
+                            }
+                        </ul>
                     </div>
                 </div>
             </div>
