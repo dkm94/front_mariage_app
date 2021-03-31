@@ -20,10 +20,6 @@ const Tables = () => {
         fetchData();
     }, [])
 
-    // const handleChange = (e) => {
-    //     setTable(e.target.value)
-    // }
-
     const handleChange = (e) => {
         const {value, name} = e.target;
         setTable(prevState => ({
@@ -33,11 +29,7 @@ const Tables = () => {
     }
 
     const handleSubmit = (table) => {
-        const token = localStorage.getItem("token");
-        const config = {
-            headers: { Authorization: 'Bearer '+ token }
-            };
-        axios.post("/api/admin/tables/add", {name: table}, config)
+        axios.post("/api/admin/tables/add", {name: table})
             .then((res) => {
                 if(res.data != null){
                     setTables([...tables].concat(table))
@@ -49,14 +41,9 @@ const Tables = () => {
     }
 
     const deleteGuest = (guest, table) => {
-        console.log(guest);
-        console.log(table);
         axios.put(`/api/admin/tables/deleteGuest/${table}`, {guestID: guest})
             .then((res) => {
-                console.log(res.data)
                 if(res.data != null){
-                    console.log(table)
-                    console.log(guest)
                     setGuests(guests.filter(table => table._id !== table))
                 }
             })
@@ -65,12 +52,7 @@ const Tables = () => {
     }
 
     const deleteTable = (id) => {
-        console.log(id);
-        const token = localStorage.getItem("token");
-        const config = {
-            headers: { Authorization: 'Bearer '+ token }
-            };
-        axios.delete(`/api/admin/tables/delete/${id}`, config)
+        axios.delete(`/api/admin/tables/delete/${id}`)
             .then(res => {
                 if(res.data != null) {
                     alert("La table a été supprimée.");
@@ -103,7 +85,6 @@ const Tables = () => {
                                     <span>{table.name}</span>
                                 </div>
                                 
-                                {/* {console.log("log", guestID)} */}
                                 <Select table={table} tables={tables} setTables={setTables} guests={table.guestID}/>
                                 {table.guestID.map(guest => {
                                     
@@ -114,7 +95,7 @@ const Tables = () => {
                                     </div>
                                 })}
                                 <div className="delete-table">
-                                    <Button handleClick={() => {deleteTable(table._id, table.guestID)}} title="Supprimer la table"/>
+                                    <Button handleClick={() => {deleteTable(table._id, table.guestID)}} title="Supprimer"/>
                                 </div>
                                 
                             </div>

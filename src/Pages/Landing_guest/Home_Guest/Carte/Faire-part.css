@@ -29,7 +29,7 @@ h3 {
 }
 
 .info {
-    padding: 50px;
+    padding: 20px;
 }
 
 .wedding-intro {
@@ -55,7 +55,7 @@ h3 {
 
 .wedding-card___date, .wedding-card___title {
     font-family: 'Alex Brush', cursive;
-    font-size: 3em;
+    font-size: 2em;
     margin: 0px 10px;
 }
 
@@ -63,6 +63,10 @@ h3 {
 
 .schedule {
     background: #fcdccc;
+}
+
+.schedule > h3 {
+    margin-top: 20px;
 }
 
 .schedule-cols {
@@ -87,6 +91,12 @@ h3 {
 
 .additionnal-info {
     background: #FFFFFF;
+    /* margin: 0 50px 50px 50px; */
+    box-shadow: 10px 7px 16px 0px rgba(0,0,0,0.3);
+}
+
+.additionnal-info > h3 {
+    margin-top: 20px;
 }
 
 .additionnal-info > p {

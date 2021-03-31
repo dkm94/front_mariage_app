@@ -100,6 +100,7 @@
     background-color: #f7e8e4;
     position: relative;
     padding: 10px;
+    border-radius: 10px 0px;
 }
 
 .table-name {
@@ -107,12 +108,14 @@
     justify-content: center;
     align-items: center;
     height: 50px;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
 }
 
 .table-name > span {
+    font-family: 'Alex Brush', cursive;
+    font-size: 1.5rem;
     font-weight: 300;
-    letter-spacing: 1.2px;
+    /* letter-spacing: 1.2px; */
 }
 
 .delete-table {
@@ -120,7 +123,7 @@
     align-items: center;
     position: absolute;
     top: 80%;
-    right: 10%;
+    left: 21%;
 }
 /* 
 .delete-table > button {

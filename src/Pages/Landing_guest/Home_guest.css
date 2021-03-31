@@ -3,8 +3,14 @@
 }
 
 .select-section {
-    position: absolute;
+    /* position: absolute; */
     left: 0%;
     width: 100%;
     text-align: end;
+}
+
+.invitation-bg {
+    background-image: url("../../img/roses-2746116_1920.jpg");
+    background-size: cover;
+    background-attachment: fixed;
 }

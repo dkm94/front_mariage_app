@@ -1,8 +1,9 @@
 .fp {
+    padding: 0;
     display: flex;
     margin-top: 50px;
-    /* background: lightblue; */
-    height: 30rem;
+    background: #FFFFFF;
+    height: 25rem;
     width: 100%;
     /* background: url('../../../img/Wedding-Frame.png'); */
     box-shadow: 7px -7px 16px 0px rgba(0,0,0,0.3);
@@ -13,7 +14,7 @@
 .fp-photo {
     /* background: lightgoldenrodyellow; */
     width: 100%;
-    padding: 5%;
+    padding: 30px;
 }
 
 .fp-photo > img {
@@ -26,11 +27,11 @@
 .fp-text {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     /* background: lightpink; */
     width: 100%;
-    padding: 5%;
+    padding: 30px;
 }
 
 .announcement {
@@ -39,11 +40,11 @@
 
 .name {
     font-family: 'Alex Brush', cursive;
-    font-size: 4em;
+    font-size: 4.5em;
     margin: 0;
 }
 
 .and {
-    font-size: 3em;
+    font-size: 2em;
     margin: 0;
 }

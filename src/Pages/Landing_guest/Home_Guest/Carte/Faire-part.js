@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Faire-part.css";
+import "../../Home_Guest/Faire-part/Faire-part.css";
 import axios from "axios";
 import decode from "jwt-decode";
 import couple from "../../../../img/couple.jpg";
@@ -36,6 +37,7 @@ const Card = () => {
             //         filename: result.data.picture
             //     }
             // })
+            console.log(result)
             const image = await axios.get(`/api/admin/invitation/page/picture/${result.data.picture}`)
              .catch(function (error) {
                 if (error.response) {
@@ -107,16 +109,16 @@ const Card = () => {
     console.log(weddingImg)
     return(
         <>
-        <div className="wedding-img">
+        {/* <div className="wedding-img">
             {invitation.picture === "" ? 
             <img alt="notre mariage" src={couple}/> :
             // <img alt="notre mariage" src={`/public/${invitation.picture}`}/>
             
             <img alt="notre mariage" src={`http://backend-mywedding-app.herokuapp.com${weddingImg}`} />
-        }
-        </div>
+            }
+        </div> */}
         <div className="wedding-infos">
-            <div className="wedding-intro info">
+            {/* <div className="wedding-intro info">
                 <h3>Invitation</h3>
                 <div className="wedding-card">
                     <span>Vous êtes cordialement invité.e.s au mariage de</span><br />
@@ -128,6 +130,20 @@ const Card = () => {
                     <span>sur le thème</span><br />
                     <span className="wedding-card___title">{invitation.title}</span>
                 </div>
+            </div> */}
+            <div className="fp container">
+                <div className="fp-photo">
+                    <img alt="by StockSnap from Pixabay" src={couple} />
+                </div>
+                <div className="fp-text">
+                    <span className="name">{invitation.firstPerson} & {invitation.secondPerson}</span>
+                    
+                    <p className="announcement">Vous êtes cordialement invité.e au mariage qui se tiendra le</p>
+                    <span className="wedding-card___date">{invitation.date}</span><br />
+                    <span>sur le thème</span><br />
+                    <span className="wedding-card___title">{invitation.title}</span>
+
+                </div>
             </div>
             <div className="schedule info">
                 <h3>Programme</h3>
@@ -135,7 +151,7 @@ const Card = () => {
                     {schedule}
                 </ul>
             </div>
-            <div className="additionnal-info info">
+            <div className="additionnal-info info container">
                 <h3>Informations complémentaires</h3>
                 <p>{invitation.infos}</p>
             </div>

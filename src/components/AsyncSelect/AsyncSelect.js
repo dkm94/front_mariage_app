@@ -8,40 +8,30 @@ const Select = ({ tables, table, guests, setTables }) => {
     const [selectedGuest, setSelectedGuest] = useState(null);
     const [guest, setGuest] = useState(null);
 
-    React.useEffect(() => {
-    //    console.log("invités de la table", guests)
-    })
-
     const onSearchChange = (name) => {
         if(name){
             setSelectedGuest(name)
         }
-        console.log(name)
-    }
-
-    const updateTable = (newTableList) => {
-        alert("Update table!")
-        setTables(newTableList)
-        console.log(guest)
-        // console.log("resultat update tables:", tables)
     }
 
     const addGuest = (selectedGuest, tableID) => {
+        console.log(guest)
         selectedGuest = selectedGuest.value
-        // console.log("table", table.id)
-        console.log(selectedGuest)
+        const updatedTables = [...tables].map((table) => {
+            if(table._id === tableID.id) {
+                table._id = selectedGuest
+            }
+            return table
+        })
         axios.put(`/api/admin/tables/addGuest/${tableID._id}`, {guestID: selectedGuest})
             .then((res) => {
-                console.log(res.data)
                 if(res.data != null) {
                     alert("udpdate ok")
-                    const updatedTables = [...tables].map((table) => {
-                        if(table._id === tableID._id) {
-                            console.log(true)
-                        }
-                        return table
-                    })
-                    updateTable(updatedTables)
+                    // updateTable(updatedTables)
+                    setTimeout(() => {
+                        setTables(updatedTables)
+                        window.location.reload(false)
+                    }, 1000);
                 }
             })
             .catch((err) => {
@@ -58,6 +48,7 @@ const Select = ({ tables, table, guests, setTables }) => {
                 const tempArray = [];
                 if(array) {
                     if(array.length){
+                        console.log(guest)
                         array.forEach((guest) => {
                             // console.log(guest)
                             setGuest(guest)

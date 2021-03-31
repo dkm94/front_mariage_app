@@ -17,8 +17,16 @@ const Landing = () => {
     } else
         section = <Form/>
 
+        
+        const changeBackground = () => {
+            if(section.type.name === 'Card'){
+                document.getElementById("invitation__").classList.add("invitation-bg")
+            } else
+                document.getElementById("invitation__").classList.remove("invitation-bg")
+        }
+
         return (
-            <div className="invitation">
+            <div className="invitation" id="invitation__" onClick={changeBackground}>
                 <div className="select-section">
                     {/* <label htmlFor="affichage-select">Affichage par:</label> */}
                     <select name="affichage" onChange={selectSection}>
