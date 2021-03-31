@@ -5,8 +5,10 @@ import avatar from "../../../img/avatar.jpg";
 import axios from "axios";
 
 const Byguests = () => {
+    const [editingText, seteditingText] = useState('')
     const [guests, setGuests] = useState([]);
     const [newGuest, setNewGuest] = useState({name: ''})
+    const [guestEditing, setguestEditing] = useState(null)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -28,18 +30,35 @@ const Byguests = () => {
         alert("submitted!")
         axios.post("/api/admin/guests/add", {name: guest})
             .then((res) => {
-                console.log(res.data)
                 if(res.data != null){
-                    // alert("update guestlist...",
-                    // guest,
-                    // guests)
-                    // setGuests([...guests].concat(guest))
                     setGuests([...guests, guest])
                     setNewGuest({name: ''})
                 }
             })
             .catch((err) => {
                 console.log(err)})
+    }
+
+    const editGuest = (id) => {
+        const updatedGueslist = [...guests].map((guest) => {
+            if(guest._id === id) {
+                guest.name = editingText
+            }
+            return guest
+        })
+        axios.put(`api/admin/guests/edit/${id}`, {name: editingText})
+            .then((res) => {
+                if(res.data != null){
+                    setTimeout(() => {
+                        setGuests(updatedGueslist)
+                        setguestEditing(null)
+                        seteditingText('')
+                    }, 1000);
+                }
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     }
 
     const deleteGuest = (id) => {
@@ -55,6 +74,7 @@ const Byguests = () => {
             .catch((err) => {
                 console.log(err)})
     }
+    
 
     return(
         <div className="byguests container">
@@ -70,22 +90,35 @@ const Byguests = () => {
                     <button type="submit">OK</button>
                 </form>
             </div>
-            <div className="get-guestlist">
-                {guests.length === 0 || null ? <div className="block"><span>Vos invités ici.</span></div> : guests.map(({_id, name, media}, i) => {
-                return <div key={i} className="div-guest">
-                    <div className="guest-name">
-                        <span>{name}</span>
-                    </div>
-                    <div className="guest-picture">
-                        {/* <img alt="avatar" src={require("../../../img/"+ media)}  /> */}
-                        <img alt="avatar" src={avatar}  />
-                    </div>
-                    <div className="del-guest">
-                        <Button handleClick={() => {deleteGuest(_id)}} title="Supprimer"/>
-                    </div>
+            <ul className="get-guestlist">
+            {
+                guests.length === 0 || null ? 
+                <div className="block"><span>Vos invités ici.</span></div> : 
+                guests.map((guest) => <li className="div-guest" key={guest._id} >
+                {guestEditing === guest._id ? 
+                (<input 
+                    type="text" 
+                    onChange={(e) => {seteditingText(e.target.value)}} 
+                    value={editingText}
+                    style={{width: "70%"}}
+                />) : 
+                (<span>{guest.name}</span>)}
+                
+                <div className="guest-picture">
+                    <img alt="avatar" src={avatar}  />
                 </div>
-            })}
-            </div>
+                <div className="menu___li-btns">
+                    {guestEditing === guest._id ? 
+                    (<Button handleClick={() => editGuest(guest._id)} title="Valider" />) : 
+                    (<Button handleClick={() => setguestEditing(guest._id)} title="Modifier" />)}
+                    
+                    <button className="del-btn" onClick={() => {deleteGuest(guest._id)}}>
+                        <i className="fas fa-trash"/>
+                    </button>
+                </div>
+                </li>)
+            }
+            </ul>
         </div>
     )
 }

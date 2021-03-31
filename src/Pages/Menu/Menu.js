@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { withRouter } from "react-router-dom";
+// import { withRouter } from "react-router-dom";
 import axios from "axios";
 import "./Menu.css";
 
 const Menus = () => {
-    const [starterEditing, setstarterEditing] = useState(null)
+    const [editingText, seteditingText] = useState('')
 
     const [starters, setStarters] = useState([]);
     const [starter, setStarter] = useState({name:""})
-    const [editingText, seteditingText] = useState('')
+    const [starterEditing, setstarterEditing] = useState(null)
 
     const [maincourses, setMaincourses] = useState([]);
     const [maincourse, setMaincourse] = useState({name:""})
@@ -357,4 +357,4 @@ const Menus = () => {
     )
 }
 
-export default withRouter(Menus)
+export default Menus;
