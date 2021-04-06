@@ -1,14 +1,15 @@
 import React from 'react';
 import { ErrorMessage, useField } from 'formik';
+import "./style.css";
 
 const TextField = ({ label, ...props }) => {
   const [field, meta] = useField(props);
   // console.log(props.value)
   return (
-    <div className={props.size}>
-        {/* <label htmlFor={field.name}>{label}</label> */}
+    <div className={`textfield-style ${props.size}`}>
+        <label htmlFor={field.name}>{label}</label>
         <input
-            className={`form-control shadow-none ${meta.touched && meta.error && 'is-invalid'}`}
+            className={`input-style shadow-none ${meta.touched && meta.error}`}
             {...field} {...props}
             autoComplete="off"
         />

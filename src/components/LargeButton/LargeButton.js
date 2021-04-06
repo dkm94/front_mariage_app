@@ -4,7 +4,7 @@ import './LargeButton.css'
 const LargeButton = props => {
     return (
       <button
-        onClick={props.handleClick} className="btn-style-s">
+        onClick={props.handleClick} type={props.type} className="btn-style-s">
         {props.title}
       </button>
     );

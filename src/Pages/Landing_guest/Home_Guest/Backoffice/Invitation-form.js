@@ -13,7 +13,7 @@ const Formulaire = () => {
         title: '', 
         firstPerson: '', 
         secondPerson: '',
-        // picture: '',
+        picture: '',
         places: '',
         date: '',
         infos: '',
@@ -83,7 +83,7 @@ const Formulaire = () => {
         title: invitation.title, 
         firstPerson: invitation.firstPerson, 
         secondPerson: invitation.secondPerson,
-        // picture: invitation.picture,
+        picture: invitation.picture,
         places: invitation.places,
         date: invitation.date,
         infos: invitation.infos,
@@ -97,11 +97,9 @@ const Formulaire = () => {
         title: Yup.string()
             .max(100, 'Le titre du thème ne doit pas dépasser 100 caractères.'),
         firstPerson: Yup.string()
-            .max(100, 'Le nom ne peut excéder 100 caractères.')
-            .required('Merci de remplir ce champ'),
+            .max(100, 'Le nom ne peut excéder 100 caractères.'),
         secondPerson: Yup.string()
-            .max(100, 'Le nom ne peut excéder 100 caractères.')
-            .required('Merci de remplir ce champ'),
+            .max(100, 'Le nom ne peut excéder 100 caractères.'),
         picture: Yup.string(),
         date: Yup.string(),
         infos: Yup.string()
@@ -145,7 +143,7 @@ const Formulaire = () => {
                                 title: values.title,
                                 firstPerson: values.firstPerson,
                                 secondPerson: values.secondPerson,
-                                // picture: values.picture,
+                                picture: values.picture,
                                 places: values.places,
                                 date: values.date,
                                 infos: values.infos
@@ -205,7 +203,7 @@ const Formulaire = () => {
                                             className="form-control"
                                         />
 
-                                        {/* <div className="mb-3 mt-30 plr-15">
+                                        <div className="mb-3 mt-30 plr-15">
                                             <label htmlFor="formFile" className="form-label">Photo de mariage</label>
                                             <input 
                                             className="form-control form-control" 
@@ -217,7 +215,7 @@ const Formulaire = () => {
                                                 formik.setFieldValue("picture", event.currentTarget.files[0]);
                                               }}
                                             />
-                                        </div> */}
+                                        </div>
                                         <TextField 
                                             size="col-4 mt-30"
                                             label="Date de l'évènement" 

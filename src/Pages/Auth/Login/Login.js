@@ -1,47 +1,27 @@
-import React, { useState } from "react";
-import { Link, withRouter, useHistory } from "react-router-dom";
+import React from "react";
+import { Link, withRouter } from "react-router-dom";
 import "./Login.css";
 import Button from "../../../components/LargeButton/LargeButton";
 // import "../../../components/LargeButton/LargeButton.css";
-import check from "../../../img/check.png";
 import axios from "axios";
+import { Formik, Form } from "formik";
+import TextField from "../../../components/Formik/Texfiled-auth";
+import * as Yup from "yup";
 
 const Login = props => {
-    const history = useHistory();
+    // const history = useHistory();
     
-    const [admin, setAdmin] = useState({email: '', password: ''})
-
-    const handleChange = (e) => {
-        const {value, name} = e.target;
-        setAdmin(prevState => ({
-            ...prevState,
-            [name]: value
-        }))
+    const adminValues = {
+        email: '',
+        password: ''
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(admin)
-        alert("submitted!")
-        axios.post("/api/auth/adminLogin", admin)
-            .then((res) => {
-                console.log(res.data)
-                if(res.data != null){
-                    alert("Bienvenue.")
-                    localStorage.setItem("token", res.data.token)
-                    const token = localStorage.getItem('token')
-                    console.log(token)
-                    if(token){
-                        setTimeout(() => {
-                            window.location = "/menuAdm" ;
-                            history.push("/menuAdm");
-                        }, 1500);
-                    }
-                }
-            })
-            .catch((err) => {
-                console.log(err)})
-    }
+    const validationSchema = Yup.object().shape({
+        email: Yup.string()
+            .required('Veuillez compléter ce champ.'),
+        password: Yup.string()
+            .required('Veuillez compléter ce champ.')
+    })
 
     return (
         <div className="login-page">
@@ -49,40 +29,88 @@ const Login = props => {
                 <div className="demo">
                     <div className="login">
                         <div className="login__check">
-                            <img alt="check" src={check}/>
+                            {/* <img alt="check" src={check}/> */}
+                            <span>Connectez-vous</span>
                         </div>
                         <div className="login__form">
-                            <form onSubmit={handleSubmit}>
-                                <div className="login__row">
-                                    <svg className="login__icon name svg-icon" viewBox="0 0 20 20">
-                                        <path d="M0,20 a10,8 0 0,1 20,0z M10,0 a4,4 0 0,1 0,8 a4,4 0 0,1 0,-8" />
-                                    </svg>
-                                    <input
-                                    className="login__input"
-                                    name="email"
-                                    type="email"
-                                    value={admin.email}
-                                    onChange={handleChange}
-                                    placeholder="Email"
-                                    autoComplete="email"
-                                    />
-                                </div>
-                                <div className="login__row">
-                                    <svg className="login__icon pass svg-icon" viewBox="0 0 20 20">
-                                        <path d="M0,20 20,20 20,8 0,8z M10,13 10,16z M4,8 a6,8 0 0,1 12,0" />
-                                    </svg>
-                                    <input
-                                    className="login__input"
-                                    name="password"
-                                    type="password"
-                                    value={admin.password}
-                                    onChange={handleChange}
-                                    placeholder="Mot de passe"
-                                    autoComplete="current-password"
-                                    />
-                                </div>
-                                <Button title="Se connecter"/>
-                            </form>
+                            <Formik
+                                validateOnChange={true}
+                                initialValues={adminValues}
+                                enableReinitialize={true}
+                                validationSchema={validationSchema}
+                                onSubmit={async (values, { setSubmitting }) => {
+                                    await axios.post(`/api/auth/adminLogin`,
+                                    {
+                                        email: values.email,
+                                        password: values.password,
+                                    })
+                                        .then((res) => {
+                                            if(res.data != null){
+                                                setSubmitting(true);
+                                                localStorage.setItem("token", res.data.token)
+                                                const token = localStorage.getItem('token')
+                                                if(token){
+                                                    setTimeout(() => {
+                                                        // history.push("/menuAdm");
+                                                        // alert(JSON.stringify(values, null, 2));
+                                                        window.location = "/menuAdm" ;
+                                                        setSubmitting(false);
+                                                    }, 1000);
+                                                }
+                                            }
+                                        })
+                                        .catch((err) => {
+                                            alert(err);
+                                            console.log(err)})
+                                            
+                                }}
+                            >
+                                {({ values, handleChange, isSubmitting, handleBlur, handleSubmit }) => {
+                                    return(
+                                        <Form onSubmit={() => handleSubmit(values)}>
+                                            <div className="login__row">
+                                                <div className="login__row__icon">
+                                                    <svg className="login__icon name svg-icon" viewBox="0 0 20 20">
+                                                        <path d="M0,20 a10,8 0 0,1 20,0z M10,0 a4,4 0 0,1 0,8 a4,4 0 0,1 0,-8" />
+                                                    </svg>
+                                                </div>
+                                                <TextField
+                                                id="login__input"
+                                                label="Email"
+                                                name="email"
+                                                type="email"
+                                                value={values.email}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                // placeholder="Email"
+                                                autoComplete="email"
+                                                />
+                                            </div>
+                                            <div className="login__row">
+                                                <div className="login__row__icon">
+                                                    <svg className="login__icon pass svg-icon" viewBox="0 0 20 20">
+                                                        <path d="M0,20 20,20 20,8 0,8z M10,13 10,16z M4,8 a6,8 0 0,1 12,0" />
+                                                    </svg>
+                                                </div>
+                                                <TextField
+                                                id="login__input"
+                                                label="Mot de passe"
+                                                name="password"
+                                                type="password"
+                                                value={values.password}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                // placeholder="Mot de passe"
+                                                autoComplete="current-password"
+                                                />
+                                            </div>
+                                            <div className="center-x">
+                                                <Button title="Se connecter" disabled={isSubmitting}/>
+                                            </div>
+                                        </Form>
+                                    )
+                                }}
+                            </Formik>
                         </div>
                         <div className="login__signup">
                             <p>Pas encore membre? &nbsp;<Link to={"/register"}>Inscrivez-vous</Link></p>

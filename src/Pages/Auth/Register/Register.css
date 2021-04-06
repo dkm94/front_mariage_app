@@ -60,15 +60,15 @@ input, button {
 	transform: translate(-50%, -50%);
 	/* margin-left: -15rem;
 	margin-top: -26.5rem; */
-	width: 25rem;
+	width: 30rem;
 	height: 90%;
 	/* overflow: hidden; */
 }
 
 .register {
-	display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+	display: block;
+    /* flex-direction: column; */
+    /* justify-content: space-evenly; */
 	/* position: relative; */
 	height: 100%;
 	background: linear-gradient(to bottom, rgba(146, 135, 187, 0.8) 0%, rgba(0, 0, 0, 0.6) 100%);
@@ -83,15 +83,24 @@ input, button {
 
 .register__check {
 	height: 100%;
-    /* position: absolute; */
+    position: relative;
     /* bottom: 50%; */
     width: 100%;
-    height: 30%;
+    height: 15%;
     text-align: center;
 }
 
-.register__check > img {
+/* .register__check > img {
 	height: 100%;
+} */
+
+.register__check > span {
+	position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+	font-weight: 600;
+	font-size: 1.8rem;
 }
 
 .register__form {
@@ -99,7 +108,7 @@ input, button {
 	top: 50%;
 	left: 0; */
 	width: 100%;
-	/* height: 50%; */
+	height: 70%;
 	padding: 1.5rem 2.5rem;
 	text-align: center;
 }
@@ -117,9 +126,14 @@ input, button {
 
 .register__row {
 	display: flex;
-	height: 4rem;
-	padding: 1rem;
-	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+	margin-bottom: 20px;
+    min-height: 50px;
+	width: 100%;
+}
+
+.register__row__icon {
+	display: flex;
+	align-self: center;
 }
 
 .register__icon {
@@ -144,10 +158,12 @@ input, button {
 	/* width: 22rem;
 	height: 100%; */
 	padding-left: 1.5rem;
+	padding-bottom: 10px;
 	/* font-size: 1.5rem; */
 	height: 100%;
 	background: transparent;
 	color: #FDFCFD;
+	border-bottom: 1px solid #FFFFFF;
 }
 
 .register__submit {
@@ -204,17 +220,24 @@ input, button {
 }
 
 .register__signup {
-	font-size: 1.2rem;
-	color: #ABA8AE;
+	font-size: .8rem;
+	color: #d3c5e0;
+	height: 15%;
+	position: relative;
 }
 
 .register__signup > p {
 	text-align: center;
+	position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .register__signup a {
 	color: #fff;
 	cursor: pointer;
+	text-decoration: underline;
 }
 
 
