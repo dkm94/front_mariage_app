@@ -30,7 +30,7 @@ function App() {
     role = user.role
   }
 
-  axios.defaults.baseURL = 'http://localhost:3050';
+  axios.defaults.baseURL = 'https://backend-mywedding-app.herokuapp.com/';
   axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
 
   let navigation;
