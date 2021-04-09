@@ -26,7 +26,7 @@ const Select = ({ tables, table, guests, setTables }) => {
         axios.put(`/api/admin/tables/addGuest/${tableID._id}`, {guestID: selectedGuest})
             .then((res) => {
                 if(res.data != null) {
-                    alert("udpdate ok")
+                    // alert("udpdate ok")
                     // updateTable(updatedTables)
                     setTimeout(() => {
                         setTables(updatedTables)

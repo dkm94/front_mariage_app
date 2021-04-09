@@ -55,7 +55,7 @@ const Tables = () => {
         axios.delete(`/api/admin/tables/delete/${id}`)
             .then(res => {
                 if(res.data != null) {
-                    alert("La table a été supprimée.");
+                    // alert("La table a été supprimée.");
                     setTables(tables.filter(table => table._id !== id))
                 }
             })
@@ -78,9 +78,12 @@ const Tables = () => {
                     </form>
                 </div>
 
-                <div className="get-tables">
-                        {tables.length === 0 || null ? <div className="block"><span>Vos tables ici.</span></div> : tables.map((table, i) => {
-                            return <div key={i} data-id={table._id} className="table-form">
+                <div className="tables___block">
+                        {tables.length === 0 || null ? 
+                        (<div className="block"><span>Vos tables ici.</span></div>) : 
+                        (<ul className="get-tables">
+                            {tables.map((table, i) => {
+                            return <li key={i} data-id={table._id} className="table-form">
                                 <div className="table-name">
                                     <span>{table.name}</span>
                                 </div>
@@ -98,8 +101,10 @@ const Tables = () => {
                                     <Button handleClick={() => {deleteTable(table._id, table.guestID)}} title="Supprimer"/>
                                 </div>
                                 
-                            </div>
+                            </li>
                         })}
+                        </ul>)
+                    }
                 </div>
             </div>
         </div>

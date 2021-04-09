@@ -60,7 +60,7 @@ const Login = props => {
                                             }
                                         })
                                         .catch((err) => {
-                                            alert(err);
+                                            // alert(err);
                                             console.log(err)})
                                             
                                 }}

@@ -27,7 +27,7 @@ const Byguests = () => {
     }
 
     const handleSubmit = (guest) => {
-        alert("submitted!")
+        // alert("submitted!")
         axios.post("/api/admin/guests/add", {name: guest})
             .then((res) => {
                 if(res.data != null){
@@ -67,7 +67,7 @@ const Byguests = () => {
             .then(result => {
                 console.log(result.data)
                 if(result.data != null) {
-                    alert("Invité supprimé.");
+                    // alert("Invité supprimé.");
                     setGuests(guests.filter(guest => guest._id !== id))
                 }
             })
@@ -90,35 +90,39 @@ const Byguests = () => {
                     <button type="submit">OK</button>
                 </form>
             </div>
-            <ul className="get-guestlist">
+            <div className="byguests___block">
             {
                 guests.length === 0 || null ? 
-                <div className="block"><span>Vos invités ici.</span></div> : 
-                guests.map((guest) => <li className="div-guest" key={guest._id} >
-                {guestEditing === guest._id ? 
-                (<input 
-                    type="text" 
-                    onChange={(e) => {seteditingText(e.target.value)}} 
-                    value={editingText}
-                    style={{width: "70%"}}
-                />) : 
-                (<span>{guest.name}</span>)}
-                
-                <div className="guest-picture">
-                    <img alt="avatar" src={avatar}  />
-                </div>
-                <div className="menu___li-btns">
-                    {guestEditing === guest._id ? 
-                    (<Button handleClick={() => editGuest(guest._id)} title="Valider" />) : 
-                    (<Button handleClick={() => setguestEditing(guest._id)} title="Modifier" />)}
-                    
-                    <button className="del-btn" onClick={() => {deleteGuest(guest._id)}}>
-                        <i className="fas fa-trash"/>
-                    </button>
-                </div>
-                </li>)
+                (<div className="block"><span>Vos invités ici.</span></div>) : 
+                (<ul className="get-guestlist">
+                    {
+                        guests.map((guest) => <li className="div-guest" key={guest._id} >
+                        {guestEditing === guest._id ? 
+                        (<input 
+                            type="text" 
+                            onChange={(e) => {seteditingText(e.target.value)}} 
+                            value={editingText}
+                            style={{width: "70%"}}
+                        />) : 
+                        (<span>{guest.name}</span>)}
+                        
+                        <div className="guest-picture">
+                            <img alt="avatar" src={avatar}  />
+                        </div>
+                        <div className="menu___li-btns">
+                            {guestEditing === guest._id ? 
+                            (<Button handleClick={() => editGuest(guest._id)} title="Valider" />) : 
+                            (<Button handleClick={() => setguestEditing(guest._id)} title="Modifier" />)}
+                            
+                            <button className="del-btn" onClick={() => {deleteGuest(guest._id)}}>
+                                <i className="fas fa-trash"/>
+                            </button>
+                        </div>
+                        </li>)
+                    }
+                </ul>)
             }
-            </ul>
+            </div>
         </div>
     )
 }

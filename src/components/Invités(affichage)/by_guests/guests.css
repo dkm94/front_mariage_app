@@ -8,9 +8,17 @@
     box-sizing: border-box;
 }
 
+.byguests___block {
+    width: 100%;
+}
+
+
+
 .block {
-    position: relative;
-    margin: 0px 150px;
+    width: 100%;
+    text-align: center;
+    /* position: relative; */
+    /* margin: 0px 150px; */
     border-radius: 10px;
 }
 

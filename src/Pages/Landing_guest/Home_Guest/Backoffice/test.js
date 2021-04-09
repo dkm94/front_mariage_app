@@ -86,7 +86,7 @@ const Formulaire = () => {
         axios.delete(`/api/admin/invitation/events/delete/${id}`)
             .then(res => {
                 if(res.data != null) {
-                    alert("L'évènement a été supprimé.");
+                    // alert("L'évènement a été supprimé.");
                     setEvents(events.filter(event => event._id !== id))
                 }
             })
@@ -183,18 +183,18 @@ const Formulaire = () => {
                                 infos: values.infos
                             })
                                 .then((res) => {
-                                    alert(res)
+                                    // alert(res)
                                     if(res.data != null){
-                                        alert("Modifications effectuées");
+                                        // alert("Modifications effectuées");
                                         setSubmitting(true);
                                         setTimeout(() => {
-                                            alert(JSON.stringify(values, null, 2));
+                                            // alert(JSON.stringify(values, null, 2));
                                             setSubmitting(false);
                                         }, 3000);
                                     }
                                 })
                                 .catch((err) => {
-                                    alert(err);
+                                    // alert(err);
                                     console.log(err)})
                                     
                         }}
@@ -308,19 +308,19 @@ const Formulaire = () => {
                         })
                             .then((res) => {
                                 if(res.data != null){
-                                    alert("Modifications effectuées");
+                                    // alert("Modifications effectuées");
                                     setSubmitting(true);
                                     setnewEvent(
                                         newEvent
                                     )
                                     setTimeout(() => {
-                                        alert(JSON.stringify(values, null, 2));
+                                        // alert(JSON.stringify(values, null, 2));
                                         setSubmitting(false);
                                     }, 3000);
                                 }
                             })
                             .catch((err) => {
-                                alert(err);
+                                // alert(err);
                                 console.log(err)})
                                 
                     }}

@@ -31,7 +31,7 @@ const Bygroups = () => {
     }
 
     const handleSubmit = (name, mail) => {
-        alert("submitted!")
+        // alert("submitted!")
         const token = localStorage.getItem("token");
         const config = {
             headers: { Authorization: 'Bearer '+ token }
@@ -49,7 +49,7 @@ const Bygroups = () => {
     }
 
     const deleteGroup = (id) => {
-        alert("submitted !")
+        // alert("submitted !")
         console.log(id)
         const token = localStorage.getItem("token");
         const config = {
@@ -59,7 +59,7 @@ const Bygroups = () => {
             .then(result => {
                 console.log(result.data)
                 if(result.data != null) {
-                    alert("Groupe supprimé.");
+                    // alert("Groupe supprimé.");
                     setGroups(groups.filter(group => group._id !== id))
                 }
             })

@@ -197,7 +197,7 @@ const Menus = () => {
         axios.delete(`/api/admin/menu/starters/delete/${id}`)
             .then(res => {
                 if(res.data != null) {
-                    alert("L'entrée a été supprimée.");
+                    // alert("L'entrée a été supprimée.");
                     setStarters(starters.filter(starter => starter._id !== id))
                 }
             })
@@ -207,7 +207,7 @@ const Menus = () => {
         axios.delete(`/api/admin/menu/maincourses/delete/${id}`)
             .then(res => {
                 if(res.data != null) {
-                    alert("Le plat a été supprimé.");
+                    // alert("Le plat a été supprimé.");
                     setMaincourses(maincourses.filter(maincourse => maincourse._id !== id))
                 }
             })
@@ -217,7 +217,7 @@ const Menus = () => {
         axios.delete(`/api/admin/menu/desserts/delete/${id}`)
             .then(res => {
                 if(res.data != null) {
-                    alert("Le dessert a été supprimé.");
+                    // alert("Le dessert a été supprimé.");
                     setDesserts(desserts.filter(dessert => dessert._id !== id))
                 }
             })

@@ -53,7 +53,11 @@ h3 {
     margin: 0px 10px;
 }
 
-.wedding-card___date, .wedding-card___title {
+.wedding-card___date {
+    font-size: 1.5em;
+}
+
+.wedding-card___title {
     font-family: 'Alex Brush', cursive;
     font-size: 2em;
     margin: 0px 10px;

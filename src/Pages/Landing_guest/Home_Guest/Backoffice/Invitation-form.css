@@ -10,7 +10,8 @@
     line-height: normal;
     letter-spacing: 3.3px;
     text-align: center;
-    color: #e4bdb7;
+    /* color: #e4bdb7; */
+    color: #000000;
     text-transform: uppercase;
 }
 
@@ -48,4 +49,17 @@
 
 .event-form___submit {
     text-align: end;
+}
+
+.events-list > ul {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 2rem;
+    padding: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.events-list___inputs > input {
+    margin: 5px 0px;
 }

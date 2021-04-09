@@ -11,7 +11,7 @@ const Logout = () => {
                 <Link to={"/"}><img alt="logo" src={Logo} id="logo" /></Link>
             </div>
             <ul className="navbar-menu">
-                <li className="li-style" id="about"><span>Qui sommes-nous ?</span></li>
+                {/* <li className="li-style" id="about"><span>Qui sommes-nous ?</span></li> */}
                 <li className="li-style" id="login"><Link to={"/login"}>Connexion</Link></li>
             </ul>
         </div>
