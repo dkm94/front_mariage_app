@@ -8,7 +8,13 @@ import couple from "../../../../img/couple.jpg";
 const Card = () => {
     
     const initialState = {
-        title: '', firstPerson: '', secondPerson: '', picture: '', date: '', eventsID: [], infos: ''
+        title: '', 
+        firstPerson: '', 
+        secondPerson: '', 
+        picture: '', 
+        date: '', 
+        eventsID: [], 
+        infos: ''
     }
   
     const [invitation, setinvitation] = useState(initialState);
@@ -33,39 +39,7 @@ const Card = () => {
         fetchData();
     }, [])
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         const token = localStorage.getItem("token");
-    //         const instance = axios.create({
-    //             url: [`https://backend-mywedding-app.herokuapp.com/api/admin/invitation/page/picture/${invitation.picture}`],
-    //             timeout: 3000,
-    //             headers: {
-    //               'Accept-Version': 1,
-    //               'Accept': 'application/json',
-    //               'Access-Control-Allow-Origin': '*',
-    //             //   'Content-Type': 'application/json; charset=utf-8',
-    //             },
-    //           });
-    //           instance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    //           console.log(instance)
-    //         // const img = await axios({
-    //         //     method: 'get',
-    //         //     url: `https://backend-mywedding-app.herokuapp.com/api/admin/invitation/page/picture/${invitation.picture}`,
-    //         //     headers: {
-    //         //         'Authorization': `Bearer ${token}`
-    //         //     },
-    //         //     responseType: 'stream'
-    //         //   })
-    //         const img = await instance.get()
-    //         setweddingImg(img.data)
-    //         console.log(img.data);
-    //     }
-    //     fetchData();
-    // }, [])
-
-
     const schedule = events.map((obj, i) => {
-        // console.log(events)
         return(
             <li key={i} data-id={obj._id}>
                 <h4>{obj.eventTitle}</h4>

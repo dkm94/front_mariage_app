@@ -67,18 +67,19 @@ const Menus = () => {
     }, [])
 
 
-    const submitStarter = () => {
+    const submitStarter = (e) => {
+        e.preventDefault();
         axios.get("/api/admin/menu")
         .then((res) => {
+            console.log(res.data)
             const data = res.data;
             const result = data._id
             if(data){
                 axios.post(`/api/admin/menu/starters/add/${result}`,starter)
                 .then((res) => {
                     if(res.data != null){
-                        setTimeout(() => {
-                            setStarters([...starters, starter])
-                        }, 1500);
+                        setStarters([...starters, starter])
+                        setStarter({name:""})
                     }
                 })
                 .catch((err) => {
@@ -87,7 +88,8 @@ const Menus = () => {
         })
     }
 
-    const submitMaincourse = () => {
+    const submitMaincourse = (e) => {
+        e.preventDefault();
         axios.get("/api/admin/menu")
         .then((res) => {
             const data = res.data;
@@ -96,9 +98,8 @@ const Menus = () => {
                 axios.post(`/api/admin/menu/maincourses/add/${result}`,maincourse)
                 .then((res) => {
                     if(res.data != null){
-                        setTimeout(() => {
-                            setMaincourses([...maincourses, maincourse])
-                        }, 1500);
+                        setMaincourses([...maincourses, maincourse])
+                        setMaincourse({name:""})
                     }
                 })
                 .catch((err) => {
@@ -107,7 +108,8 @@ const Menus = () => {
         })
     }
 
-    const submitDessert = () => {
+    const submitDessert = (e) => {
+        e.preventDefault();
         axios.get("/api/admin/menu")
         .then((res) => {
             const data = res.data;
@@ -116,9 +118,8 @@ const Menus = () => {
                 axios.post(`/api/admin/menu/desserts/add/${result}`,dessert)
                 .then((res) => {
                     if(res.data != null){
-                        setTimeout(() => {
-                            setDesserts([...desserts, dessert])
-                        }, 1500);
+                        setDesserts([...desserts, dessert])
+                        setDessert({name:""})
                     }
                 })
                 .catch((err) => {
@@ -238,7 +239,9 @@ const Menus = () => {
                                 type="text"
                                 name="name" 
                                 value={starter.name} 
-                                onChange={handleStarter}/>
+                                onChange={handleStarter}
+                                required
+                                />
                                 <button type="submit">OK</button>
                             </form>
                         </div>
@@ -278,7 +281,9 @@ const Menus = () => {
                                 type="text"
                                 name="name" 
                                 value={maincourse.name} 
-                                onChange={handleMaincourse}/>
+                                onChange={handleMaincourse}
+                                required
+                                />
                                 <button type="submit">OK</button>
                             </form>
 
@@ -319,7 +324,9 @@ const Menus = () => {
                                 type="text"
                                 name="name" 
                                 value={dessert.name} 
-                                onChange={handleDessert}/>
+                                onChange={handleDessert}
+                                required
+                                />
                                 <button type="submit">OK</button>
                             </form>
                         </div>

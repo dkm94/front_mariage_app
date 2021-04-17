@@ -5,14 +5,12 @@
     background: #FFFFFF;
     height: 25rem;
     width: 100%;
-    /* background: url('../../../img/Wedding-Frame.png'); */
     box-shadow: 7px -7px 16px 0px rgba(0,0,0,0.3);
     -webkit-box-shadow: 7px -7px 16px 0px rgba(0,0,0,0.3);
     -moz-box-shadow: 7px -7px 16px 0px rgba(0,0,0,0.3);
 }
 
 .fp-photo {
-    /* background: lightgoldenrodyellow; */
     width: 100%;
     padding: 30px;
 }
@@ -29,7 +27,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* background: lightpink; */
     width: 100%;
     padding: 30px;
 }

@@ -59,7 +59,7 @@
 .get-tables {
     display: grid;
     /* grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); */
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-gap: 2rem;
     padding: 1rem;
     /* border: solid 3px beige; */
@@ -119,11 +119,14 @@
 }
 
 .delete-table {
+    position: absolute;
+    bottom: 10px;
+    place-self: center;
     /* width: 100%; */
-    align-items: center;
+    /* align-items: center;
     position: absolute;
     top: 80%;
-    left: 21%;
+    left: 21%; */
 }
 /* 
 .delete-table > button {
@@ -163,6 +166,7 @@
     transform: translate(-50%, -50%); */
 
 }
-/* .del-btn {
-    font-weight: 400;
-} */
+
+.tables___block {
+    width: 100%;
+}

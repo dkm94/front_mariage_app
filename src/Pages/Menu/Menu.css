@@ -52,11 +52,11 @@ h2 {
     box-sizing: border-box;
 }
 
-ul {
+.forms > ul {
     padding: 0;
 }
 
-li {
+.forms > ul > li {
     list-style: none;
     display: flex;
     justify-content: space-between;
@@ -104,6 +104,13 @@ button {
 .menu___forms > form > input {
     border-radius: 5px;
 }
+
+
+.menu___li-btns {
+    display: flex;
+    height: fit-content;
+}
+
 
 .menu___li-btns > .del-btn {
     margin-left: 7px;

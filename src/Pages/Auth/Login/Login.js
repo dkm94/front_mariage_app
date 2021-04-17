@@ -8,7 +8,7 @@ import { Formik, Form } from "formik";
 import TextField from "../../../components/Formik/Texfiled-auth";
 import * as Yup from "yup";
 
-const Login = props => {
+const Login = () => {
     // const history = useHistory();
     
     const adminValues = {
@@ -39,6 +39,7 @@ const Login = props => {
                                 enableReinitialize={true}
                                 validationSchema={validationSchema}
                                 onSubmit={async (values, { setSubmitting }) => {
+                                    // e.preventDefault()
                                     await axios.post(`/api/auth/adminLogin`,
                                     {
                                         email: values.email,
@@ -67,7 +68,7 @@ const Login = props => {
                             >
                                 {({ values, handleChange, isSubmitting, handleBlur, handleSubmit }) => {
                                     return(
-                                        <Form onSubmit={() => handleSubmit(values)}>
+                                        <Form onSubmit={(e) => {e.preventDefault(); handleSubmit(values)}}>
                                             <div className="login__row">
                                                 <div className="login__row__icon">
                                                     <svg className="login__icon name svg-icon" viewBox="0 0 20 20">

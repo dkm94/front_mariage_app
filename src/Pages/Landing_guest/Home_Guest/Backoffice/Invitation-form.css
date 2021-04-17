@@ -52,6 +52,7 @@
 }
 
 .events-list > ul {
+    list-style: none;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 2rem;
@@ -62,4 +63,29 @@
 
 .events-list___inputs > input {
     margin: 5px 0px;
+}
+
+.events-list___li {
+    list-style: none;
+}
+
+.overview  {
+    display: flex;
+    flex-direction: column;
+}
+
+.overview > div {
+    height: 200px;
+    object-fit: contain;
+    align-self: flex-end;
+    position: relative;
+}
+
+.overview > div > img {
+    height: inherit;
+}
+
+.overview > div > button {
+    position: absolute;
+    right: 0px;
 }
