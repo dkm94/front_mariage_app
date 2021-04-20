@@ -51,7 +51,7 @@ const Byguests = () => {
             }
             return guest
         })
-        axios.put(`api/admin/guests/edit/${id}`, {name: editingText})
+        axios.post(`api/admin/guests/edit/${id}`, {name: editingText})
             .then((res) => {
                 if(res.data != null){
                     setTimeout(() => {

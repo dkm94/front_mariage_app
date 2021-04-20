@@ -1,0 +1,59 @@
+.account {
+    /* background-color: red; */
+    background-image: url("../../img/pen.jpg");
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    height: 85vh;
+}
+
+.account__row {
+    display: flex;
+    margin-bottom: 20px;
+    min-height: 50px;
+    width: 100%;
+}
+
+.account__row > span {
+    padding-left: 1.5rem;
+}
+
+.account___container {
+    /* height: fit-content;
+    background: linear-gradient(to bottom, rgba(146, 135, 187, 0.8) 0%, rgba(0, 0, 0, 0.6) 100%); */
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(232, 221, 220, 0.75);
+    padding: 50px;
+    box-shadow: 10px 10px 13px -6px rgb(184 178 184);
+}
+
+.account___title {
+    /* height: 50px;
+    background-color: lightpink;
+
+    width: 100%; */
+    align-self: start;
+}
+
+.account___settings {
+    /* position: absolute; */
+    height: 200px;
+    /* background-color: lightgreen; */
+    width: 100%;
+}
+
+.account___btn_container {
+    text-align: end;
+}
+
+.account___title > h1 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+}
+
+#delete-account___link {
+    margin-top: 50px;
+}

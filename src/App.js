@@ -7,6 +7,7 @@ import LoggedInNavigation from "./components/Header/Navigation/Log_in"
 
 import ProtectedRoute from "../src/ProtectedRoutes/Admin";
 
+import Account from "../src/Pages/Mon_Compte/Mon_compte";
 import Home from './Pages/Homepage/Home';
 import Register from './Pages/Auth/Register/Register';
 import Login from './Pages/Auth/Login/Login';
@@ -22,6 +23,7 @@ import decode from "jwt-decode";
 function App() {
 
   const token = localStorage.getItem("token");
+
   let user;
   let role;
   if(token){
@@ -48,6 +50,7 @@ function App() {
             <Route exact path="/" component={Home}/>
             <Route path="/login" component={Login}/>
             <Route path="/register" component={Register}/>
+            <ProtectedRoute path="/mon-compte" component={Account} isAuth={role} userInfos={user}/>
             <ProtectedRoute path="/menuAdm" component={MenuAdmin} isAuth={role}/>
             <ProtectedRoute path="/invitation" component={Invitation} isAuth={role}/>
             <ProtectedRoute path="/tables" component={Tables} isAuth={role}/>
