@@ -40,13 +40,12 @@ const MyAccount = ({ userInfos }) => {
             confirmPassword: ''
         },
         onSubmit: async (values) => {
-            await axios.post(`/api/auth/createAccount`,
+            await axios.post(`/api/admin/admin/editAccount/${userId}`,
             {
                 password: values.password
             })
             .then((res) => {
                 if(res.data != null){
-                    // setnewAdmin(values)
                     setTimeout(() => {
                         alert('Le mot de passe a été modifié.')
                     }, 1000);
