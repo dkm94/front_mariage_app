@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
 function Admin({ isAuth: role, component: Component, userInfos: user, ...rest}){
-    console.log(user)
+
     return (
         <Route
         {...rest}

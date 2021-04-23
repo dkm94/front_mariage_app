@@ -5,7 +5,7 @@ import Card from "../Landing_guest/Home_Guest/Carte/Faire-part";
 import Form from "../Landing_guest/Home_Guest/Backoffice/Invitation-form";
 
 const Landing = ({ userInfos }) => {
-    console.log(userInfos)
+
     const [selectedSection, setSelectedSection] = useState("");
 
     const selectSection = (e) => {
@@ -16,7 +16,7 @@ const Landing = ({ userInfos }) => {
     if (selectedSection ===  "invitation"){
         section = <Card userInfos={userInfos}/>
     } else
-        section = <Form/>
+        section = <Form userInfos={userInfos}/>
 
         
         const changeBackground = () => {

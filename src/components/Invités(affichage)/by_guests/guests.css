@@ -48,6 +48,25 @@
     text-transform: uppercase;
 }
 
+.nameField {
+    width: 100%;
+    text-align: center;
+}
+
+#input___nameField {
+    display: flex;
+}
+
+#input___nameField > button {
+    /* float: right; */
+    margin-left: 5px;
+}
+
+.nameField > button {
+    /* float: right; */
+    margin-left: 10px;
+}
+
 .guest-picture > img {
     height: 100px;
 }

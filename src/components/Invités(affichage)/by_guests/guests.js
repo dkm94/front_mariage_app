@@ -38,6 +38,7 @@ const Byguests = () => {
                 if(res.data != null){
                     setGuests([...guests, newGuest])
                     setNewGuest({name: ''})
+                    window.location.reload(false);
                 }
             })
             .catch((err) => {
@@ -58,7 +59,7 @@ const Byguests = () => {
                         setGuests(updatedGueslist)
                         setguestEditing(null)
                         seteditingText('')
-                    }, 1000);
+                    }, 1500);
                 }
             })
             .catch((err) => {
@@ -134,14 +135,27 @@ const Byguests = () => {
                     {
                         guests.map((guest) => <li className="div-guest" key={guest._id} >
                         {guestEditing === guest._id ? 
-                        (<input 
+                        (<div className="nameField" id="input___nameField">
+                            <input 
                             type="text" 
                             onChange={(e) => {seteditingText(e.target.value)}} 
                             value={editingText}
                             style={{width: "70%"}}
                             required
-                        />) : 
-                        (<span>{guest.name}</span>)}
+                            />
+                            <button onClick={() => editGuest(guest._id)}>
+                                <i className="fas fa-check"/>
+                            </button>
+                            <button onClick={() => setguestEditing(null)}>
+                                <i className="fas fa-undo"></i>
+                            </button>
+                        </div>) : 
+                        (<div className="nameField">
+                            <span>{guest.name}</span>
+                            <button onClick={() => setguestEditing(guest._id)}>
+                                <i className="fas fa-pencil-alt"/>
+                            </button>
+                        </div>)}
                         
                         <div className="guest-picture">
                             {guest.media === "" ? 
@@ -170,11 +184,11 @@ const Byguests = () => {
                             <i className="fas fa-camera"/>
                             </button>)}
 
-                            {guestEditing === guest._id ? 
+                            {/* {guestEditing === guest._id ? 
                             (<button onClick={() => editGuest(guest._id)}>Valider</button>) : 
                             (<button onClick={() => setguestEditing(guest._id)}>
                                 <i className="fas fa-pencil-alt"/>
-                            </button>)}
+                            </button>)} */}
                             
                             <button className="del-btn" onClick={() => {deleteGuest(guest._id)}}>
                                 <i className="fas fa-trash"/>

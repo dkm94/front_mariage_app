@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 // import Button from "../../../../components/LargeButton/LargeButton";
+import Events from "../Events/Events";
 import "./Invitation-form.css";
 import { Formik, Form, useFormik } from "formik";
 import TextField from "../../../../components/Formik/TextField";
 import * as Yup from "yup";
 import axios from "axios";
-import decode from "jwt-decode";
 
-const Formulaire = () => {
+const Formulaire = ({ userInfos }) => {
   
     const invitationValues = {
         title: '', 
@@ -26,26 +26,19 @@ const Formulaire = () => {
         eventAddress: '',
     }
 
+    
     const [invitation, setInvitation] = useState(null)
     const [eventForm, toggleEventForm] = useState(false)
     const [events, setEvents] = useState([])
     const [newEvent, setnewEvent] = useState(newEventValues)
-
-    const [eventEditing, seteventEditing] = useState(null)
-    const [editingTitle, seteditingTitle] = useState('')
-    const [editingPlace, seteditingPlace] = useState('')
-    const [editingTime, seteditingTime] = useState('')
-    const [editingAddress, seteditingAddress] = useState('')
     
     useEffect(() => {
         const fetchData = async () => {
-            const token = localStorage.getItem("token")
-            const user = decode(token)
-            const result = await axios.get(`/api/admin/invitation/page/${user.invitationID}`)
+            const result = await axios.get(`/api/admin/invitation/page/${userInfos.invitationID}`)
             setInvitation(result.data)
         }
         fetchData();
-    }, [])
+    }, [userInfos.invitationID])
 
     useEffect(() => {
         const fetchData = async () => {
@@ -55,33 +48,21 @@ const Formulaire = () => {
         fetchData();
     }, [])
 
-    const editEvent = (id) => {
+    const editEvent = (updatedEvent) => {
         const updatedEvents = [...events].map((obj) => {
-            if(obj._id === id) {
-                obj.eventTitle = editingTitle
-                obj.eventPlace = editingPlace
-                obj.eventTime = editingTime
-                obj.eventAddress = editingAddress
+            if(obj._id === updatedEvent.id) {
+                obj.eventTitle = updatedEvent.event.eventTitle
+                obj.eventPlace = updatedEvent.event.eventPlace
+                obj.eventTime = updatedEvent.event.eventTime
+                obj.eventAddress = updatedEvent.event.eventAddress
             }
             return obj
         })
-        axios.post(`/api/admin/menu/maincourses/edit/${id}`, 
-        {
-            eventTitle: editingTitle,
-            eventPlace: editingPlace,
-            eventTime: editingTime,
-            eventAddress: editingAddress
-            
-        })
+        axios.post(`/api/admin/invitation/events/edit/${updatedEvent.id}`, updatedEvent.event)
             .then((res) => {
                 if(res.data != null){
                     setTimeout(() => {
                         setEvents(updatedEvents)
-                        seteventEditing(null)
-                        seteditingTitle('')
-                        seteditingPlace('')
-                        seteditingTime('')
-                        seteditingAddress('')
                     }, 1000);
                 }
             })
@@ -132,8 +113,6 @@ const Formulaire = () => {
     const formik = useFormik({
         initialValues: invitation || invitationValues,
         onSubmit: async (values) => {
-            const token = localStorage.getItem("token");
-            const user = decode(token);
             let formData = new FormData()
             formData.append('title', values.title)
             formData.append('firstPerson', values.firstPerson)
@@ -142,7 +121,7 @@ const Formulaire = () => {
             formData.append('date', values.date)
             formData.append('infos', values.infos)
 
-            await axios.post(`/api/admin/invitation/edit/${user.invitationID}`,
+            await axios.post(`/api/admin/invitation/edit/${userInfos.invitationID}`,
             formData)
                 .then((res) => {
                     if(res.data != null){
@@ -158,15 +137,10 @@ const Formulaire = () => {
         enableReinitialize: true
     })
     
-    const event = events.map(obj => {return obj})
-    console.log(event)
-
     const formikEvent = useFormik({
         initialValues: newEventValues,
         onSubmit: async (values) => {
-            const token = localStorage.getItem("token");
-            const user = decode(token);
-            axios.post(`/api/admin/invitation/events/add/${user.invitationID}`,
+            axios.post(`/api/admin/invitation/events/add/${userInfos.invitationID}`,
             {
                 eventTitle: values.eventTitle,
                 eventPlace: values.eventPlace,
@@ -375,67 +349,11 @@ const Formulaire = () => {
                                 
                     </Formik>               
                 
-                    <div className="events-list">
-                        <ul>
-                        {
-                            events.map((obj) => <li key={obj._id} >
-                            {eventEditing === obj._id ? 
-                            (<div className="events-list___inputs">
-                                <input 
-                                onBlur={true}
-                                type="text"
-                                onChange={(e) => {seteditingTitle(e.target.value)}}  
-                                value={editingTitle} />
-
-                                <input 
-                                type="text" 
-                                onChange={(e) => {seteditingPlace(e.target.value)}} 
-                                value={editingPlace} />
-
-                                <input 
-                                type="datetime-local" 
-                                onChange={(e) => {seteditingTime(e.target.value)}} 
-                                value={editingTime} />
-
-                                <input 
-                                type="text" 
-                                onChange={(e) => {seteditingAddress(e.target.value)}} 
-                                value={editingAddress} />
-                            </div>) : 
-                            (<ul className="events-list___li">
-                                <li>{obj.eventTitle}</li>
-                                <li>{obj.eventPlace}</li>
-                                <li>{obj.eventTime.replace('T', ' à ')}</li>
-                                <li>{obj.eventAddress}</li>
-                            </ul>)}
-
-                            {/* <div style={{ marginTop: "10px", textAlign: "end"}}>
-                                <button>Modifier</button>
-                                <button onClick={() => {deleteEvent(obj._id)}}>Supprimer</button>
-                                </div>
-                            */}
-                            <div style={{ marginTop: "10px", textAlign: "end"}}>
-                                {eventEditing === obj._id ? 
-                                (<>
-                                <button onClick={() => {editEvent(obj._id)}}>
-                                    <i className="fas fa-check"/>
-                                </button>
-                                <button onClick={() => seteventEditing(null)}><i class="fas fa-undo"></i></button>
-                                </>
-                                ) : 
-                                (<button onClick={() => seteventEditing(obj._id)}>
-                                    <i className="fas fa-pencil-alt"/>
-                                </button>)}
-                                
-                                <button className="del-btn" onClick={() => {deleteEvent(obj._id)}}>
-                                    <i className="fas fa-trash"/>
-                                </button>
-                            </div>
-                        </li>)
-                        }
-                            
-                        </ul>
-                    </div>
+                    <Events 
+                    events={events}
+                    deleteEvent={deleteEvent}
+                    updateEvent={editEvent}
+                    />
                     
                 </div>
             </div>
