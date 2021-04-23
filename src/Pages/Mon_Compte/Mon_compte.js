@@ -10,14 +10,18 @@ const MyAccount = ({ userInfos }) => {
     const userId = userInfos.id;
 
     const [account, setaccount] = useState({})
-
+    const [deleteValidation, setdeleteValidation] = useState(false)
+    console.log(deleteValidation)
+    
     useEffect(() => {
         const fetchData = async () => {
-            const result = await axios.get(`/api/admin/admin/myAccount/${userId}`)
-            setaccount(result.data)
+            await axios.get(`/api/admin/admin/myAccount/${userId}`, {withCredentials: true})
+                .then(res => {
+                    setaccount(res.data)
+                })
+                .catch(err => console.log(err))
         }
-        fetchData();
-    }, [userId]) 
+        fetchData()}, [userId])
 
     const validationSchema = Yup.object().shape({
         password: Yup.string()
@@ -55,7 +59,27 @@ const MyAccount = ({ userInfos }) => {
         validationSchema: validationSchema
     })
 
-    console.log(account)
+    const deleteAccount = async () => {
+        await axios.delete(`/api/admin/admin/deleteAccount/${userId}`)
+            .then(res => {
+                // if(res.data === 200){
+                //     localStorage.removeItem("token")
+                //     window.location.reload()
+                // }
+                console.log(res.data)
+                console.log(res.status)
+                console.log(res.statusText)
+            })
+            .catch(err => console.log(err))
+    }
+
+    const hideButtons = {
+        display: 'none'
+    }
+
+    const showButtons = {
+        display: "block"
+    }
 
     return (
         <div className="account">
@@ -74,7 +98,7 @@ const MyAccount = ({ userInfos }) => {
                                     className="form-control"
                                     name="email"
                                     type="email"
-                                    value={account.email}
+                                    value={account.email ||''}
                                     />
                                 </div>
                                 
@@ -113,14 +137,19 @@ const MyAccount = ({ userInfos }) => {
                                 </div>
                                 
                             </div>
-                            <div className="account__row" id="delete-account___link">
-                                <span>Supprimer le compte</span>
-                            </div>
                             <div className="account___btn_container">
                                 <Button title="Enregistrer les changements" type="submit"/>
                             </div>
                         </Form>
                     </Formik>
+                    <div className="account__row" id="delete-account___link">
+                        <span onClick={() => setdeleteValidation(!deleteValidation)}>Supprimer le compte</span>
+                        <div style={deleteValidation ? showButtons : hideButtons}>
+                            <span>La suppression du compte étant définitive, toutes les données seront perdues. Souhaitez-vous continuer ?</span>
+                            <button onClick={deleteAccount}>OUI</button>
+                            <button type="submit" onClick={() => setdeleteValidation(!deleteValidation)}>NON</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

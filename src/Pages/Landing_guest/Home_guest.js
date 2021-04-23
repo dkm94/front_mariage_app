@@ -4,7 +4,8 @@ import "./Home_guest.css";
 import Card from "../Landing_guest/Home_Guest/Carte/Faire-part";
 import Form from "../Landing_guest/Home_Guest/Backoffice/Invitation-form";
 
-const Landing = () => {
+const Landing = ({ userInfos }) => {
+    console.log(userInfos)
     const [selectedSection, setSelectedSection] = useState("");
 
     const selectSection = (e) => {

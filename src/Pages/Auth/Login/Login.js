@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link, withRouter, useHistory } from "react-router-dom";
 import "./Login.css";
 import Button from "../../../components/LargeButton/LargeButton";
 // import "../../../components/LargeButton/LargeButton.css";
@@ -9,7 +9,7 @@ import TextField from "../../../components/Formik/Texfiled-auth";
 import * as Yup from "yup";
 
 const Login = () => {
-    // const history = useHistory();
+    const history = useHistory();
     
     const adminValues = {
         email: '',
@@ -52,9 +52,9 @@ const Login = () => {
                                                 const token = localStorage.getItem('token')
                                                 if(token){
                                                     setTimeout(() => {
-                                                        // history.push("/menuAdm");
+                                                        history.push("/menu");
                                                         // alert(JSON.stringify(values, null, 2));
-                                                        window.location = "/menuAdm" ;
+                                                        window.location = "/menu" ;
                                                         setSubmitting(false);
                                                     }, 1000);
                                                 }

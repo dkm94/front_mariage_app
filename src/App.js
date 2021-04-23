@@ -51,11 +51,11 @@ function App() {
             <Route path="/login" component={Login}/>
             <Route path="/register" component={Register}/>
             <ProtectedRoute path="/mon-compte" component={Account} isAuth={role} userInfos={user}/>
-            <ProtectedRoute path="/menuAdm" component={MenuAdmin} isAuth={role}/>
-            <ProtectedRoute path="/invitation" component={Invitation} isAuth={role}/>
+            <ProtectedRoute path="/menu" component={MenuAdmin} isAuth={role} userInfos={user}/>
+            <ProtectedRoute path="/invitation/:id" component={Invitation} isAuth={role} userInfos={user}/>
             <ProtectedRoute path="/tables" component={Tables} isAuth={role}/>
             <ProtectedRoute path="/invités" component={Invités} isAuth={role}/>
-            <ProtectedRoute path="/menu" component={Menu} isAuth={role}/>
+            <ProtectedRoute path="/carte" component={Menu} isAuth={role}/>
             {/* <Route path="*" component={() => "Contenu introuvable"}/> */}
           {/* </Switch> */}
  

@@ -56,4 +56,20 @@
 
 #delete-account___link {
     margin-top: 50px;
+    flex-direction: column;
 }
+
+#delete-account___link > span {
+    text-decoration: underline;
+}
+
+
+#delete-account___link > div {
+    padding-left: 1.5rem;
+    font-size: 0.7rem;
+}
+
+#delete-account___link > div > button {
+    margin: 0px 5px;
+}
+

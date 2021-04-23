@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
 import "./Register.css";
 import Button from "../../../components/LargeButton/LargeButton";
@@ -9,10 +9,32 @@ import axios from "axios";
 
 const Register = () => {
 
+    const [checkEmail, setcheckEmail] = useState([])
+
+    let emails = [];
+    checkEmail.forEach(user => {
+        emails.push(user.email)
+    })
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const myHeaders = new Headers();
+            const myInit = { method: 'GET',
+               headers: myHeaders,
+               mode: 'cors'};
+            await fetch(`https://backend-mywedding-app.herokuapp.com/api/admin/admin/`, myInit)
+                .then(res => res.json())
+                .then(data => setcheckEmail(data))
+                .catch(err => console.log(err))
+        }
+        fetchData()}, []
+    )
+
     const validationSchema = Yup.object().shape({
         email: Yup.string()
             .email('Cet email est invalide.')
-            .required('Veuiller compléter ce champ.'),
+            .required('Veuiller compléter ce champ.')
+            .notOneOf(emails, 'Cet utilisateur existe déjà.'),
         password: Yup.string()
             .required('Veuiller compléter ce champ.')
             .matches(
@@ -130,7 +152,11 @@ const Register = () => {
                                             </div>
                                             
                                         </div>
-                                    <Button title="Créér mon compte" type="submit"/>
+                                    <Button 
+                                    title="Créér mon compte" 
+                                    disabled={!formik.dirty || !formik.isValid}
+                                    type="submit"
+                                    />
                                 </Form>
                             </Formik>
                             
