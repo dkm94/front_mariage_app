@@ -158,6 +158,9 @@ const Formulaire = () => {
         enableReinitialize: true
     })
     
+    const event = events.map(obj => {return obj})
+    console.log(event)
+
     const formikEvent = useFormik({
         initialValues: newEventValues,
         onSubmit: async (values) => {
@@ -413,9 +416,13 @@ const Formulaire = () => {
                             */}
                             <div style={{ marginTop: "10px", textAlign: "end"}}>
                                 {eventEditing === obj._id ? 
-                                (<button onClick={() => {editEvent(obj._id)}}>
+                                (<>
+                                <button onClick={() => {editEvent(obj._id)}}>
                                     <i className="fas fa-check"/>
-                                </button>) : 
+                                </button>
+                                <button onClick={() => seteventEditing(null)}><i class="fas fa-undo"></i></button>
+                                </>
+                                ) : 
                                 (<button onClick={() => seteventEditing(obj._id)}>
                                     <i className="fas fa-pencil-alt"/>
                                 </button>)}
