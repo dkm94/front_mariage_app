@@ -14,7 +14,7 @@ const Landing = ({ userInfos }) => {
 
     let section;
     if (selectedSection ===  "invitation"){
-        section = <Card/>
+        section = <Card userInfos={userInfos}/>
     } else
         section = <Form/>
 

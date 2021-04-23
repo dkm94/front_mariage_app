@@ -200,7 +200,7 @@ const Formulaire = () => {
 
                     <Formik>
                     
-                        <Form className="row g-3" onSubmit={() => formik.handleSubmit(formik.values)} encType="multipart/form-data">
+                        <Form className="row g-3" onSubmit={(e) => {e.preventDefault(); formik.handleSubmit(formik.values)}} encType="multipart/form-data">
 
                             <div className="col-12">
                                 <label>Thème du mariage</label>
@@ -263,14 +263,14 @@ const Formulaire = () => {
                                         }}
                                     />
                                 </div>
-                                <div className="overview">
+                                {/* <div className="overview">
                                     <span>Apercu:</span>
                                     <div>
                                         <img alt="aperçu" src={`http://backend-mywedding-app.herokuapp.com/api/admin/invitation/page/picture/${formik.values.picture}`} />
                                         <button>X</button>
                                     </div>
                                     
-                                </div>
+                                </div> */}
                             </div>
 
                             <div className="col-4 mt-30">

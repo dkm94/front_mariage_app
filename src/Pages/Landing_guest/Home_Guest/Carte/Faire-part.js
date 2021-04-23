@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import "./Faire-part.css";
 import "../../Home_Guest/Faire-part/Faire-part.css";
 import axios from "axios";
-import decode from "jwt-decode";
 import couple from "../../../../img/couple.jpg";
 
-const Card = () => {
+const Card = ({ userInfos }) => {
+
+    const invitationId = userInfos.invitationID;
     
     const initialState = {
         title: '', 
@@ -22,13 +23,10 @@ const Card = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const token = localStorage.getItem("token");
-            const decoded = decode(token);
-            const invitationID = decoded.invitationID;
-            const result = await axios.get(`/api/admin/invitation/page/${invitationID}`, {withCredentials: true});
+            const result = await axios.get(`/api/admin/invitation/page/${invitationId}`, {withCredentials: true});
             setinvitation(result.data)
         }
-        fetchData()}, [])
+        fetchData()}, [invitationId])
        
 
     useEffect(() => {
