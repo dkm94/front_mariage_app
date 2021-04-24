@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from "react";
 // import Button from "../../LargeButton/LargeButton";
-import Modal from "../../Modals/Set_guest_picture";
+import GuestList from "./Components/Guests/Guests";
 import "./guests.css";
-import avatar from "../../../img/avatar.jpg";
 import axios from "axios";
 
 const Byguests = () => {
-    const [editingText, seteditingText] = useState('')
     const [guests, setGuests] = useState([]);
     const [newGuest, setNewGuest] = useState({name: ''})
-    const [guestEditing, setguestEditing] = useState(null)
     const [editPicture, seteditPicture] = useState(null)
-    const [isOpen, setisOpen] = useState(false)
     const [file, setFile] = useState(null)
 
     useEffect(() => {
@@ -32,7 +28,6 @@ const Byguests = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // alert("submitted!")
         axios.post("/api/admin/guests/add", newGuest)
             .then((res) => {
                 if(res.data != null){
@@ -45,20 +40,18 @@ const Byguests = () => {
                 console.log(err)})
     }
 
-    const editGuest = (id) => {
+    const editGuest = updatedGuest => {
         const updatedGueslist = [...guests].map((guest) => {
-            if(guest._id === id) {
-                guest.name = editingText
+            if(guest._id === updatedGuest.id) {
+                guest.name = updatedGuest.name
             }
             return guest
         })
-        axios.post(`api/admin/guests/edit/${id}`, {name: editingText})
+        axios.post(`api/admin/guests/edit/${updatedGuest.id}`, {name: updatedGuest.name})
             .then((res) => {
                 if(res.data != null){
                     setTimeout(() => {
                         setGuests(updatedGueslist)
-                        setguestEditing(null)
-                        seteditingText('')
                     }, 1500);
                 }
             })
@@ -71,9 +64,7 @@ const Byguests = () => {
         console.log(id)
         axios.delete(`/api/admin/guests/delete/${id}`)
             .then(result => {
-                console.log(result.data)
                 if(result.data != null) {
-                    // alert("Invité supprimé.");
                     setGuests(guests.filter(guest => guest._id !== id))
                 }
             })
@@ -81,14 +72,9 @@ const Byguests = () => {
                 console.log(err)})
     }
 
-    const handleFile = (e) => {
-        console.log(e)
-        const fileValue = e.target.files[0];
-        console.log(fileValue)
-        setFile(fileValue)
-        // setTimeout(() => {
-        //     console.log(file)
-        // }, 3000);
+    const handleFile = file => {
+        console.log(file)
+        setFile(file)
     }
 
     const uploadPicture = (id) => {
@@ -100,7 +86,6 @@ const Byguests = () => {
             .then(result => {
                 console.log(result.data)
                 if(result.data != null) {
-                    // alert("Invité supprimé.");
                     setFile(null)
                 }
             })
@@ -128,76 +113,15 @@ const Byguests = () => {
                 </form>
             </div>
             <div className="byguests___block">
-            {
-                guests.length === 0 || null ? 
-                (<div className="block"><span>Vos invités ici.</span></div>) : 
-                (<ul className="get-guestlist">
-                    {
-                        guests.map((guest) => <li className="div-guest" key={guest._id} >
-                        {guestEditing === guest._id ? 
-                        (<div className="nameField" id="input___nameField">
-                            <input 
-                            type="text" 
-                            onChange={(e) => {seteditingText(e.target.value)}} 
-                            value={editingText}
-                            style={{width: "70%"}}
-                            required
-                            />
-                            <button onClick={() => editGuest(guest._id)}>
-                                <i className="fas fa-check"/>
-                            </button>
-                            <button onClick={() => setguestEditing(null)}>
-                                <i className="fas fa-undo"></i>
-                            </button>
-                        </div>) : 
-                        (<div className="nameField">
-                            <span>{guest.name}</span>
-                            <button onClick={() => setguestEditing(guest._id)}>
-                                <i className="fas fa-pencil-alt"/>
-                            </button>
-                        </div>)}
-                        
-                        <div className="guest-picture">
-                            {guest.media === "" ? 
-                            (<img alt="avatar" src={avatar}  />) : 
-                            (<img alt="notre mariage" src={`http://backend-mywedding-app.herokuapp.com/api/admin/guests/media/${guest.media}`} />)}
-                        </div>
-                        <div className="menu___li-btns" >
-                            {editPicture === guest._id ?
-                            (<>
-                                <button  onClick={() => {setisOpen(true); seteditPicture(guest._id)}}>
-                                <i className="fas fa-camera"/>
-                                </button>
-                                <Modal open={isOpen} guestId={editPicture} close={() => {setisOpen(false)}}>
-                                    <form className="modal___picture" onSubmit={(e) => {uploadPicture(editPicture, e); e.preventDefault()}}>
-                                        <label>Télécharger une photo (format: JPG/JPEG ou PNG)</label>
-                                        <input 
-                                            type="file" 
-                                            name="media" 
-                                            onChange={(e) => handleFile(e)}
-                                            />
-                                        <button type="submit">Valider</button>
-                                    </form>
-                                </Modal>
-                            </>):
-                            (<button  onClick={() => {setisOpen(true); seteditPicture(guest._id)}}>
-                            <i className="fas fa-camera"/>
-                            </button>)}
-
-                            {/* {guestEditing === guest._id ? 
-                            (<button onClick={() => editGuest(guest._id)}>Valider</button>) : 
-                            (<button onClick={() => setguestEditing(guest._id)}>
-                                <i className="fas fa-pencil-alt"/>
-                            </button>)} */}
-                            
-                            <button className="del-btn" onClick={() => {deleteGuest(guest._id)}}>
-                                <i className="fas fa-trash"/>
-                            </button>
-                        </div>
-                        </li>)
-                    }
-                </ul>)
-            }
+                <GuestList 
+                guests={guests}
+                deleteGuest={deleteGuest}
+                updateGuest={editGuest}
+                editPicture={editPicture}
+                seteditPicture={seteditPicture}
+                upload={uploadPicture}
+                handleFile={handleFile}
+                />
             </div>
         </div>
     )

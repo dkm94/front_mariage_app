@@ -55,13 +55,17 @@ const UpdateEvent = ({ edit, setEdit, onSubmit }) => {
                         type="datetime-local"
                         name="eventTime"
                         onChange={handleChange} 
-                        value={input.eventTime} />
+                        value={input.eventTime}
+                        ref={inputRef}
+                         />
 
                         <input 
                         type="text"
                         name="eventAddress"
                         onChange={handleChange} 
-                        value={input.eventAddress} />
+                        value={input.eventAddress}
+                        ref={inputRef}
+                        />
 
                         <button onClick={handleSubmit}>
                             <i className="fas fa-check"/>

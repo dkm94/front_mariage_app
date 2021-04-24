@@ -48,20 +48,21 @@ const Card = ({ userInfos }) => {
             </li>
         )
     })
-    console.log(invitation)
     
     return(
         <>
         <div className="wedding-infos">
             <div className="fp container">
                 <div className="fp-photo">
-                {!invitation.picture ? 
-                    <img alt="notre mariage" src={couple}/>:
+                {invitation.picture ? 
+                <img alt="notre mariage" src={`http://backend-mywedding-app.herokuapp.com/api/admin/invitation/page/picture/${invitation.picture}`} />
+                    :
                 // setTimeout(() => {
                 // }, 10000) :
                 // <img alt="notre mariage" src={`/public/${invitation.picture}`}/>
-                
-                <img alt="notre mariage" src={`http://backend-mywedding-app.herokuapp.com/api/admin/invitation/page/picture/${invitation.picture}`} />
+                setTimeout(() => {
+                    <img alt="notre mariage" src={couple}/>
+                }, 2500)
                 }
                 </div>
                 <div className="fp-text">

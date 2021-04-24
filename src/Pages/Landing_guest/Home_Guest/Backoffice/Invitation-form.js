@@ -149,9 +149,7 @@ const Formulaire = ({ userInfos }) => {
             })
             .then((res) => {
                 if(res.data != null){
-                    setnewEvent(
-                        newEvent
-                    )
+                    setnewEvent(newEvent)
                     window.location.reload()
                 }
             })
@@ -174,9 +172,7 @@ const Formulaire = ({ userInfos }) => {
             </div>
             <div className="row invitation-form">
                 <div className="col-lg-8 col-lg-offset-2 ">
-
                     <Formik>
-                    
                         <Form className="row g-3" onSubmit={(e) => {e.preventDefault(); formik.handleSubmit(formik.values)}} encType="multipart/form-data">
 
                             <div className="col-12">
@@ -240,14 +236,6 @@ const Formulaire = ({ userInfos }) => {
                                         }}
                                     />
                                 </div>
-                                {/* <div className="overview">
-                                    <span>Apercu:</span>
-                                    <div>
-                                        <img alt="aperçu" src={`http://backend-mywedding-app.herokuapp.com/api/admin/invitation/page/picture/${formik.values.picture}`} />
-                                        <button>X</button>
-                                    </div>
-                                    
-                                </div> */}
                             </div>
 
                             <div className="col-4 mt-30">
@@ -286,12 +274,10 @@ const Formulaire = ({ userInfos }) => {
                             <div className="col-12 event-form___submit mt-30">
                                 <button type="submit" disabled={formik.isSubmitting}>Valider</button>
                             </div>
-                        </Form>
-                           
+                        </Form>  
                     </Formik>
 
                     <Formik>
-                        
                        <div className="event-form" style={{ marginTop: "50px"}}>
                             <h3>Votre programme</h3>
                             <div className="event-form___add-btn mt-30">
@@ -345,8 +331,7 @@ const Formulaire = ({ userInfos }) => {
                                     </button>
                                 </div>
                             </Form>
-                        </div>
-                                
+                        </div>    
                     </Formik>               
                 
                     <Events 
