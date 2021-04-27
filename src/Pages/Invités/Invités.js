@@ -19,7 +19,7 @@ const Guests = () => {
     section = <Byguests/>
  
     return(
-        <div className="guest-container center-x">
+        <div className="byguests">
             {/* <div className="select-section">
                 <label htmlFor="affichage-select">Affichage par:</label>
                 <select name="affichage" onChange={selectSection}>

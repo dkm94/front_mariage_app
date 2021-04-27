@@ -33,50 +33,63 @@ const Guests = ({ guests, deleteGuest, updateGuest, editPicture, seteditPicture,
                 (<ul className="get-guestlist">
                     {
                         guests.map((guest) => <li className="div-guest" key={guest._id} >
-                        {edit.id === guest._id ? 
-                        (<Form edit={edit} setEdit={setEdit} onSubmit={submitUpdate}/>) : 
-                        (<div className="nameField">
-                            <span>{guest.name}</span>
-                            <button onClick={() => setEdit({
-                                id: guest._id, 
-                                name: guest.name
-                            })}>
-                                <i className="fas fa-pencil-alt"/>
-                            </button>
-                        </div>)}
+                            <div className="div-guest___container">
+                                <div className="guest-picture center-x">
+                                    {guest.media === "" ? 
+                                    (<img alt="avatar" src={avatar}  />) : 
+                                    (<img alt="notre mariage" src={`http://backend-mywedding-app.herokuapp.com/api/admin/guests/media/${guest.media}`} />)}
+                                </div>
                         
-                        <div className="guest-picture">
-                            {guest.media === "" ? 
-                            (<img alt="avatar" src={avatar}  />) : 
-                            (<img alt="notre mariage" src={`http://backend-mywedding-app.herokuapp.com/api/admin/guests/media/${guest.media}`} />)}
-                        </div>
-                        <div className="menu___li-btns" >
-                            {editPicture === guest._id ?
-                            (<>
-                                <button  onClick={() => {setisOpen(!isOpen); seteditPicture(guest._id)}}>
-                                <i className="fas fa-camera"/>
-                                </button>
-                                <Modal open={isOpen} guestId={editPicture} close={() => {setisOpen(false)}}>
-                                    <form className="modal___picture" onSubmit={(e) => {upload(editPicture); e.preventDefault()}}>
-                                        <label>Télécharger une photo (format: JPG/JPEG ou PNG)</label>
-                                        <input 
-                                            type="file" 
-                                            name="media" 
-                                            onChange={handleFileInput}
-                                            />
-                                        <button type="submit">Valider</button>
-                                        <button type="button">Supprimer la photo</button>
-                                    </form>
-                                </Modal>
-                            </>):
-                            (<button  onClick={() => {setisOpen(!isOpen); seteditPicture(guest._id)}}>
-                            <i className="fas fa-camera"/>
-                            </button>)}
-                            
-                            <button className="del-btn" onClick={() => {deleteGuest(guest._id)}}>
-                                <i className="fas fa-trash"/>
-                            </button>
-                        </div>
+                                {edit.id === guest._id ? 
+                                (<Form edit={edit} setEdit={setEdit} onSubmit={submitUpdate}/>) : 
+                                (<div className="nameField">
+                                    <span>{guest.name}</span>
+                                    {/* <button onClick={() => setEdit({
+                                        id: guest._id, 
+                                        name: guest.name
+                                    })}>
+                                        <i className="fas fa-pencil-alt"/>
+                                    </button> */}
+                                </div>)}
+                        
+                                <div className="menu___li-btns center-x" >
+                                    {editPicture === guest._id ?
+                                    (<>
+                                        <button  onClick={() => {setisOpen(!isOpen); seteditPicture(guest._id)}}>
+                                        <i className="fas fa-camera"/>
+                                        </button>
+                                        <Modal open={isOpen} guestId={editPicture} close={() => {setisOpen(false)}}>
+                                            <form className="modal___picture" onSubmit={(e) => {upload(editPicture); e.preventDefault()}}>
+                                                <label>Télécharger une photo (format: JPG/JPEG ou PNG)</label>
+                                                <input 
+                                                    type="file" 
+                                                    name="media" 
+                                                    onChange={handleFileInput}
+                                                    />
+                                                <button type="submit">Valider</button>
+                                                <button type="button">Supprimer la photo</button>
+                                            </form>
+                                        </Modal>
+                                    </>):
+                                    (
+                                    <>
+                                    <button onClick={() => setEdit({
+                                        id: guest._id, 
+                                        name: guest.name
+                                    })}>
+                                        <i className="fas fa-pencil-alt"/>
+                                    </button>
+                                    <button  onClick={() => {setisOpen(!isOpen); seteditPicture(guest._id)}}>
+                                        <i className="fas fa-camera"/>
+                                    </button>
+                                    </>
+                                    )}
+                                    
+                                    <button className="del-btn" onClick={() => {deleteGuest(guest._id)}}>
+                                        <i className="fas fa-trash"/>
+                                    </button>
+                                </div>
+                            </div>
                         </li>)
                     }
                 </ul>)

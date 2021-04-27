@@ -99,29 +99,43 @@ const Byguests = () => {
     }
 
     return(
-        <div className="byguests container" style={button_wrapper_style}>
-            {/* <h1>Affichage par invités</h1> */}
-            <div className="guest-form">
-                <form onSubmit={handleSubmit}>
-                    <label>Ajouter un nouvel invité</label><br />
-                    <input
-                    type="text"
-                    name="name" 
-                    value={newGuest.name} 
-                    onChange={handleChange}/>
-                    <button type="submit">OK</button>
-                </form>
+        <div className="guest-container" style={button_wrapper_style}>
+            <div className="guests___bgimage">
+                {/* <img /> */}
             </div>
-            <div className="byguests___block">
-                <GuestList 
-                guests={guests}
-                deleteGuest={deleteGuest}
-                updateGuest={editGuest}
-                editPicture={editPicture}
-                seteditPicture={seteditPicture}
-                upload={uploadPicture}
-                handleFile={handleFile}
-                />
+            <div className="guests___title">
+                <div className="guests___title_style" >
+                    <h2>Les invités</h2>
+                </div>
+            </div>
+            <div className="guests___list">
+                <div className="guest-form input-group mb-3">
+                    <form onSubmit={handleSubmit} className="input-group mb-3">
+                        <label>Ajouter un nouvel invité</label>
+                        <input
+                        type="text"
+                        className="form-control"
+                        name="name" 
+                        value={newGuest.name} 
+                        onChange={handleChange}/>
+                        <button 
+                        type="submit"
+                        className="btn btn-secondary"
+                        id="button-addon2"
+                        >OK</button>
+                    </form>
+                </div>
+                <div className="byguests___block container">
+                    <GuestList 
+                    guests={guests}
+                    deleteGuest={deleteGuest}
+                    updateGuest={editGuest}
+                    editPicture={editPicture}
+                    seteditPicture={seteditPicture}
+                    upload={uploadPicture}
+                    handleFile={handleFile}
+                    />
+                </div>
             </div>
         </div>
     )
