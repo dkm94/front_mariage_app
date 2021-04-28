@@ -21,7 +21,7 @@ const Login = () => {
                     </div>
                     <ul className="navbar-menu">
                         <li className="li-style"><Link to={"/menu"}>Organisation</Link></li>
-                        <li className="li-style"><Link to={"/mon-compte"}>Mon compte</Link></li>
+                        <li className="li-style"><Link to={"/mon-compte"}>Votre compte</Link></li>
                         {/* <li className="li-style" id="about"><span>Qui sommes-nous ?</span></li> */}
                         <li><Link to={"/"} onClick={LogOut}>Déconnexion</Link></li>
                     </ul>

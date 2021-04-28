@@ -28,7 +28,7 @@ const Events = ({ events, deleteEvent, updateEvent }) => {
     };
 
     return(
-        <ul>
+        <ul className="schedule-list">
             {
                 events.map(obj => (
                     <li key={obj._id}>

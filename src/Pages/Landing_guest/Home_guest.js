@@ -26,17 +26,31 @@ const Landing = ({ userInfos }) => {
                 document.getElementById("invitation__").classList.remove("invitation-bg")
         }
 
+        const selectButtonStyle = () => {
+            if(section.type.name === 'Card'){
+                document.getElementById("select-style").classList.add("select-btn-card")
+            } else
+                document.getElementById("select-style").classList.remove("select-btn-card")
+        }
+
+        const changeStyle = () => {
+            changeBackground();
+            selectButtonStyle();
+        }
+
         return (
-            <div className="invitation" id="invitation__" onClick={changeBackground}>
-                <div className="select-section">
-                    {/* <label htmlFor="affichage-select">Affichage par:</label> */}
-                    <select name="affichage" onChange={selectSection}>
-                        <option value="form">Modifier l'invitation</option>
-                        <option value="invitation">Voir aperçu</option>
-                    </select>
-                </div>
-                <div className="section">
-                    {section}
+            <div className="invitation" id="invitation__" onClick={changeStyle}>
+                <div className="invitation-container">
+                    <div className="select-section" id="select-style">
+                        {/* <label htmlFor="affichage-select">Affichage par:</label> */}
+                        <select name="affichage" onChange={selectSection}>
+                            <option value="form">Modifier l'invitation</option>
+                            <option value="invitation">Voir aperçu</option>
+                        </select>
+                    </div>
+                    <div className="section">
+                        {section}
+                    </div>
                 </div>
             </div>
         )

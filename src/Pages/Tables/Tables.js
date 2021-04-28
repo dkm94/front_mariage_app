@@ -28,11 +28,12 @@ const Tables = () => {
         }))
     }
 
-    const handleSubmit = (table) => {
-        axios.post("/api/admin/tables/add", {name: table})
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        axios.post("/api/admin/tables/add", table)
             .then((res) => {
                 if(res.data != null){
-                    setTables([...tables].concat(table))
+                    setTables([...tables, table])
                     setTable({name:""})
                 }
             })
@@ -64,26 +65,37 @@ const Tables = () => {
     }
 
     return(
-        <div className="tables-container center-x">
-            <div className="tables container">
-                <div className="tables-form">
-                    <form onSubmit={() => handleSubmit(table.name)}>
-                        <label>Créer une nouvelle table</label><br />
-                        <input
-                        type="text"
-                        name="name" 
-                        value={table.name} 
-                        onChange={handleChange}/>
-                        <button type="submit">OK</button>
-                    </form>
+        <div className="tables-container">
+            <div className="tables">
+                <div className="tables___bgimage"/>
+                <div className="tables___title">
+                    <div className="tables___title_style">
+                        <h2>Les tables</h2>
+                    </div>
                 </div>
 
-                <div className="tables___block">
+                <div className="tables___list">
+                    <div className="table-form input-group mb-3">
+                        <form onSubmit={handleSubmit} className="input-group mb-3">
+                            <label>Créer une nouvelle table</label>
+                            <input
+                            type="text"
+                            className="form-control"
+                            name="name" 
+                            value={table.name} 
+                            onChange={handleChange}/>
+                            <button 
+                            type="submit"
+                            className="btn btn-secondary"
+                            id="button-addon2"
+                            >OK</button>
+                        </form>
+                    </div>
                         {tables.length === 0 || null ? 
                         (<div className="block"><span>Vos tables ici.</span></div>) : 
-                        (<ul className="get-tables">
+                        (<ul className="get-tables container">
                             {tables.map((table, i) => {
-                            return <li key={i} data-id={table._id} className="table-form">
+                            return <li key={i} data-id={table._id} className="table-style">
                                 <div className="table-name">
                                     <span>{table.name}</span>
                                 </div>

@@ -1,36 +1,39 @@
 /* Menu tables */
 .tables-container {
-    background-image: url("../../img/tables/table-1.jpg");
-    background-size: cover;
-    background-position: center;
-    min-height: 600px;
-    /* position: relative; */
+    padding-bottom: 100px;
 }
 
 .tables {
-    border-radius: 10px;
-    margin: 50px 0px;
-    /* position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%); */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: rgba(312,312,312,0.85);
-    padding: 50px;
-    box-shadow: 10px 10px 13px -6px rgba(184,178,184,1);
+   
 }
 
-.tables-form {
-    width: 50%;
+.tables___bgimage {
+    height: 400px;
+    background-attachment: fixed;
+    background-image: url("../../img/tables/table-4.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.tables___title {
+    padding: 50px;
+    text-align: -webkit-center;
+}
+
+.tables___title_style {
+    padding-bottom: 20px;
+    border-bottom: 1px solid;
+    width: 20%;
+    text-transform: uppercase;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+.tables___list {
+    width: 100%;
 }
 
 .tables-form > form > label {
-    /* display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 10rem; */
     font-size: 20px;
     font-weight: bold;
     font-style: normal;
@@ -45,8 +48,6 @@
 
 .tables-form > form {
     padding: 20px;
-    /* background-color: #ffffff; */
-    /* border: 1px solid lightgray; */
     width: 100%;
     text-align: center;
 }
@@ -63,6 +64,7 @@
     grid-gap: 2rem;
     padding: 1rem;
     /* border: solid 3px beige; */
+    list-style: none;
     width: 100%;
     box-sizing: border-box;
 }
@@ -91,16 +93,31 @@
 }
 
 .table-form {
-    display: flex;
-    flex-direction: column;
-    -webkit-box-shadow: 10px 10px 17px 0px rgba(230,221,230,1);
-    -moz-box-shadow: 10px 10px 17px 0px rgba(230,221,230,1);
-    box-shadow: 10px 10px 17px 0px rgba(230,221,230,1);
-    min-height: 300px;
-    background-color: #f7e8e4;
-    position: relative;
-    padding: 10px;
+    justify-content: center;
+    width: 100%;
+}
+
+.table-form > form {
+    padding: 77px;
+    width: 50%;
+    text-align: center;
+    background-color: #EFDDD1;
     border-radius: 10px 0px;
+}
+
+.table-form > form > label {
+    width: 100%;
+}
+
+.table-style {
+    background-color: rgba(239, 221, 209, 0.7);
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    padding: 40px 10px;
+    border-radius: 5px;
+    box-shadow: 10px 10px 17px 0px rgb(230 221 230);
+    border: 1px #ead2c3 solid;
 }
 
 .table-name {
@@ -108,34 +125,28 @@
     justify-content: center;
     align-items: center;
     height: 50px;
+    padding-bottom: 20px;
     /* text-transform: uppercase; */
 }
 
 .table-name > span {
-    font-family: 'Alex Brush', cursive;
-    font-size: 1.5rem;
+    /* font-family: 'Alex Brush', cursive;
+    font-size: 1.5rem; */
     font-weight: 300;
     /* letter-spacing: 1.2px; */
 }
 
-.delete-table {
+.select-style > div > div > div > div {
+    padding: 0px 5px;
+}
+
+/* .delete-table {
     position: absolute;
     bottom: 10px;
     place-self: center;
-    /* width: 100%; */
-    /* align-items: center;
-    position: absolute;
-    top: 80%;
-    left: 21%; */
-}
-/* 
-.delete-table > button {
-    background: white;
-    color: grey;
-    border: 1px solid lightgrey;
-    margin: 10px 0px;
-    padding: 7px;
+
 } */
+
 
 .icon-style {
     cursor: pointer;
@@ -165,8 +176,4 @@
     top: 50%;
     transform: translate(-50%, -50%); */
 
-}
-
-.tables___block {
-    width: 100%;
 }

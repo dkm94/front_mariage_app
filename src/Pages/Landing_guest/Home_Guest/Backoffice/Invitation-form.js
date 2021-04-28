@@ -166,12 +166,18 @@ const Formulaire = ({ userInfos }) => {
     }
 
     return(
-        <div className="container invitation-form-container">
-            <div className="title title-style">
-                <span>Créez votre faire-part de mariage</span>
+        <div className="invitation-form-container">
+            <div className="invitation___bgimage" />
+            <div className="invitation___title">
+                <div className="invitation___title_style">
+                    <h2>Faire-part</h2>
+                </div>
             </div>
             <div className="row invitation-form">
-                <div className="col-lg-8 col-lg-offset-2 ">
+                <div className="col">
+                    <div className="invitation-form-col">
+                        <h3>Invitation</h3>
+                    </div>
                     <Formik>
                         <Form className="row g-3" onSubmit={(e) => {e.preventDefault(); formik.handleSubmit(formik.values)}} encType="multipart/form-data">
 
@@ -275,11 +281,15 @@ const Formulaire = ({ userInfos }) => {
                                 <button type="submit" disabled={formik.isSubmitting}>Valider</button>
                             </div>
                         </Form>  
-                    </Formik>
-
+                    </Formik>           
+                </div>
+                <div className="col">
+                    <div className="schedule-col">
+                        <h3>Programme</h3>
+                    </div>
                     <Formik>
-                       <div className="event-form" style={{ marginTop: "50px"}}>
-                            <h3>Votre programme</h3>
+                       <div className="event-form">
+                            {/* <h3>Votre programme</h3> */}
                             <div className="event-form___add-btn mt-30">
                                 <button onClick={newEventForm}>Ajouter un évènement</button>
                             </div> 
@@ -332,15 +342,13 @@ const Formulaire = ({ userInfos }) => {
                                 </div>
                             </Form>
                         </div>    
-                    </Formik>               
-                
+                    </Formik>    
                     <Events 
                     events={events}
                     deleteEvent={deleteEvent}
                     updateEvent={editEvent}
                     />
-                    
-                </div>
+                </div>   
             </div>
         </div>
     )

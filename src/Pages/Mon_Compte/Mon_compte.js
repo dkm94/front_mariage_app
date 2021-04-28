@@ -3,6 +3,7 @@ import { Formik, useFormik, Form } from "formik";
 import Button from "../../../src/components/LargeButton/LargeButton";
 import * as Yup from "yup";
 import axios from "axios";
+import accountimg from "../../../src/img/account.jpg";
 import "./Mon_compte.css";
 
 const MyAccount = ({ userInfos }) => {
@@ -83,63 +84,69 @@ const MyAccount = ({ userInfos }) => {
 
     return (
         <div className="account">
-            <div className="row align-items-center account___container container">
-                <div className="col account___title">
-                    <h1>Mon compte</h1>
+            <div className="account___container">
+                <div  className="account___bgimage" />
+                <div className="account___title">
+                    <div className="account___title_style">
+                        <h2>Votre compte</h2>
+                    </div>
                 </div>
-                <div className="col account___form">
-                    <Formik>
-                        <Form onSubmit={formik.handleSubmit}>
-                            <div className="account__row">
-                                <div className={`textfield-style`}>
-                                    <label>Email</label>
-                                    <input
-                                    disabled
-                                    className="form-control"
-                                    name="email"
-                                    type="email"
-                                    value={account.email ||''}
-                                    />
+                <div className="row align-items-center account___form container">
+                    <div className="col account___img">
+                        <img alt="account" src={accountimg}/>
+                    </div>
+                    <div className="col">
+                        <Formik>
+                            <Form onSubmit={formik.handleSubmit}>
+                                <div className="account__row">
+                                    <div className={`textfield-style`}>
+                                        <label>Email</label>
+                                        <input
+                                        disabled
+                                        className="form-control"
+                                        name="email"
+                                        type="email"
+                                        value={account.email ||''}
+                                        />
+                                    </div>
+                                    
                                 </div>
-                                
-                            </div>
-                            <div className="account__row">
-                                <div className={`textfield-style`}>
-                                    <label>Nouveau mot de passe</label>
-                                    <input
-                                    className="form-control"
-                                    name="password"
-                                    type="password"
-                                    value={formik.values.password}
-                                    onChange={formik.handleChange}
-                                    {...formik.getFieldProps('password')}
-                                    />
-                                    {formik.touched.password && formik.errors.password ? (
-                                        <div className="error">{formik.errors.password}</div>
-                                    ) : null}
+                                <div className="account__row">
+                                    <div className={`textfield-style`}>
+                                        <label>Nouveau mot de passe</label>
+                                        <input
+                                        className="form-control"
+                                        name="password"
+                                        type="password"
+                                        value={formik.values.password}
+                                        onChange={formik.handleChange}
+                                        {...formik.getFieldProps('password')}
+                                        />
+                                        {formik.touched.password && formik.errors.password ? (
+                                            <div className="error">{formik.errors.password}</div>
+                                        ) : null}
+                                    </div>
                                 </div>
-                                
-                            </div>
-                            <div className="account__row">
-                                <div className={`textfield-style`}>
-                                    <label>Confirmer le nouveau mot de passe</label>
-                                    <input
-                                    className="form-control"
-                                    name="confirmPassword"
-                                    type="password"
-                                    value={formik.values.confirmPassword}
-                                    onChange={formik.handleChange}
-                                    {...formik.getFieldProps('confirmPassword')}
-                                    />
-                                    {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
-                                        <div className="error">{formik.errors.confirmPassword}</div>
-                                    ) : null}
+                                <div className="account__row">
+                                    <div className={`textfield-style`}>
+                                        <label>Confirmer le nouveau mot de passe</label>
+                                        <input
+                                        className="form-control"
+                                        name="confirmPassword"
+                                        type="password"
+                                        value={formik.values.confirmPassword}
+                                        onChange={formik.handleChange}
+                                        {...formik.getFieldProps('confirmPassword')}
+                                        />
+                                        {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
+                                            <div className="error">{formik.errors.confirmPassword}</div>
+                                        ) : null}
+                                    </div>
+                                    
                                 </div>
-                                
-                            </div>
-                            <div className="account___btn_container">
-                                <Button title="Enregistrer les changements" type="submit"/>
-                            </div>
+                                <div className="account___btn_container">
+                                    <Button title="Enregistrer les changements" type="submit"/>
+                                </div>
                         </Form>
                     </Formik>
                     <div className="account__row" id="delete-account___link">
@@ -149,6 +156,7 @@ const MyAccount = ({ userInfos }) => {
                             <button onClick={deleteAccount}>OUI</button>
                             <button type="submit" onClick={() => setdeleteValidation(!deleteValidation)}>NON</button>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>

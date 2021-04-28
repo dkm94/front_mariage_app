@@ -225,14 +225,17 @@ const Menus = () => {
     }
 
     return(
-        <div className="menu-container center-x">
-            <div className="menu container">
-                <div className="menu-span container">
-                    <span>Constituez le menu de votre mariage</span>
+        <div className="menu-container">
+            <div className="menu">
+                <div className="menu___bgimage" />
+                <div className="menu___title">
+                    <div className="menu___title_style">
+                        <h2>Menu</h2>
+                    </div>
                 </div>
-                <div className="grid-container-menu">
+                <div className="menu___list container">
                     <div className="starter forms">
-                        <h2>Entrée(s)</h2>
+                        <h2>Entrée</h2>
                         <div className="menu___forms">
                             <form onSubmit={submitStarter}>
                                 <input
@@ -274,7 +277,7 @@ const Menus = () => {
                         </ul>
                     </div>
                     <div className="maincourse forms">
-                        <h2>Plat(s)</h2>
+                        <h2>Plat</h2>
                         <div className="menu___forms">
                             <form onSubmit={submitMaincourse}>
                                 <input
@@ -317,7 +320,7 @@ const Menus = () => {
                         </ul>
                     </div>
                     <div className="dessert forms">
-                        <h2>Dessert(s)</h2>
+                        <h2>Dessert</h2>
                         <div className="menu___forms">
                             <form onSubmit={submitDessert}>
                                 <input

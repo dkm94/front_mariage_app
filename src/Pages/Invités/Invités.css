@@ -21,6 +21,7 @@
     width: 50%;
     text-align: center;
     background: #E7E3E0;
+    border-radius: 10px 0px;
 }
 
 .guest-form > form > label {

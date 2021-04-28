@@ -2,54 +2,40 @@ h2 {
     font-weight: 400;
 }
 
-.menu-container {
-    background-image: url("../../img/menus/lollipops.jpg");
-    background-size: cover;
-    background-position: center;
-    min-height: 600px;
-    /* position: relative; */
-}
-
 .menu {
-    border-radius: 10px;
-    margin: 50px 0px;
-    /* position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%); */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: rgba(312,312,312,0.85);
+    padding-bottom: 100px;
+}
+
+.menu___bgimage {
+    height: 400px;
+    background-attachment: fixed;
+    background-image: url("../../img/menus/menu-4.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.menu___title {
     padding: 50px;
-    box-shadow: 10px 10px 13px -6px rgba(184,178,184,1);
+    text-align: -webkit-center;
 }
 
-.menu-span {
-    width: 100%;
-    text-align: center;
-}
-
-.menu-span > span {
-    font-size: 20px;
-    font-weight: bold;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: 3.3px;
-    text-align: center;
-    /* color: #e4bdb7; */
-    color: #000000;
+.menu___title_style {
+    padding-bottom: 20px;
+    border-bottom: 1px solid;
+    width: 13%;
     text-transform: uppercase;
+    font-family: 'Noto Sans JP', sans-serif;
 }
 
-.grid-container-menu {
-    display: grid;
+.menu___list {
     width: 100%;
-    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
-    grid-gap: 2rem;
-    padding: 1rem;
-    box-sizing: border-box;
+    display: flex;
+    justify-content: space-around;
+}
+
+.menu___list > .forms {
+    width: 30%;
 }
 
 .forms > ul {
@@ -102,12 +88,14 @@ button {
 }
 
 .menu___forms > form > input {
+    width: 80%;
     border-radius: 5px;
 }
 
 
 .menu___li-btns {
     height: fit-content;
+    display: flex;
 }
 
 .menu___li-btns > button {
