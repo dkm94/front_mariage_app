@@ -39,7 +39,7 @@ const Login = () => {
                                 enableReinitialize={true}
                                 validationSchema={validationSchema}
                                 onSubmit={async (values, { setSubmitting }) => {
-                                    // e.preventDefault()
+                                   
                                     await axios.post(`/api/auth/adminLogin`,
                                     {
                                         email: values.email,
@@ -52,9 +52,9 @@ const Login = () => {
                                                 const token = localStorage.getItem('token')
                                                 if(token){
                                                     setTimeout(() => {
+                                                        window.location = "/menu" ;
                                                         history.push("/menu");
                                                         // alert(JSON.stringify(values, null, 2));
-                                                        window.location = "/menu" ;
                                                         setSubmitting(false);
                                                     }, 1000);
                                                 }
@@ -106,7 +106,7 @@ const Login = () => {
                                                 />
                                             </div>
                                             <div className="center-x">
-                                                <Button title="Se connecter" disabled={isSubmitting}/>
+                                                <Button type="submit" title="Se connecter" disabled={isSubmitting}/>
                                             </div>
                                         </Form>
                                     )

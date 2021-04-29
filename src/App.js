@@ -11,7 +11,6 @@ import Account from "../src/Pages/Mon_Compte/Mon_compte";
 import Home from './Pages/Homepage/Home';
 import Register from './Pages/Auth/Register/Register';
 import Login from './Pages/Auth/Login/Login';
-import MenuAdmin from './Pages/MenuAdmin/Menu';
 import Invitation from "../src/Pages/Landing_guest/Home_guest";
 import Invités from "../src/Pages/Invités/Invités";
 import Tables from "../src/Pages/Tables/Tables";
@@ -40,7 +39,7 @@ function App() {
     if(!token) {
         navigation =  <LoggedOutNavigation />
     } else 
-        navigation =  <LoggedInNavigation />
+        navigation =  <LoggedInNavigation userInfos={user}/>
 
   return (
     <div className="App">
@@ -51,7 +50,6 @@ function App() {
             <Route path="/login" component={Login}/>
             <Route path="/register" component={Register}/>
             <ProtectedRoute path="/mon-compte" component={Account} isAuth={role} userInfos={user}/>
-            <ProtectedRoute path="/menu" component={MenuAdmin} isAuth={role} userInfos={user}/>
             <ProtectedRoute path="/invitation/:id" component={Invitation} isAuth={role} userInfos={user}/>
             <ProtectedRoute path="/tables" component={Tables} isAuth={role}/>
             <ProtectedRoute path="/invités" component={Invités} isAuth={role}/>

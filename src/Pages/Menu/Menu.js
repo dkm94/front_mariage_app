@@ -230,7 +230,7 @@ const Menus = () => {
                 <div className="menu___bgimage" />
                 <div className="menu___title">
                     <div className="menu___title_style">
-                        <h2>Menu</h2>
+                        <h1>Menu</h1>
                     </div>
                 </div>
                 <div className="menu___list container">

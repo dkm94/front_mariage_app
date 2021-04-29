@@ -1,13 +1,17 @@
 .header {
-    height: 15vh;
+    height: 60px;
     width: 100%;
     background-color: white;
     box-shadow: 1px 1px 1px rgba(0, 0,0, 0.2);
-    /* position: fixed; */
-    /* z-index: 9999; */
+    position: fixed;
+    z-index: 9999;
 }
 
-.header-style {
+.header > nav, .header > nav > a, .header > nav > a > img {
+    height: 100%;
+}
+
+.header-style, .nav-btn-style {
     font-weight: 500;
     font-style: normal;
     font-stretch: normal;
@@ -44,6 +48,16 @@ a {
   text-decoration: none
 }
 
+.nav-item > button {
+    background: none;
+    /* color: inherit; */
+    border: none;
+    /* padding: 0; */
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+}
+
 .navbar-menu {
     display: flex;
     align-items: center;
@@ -52,9 +66,8 @@ a {
     padding: 0;
     /* display: inline-block; */
     float: right;
-    
+    /* box-shadow: -20px 18px 46px -13px rgb(204 198 204); */
 }
-
 .navbar-menu > li {
     display: inline-block;
     margin: 0 10px;
@@ -62,6 +75,40 @@ a {
     color: rgb(156, 154, 154);
 }
 
-.navbar-menu > li > a {
+.navbar-menu > li > a, .navbar-menu > li > button {
     color: rgb(156, 154, 154);
+}
+
+.navbar-side {
+    place-content: flex-end;
+}
+
+.dropdown-item {
+    font-size: 0.7rem;
+}
+
+.dropdown-menu {
+    background-color: #F8F9FA;
+}
+
+/* 988 */
+
+@media screen and (max-width: 988px) {
+    .header {
+        height: fit-content;
+    }
+
+    /* .navbar {
+        height: auto;
+    } */
+
+    .dropdown-menu {
+        background: none;
+        border: none;
+        font-size: 0.7rem;
+    }
+
+    #logo {
+        height: 60px;
+    }
 }

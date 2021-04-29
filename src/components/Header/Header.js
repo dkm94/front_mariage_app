@@ -4,24 +4,22 @@ import "./Header.css";
 import Login from "../Navigation/Log_in";
 import Logout from "../Navigation/Log_out";
 
-class Header extends Component {
+const Header = ({ userInfos: { invitationID } }) => {
+    console.log(userInfos, "!!!!")
+    console.log("hey")
 
-
-    render(){
-
-        const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
         let navigation;
         if(token === null) {
             navigation =  <Logout />
         } else 
-            navigation =  <Login />
-
-        return (
-            <div className="header">
-                {navigation}
-            </div>
-        )
-    }
+            navigation =  <Login invitationId={invitationID}/>
+    return (
+        <div className="header">
+            {navigation}
+        </div>
+    )
 }
+
 
 export default withRouter(Header);

@@ -170,16 +170,18 @@ const Formulaire = ({ userInfos }) => {
             <div className="invitation___bgimage" />
             <div className="invitation___title">
                 <div className="invitation___title_style">
-                    <h2>Faire-part</h2>
+                    <h1>Faire-part</h1>
                 </div>
             </div>
             <div className="row invitation-form">
-                <div className="col">
-                    <div className="invitation-form-col">
-                        <h3>Invitation</h3>
+                <div className="col invitation-form___col-1">
+                    <div className="center-x">
+                        <div className="invitation-form-col">
+                            <h2>Invitation</h2>
+                        </div>
                     </div>
                     <Formik>
-                        <Form className="row g-3" onSubmit={(e) => {e.preventDefault(); formik.handleSubmit(formik.values)}} encType="multipart/form-data">
+                        <Form className="row g-3 invitation-form___style" onSubmit={(e) => {e.preventDefault(); formik.handleSubmit(formik.values)}} encType="multipart/form-data">
 
                             <div className="col-12">
                                 <label>Thème du mariage</label>
@@ -283,9 +285,11 @@ const Formulaire = ({ userInfos }) => {
                         </Form>  
                     </Formik>           
                 </div>
-                <div className="col">
-                    <div className="schedule-col">
-                        <h3>Programme</h3>
+                <div className="col invitation-form___col-2">
+                    <div className="center-x">
+                        <div className="schedule-col">
+                            <h2>Programme</h2>
+                        </div>
                     </div>
                     <Formik>
                        <div className="event-form">
@@ -293,12 +297,13 @@ const Formulaire = ({ userInfos }) => {
                             <div className="event-form___add-btn mt-30">
                                 <button onClick={newEventForm}>Ajouter un évènement</button>
                             </div> 
-                            <Form className="row g-3" onSubmit={formikEvent.handleSubmit} style={{display: eventForm ? 'flex' : 'none'}}>
+                            <Form className="row g-3 invitation-form___style" onSubmit={formikEvent.handleSubmit} style={{display: eventForm ? 'flex' : 'none'}}>
                                 <TextField 
                                     size="col-md-6 mt-30"
-                                    label="Evènement" 
+                                    label="Evènement"
                                     name="eventTitle" 
                                     type="text" 
+                                    placeholder="Réception, cérémonie, église..."
                                     value={formikEvent.values.eventTitle} 
                                     onChange={formikEvent.handleChange}
                                     onBlur={formikEvent.handleBlur}
