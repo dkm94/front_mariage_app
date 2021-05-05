@@ -7,7 +7,7 @@
 }
 
 .select-section {
-    position: absolute;
+    position: relative;
     width: 100%;
     text-align: end;
 }

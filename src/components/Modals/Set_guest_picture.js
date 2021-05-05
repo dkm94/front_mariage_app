@@ -27,11 +27,16 @@ const overlayStyle = {
     zIndex: 1000
 }
 
-export default function Set_guest_picture({ open, children, guestId, close }) {
+export default function Set_guest_picture({ open, children, guestId, close, setOpen, pictureStatus }) {
     if(!open) return null
-    console.log(children)
+
+    const xxx = () => {
+        setOpen(!open)
+    }
+
     return ReactDom.createPortal(
         <>
+            {pictureStatus ? xxx() : null}
             <div style={overlayStyle} onClick={close}/>
             <div style={modalStyle}>
                 <button style={buttonStyle} onClick={close}>×</button>

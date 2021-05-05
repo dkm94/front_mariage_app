@@ -2,7 +2,7 @@
     display: grid;
     /* grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); */
     grid-template-columns: repeat(5, 1fr);
-    row-gap: 5rem;
+    row-gap: 7rem;
     column-gap: 2rem;
     padding: 1rem;
     width: 100%;
@@ -52,6 +52,8 @@
 .div-guest___container {
     position: absolute;
     bottom: 19%;
+    width: 100%;
+    text-align: -webkit-center;
 }
 
 .group-name {
@@ -90,16 +92,16 @@
     margin: 0px 5px;
 }
 
-.guest-picture > img {
-    height: 100px;
-    border-radius: 100px
+.guest-picture {
+    width: 80%;
 }
 
-.del-guest {
-    /* align-items: center;
-    position: absolute;
-    top: 80%;
-    right: 27%; */
+
+.guest-picture > img {
+    object-fit: cover;
+    width: 100%;
+    height: 9rem;
+    border-radius: 50%;
 }
 
 .modal___picture {

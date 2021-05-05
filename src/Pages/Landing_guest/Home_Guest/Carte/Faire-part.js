@@ -42,8 +42,7 @@ const Card = ({ userInfos }) => {
             <li key={i} data-id={obj._id}>
                 <h4>{obj.eventTitle}</h4>
                 <p>{obj.eventPlace}</p>
-                <p>{obj.eventTime}</p>
-                <p>{obj.eventTime}</p>
+                <p>{obj.eventTime.replace('T', ' à ')}</p>
                 <p>{obj.eventAddress}</p>
             </li>
         )

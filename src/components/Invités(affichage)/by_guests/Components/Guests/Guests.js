@@ -3,7 +3,7 @@ import Modal from "../../../../Modals/Set_guest_picture";
 import Form from "../Form/UpdateGuest";
 import avatar from "../../../../../img/avatar.jpg";
 
-const Guests = ({ guests, deleteGuest, updateGuest, editPicture, seteditPicture, upload, handleFile }) => {
+const Guests = ({ guests, deleteGuest, updateGuest, editPicture, seteditPicture, upload, handleFile, uploadStatus }) => {
 
     const [isOpen, setisOpen] = useState(false)
 
@@ -44,21 +44,21 @@ const Guests = ({ guests, deleteGuest, updateGuest, editPicture, seteditPicture,
                                 (<Form edit={edit} setEdit={setEdit} onSubmit={submitUpdate}/>) : 
                                 (<div className="nameField">
                                     <span>{guest.name}</span>
-                                    {/* <button onClick={() => setEdit({
-                                        id: guest._id, 
-                                        name: guest.name
-                                    })}>
-                                        <i className="fas fa-pencil-alt"/>
-                                    </button> */}
                                 </div>)}
                         
                                 <div className="menu___li-btns center-x" >
                                     {editPicture === guest._id ?
                                     (<>
+                                        <button onClick={() => setEdit({
+                                        id: guest._id, 
+                                        name: guest.name
+                                        })}>
+                                            <i className="fas fa-pencil-alt"/>
+                                        </button>
                                         <button  onClick={() => {setisOpen(!isOpen); seteditPicture(guest._id)}}>
                                         <i className="fas fa-camera"/>
                                         </button>
-                                        <Modal open={isOpen} guestId={editPicture} close={() => {setisOpen(false)}}>
+                                        <Modal open={isOpen} setOpen={setisOpen} guestId={editPicture} close={() => {setisOpen(false)}} pictureStatus={uploadStatus}>
                                             <form className="modal___picture" onSubmit={(e) => {upload(editPicture); e.preventDefault()}}>
                                                 <label>Télécharger une photo (format: JPG/JPEG ou PNG)</label>
                                                 <input 
@@ -73,7 +73,7 @@ const Guests = ({ guests, deleteGuest, updateGuest, editPicture, seteditPicture,
                                     </>):
                                     (
                                     <>
-                                    <button onClick={() => setEdit({
+                                    <button style={edit.id === guest._id ? {display: 'none'} : {display: 'flex'}}  onClick={() => setEdit({
                                         id: guest._id, 
                                         name: guest.name
                                     })}>

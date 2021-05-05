@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AsyncSelect from "react-select/async";
 import axios from "axios";
 import "./AsyncSelect.css";
 
 const Select = ({ tables, table, guests, setTables }) => {
+    
+    const [loadingList, setloadingList] = useState(tables)
+
+    useEffect(() => {
+        console.log(tables)
+    }, [tables])
 
     const [selectedGuest, setSelectedGuest] = useState(null);
     const [guest, setGuest] = useState(null);
@@ -17,7 +23,7 @@ const Select = ({ tables, table, guests, setTables }) => {
     const addGuest = (selectedGuest, tableID) => {
         console.log(guest)
         selectedGuest = selectedGuest.value
-        const updatedTables = [...tables].map((table) => {
+        const updatedTables = [...loadingList].map((table) => {
             if(table._id === tableID.id) {
                 table._id = selectedGuest
             }
@@ -26,8 +32,6 @@ const Select = ({ tables, table, guests, setTables }) => {
         axios.put(`/api/admin/tables/addGuest/${tableID._id}`, {guestID: selectedGuest})
             .then((res) => {
                 if(res.data != null) {
-                    // alert("udpdate ok")
-                    // updateTable(updatedTables)
                     setTimeout(() => {
                         setTables(updatedTables)
                         window.location.reload(false)
@@ -44,19 +48,15 @@ const Select = ({ tables, table, guests, setTables }) => {
             .then((res) => {
                 let array;
                 array = res.data;
-                // console.log("array", array)
                 const tempArray = [];
                 if(array) {
                     if(array.length){
-                        console.log(guest)
                         array.forEach((guest) => {
-                            // console.log(guest)
                             setGuest(guest)
                             tempArray.push({
                                 label: `${guest.name}`,
                                 value: guest._id
                             })
-                            // console.log(tempArray)
                         })
                     } else {
                         tempArray.push({
@@ -66,7 +66,6 @@ const Select = ({ tables, table, guests, setTables }) => {
                     }
                 }
                 callback(guests = tempArray)
-                // console.log(guests)
             })
             .catch((err) => {
                 console.log(err)
@@ -92,7 +91,7 @@ const Select = ({ tables, table, guests, setTables }) => {
             onChange={e => onSearchChange(e)}
             defaultOptions={true}
             />
-            <button className="add-btn" onClick={() => {addGuest(selectedGuest, table)}}>Ajouter</button>
+            <button className="add-btn" disabled={!selectedGuest} onClick={() => {addGuest(selectedGuest, table)}}>Ajouter</button>
         </div>
     )
 }

@@ -44,8 +44,8 @@ const Login = ({ userInfos: { invitationID } }) => {
                                     <Link className="dropdown-item" to="/carte">Menu</Link>
                                 </div>
                             </li>
-                            <li className="nav-item active">
-                                <Link className="nav-link" to={"/mon-compte"}>Votre compte <span className="sr-only">(current)</span></Link>
+                            <li className="nav-item">
+                                <Link className="nav-link" to={"/mon-compte"}>Votre compte</Link>
                             </li>
                             <li className="nav-item">
                                 <button  className="nav-link nav-btn-style" type="submit" onClick={LogOut}>Déconnexion</button>

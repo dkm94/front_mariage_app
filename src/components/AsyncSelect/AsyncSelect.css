@@ -1,6 +1,6 @@
 .add-btn {
     margin: 10px 0px;
-    background: grey;
+    background: lightgrey;
     color: white;
     border-style: none;
     /* border: 1px solid white; */
@@ -10,10 +10,15 @@
     letter-spacing: 1px;
 }
 
-.select-style {
+/* .select-style {
     display: flex;
     flex-direction: column;
     align-items: center;
+} */
+
+#select-style > select {
+    position: absolute;
+    right: 0;
 }
 
 .select-style > div {

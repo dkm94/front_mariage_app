@@ -129,6 +129,10 @@
     /* text-transform: uppercase; */
 }
 
+.table-name > button {
+    margin-left: 5px;
+}
+
 .table-name > span {
     /* font-family: 'Alex Brush', cursive;
     font-size: 1.5rem; */
@@ -140,12 +144,9 @@
     padding: 0px 5px;
 }
 
-/* .delete-table {
-    position: absolute;
-    bottom: 10px;
-    place-self: center;
-
-} */
+.delete-table {
+    text-align: end;
+}
 
 
 .icon-style {

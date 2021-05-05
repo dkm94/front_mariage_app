@@ -3,11 +3,15 @@
     width: 100%;
     background-color: white;
     box-shadow: 1px 1px 1px rgba(0, 0,0, 0.2);
-    position: fixed;
-    z-index: 9999;
+    /* position: fixed; */
+    /* z-index: 9999; */
 }
 
-.header > nav, .header > nav > a, .header > nav > a > img {
+é    > nav, .header > nav > a, .header > nav > a > img {
+    height: 100%;
+}
+
+.navbar {
     height: 100%;
 }
 
@@ -98,9 +102,9 @@ a {
         height: fit-content;
     }
 
-    /* .navbar {
-        height: auto;
-    } */
+    .navbar-brand {
+        height: 60px;
+    }
 
     .dropdown-menu {
         background: none;

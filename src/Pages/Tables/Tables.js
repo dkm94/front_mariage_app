@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
 import Select from "../../components/AsyncSelect/AsyncSelect";
@@ -9,7 +9,19 @@ import "./Tables.css";
 
 const Tables = () => {
     const [tables, setTables] = useState([]);
-    const [table, setTable] = useState({name:""});
+    const [newTable, setNewTable] = useState({name: ''})
+    const [edit, setEdit] = useState({
+        id: null,
+        name: ''
+    })
+    const [input, setInput] = useState('')
+
+    const inputRef = useRef(null);
+
+    const handleUpdatedTable = (e) => {
+        setInput(e.target.value)
+    }
+    
     const [guests, setGuests] = useState([])
    
     useEffect(() => {
@@ -22,23 +34,58 @@ const Tables = () => {
 
     const handleChange = (e) => {
         const {value, name} = e.target;
-        setTable(prevState => ({
+        console.log(value)
+        setNewTable(prevState => ({
             ...prevState,
             [name]: value
         }))
     }
+    
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post("/api/admin/tables/add", table)
+        axios.post("/api/admin/tables/add", newTable)
             .then((res) => {
-                if(res.data != null){
-                    setTables([...tables, table])
-                    setTable({name:""})
-                }
+                // if(res.data != null){
+                //     setTables([...tables, newTable])
+                //     setNewTable({name:""})
+                // }
+                setTimeout(() => {
+                    window.location.reload()
+                }, 1500);
             })
             .catch((err) => {
                 console.log(err)})
+    }
+
+    const getUpdatedId = (tableId, tableName) => {
+        setEdit({
+            id: tableId,
+            name: tableName
+        })
+        setInput(tableName)
+    }
+
+    const editTableName = (e) => {
+        e.preventDefault()
+        const updatedTableList = [...tables].map((table) => {
+            if(table._id === edit.id) {
+                table.name = input
+            }
+            return table
+        })
+        axios.post(`/api/admin/tables/edit/${edit.id}`, {name: input})
+            .then((res) => {
+                if(res.data != null){
+                    setTimeout(() => {
+                        setTables(updatedTableList)
+                        setEdit('')
+                    }, 1500);
+                }
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     }
 
     const deleteGuest = (guest, table) => {
@@ -46,6 +93,7 @@ const Tables = () => {
             .then((res) => {
                 if(res.data != null){
                     setGuests(guests.filter(table => table._id !== table))
+                    window.location.reload(false);
                 }
             })
             .catch((err) => {
@@ -56,7 +104,6 @@ const Tables = () => {
         axios.delete(`/api/admin/tables/delete/${id}`)
             .then(res => {
                 if(res.data != null) {
-                    // alert("La table a été supprimée.");
                     setTables(tables.filter(table => table._id !== id))
                 }
             })
@@ -82,7 +129,7 @@ const Tables = () => {
                             type="text"
                             className="form-control"
                             name="name" 
-                            value={table.name} 
+                            value={newTable.name} 
                             onChange={handleChange}/>
                             <button 
                             type="submit"
@@ -97,7 +144,35 @@ const Tables = () => {
                             {tables.map((table, i) => {
                             return <li key={i} data-id={table._id} className="table-style">
                                 <div className="table-name">
-                                    <span>{table.name}</span>
+                                    {edit.id === table._id ? 
+                                    (<form onSubmit={editTableName} className="input-group mb-3">
+                                        <input
+                                        type="text"
+                                        className="form-control"
+                                        name="name" 
+                                        onChange={handleUpdatedTable}
+                                        value={input}
+                                        ref={inputRef}
+                                        />
+                                        <button 
+                                        type="submit"
+                                        className="btn btn-secondary"
+                                        id="button-addon2"
+                                        onClick={(e) => editTableName(e)}
+                                        >
+                                            <i className="fas fa-check"/>
+                                        </button>
+                                        <button onClick={() => setEdit({id: null})}>
+                                            <i className="fas fa-undo"/>
+                                        </button>
+                                    </form>) : 
+                                    (<>
+                                        <span>{table.name}</span>
+                                        <button onClick={() => getUpdatedId(table._id, table.name)}>
+                                            <i className="fas fa-pencil-alt"/>
+                                        </button>
+                                    </>)
+                                    }
                                 </div>
                                 
                                 <Select table={table} tables={tables} setTables={setTables} guests={table.guestID}/>

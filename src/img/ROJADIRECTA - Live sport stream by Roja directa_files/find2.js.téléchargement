@@ -1,0 +1,135 @@
+if((language=='es')||(language=='ca')||(language=='gl')||(language=='eu')){var encontrado='Encontrado';var noencontrado='No encontrado<br><span style="font-size: x-small;">Consejo: Usar una palabra y correctamente (ejemplo: Canadá)</span>';}
+else{var encontrado='Found';var noencontrado='Not found<br><span style="font-size: x-small;">Tip: Use a single word typed correctly (e.g. Argentina)</span>';}
+var window_background="white";var window_border="#D20808";var text_color="black";var title_color="white";var window_width=200;var window_height=150;var mozilla_opt=1;var start_at=0;var ie=(document.all)
+if(window.find)
+var nav=1;else
+var nav=0;var t=0;var sel;var range;if(!ie)
+{document.captureEvents(Event.MOUSEDOWN|Event.MOUSEMOVE|Event.MOUSEUP);}
+document.onmousedown=MouseDown;document.onmousemove=MouseMove;document.onmouseup=MouseUp;var mousex=0;var mousey=0;if(ie)
+{var txt=document.body.createTextRange();var bookmark=new Array();}
+var finds=0;function findit()
+{var string=document.getElementById('fwtext').value;findwindow.style.visibility='hidden';contenedorbuscar.style.visibility='hidden';if(ie)
+{bookmark[finds]=txt.getBookmark();if(string)
+if(txt.findText(string))
+{txt.select();txt.scrollIntoView();txt.collapse(false);test.innerHTML=encontrado;}
+else
+{test.innerHTML=noencontrado;finds--;}}
+else
+{if(finds>0)
+{sel=window.getSelection();if(sel.rangeCount>0)sel.removeAllRanges();sel.addRange(range);}
+if(string!="")
+{if(window.find(string,false,false))
+{sel=window.getSelection();if(sel.rangeCount>0)
+range=sel.getRangeAt(0);test.innerHTML=encontrado;}
+else
+{test.innerHTML=noencontrado;finds--;}}}
+finds++;findwindow.style.visibility='visible';contenedorbuscar.style.visibility='visible';}
+function findprev()
+{var string=document.getElementById('fwtext').value;findwindow.style.visibility='hidden';contenedorbuscar.style.visibility='hidden';if(ie)
+{if(finds<2)
+{findwindow.style.visibility='visible';contenedorbuscar.style.visibility='visible';return;}
+finds=finds-2;txt.moveToBookmark(bookmark[finds]);findit();}
+else
+{if(finds>0)
+{sel=window.getSelection();if(sel.rangeCount>0)sel.removeAllRanges();sel.addRange(range);}
+if(string!="")
+test.innerHTML=window.find(string,false,true);sel=window.getSelection();if(sel.rangeCount>0)
+range=sel.getRangeAt(0);}
+findwindow.style.visibility='visible';contenedorbuscar.style.visibility='visible';}
+function checkkey(e)
+{var keycode;if(window.event)
+keycode=window.event.keyCode;else
+keycode=e.which;if(keycode==13)
+{if(ie)
+document.getElementById('btn').focus();findit();}}
+function show()
+{if(ie||mozilla_opt==1)
+{var textbox=document.getElementById('fwtext');findwindow.style.visibility='visible';textbox.focus();t=setInterval('move_window();',500);document.onkeydown=checkkey;}
+else
+window.find();}
+function hide()
+{findwindow.style.visibility='hidden';clearTimeout(t);document.onkeydown=null;}
+function resettext()
+{if(ie)
+{txt=document.body.createTextRange();txt.moveStart("character",start_at);}
+finds=0;}
+function move_window()
+{fwtop=parseFloat(findwindow.style.top);fwleft=parseFloat(findwindow.style.left);fwheight=parseFloat(findwindow.style.height);if(document.documentElement.scrollTop)
+current_top=document.documentElement.scrollTop;else
+current_top=document.body.scrollTop;if(document.documentElement.clientHeight)
+{if(document.documentElement.clientHeight>document.body.clientHeight)
+current_bottom=document.body.clientHeight+current_top;else
+current_bottom=document.documentElement.clientHeight+current_top;}
+else
+current_bottom=document.body.clientHeight+current_top;if(document.documentElement.scrollLeft)
+current_left=document.documentElement.scrollLeft;else
+current_left=document.body.scrollLeft;if(document.documentElement.clientWidth)
+{if(document.documentElement.clientWidth>document.body.clientWidth)
+current_right=document.body.clientWidth+current_left;else
+current_right=document.documentElement.clientWidth+current_left;}
+else
+current_right=document.body.clientWidth+current_left;if(fwtop<current_top)
+{findwindow.style.top=current_top+'px';}
+else if(fwtop>current_bottom-fwheight)
+{findwindow.style.top=current_bottom-fwheight+'px';}
+if(fwleft<current_left||fwleft>current_right)
+{findwindow.style.left=current_left+'px';}}
+function MouseDown(e)
+{if(over==1)
+DivID='findwindow';if(over)
+{if(ie)
+{objDiv=document.getElementById(DivID);objDiv=objDiv.style;mousex=event.offsetX;mousey=event.offsetY;}
+else
+{objDiv=document.getElementById(DivID);mousex=e.layerX;mousey=e.layerY;return false;}}}
+function MouseMove(e)
+{if(document.documentElement.scrollTop)
+current_top=document.documentElement.scrollTop;else
+current_top=document.body.scrollTop;if(document.documentElement.scrollLeft)
+current_top=document.documentElement.scrollLeft;else
+current_left=document.body.scrollLeft;if(objDiv)
+{if(ie)
+{objDiv.pixelLeft=event.clientX-mousex+current_left;objDiv.pixelTop=event.clientY-mousey+current_top;return false;}
+else
+{objDiv.style.left=(e.pageX-mousex)+'px';objDiv.style.top=(e.pageY-mousey)+'px';return false;}}}
+function MouseUp()
+{objDiv=null;}
+function create_div(dleft,dtop,dwidth,dheight)
+{if(document.documentElement.scrollTop)
+current_top=document.documentElement.scrollTop;else
+current_top=document.body.scrollTop;if(document.getElementById('findwindow'))
+{findwindow=document.getElementById('findwindow');}
+else
+{findwindow.id="findwindow";findwindow.style.position='absolute';document.body.insertBefore(findwindow,document.body.firstChild);findwindow.className='findwindow';findwindow.style.visibility='hidden';}
+findwindow.style.backgroundColor=window_background;findwindow.style.border='2px solid '+window_border;findwindow.style.color=text_color;findwindow.style.width=window_width+'px';findwindow.style.height=+window_height+'px';findwindow.style.top=0;findwindow.style.left=0;findwindow.style.padding='0px';findwindow.style.zIndex=2000;findwindow.style.fontSize='14px';findwindow.style.overflowX='hidden';findwindow.innerHTML='<div style="text-align: center'
++';width: '+(window_width-20)+'px'
++';cursor: move'
++';color: '+title_color
++';border: 1px solid '+text_color
++';background-color: '+window_border
++';float: left'
++';" onmouseover="over=1;" onmouseout="over=0;">'
++'<span class="es">Ventana de búsqueda</span><span class="en">Find Window</span></div>';findwindow.innerHTML+='<div onclick="hide();" style="text-align: center'
++';width: '+(16)+'px'
++';cursor: default'
++';font-weight: bold'
++';background-color: #D20808'
++';border: 1px solid '+text_color
++';float: right'
++';">'
++'X'
++'</div><br />\n';findwindow.innerHTML+='<div id="window_body" style="padding: 5px;">'
++'<span class="es">Escribe el texto a buscar:</span><span class="en">Type in text to find:</span> '
++'<input type="text" size="25" maxlength="25" id="fwtext"'
++' onchange="resettext();">'
++'<span class="es"><input type="button" value="<anterior" onclick="findprev();"></span><span class="en"><input type="button" value="< Prev" onclick="findprev();"></span>'
++'<span class="es"><input id="btn" type="button" value="Buscar >" onclick="findit();"></span><span class="en"><input id="btn" type="button" value="Find next >" onclick="findit();"></span>'
++'</div>\n'
++'<div id="test"><br /></div>';}
+var findwindow=document.createElement("div");create_div();var over=0;var objDiv=null;var DivID=null;var test=document.getElementById('test');function buscadesdepaxina()
+{var string=document.getElementById('searchInput').value;document.getElementById('fwtext').value=string;findit();}
+function onkeydowndesdepaxina(e)
+{var keycode2;if(window.event)
+keycode2=window.event.keyCode2;else
+keycode2=e.which;if(keycode2==13)
+{buscadesdepaxina();}}
+function clearText(a){if(a.defaultValue==a.value){a.value=""}else{if(a.value==""){a.value=a.defaultValue}}};

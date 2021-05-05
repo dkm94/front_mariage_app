@@ -40,14 +40,12 @@ const Landing = ({ userInfos }) => {
 
         return (
             <div className="invitation" id="invitation__" onClick={changeStyle}>
-                <div className="invitation-container">
-                    <div className="select-section" id="select-style">
-                        {/* <label htmlFor="affichage-select">Affichage par:</label> */}
-                        <select name="affichage" onChange={selectSection}>
-                            <option value="form">Modifier l'invitation</option>
-                            <option value="invitation">Voir aperçu</option>
-                        </select>
-                    </div>
+                <div className="select-section" id="select-style">
+                    {/* <label htmlFor="affichage-select">Affichage par:</label> */}
+                    <select name="affichage" onChange={selectSection}>
+                        <option value="form">Modifier l'invitation</option>
+                        <option value="invitation">Voir aperçu</option>
+                    </select>
                     <div className="section">
                         {section}
                     </div>
