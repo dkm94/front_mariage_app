@@ -9,7 +9,6 @@ const Byguests = () => {
     const [newGuest, setNewGuest] = useState({name: ''})
     const [editPicture, seteditPicture] = useState(null)
     const [file, setFile] = useState(null)
-    const [uploadStatus, setuploadStatus] = useState(null)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -85,11 +84,7 @@ const Byguests = () => {
         axios.post(`/api/admin/guests/edit/${id}`, formData)
             .then(result => {
                 if(result.data != null) {
-                    // setuploadStatus(result.data)
                     setFile(null)
-                    // setTimeout(() => {
-                    //     setuploadStatus(null)
-                    // }, 1500);
                     window.location.reload()
                 }
                 console.log(result)
@@ -139,7 +134,6 @@ const Byguests = () => {
                     seteditPicture={seteditPicture}
                     upload={uploadPicture}
                     handleFile={handleFile}
-                    uploadStatus={uploadStatus}
                     />
                 </div>
             </div>

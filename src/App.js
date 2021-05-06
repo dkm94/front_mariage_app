@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route} from 'react-router-dom';
+import { Switch, BrowserRouter as Router, Route} from 'react-router-dom';
 
 import LoggedOutNavigation from "./components/Header/Navigation/Log_out"
 import LoggedInNavigation from "./components/Header/Navigation/Log_in"
-
+import Footer from "./components/Footer/Footer";
 import ProtectedRoute from "../src/ProtectedRoutes/Admin";
 import Menu from "../src/Pages/MenuAdmin/Menu";
 import Account from "../src/Pages/Mon_Compte/Mon_compte";
@@ -45,7 +45,7 @@ function App() {
     <div className="App">
       <Router>
         {navigation}
-          {/* <Switch> */}
+          <Switch>
             <Route exact path="/" component={Home}/>
             <Route path="/login" component={Login}/>
             <Route path="/register" component={Register}/>
@@ -56,8 +56,8 @@ function App() {
             <ProtectedRoute path="/menu/invités" component={Invités} isAuth={role}/>
             <ProtectedRoute path="/menu/carte" component={Carte} isAuth={role}/>
             {/* <Route path="*" component={() => "Contenu introuvable"}/> */}
-          {/* </Switch> */}
- 
+          </Switch>
+        <Footer />
       </Router>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import AsyncSelect from "react-select/async";
 import axios from "axios";
 import "./AsyncSelect.css";
@@ -18,12 +18,13 @@ const Select = ({ tables, table, guests, setTables }) => {
         background: 'beige'
     }
 
-    useEffect(() => {
-        console.log(tables)
-    }, [tables])
+    // useEffect(() => {
+    //     console.log(tables)
+    // }, [tables])
 
     const [selectedGuest, setSelectedGuest] = useState(null);
     const [guest, setGuest] = useState(null);
+    // console.log(guest)
 
     const onSearchChange = (name) => {
         if(name){
@@ -32,7 +33,6 @@ const Select = ({ tables, table, guests, setTables }) => {
     }
 
     const addGuest = (selectedGuest, tableID) => {
-        console.log(guest)
         selectedGuest = selectedGuest.value
         const updatedTables = [...loadingList].map((table) => {
             if(table._id === tableID.id) {
@@ -44,8 +44,9 @@ const Select = ({ tables, table, guests, setTables }) => {
             .then((res) => {
                 if(res.data != null) {
                     setTimeout(() => {
-                        setTables(updatedTables)
-                        window.location.reload(false)
+                        // setTables(updatedTables)
+                        setloadingList(updatedTables)
+                        // window.location.reload(false)
                     }, 1000);
                 }
             })
@@ -57,6 +58,8 @@ const Select = ({ tables, table, guests, setTables }) => {
         setTimeout(() => {
             axios.get(`api/admin/guests/${inputText}`)
             .then((res) => {
+                console.log("OK")
+                console.log(guest)
                 let array;
                 array = res.data;
                 const tempArray = [];
@@ -77,6 +80,7 @@ const Select = ({ tables, table, guests, setTables }) => {
                     }
                 }
                 callback(guests = tempArray)
+                console.log(tempArray)
             })
             .catch((err) => {
                 console.log(err)

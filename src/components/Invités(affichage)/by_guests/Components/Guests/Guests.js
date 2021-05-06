@@ -3,7 +3,7 @@ import Modal from "../../../../Modals/Set_guest_picture";
 import Form from "../Form/UpdateGuest";
 import avatar from "../../../../../img/avatar.jpg";
 
-const Guests = ({ guests, deleteGuest, updateGuest, editPicture, seteditPicture, upload, handleFile, uploadStatus }) => {
+const Guests = ({ guests, deleteGuest, updateGuest, editPicture, seteditPicture, upload, handleFile }) => {
 
     const [isOpen, setisOpen] = useState(false)
 
@@ -58,7 +58,7 @@ const Guests = ({ guests, deleteGuest, updateGuest, editPicture, seteditPicture,
                                         <button  onClick={() => {setisOpen(!isOpen); seteditPicture(guest._id)}}>
                                         <i className="fas fa-camera"/>
                                         </button>
-                                        <Modal open={isOpen} setOpen={setisOpen} guestId={editPicture} close={() => {setisOpen(false)}} pictureStatus={uploadStatus}>
+                                        <Modal open={isOpen} setOpen={setisOpen} guestId={editPicture} close={() => {setisOpen(false)}}>
                                             <form className="modal___picture" onSubmit={(e) => {upload(editPicture); e.preventDefault()}}>
                                                 <label>Télécharger une photo (format: JPG/JPEG ou PNG)</label>
                                                 <input 
