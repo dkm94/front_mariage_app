@@ -1,6 +1,0 @@
-function idclo(){var ltex=Math.floor(Math.random()*3)+1;if(ltex==1){texte='https://www.javafooty.com/best-soccer-highlights/'}
-else if(ltex==1){texte='https://www.javafooty.com/best-football-highlights/'}
-else{texte='https://www.javafooty.com/top-football-highlights/'}
-return texte;};$(document).ready(function(){$("html").click(function(){if($.cookie("popup_open")=="temp"){var date=new Date();date.setTime(date.getTime()+(4*60*60*1000));$.cookie("popup_open","true",{expires:date,path:'/'});}
-if($.cookie("popup_open")==null){$.cookie("popup_open","temp",{expires:1,path:'/'});}
-if($.cookie("x_open")==null){var settings='width=1400,';settings+='height=850,';settings+='scrollbars=1,';settings+='resizable=1,';var rand=Math.floor(Math.random()*2000);window.open(idclo(),rand,settings);var date=new Date();date.setTime(date.getTime()+(5*60*60*1000));$.cookie("x_open","true",{expires:date,path:'/'});}});});

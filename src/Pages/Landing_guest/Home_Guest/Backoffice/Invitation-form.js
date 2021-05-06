@@ -280,7 +280,7 @@ const Formulaire = ({ userInfos }) => {
                             </div>
                             
                             <div className="col-12 event-form___submit mt-30">
-                                <button type="submit" disabled={formik.isSubmitting}>Valider</button>
+                                <button className="btn-style-s" type="submit" disabled={formik.isSubmitting}>Valider</button>
                             </div>
                         </Form>  
                     </Formik>           
@@ -341,7 +341,7 @@ const Formulaire = ({ userInfos }) => {
                                     className="form-control"
                                 />
                                 <div className="col-12 event-form___submit mt-30">
-                                    <button type="submit" disabled={formik.isSubmitting}>
+                                    <button className="btn-style-s" type="submit" disabled={formik.isSubmitting}>
                                         Valider
                                     </button>
                                 </div>

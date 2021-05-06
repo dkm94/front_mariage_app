@@ -156,13 +156,13 @@ const Tables = () => {
                                         />
                                         <button 
                                         type="submit"
-                                        className="btn btn-secondary"
+                                        className="btn"
                                         id="button-addon2"
                                         onClick={(e) => editTableName(e)}
                                         >
                                             <i className="fas fa-check"/>
                                         </button>
-                                        <button onClick={() => setEdit({id: null})}>
+                                        <button className="undo-btn" onClick={() => setEdit({id: null})}>
                                             <i className="fas fa-undo"/>
                                         </button>
                                     </form>) : 
@@ -176,14 +176,17 @@ const Tables = () => {
                                 </div>
                                 
                                 <Select table={table} tables={tables} setTables={setTables} guests={table.guestID}/>
-                                {table.guestID.map(guest => {
-                                    
-                                    return <div key={guest._id} className="guest-del">
-                                        <span>{guest.name}</span>
-                                        <button><i className="fas fa-trash"
-                                        onClick={() => {deleteGuest(guest._id, table._id)}} /></button>
-                                    </div>
-                                })}
+
+                                <div style={{marginBottom: '20px'}}>
+                                    {table.guestID.map(guest => {
+                                        
+                                        return <div key={guest._id} className="guest-del">
+                                            <span>{guest.name}</span>
+                                            <button><i className="fas fa-trash"
+                                            onClick={() => {deleteGuest(guest._id, table._id)}} /></button>
+                                        </div>
+                                    })}
+                                </div>
                                 <div className="delete-table">
                                     <Button handleClick={() => {deleteTable(table._id, table.guestID)}} title="Supprimer"/>
                                 </div>

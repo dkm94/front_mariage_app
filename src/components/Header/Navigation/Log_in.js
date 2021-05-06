@@ -33,19 +33,22 @@ const Login = ({ userInfos: { invitationID } }) => {
                     </button>
                     <div className="collapse navbar-collapse navbar-side" id="navbarNavDropdown">
                         <ul className="navbar-nav">
+                            <li className="nav-item">
+                                <Link className="nav-link" to={'/menu'}>Menu</Link>
+                            </li>
                             <li className="nav-item dropdown">
                                 <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Organisation
                                 </Link>
                                 <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <Link className="dropdown-item" to={`/invitation/${invitationID}`}>Invitation</Link>
-                                    <Link className="dropdown-item" to="/invités">Invités</Link>
-                                    <Link className="dropdown-item" to="/tables">Tables</Link>
-                                    <Link className="dropdown-item" to="/carte">Menu</Link>
+                                    <Link className="dropdown-item" to={`/menu/invitation/${invitationID}`}>Invitation</Link>
+                                    <Link className="dropdown-item" to="/menu/invités">Invités</Link>
+                                    <Link className="dropdown-item" to="/menu/tables">Tables</Link>
+                                    <Link className="dropdown-item" to="/menu/carte">Menu</Link>
                                 </div>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to={"/mon-compte"}>Votre compte</Link>
+                                <Link className="nav-link" to={"/menu/mon-compte"}>Votre compte</Link>
                             </li>
                             <li className="nav-item">
                                 <button  className="nav-link nav-btn-style" type="submit" onClick={LogOut}>Déconnexion</button>

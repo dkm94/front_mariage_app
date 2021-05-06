@@ -110,6 +110,7 @@
 }
 
 .table-style {
+    position: relative;
     background-color: rgba(239, 221, 209, 0.7);
     width: 100%;
     margin-bottom: 1rem;
@@ -131,6 +132,7 @@
 
 .table-name > button {
     margin-left: 5px;
+    background-color: transparent;
 }
 
 .table-name > span {
@@ -146,6 +148,9 @@
 
 .delete-table {
     text-align: end;
+    position: absolute;
+    bottom: 17px;
+    right: 17px;
 }
 
 
@@ -157,6 +162,15 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 5px;
+}
+
+.guest-del > button {
+    box-shadow: rgb(0 0 0 / 26%) 0px 1px 3px 0px;
+    background-color: #f6f5f3;
+}
+
+.undo-btn {
+    background-color: transparent;
 }
 
 .block {

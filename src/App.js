@@ -6,7 +6,7 @@ import LoggedOutNavigation from "./components/Header/Navigation/Log_out"
 import LoggedInNavigation from "./components/Header/Navigation/Log_in"
 
 import ProtectedRoute from "../src/ProtectedRoutes/Admin";
-
+import Menu from "../src/Pages/MenuAdmin/Menu";
 import Account from "../src/Pages/Mon_Compte/Mon_compte";
 import Home from './Pages/Homepage/Home';
 import Register from './Pages/Auth/Register/Register';
@@ -14,7 +14,7 @@ import Login from './Pages/Auth/Login/Login';
 import Invitation from "../src/Pages/Landing_guest/Home_guest";
 import Invités from "../src/Pages/Invités/Invités";
 import Tables from "../src/Pages/Tables/Tables";
-import Menu from "../src/Pages/Menu/Menu";
+import Carte from "../src/Pages/Menu/Menu";
 
 import axios from "axios";
 import decode from "jwt-decode";
@@ -49,11 +49,12 @@ function App() {
             <Route exact path="/" component={Home}/>
             <Route path="/login" component={Login}/>
             <Route path="/register" component={Register}/>
-            <ProtectedRoute path="/mon-compte" component={Account} isAuth={role} userInfos={user}/>
-            <ProtectedRoute path="/invitation/:id" component={Invitation} isAuth={role} userInfos={user}/>
-            <ProtectedRoute path="/tables" component={Tables} isAuth={role}/>
-            <ProtectedRoute path="/invités" component={Invités} isAuth={role}/>
-            <ProtectedRoute path="/carte" component={Menu} isAuth={role}/>
+            <ProtectedRoute exact path="/menu" component={Menu} isAuth={role} userInfos={user}/>
+            <ProtectedRoute path="/menu/mon-compte" component={Account} isAuth={role} userInfos={user}/>
+            <ProtectedRoute path="/menu/invitation/:id" component={Invitation} isAuth={role} userInfos={user}/>
+            <ProtectedRoute path="/menu/tables" component={Tables} isAuth={role}/>
+            <ProtectedRoute path="/menu/invités" component={Invités} isAuth={role}/>
+            <ProtectedRoute path="/menu/carte" component={Carte} isAuth={role}/>
             {/* <Route path="*" component={() => "Contenu introuvable"}/> */}
           {/* </Switch> */}
  

@@ -73,7 +73,7 @@
 }
 
 .schedule-list > li {
-    background-color: #F9F9F9;
+    background-color: rgba(236, 210, 182, 0.4);
     padding: 20px 10px;
     border-radius: 7px;
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 10%);
@@ -82,6 +82,12 @@
 
 .schedule-list > li > ul {
     padding-left: 0;
+}
+
+.schedule-list > li > div > button {
+    box-shadow: rgb(0 0 0 / 26%) 0px 1px 3px 0px;
+    background-color: #fbfaf9;
+    margin-right: 10px;
 }
 
 .full-width {
@@ -102,6 +108,11 @@
 
 .event-form___add-btn {
     text-align: end;
+}
+
+.event-form___add-btn > button {
+    box-shadow: rgb(0 0 0 / 26%) 0px 1px 3px 0px;
+    background-color: #fbfaf9;
 }
 
 .event-form___submit {

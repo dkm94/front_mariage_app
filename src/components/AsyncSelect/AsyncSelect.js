@@ -7,6 +7,17 @@ const Select = ({ tables, table, guests, setTables }) => {
     
     const [loadingList, setloadingList] = useState(tables)
 
+    const disableBtn = {
+        boxShadow: 'none',
+        backgroundColor: '#d6d6d6',
+        color: '#878787'
+    }
+
+    const enableBtn = {
+        boxShadow: '0 1px 3px 0 rgb(0 0 0 / 26%)',
+        background: 'beige'
+    }
+
     useEffect(() => {
         console.log(tables)
     }, [tables])
@@ -91,7 +102,7 @@ const Select = ({ tables, table, guests, setTables }) => {
             onChange={e => onSearchChange(e)}
             defaultOptions={true}
             />
-            <button className="add-btn" disabled={!selectedGuest} onClick={() => {addGuest(selectedGuest, table)}}>Ajouter</button>
+            <button className="add-btn" disabled={!selectedGuest} style={!selectedGuest ? disableBtn : enableBtn} onClick={() => {addGuest(selectedGuest, table)}}>Ajouter</button>
         </div>
     )
 }

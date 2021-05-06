@@ -88,8 +88,9 @@
     margin-left: 10px;
 }
 
-#nameField___check_btn {
+.nameField___btns {
     margin: 0px 5px;
+    background-color: transparent;
 }
 
 .guest-picture {

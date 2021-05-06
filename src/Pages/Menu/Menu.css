@@ -103,6 +103,8 @@ button {
     height: fit-content;
     margin: 0px 5px;
     padding: 8px;
+    box-shadow: rgb(0 0 0 / 26%) 0px 1px 3px 0px;
+    background-color: #f6f5f3;
 }
 
 
@@ -112,6 +114,12 @@ button {
 
 .maincourse {
     background-color: #E4D1E0;
+}
+
+.maincourse > ul > li > form > input, .starter > ul > li > form > input, .dessert > ul > li > form > input {
+    width: 85%;
+    border-radius: 5px;
+    padding-left: 5px;
 }
 
 .dessert {
