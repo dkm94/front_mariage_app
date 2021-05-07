@@ -50,41 +50,41 @@ const Card = ({ userInfos }) => {
     
     return(
         <>
-        <div className="wedding-infos">
-            <div className="fp container">
-                <div className="fp-photo">
-                {invitation.picture ? 
-                <img alt="notre mariage" src={`http://backend-mywedding-app.herokuapp.com/api/admin/invitation/page/picture/${invitation.picture}`} />
-                    :
-                // setTimeout(() => {
-                // }, 10000) :
-                // <img alt="notre mariage" src={`/public/${invitation.picture}`}/>
-                setTimeout(() => {
-                    <img alt="notre mariage" src={couple}/>
-                }, 2500)
-                }
-                </div>
-                <div className="fp-text">
-                    <span className="name">{invitation.firstPerson} & {invitation.secondPerson}</span>
-                    
-                    <p className="announcement">Vous êtes cordialement invité.e au mariage qui se tiendra le</p>
-                    <span className="wedding-card___date">{invitation.date}</span><br />
-                    <span>sur le thème</span><br />
-                    <span className="wedding-card___title">{invitation.title}</span>
+            <div className="wedding-infos container">
+                <div className="fp container">
+                    <div className="fp-photo">
+                    {invitation.picture ? 
+                    <img alt="notre mariage" src={`http://backend-mywedding-app.herokuapp.com/api/admin/invitation/page/picture/${invitation.picture}`} />
+                        :
+                    // setTimeout(() => {
+                    // }, 10000) :
+                    // <img alt="notre mariage" src={`/public/${invitation.picture}`}/>
+                    setTimeout(() => {
+                        <img alt="notre mariage" src={couple}/>
+                    }, 2500)
+                    }
+                    </div>
+                    <div className="fp-text">
+                        <span className="name">{invitation.firstPerson} & {invitation.secondPerson}</span>
+                        
+                        {/* <p className="announcement">Vous êtes cordialement invité.e au mariage qui se tiendra le</p>
+                        <span className="wedding-card___date">{invitation.date}</span><br />
+                        <span>sur le thème</span><br />
+                        <span className="wedding-card___title">{invitation.title}</span> */}
 
+                    </div>
                 </div>
+                    {/* <div className="schedule info">
+                        <h3>Programme</h3>
+                        <ul className="schedule-cols">
+                            {schedule}
+                        </ul>
+                    </div>
+                    <div className="additionnal-info info container">
+                        <h3>Informations complémentaires</h3>
+                        <p>{invitation.infos}</p>
+                    </div> */}
             </div>
-            <div className="schedule info">
-                <h3>Programme</h3>
-                <ul className="schedule-cols">
-                    {schedule}
-                </ul>
-            </div>
-            <div className="additionnal-info info container">
-                <h3>Informations complémentaires</h3>
-                <p>{invitation.infos}</p>
-            </div>
-        </div>
         </>
     )
 }

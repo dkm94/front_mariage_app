@@ -7,8 +7,12 @@ html, body {
     width: 100%;
     margin: 0;
     font-family: 'Crimson Text', serif;
-    background-color: #F0F0F0;
+    /* background-color: #F0F0F0; */
     font-family: 'Roboto', sans-serif;
+    background-image: url('./img/white-bg.jpg');
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
 }
 
 .App {
