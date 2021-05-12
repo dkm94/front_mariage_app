@@ -3,6 +3,7 @@ import "./Faire-part.css";
 import "../../Home_Guest/Faire-part/Faire-part.css";
 import axios from "axios";
 import couple from "../../../../img/couple.jpg";
+import heart from "../../../../img/heart.png";
 
 const Card = ({ userInfos }) => {
 
@@ -74,16 +75,29 @@ const Card = ({ userInfos }) => {
 
                     </div>
                 </div>
-                    {/* <div className="schedule info">
-                        <h3>Programme</h3>
-                        <ul className="schedule-cols">
-                            {schedule}
-                        </ul>
+                {/* <div className="schedule info">
+                    <h3>Programme</h3>
+                    <ul className="schedule-cols">
+                        {schedule}
+                    </ul>
+                </div>
+                <div className="additionnal-info info container">
+                    <h3>Informations complémentaires</h3>
+                    <p>{invitation.infos}</p>
+                </div> */}
+                <div className="wedding-details">
+                    <div className="wedding-details___card">
+                        <div className="wedding-details___card-container___content" >
+                            <div className="content___intro">Vous êtes cordialement invité.e.s au mariage de</div>
+                            <div className="content___names">{invitation.firstPerson} & {invitation.secondPerson}</div>
+                            <div className="content___date">{invitation.date}</div>
+                            <div className="content___programme">{schedule}</div>
+                            <div className="content___add-info">{invitation.infos}</div>
+                            <div className="content___rsvp">Merci de réserver avant le</div>
+                            <div className="content___drawing"><img alt="heart" src={heart}/></div>
+                        </div>
                     </div>
-                    <div className="additionnal-info info container">
-                        <h3>Informations complémentaires</h3>
-                        <p>{invitation.infos}</p>
-                    </div> */}
+                </div>
             </div>
         </>
     )
