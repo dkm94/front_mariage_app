@@ -14,7 +14,8 @@ const Card = ({ userInfos }) => {
         firstPerson: '', 
         secondPerson: '', 
         picture: '', 
-        date: '', 
+        date: '',
+        rsvp: '',
         eventsID: [], 
         infos: ''
     }
@@ -62,38 +63,23 @@ const Card = ({ userInfos }) => {
                     // <img alt="notre mariage" src={`/public/${invitation.picture}`}/>
                     setTimeout(() => {
                         <img alt="notre mariage" src={couple}/>
-                    }, 2500)
+                    }, 500)
                     }
                     </div>
                     <div className="fp-text">
-                        <span className="name">{invitation.firstPerson} & {invitation.secondPerson}</span>
-                        
-                        {/* <p className="announcement">Vous êtes cordialement invité.e au mariage qui se tiendra le</p>
-                        <span className="wedding-card___date">{invitation.date}</span><br />
-                        <span>sur le thème</span><br />
-                        <span className="wedding-card___title">{invitation.title}</span> */}
-
+                        <span className="name">{invitation.firstPerson_firstName} & {invitation.secondPerson_firstName}</span>
                     </div>
                 </div>
-                {/* <div className="schedule info">
-                    <h3>Programme</h3>
-                    <ul className="schedule-cols">
-                        {schedule}
-                    </ul>
-                </div>
-                <div className="additionnal-info info container">
-                    <h3>Informations complémentaires</h3>
-                    <p>{invitation.infos}</p>
-                </div> */}
+            
                 <div className="wedding-details">
                     <div className="wedding-details___card">
                         <div className="wedding-details___card-container___content" >
                             <div className="content___intro">Vous êtes cordialement invité.e.s au mariage de</div>
-                            <div className="content___names">{invitation.firstPerson} & {invitation.secondPerson}</div>
+                            <div className="content___names">{invitation.firstPerson_firstName} {invitation.firstPerson_lastName} & {invitation.secondPerson_firstName} {invitation.secondPerson_lastName}</div>
                             <div className="content___date">{invitation.date}</div>
                             <div className="content___programme">{schedule}</div>
                             <div className="content___add-info">{invitation.infos}</div>
-                            <div className="content___rsvp">Merci de réserver avant le</div>
+                            <div className="content___rsvp">Merci de réserver avant le {invitation.rsvp}</div>
                             <div className="content___drawing"><img alt="heart" src={heart}/></div>
                         </div>
                     </div>
