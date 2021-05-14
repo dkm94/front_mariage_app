@@ -46,7 +46,7 @@ const Select = ({ tables, table, guests, setTables }) => {
                     setTimeout(() => {
                         // setTables(updatedTables)
                         setloadingList(updatedTables)
-                        // window.location.reload(false)
+                        window.location.reload()
                     }, 1000);
                 }
             })

@@ -6,7 +6,8 @@ import LoggedOutNavigation from "./components/Header/Navigation/Log_out"
 import LoggedInNavigation from "./components/Header/Navigation/Log_in"
 import Footer from "./components/Footer/Footer";
 import ProtectedRoute from "../src/ProtectedRoutes/Admin";
-import Menu from "../src/Pages/MenuAdmin/Menu";
+// import Menu from "../src/Pages/MenuAdmin/Menu";
+import Dashboard from "../src/Pages/Dashboard/Dashboard";
 import Account from "../src/Pages/Mon_Compte/Mon_compte";
 import Home from './Pages/Homepage/Home';
 import Register from './Pages/Auth/Register/Register';
@@ -49,7 +50,7 @@ function App() {
             <Route exact path="/" component={Home}/>
             <Route path="/login" component={Login}/>
             <Route path="/register" component={Register}/>
-            <ProtectedRoute exact path="/menu" component={Menu} isAuth={role} userInfos={user}/>
+            <ProtectedRoute exact path="/tableau-de-bord" component={Dashboard} isAuth={role} userInfos={user}/>
             <ProtectedRoute path="/menu/mon-compte" component={Account} isAuth={role} userInfos={user}/>
             <ProtectedRoute path="/menu/invitation/:id" component={Invitation} isAuth={role} userInfos={user}/>
             <ProtectedRoute path="/menu/tables" component={Tables} isAuth={role}/>
