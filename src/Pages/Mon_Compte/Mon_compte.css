@@ -45,18 +45,19 @@
 }
 
 .account___form {
-    height: 550px;
+    height: fit-content;
     margin: 0;
+    padding: 100px 0;
 }
 
 .account___img {
     width: 50%;
-    height: 100%;
+    height: fit-content;
 }
 
 .account___img > img {
     width: 100%;
-    height: 100%;
+    height: 35rem;
     object-fit: contain;
 }
 
