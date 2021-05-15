@@ -26,8 +26,23 @@
 
 .dashboard___elements {
     width: 100%;
+    padding-bottom: 100px;
 }
 
 .elements___container {
-    
+    row-gap: 3rem;
+}
+
+.card-pd {
+    padding: 20px;
+}
+
+.dashboard___grid {
+    flex-wrap: wrap;
+}
+
+@media only screen and (max-width: 768px){
+	/* .row {
+        flex-wrap: none;
+    } */
 }

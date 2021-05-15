@@ -33,9 +33,9 @@ const Login = ({ userInfos: { invitationID } }) => {
                     </button>
                     <div className="collapse navbar-collapse navbar-side" id="navbarNavDropdown">
                         <ul className="navbar-nav">
-                            {/* <li className="nav-item">
+                            <li className="nav-item">
                                 <Link className="nav-link" to={'/tableau-de-bord'}>Tableau de bord</Link>
-                            </li> */}
+                            </li>
                             <li className="nav-item dropdown">
                                 <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Organisation
