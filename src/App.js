@@ -16,6 +16,7 @@ import Invitation from "../src/Pages/Landing_guest/Home_guest";
 import Invités from "../src/Pages/Invités/Invités";
 import Tables from "../src/Pages/Tables/Tables";
 import Carte from "../src/Pages/Menu/Menu";
+import Budget from "../src/Pages/Budget/Budget.js";
 
 import axios from "axios";
 import decode from "jwt-decode";
@@ -56,6 +57,7 @@ function App() {
             <ProtectedRoute path="/menu/tables" component={Tables} isAuth={role}/>
             <ProtectedRoute path="/menu/invités" component={Invités} isAuth={role}/>
             <ProtectedRoute path="/menu/carte" component={Carte} isAuth={role}/>
+            <ProtectedRoute path="/menu/budget" component={Budget} isAuth={role} userInfos={user}/>
             {/* <Route path="*" component={() => "Contenu introuvable"}/> */}
           </Switch>
         <Footer />

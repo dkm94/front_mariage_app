@@ -31,7 +31,7 @@ const Events = ({ events, deleteEvent, updateEvent }) => {
         <ul className="schedule-list">
             {
                 events.map(obj => (
-                    <li key={obj._id}>
+                    <li key={obj._id} className="col-md-6">
                         {edit.id === obj._id ? 
                         (<UpdateForm edit={edit} setEdit={setEdit} onSubmit={submitUpdate}/>) : 
                         (<>
