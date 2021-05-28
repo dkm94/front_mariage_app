@@ -182,7 +182,6 @@ const Budget = ({ userInfos: { budgetID } }) => {
                                             label="Montant" 
                                             name="price" 
                                             type="number"
-                                            step="0.01"
                                             value={formik.values.price} 
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
@@ -201,7 +200,7 @@ const Budget = ({ userInfos: { budgetID } }) => {
                             <Expenses 
                             expenses={operations}
                             deleteExpense={deleteExpense}
-                            // updateExpense={editExpense}
+                            updateExpense={editExpense}
                             />
                         </div>
                     </div>

@@ -1,29 +1,29 @@
 import React, { useState } from 'react';
-// import UpdateForm from "./UpdateEvent";
+import UpdateForm from "./UpdateDépense";
 import "./Dépenses.css";
 
-const Expenses = ({ expenses, deleteExpense }) => {
+const Expenses = ({ expenses, deleteExpense, updateExpense }) => {
 
     const [edit, setEdit] = useState({
         id: null,
         obj: {
-            expenseTitle: '',
-            expensePrice: '',
-            expenseDescription: ''
+            title: '',
+            price: '',
+            description: ''
         }
     })
 
-    // const submitUpdate = obj => {
-    //     updateExpense(obj);
-    //     setEdit({
-    //         id: null,
-    //         obj: {
-    //             expenseTitle: '',
-    //             expensePrice: '',
-    //             expenseDescription: ''
-    //         }
-    //     });
-    // };
+    const submitUpdate = obj => {
+        updateExpense(obj);
+        setEdit({
+            id: null,
+            obj: {
+                title: '',
+                price: '',
+                description: ''
+            }
+        });
+    };
 
     return(
         <ul className="budget-list">
@@ -32,48 +32,38 @@ const Expenses = ({ expenses, deleteExpense }) => {
                     let prix = obj.price/100;
                     function financial(prix) {
                         return Number(prix).toFixed(2);
-                      }
+                    }
                     return <li key={obj._id} className="row mb-3">
-                    <div className="col-2 li___strip" />
-                    <ul className="col-10">
-                        <div className="close-btn">
-                            <button onClick={() => {deleteExpense(obj._id)}}>✖</button>
-                        </div>
-                        <li>{obj.title}</li>
-                        <li>{obj.description}</li>
-                        <li>{financial(prix)}</li>
-                        {/* <li>{prix.toFixed(2)}</li> */}
-                    </ul>
-                    {/* {edit.id === obj._id ? 
-                    (<UpdateForm edit={edit} setEdit={setEdit} onSubmit={submitUpdate}/>) : 
-                    (<>
-                        <ul className="events-list___li">
-                        <li>{obj.eventTitle}</li>
-                        <li>{obj.eventPlace}</li>
-                        <li>{obj.eventTime.replace('T', ' à ')}</li>
-                        <li>{obj.eventAddress}</li>
-                    </ul>
-        
-                    <div>
-                        <button onClick={() => setEdit({
-                            id: obj._id, 
-                            obj: {
-                                eventTitle: obj.eventTitle,
-                                eventPlace: obj.eventPlace,
-                                eventTime: obj.eventTime,
-                                eventAddress: obj.eventAddress
-                            }
-                        })}>
-                            <i className="fas fa-pencil-alt"/>
-                        </button>
+                        <div className="col-2 li___strip" />
                         
-                        <button className="del-btn" onClick={() => {deleteEvent(obj._id)}}>
-                            <i className="fas fa-trash"/>
-                        </button>
-                    </div>
-                    </>)} */}
-                    
-                </li>
+                        <div className="expense-li col-10">
+                            <div className="expense-li___btn">
+                                <button onClick={() => {deleteExpense(obj._id)}}>✖</button>
+                            </div>
+                            {edit.id === obj._id ?
+                                (<UpdateForm edit={edit} setEdit={setEdit} onSubmit={submitUpdate} />) :
+                                (<>
+                                    <ul className="">
+                                        <li><strong>{obj.title}</strong></li>
+                                        <li>{obj.description}</li>
+                                        <li>{financial(prix)}</li>
+                                    </ul>
+                                    {/* <div className="expense_li___edit-btn">
+                                        <button onClick={() => setEdit({
+                                            id: obj._id, 
+                                            obj: {
+                                                title: obj.title,
+                                                price: obj.price,
+                                                description: obj.description,
+                                            }
+                                        })}>
+                                            <i className="fas fa-pencil-alt"/>
+                                        </button>
+                                    </div> */}
+                                </>)
+                            }
+                        </div>
+                    </li>
                 }
                 )
             }

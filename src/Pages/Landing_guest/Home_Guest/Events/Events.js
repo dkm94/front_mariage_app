@@ -36,11 +36,11 @@ const Events = ({ events, deleteEvent, updateEvent }) => {
                         (<UpdateForm edit={edit} setEdit={setEdit} onSubmit={submitUpdate}/>) : 
                         (<>
                             <ul className="events-list___li">
-                            <li>{obj.eventTitle}</li>
-                            <li>{obj.eventPlace}</li>
-                            <li>{obj.eventTime.replace('T', ' à ')}</li>
-                            <li>{obj.eventAddress}</li>
-                        </ul>
+                                <li>{obj.eventTitle}</li>
+                                <li>{obj.eventPlace}</li>
+                                <li>{obj.eventTime.replace('T', ' à ')}</li>
+                                <li>{obj.eventAddress}</li>
+                            </ul>
             
                         <div>
                             <button onClick={() => setEdit({

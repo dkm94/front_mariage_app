@@ -122,7 +122,7 @@ const Tables = () => {
                 </div>
 
                 <div className="tables___list">
-                    <div className="table-form input-group mb-3">
+                    <div className="table-form add-form input-group mb-3">
                         <form onSubmit={handleSubmit} className="input-group mb-3">
                             <label>Créer une nouvelle table</label>
                             <input
@@ -140,7 +140,7 @@ const Tables = () => {
                     </div>
                         {tables.length === 0 || null ? 
                         (<div className="block"><span>Vos tables ici.</span></div>) : 
-                        (<ul className="get-tables container">
+                        (<ul className="get-tables">
                             {tables.map((table, i) => {
                             return <li key={i} data-id={table._id} className="table-style">
                                 <div className="table-name">

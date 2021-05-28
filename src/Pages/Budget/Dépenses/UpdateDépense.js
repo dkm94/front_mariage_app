@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-const UpdateEvent = ({ edit, setEdit, onSubmit }) => {
+const UpdateExpense = ({ edit, setEdit, onSubmit }) => {
 
     const [input, setInput] = useState(edit ? edit.obj : '')
     console.log(input)
+    // const editedPrice = input.price/100;
+    // const fixedPrice = editedPrice.toFixed(2);
 
     const inputRef = useRef(null);
 
@@ -23,13 +25,12 @@ const UpdateEvent = ({ edit, setEdit, onSubmit }) => {
         e.preventDefault();
         onSubmit({
             id: edit.id,
-            event: input
+            expense: input
         });
         setInput({
-            eventTitle: '',
-            eventPlace: '',
-            eventTime: '',
-            eventAddress: ''
+            title: '',
+            description: '',
+            price: ''
         });
     };
 
@@ -40,33 +41,25 @@ const UpdateEvent = ({ edit, setEdit, onSubmit }) => {
                     <>
                         <input 
                         type="text"
-                        name="eventTitle"
+                        name="title"
                         onChange={handleChange}  
-                        value={input.eventTitle}
+                        value={input.title}
                         ref={inputRef} />
 
                         <input 
                         type="text" 
-                        name="eventPlace"
+                        name="description"
                         onChange={handleChange} 
-                        value={input.eventPlace}
+                        value={input.description}
                         ref={inputRef} />
 
                         <input 
-                        type="datetime-local"
-                        name="eventTime"
+                        type="text"
+                        name="price"
                         onChange={handleChange} 
-                        value={input.eventTime}
+                        value={input.price}
                         ref={inputRef}
                          />
-
-                        <input 
-                        type="text"
-                        name="eventAddress"
-                        onChange={handleChange} 
-                        value={input.eventAddress}
-                        ref={inputRef}
-                        />
 
                         <button onClick={handleSubmit}>
                             <i className="fas fa-check"/>
@@ -79,4 +72,4 @@ const UpdateEvent = ({ edit, setEdit, onSubmit }) => {
     )
 }
 
-export default UpdateEvent;
+export default UpdateExpense;
