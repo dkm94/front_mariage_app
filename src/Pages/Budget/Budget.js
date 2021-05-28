@@ -36,28 +36,28 @@ const Budget = ({ userInfos: { budgetID } }) => {
         getDatas();
     }, [budgetID])
 
-    const editExpense = (updatedExpense) => {
-        console.log(updatedExpense)
-        // const updatedExpenses = [...operations].map((obj) => {
-        //     if(obj._id === updatedExpense.id) {
-        //         obj.expenseTitle = updatedExpense.event.expenseTitle
-        //         obj.expensePrince = updatedExpense.event.expensePrice
-        //         obj.expenseDescription = updatedExpense.event.expenseDescription
-        //     }
-        //     return obj
-        // })
-        // axios.post(`/api/admin/invitation/events/edit/${updatedExpense.id}`, updatedExpense.event)
-        //     .then((res) => {
-        //         if(res.data != null){
-        //             setTimeout(() => {
-        //                 setEvents(updatedExpenses)
-        //             }, 1000);
-        //         }
-        //     })
-        //     .catch((err) => {
-        //         console.log(err)
-        //     })
-    }
+    // const editExpense = (updatedExpense) => {
+    //     console.log(updatedExpense)
+    //     // const updatedExpenses = [...operations].map((obj) => {
+    //     //     if(obj._id === updatedExpense.id) {
+    //     //         obj.expenseTitle = updatedExpense.event.expenseTitle
+    //     //         obj.expensePrince = updatedExpense.event.expensePrice
+    //     //         obj.expenseDescription = updatedExpense.event.expenseDescription
+    //     //     }
+    //     //     return obj
+    //     // })
+    //     // axios.post(`/api/admin/invitation/events/edit/${updatedExpense.id}`, updatedExpense.event)
+    //     //     .then((res) => {
+    //     //         if(res.data != null){
+    //     //             setTimeout(() => {
+    //     //                 setEvents(updatedExpenses)
+    //     //             }, 1000);
+    //     //         }
+    //     //     })
+    //     //     .catch((err) => {
+    //     //         console.log(err)
+    //     //     })
+    // }
 
     const deleteExpense = (id) => {
         console.log(id);
@@ -200,7 +200,7 @@ const Budget = ({ userInfos: { budgetID } }) => {
                             <Expenses 
                             expenses={operations}
                             deleteExpense={deleteExpense}
-                            updateExpense={editExpense}
+                            // updateExpense={editExpense}
                             />
                         </div>
                     </div>
