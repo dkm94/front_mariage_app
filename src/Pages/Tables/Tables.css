@@ -1,6 +1,6 @@
 /* Menu tables */
 .tables-container {
-    padding-bottom: 100px;
+    /* padding-bottom: 100px; */
 }
 
 .tables {
@@ -192,23 +192,32 @@
 
 }
 
-@media (max-width: 1112px) { 
+@media (max-width: 1024px) { 
     .tables___title_style {
-        width: 30%;
+        width: 40%;
     }
  }
 
  @media (max-width: 768px) { 
+
+    .tables___title_style {
+        width: 80%;
+    }
+
     .get-tables {
-        grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
     }
 
     .table-form > form > label {
-        font-size: 1.7rem;
+        font-size: 1.3rem;
     }
 
     .table-name {
-        font-size: 2rem;
+        font-size: 1.3rem;
+    }
+
+    .add-form > form {
+        width: 80%;
     }
  }
 
@@ -222,16 +231,16 @@
     }
  }
 
- @media (max-width: 435px) { 
+ @media (max-width: 451px) { 
     .get-tables {
         grid-template-columns: repeat(2, 1fr);
     }
 
     .tables___title_style {
-        width: 50%;
+        width: 80%;
     }
 
-    .tables___bgimage {
+    /* .tables___bgimage {
         display: none;
-    }
+    } */
  }
