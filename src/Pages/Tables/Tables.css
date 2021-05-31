@@ -209,7 +209,7 @@
     }
 
     .table-form > form > label {
-        font-size: 1.3rem;
+        font-size: 1rem;
     }
 
     .table-name {
@@ -221,15 +221,15 @@
     }
  }
 
-  @media (max-width: 576px) { 
-    .table-form > form {
+  /* @media (max-width: 576px) { 
+     .table-form > form {
         width: 70%;
-    }
+    } 
 
     .tables___title_style {
         width: 40%;
     }
- }
+ } */
 
  @media (max-width: 451px) { 
     .get-tables {
