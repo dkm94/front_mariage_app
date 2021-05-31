@@ -13,7 +13,7 @@
     width: 100%;
 }
 .guest-form > form {
-    padding: 77px;
+    padding: 3rem;
     width: 50%;
     text-align: center;
     background: #E7E3E0;
@@ -53,4 +53,26 @@
 .guests___list {
     /* background: #FFFAF5; */
     width: 100%;
+}
+
+@media (max-width: 768px) {
+    .guest-form > form {
+        width: 80%;
+    }
+
+    .guests___title_style {
+        width: 80%;
+    }
+    
+    .guest-form > form > label {
+        font-size: 1rem;
+    }
+
+}
+
+@media (max-width: 414px) {
+    .guest-form > form {
+        padding: 2rem;
+    }
+
 }
