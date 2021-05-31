@@ -10,12 +10,6 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
 	transition: background-color 5000s ease-in-out 0s;
 }
 
-@media (max-width: 768px) {
-	html, body {
-		font-size: 50%;
-	}
-}
-
 svg {
 	display: inline-block;
 	width: 2rem;
@@ -264,5 +258,16 @@ input, button {
 @keyframes animatePath {
 	to {
 		stroke-dashoffset: 0;
+	}
+}
+
+
+@media (max-width: 991px) {
+	html, body {
+		font-size: 150%;
+	}
+
+	.footer-dims, .navbar-nav, .dropdown-menu > a {
+		font-size: 1rem;
 	}
 }

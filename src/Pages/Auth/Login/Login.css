@@ -3,11 +3,11 @@
     height: 85vh;
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
 	html, body {
 		font-size: 50%;
 	}
-}
+} */
 
 svg {
 	display: inline-block;
