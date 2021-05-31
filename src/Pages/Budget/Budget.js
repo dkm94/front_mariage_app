@@ -127,7 +127,7 @@ const Budget = ({ userInfos: { budgetID } }) => {
                 <div className="budget___bgimage" />
                 <div className="budget___title">
                     <div className="budget___title_style">
-                        <h1>Dépenses</h1>
+                        <h2>Dépenses</h2>
                     </div>
                 </div>
                 <div className="row budget-cols">

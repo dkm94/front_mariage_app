@@ -18,13 +18,14 @@
 }
 
 .li___strip{
-    background-color: lightgreen;
+    background-color: #E0D7FF;
     border-radius: 10px 0 0 10px;
 }
 
 .expense-li {
     padding: 20px;
     width: 100%;
+    background-color: #FFFFFF;
 }
 
 .expense-li > ul {
@@ -43,3 +44,8 @@
     color: #c1b8b8;
 }
 
+@media (max-width: 768px) { 
+    .budget-list > li {
+        margin-left: 0;
+    }
+}

@@ -112,4 +112,8 @@
     .get-guestlist {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .guest-picture > img {
+        height: 7rem;
+    }
 }

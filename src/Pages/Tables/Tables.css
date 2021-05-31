@@ -24,7 +24,9 @@
 .tables___title_style {
     padding-bottom: 20px;
     border-bottom: 1px solid;
-    width: 20%;
+    width: fit-content;
+    padding-right: 50px;
+    padding-left: 50px;
     text-transform: uppercase;
     font-family: 'Noto Sans JP', sans-serif;
 }
@@ -175,17 +177,7 @@
     font-weight: 500;
 }
 
-@media (max-width: 1024px) { 
-    .tables___title_style {
-        width: 40%;
-    }
- }
-
  @media (max-width: 768px) { 
-
-    .tables___title_style {
-        width: 80%;
-    }
 
     .get-tables {
         grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
@@ -207,10 +199,6 @@
  @media (max-width: 451px) { 
     .get-tables {
         grid-template-columns: repeat(2, 1fr);
-    }
-
-    .tables___title_style {
-        width: 80%;
     }
  }
 

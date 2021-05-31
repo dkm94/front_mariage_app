@@ -45,7 +45,9 @@
 .guests___title_style {
     padding-bottom: 20px;
     border-bottom: 1px solid;
-    width: 20%;
+    width: fit-content;
+    padding-right: 50px;
+    padding-left: 50px;
     text-transform: uppercase;
     font-family: 'Noto Sans JP', sans-serif;
 }
@@ -57,10 +59,6 @@
 
 @media (max-width: 768px) {
     .guest-form > form {
-        width: 80%;
-    }
-
-    .guests___title_style {
         width: 80%;
     }
     
