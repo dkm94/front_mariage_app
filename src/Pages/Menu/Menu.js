@@ -248,157 +248,159 @@ const Menus = () => {
                         <h1>Menu</h1>
                     </div>
                 </div>
-                <div className="menu___list container">
-                    <div className="starter forms">
-                        <h2>Entrée</h2>
-                        <div className="menu___forms">
-                            <form onSubmit={submitStarter}>
-                                <input
-                                type="text"
-                                name="name" 
-                                value={starter.name} 
-                                onChange={handleStarter}
-                                required
-                                />
-                                <button type="submit">OK</button>
-                            </form>
-                        </div>
-                        <ul>
-                            {
-                                starters.map((starter) => <li key={starter._id} >
-                                    {edit.id === starter._id ? 
-                                    (<form onSubmit={editStarter}>
-                                        <input 
-                                        type="text" 
-                                        onChange={handleUpdate} 
-                                        value={input}
-                                        ref={inputRef}
-                                        />
-                                    </form>) : 
-                                    (<span>{starter.name}</span>)}
-                                    
-                                    <div className="menu___li-btns">
+                <div className="container">
+                    <div className="menu___list">
+                        <div className="starter forms">
+                            <h2>Entrée</h2>
+                            <div className="menu___forms">
+                                <form onSubmit={submitStarter}>
+                                    <input
+                                    type="text"
+                                    name="name" 
+                                    value={starter.name} 
+                                    onChange={handleStarter}
+                                    required
+                                    />
+                                    <button type="submit">OK</button>
+                                </form>
+                            </div>
+                            <ul>
+                                {
+                                    starters.map((starter) => <li key={starter._id} >
                                         {edit.id === starter._id ? 
-                                        (<><button onClick={(e) => {editStarter(e)}}>
-                                            <i className="fas fa-check"/>
-                                        </button>
-                                        <button onClick={() => setEdit({id: null})}>
-                                            <i className="fas fa-undo"/>
-                                        </button>
-                                        </>
-                                        ) : 
-                                        (<button onClick={() => getUpdatedId(starter._id, starter.name)}>
-                                            <i className="fas fa-pencil-alt"/>
-                                        </button>)}
+                                        (<form onSubmit={editStarter}>
+                                            <input 
+                                            type="text" 
+                                            onChange={handleUpdate} 
+                                            value={input}
+                                            ref={inputRef}
+                                            />
+                                        </form>) : 
+                                        (<span>{starter.name}</span>)}
                                         
-                                        <button className="del-btn" onClick={() => {deleteStarter(starter._id)}}>
-                                            <i className="fas fa-trash"/>
-                                        </button>
-                                    </div>
-                                </li>)
-                            }
-                        </ul>
-                    </div>
-                    <div className="maincourse forms">
-                        <h2>Plat</h2>
-                        <div className="menu___forms">
-                            <form onSubmit={submitMaincourse}>
-                                <input
-                                type="text"
-                                name="name" 
-                                value={maincourse.name} 
-                                onChange={handleMaincourse}
-                                required
-                                />
-                                <button type="submit">OK</button>
-                            </form>
-
-                        </div>
-                        <ul>
-                            {
-                                maincourses.map((maincourse) => <li key={maincourse._id} >
-                                    {edit.id === maincourse._id ? 
-                                    (<form onSubmit={editMaincourse}>
-                                        <input 
-                                        type="text" 
-                                        onChange={handleUpdate} 
-                                        value={input}
-                                        ref={inputRef}
-                                        />
-                                    </form>) : 
-                                    (<span>{maincourse.name}</span>)}
-                                    
-                                    <div className="menu___li-btns">
-                                        {edit.id === maincourse._id ? 
-                                        (<>
-                                            <button onClick={(e) => {editMaincourse(e)}}>
+                                        <div className="menu___li-btns">
+                                            {edit.id === starter._id ? 
+                                            (<><button onClick={(e) => {editStarter(e)}}>
                                                 <i className="fas fa-check"/>
                                             </button>
                                             <button onClick={() => setEdit({id: null})}>
-                                            <i className="fas fa-undo"/>
+                                                <i className="fas fa-undo"/>
                                             </button>
-                                        </>) : 
-                                        (<button onClick={() => getUpdatedId(maincourse._id, maincourse.name)}>
-                                            <i className="fas fa-pencil-alt"/>
-                                        </button>)}
-                                        
-                                        <button className="del-btn" onClick={() => {deleteMaincourse(maincourse._id)}}>
-                                            <i className="fas fa-trash"/>
-                                        </button>
-                                    </div>
-                                </li>)
+                                            </>
+                                            ) : 
+                                            (<button onClick={() => getUpdatedId(starter._id, starter.name)}>
+                                                <i className="fas fa-pencil-alt"/>
+                                            </button>)}
+                                            
+                                            <button className="del-btn" onClick={() => {deleteStarter(starter._id)}}>
+                                                <i className="fas fa-trash"/>
+                                            </button>
+                                        </div>
+                                    </li>)
                                 }
-                        </ul>
-                    </div>
-                    <div className="dessert forms">
-                        <h2>Dessert</h2>
-                        <div className="menu___forms">
-                            <form onSubmit={submitDessert}>
-                                <input
-                                type="text"
-                                name="name" 
-                                value={dessert.name} 
-                                onChange={handleDessert}
-                                required
-                                />
-                                <button type="submit">OK</button>
-                            </form>
+                            </ul>
                         </div>
-                        <ul>
-                            {
-                                desserts.map((dessert) => <li key={dessert._id} >
-                                    {edit.id === dessert._id ? 
-                                    (<form onSubmit={editDessert}>
-                                        <input 
-                                        type="text" 
-                                        onChange={handleUpdate} 
-                                        value={input}
-                                        ref={inputRef}
-                                        />
-                                    </form>) : 
-                                    (<span>{dessert.name}</span>)}
-                                    
-                                    <div className="menu___li-btns">
-                                        {edit.id === dessert._id ? 
-                                        (<>
-                                            <button onClick={(e) => {editDessert(e)}}>
-                                                <i className="fas fa-check"/>
-                                            </button>
-                                            <button onClick={() => setEdit({id: null})}>
-                                            <i className="fas fa-undo"/>
-                                            </button>
-                                        </>) : 
-                                        (<button onClick={() => getUpdatedId(dessert._id, dessert.name)}>
-                                            <i className="fas fa-pencil-alt"/>
-                                        </button>)}
+                        <div className="maincourse forms">
+                            <h2>Plat</h2>
+                            <div className="menu___forms">
+                                <form onSubmit={submitMaincourse}>
+                                    <input
+                                    type="text"
+                                    name="name" 
+                                    value={maincourse.name} 
+                                    onChange={handleMaincourse}
+                                    required
+                                    />
+                                    <button type="submit">OK</button>
+                                </form>
+
+                            </div>
+                            <ul>
+                                {
+                                    maincourses.map((maincourse) => <li key={maincourse._id} >
+                                        {edit.id === maincourse._id ? 
+                                        (<form onSubmit={editMaincourse}>
+                                            <input 
+                                            type="text" 
+                                            onChange={handleUpdate} 
+                                            value={input}
+                                            ref={inputRef}
+                                            />
+                                        </form>) : 
+                                        (<span>{maincourse.name}</span>)}
                                         
-                                        <button className="del-btn" onClick={() => {deleteDessert(dessert._id)}}>
-                                            <i className="fas fa-trash"/>
-                                        </button>
-                                    </div>
-                                </li>)
-                            }
-                        </ul>
+                                        <div className="menu___li-btns">
+                                            {edit.id === maincourse._id ? 
+                                            (<>
+                                                <button onClick={(e) => {editMaincourse(e)}}>
+                                                    <i className="fas fa-check"/>
+                                                </button>
+                                                <button onClick={() => setEdit({id: null})}>
+                                                <i className="fas fa-undo"/>
+                                                </button>
+                                            </>) : 
+                                            (<button onClick={() => getUpdatedId(maincourse._id, maincourse.name)}>
+                                                <i className="fas fa-pencil-alt"/>
+                                            </button>)}
+                                            
+                                            <button className="del-btn" onClick={() => {deleteMaincourse(maincourse._id)}}>
+                                                <i className="fas fa-trash"/>
+                                            </button>
+                                        </div>
+                                    </li>)
+                                    }
+                            </ul>
+                        </div>
+                        <div className="dessert forms">
+                            <h2>Dessert</h2>
+                            <div className="menu___forms">
+                                <form onSubmit={submitDessert}>
+                                    <input
+                                    type="text"
+                                    name="name" 
+                                    value={dessert.name} 
+                                    onChange={handleDessert}
+                                    required
+                                    />
+                                    <button type="submit">OK</button>
+                                </form>
+                            </div>
+                            <ul>
+                                {
+                                    desserts.map((dessert) => <li key={dessert._id} >
+                                        {edit.id === dessert._id ? 
+                                        (<form onSubmit={editDessert}>
+                                            <input 
+                                            type="text" 
+                                            onChange={handleUpdate} 
+                                            value={input}
+                                            ref={inputRef}
+                                            />
+                                        </form>) : 
+                                        (<span>{dessert.name}</span>)}
+                                        
+                                        <div className="menu___li-btns">
+                                            {edit.id === dessert._id ? 
+                                            (<>
+                                                <button onClick={(e) => {editDessert(e)}}>
+                                                    <i className="fas fa-check"/>
+                                                </button>
+                                                <button onClick={() => setEdit({id: null})}>
+                                                <i className="fas fa-undo"/>
+                                                </button>
+                                            </>) : 
+                                            (<button onClick={() => getUpdatedId(dessert._id, dessert.name)}>
+                                                <i className="fas fa-pencil-alt"/>
+                                            </button>)}
+                                            
+                                            <button className="del-btn" onClick={() => {deleteDessert(dessert._id)}}>
+                                                <i className="fas fa-trash"/>
+                                            </button>
+                                        </div>
+                                    </li>)
+                                }
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>

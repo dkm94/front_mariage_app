@@ -29,14 +29,14 @@ h2 {
 }
 
 .menu___list {
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    padding: 100px 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 1rem;
+    row-gap: 1rem;
 }
 
 .menu___list > .forms {
-    width: 30%;
+    /* width: 30%; */
 }
 
 .forms > ul {
@@ -125,4 +125,17 @@ button {
 
 .dessert {
     background-color: #DABDD3;
+}
+
+@media (max-width: 768px) {
+    .menu___title_style {
+        width: 80%;
+    }
+
+    .menu___list {
+        grid-template-columns: repeat(1, 80%);
+        grid-row-gap: 3rem;
+        justify-content: center;
+        row-gap: 3rem;
+    }
 }
