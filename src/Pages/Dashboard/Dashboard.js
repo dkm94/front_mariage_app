@@ -5,8 +5,9 @@ import './Dashboard.css';
 
 const Dashboard = ({ userInfos }) => {
         
-    const [nbOfGuests, setnbOfGuests] = useState()
-    const [nbOfTables, setnbOfTables] = useState()
+    const [nbOfGuests, setnbOfGuests] = useState();
+    const [nbOfTables, setnbOfTables] = useState();
+    const [operations, setOperations] = useState([]);
     const [detailedMenu, setdetailedMenu] = useState({
         starterID: '', maincourseID: '', dessertID: ''
     })
@@ -22,15 +23,22 @@ const Dashboard = ({ userInfos }) => {
         let guests = axios.get("/api/admin/guests/");
         let tables = axios.get("/api/admin/tables/");
         let menu = axios.get("/api/admin/menu/");
+        let operations = axios.get("/api/admin/budget/operations/");
 
         async function getDatas(){
-            let res = await Promise.all([guests, tables, menu])
+            let res = await Promise.all([guests, tables, menu, operations])
             setnbOfGuests(res[0].data.length)
             setnbOfTables(res[1].data.length)
             setdetailedMenu(res[2].data)
+            setOperations(res[3].data)
         }
         getDatas();
     }, [])
+
+    let sum = operations.reduce((a, b) => a + b.price, 0)/100;
+    function total(sum){
+        return Number(sum).toFixed(2);
+    }
 
     return(
         <div className="dashboard">
@@ -41,20 +49,23 @@ const Dashboard = ({ userInfos }) => {
                 </div>
             </div>
             <div className="dashboard___elements container">
-                <div className="elements___container dashboard___grid row row-cols-2 row-cols-md-2 row-cols-lg-3">
-                    <Card 
+                <div className="elements___container dashboard___grid row">
+                    <Card
+                    responsive={"col-sm-8 col-md-6 col-xl-4"}
                     title="Nombre de tables"
                     number={nbOfTables}
                     strip={cardColor[0]}
                     path={"/menu/tables"}
                     />
-                    <Card 
+                    <Card
+                    responsive={"col-sm-8 col-md-6 col-xl-4"}
                     title="Nombre d'invités"
                     number={nbOfGuests}
                     strip={cardColor[1]}
                     path={"/menu/invités"}
                     />
-                    <Card 
+                    <Card
+                    responsive={"col-sm-8 col-md-6 col-xl-4"}
                     title="Composition du menu"
                     detailedMenu={detailedMenu}
                     entrées={detailedMenu.starterID.length}
@@ -63,10 +74,12 @@ const Dashboard = ({ userInfos }) => {
                     strip={cardColor[2]}
                     path={"/menu/carte"}
                     />
-                    <Card 
+                    <Card
+                    responsive={"col-sm-8 col-md-6 col-xl-6"}
                     title="Dépenses"
-                    number="0"
+                    number={total(sum)}
                     strip={cardColor[3]}
+                    path={"/menu/budget"}
                     // devise="€"
                     />
                 </div>

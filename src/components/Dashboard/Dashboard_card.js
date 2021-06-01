@@ -4,10 +4,11 @@ import "./Dashboard_card.css";
 
 const Card = (props) => {
     
-    const {title, number, strip, path, detailedMenu, entrées, plats, desserts} = props;
+    const {responsive, title, number, strip, path, detailedMenu, entrées, plats, desserts} = props;
+    console.log(number)
 
     return(
-        <div className="col card-component" >
+        <div className={`${responsive} card-component`} >
             <div className="card">
                 <div className="row g-0">
                     <div className="col-2 card-strip" style={{ backgroundColor: strip}} />
