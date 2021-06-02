@@ -13,19 +13,37 @@
     width: 100%;
 }
 .guest-form > form {
-    padding: 3rem;
+    padding: 2rem;
     width: 50%;
     text-align: center;
     background: #E7E3E0;
-    border-radius: 10px 0px;
+    /* border-radius: 10px 0px; */
 }
 
 .guest-form > form > label {
+    font-size: 2rem;
     width: 100%;
+    font-family: 'Alex Brush', cursive;
+    text-align: center;
 }
 
-.guest-form > form > input {
-    /* margin-right: 1rem; */
+.guest-form > form > div {
+    width: 100%;
+    display: flex;
+}
+
+
+.guest-form > form > div > input {
+    width: 80%;
+    border-radius: 5px;
+}
+
+.guest-form > form > div > button {
+    margin-left: 10px;
+    border-style: none;
+    background: white;
+    border-radius: 5px;
+    box-shadow: rgb(0 0 0 / 26%) 0px 1px 3px 0px;
 }
 
 .guests___bgimage {

@@ -49,3 +49,9 @@
 .element___data-size {
     font-size: 2em;
 }
+
+@media (max-width: 414px) { 
+    .card-component {
+        margin-bottom: 1rem;
+    }
+}

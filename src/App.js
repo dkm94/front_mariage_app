@@ -12,11 +12,12 @@ import Account from "../src/Pages/Mon_Compte/Mon_compte";
 import Home from './Pages/Homepage/Home';
 import Register from './Pages/Auth/Register/Register';
 import Login from './Pages/Auth/Login/Login';
-import Invitation from "../src/Pages/Landing_guest/Home_guest";
+// import Invitation from "../src/Pages/Landing_guest/Home_guest";
 import Invités from "../src/Pages/Invités/Invités";
 import Tables from "../src/Pages/Tables/Tables";
 import Carte from "../src/Pages/Menu/Menu";
 import Budget from "../src/Pages/Budget/Budget.js";
+import ScrollButton from "../src/components/ScrollToTop/ScrollToTop";
 
 import axios from "axios";
 import decode from "jwt-decode";
@@ -29,7 +30,7 @@ function App() {
   let role;
   if(token){
     user = decode(token)
-    console.log(user)
+    // console.log(user)
     role = user.role
   }
 
@@ -43,21 +44,24 @@ function App() {
     } else 
         navigation =  <LoggedInNavigation userInfos={user}/>
 
+  let scrollButton = <ScrollButton />
+
+
   return (
     <div className="App">
       <Router>
         {navigation}
           <Switch>
-            <Route exact path="/" component={Home}/>
+            <Route exact path="/home" component={Home}/>
             <Route path="/login" component={Login}/>
             <Route path="/register" component={Register}/>
-            <ProtectedRoute exact path="/tableau-de-bord" component={Dashboard} isAuth={role} userInfos={user}/>
-            <ProtectedRoute path="/menu/mon-compte" component={Account} isAuth={role} userInfos={user}/>
-            <ProtectedRoute path="/menu/invitation/:id" component={Invitation} isAuth={role} userInfos={user}/>
-            <ProtectedRoute path="/menu/tables" component={Tables} isAuth={role}/>
-            <ProtectedRoute path="/menu/invités" component={Invités} isAuth={role}/>
-            <ProtectedRoute path="/menu/carte" component={Carte} isAuth={role}/>
-            <ProtectedRoute path="/menu/budget" component={Budget} isAuth={role} userInfos={user}/>
+            <ProtectedRoute exact path="/tableau-de-bord" component={Dashboard} isAuth={role} userInfos={user} scroll={scrollButton}/>
+            <ProtectedRoute path="/menu/mon-compte" component={Account} isAuth={role} userInfos={user} scroll={scrollButton}/>
+            {/* <ProtectedRoute path="/menu/invitation/:id" component={Invitation} isAuth={role} userInfos={user} scroll={scrollButton}/> */}
+            <ProtectedRoute path="/menu/tables" component={Tables} isAuth={role} scroll={scrollButton}/>
+            <ProtectedRoute path="/menu/invités" component={Invités} isAuth={role} scroll={scrollButton}/>
+            <ProtectedRoute path="/menu/carte" component={Carte} isAuth={role} scroll={scrollButton}/>
+            <ProtectedRoute path="/menu/budget" component={Budget} isAuth={role} userInfos={user} scroll={scrollButton}/>
             {/* <Route path="*" component={() => "Contenu introuvable"}/> */}
           </Switch>
         <Footer />

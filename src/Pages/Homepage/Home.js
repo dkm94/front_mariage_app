@@ -3,7 +3,7 @@ import { withRouter, Link } from "react-router-dom";
 import './Home.css';
 import "../../components/LargeButton/LargeButton.css"
 
-const Home = () => {
+const Home = (props) => {
 
         return (
             <div className="home">

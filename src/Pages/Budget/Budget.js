@@ -7,7 +7,7 @@ import axios from "axios";
 
 import "./Budget.css";
 
-const Budget = ({ userInfos: { budgetID } }) => {
+const Budget = ({ userInfos: { budgetID }, scroll }) => {
 
     const newOperationValues = {
         title: '', 
@@ -20,16 +20,12 @@ const Budget = ({ userInfos: { budgetID } }) => {
     const [operations, setOperations] = useState([]);
     const [newOperation, setnewOperation] = useState(newOperationValues)
 
-    console.log(operations)
-
     useEffect(() => {
         let budget = axios.get(`/api/admin/budget/details/${budgetID}`);
         let operations = axios.get(`/api/admin/budget/operations/`);
 
         async function getDatas(){
             let res = await Promise.all([budget, operations])
-            console.log(res[0].data)
-            console.log(res[1].data)
             setBudget(res[0].data)
             setOperations(res[1].data)
         }
@@ -123,6 +119,7 @@ const Budget = ({ userInfos: { budgetID } }) => {
 
     return(
         <div className="budget-container">
+            {scroll}
             <div className="budget">
                 <div className="budget___bgimage" />
                 <div className="budget___title">

@@ -3,8 +3,8 @@ import axios from 'axios';
 import Card from "../../components/Dashboard/Dashboard_card";
 import './Dashboard.css';
 
-const Dashboard = ({ userInfos }) => {
-        
+const Dashboard = ({ scroll }) => {
+
     const [nbOfGuests, setnbOfGuests] = useState();
     const [nbOfTables, setnbOfTables] = useState();
     const [operations, setOperations] = useState([]);
@@ -42,6 +42,7 @@ const Dashboard = ({ userInfos }) => {
 
     return(
         <div className="dashboard">
+            {scroll}
             <div className="dashboard___bgimage" />
             <div className="dashboard___title">
                 <div className="dashboard___title_style">
@@ -51,21 +52,21 @@ const Dashboard = ({ userInfos }) => {
             <div className="dashboard___elements container">
                 <div className="elements___container dashboard___grid row">
                     <Card
-                    responsive={"col-sm-8 col-md-6 col-xl-4"}
+                    responsive={"col-sm-8 col-xl-6"}
                     title="Nombre de tables"
                     number={nbOfTables}
                     strip={cardColor[0]}
                     path={"/menu/tables"}
                     />
                     <Card
-                    responsive={"col-sm-8 col-md-6 col-xl-4"}
+                    responsive={"col-sm-8 col-xl-6"}
                     title="Nombre d'invités"
                     number={nbOfGuests}
                     strip={cardColor[1]}
                     path={"/menu/invités"}
                     />
                     <Card
-                    responsive={"col-sm-8 col-md-6 col-xl-4"}
+                    responsive={"col-sm-8 col-xl-6"}
                     title="Composition du menu"
                     detailedMenu={detailedMenu}
                     entrées={detailedMenu.starterID.length}
@@ -75,7 +76,7 @@ const Dashboard = ({ userInfos }) => {
                     path={"/menu/carte"}
                     />
                     <Card
-                    responsive={"col-sm-8 col-md-6 col-xl-6"}
+                    responsive={"col-sm-8 col-xl-6"}
                     title="Dépenses"
                     number={total(sum)}
                     strip={cardColor[3]}

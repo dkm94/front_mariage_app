@@ -58,7 +58,6 @@ const Select = ({ tables, table, guests, setTables }) => {
         setTimeout(() => {
             axios.get(`api/admin/guests/${inputText}`)
             .then((res) => {
-                console.log("OK")
                 console.log(guest)
                 let array;
                 array = res.data;
@@ -80,7 +79,7 @@ const Select = ({ tables, table, guests, setTables }) => {
                     }
                 }
                 callback(guests = tempArray)
-                console.log(tempArray)
+                // console.log(tempArray)
             })
             .catch((err) => {
                 console.log(err)

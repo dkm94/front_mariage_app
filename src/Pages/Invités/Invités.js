@@ -4,7 +4,7 @@ import Byguests from "../../components/Invités(affichage)/by_guests/guests";
 // import Bygroups from "../../components/Invités(affichage)/by_groups/groups";
 import "./Invités.css";
 
-const Guests = () => {
+const Guests = ({ scroll }) => {
     // const [selectedSection, setSelectedSection] = useState("");
 
     // const selectSection = (e) => {
@@ -20,6 +20,7 @@ const Guests = () => {
  
     return(
         <div className="byguests">
+            {scroll}
             {/* <div className="select-section">
                 <label htmlFor="affichage-select">Affichage par:</label>
                 <select name="affichage" onChange={selectSection}>

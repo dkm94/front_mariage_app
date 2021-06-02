@@ -111,18 +111,21 @@ const Byguests = () => {
             <div className="guests___list">
                 <div className="guest-form input-group mb-3">
                     <form onSubmit={handleSubmit} className="input-group mb-3">
-                        <label>Ajouter un nouvel invité</label>
-                        <input
-                        type="text"
-                        className="form-control"
-                        name="name" 
-                        value={newGuest.name} 
-                        onChange={handleChange}/>
-                        <button 
-                        type="submit"
-                        className="btn btn-secondary"
-                        id="button-addon2"
-                        >OK</button>
+                        <label>Nouvel invité</label>
+                        <div>
+                            <input
+                            type="text"
+                            className="form-control"
+                            name="name"
+                            placeholder="ex: Julie Durand"
+                            value={newGuest.name} 
+                            onChange={handleChange}/>
+                            <button 
+                            type="submit"
+                            className="btn"
+                            id="button-addon2"
+                            >OK</button>
+                        </div>
                     </form>
                 </div>
                 <div className="byguests___block container">

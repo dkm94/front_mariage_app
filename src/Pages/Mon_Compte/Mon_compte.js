@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Formik, useFormik, Form } from "formik";
+// import { useHistory } from "react-router-dom";
 import Button from "../../../src/components/LargeButton/LargeButton";
 import * as Yup from "yup";
 import axios from "axios";
 import accountimg from "../../../src/img/account.jpg";
 import "./Mon_compte.css";
 
-const MyAccount = ({ userInfos }) => {
-
+const MyAccount = ({ userInfos, scroll, ...props }) => {
+   
     const userId = userInfos.id;
-
+    
     const [account, setaccount] = useState({})
     const [deleteValidation, setdeleteValidation] = useState(false)
-    console.log(deleteValidation)
     
     useEffect(() => {
         const fetchData = async () => {
@@ -84,6 +84,7 @@ const MyAccount = ({ userInfos }) => {
 
     return (
         <div className="account">
+            {scroll}
             <div className="account___container">
                 <div  className="account___bgimage" />
                 <div className="account___title">

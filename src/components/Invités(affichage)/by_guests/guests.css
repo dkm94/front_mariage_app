@@ -98,7 +98,7 @@
 .guest-picture > img {
     object-fit: cover;
     width: 100%;
-    height: 9rem;
+    height: 10rem;
     border-radius: 50%;
 }
 

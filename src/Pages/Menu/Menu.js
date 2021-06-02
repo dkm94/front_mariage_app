@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import "./Menu.css";
 
-const Menus = () => {
+const Menus = ({ scroll }) => {
 
     const [starters, setStarters] = useState([]);
     const [starter, setStarter] = useState({name:""})
@@ -241,6 +241,7 @@ const Menus = () => {
 
     return(
         <div className="menu-container">
+            {scroll}
             <div className="menu">
                 <div className="menu___bgimage" />
                 <div className="menu___title">

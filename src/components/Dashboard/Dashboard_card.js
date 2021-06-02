@@ -5,7 +5,6 @@ import "./Dashboard_card.css";
 const Card = (props) => {
     
     const {responsive, title, number, strip, path, detailedMenu, entrées, plats, desserts} = props;
-    console.log(number)
 
     return(
         <div className={`${responsive} card-component`} >
@@ -31,12 +30,12 @@ const Card = (props) => {
                                         <span className="element___data-size">{desserts}</span>
                                     </div>
                                 </div>
-                                <Link to={path}>Voir détails</Link>
+                                <Link to={path} replace>Voir détails</Link>
                             </> : 
                             <>
                                 <h5 className="card-title">{title}</h5>
                                 <span>{number}</span>
-                                <Link to={path}>Voir détails</Link>
+                                <Link to={path} replace>Voir détails</Link>
                             </>}
                         </div>
                     </div>

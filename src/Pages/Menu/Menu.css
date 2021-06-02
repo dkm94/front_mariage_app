@@ -93,6 +93,9 @@ button {
     border-radius: 5px;
 }
 
+.menu___forms > form > button {
+    box-shadow: rgb(0 0 0 / 26%) 0px 1px 3px 0px;
+}
 
 .menu___li-btns {
     height: fit-content;

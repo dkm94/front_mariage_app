@@ -7,7 +7,7 @@ import Button from "../../components/LargeButton/LargeButton";
 import "./Tables.css";
 
 
-const Tables = () => {
+const Tables = ({ scroll }) => {
     const [tables, setTables] = useState([]);
     const [newTable, setNewTable] = useState({name: ''})
     const [edit, setEdit] = useState({
@@ -113,6 +113,7 @@ const Tables = () => {
 
     return(
         <div className="tables-container">
+            {scroll}
             <div className="tables">
                 <div className="tables___bgimage"/>
                 <div className="tables___title">
@@ -124,18 +125,21 @@ const Tables = () => {
                 <div className="tables___list">
                     <div className="table-form add-form input-group mb-3">
                         <form onSubmit={handleSubmit} className="input-group mb-3">
-                            <label>Créer une nouvelle table</label>
-                            <input
-                            type="text"
-                            className="form-control"
-                            name="name" 
-                            value={newTable.name} 
-                            onChange={handleChange}/>
-                            <button 
-                            type="submit"
-                            className="btn btn-secondary"
-                            id="button-addon2"
-                            >OK</button>
+                            <label>Nouvelle table</label>
+                            <div>
+                                <input
+                                type="text"
+                                className="form-control"
+                                name="name" 
+                                placeholder="ex: Table amis..."
+                                value={newTable.name} 
+                                onChange={handleChange}/>
+                                <button 
+                                type="submit"
+                                className="btn"
+                                id="button-addon2"
+                                >OK</button>
+                            </div>
                         </form>
                     </div>
                         {tables.length === 0 || null ? 

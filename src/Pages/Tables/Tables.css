@@ -97,15 +97,36 @@
 }
 
 .table-form > form {
-    padding: 3rem;
+    padding: 2rem;
     width: 50%;
     text-align: center;
     background-color: #EFDDD1;
-    border-radius: 10px 0px;
+    /* border-radius: 10px 0px; */
 }
 
 .table-form > form > label {
+    font-size: 2rem;
     width: 100%;
+    font-family: 'Alex Brush', cursive;
+    text-align: center;
+}
+
+.table-form > form > div {
+    width: 100%;
+    display: flex;
+}
+
+.table-form > form > div > input {
+    width: 80%;
+    border-radius: 5px;
+}
+
+.table-form > form > div > button {
+    margin-left: 10px;
+    border-style: none;
+    background: white;
+    border-radius: 5px;
+    box-shadow: rgb(0 0 0 / 26%) 0px 1px 3px 0px;
 }
 
 .table-style {
