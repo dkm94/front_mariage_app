@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Formik, Form, useFormik } from "formik";
 import TextField from "../../components/Formik/TextField-operations";
-import { UserContext, AuthenticationContext, ScrollButtonContext } from "../../../src/App";
+import { UserContext, ScrollButtonContext } from "../../../src/App";
 import Expenses from "./Dépenses/Dépenses";
 import * as Yup from "yup";
 import axios from "axios";
@@ -11,7 +11,6 @@ import "./Budget.css";
 const Budget = () => {
  
     const { budgetID } = useContext(UserContext)
-    const isAuthenticated = useContext(AuthenticationContext)
     const scrollBtn = useContext(ScrollButtonContext)
 
     const newOperationValues = {
