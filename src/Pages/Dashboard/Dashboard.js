@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import Card from "../../components/Dashboard/Dashboard_card";
+import { ScrollButtonContext } from "../../../src/App";
 import './Dashboard.css';
 
-const Dashboard = ({ scroll }) => {
+const Dashboard = () => {
+
+    const scrollBtn = useContext(ScrollButtonContext)
 
     const [nbOfGuests, setnbOfGuests] = useState();
     const [nbOfTables, setnbOfTables] = useState();
@@ -42,7 +45,7 @@ const Dashboard = ({ scroll }) => {
 
     return(
         <div className="dashboard">
-            {scroll}
+            {scrollBtn}
             <div className="dashboard___bgimage" />
             <div className="dashboard___title">
                 <div className="dashboard___title_style">

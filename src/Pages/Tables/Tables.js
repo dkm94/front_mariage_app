@@ -1,5 +1,6 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import { withRouter } from "react-router-dom";
+import { ScrollButtonContext } from "../../../src/App";
 import axios from "axios";
 import Select from "../../components/AsyncSelect/AsyncSelect";
 import Button from "../../components/LargeButton/LargeButton";
@@ -7,7 +8,9 @@ import Button from "../../components/LargeButton/LargeButton";
 import "./Tables.css";
 
 
-const Tables = ({ scroll }) => {
+const Tables = () => {
+    const scrollBtn = useContext(ScrollButtonContext)
+
     const [tables, setTables] = useState([]);
     const [newTable, setNewTable] = useState({name: ''})
     const [edit, setEdit] = useState({
@@ -113,7 +116,7 @@ const Tables = ({ scroll }) => {
 
     return(
         <div className="tables-container">
-            {scroll}
+            {scrollBtn}
             <div className="tables">
                 <div className="tables___bgimage"/>
                 <div className="tables___title">

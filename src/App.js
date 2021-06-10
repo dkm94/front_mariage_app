@@ -2,25 +2,37 @@ import React from 'react';
 import './App.css';
 import { Switch, BrowserRouter as Router, Route} from 'react-router-dom';
 
+// <------- Setup App ---------->
+import ProtectedRoute from "../src/ProtectedRoutes/Admin";
+import useDocumentTitle from "./setupTitle";
+
+// <------- Components ---------->
 import LoggedOutNavigation from "./components/Header/Navigation/Log_out"
 import LoggedInNavigation from "./components/Header/Navigation/Log_in"
 import Footer from "./components/Footer/Footer";
-import ProtectedRoute from "../src/ProtectedRoutes/Admin";
-// import Menu from "../src/Pages/MenuAdmin/Menu";
-import Dashboard from "../src/Pages/Dashboard/Dashboard";
-import Account from "../src/Pages/Mon_Compte/Mon_compte";
-import Home from './Pages/Homepage/Home';
-import Register from './Pages/Auth/Register/Register';
-import Login from './Pages/Auth/Login/Login';
-// import Invitation from "../src/Pages/Landing_guest/Home_guest";
-import Invités from "../src/Pages/Invités/Invités";
-import Tables from "../src/Pages/Tables/Tables";
-import Carte from "../src/Pages/Menu/Menu";
-import Budget from "../src/Pages/Budget/Budget.js";
 import ScrollButton from "../src/components/ScrollToTop/ScrollToTop";
 
+// <------- Pages ---------->
+import Homepage from './Pages/Homepage/Home';
+import NouvelUtilisateur from './Pages/Auth/Register/Register';
+import Connexion from './Pages/Auth/Login/Login';
+import TableauDeBord from "../src/Pages/Dashboard/Dashboard";
+import CompteUtilisateur from "../src/Pages/Mon_Compte/Mon_compte";
+import LesInvités from "../src/Pages/Invités/Invités";
+import LesTables from "../src/Pages/Tables/Tables";
+import LaCarte from "../src/Pages/Menu/Menu";
+import LesDépenses from "../src/Pages/Budget/Budget.js";
+// import Invitation from "../src/Pages/Landing_guest/Home_guest";
+// import Menu from "../src/Pages/MenuAdmin/Menu";
+
+// <------- Packages ---------->
 import axios from "axios";
 import decode from "jwt-decode";
+
+// <------- Props ---------->
+export const UserContext = React.createContext()
+export const AuthenticationContext = React.createContext()
+export const ScrollButtonContext = React.createContext()
 
 function App() {
 
@@ -30,7 +42,6 @@ function App() {
   let role;
   if(token){
     user = decode(token)
-    // console.log(user)
     role = user.role
   }
 
@@ -46,26 +57,74 @@ function App() {
 
   let scrollButton = <ScrollButton />
 
+  function Page({ title: titre, component: Component, isAuth:role, userInfos:info, scroll: scrollBtn }) {
+    const titlePrefix = "My Wedding | "
+    useDocumentTitle(`${titlePrefix}${titre}`)
+    return <Component userRole={role} infos={info} button={scrollBtn}/>;
+  }
+  
+  function Home() {
+    return <Page title="Accueil" component={Homepage}/>
+  }
+  
+  function Login() {
+    return <Page title="Connexion" component={Connexion} />
+  }
+  
+  function Register() {
+    return <Page title="Créer un compte" component={NouvelUtilisateur} />
+  }
+
+  function Dashboard() {
+    return <Page title="Tableau de bord" component={TableauDeBord} />
+  }
+  
+  function Account() {
+    return <Page title="Paramètres du compte" component={CompteUtilisateur} />
+  }
+  
+  function Tables() {
+    return <Page title="Les tables" component={LesTables} />
+  }
+  
+  function Guests() {
+    return <Page title="Les invités" component={LesInvités} />
+  }
+  
+  function Carte() {
+    return <Page title="Le repas" component={LaCarte} />
+  }
+  
+  function Budget() {
+    return <Page title="Les dépenses" component={LesDépenses} />
+  }
+
 
   return (
     <div className="App">
-      <Router>
-        {navigation}
-          <Switch>
-            <Route exact path="/home" component={Home}/>
-            <Route path="/login" component={Login}/>
-            <Route path="/register" component={Register}/>
-            <ProtectedRoute exact path="/tableau-de-bord" component={Dashboard} isAuth={role} userInfos={user} scroll={scrollButton}/>
-            <ProtectedRoute path="/menu/mon-compte" component={Account} isAuth={role} userInfos={user} scroll={scrollButton}/>
-            {/* <ProtectedRoute path="/menu/invitation/:id" component={Invitation} isAuth={role} userInfos={user} scroll={scrollButton}/> */}
-            <ProtectedRoute path="/menu/tables" component={Tables} isAuth={role} scroll={scrollButton}/>
-            <ProtectedRoute path="/menu/invités" component={Invités} isAuth={role} scroll={scrollButton}/>
-            <ProtectedRoute path="/menu/carte" component={Carte} isAuth={role} scroll={scrollButton}/>
-            <ProtectedRoute path="/menu/budget" component={Budget} isAuth={role} userInfos={user} scroll={scrollButton}/>
-            {/* <Route path="*" component={() => "Contenu introuvable"}/> */}
-          </Switch>
-        <Footer />
-      </Router>
+      <AuthenticationContext.Provider value={role}>
+        <UserContext.Provider value={user}>
+          <ScrollButtonContext.Provider value={scrollButton}>
+            <Router>
+            {navigation}
+              <Switch>
+                <Route exact path="/" component={Home}/>
+                <Route path="/login" component={Login}/>
+                <Route path="/register" component={Register}/>
+                <ProtectedRoute exact path="/tableau-de-bord" component={Dashboard} isAuth={role}/>
+                <ProtectedRoute path="/menu/mon-compte" component={Account} isAuth={role}/>
+                {/* <ProtectedRoute path="/menu/invitation/:id" component={Invitation} isAuth={role} userInfos={user} scroll={scrollButton}/> */}
+                <ProtectedRoute path="/menu/tables" component={Tables} isAuth={role}/>
+                <ProtectedRoute path="/menu/invités" component={Guests} isAuth={role}/>
+                <ProtectedRoute path="/menu/carte" component={Carte} isAuth={role}/>
+                <ProtectedRoute path="/menu/budget" component={Budget} isAuth={role}/>
+                {/* <Route path="*" component={() => "Contenu introuvable"}/> */}
+              </Switch>
+              <Footer />
+            </Router>
+          </ScrollButtonContext.Provider>
+        </UserContext.Provider>
+      </AuthenticationContext.Provider>
     </div>
   );
 }

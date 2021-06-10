@@ -1,9 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 // import { withRouter } from "react-router-dom";
+import { ScrollButtonContext } from "../../../src/App";
 import axios from "axios";
 import "./Menu.css";
 
-const Menus = ({ scroll }) => {
+const Menus = () => {
+
+    const scrollBtn = useContext(ScrollButtonContext)
 
     const [starters, setStarters] = useState([]);
     const [starter, setStarter] = useState({name:""})
@@ -241,7 +244,7 @@ const Menus = ({ scroll }) => {
 
     return(
         <div className="menu-container">
-            {scroll}
+            {scrollBtn}
             <div className="menu">
                 <div className="menu___bgimage" />
                 <div className="menu___title">

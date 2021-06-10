@@ -204,10 +204,6 @@
         grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
     }
 
-    .table-form > form > label {
-        font-size: 1rem;
-    }
-
     .table-name {
         font-size: 1.3rem;
     }
@@ -226,6 +222,10 @@
  @media (max-width: 414px) { 
     .table-form > form {
         padding: 2rem;
+    }
+
+    .get-tables {
+        padding: 50px;
     }
  }
 

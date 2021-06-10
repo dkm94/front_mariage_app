@@ -30,12 +30,12 @@ const Card = (props) => {
                                         <span className="element___data-size">{desserts}</span>
                                     </div>
                                 </div>
-                                <Link to={path} replace>Voir détails</Link>
+                                <Link to={path}>Voir détails</Link>
                             </> : 
                             <>
                                 <h5 className="card-title">{title}</h5>
                                 <span>{number}</span>
-                                <Link to={path} replace>Voir détails</Link>
+                                <Link to={path}>Voir détails</Link>
                             </>}
                         </div>
                     </div>

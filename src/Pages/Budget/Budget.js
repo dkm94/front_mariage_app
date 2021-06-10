@@ -1,13 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Formik, Form, useFormik } from "formik";
 import TextField from "../../components/Formik/TextField-operations";
+import { UserContext, AuthenticationContext, ScrollButtonContext } from "../../../src/App";
 import Expenses from "./Dépenses/Dépenses";
 import * as Yup from "yup";
 import axios from "axios";
 
 import "./Budget.css";
 
-const Budget = ({ userInfos: { budgetID }, scroll }) => {
+const Budget = () => {
+ 
+    const { budgetID } = useContext(UserContext)
+    const isAuthenticated = useContext(AuthenticationContext)
+    const scrollBtn = useContext(ScrollButtonContext)
 
     const newOperationValues = {
         title: '', 
@@ -119,7 +124,7 @@ const Budget = ({ userInfos: { budgetID }, scroll }) => {
 
     return(
         <div className="budget-container">
-            {scroll}
+            {scrollBtn}
             <div className="budget">
                 <div className="budget___bgimage" />
                 <div className="budget___title">
@@ -186,7 +191,7 @@ const Budget = ({ userInfos: { budgetID }, scroll }) => {
                                             required
                                             // placeholder="Exemple: Salle des fêtes de la ville"
                                         /><span>€</span>
-                                        <div className="col-12 event-form___submit">
+                                        <div className="col-12 budget-form___submit">
                                             <button className="btn-style-s" type="submit" disabled={formik.isSubmitting}>
                                                 Valider
                                             </button>

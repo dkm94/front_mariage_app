@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Formik, useFormik, Form } from "formik";
+import { UserContext, ScrollButtonContext } from "../../../src/App";
 // import { useHistory } from "react-router-dom";
 import Button from "../../../src/components/LargeButton/LargeButton";
 import * as Yup from "yup";
@@ -7,22 +8,23 @@ import axios from "axios";
 import accountimg from "../../../src/img/account.jpg";
 import "./Mon_compte.css";
 
-const MyAccount = ({ userInfos, scroll, ...props }) => {
+const MyAccount = () => {
    
-    const userId = userInfos.id;
+    const { id } = useContext(UserContext)
+    const scrollBtn = useContext(ScrollButtonContext)
     
     const [account, setaccount] = useState({})
     const [deleteValidation, setdeleteValidation] = useState(false)
     
     useEffect(() => {
         const fetchData = async () => {
-            await axios.get(`/api/admin/admin/myAccount/${userId}`, {withCredentials: true})
+            await axios.get(`/api/admin/admin/myAccount/${id}`, {withCredentials: true})
                 .then(res => {
                     setaccount(res.data)
                 })
                 .catch(err => console.log(err))
         }
-        fetchData()}, [userId])
+        fetchData()}, [id])
 
     const validationSchema = Yup.object().shape({
         password: Yup.string()
@@ -45,7 +47,7 @@ const MyAccount = ({ userInfos, scroll, ...props }) => {
             confirmPassword: ''
         },
         onSubmit: async (values) => {
-            await axios.post(`/api/admin/admin/editAccount/${userId}`,
+            await axios.post(`/api/admin/admin/editAccount/${id}`,
             {
                 password: values.password
             })
@@ -61,7 +63,7 @@ const MyAccount = ({ userInfos, scroll, ...props }) => {
     })
 
     const deleteAccount = async () => {
-        await axios.delete(`/api/admin/admin/deleteAccount/${userId}`)
+        await axios.delete(`/api/admin/admin/deleteAccount/${id}`)
             .then(res => {
                 // if(res.data === 200){
                 //     localStorage.removeItem("token")
@@ -84,7 +86,7 @@ const MyAccount = ({ userInfos, scroll, ...props }) => {
 
     return (
         <div className="account">
-            {scroll}
+            {scrollBtn}
             <div className="account___container">
                 <div  className="account___bgimage" />
                 <div className="account___title">
@@ -100,7 +102,7 @@ const MyAccount = ({ userInfos, scroll, ...props }) => {
                         <Formik>
                             <Form onSubmit={formik.handleSubmit}>
                                 <div className="account__row">
-                                    <div className={`textfield-style`}>
+                                    <div className={`textfield-style account___form-style`}>
                                         <label>Email</label>
                                         <input
                                         disabled
@@ -113,7 +115,7 @@ const MyAccount = ({ userInfos, scroll, ...props }) => {
                                     
                                 </div>
                                 <div className="account__row">
-                                    <div className={`textfield-style`}>
+                                    <div className={`textfield-style account___form-style`}>
                                         <label>Nouveau mot de passe</label>
                                         <input
                                         className="form-control"
@@ -129,7 +131,7 @@ const MyAccount = ({ userInfos, scroll, ...props }) => {
                                     </div>
                                 </div>
                                 <div className="account__row">
-                                    <div className={`textfield-style`}>
+                                    <div className={`textfield-style account___form-style`}>
                                         <label>Confirmer le nouveau mot de passe</label>
                                         <input
                                         className="form-control"

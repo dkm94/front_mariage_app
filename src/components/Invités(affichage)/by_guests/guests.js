@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 // import Button from "../../LargeButton/LargeButton";
+import { ScrollButtonContext } from "../../../App";
 import GuestList from "./Components/Guests/Guests";
 import "./guests.css";
 import axios from "axios";
 
 const Byguests = () => {
+    
+    const scrollBtn = useContext(ScrollButtonContext)
+
     const [guests, setGuests] = useState([]);
     const [newGuest, setNewGuest] = useState({name: ''})
     const [editPicture, seteditPicture] = useState(null)
@@ -105,6 +109,7 @@ const Byguests = () => {
             </div>
             <div className="guests___title">
                 <div className="guests___title_style" >
+                    {scrollBtn}
                     <h2>Les invités</h2>
                 </div>
             </div>

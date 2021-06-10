@@ -70,6 +70,10 @@
     border-radius: 10px;
 }
 
+.budget-form___add-btn, .budget-form___submit {
+    text-align: end;
+}
+
 @media (max-width: 768px) { 
     .card-body > span {
         font-size: 2rem;
@@ -91,7 +95,4 @@
         margin-left: 0;
     }
     
-    .budget-form___add-btn {
-        text-align: end;
-    }
 }
