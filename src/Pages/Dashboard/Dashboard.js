@@ -66,7 +66,7 @@ const Dashboard = () => {
                     title="Nombre d'invités"
                     number={nbOfGuests}
                     strip={cardColor[1]}
-                    path={"/menu/invités"}
+                    path={"/menu/invites"}
                     />
                     <Card
                     responsive={"col-sm-8 col-xl-6"}

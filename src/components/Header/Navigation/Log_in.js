@@ -42,11 +42,11 @@ const Login = ({ userInfos: { invitationID } }) => {
                                 </Link>
                                 <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                     {/* <Link className="dropdown-item" to={`/menu/invitation/${invitationID}`>Invitation</Link> */}
-                                    <Link className="dropdown-item" to="/menu/invités">Les invités</Link>
+                                    <Link className="dropdown-item" to="/menu/invites">Les invités</Link>
                                     <Link className="dropdown-item" to="/menu/tables">Les tables</Link>
                                     <Link className="dropdown-item" to="/menu/carte">La carte</Link>
                                     <Link className="dropdown-item" to="/menu/budget">Les dépenses</Link>
-                                    <Link className="dropdown-item" to="/menu/tâches">Liste des tâches</Link>
+                                    <Link className="dropdown-item" to="/menu/taches">Liste des tâches</Link>
                                 </div>
                             </li>
                             <li className="nav-item">

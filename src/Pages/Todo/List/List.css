@@ -1,0 +1,15 @@
+.tasks-list {
+    list-style: none;
+    padding: 2rem 0;
+    width: 60%;
+}
+
+.tasks-list > li {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px;
+    background: whitesmoke;
+    border: 1px solid lightgrey;
+    margin: 2px 0px;
+    border-radius: 5px;
+}

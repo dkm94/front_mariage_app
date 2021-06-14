@@ -16,7 +16,7 @@ const Menu = ({ userInfos }) => {
                         <div className="grid-item-title"><Link to={`/menu/invitation/${invitationID}`}><h2>Faire-part</h2></Link></div>
                     </div>
                     <div className="grid-item item2">
-                        <div className="grid-item-title"><Link to="/menu/invités"><h2>Invités</h2></Link></div>
+                        <div className="grid-item-title"><Link to="/menu/invites"><h2>Invités</h2></Link></div>
                     </div>
                     <div className="grid-item item3">
                         <div className="grid-item-title"><Link to="/menu/tables"><h2>Tables</h2></Link></div>

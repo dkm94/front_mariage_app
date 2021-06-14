@@ -120,10 +120,10 @@ function App() {
                 <ProtectedRoute path="/menu/mon-compte" component={Account} isAuth={role}/>
                 {/* <ProtectedRoute path="/menu/invitation/:id" component={Invitation} isAuth={role} userInfos={user} scroll={scrollButton}/> */}
                 <ProtectedRoute path="/menu/tables" component={Tables} isAuth={role}/>
-                <ProtectedRoute path="/menu/invités" component={Guests} isAuth={role}/>
+                <ProtectedRoute path="/menu/invites" component={Guests} isAuth={role}/>
                 <ProtectedRoute path="/menu/carte" component={Carte} isAuth={role}/>
                 <ProtectedRoute path="/menu/budget" component={Budget} isAuth={role}/>
-                <ProtectedRoute path="/menu/tâches" component={TodoList} isAuth={role}/>
+                <ProtectedRoute path="/menu/taches" component={TodoList} isAuth={role}/>
                 {/* <Route path="*" component={() => "Contenu introuvable"}/> */}
               </Switch>
               <Footer />
