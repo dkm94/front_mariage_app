@@ -134,7 +134,7 @@ const Tables = () => {
                                 type="text"
                                 className="form-control"
                                 name="name" 
-                                placeholder="ex: Table amis..."
+                                placeholder="Nom/Numéro de la table"
                                 value={newTable.name} 
                                 onChange={handleChange}/>
                                 <button 

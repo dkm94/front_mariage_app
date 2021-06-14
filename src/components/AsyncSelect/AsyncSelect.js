@@ -24,6 +24,7 @@ const Select = ({ tables, table, guests, setTables }) => {
 
     const [selectedGuest, setSelectedGuest] = useState(null);
     const [guest, setGuest] = useState(null);
+    // console.log(guest)
 
     const onSearchChange = (name) => {
         if(name){
@@ -53,10 +54,12 @@ const Select = ({ tables, table, guests, setTables }) => {
                 console.log(err)})
     }
 
+
     const loadOptions = (inputText, callback) => {
         setTimeout(() => {
             axios.get(`api/admin/guests/${inputText}`)
             .then((res) => {
+                console.log(guest)
                 let array;
                 array = res.data;
                 const tempArray = [];
@@ -105,6 +108,7 @@ const Select = ({ tables, table, guests, setTables }) => {
             loadOptions={loadOptions}
             onChange={e => onSearchChange(e)}
             defaultOptions={true}
+            // inputValue={true}
             isOptionDisabled={(option) => option.tableID != null }
             />
             <button className="add-btn" disabled={!selectedGuest} style={!selectedGuest ? disableBtn : enableBtn} onClick={() => {addGuest(selectedGuest, table)}}>Ajouter</button>

@@ -22,6 +22,7 @@ import LesInvités from "../src/Pages/Invités/Invités";
 import LesTables from "../src/Pages/Tables/Tables";
 import LaCarte from "../src/Pages/Menu/Menu";
 import LesDépenses from "../src/Pages/Budget/Budget.js";
+import Todo from "../src/Pages/Todo/Todo";
 // import Invitation from "../src/Pages/Landing_guest/Home_guest";
 // import Menu from "../src/Pages/MenuAdmin/Menu";
 
@@ -99,6 +100,10 @@ function App() {
     return <Page title="Les dépenses" component={LesDépenses} />
   }
 
+  function TodoList() {
+    return <Page title="Liste des tâches" component={Todo} />
+  }
+
 
   return (
     <div className="App">
@@ -118,6 +123,7 @@ function App() {
                 <ProtectedRoute path="/menu/invités" component={Guests} isAuth={role}/>
                 <ProtectedRoute path="/menu/carte" component={Carte} isAuth={role}/>
                 <ProtectedRoute path="/menu/budget" component={Budget} isAuth={role}/>
+                <ProtectedRoute path="/menu/tâches" component={TodoList} isAuth={role}/>
                 {/* <Route path="*" component={() => "Contenu introuvable"}/> */}
               </Switch>
               <Footer />

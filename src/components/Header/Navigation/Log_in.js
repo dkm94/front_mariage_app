@@ -46,6 +46,7 @@ const Login = ({ userInfos: { invitationID } }) => {
                                     <Link className="dropdown-item" to="/menu/tables">Les tables</Link>
                                     <Link className="dropdown-item" to="/menu/carte">La carte</Link>
                                     <Link className="dropdown-item" to="/menu/budget">Les dépenses</Link>
+                                    <Link className="dropdown-item" to="/menu/tâches">Liste des tâches</Link>
                                 </div>
                             </li>
                             <li className="nav-item">
