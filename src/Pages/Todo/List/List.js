@@ -4,8 +4,6 @@ import "./List.css";
 
 const Todos = ({ todos, deleteTodo }) => {
 
-    console.log("List: ", todos)
-
     const [edit, setEdit] = useState({
         id: null,
         obj: {

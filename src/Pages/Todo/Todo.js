@@ -10,7 +10,7 @@ const Todo = () => {
     const scrollBtn = useContext(ScrollButtonContext);
 
     const [todos, setTodos] = useState([]);
-    
+    const [todo, setTodo] = useState({text:"", color: ""})
     
     useEffect(() => {
         const fetchData = async () => {
@@ -19,6 +19,36 @@ const Todo = () => {
         }
         fetchData();
     }, []) 
+
+    const handleInput = (e) => {
+        const {value, name} = e.target;
+        setTodo(prevState => ({
+            ...prevState,
+            [name]: value
+        }))
+    } 
+
+    const addTodo = (e) => {
+        e.preventDefault();
+        axios.post(`/api/admin/todolist/add`, todo)
+            .then((res) => {
+                if(res.data != null){
+                    setTodos([...todos, todo])
+                    setTodo({text:"", color: ""})
+                }
+            })
+            .catch((err) => {
+                console.log(err)})
+    }
+
+    const deleteTodo = (id) => {
+        axios.delete(`/api/admin/todolist/delete/${id}`)
+            .then(res => {
+                if(res.data != null) {
+                    setTodos(todos.filter(todo => todo._id !== id))
+                }
+            })
+    }
 
     console.log("Todos: ", todos)
 
@@ -36,9 +66,14 @@ const Todo = () => {
                     <AddForm 
                     todos={todos}
                     setTodos={setTodos}
+                    todo={todo}
+                    setTodo={setTodo}
+                    addTodo={addTodo}
+                    handleInput={handleInput}
                     />
                     <List 
                     todos={todos}
+                    deleteTodo={deleteTodo}
                     />
                 </div>
             </div>

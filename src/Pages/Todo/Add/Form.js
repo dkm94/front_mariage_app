@@ -2,44 +2,27 @@ import React, { useState } from 'react';
 import axios from "axios";
 import "./Form.css";
 
-const Form = ({ todos, setTodos }) => {
+const Form = ({ todos, setTodos, todo, setTodo, handleInput, addTodo }) => {
 
-  const [todo, setTodo] = useState({text:"", color: ""})
+  
 
-  const settodos = updatedTodoList => {
-    console.log("updatedTodoList :", updatedTodoList)
-    setTodos(updatedTodoList)
+  // const settodos = updatedTodoList => {
+  //   console.log("updatedTodoList :", updatedTodoList)
+  //   setTodos(updatedTodoList)
+  // }
+
+  const handleValue = content => {
+    handleInput(content)
   }
-
-  const handleInput = (e) => {
-    const {value, name} = e.target;
-    setTodo(prevState => ({
-        ...prevState,
-        [name]: value
-    }))
-  } 
-
-  const submit = (e) => {
-    e.preventDefault();
-    axios.post(`/api/admin/todolist/add`, todo)
-      .then((res) => {
-          if(res.data != null){
-            settodos([...todos, todo])
-            setTodo({text:"", color: ""})
-          }
-      })
-      .catch((err) => {
-          console.log(err)})
-      }
 
   return(
     <div className="add-todo___form">
-      <form onSubmit={submit}>
+      <form onSubmit={addTodo}>
         <input
         type="text"
         name="text" 
         value={todo.text} 
-        onChange={handleInput}
+        onChange={handleValue}
         className="todo-input"
         placeholder="Nouvelle tâche"
         required
