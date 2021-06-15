@@ -73,7 +73,7 @@ const Todos = ({ todos, setTodos, deleteTodo }) => {
                             />) : 
                             (<>
                                 <span>{obj.text}</span>
-                                <div>
+                                <div className="todolist___li-btns">
                                     <button onClick={() => getUpdatedId(obj._id, obj.text)}>
                                         <i className="fas fa-pencil-alt"/>
                                     </button>

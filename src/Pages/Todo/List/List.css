@@ -13,3 +13,9 @@
     margin: 2px 0px;
     border-radius: 5px;
 }
+
+.todolist___li-btns > button {
+    margin: 0px 5px;
+    box-shadow: rgb(0 0 0 / 26%) 0px 1px 3px 0px;
+    background-color: #f6f5f3;
+}
