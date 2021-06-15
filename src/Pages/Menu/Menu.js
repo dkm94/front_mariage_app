@@ -30,12 +30,12 @@ const Menus = () => {
         setInput(e.target.value)
     }
 
-    const getUpdatedId = (tableId, tableName) => {
+    const getUpdatedId = (objId, objName) => {
         setEdit({
-            id: tableId,
-            name: tableName
+            id: objId,
+            name: objName
         })
-        setInput(tableName)
+        setInput(objName)
     }
 
 

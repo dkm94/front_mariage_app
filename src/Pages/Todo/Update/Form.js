@@ -1,51 +1,32 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
+import "./Form.css";
 
-const UpdateTask = ({ edit, setEdit, onSubmit }) => {
-
-    const [input, setInput] = useState(edit ? edit.obj : '')
-    console.log(input)
-
-    const inputRef = useRef(null);
+const UpdateTask = ({ edit, setEdit, input, handleChange, inputRef, editTodo }) => {
 
     useEffect(() => {
         inputRef.current.focus();
     });
 
-    const handleChange = (e) => {
-        const {value, name} = e.target;
-        setInput(prevState => ({
-            ...prevState,
-            [name]: value
-        }))
+    const handleValue = content => {
+        handleChange(content)
     }
 
-    const handleSubmit = e => {
-        e.preventDefault();
-        onSubmit({
-            id: edit.id,
-            event: input
-        });
-        setInput({
-            text: '',
-            color: ''
-        });
-    };
-
     return (
-        <div className="events-list___inputs">
-            <form onSubmit={handleSubmit} className='todo-form'>
+        <div>
+            <form onSubmit={editTodo} className='todo-form'>
                 {edit ?
                     <>
                         <input 
                         type="text"
-                        name="eventTitle"
-                        onChange={handleChange}  
+                        name="text"
+                        onChange={handleValue}  
                         value={input.text}
                         ref={inputRef} />
 
-                        <button onClick={handleSubmit}>
+                        <button type="submit">
                             <i className="fas fa-check"/>
                         </button>
+
                         <button onClick={() => setEdit({id: null})}><i className="fas fa-undo"></i></button>
                     </>
                 : null }

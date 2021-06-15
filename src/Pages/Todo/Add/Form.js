@@ -1,15 +1,7 @@
-import React, { useState } from 'react';
-import axios from "axios";
+import React from 'react';
 import "./Form.css";
 
-const Form = ({ todos, setTodos, todo, setTodo, handleInput, addTodo }) => {
-
-  
-
-  // const settodos = updatedTodoList => {
-  //   console.log("updatedTodoList :", updatedTodoList)
-  //   setTodos(updatedTodoList)
-  // }
+const Form = ({ todo, handleInput, addTodo }) => {
 
   const handleValue = content => {
     handleInput(content)

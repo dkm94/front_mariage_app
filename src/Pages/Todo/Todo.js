@@ -50,8 +50,6 @@ const Todo = () => {
             })
     }
 
-    console.log("Todos: ", todos)
-
     return(
         <div className='todo-container'>
             {scrollBtn}
@@ -73,6 +71,7 @@ const Todo = () => {
                     />
                     <List 
                     todos={todos}
+                    setTodos={setTodos}
                     deleteTodo={deleteTodo}
                     />
                 </div>
