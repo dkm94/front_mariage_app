@@ -60,12 +60,17 @@
 .get-tables {
     display: grid;
     justify-content: center;
-    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
     grid-gap: 2rem;
-    padding: 100px 50px;
+    padding: 1rem;
     list-style: none;
     width: 100%;
     box-sizing: border-box;
+}
+
+.tables___block {
+    width: 100%;
+    height: fit-content;
 }
 
 .tablesBox {
@@ -97,40 +102,41 @@
 }
 
 .table-form > form {
-    padding: 2rem;
-    width: 50%;
-    text-align: center;
-    background-color: #EFDDD1;
-    /* border-radius: 10px 0px; */
-}
-
-.table-form > form > label {
-    font-size: 2rem;
-    width: 100%;
-    font-family: 'Alex Brush', cursive;
+    width: 35%;
     text-align: center;
 }
 
 .table-form > form > div {
     width: 100%;
     display: flex;
+    border: lightgray 1px solid;
+    padding: 0 0.5rem;
+    border-radius: 30px;
+    background: #FFFFFF;
+    padding: .375rem .375rem .375rem .75rem;
+    box-shadow: 7px 6px 25px -6px rgba(158,153,158,1);
 }
 
 .table-form > form > div > input {
-    width: 80%;
-    border-radius: 5px;
+    border-style: none;
+}
+
+.table-form > form > div > input::placeholder {
+    font: italic;
 }
 
 .table-form > form > div > button {
     margin-left: 10px;
     border-style: none;
     background: white;
-    border-radius: 5px;
-    box-shadow: rgb(0 0 0 / 26%) 0px 1px 3px 0px;
+}
+
+.check-btn:focus {
+    outline: none;
 }
 
 .table-style {
-    position: relative;
+    /* position: relative;
     background-color: rgba(239, 221, 209, 0.7);
     width: 100%;
     margin-bottom: 1rem;
@@ -138,24 +144,58 @@
     padding: 40px 10px;
     border-radius: 5px;
     box-shadow: 10px 10px 17px 0px rgb(230 221 230);
-    border: 1px #ead2c3 solid;
+    border: 1px #ead2c3 solid; */
+    display: flex;
+    flex-direction: column;
+    box-shadow: 7px 6px 9px -6px rgba(158,153,158,1);
+    height: fit-content;
+    background-color: #FFF;
+    position: relative;
+    align-items: center;
+    padding: 2rem 1rem;
+    border: 1px #dfdbd7 solid;
 }
 
 .table-name {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 50px;
+    height: fit-content;
     padding-bottom: 20px;
 }
 
 .table-name > button {
-    margin-left: 5px;
-    background-color: transparent;
+    display: flex;
+    height: -moz-fit-content;
+    height: fit-content;
+    margin: 0px 5px;
+    padding: .5rem;
+    box-shadow: rgb(0 0 0 / 26%) 0px 1px 3px 0px;
+    background-color: #f6f5f3;
+    border-radius: 20px;
+}
+
+.table-name > button:focus {
+    outline: none;
 }
 
 .table-name > span {
     font-weight: 300;
+    font-size: 1.5rem;
+}
+
+.table-name > form {
+    display: flex;
+    flex-direction: row;
+}
+
+.table-name > form > input {
+    border-radius: 20px;
+}
+
+.select-style {
+    width: 100%;
 }
 
 .select-style > div > div > div > div {
@@ -163,10 +203,16 @@
 }
 
 .delete-table {
-    text-align: end;
     position: absolute;
-    bottom: 17px;
-    right: 17px;
+    bottom: 93%;
+    left: 96%;
+    border-radius: 50%;
+    background: #ba0e0e;
+    color: #fff;
+}
+
+.delete-table:focus {
+    outline: none;
 }
 
 
@@ -178,15 +224,30 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 5px;
+    margin-left: 1rem;
 }
 
 .guest-del > button {
+    display: flex;
+    height: -moz-fit-content;
+    height: fit-content;
+    margin: 0px 5px;
+    padding: .375rem 1.5rem;
     box-shadow: rgb(0 0 0 / 26%) 0px 1px 3px 0px;
     background-color: #f6f5f3;
+    border-radius: 20px;
+}
+
+.guest-del > button:focus {
+    outline: none;
 }
 
 .undo-btn {
     background-color: transparent;
+}
+
+.undo-btn:focus {
+    outline: none;
 }
 
 .block {

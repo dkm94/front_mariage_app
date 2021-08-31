@@ -3,7 +3,6 @@ import { withRouter } from "react-router-dom";
 import { ScrollButtonContext } from "../../../src/App";
 import axios from "axios";
 import Select from "../../components/AsyncSelect/AsyncSelect";
-import Button from "../../components/LargeButton/LargeButton";
 
 import "./Tables.css";
 
@@ -109,6 +108,7 @@ const Tables = () => {
                 if(res.data != null) {
                     setTables(tables.filter(table => table._id !== id))
                 }
+                window.location.reload();
             })
             .catch((err) => {
                 console.log(err)})
@@ -128,79 +128,90 @@ const Tables = () => {
                 <div className="tables___list">
                     <div className="table-form add-form input-group mb-3">
                         <form onSubmit={handleSubmit} className="input-group mb-3">
-                            <label>Nouvelle table</label>
                             <div>
                                 <input
                                 type="text"
-                                className="form-control"
+                                className="form-control shadow-none"
                                 name="name" 
                                 placeholder="Nom/Numéro de la table"
                                 value={newTable.name} 
                                 onChange={handleChange}/>
                                 <button 
                                 type="submit"
-                                className="btn"
+                                className="btn shadow-none check-btn"
                                 id="button-addon2"
-                                >OK</button>
+                                ><i className="fas fa-check" /></button>
                             </div>
                         </form>
                     </div>
                         {tables.length === 0 || null ? 
                         (<div className="block"><span>Vos tables ici.</span></div>) : 
-                        (<ul className="get-tables">
-                            {tables.map((table, i) => {
-                            return <li key={i} data-id={table._id} className="table-style">
-                                <div className="table-name">
-                                    {edit.id === table._id ? 
-                                    (<form onSubmit={editTableName} className="input-group mb-3">
-                                        <input
-                                        type="text"
-                                        className="form-control"
-                                        name="name" 
-                                        onChange={handleUpdatedTable}
-                                        value={input}
-                                        ref={inputRef}
-                                        />
-                                        <button 
-                                        type="submit"
-                                        className="btn"
-                                        id="button-addon2"
-                                        onClick={(e) => editTableName(e)}
-                                        >
-                                            <i className="fas fa-check"/>
-                                        </button>
-                                        <button className="undo-btn" onClick={() => setEdit({id: null})}>
-                                            <i className="fas fa-undo"/>
-                                        </button>
-                                    </form>) : 
-                                    (<>
-                                        <span>{table.name}</span>
-                                        <button onClick={() => getUpdatedId(table._id, table.name)}>
-                                            <i className="fas fa-pencil-alt"/>
-                                        </button>
-                                    </>)
-                                    }
-                                </div>
-                                
-                                <Select table={table} tables={tables} setTables={setTables} guests={table.guestID}/>
-
-                                <div style={{marginBottom: '20px'}}>
-                                    {table.guestID.map(guest => {
-                                        
-                                        return <div key={guest._id} className="guest-del">
-                                            <span>{guest.name}</span>
-                                            <button><i className="fas fa-trash"
-                                            onClick={() => {deleteGuest(guest._id, table._id)}} /></button>
+                        (<div className="tables__block container">
+                            <ul className="get-tables">
+                                {tables.map((table, i) => {
+                                    return <li key={i} data-id={table._id} className="table-style">
+                                        <div className="table-name">
+                                            {edit.id === table._id ? 
+                                            (<form onSubmit={editTableName} className="mb-3">
+                                                <input
+                                                type="text"
+                                                className="form-control shadow-none"
+                                                name="name" 
+                                                onChange={handleUpdatedTable}
+                                                value={input}
+                                                ref={inputRef}
+                                                />
+                                                <button 
+                                                type="submit"
+                                                className="btn shadow-none"
+                                                id="button-addon2"
+                                                onClick={(e) => editTableName(e)}
+                                                >
+                                                    <i className="fas fa-check"/>
+                                                </button>
+                                                <button className="undo-btn shadow-none" onClick={() => setEdit({id: null})}>
+                                                    <i className="fas fa-undo"/>
+                                                </button>
+                                            </form>) : 
+                                            (<>
+                                                <span>{table.name}</span>
+                                                <button 
+                                                    onClick={() => getUpdatedId(table._id, table.name)}
+                                                    className=""
+                                                >
+                                                    <i className="fas fa-pencil-alt"/>
+                                                </button>
+                                            </>)
+                                            }
                                         </div>
-                                    })}
-                                </div>
-                                <div className="delete-table">
-                                    <Button handleClick={() => {deleteTable(table._id, table.guestID)}} title="Supprimer"/>
-                                </div>
-                                
-                            </li>
-                        })}
-                        </ul>)
+                                    
+                                        <Select table={table} tables={tables} setTables={setTables} guests={table.guestID}/>
+
+                                        <div style={{marginBottom: '20px', marginTop: '20px', width: "100%"}}>
+                                            {table.guestID.map(guest => {
+                                                
+                                                return <div key={guest._id} className="guest-del">
+                                                    <span>{guest.name}</span>
+                                                    <button 
+                                                        onClick={() => {deleteGuest(guest._id, table._id)}} 
+                                                        className=""
+                                                    >
+                                                        <i className="fas fa-trash"/>
+                                                    </button>
+                                                </div>
+                                            })}
+                                        </div>
+                                        <button 
+                                            onClick={() => {deleteTable(table._id, table.guestID)}}
+                                            className="delete-table shadow-none"
+                                        >
+                                            <i className="fas fa-times"></i>
+                                        </button>
+                                     
+                                    </li>
+                                })}
+                            </ul>
+                        </div>)
                     }
                 </div>
             </div>

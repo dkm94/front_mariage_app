@@ -1,10 +1,15 @@
 .add-btn {
-    margin: 10px 0px;
+    /* margin: 10px 0px;
     color: #000000;
     border-style: none;
     padding: 5px 10px;
     font-size: 12px;
-    letter-spacing: 1px;
+    letter-spacing: 1px; */
+    margin-top: 10px;
+}
+
+.add-btn:focus {
+   outline: none;
 }
 
 .select-style {

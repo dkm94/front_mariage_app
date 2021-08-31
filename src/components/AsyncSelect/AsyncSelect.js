@@ -10,12 +10,23 @@ const Select = ({ tables, table, guests, setTables }) => {
     const disableBtn = {
         boxShadow: 'none',
         backgroundColor: '#d6d6d6',
-        color: '#878787'
+        color: '#878787',
+        padding: '6px 19px',
+        fontSize: ".75rem"
     }
 
     const enableBtn = {
-        boxShadow: '0 1px 3px 0 rgb(0 0 0 / 26%)',
-        background: 'beige'
+        boxShadow: "0 1px 3px 0 rgb(0 0 0 / 26%)",
+        backgroundColor: "transparent",
+        backgroundImage: "linear-gradient(39deg, #caa5c1, #f2bbb2)",
+        borderColor: "#caa5c1",
+        color: "#FFFFFF",
+        fontSize: ".75rem",
+        padding: "6px 19px",
+        fontWeight: "400",
+        width: "fit-content",
+        marginTop: "10px",
+        letterSpacing: "1px"
     }
 
     // useEffect(() => {
@@ -66,7 +77,7 @@ const Select = ({ tables, table, guests, setTables }) => {
                 if(array) {
                     if(array.length){
                         array.forEach((guest) => {
-                            console.log(guest)
+                            // console.log(guest)
                             setGuest(guest)
                             tempArray.push({
                                 label: `${guest.name}`,
@@ -111,7 +122,12 @@ const Select = ({ tables, table, guests, setTables }) => {
             // inputValue={true}
             isOptionDisabled={(option) => option.tableID != null }
             />
-            <button className="add-btn" disabled={!selectedGuest} style={!selectedGuest ? disableBtn : enableBtn} onClick={() => {addGuest(selectedGuest, table)}}>Ajouter</button>
+            <button 
+                className="add-btn" 
+                disabled={!selectedGuest} 
+                style={!selectedGuest ? disableBtn : enableBtn} 
+                onClick={() => {addGuest(selectedGuest, table)}}
+            >Sélectionner</button>
         </div>
     )
 }

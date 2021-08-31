@@ -13,11 +13,8 @@
     width: 100%;
 }
 .guest-form > form {
-    /* padding: 2rem; */
     width: 35%;
     text-align: center;
-    /* background: #a59283; */
-    /* border-radius: 10px 0px; */
 }
 
 .guest-form > form > label {
@@ -40,7 +37,6 @@
 
 
 .guest-form > form > div > input {
-    /* width: 80%; */
     border-style: none;
 }
 

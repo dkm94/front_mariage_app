@@ -1,13 +1,11 @@
 .get-guestlist {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
-    /* grid-template-columns: repeat(5, 1fr); */
     row-gap: 2rem;
     column-gap: 2rem;
     padding: 1rem;
     width: 100%;
     box-sizing: border-box;
-    margin-top: 50px;
 }
 
 .byguests {
