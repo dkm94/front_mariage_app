@@ -152,13 +152,13 @@
     background-color: #FFF;
     position: relative;
     align-items: center;
-    padding: 2rem 1rem;
+    padding: 2rem 2rem;
     border: 1px #dfdbd7 solid;
 }
 
 .table-name {
     display: flex;
-    flex-direction: column;
+    flex-direction: row-reverse;
     justify-content: center;
     align-items: center;
     height: fit-content;
@@ -167,12 +167,12 @@
 
 .table-name > button {
     display: flex;
-    height: -moz-fit-content;
+    font-size: 0.7rem;
     height: fit-content;
-    margin: 0px 5px;
-    padding: .5rem;
+    padding: .25rem;
+    margin-right: .5rem;
     box-shadow: rgb(0 0 0 / 26%) 0px 1px 3px 0px;
-    background-color: #f6f5f3;
+    background-color: #fce8ea;
     border-radius: 20px;
 }
 
@@ -183,6 +183,7 @@
 .table-name > span {
     font-weight: 300;
     font-size: 1.5rem;
+    text-align: center;
 }
 
 .table-name > form {
@@ -204,11 +205,9 @@
 
 .delete-table {
     position: absolute;
-    bottom: 93%;
-    left: 96%;
-    border-radius: 50%;
-    background: #ba0e0e;
-    color: #fff;
+    bottom: 86%;
+    left: 86%;
+    color: #D3D3D3;
 }
 
 .delete-table:focus {

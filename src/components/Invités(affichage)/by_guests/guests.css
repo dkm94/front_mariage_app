@@ -47,11 +47,9 @@
 
 .div-guest > button {
     position: absolute;
-    bottom: 93%;
-    left: 93%;
-    border-radius: 50%;
-    background: #ba0e0e;
-    color: #fff;
+    bottom: 86%;
+    left: 86%;
+    color: #D3D3D3;
 }
 
 .guests___li-btns > button {
@@ -122,6 +120,7 @@
     width: 5rem;
     height: 5rem;
     border-radius: 50%;
+    border: 3px solid #fcdee3;
 }
 
 .modal___picture {

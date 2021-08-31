@@ -70,7 +70,7 @@ const Select = ({ tables, table, guests, setTables }) => {
         setTimeout(() => {
             axios.get(`api/admin/guests/${inputText}`)
             .then((res) => {
-                console.log(guest)
+                // console.log(guest)
                 let array;
                 array = res.data;
                 const tempArray = [];
