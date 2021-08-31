@@ -3,7 +3,6 @@ import React, { useState, useRef, useEffect } from 'react'
 const UpdateGuest = ({ edit, setEdit, onSubmit }) => {
 
     const [input, setInput] = useState(edit ? edit.name : '')
-    console.log(input)
 
     const inputRef = useRef(null);
 
@@ -24,11 +23,9 @@ const UpdateGuest = ({ edit, setEdit, onSubmit }) => {
         setInput('');
     };
 
-    console.log(input)
-
     return (
         <>
-            <div className="nameField" id="input___nameField">
+            <div className="nameField guest__updateForm" id="input___nameField">
                <form onSubmit={handleSubmit}>
                     <input 
                     type="text"

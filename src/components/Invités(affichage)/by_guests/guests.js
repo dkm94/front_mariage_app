@@ -66,7 +66,6 @@ const Byguests = () => {
     }
 
     const deleteGuest = (id) => {
-        console.log(id)
         axios.delete(`/api/admin/guests/delete/${id}`)
             .then(result => {
                 if(result.data != null) {
@@ -116,20 +115,20 @@ const Byguests = () => {
             <div className="guests___list">
                 <div className="guest-form input-group mb-3">
                     <form onSubmit={handleSubmit} className="input-group mb-3">
-                        <label>Nouvel invité</label>
+                        {/* <label>Nouvel invité</label> */}
                         <div>
                             <input
                             type="text"
-                            className="form-control"
+                            className="form-control shadow-none"
                             name="name"
-                            placeholder="ex: Julie Durand"
+                            placeholder="Nouvel invité"
                             value={newGuest.name} 
                             onChange={handleChange}/>
                             <button 
                             type="submit"
                             className="btn"
                             id="button-addon2"
-                            >OK</button>
+                            ><i className="fas fa-check" /></button>
                         </div>
                     </form>
                 </div>

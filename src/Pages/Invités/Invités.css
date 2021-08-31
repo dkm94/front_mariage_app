@@ -13,37 +13,49 @@
     width: 100%;
 }
 .guest-form > form {
-    padding: 2rem;
-    width: 50%;
+    /* padding: 2rem; */
+    width: 35%;
     text-align: center;
-    background: #E7E3E0;
+    /* background: #a59283; */
     /* border-radius: 10px 0px; */
 }
 
 .guest-form > form > label {
-    font-size: 2rem;
+    /* font-size: 2rem; */
     width: 100%;
-    font-family: 'Alex Brush', cursive;
-    text-align: center;
+    /* font-family: 'Alex Brush', cursive; */
+    /* text-align: center; */
 }
 
 .guest-form > form > div {
     width: 100%;
     display: flex;
+    border: lightgray 1px solid;
+    padding: 0 0.5rem;
+    border-radius: 30px;
+    background: #FFFFFF;
+    padding: .375rem .375rem .375rem .75rem;
+    box-shadow: 7px 6px 25px -6px rgba(158,153,158,1);
 }
 
 
 .guest-form > form > div > input {
-    width: 80%;
-    border-radius: 5px;
+    /* width: 80%; */
+    border-style: none;
+}
+
+.guest-form > form > div > input::placeholder {
+    font: italic;
 }
 
 .guest-form > form > div > button {
     margin-left: 10px;
     border-style: none;
     background: white;
-    border-radius: 5px;
-    box-shadow: rgb(0 0 0 / 26%) 0px 1px 3px 0px;
+}
+
+.guest-form > form > div > button:active {
+    color: #D18476;
 }
 
 .guests___bgimage {

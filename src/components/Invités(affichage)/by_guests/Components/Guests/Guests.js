@@ -46,16 +46,22 @@ const Guests = ({ guests, deleteGuest, updateGuest, editPicture, seteditPicture,
                                     <span>{guest.name}</span>
                                 </div>)}
                         
-                                <div className="menu___li-btns center-x" >
+                                <div className="guests___li-btns center-x" >
                                     {editPicture === guest._id ?
                                     (<>
-                                        <button onClick={() => setEdit({
-                                        id: guest._id, 
-                                        name: guest.name
-                                        })}>
+                                        <button 
+                                            onClick={() => setEdit({
+                                                id: guest._id, 
+                                                name: guest.name
+                                            })}
+                                            className="shadow-none"
+                                            >
                                             <i className="fas fa-pencil-alt"/>
                                         </button>
-                                        <button  onClick={() => {setisOpen(!isOpen); seteditPicture(guest._id)}}>
+                                        <button  
+                                            onClick={() => {setisOpen(!isOpen); seteditPicture(guest._id)}}
+                                            className="shadow-none"
+                                            >
                                         <i className="fas fa-camera"/>
                                         </button>
                                         <Modal open={isOpen} setOpen={setisOpen} guestId={editPicture} close={() => {setisOpen(false)}}>
@@ -85,11 +91,12 @@ const Guests = ({ guests, deleteGuest, updateGuest, editPicture, seteditPicture,
                                     </>
                                     )}
                                     
-                                    <button className="del-btn" onClick={() => {deleteGuest(guest._id)}}>
-                                        <i className="fas fa-trash"/>
-                                    </button>
+                                    
                                 </div>
                             </div>
+                            <button className="del-btn" onClick={() => {deleteGuest(guest._id)}}>
+                                <i className="fas fa-times"></i>
+                            </button>
                         </li>)
                     }
                 </ul>)
