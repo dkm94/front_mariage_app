@@ -1,33 +1,30 @@
+.add-todo___form {
+    justify-content: center;
+    width: 100%;
+}
+
 .add-todo___form > form {
+    width: 35%;
     text-align: center;
 }
 
-.add-todo___form > form > input {
-    padding: 8px 32px 8px 16px;
-    border-radius: 4px 0 0 4px;
-    border: 2px solid pink;
-    outline: none;
-    width: 320px;
-    /* background: transparent; */
-    color: #000000;
+.add-todo___form > form > div {
+    width: 100%;
+    display: flex;
+    border: lightgray 1px solid;
+    padding: 0 0.5rem;
+    border-radius: 30px;
+    background: #FFFFFF;
+    padding: .375rem .375rem .375rem .75rem;
+    box-shadow: 7px 6px 25px -6px rgb(158 153 158);
 }
 
-.todo-input::placeholder {
-    color: grey;
-    font: italic;
+.add-todo___form > form > div > input {
+    border-style: none;
 }
 
-.add-todo___form > form > button {
-    padding: 10px;
-    border: none;
-    border-radius: 0 4px 4px 0;
-    cursor: pointer;
-    outline: none;
-    background: linear-gradient(
-      25deg,
-      rgba(254, 173, 185, 1) 0%, 
-      rgba(237, 203, 189, 1) 100%
-    );
-    color: #fff;
-    text-transform: capitalize;
+.add-todo___form > form > div > button {
+    margin-left: 10px;
+    border-style: none;
+    background: white;
   }

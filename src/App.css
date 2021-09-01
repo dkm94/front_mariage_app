@@ -23,6 +23,10 @@ body {
     min-height: 100vh;
 }
 
+button:focus {
+    outline: none;
+}
+
 .center-x {
     display: flex;
     justify-content: center;

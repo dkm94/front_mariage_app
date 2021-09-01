@@ -70,11 +70,14 @@ button {
 .forms {
     display: grid;
     grid-template-columns: 2fr 3fr;
-    padding: 2rem;
     grid-gap: 2rem;
     border-radius: 10px 0px;
     background-color: #FFFFFF;
     box-shadow: 7px 6px 9px -6px rgb(158 153 158);
+}    
+
+.starter___div_form, .maincourse___div_form, .dessert___div_form {
+    padding: 2rem;
 }
 
 #forms_reverse {
@@ -167,7 +170,7 @@ button {
 .starter___div_img > img , .maincourse___div_img > img, .dessert___div_img > img{
     object-fit: cover;
     width: 100%;
-    max-height: 100%;
+    height: 100%;
 }
 
 .starter___div_form > h2, .dessert___div_form > h2 {

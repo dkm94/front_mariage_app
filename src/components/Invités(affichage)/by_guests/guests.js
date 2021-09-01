@@ -20,7 +20,7 @@ const Byguests = () => {
             setGuests(result.data)
         }
         fetchData();
-    }, []) 
+    }, [guests]) 
 
     const handleChange = (e) => {
         const {value, name} = e.target;
@@ -32,13 +32,11 @@ const Byguests = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(newGuest)
         axios.post("/api/admin/guests/add", newGuest)
             .then((res) => {
                 if(res.data != null){
                     setGuests([...guests, newGuest])
                     setNewGuest({name: ''})
-                    window.location.reload(false);
                 }
             })
             .catch((err) => {
@@ -115,7 +113,6 @@ const Byguests = () => {
             <div className="guests___list">
                 <div className="guest-form input-group mb-3">
                     <form onSubmit={handleSubmit} className="input-group mb-3">
-                        {/* <label>Nouvel invité</label> */}
                         <div>
                             <input
                             type="text"
@@ -123,10 +120,12 @@ const Byguests = () => {
                             name="name"
                             placeholder="Nouvel invité"
                             value={newGuest.name} 
-                            onChange={handleChange}/>
+                            onChange={handleChange}
+                            required
+                            />
                             <button 
                             type="submit"
-                            className="btn"
+                            className="btn shadow-none"
                             id="button-addon2"
                             ><i className="fas fa-check" /></button>
                         </div>

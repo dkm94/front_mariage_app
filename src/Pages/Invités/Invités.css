@@ -17,13 +17,6 @@
     text-align: center;
 }
 
-.guest-form > form > label {
-    /* font-size: 2rem; */
-    width: 100%;
-    /* font-family: 'Alex Brush', cursive; */
-    /* text-align: center; */
-}
-
 .guest-form > form > div {
     width: 100%;
     display: flex;
@@ -52,6 +45,9 @@
 
 .guest-form > form > div > button:active {
     color: #D18476;
+}
+.guest-form > form > div > button:focus {
+    outline: none;
 }
 
 .guests___bgimage {

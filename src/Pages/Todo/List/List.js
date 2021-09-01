@@ -4,7 +4,7 @@ import "./List.css";
 import axios from "axios";
 
 const Todos = ({ todos, setTodos, deleteTodo }) => {
-    
+
     const [edit, setEdit] = useState({
         id: null,
         obj: {
@@ -54,13 +54,36 @@ const Todos = ({ todos, setTodos, deleteTodo }) => {
                 console.log(err)
             })
     }
+    
+    const toggleCompleted = (task) => {  
+        const updatedList = [...todos].map((todo) => {
+            if(todo._id === task._id){
+                todo.isCompleted = !task.isCompleted
+            }
+            return todo
+        })
+        axios.post(`/api/admin/todolist/edit/${task._id}`, {
+            _id: task._id,
+            isCompleted: task.isCompleted
+        })
+            .then((res) => {
+                if(res.data != null){
+                    setTimeout(() => {
+                        setTodos(updatedList)
+                    }, 500);
+                }
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+   }
 
     return(
         <ul className="tasks-list">
             {
                 todos.map(obj => {
                     return(
-                        <li key={obj._id} className="col-12">
+                        <li key={obj._id} className={obj.isCompleted ? 'col-12 tasks-list__li__done' : "col-12 tasks-list__li"} style={obj.isCompleted ? null : {backgroundColor: `#${obj.color}`}}>
                             {edit.id === obj._id ? 
                             (<UpdateForm 
                                 edit={edit} 
@@ -72,14 +95,20 @@ const Todos = ({ todos, setTodos, deleteTodo }) => {
                                 handleChange={handleChange}
                             />) : 
                             (<>
-                                <span>{obj.text}</span>
+                                <div className="todolist___checkbox_span">
+                                    <input 
+                                        type="checkbox"
+                                        onClick={() => toggleCompleted(obj)}
+                                        checked={obj.isCompleted} 
+                                    />
+                                    <span>{obj.text}</span>
+                                </div>
                                 <div className="todolist___li-btns">
-                                    <button onClick={() => getUpdatedId(obj._id, obj.text)}>
+                                    <button disabled={obj.isCompleted} onClick={() => getUpdatedId(obj._id, obj.text)}>
                                         <i className="fas fa-pencil-alt"/>
                                     </button>
-                                    
                                     <button className="del-btn" onClick={() => {deleteTodo(obj._id)}}>
-                                        <i className="fas fa-trash"/>
+                                        <i className="fas fa-times" aria-hidden="true"></i>
                                     </button>
                                 </div>
                             </>)}

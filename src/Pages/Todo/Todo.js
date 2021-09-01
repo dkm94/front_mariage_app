@@ -18,7 +18,7 @@ const Todo = () => {
             setTodos(result.data)
         }
         fetchData();
-    }, []) 
+    }, [todos]) 
 
     const handleInput = (e) => {
         const {value, name} = e.target;
@@ -30,7 +30,14 @@ const Todo = () => {
 
     const addTodo = (e) => {
         e.preventDefault();
-        axios.post(`/api/admin/todolist/add`, todo)
+        const newTodo = {
+            // _id: undefined,
+            text: todo.text,
+            color: "#fce2e0",
+            isCompleted: false,
+            // mariageId: undefined
+        }
+        axios.post(`/api/admin/todolist/add`, newTodo)
             .then((res) => {
                 if(res.data != null){
                     setTodos([...todos, todo])

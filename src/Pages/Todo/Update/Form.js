@@ -12,26 +12,27 @@ const UpdateTask = ({ edit, setEdit, input, handleChange, inputRef, editTodo }) 
     }
 
     return (
-        <div>
-            <form onSubmit={editTodo} className='todo-form'>
-                {edit ?
-                    <>
-                        <input 
-                        type="text"
-                        name="text"
-                        onChange={handleValue}  
-                        value={input.text}
-                        ref={inputRef} />
+        <form onSubmit={editTodo} className='todo-form'>
+            {edit ?
+                <>
+                    <input 
+                    type="text"
+                    name="text"
+                    onChange={handleValue}  
+                    value={input.text}
+                    ref={inputRef} />
 
+                    <div className="todo-form___update-btns">
                         <button type="submit">
                             <i className="fas fa-check"/>
                         </button>
-
-                        <button onClick={() => setEdit({id: null})}><i className="fas fa-undo"></i></button>
-                    </>
-                : null }
-            </form>
-        </div>
+                        <button onClick={() => setEdit({id: null})}>
+                            <i className="fas fa-undo"></i>
+                        </button>
+                    </div>
+                </>
+            : null }
+        </form>
     )
 }
 
