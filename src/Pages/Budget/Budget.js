@@ -14,7 +14,7 @@ const Budget = () => {
     const scrollBtn = useContext(ScrollButtonContext)
 
     const newOperationValues = {
-        title: '', 
+        category: '', 
         price: '', 
         description: ''
     }
@@ -60,7 +60,6 @@ const Budget = () => {
     // }
 
     const deleteExpense = (id) => {
-        console.log(id);
         axios.delete(`/api/admin/budget/operations/delete/${id}`)
             .then(res => {
                 if(res.data != null) {
@@ -72,21 +71,18 @@ const Budget = () => {
     }
 
     const operationValidationSchema = Yup.object().shape({
-        // places: Yup.array(),
-        title: Yup.string()
-            .max(100, 'Vous avez atteint la limite de caractères autorisés (100).')
-            .required('Merci de remplir ce champ'),
-        // price: Yup.string()
-        //     .required('Merci de remplir ce champ'),
+        category: Yup.string()
+            .required('Veuillez choisir une catégorie.'),
         price: Yup.number()
             .test(
                 "maxDigitsAfterDecimal",
                 "Format invalide.",
                 (number) => /^\d+(\.\d{1,2})?$/.test(number)
-            ),
+            )
+            .required('Veuillez compléter ce champ.'),
         description: Yup.string()
             .max(300, 'La description ne peut dépasser 300 caractères.')
-            .required('Merci de remplir ce champ')
+            .required('Veuillez compléter ce champ.')
     })
 
     const formik = useFormik({
@@ -94,7 +90,7 @@ const Budget = () => {
         onSubmit: async (values) => {
             axios.post(`/api/admin/budget/operations/add/${budgetID}`,
             {
-                title: values.title,
+                category: values.category,
                 price: values.price,
                 description: values.description
             })
@@ -155,18 +151,38 @@ const Budget = () => {
                                         <button onClick={newOperationForm}>Ajouter une nouvelle opération</button>
                                     </div>
                                     <Form className="row g-3 budget-form___style" onSubmit={formik.handleSubmit} style={{display: operationForm ? 'flex' : 'none'}}>
-                                        <TextField 
+                                        {/* <SelectExpenses 
                                             size="col-12"
-                                            label="Motif"
-                                            name="title" 
-                                            type="text" 
-                                            // placeholder="Réception, cérémonie, église..."
-                                            value={formik.values.title} 
+                                            name="category" 
+                                            value={formik.values.category} 
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
-                                            className="form-control"
                                             required
-                                        />
+                                            // label="Motif"
+                                        /> */}
+                                        <div className="budget___select">
+                                            <select 
+                                                name="category" 
+                                                value={formik.values.category} 
+                                                onChange={formik.handleChange}
+                                                onBlur={formik.handleBlur}
+                                            >
+                                                <option value="" label="Sélectionnez une catégorie"></option>
+                                                <option value="Locations" label="Locations"></option>
+                                                <option value="Habillement/Beauté" label="Habillement/Beauté"></option>
+                                                <option value="Décoration/Fleurs" label="Décoration/Fleurs"></option>
+                                                <option value="Alliances/Bijoux" label="Alliances/Bijoux"></option>
+                                                <option value="Animation" label="Animation (DJ, Photographe...)"></option>
+                                                <option value="Traiteur" label="Traiteur"></option>
+                                                <option value="Faire-part" label="Faire-part"></option>
+                                                <option value="Autres" label="Autres"></option>
+                                            </select>
+                                            {formik.errors.category &&
+                                            formik.touched.category &&
+                                            <div className="input-feedback error">
+                                            {formik.errors.category}
+                                            </div>}
+                                        </div>
                                         <TextField 
                                             size="col-12"
                                             label="Description" 
@@ -176,10 +192,13 @@ const Budget = () => {
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
                                             className="form-control"
+                                            errors={formik.errors}
+                                            touched={formik.touched}
                                         />
                                         <TextField 
                                             size="col-3"
                                             width="100%"
+                                            inputwidth="5rem"
                                             label="Montant" 
                                             name="price" 
                                             type="number"
@@ -187,8 +206,8 @@ const Budget = () => {
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
                                             className="form-control"
-                                            required
-                                            // placeholder="Exemple: Salle des fêtes de la ville"
+                                            errors={formik.errors}
+                                            touched={formik.touched}
                                         /><span>€</span>
                                         <div className="col-12 budget-form___submit">
                                             <button className="btn-style-s" type="submit" disabled={formik.isSubmitting}>

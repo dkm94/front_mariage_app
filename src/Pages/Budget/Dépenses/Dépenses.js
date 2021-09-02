@@ -63,9 +63,10 @@ const Expenses = ({ expenses, deleteExpense, updateExpense }) => {
                                 </>)
                             } */}
                             <ul className="">
-                                <li><strong>{obj.title}</strong></li>
+                                <li><strong>{obj.category}</strong></li>
                                 <li>{obj.description}</li>
                                 <li>{financial(prix)}</li>
+                                <li>{obj.date}</li>
                             </ul>
                         </div>
                     </li>

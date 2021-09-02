@@ -74,6 +74,10 @@
     text-align: end;
 }
 
+.budget___select {
+    padding-left: 1.5rem;
+}
+
 @media (max-width: 768px) { 
     .card-body > span {
         font-size: 2rem;
