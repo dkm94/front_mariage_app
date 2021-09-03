@@ -35,6 +35,26 @@ const Expenses = ({ expenses, deleteExpense, updateExpense }) => {
         }
       }
 
+      const renderSwitchColors = (categoryIconColors) => {
+        switch(categoryIconColors) {
+            case 'Locations':
+                return "#D8C7EB";
+            case 'Habillement/Beauté':
+                return "#A8D4DD";
+            case 'Décoration/Fleurs':
+                return "#FFEC52";
+            case 'Alliances/Bijoux':
+                return "#F8DDA8";
+            case 'Animation':
+                return "#FEDEE2";
+            case 'Traiteur':
+                return "#B6DCB5";
+            case 'Faire-part':
+                return "#C4BEA1";   
+            default:
+                return "#E1E1E1";
+        }
+      }
     // const [edit, setEdit] = useState({
     //     id: null,
     //     obj: {
@@ -64,9 +84,9 @@ const Expenses = ({ expenses, deleteExpense, updateExpense }) => {
                     function financial(prix) {
                         return Number(prix).toFixed(2);
                     }
-                    return <li key={obj._id} className="mb-3 expenses-container">
+                    return <li key={obj._id} className="mb-3 expenses-container" style={{ backgroundColor: `${renderSwitchColors(obj.category)}` }}>
                         <div className="li___icon center-x">
-                            <div className="icon___container">
+                            <div className="icon___container" style={{ backgroundColor: renderSwitchColors(obj.category)}}>
                                 <img src={renderSwitch(obj.category)} alt="divers"/>
                             </div>
                         </div>

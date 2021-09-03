@@ -19,6 +19,11 @@
     display: grid;
     grid-template-columns: 1fr 5fr;
     box-shadow: 7px 6px 9px -6px rgb(158 153 158);
+    padding: 1rem;
+}
+
+.li___icon {
+    background-color: #FFFFFF;
 }
 
 .icon___container {
