@@ -8,7 +8,7 @@
 	}
 } */
 
-svg {
+.login__row__icon > svg {
 	display: inline-block;
 	width: 2rem;
 	height: 2rem;

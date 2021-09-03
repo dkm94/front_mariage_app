@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Formik, Form, useFormik } from "formik";
+import PieChart from "../../components/Expenses/Graph/PieChart";
 import TextField from "../../components/Formik/TextField-operations";
 import { UserContext, ScrollButtonContext } from "../../../src/App";
 import Expenses from "./Dépenses/Dépenses";
@@ -141,6 +142,9 @@ const Budget = () => {
                                 </div>
                             </div>
                         </div>
+                        <div className="col chart-component" style={{ width: '100%', height: 300 }}>
+                            <PieChart operations={operations}/>
+                        </div>
                     </div>
                     <div className="col budget___col-2">
                         <div className="budget___col-2___style input-group mb-3">
@@ -150,15 +154,7 @@ const Budget = () => {
                                         <button onClick={newOperationForm}>Ajouter une nouvelle opération</button>
                                     </div>
                                     <Form className="row g-3 budget-form___style" onSubmit={formik.handleSubmit} style={{display: operationForm ? 'flex' : 'none'}}>
-                                        {/* <SelectExpenses 
-                                            size="col-12"
-                                            name="category" 
-                                            value={formik.values.category} 
-                                            onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur}
-                                            required
-                                            // label="Motif"
-                                        /> */}
+                                        
                                         <div className="budget___select">
                                             <select 
                                                 name="category" 
