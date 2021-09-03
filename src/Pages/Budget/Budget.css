@@ -53,8 +53,9 @@
 }
 
 .budget-cols {
-    padding: 0px 50px;
     width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
 }
 
 .budget___col-2___style {

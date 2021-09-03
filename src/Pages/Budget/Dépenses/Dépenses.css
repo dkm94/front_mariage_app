@@ -5,11 +5,6 @@
     width: 100%;
 }
 
-.budget-list > li {
-    width: 100%;
-    border: 1px solid rgba(0,0,0,.125);
-    border-radius: 10px;
-}
 .budget-list > li > ul {
     list-style: none;
     background-color: #FFFFFF;
@@ -17,23 +12,64 @@
     border-radius: 0 10px 10px 0;
 }
 
-.li___strip{
-    background-color: #E0D7FF;
-    border-radius: 10px 0 0 10px;
+.expenses-container {
+    width: 100%;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    box-shadow: 7px 6px 9px -6px rgb(158 153 158);
+}
+
+.icon___container {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    background-color: yellow;
+    padding: 15px;
+}
+
+.icon___container > img {
+    height: 100%;
+    /* margin: 5px; */
+
 }
 
 .expense-li {
-    padding: 20px;
+    padding: 0.5rem 0;
     width: 100%;
     background-color: #FFFFFF;
 }
 
-.expense-li > ul {
+.expense__li__style {
     list-style: none;
+    display: grid;
+    grid-template-columns: 4fr 2fr;
+    padding: 0.5rem 1.5rem;
+}
+
+.expense__li__style > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.expense__li__style > div:nth-child(2) {
+    text-align: end;
+}
+
+.expense__li__style > div > span:nth-child(1) {
+    font-size: 1.3rem;;
+    font-weight: 500;
+}
+
+.expense__li__style > div > span:nth-child(2) {
+    margin-top: .5rem;
+    color: grey;
 }
 
 .expense-li___btn {
     text-align: end;
+    padding-right: 0.4rem;
 }
 
 .expense_li___edit-btn {

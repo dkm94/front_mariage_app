@@ -118,7 +118,7 @@ const Budget = () => {
     }
 
     return(
-        <div className="budget-container">
+        <div className="budget-container container">
             {scrollBtn}
             <div className="budget">
                 <div className="budget___bgimage" />
@@ -127,13 +127,12 @@ const Budget = () => {
                         <h2>Dépenses</h2>
                     </div>
                 </div>
-                <div className="row budget-cols">
+                <div className="budget-cols">
                     <div className="col budget___col-1">
                         <div className="col card-component">
                             <div className="card">
-                                <div className="row g-0">
-                                    <div className="col-2 card-strip" style={{backgroundColor: "rgb(249, 225, 224)"}}></div>
-                                    <div className="col-10 card-pd">
+                                <div className="g-0">
+                                    <div className="card-pd">
                                         <div className="card-body">
                                             <h5 className="card-title">Dépenses <small>(en {budget.currency})</small></h5>
                                             <span>{total(sum)}</span>
