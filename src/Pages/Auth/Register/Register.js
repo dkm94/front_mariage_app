@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
 import "./Register.css";
 import Button from "../../../components/LargeButton/LargeButton";
@@ -9,12 +9,10 @@ import axios from "axios";
 
 const Register = () => {
 
-    const [checkEmail, setcheckEmail] = useState([])
+    // const [checkEmail, setcheckEmail] = useState([])
 
     let emails = [];
-    checkEmail.forEach(user => {
-        emails.push(user.email)
-    })
+    
 
     useEffect(() => {
         const fetchData = async () => {
@@ -24,17 +22,22 @@ const Register = () => {
                mode: 'cors'};
             await fetch(`https://backend-mywedding-app.herokuapp.com/api/admin/admin/`, myInit)
                 .then(res => res.json())
-                .then(data => setcheckEmail(data))
+                .then(data => {
+                    // setcheckEmail(data)
+                    data.forEach(user => {
+                        emails.push(user.email)
+                    })
+                })
                 .catch(err => console.log(err))
         }
-        fetchData()}, []
+        fetchData()}
     )
 
     const validationSchema = Yup.object().shape({
-        email: Yup.string()
-            .email('Cet email est invalide.')
-            .required('Veuiller compléter ce champ.')
-            .notOneOf(emails, 'Cet utilisateur existe déjà.'),
+        email: Yup.string(),
+            // .email('Cet email est invalide.')
+            // .required('Veuiller compléter ce champ.')
+            // .notOneOf(emails, 'Cet utilisateur existe déjà.'),
         password: Yup.string()
             .required('Veuiller compléter ce champ.')
             .matches(

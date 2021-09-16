@@ -13,6 +13,7 @@ const Byguests = () => {
     const [newGuest, setNewGuest] = useState({name: ''})
     const [editPicture, seteditPicture] = useState(null)
     const [file, setFile] = useState(null)
+    const [value, setValue] = useState("")
 
     useEffect(() => {
         const fetchData = async () => {
@@ -37,6 +38,7 @@ const Byguests = () => {
                 if(res.data != null){
                     setGuests([...guests, newGuest])
                     setNewGuest({name: ''})
+                    setValue("") //test
                 }
             })
             .catch((err) => {
@@ -140,6 +142,7 @@ const Byguests = () => {
                     seteditPicture={seteditPicture}
                     upload={uploadPicture}
                     handleFile={handleFile}
+                    value={value}
                     />
                 </div>
             </div>

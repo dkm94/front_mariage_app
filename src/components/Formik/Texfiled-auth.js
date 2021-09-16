@@ -4,7 +4,7 @@ import "./style.css";
 
 const TextField = ({ label, ...props }) => {
   const [field, meta] = useField(props);
-  console.log(props)
+
   return (
     <div className={`textfield-style ${props.size}`}>
         <label htmlFor={field.name}>{label}</label>
