@@ -11,12 +11,12 @@ const Register = () => {
 
     const [emails, setEmails] = useState([])
     // let emails ;
-    console.log(emails)
+   
     const validationSchema = Yup.object().shape({
         email: Yup.string()
             .email('Cet email est invalide.')
-            .required('Veuiller compléter ce champ.'),
-            // .notOneOf(emails, 'Cet utilisateur existe déjà.'),
+            .required('Veuiller compléter ce champ.')
+            .notOneOf(emails, 'Cet utilisateur existe déjà.'),
         password: Yup.string()
             .required('Veuiller compléter ce champ.')
             .matches(
@@ -74,34 +74,6 @@ const Register = () => {
                 console.log(err)
             })
     };
-    
-  
-    // const formik = useFormik({
-    //     initialValues: {
-    //         email: '', 
-    //         password: '',
-    //         confirmPassword: ''
-    //     },
-    //     onSubmit: async (values) => {
-    //         await axios.post(`/api/auth/createAccount`,
-    //         {
-    //             email: values.email,
-    //             password: values.password
-    //         })
-    //         .then((res) => {
-    //             if(res.data != null){
-    //                 // setnewAdmin(values)
-    //                 setTimeout(() => {
-    //                     alert('Votre compte a été créé avec succès. Vous allez être redirigé.e vers la page de connexion...')
-    //                     window.location = "/login" ;
-    //                 }, 1000);
-    //             }
-    //         })
-    //     },
-    //     validationSchema: validationSchema
-    // })
-  
-    
 
     return (
         <div className="register-page">
@@ -159,82 +131,6 @@ const Register = () => {
                                     <input type="submit" />
                                 </div>
                             </form>
-                            {/* <Formik>
-                                <Form onSubmit={formik.handleSubmit}>
-                                        <div className="register__row">
-                                            <div className="register__row__icon">
-                                                <svg className="register__icon name svg-icon" viewBox="0 0 20 20">
-                                                    <path d="M0,20 a10,8 0 0,1 20,0z M10,0 a4,4 0 0,1 0,8 a4,4 0 0,1 0,-8" />
-                                                </svg>
-                                            </div>
-                                            <div className={`textfield-style`}>
-                                                <label>Email</label>
-                                                <input
-                                                className="register__input"
-                                                name="email"
-                                                type="email"
-                                                value={formik.values.email}
-                                                onChange={formik.handleChange}
-                                                {...formik.getFieldProps('email')}
-                                                />
-                                                {formik.touched.email && formik.errors.email ? (
-                                                <div className="error">{formik.errors.email}</div>
-                                            ) : null}
-                                            </div>
-                                        </div>
-                                        <div className="register__row">
-                                            <div className="register__row__icon">
-                                                <svg className="register__icon pass svg-icon" viewBox="0 0 20 20">
-                                                    <path d="M0,20 20,20 20,8 0,8z M10,13 10,16z M4,8 a6,8 0 0,1 12,0" />
-                                                </svg>
-                                            </div>
-                                            <div className={`textfield-style`}>
-                                                <label>Mot de passe</label>
-                                                <input
-                                                className="register__input"
-                                                name="password"
-                                                type="password"
-                                                value={formik.values.password}
-                                                onChange={formik.handleChange}
-                                                {...formik.getFieldProps('password')}
-                                                />
-                                                {formik.touched.password && formik.errors.password ? (
-                                                    <div className="error">{formik.errors.password}</div>
-                                                ) : null}
-                                            </div>
-                                            
-                                        </div>
-                                        <div className="register__row">
-                                            <div className="register__row__icon">
-                                                <svg className="register__icon pass svg-icon" viewBox="0 0 20 20">
-                                                    <path d="M0,20 20,20 20,8 0,8z M10,13 10,16z M4,8 a6,8 0 0,1 12,0" />
-                                                </svg>
-                                            </div>
-                                            <div className={`textfield-style`}>
-                                                <label>Confirmer le mot de passe</label>
-                                                <input
-                                                className="register__input"
-                                                name="confirmPassword"
-                                                type="password"
-                                                value={formik.values.confirmPassword}
-                                                onChange={formik.handleChange}
-                                                {...formik.getFieldProps('confirmPassword')}
-                                                />
-                                                {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
-                                                    <div className="error">{formik.errors.confirmPassword}</div>
-                                                ) : null}
-                                            </div>
-                                            
-                                        </div>
-                                    <Button 
-                                    title="Créér mon compte" 
-                                    disabled={!formik.dirty || !formik.isValid}
-                                    type="submit"
-                                    />
-                                </Form>
-                            </Formik> */}
-                            
-                       
                         </div>
                         
                     </div>
