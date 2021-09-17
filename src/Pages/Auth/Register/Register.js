@@ -1,42 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, withRouter } from "react-router-dom";
-import "./Register.css";
-import Button from "../../../components/LargeButton/LargeButton";
-// import "../../../components/LargeButton/LargeButton.css";
-import { Formik, useFormik, Form } from "formik";
+import { useForm } from "react-hook-form";
 import * as Yup from "yup";
+import { yupResolver } from '@hookform/resolvers/yup';
 import axios from "axios";
+import "./Register.css";
 
 const Register = () => {
 
-    // const [checkEmail, setcheckEmail] = useState([])
-
-    let emails = [];
-    
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const myHeaders = new Headers();
-            const myInit = { method: 'GET',
-               headers: myHeaders,
-               mode: 'cors'};
-            await fetch(`https://backend-mywedding-app.herokuapp.com/api/admin/admin/`, myInit)
-                .then(res => res.json())
-                .then(data => {
-                    // setcheckEmail(data)
-                    data.forEach(user => {
-                        emails.push(user.email)
-                    })
-                })
-                .catch(err => console.log(err))
-        }
-        fetchData()}
-    )
-
+    const [emails, setEmails] = useState([])
+    // let emails ;
+    console.log(emails)
     const validationSchema = Yup.object().shape({
-        email: Yup.string(),
-            // .email('Cet email est invalide.')
-            // .required('Veuiller compléter ce champ.')
+        email: Yup.string()
+            .email('Cet email est invalide.')
+            .required('Veuiller compléter ce champ.'),
             // .notOneOf(emails, 'Cet utilisateur existe déjà.'),
         password: Yup.string()
             .required('Veuiller compléter ce champ.')
@@ -51,31 +29,76 @@ const Register = () => {
               })
             .required('Veuiller compléter ce champ.')
     })
-  
-    const formik = useFormik({
-        initialValues: {
-            email: '', 
-            password: '',
-            confirmPassword: ''
-        },
-        onSubmit: async (values) => {
-            await axios.post(`/api/auth/createAccount`,
+
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        resolver: yupResolver(validationSchema)
+    });
+
+    
+    
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const myHeaders = new Headers();
+            const myInit = { method: 'GET',
+               headers: myHeaders,
+               mode: 'cors'};
+            await fetch(`https://backend-mywedding-app.herokuapp.com/api/admin/admin/`, myInit)
+                .then(res => res.json())
+                .then(data => {
+                    setEmails(data)
+                    // emails.push(data);
+                })
+                .catch(err => console.log(err))
+        }
+        fetchData();
+    }, [emails])
+
+    const onSubmit = async ({email, password}) => {
+        await axios.post(`/api/auth/createAccount`,
             {
-                email: values.email,
-                password: values.password
+                email:email,
+                password: password
             })
             .then((res) => {
                 if(res.data != null){
-                    // setnewAdmin(values)
                     setTimeout(() => {
                         alert('Votre compte a été créé avec succès. Vous allez être redirigé.e vers la page de connexion...')
                         window.location = "/login" ;
                     }, 1000);
                 }
             })
-        },
-        validationSchema: validationSchema
-    })
+            .catch((err) => {
+                alert("Une erreur est survenue. Veuillez rééssayer plus tard.", JSON.stringify(err));
+                console.log(err)
+            })
+    };
+    
+  
+    // const formik = useFormik({
+    //     initialValues: {
+    //         email: '', 
+    //         password: '',
+    //         confirmPassword: ''
+    //     },
+    //     onSubmit: async (values) => {
+    //         await axios.post(`/api/auth/createAccount`,
+    //         {
+    //             email: values.email,
+    //             password: values.password
+    //         })
+    //         .then((res) => {
+    //             if(res.data != null){
+    //                 // setnewAdmin(values)
+    //                 setTimeout(() => {
+    //                     alert('Votre compte a été créé avec succès. Vous allez être redirigé.e vers la page de connexion...')
+    //                     window.location = "/login" ;
+    //                 }, 1000);
+    //             }
+    //         })
+    //     },
+    //     validationSchema: validationSchema
+    // })
   
     
 
@@ -88,7 +111,34 @@ const Register = () => {
                             <span>Inscrivez-vous</span>
                         </div>
                         <div className="register__form">
-                            <Formik>
+                            <form onSubmit={handleSubmit(onSubmit)}>
+                                    <label>Email</label>
+                                    <input
+                                        {...register('email', { required: true })}
+                                        id="email"
+                                        name="email"
+                                        type="email"
+                                    />
+                                    <div>{errors.email?.message}</div>
+                                    <label>Mot de passe</label>
+                                    <input 
+                                        {...register('password', { required: true })}
+                                        id="password"
+                                        name="password"
+                                        type="password"
+                                    />
+                                    <div>{errors.password?.message}</div>
+                                    <label>Confirmer le mot de passe</label>
+                                    <input 
+                                        {...register('confirmPassword', { required: true })}
+                                        id="password"
+                                        name="confirmPassword"
+                                        type="password"
+                                    />
+                                    <div>{errors.confirmPassword?.message}</div>
+                                    <input type="submit" />
+                                </form>
+                            {/* <Formik>
                                 <Form onSubmit={formik.handleSubmit}>
                                         <div className="register__row">
                                             <div className="register__row__icon">
@@ -161,7 +211,7 @@ const Register = () => {
                                     type="submit"
                                     />
                                 </Form>
-                            </Formik>
+                            </Formik> */}
                             
                        
                         </div>

@@ -30,14 +30,20 @@ input, button {
 	border: none;
 }
 
-.login-container {
-	position: relative;
+.login-grid {
+	display: grid;
+	grid-template-columns: 2fr 1fr;
 	height: 100%;
-	background-image: url("../../../img/register-login.jpg");
-	position: relative;
-    background-size: cover;
-    /* overflow: initial; */
-    background-position: center
+}
+
+.grid-item-1 > img {
+	object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.grid-item-2 {
+	height: 100%;
 }
 
 .demo {
@@ -55,12 +61,6 @@ input, button {
 .login {
 	display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-	/* position: relative; */
-	height: 100%;
-	background: linear-gradient(to bottom, rgba(146, 135, 187, 0.8) 0%, rgba(0, 0, 0, 0.6) 100%);
-	/* transition: opacity 0.1s, transform 0.3s cubic-bezier(0.17, -0.65, 0.665, 1.25);
-	transform: scale(1); */
 }
 
 .login.inactive {
@@ -68,38 +68,16 @@ input, button {
 	transform: scale(1.1);
 }
 
-.login__check {
-	height: 100%;
-    position: relative;
-    /* bottom: 50%; */
-    width: 100%;
-    height: 15%;
-    text-align: center;
+
+.login__form > form > div {
+	display: flex;
+	flex-direction: column;
 }
 
-.login__check > img {
-	height: 100%;
-}
-
-.login__check > span {
-	position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-	font-weight: 600;
-	font-size: 1.8rem;
-}
-
-.login__form {
-	position: relative;
-    width: 100%;
-    height: 70%;
-    padding: 1.5rem 2.5rem;
-    text-align: center;
-}
-
-.login__form > form > button {
-    margin-top: 2rem;
+.login__form > form > div > input[type=submit] {
+	background: #CCD5AE;
+    border-radius: 20px;
+    padding: 0.5rem;
 }
 
 .login__row {
@@ -194,7 +172,7 @@ input, button {
 }
 
 .login__signup a {
-	color: #fff;
+	color: #000000;
 	cursor: pointer;
 	text-decoration: underline;
 }

@@ -3,7 +3,7 @@
     height: 8vh;
     width: 100%;
     background-color: white;
-    box-shadow: 1px 1px 1px rgba(0, 0,0, 0.2);
+    /* box-shadow: 1px 1px 1px rgba(0, 0,0, 0.2); */
     /* position: fixed; */
     /* z-index: 9999; */
 }
@@ -99,9 +99,9 @@ a {
 /* 988 */
 
 @media screen and (max-width: 1024px) {
-    .header {
+    /* .header {
         height: fit-content;
-    }
+    } */
 
     .navbar-brand {
         height: 60px;
