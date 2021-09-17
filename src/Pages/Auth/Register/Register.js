@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from "axios";
 import "./Register.css";
+import couple from "../../../img/couple2.jpg";
 
 const Register = () => {
 
@@ -104,40 +105,60 @@ const Register = () => {
 
     return (
         <div className="register-page">
-            <div className="register-container">
-                <div className="demo">
+            <div className="register-grid">
+                <div className="grid-item-1">
+                    <img alt="couple img" src={couple} />
+                </div>
+                <div className="grid-item-2 center-x">
                     <div className="register">
-                        <div className="register__check">
+                        <div className="form-group">
                             <span>Inscrivez-vous</span>
                         </div>
                         <div className="register__form">
                             <form onSubmit={handleSubmit(onSubmit)}>
+                                <div className="form-group">
                                     <label>Email</label>
                                     <input
                                         {...register('email', { required: true })}
                                         id="email"
                                         name="email"
                                         type="email"
+                                        className="form-control shadow-none"
+                                        style={{ borderColor: "#D1D4D5"}}
                                     />
-                                    <div>{errors.email?.message}</div>
+                                    <span>{errors.email?.message}</span>
+                                </div>
+                                <div className="form-group">
                                     <label>Mot de passe</label>
                                     <input 
                                         {...register('password', { required: true })}
                                         id="password"
                                         name="password"
                                         type="password"
+                                        className="form-control shadow-none"
+                                        style={{ borderColor: "#D1D4D5"}}
                                     />
-                                    <div>{errors.password?.message}</div>
+                                    <span>{errors.password?.message}</span>
+                                </div>
+                                <div className="form-group">
                                     <label>Confirmer le mot de passe</label>
                                     <input 
                                         {...register('confirmPassword', { required: true })}
                                         id="password"
                                         name="confirmPassword"
                                         type="password"
+                                        className="form-control shadow-none"
+                                        style={{ borderColor: "#D1D4D5"}}
                                     />
-                                    <div>{errors.confirmPassword?.message}</div>
+                                    <span>{errors.confirmPassword?.message}</span>
+                                </div>
+                                <div className="register__signup">
+                                    <p>Déjà inscrit ? &nbsp;<Link to={"/login"}>Connectez-vous</Link></p>
+                                </div>
+                                <div className="form-group">
                                     <input type="submit" />
-                                </form>
+                                </div>
+                            </form>
                             {/* <Formik>
                                 <Form onSubmit={formik.handleSubmit}>
                                         <div className="register__row">
@@ -215,9 +236,7 @@ const Register = () => {
                             
                        
                         </div>
-                        <div className="register__signup">
-                            <p>Déjà inscrit ? &nbsp;<Link to={"/login"}>Connectez-vous</Link></p>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
