@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import "../Header.css";
 import Logo from "../../../img/logo2.png";
+import { NavigationData } from "./NavigationData";
 
 const Login = ({ userInfos: { invitationID } }) => {
 
@@ -13,7 +14,23 @@ const Login = ({ userInfos: { invitationID } }) => {
 
         return (
 
-            <div className="header header-style">
+            <nav className="header header-style">
+                <ul>
+                    {NavigationData.map((val, key) => {
+                        return(
+                            <li 
+                                key={key}
+                                className
+                                id
+                                // onClick={() => {window.location.pathname == val.pathname}}
+                            >
+                                <div>{val.icon}</div>
+                                <div>{val.title}</div>
+                            </li>
+                        )
+                    })}
+                </ul>
+
             
                 {/* <div className="navigation container">
                     <div id="brand">
@@ -59,7 +76,7 @@ const Login = ({ userInfos: { invitationID } }) => {
                     </div>
                 </nav>
                     
-            </div>
+            </nav>
 
         )
 }
