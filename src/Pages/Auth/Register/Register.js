@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from "axios";
 import "./Register.css";
-import couple from "../../../img/couple2.jpg";
+import flowers from "../../../img/login-register/flowers.jpeg";
 
 const Register = () => {
 
@@ -79,7 +79,7 @@ const Register = () => {
         <div className="register-page">
             <div className="register-grid">
                 <div className="grid-item-1">
-                    <img alt="couple img" src={couple} />
+                    <img alt="couple img" src={flowers} />
                 </div>
                 <div className="grid-item-2 center-x">
                     <div className="register">

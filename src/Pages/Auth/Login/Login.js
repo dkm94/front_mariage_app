@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from "yup";
-import couple from "../../../img/couple.jpg";
+import cake from "../../../img/login-register/cake.jpeg";
 
 const Login = () => {
     const history = useHistory();
@@ -49,7 +49,7 @@ const Login = () => {
                 <div className="grid-item-1">
                     <img 
                         alt="login img" 
-                        src={couple}
+                        src={cake}
                     />
                 </div>
                 <div className="grid-item-2 center-x">
