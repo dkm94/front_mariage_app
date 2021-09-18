@@ -245,7 +245,7 @@ const Menus = () => {
     }
 
     return(
-        <div className="menu-container">
+        <div className="menu-container page-component">
             {scrollBtn}
             <div className="menu">
                 <div className="menu___bgimage" />

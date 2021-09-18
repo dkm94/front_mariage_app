@@ -19,7 +19,7 @@ const Guests = () => {
     section = <Byguests />
  
     return(
-        <div className="byguests">
+        <div className="byguests page-component">
             {/* {scroll} */}
             {/* <div className="select-section">
                 <label htmlFor="affichage-select">Affichage par:</label>

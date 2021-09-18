@@ -58,7 +58,7 @@ const Todo = () => {
     }
 
     return(
-        <div className='todo-container'>
+        <div className='todo-container page-component'>
             {scrollBtn}
             <div className="todo">
                 <div className="todo___bgimage" />

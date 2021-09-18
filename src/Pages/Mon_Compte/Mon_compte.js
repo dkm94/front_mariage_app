@@ -85,7 +85,7 @@ const MyAccount = () => {
     }
 
     return (
-        <div className="account">
+        <div className="account page-component">
             {scrollBtn}
             <div className="account___container">
                 <div  className="account___bgimage" />

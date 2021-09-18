@@ -119,7 +119,7 @@ const Budget = () => {
     }
 
     return(
-        <div className="budget-container container">
+        <div className="budget-container page-component">
             {scrollBtn}
             <div className="budget">
                 <div className="budget___bgimage" />

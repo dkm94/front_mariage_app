@@ -1,4 +1,3 @@
-// import React from "react";
 import { Dashboard as DashboardIcon,
     PeopleAlt as PeopleAltIcon,
     GridOn as GridOnIcon,

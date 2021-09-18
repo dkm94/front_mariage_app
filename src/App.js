@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Switch, BrowserRouter as Router, Route} from 'react-router-dom';
+import { Switch, Route} from 'react-router-dom';
 
 // <------- Setup App ---------->
 import ProtectedRoute from "../src/ProtectedRoutes/Admin";
@@ -8,8 +8,7 @@ import useDocumentTitle from "./setupTitle";
 
 // <------- Components ---------->
 import LoggedOutNavigation from "./components/Header/Navigation/Log_out"
-import LoggedInNavigation from "./components/Header/Navigation/Log_in"
-import Footer from "./components/Footer/Footer";
+import LoggedInNavigation from "./components/Header/Navigation/Sidebar"
 import ScrollButton from "../src/components/ScrollToTop/ScrollToTop";
 
 // <------- Pages ---------->
@@ -110,24 +109,29 @@ function App() {
       <AuthenticationContext.Provider value={role}>
         <UserContext.Provider value={user}>
           <ScrollButtonContext.Provider value={scrollButton}>
-            <Router>
-            {navigation}
-              <Switch>
-                <Route exact path="/" component={Home}/>
-                <Route path="/login" component={Login}/>
-                <Route path="/register" component={Register}/>
-                <ProtectedRoute exact path="/tableau-de-bord" component={Dashboard} isAuth={role}/>
-                <ProtectedRoute path="/menu/mon-compte" component={Account} isAuth={role}/>
-                {/* <ProtectedRoute path="/menu/invitation/:id" component={Invitation} isAuth={role} userInfos={user} scroll={scrollButton}/> */}
-                <ProtectedRoute path="/menu/tables" component={Tables} isAuth={role}/>
-                <ProtectedRoute path="/menu/invites" component={Guests} isAuth={role}/>
-                <ProtectedRoute path="/menu/carte" component={Carte} isAuth={role}/>
-                <ProtectedRoute path="/menu/budget" component={Budget} isAuth={role}/>
-                <ProtectedRoute path="/menu/taches" component={TodoList} isAuth={role}/>
-                {/* <Route path="*" component={() => "Contenu introuvable"}/> */}
-              </Switch>
-              <Footer />
-            </Router>
+            {/* <Router> */}
+              <div className="content">
+              {/* {navigation} */}
+                <Switch>
+                  <Route exact path="/" component={Home}/>
+                  <Route path="/login" component={Login}/>
+                  <Route path="/register" component={Register}/>
+                  <ProtectedRoute exact path="/tableau-de-bord" component={Dashboard} isAuth={role}/>
+                  <ProtectedRoute path="/menu/mon-compte" component={Account} isAuth={role}/>
+                  {/* <ProtectedRoute path="/menu/invitation/:id" component={Invitation} isAuth={role} userInfos={user} scroll={scrollButton}/> */}
+                  <ProtectedRoute path="/menu/tables" component={Tables} isAuth={role}/>
+                  <ProtectedRoute path="/menu/invites" component={Guests} isAuth={role}/>
+                  <ProtectedRoute path="/menu/carte" component={Carte} isAuth={role}/>
+                  <ProtectedRoute path="/menu/budget" component={Budget} isAuth={role}/>
+                  <ProtectedRoute path="/menu/taches" component={TodoList} isAuth={role}/>
+                  {/* <Route path="*" component={() => "Contenu introuvable"}/> */}
+                </Switch>
+              </div>
+              <div>
+                {/* <Footer className="footer-component"/> */}
+              </div>
+            
+            {/* </Router> */}
           </ScrollButtonContext.Provider>
         </UserContext.Provider>
       </AuthenticationContext.Provider>

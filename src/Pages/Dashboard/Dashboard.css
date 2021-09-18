@@ -3,7 +3,7 @@
 }
 
 .dashboard___bgimage {
-    height: 400px;
+    height: 10rem;
     background-attachment: fixed;
     background-image: url('../../img/dashboard-bg.jpg');
     background-position: center;

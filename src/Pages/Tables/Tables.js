@@ -115,7 +115,7 @@ const Tables = () => {
     }
 
     return(
-        <div className="tables-container">
+        <div className="tables-container page-component">
             {scrollBtn}
             <div className="tables">
                 <div className="tables___bgimage"/>

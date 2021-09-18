@@ -44,7 +44,7 @@ const Dashboard = () => {
     }
 
     return(
-        <div className="dashboard">
+        <div className="dashboard page-component">
             {scrollBtn}
             <div className="dashboard___bgimage" />
             <div className="dashboard___title">

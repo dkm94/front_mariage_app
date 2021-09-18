@@ -4,7 +4,10 @@
  import Logo from "../../../img/logo2.png"
  
 const Logout = () => {
- 
+    
+    console.log("out")
+
+
     return (
     <div className="header header-style">
         <div className="navigation container">
