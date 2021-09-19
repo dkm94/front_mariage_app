@@ -1,7 +1,6 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import "../Header.css";
-import Logo from "../../../img/logo2.png";
 import { NavigationData } from "./NavigationData";
 
 const Login = () => {

@@ -8,8 +8,6 @@ import useDocumentTitle from "./setupTitle";
 
 // <------- Components ---------->
 import Footer from "./components/Footer/Footer";
-import LoggedOutNavigation from "./components/Header/Navigation/Log_out"
-import LoggedInNavigation from "./components/Header/Navigation/Sidebar"
 import ScrollButton from "../src/components/ScrollToTop/ScrollToTop";
 
 // <------- Pages ---------->
@@ -49,12 +47,6 @@ function App() {
   axios.defaults.baseURL = 'https://backend-mywedding-app.herokuapp.com';
   // axios.defaults.baseURL = 'http://localhost:3050';
   axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
-
-  let navigation;
-    if(!token) {
-        navigation =  <LoggedOutNavigation />
-    } else 
-        navigation =  <LoggedInNavigation userInfos={user}/>
 
   let scrollButton = <ScrollButton />
 
@@ -110,9 +102,7 @@ function App() {
       <AuthenticationContext.Provider value={role}>
         <UserContext.Provider value={user}>
           <ScrollButtonContext.Provider value={scrollButton}>
-            {/* <Router> */}
               <div className={token ? "content" : "content-home"}>
-              {/* {navigation} */}
                 <Switch>
                   <Route exact path="/" component={Home}/>
                   <Route path="/login" component={Login}/>
@@ -129,10 +119,7 @@ function App() {
                 </Switch>
               </div>
               <div>
-                {/* <Footer className="footer-component"/> */}
               </div>
-            
-            {/* </Router> */}
           </ScrollButtonContext.Provider>
         </UserContext.Provider>
       </AuthenticationContext.Provider>

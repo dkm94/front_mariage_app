@@ -18,6 +18,10 @@
     clear: both;
 }
 
+.nav-logo {
+    height: 100%
+}
+
 #brand {
     height: 100%;
     float: left;

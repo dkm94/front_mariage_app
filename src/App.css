@@ -43,6 +43,10 @@ body {
     z-index: 1000;
 }
 
+.nav-logo > img {
+    height: 100%;
+}
+
 /*********App Content*******/
 .body-content {
     display: flex;
@@ -61,14 +65,14 @@ body {
 }
 
 .App-home {
-    min-height: 100vh;
+    min-height: 90vh;
     width: 80%;
     position: absolute;
     left: 20%;
 }
 
 .App {
-    min-height: 100vh;
+    min-height: 90vh;
     width: 100%;
 }
 

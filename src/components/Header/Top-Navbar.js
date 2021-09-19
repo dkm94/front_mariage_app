@@ -12,7 +12,7 @@ const TopNav = () => {
     
     return(
         <nav className="navbar navbar-expand-lg navbar-light bg-light navbar-1">
-            <Link className="navbar-brand" to={"/"}><img alt="logo" src={Logo} id="logo" /></Link>
+            <Link className="navbar-brand nav-logo" to={"/"}><img alt="logo" src={Logo} id="logo" /></Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
