@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Formik, useFormik, Form } from "formik";
 import { UserContext, ScrollButtonContext } from "../../../src/App";
-// import { useHistory } from "react-router-dom";
 import Button from "../../../src/components/LargeButton/LargeButton";
 import * as Yup from "yup";
 import axios from "axios";
-import accountimg from "../../../src/img/account.jpg";
 import "./Mon_compte.css";
 
 const MyAccount = () => {
@@ -95,9 +93,6 @@ const MyAccount = () => {
                     </div>
                 </div>
                 <div className="row align-items-center account___form container">
-                    <div className="col account___img">
-                        <img alt="account" src={accountimg}/>
-                    </div>
                     <div className="col">
                         <Formik>
                             <Form onSubmit={formik.handleSubmit}>

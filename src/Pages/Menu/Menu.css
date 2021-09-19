@@ -96,7 +96,7 @@ button {
 }
 
 .starter {
-    background-color: #F2E2EE;
+    background-color: #FAEDCD;
 }
 
 .menu___forms {
@@ -154,7 +154,7 @@ button {
 }
 
 .maincourse {
-    background-color: #E4D1E0;
+    background-color: #FAEDCD;
 }
 
 .maincourse > ul > li > form > input, .starter > ul > li > form > input, .dessert > ul > li > form > input {
@@ -164,7 +164,7 @@ button {
 }
 
 .dessert {
-    background-color: #DABDD3;
+    background-color: #FAEDCD;
 }
 
 .starter___div_img > img , .maincourse___div_img > img, .dessert___div_img > img{

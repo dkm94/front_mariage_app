@@ -33,7 +33,7 @@ const Todo = () => {
         const newTodo = {
             // _id: undefined,
             text: todo.text,
-            color: "#fce2e0",
+            color: "#D4A373",
             isCompleted: false,
             // mariageId: undefined
         }
