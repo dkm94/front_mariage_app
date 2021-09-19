@@ -31,7 +31,7 @@ const Layout = ({ children }) => {
         <Router>
             <div className="navigation-layout">
                 {token ? <TopNav userInfos={user}/> : <LoggedOutNavigation />}
-                <div className="body-content">
+                <div className={token ? "body-content" : "body-content___home"}>
                     {token ? <Sidebar userInfos={user}/> : null}
                     {children}
                 </div>

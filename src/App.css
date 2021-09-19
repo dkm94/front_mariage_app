@@ -25,6 +25,12 @@ body {
     padding: 0 10rem;
 }
 
+.content-home {
+    display: flex;
+    width: 100%;
+    padding: 0;
+}
+
 /********Navigation*********/
 .navigation-layout {
     height: 100%;
@@ -46,11 +52,24 @@ body {
     top: 10vh;
 }
 
-.App {
+.body-content___home {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    position: relative;
+    top: 0;
+}
+
+.App-home {
     min-height: 100vh;
     width: 80%;
     position: absolute;
     left: 20%;
+}
+
+.App {
+    min-height: 100vh;
+    width: 100%;
 }
 
 /******Components******/

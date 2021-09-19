@@ -105,12 +105,12 @@ function App() {
 
 
   return (
-    <div className="App">
+    <div className={token ? "App-home" : "App"}>
       <AuthenticationContext.Provider value={role}>
         <UserContext.Provider value={user}>
           <ScrollButtonContext.Provider value={scrollButton}>
             {/* <Router> */}
-              <div className="content">
+              <div className={token ? "content" : "content-home"}>
               {/* {navigation} */}
                 <Switch>
                   <Route exact path="/" component={Home}/>
