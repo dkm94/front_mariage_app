@@ -7,6 +7,7 @@ import ProtectedRoute from "../src/ProtectedRoutes/Admin";
 import useDocumentTitle from "./setupTitle";
 
 // <------- Components ---------->
+import Footer from "./components/Footer/Footer";
 import LoggedOutNavigation from "./components/Header/Navigation/Log_out"
 import LoggedInNavigation from "./components/Header/Navigation/Sidebar"
 import ScrollButton from "../src/components/ScrollToTop/ScrollToTop";
@@ -135,6 +136,7 @@ function App() {
           </ScrollButtonContext.Provider>
         </UserContext.Provider>
       </AuthenticationContext.Provider>
+      <Footer />
     </div>
   );
 }

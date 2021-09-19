@@ -5,6 +5,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import TopNav from "../src/components/Header/Top-Navbar";
 import LoggedOutNavigation from "../src/components/Header/Navigation/Log_out";
 import Sidebar from "./components/Header/Navigation/Sidebar";
+// import Footer from "../src/components/Footer/Footer";
 
 const Layout = ({ children }) => {
 
@@ -35,6 +36,7 @@ const Layout = ({ children }) => {
                     {token ? <Sidebar userInfos={user}/> : null}
                     {children}
                 </div>
+            {/* <Footer /> */}
             </div>
         </Router>
     )
