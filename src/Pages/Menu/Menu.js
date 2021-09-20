@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
-// import { withRouter } from "react-router-dom";
 import starterImg from "../../img/menus/starter_img.jpg";
 import maincourseImg from "../../img/menus/maincourse_img.jpg";
 import dessertImg from "../../img/menus/dessert_img.jpg";
@@ -7,7 +6,8 @@ import { ScrollButtonContext } from "../../../src/App";
 import axios from "axios";
 import "./Menu.css";
 
-const Menus = () => {
+const Menus = (props) => {
+    console.log(props)
 
     const scrollBtn = useContext(ScrollButtonContext)
 

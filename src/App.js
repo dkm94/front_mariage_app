@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Switch, Route} from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 // <------- Setup App ---------->
 import ProtectedRoute from "../src/ProtectedRoutes/Admin";
@@ -48,16 +48,17 @@ function App() {
   // axios.defaults.baseURL = 'http://localhost:3050';
   axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
 
+
   let scrollButton = <ScrollButton />
 
-  function Page({ title: titre, component: Component, isAuth:role, userInfos:info, scroll: scrollBtn }) {
+  function Page({ title: titre, component: Component, auth:userRole, userInfos:infos }) {
     const titlePrefix = "My Wedding | "
     useDocumentTitle(`${titlePrefix}${titre}`)
-    return <Component userRole={role} infos={info} button={scrollBtn}/>;
+    return <Component page={titre} userInfos={infos} userRole={userRole} token={token} />;
   }
   
   function Home() {
-    return <Page title="Accueil" component={Homepage}/>
+    return <Page title="Accueil" component={Homepage} token={token}/>
   }
   
   function Login() {
@@ -69,31 +70,31 @@ function App() {
   }
 
   function Dashboard() {
-    return <Page title="Tableau de bord" component={TableauDeBord} />
+    return <Page title="Tableau de bord" userInfos={user} auth={role} component={TableauDeBord} />
   }
   
   function Account() {
-    return <Page title="Paramètres du compte" component={CompteUtilisateur} />
+    return <Page title="Paramètres du compte" userInfos={user} auth={role} component={CompteUtilisateur} />
   }
   
   function Tables() {
-    return <Page title="Les tables" component={LesTables} />
+    return <Page title="Les tables" userInfos={user} auth={role} component={LesTables} />
   }
   
   function Guests() {
-    return <Page title="Les invités" component={LesInvités} />
+    return <Page title="Les invités" userInfos={user} auth={role} component={LesInvités} />
   }
   
   function Carte() {
-    return <Page title="Le repas" component={LaCarte} />
+    return <Page title="Le repas" userInfos={user} auth={role} component={LaCarte} />
   }
   
   function Budget() {
-    return <Page title="Les dépenses" component={LesDépenses} />
+    return <Page title="Les dépenses" userInfos={user} auth={role} component={LesDépenses} />
   }
 
   function TodoList() {
-    return <Page title="Liste des tâches" component={Todo} />
+    return <Page title="Liste des tâches" userInfos={user} auth={role} component={Todo} />
   }
 
 
@@ -104,13 +105,15 @@ function App() {
           <ScrollButtonContext.Provider value={scrollButton}>
               <div className={token ? "content" : "content-home"}>
                 <Switch>
-                  <Route exact path="/" component={Home}/>
+                  <Route exact path="/">
+                    {token ? <Redirect to="/tableau-de-bord" /> : Home}
+                  </Route>
                   <Route path="/login" component={Login}/>
                   <Route path="/register" component={Register}/>
                   <ProtectedRoute exact path="/tableau-de-bord" component={Dashboard} isAuth={role}/>
                   <ProtectedRoute path="/menu/mon-compte" component={Account} isAuth={role}/>
                   {/* <ProtectedRoute path="/menu/invitation/:id" component={Invitation} isAuth={role} userInfos={user} scroll={scrollButton}/> */}
-                  <ProtectedRoute path="/menu/tables" component={Tables} isAuth={role}/>
+                  <ProtectedRoute path="/menu/tables" component={Tables} isAuth={role} infos={user} />
                   <ProtectedRoute path="/menu/invites" component={Guests} isAuth={role}/>
                   <ProtectedRoute path="/menu/carte" component={Carte} isAuth={role}/>
                   <ProtectedRoute path="/menu/budget" component={Budget} isAuth={role}/>

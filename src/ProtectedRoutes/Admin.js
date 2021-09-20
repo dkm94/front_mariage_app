@@ -3,7 +3,7 @@ import { Route, Redirect } from "react-router-dom";
 
 
 function Admin({ isAuth: role, component: Component, userInfos: user, ...rest}){
-   
+    
     return (
         <Route
         {...rest}

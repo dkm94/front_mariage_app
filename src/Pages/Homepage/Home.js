@@ -1,10 +1,10 @@
 import React from 'react';
-import { withRouter, Link } from "react-router-dom";
+import { withRouter, Link, Route, Redirect } from "react-router-dom";
 import './Home.css';
 import "../../components/LargeButton/LargeButton.css"
 
 const Home = (props) => {
-
+    console.log("Home: ",props)
         return (
             <div className="home">
                 <div className="home___position">

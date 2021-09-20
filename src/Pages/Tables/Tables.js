@@ -7,7 +7,9 @@ import Select from "../../components/AsyncSelect/AsyncSelect";
 import "./Tables.css";
 
 
-const Tables = () => {
+const Tables = (props) => {
+    console.log(props)
+   
     const scrollBtn = useContext(ScrollButtonContext)
 
     const [tables, setTables] = useState([]);
