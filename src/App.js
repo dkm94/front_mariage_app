@@ -108,8 +108,12 @@ function App() {
                   <Route exact path="/">
                     {token ? <Redirect to="/tableau-de-bord" /> : Home}
                   </Route>
-                  <Route path="/login" component={Login}/>
-                  <Route path="/register" component={Register}/>
+                  <Route path="/login">
+                    {token ? <Redirect to="/menu/mon-compte" /> : Login }
+                  </Route>
+                  <Route path="/register">
+                    {token ? <Redirect to="/menu/mon-compte" /> : Register }
+                  </Route>
                   <ProtectedRoute exact path="/tableau-de-bord" component={Dashboard} isAuth={role}/>
                   <ProtectedRoute path="/menu/mon-compte" component={Account} isAuth={role}/>
                   {/* <ProtectedRoute path="/menu/invitation/:id" component={Invitation} isAuth={role} userInfos={user} scroll={scrollButton}/> */}
