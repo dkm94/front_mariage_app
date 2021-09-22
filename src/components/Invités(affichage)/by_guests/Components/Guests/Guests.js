@@ -3,7 +3,7 @@ import Modal from "../../../../Modals/Set_guest_picture";
 import Form from "../Form/UpdateGuest";
 import avatar from "../../../../../img/avatar.jpg";
 
-const Guests = ({ guests, deleteGuest, updateGuest, editPicture, seteditPicture, upload, handleFile, searchValue }) => {
+const Guests = ({ guests, setGuests, deleteGuest, updateGuest, editPicture, seteditPicture, upload, handleFile, searchValue }) => {
 
     const [isOpen, setisOpen] = useState(false)
 
@@ -24,6 +24,12 @@ const Guests = ({ guests, deleteGuest, updateGuest, editPicture, seteditPicture,
             name: ''
         });
     };
+
+    const result = guests.sort((a,b)=>{
+        return a.name > b.name ? 1 : - 1
+      }
+    )
+    setGuests(result);
 
     return (
         <>

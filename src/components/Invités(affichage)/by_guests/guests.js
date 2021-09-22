@@ -150,6 +150,7 @@ const Byguests = () => {
                 <div className="byguests___block">
                     <GuestList 
                     guests={guests}
+                    setGuests={setGuests}
                     deleteGuest={deleteGuest}
                     updateGuest={editGuest}
                     editPicture={editPicture}
