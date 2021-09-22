@@ -3,7 +3,7 @@ import Modal from "../../../../Modals/Set_guest_picture";
 import Form from "../Form/UpdateGuest";
 import avatar from "../../../../../img/avatar.jpg";
 
-const Guests = ({ guests, deleteGuest, updateGuest, editPicture, seteditPicture, upload, handleFile }) => {
+const Guests = ({ guests, deleteGuest, updateGuest, editPicture, seteditPicture, upload, handleFile, searchValue }) => {
 
     const [isOpen, setisOpen] = useState(false)
 
@@ -32,7 +32,11 @@ const Guests = ({ guests, deleteGuest, updateGuest, editPicture, seteditPicture,
                 (<div className="block"><span>Vos invités ici.</span></div>) : 
                 (<ul className="get-guestlist">
                     {
-                        guests.map((guest) => <li className="div-guest" key={guest._id} >
+                        guests
+                        .filter((guest) => {
+                            return guest.name.toLowerCase().indexOf(searchValue.toLowerCase()) >= 0;
+                          })
+                        .map((guest) => <li className="div-guest" key={guest._id} >
                             <div className="div-guest___container">
                                 <div className="guest-picture center-x">
                                     {guest.media === "" ? 

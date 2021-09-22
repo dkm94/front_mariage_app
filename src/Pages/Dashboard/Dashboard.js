@@ -5,7 +5,6 @@ import { ScrollButtonContext } from "../../../src/App";
 import './Dashboard.css';
 
 const Dashboard = (props) => {
-    console.log(props)
 
     const scrollBtn = useContext(ScrollButtonContext)
 

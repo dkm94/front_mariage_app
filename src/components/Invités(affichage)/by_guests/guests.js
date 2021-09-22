@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 // import Button from "../../LargeButton/LargeButton";
 import { ScrollButtonContext } from "../../../App";
 import GuestList from "./Components/Guests/Guests";
+import SearchBar from "./Components/SearchBar/SearchBar";
 import "./guests.css";
 import axios from "axios";
 
@@ -14,6 +15,7 @@ const Byguests = () => {
     const [editPicture, seteditPicture] = useState(null)
     const [file, setFile] = useState(null)
     const [value, setValue] = useState("")
+    const [searchValue, setSearchValue] = useState("");
 
     useEffect(() => {
         const fetchData = async () => {
@@ -29,6 +31,10 @@ const Byguests = () => {
             ...prevState,
             [name]: value
         }))
+    }
+
+    const handleSearch = (e) => {
+        setSearchValue(e.target.value)
     }
 
     const handleSubmit = (e) => {
@@ -132,6 +138,14 @@ const Byguests = () => {
                             ><i className="fas fa-check" /></button>
                         </div>
                     </form>
+                    <SearchBar 
+                    className="search__input"
+                    type="text"
+                    placeholder="Rechercher un invité"
+                    name="searchbar"
+                    value={searchValue}
+                    onChange={handleSearch}
+                    />
                 </div>
                 <div className="byguests___block">
                     <GuestList 
@@ -143,6 +157,7 @@ const Byguests = () => {
                     upload={uploadPicture}
                     handleFile={handleFile}
                     value={value}
+                    searchValue={searchValue}
                     />
                 </div>
             </div>
