@@ -61,7 +61,8 @@ const PieChart = ({operations}) => {
                 display: true,
                 position: "bottom"
             }
-        }
+        }, 
+        maintainAspectRatio: false
     }
         
     return (

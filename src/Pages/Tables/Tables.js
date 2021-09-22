@@ -148,7 +148,7 @@ const Tables = (props) => {
                     </div>
                         {tables.length === 0 || null ? 
                         (<div className="block"><span>Vos tables ici.</span></div>) : 
-                        (<div className="tables__block container">
+                        (<div className="tables__block">
                             <ul className="get-tables">
                                 {tables.map((table, i) => {
                                     return <li key={i} data-id={table._id} className="table-style">

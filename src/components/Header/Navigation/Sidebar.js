@@ -4,9 +4,7 @@ import "../Header.css";
 import { NavigationData } from "./NavigationData";
 
 const Login = () => {
-
-    console.log("in")
-
+    
         return (
 
             <nav className="sidebar">

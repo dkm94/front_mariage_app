@@ -21,8 +21,6 @@ import LesTables from "../src/Pages/Tables/Tables";
 import LaCarte from "../src/Pages/Menu/Menu";
 import LesDépenses from "../src/Pages/Budget/Budget.js";
 import Todo from "../src/Pages/Todo/Todo";
-// import Invitation from "../src/Pages/Landing_guest/Home_guest";
-// import Menu from "../src/Pages/MenuAdmin/Menu";
 
 // <------- Packages ---------->
 import axios from "axios";
@@ -43,11 +41,10 @@ function App() {
     user = decode(token)
     role = user.role
   }
-
+  console.log(user)
   axios.defaults.baseURL = 'https://backend-mywedding-app.herokuapp.com';
   // axios.defaults.baseURL = 'http://localhost:3050';
   axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
-
 
   let scrollButton = <ScrollButton />
 
@@ -116,7 +113,6 @@ function App() {
                   </Route>
                   <ProtectedRoute exact path="/tableau-de-bord" component={Dashboard} isAuth={role}/>
                   <ProtectedRoute path="/menu/mon-compte" component={Account} isAuth={role}/>
-                  {/* <ProtectedRoute path="/menu/invitation/:id" component={Invitation} isAuth={role} userInfos={user} scroll={scrollButton}/> */}
                   <ProtectedRoute path="/menu/tables" component={Tables} isAuth={role} infos={user} />
                   <ProtectedRoute path="/menu/invites" component={Guests} isAuth={role}/>
                   <ProtectedRoute path="/menu/carte" component={Carte} isAuth={role}/>

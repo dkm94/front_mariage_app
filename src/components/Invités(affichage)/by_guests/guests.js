@@ -133,7 +133,7 @@ const Byguests = () => {
                         </div>
                     </form>
                 </div>
-                <div className="byguests___block container">
+                <div className="byguests___block">
                     <GuestList 
                     guests={guests}
                     deleteGuest={deleteGuest}

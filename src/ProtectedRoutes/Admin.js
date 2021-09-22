@@ -8,6 +8,7 @@ function Admin({ isAuth: role, component: Component, userInfos: user, ...rest}){
         <Route
         {...rest}
         render={(props) => {
+            console.log(props)
             if(role === "admin") {
                 return <Component isAuth={role} props={props}/>
             } else {

@@ -4,7 +4,8 @@ import Card from "../../components/Dashboard/Dashboard_card";
 import { ScrollButtonContext } from "../../../src/App";
 import './Dashboard.css';
 
-const Dashboard = () => {
+const Dashboard = (props) => {
+    console.log(props)
 
     const scrollBtn = useContext(ScrollButtonContext)
 

@@ -10,7 +10,7 @@ const Logout = () => {
 
     return (
     <div className="header header-style">
-        <div className="navigation container">
+        <div className="navigation">
             <div id="brand">
                 <Link to={{ pathname: "/"}}><img alt="logo" src={Logo} id="logo" /></Link>
             </div>

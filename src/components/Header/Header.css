@@ -15,7 +15,11 @@
 .navigation {
     height: 100%;
     width: 100%;
-    clear: both;
+    /* clear: both; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 5rem;
 }
 
 .nav-logo {
@@ -24,7 +28,7 @@
 
 #brand {
     height: 100%;
-    float: left;
+    /* float: left; */
     display: flex;
     align-items: center;
 }
@@ -64,7 +68,7 @@ a {
     margin: 0;
     padding: 0;
     /* display: inline-block; */
-    float: right;
+    /* float: right; */
     /* box-shadow: -20px 18px 46px -13px rgb(204 198 204); */
 }
 .navbar-menu > li {
