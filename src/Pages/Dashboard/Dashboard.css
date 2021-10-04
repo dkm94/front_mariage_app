@@ -2,6 +2,11 @@
     padding-bottom: 100px;
 }
 
+.item__title > h2 {
+    font-size: 1.75rem !important;
+    font-weight: 600 !important;
+}
+
 .dashboard___bgimage {
     height: 10rem;
     background-attachment: fixed;
@@ -17,11 +22,11 @@
 }
 
 .dashboard___title_style {
-    padding-bottom: 20px;
+    padding-bottom: 10px;
     border-bottom: 1px solid;
     width: fit-content;
-    padding-right: 50px;
-    padding-left: 50px;
+    padding-right: 30px;
+    padding-left: 30px;
     text-transform: uppercase;
     font-family: 'Noto Sans JP', sans-serif;
 }
@@ -31,20 +36,124 @@
     padding-bottom: 100px;
 }
 
-.elements___container {
-    row-gap: 3rem;
-}
-
 .card-pd {
     padding: 20px;
 }
 
-.dashboard___grid {
-    flex-wrap: wrap;
+.item1 { grid-area: invités; background-color: #F8EDEB; }
+.item2 { grid-area: tables; background-color: #FEFAE0; }
+.item3 { grid-area: tâches; background-color: #E8E8E4; }
+.item4 { grid-area: menu; background-color: #FAF8F4; }
+.item5 { grid-area: dépenses; background-color: #F4F6FA; }
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'invités tables tâches'
+    ' menu menu dépenses';
+  grid-gap: 3rem;
+  /* background-color: #2196F3; */
+  padding: 10px 5rem;
 }
 
-@media only screen and (max-width: 414px){
-	.elements___container {
-        row-gap: 1rem;
-    }
+.grid-container > div {
+  /* background-color: rgba(255, 255, 255, 0.8); */
+  text-align: center;
+  /* border: 1px solid lightgrey; */
+  border-radius: 10px;
+  padding-bottom: 2rem;
+  box-shadow: 10px 10px 15px -11px rgba(0,0,0,0.29);
 }
+
+.dashboard___elements > div > div > .item__title {
+    width: fit-content;
+    padding-left: 2rem;
+}
+
+.item__content {
+    display: flex;
+    flex-direction: row;
+}
+
+/* .item__content > div {
+    width: 50%;
+} */
+
+.item__content > .item__resume {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.item__resume__style {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.item__resume__style > h3 {
+    font-size: 1.5rem;
+}
+
+.dashboard__ul {
+    padding-left: 0;
+}
+
+/* .item__content > div {
+    padding: 0 2rem;
+} */
+
+.item__content > .chart-component > .pie > canvas {
+    height: 27rem !important;
+}
+
+.title > h3 {
+    font-size: 1.25rem;
+}
+
+.item__content > div > div > p span {
+    display: block;
+    text-align: start;
+}
+
+#expenses__sum > span {
+    font-size: 3rem;
+    font-weight: 500;
+}
+
+.show-more {
+    font-size: 1.25rem;
+    align-self: end;
+    text-align: end;
+}
+.show-more > a {
+    text-decoration: underline;
+}
+
+.item__total {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.sum {
+    font-size: 5rem;
+}
+.menu__resume___container, 
+.tables__resume___container, 
+.guests__resume___container, 
+.expenses__resume___container, 
+.tasks__resume___container {
+    padding: 0 2rem;
+}
+.menu__resume___grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.task__count > p span {
+    display: block;
+}
+
+/* @media only screen and (max-width: 414px){
+	
+} */

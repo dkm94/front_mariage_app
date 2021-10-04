@@ -64,7 +64,7 @@ const Todo = () => {
                 <div className="todo___bgimage" />
                 <div className="todo___title">
                     <div className="todo___title_style">
-                        <h2>Liste des tâches</h2>
+                        <h1>Liste des tâches</h1>
                     </div>
                 </div>
                 <div className="todo-list container">

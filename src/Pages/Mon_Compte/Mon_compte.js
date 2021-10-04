@@ -89,7 +89,7 @@ const MyAccount = () => {
                 <div  className="account___bgimage" />
                 <div className="account___title">
                     <div className="account___title_style">
-                        <h2>Votre compte</h2>
+                        <h1>Votre compte</h1>
                     </div>
                 </div>
                 <div className="row align-items-center account___form container">

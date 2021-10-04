@@ -126,7 +126,7 @@ const Budget = (props) => {
                 <div className="budget___bgimage" />
                 <div className="budget___title">
                     <div className="budget___title_style">
-                        <h2>Dépenses</h2>
+                        <h1>Dépenses</h1>
                     </div>
                 </div>
                 <div className="budget-cols">

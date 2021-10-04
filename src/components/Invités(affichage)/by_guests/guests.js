@@ -115,7 +115,7 @@ const Byguests = () => {
             <div className="guests___title">
                 <div className="guests___title_style" >
                     {scrollBtn}
-                    <h2>Les invités</h2>
+                    <h1>Les invités</h1>
                 </div>
             </div>
             <div className="guests___list">

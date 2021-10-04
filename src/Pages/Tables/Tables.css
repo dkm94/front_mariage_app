@@ -22,11 +22,11 @@
 }
 
 .tables___title_style {
-    padding-bottom: 20px;
+    padding-bottom: 10px;
     border-bottom: 1px solid;
     width: fit-content;
-    padding-right: 50px;
-    padding-left: 50px;
+    padding-right: 30px;
+    padding-left: 30px;
     text-transform: uppercase;
     font-family: 'Noto Sans JP', sans-serif;
 }
@@ -102,7 +102,7 @@
 }
 
 .table-form > form {
-    width: 35%;
+    width: 50%;
     text-align: center;
 }
 
@@ -156,6 +156,14 @@
     border: 1px #dfdbd7 solid;
 }
 
+.table-style > .menu-icon {
+    position: absolute;
+    bottom: 84%;
+    left: 89%;
+    color: #D3D3D3;
+    cursor: pointer;
+}
+
 .table-name {
     display: flex;
     flex-direction: row-reverse;
@@ -205,8 +213,8 @@
 
 .delete-table {
     position: absolute;
-    bottom: 86%;
-    left: 86%;
+    bottom: 83%;
+    left: 5%;
     color: #D3D3D3;
 }
 

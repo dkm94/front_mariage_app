@@ -8,19 +8,6 @@ const Login = () => {
         return (
 
             <nav className="sidebar">
-                {/* <div className="navigation container">
-                    <div id="brand">
-                        <Link to={"/"}><img alt="logo" src={Logo} id="logo" /></Link>
-                    </div>
-                    <ul className="navbar-menu">
-                        <li className="li-style"><Link to={"/menu"}>Organisation</Link></li>
-                        <li className="li-style"><Link to={"/mon-compte"}>Votre compte</Link></li>
-                        <li className="li-style"><button type="submit" onClick={LogOut}>Déconnexion</button></li>
-                    </ul>
-                </div> */}
-
-                
-
                 <ul className="sidebarList">
                     {NavigationData.map((val, key) => {
                         return(

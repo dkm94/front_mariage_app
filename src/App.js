@@ -9,11 +9,13 @@ import useDocumentTitle from "./setupTitle";
 // <------- Components ---------->
 import Footer from "./components/Footer/Footer";
 import ScrollButton from "../src/components/ScrollToTop/ScrollToTop";
+import Loader from "../src/components/Loader/Loader";
 
 // <------- Pages ---------->
 import Homepage from './Pages/Homepage/Home';
 import NouvelUtilisateur from './Pages/Auth/Register/Register';
 import Connexion from './Pages/Auth/Login/Login';
+import Reset from "./Pages/Auth/Reset/Reset";
 import TableauDeBord from "../src/Pages/Dashboard/Dashboard";
 import CompteUtilisateur from "../src/Pages/Mon_Compte/Mon_compte";
 import LesInvités from "../src/Pages/Invités/Invités";
@@ -30,6 +32,8 @@ import decode from "jwt-decode";
 export const UserContext = React.createContext()
 export const AuthenticationContext = React.createContext()
 export const ScrollButtonContext = React.createContext()
+export const LoaderContext = React.createContext()
+
 
 function App() {
 
@@ -41,12 +45,13 @@ function App() {
     user = decode(token)
     role = user.role
   }
-  console.log(user)
+
   axios.defaults.baseURL = 'https://backend-mywedding-app.herokuapp.com';
   // axios.defaults.baseURL = 'http://localhost:3050';
   axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
 
   let scrollButton = <ScrollButton />
+  let loader = <Loader />
 
   function Page({ title: titre, component: Component, auth:userRole, userInfos:infos }) {
     const titlePrefix = "My Wedding | "
@@ -64,6 +69,10 @@ function App() {
   
   function Register() {
     return <Page title="Créer un compte" component={NouvelUtilisateur} />
+  }
+
+  function ResetPassword() {
+    return <Page title="Réinitialiser le mot de passe" component={Reset} />
   }
 
   function Dashboard() {
@@ -100,6 +109,7 @@ function App() {
       <AuthenticationContext.Provider value={role}>
         <UserContext.Provider value={user}>
           <ScrollButtonContext.Provider value={scrollButton}>
+            <LoaderContext.Provider value={loader}>
               <div className={token ? "content" : "content-home"}>
                 <Switch>
                   <Route exact path="/">
@@ -111,6 +121,9 @@ function App() {
                   <Route path="/register">
                     {token ? <Redirect to="/menu/mon-compte" /> : Register }
                   </Route>
+                  <Route path="/reset-password">
+                    {token ? <Redirect to="/menu/mon-compte" /> : ResetPassword }
+                  </Route>
                   <ProtectedRoute exact path="/tableau-de-bord" component={Dashboard} isAuth={role}/>
                   <ProtectedRoute path="/menu/mon-compte" component={Account} isAuth={role}/>
                   <ProtectedRoute path="/menu/tables" component={Tables} isAuth={role} infos={user} />
@@ -121,8 +134,7 @@ function App() {
                   {/* <Route path="*" component={() => "Contenu introuvable"}/> */}
                 </Switch>
               </div>
-              <div>
-              </div>
+            </LoaderContext.Provider>
           </ScrollButtonContext.Provider>
         </UserContext.Provider>
       </AuthenticationContext.Provider>

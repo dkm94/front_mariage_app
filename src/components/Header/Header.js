@@ -5,8 +5,6 @@ import Login from "../Navigation/Log_in";
 import Logout from "../Navigation/Log_out";
 
 const Header = ({ userInfos: { invitationID } }) => {
-    console.log(userInfos, "!!!!")
-    console.log("hey")
 
     const token = localStorage.getItem("token");
         let navigation;

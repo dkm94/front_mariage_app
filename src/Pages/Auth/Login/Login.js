@@ -20,6 +20,8 @@ const Login = () => {
     });
     
     const onSubmit = ({email, password}) => {
+    console.log("🚀 ~ file: Login.js ~ line 23 ~ onSubmit ~ password", password)
+    console.log("🚀 ~ file: Login.js ~ line 23 ~ onSubmit ~ email", email)
         axios.post(`/api/auth/adminLogin`,
         {
             email: email,
@@ -38,8 +40,7 @@ const Login = () => {
                 }
             })
             .catch((err) => {
-                alert("Merci de vérifier vos identifiants ou de rééssayer plus tard.", JSON.strigify(err));
-                // console.log(err)})
+                console.log(err)
             })
       };
 
@@ -85,8 +86,9 @@ const Login = () => {
                                 </div>
                                 <div className="login__signup">
                                     <p>Pas encore membre? &nbsp;<Link to={"/register"}>Inscrivez-vous</Link></p>
+                                    <p><Link to={"/reset-password"}>Mot de passe oublié ?</Link></p>
                                 </div>
-                                <div>
+                                <div className="login__submit">
                                     <input type="submit" />
                                 </div>
                             </form>

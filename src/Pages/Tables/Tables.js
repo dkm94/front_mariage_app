@@ -3,10 +3,27 @@ import { withRouter } from "react-router-dom";
 import { ScrollButtonContext } from "../../../src/App";
 import axios from "axios";
 import Select from "../../components/AsyncSelect/AsyncSelect";
+import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+// import Dropdown from "react-bootstrap/Dropdown";
+// import DropdownButton from "react-bootstrap/DropdownButton";
+// import ButtonGroup from "react-bootstrap/ButtonGroup";
+// import MoreVertIcon from '@material-ui/icons//MoreVert';
 
 import "./Tables.css";
 
-
+// const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
+//     <a
+//       href=""
+//       ref={ref}
+//       onClick={e => {
+//         e.preventDefault();
+//         onClick(e);
+//       }}
+//     >
+//       {children}
+//       <span className="threedots" />
+//     </a>
+//   ));
 const Tables = (props) => {
     console.log(props)
    
@@ -123,7 +140,7 @@ const Tables = (props) => {
                 <div className="tables___bgimage"/>
                 <div className="tables___title">
                     <div className="tables___title_style">
-                        <h2>Les tables</h2>
+                        <h1>Les tables</h1>
                     </div>
                 </div>
 
@@ -152,6 +169,16 @@ const Tables = (props) => {
                             <ul className="get-tables">
                                 {tables.map((table, i) => {
                                     return <li key={i} data-id={table._id} className="table-style">
+                                        {/* <Dropdown>
+                                            <Dropdown.Toggle as={CustomToggle} />
+                                            <Dropdown.Menu size="sm" title="">
+                                            <Dropdown.Header>Options</Dropdown.Header>
+                                            <Dropdown.Item>abcd</Dropdown.Item>
+                                            <Dropdown.Item>erty</Dropdown.Item>
+                                            <Dropdown.Item>hnjm</Dropdown.Item>
+                                            </Dropdown.Menu>
+                                        </Dropdown> */}
+                                        
                                         <div className="table-name">
                                             {edit.id === table._id ? 
                                             (<form onSubmit={editTableName} className="mb-3">

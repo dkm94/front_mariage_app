@@ -23,6 +23,11 @@ export const NavigationData = [
         pathname: "/menu/tables"
     },
     {
+        title: "Liste des tâches",
+        icon: <FormatListBulletedIcon />,
+        pathname: "/menu/taches"
+    },
+    {
         title: "La carte",
         icon: <RestaurantIcon />,
         pathname: "/menu/carte"
@@ -31,10 +36,5 @@ export const NavigationData = [
         title: "Les dépenses",
         icon: <EuroIcon />,
         pathname: "/menu/budget"
-    },
-    {
-        title: "Liste des tâches",
-        icon: <FormatListBulletedIcon />,
-        pathname: "/menu/taches"
     }
 ]
