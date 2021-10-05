@@ -12,6 +12,7 @@
     display: flex;
     justify-content: space-around;
     width: 100%;
+    padding: 0 3rem;
 }
 .guest-form > form {
     width: 35%;
@@ -93,14 +94,28 @@
 }
 
 @media (max-width: 768px) {
-    .guest-form > form {
-        width: 80%;
+    .guest-form > div, form {
+        width: 50%;
     }
-    
+
     .guest-form > form > label {
         font-size: 1rem;
     }
 
+}
+
+@media (max-width: 540px) {
+    .guest-form {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .search__container {
+        align-self: flex-end;
+    }
+    .guest-form > form {
+        align-self: center;
+        width: 60%;
+    }
 }
 
 @media (max-width: 414px) {
