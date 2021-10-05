@@ -154,6 +154,7 @@
     position: absolute;
     top: -15px;
     right: -8px;
+    cursor: pointer;
 }
 
 .dropdown > a:hover {

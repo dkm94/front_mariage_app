@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     <a
-      href=""
+      href={() => false}
       ref={ref}
       onClick={e => {
         e.preventDefault();
