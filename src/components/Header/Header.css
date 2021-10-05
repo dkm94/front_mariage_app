@@ -90,7 +90,7 @@ a {
     font-size: 0.7rem;
 }
 
-.dropdown-menu {
+.dropdownmenu {
     background-color: #F8F9FA;
 }
 
@@ -147,7 +147,7 @@ a {
         height: 60px;
     }
 
-    .dropdown-menu {
+    .dropdownmenu {
         background: none;
         border: none;
         font-size: 0.7rem;

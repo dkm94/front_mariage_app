@@ -25,7 +25,7 @@ const TopNav = () => {
                         <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Organisation
                         </Link>
-                        <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <div className="dropdownmenu" aria-labelledby="navbarDropdownMenuLink">
                             {/* <Link className="dropdown-item" to={`/menu/invitation/${invitationID}`>Invitation</Link> */}
                             <Link className="dropdown-item" to="/menu/invites">Les invités</Link>
                             <Link className="dropdown-item" to="/menu/tables">Les tables</Link>

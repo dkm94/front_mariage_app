@@ -119,7 +119,7 @@ const Byguests = () => {
                 </div>
             </div>
             <div className="guests___list">
-                <div className="guest-form input-group mb-3">
+                <div className="guest-form mb-3">
                     <form onSubmit={handleSubmit} className="input-group mb-3">
                         <div>
                             <input

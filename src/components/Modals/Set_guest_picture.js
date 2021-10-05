@@ -10,7 +10,8 @@ const modalStyle = {
     padding: '10px 20px 20px 20px',
     zIndex: 1000,
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    borderRadius: '10px'
   }
 
 const buttonStyle = {
@@ -23,7 +24,7 @@ const overlayStyle = {
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(0, 0, 0, .5)',
+    backgroundColor: "rgba(211, 211, 211, 0.1)",
     zIndex: 1000
 }
 

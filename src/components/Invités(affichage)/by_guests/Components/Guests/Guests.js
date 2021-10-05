@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Modal from "../../../../Modals/Set_guest_picture";
 import Form from "../Form/UpdateGuest";
 import avatar from "../../../../../img/avatar.jpg";
+import Dropdown from "react-bootstrap/Dropdown";
+import CustomToggle from '../../../../Dots/Dots';
 
 const Guests = ({ guests, setGuests, deleteGuest, updateGuest, editPicture, seteditPicture, upload, handleFile, searchValue }) => {
 
@@ -43,6 +45,20 @@ const Guests = ({ guests, setGuests, deleteGuest, updateGuest, editPicture, sete
                             return guest.name.toLowerCase().indexOf(searchValue.toLowerCase()) >= 0;
                           })
                         .map((guest) => <li className="div-guest" key={guest._id} >
+                            <div className="custom-dropdown">
+                                <Dropdown>
+                                    <Dropdown.Toggle as={CustomToggle} />
+                                    <Dropdown.Menu size="sm" title="">
+                                        <Dropdown.Item onClick={() => setEdit({
+                                                id: guest._id, 
+                                                name: guest.name
+                                            })}>Modifier</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => {setisOpen(!isOpen); seteditPicture(guest._id)}}>Changer la photo</Dropdown.Item>
+                                        <Dropdown.Item>Supprimer la photo</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => {deleteGuest(guest._id)}}>Supprimer l'invité</Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                            </div>
                             <div className="div-guest___container">
                                 <div className="guest-picture center-x">
                                     {guest.media === "" ? 
@@ -55,8 +71,19 @@ const Guests = ({ guests, setGuests, deleteGuest, updateGuest, editPicture, sete
                                 (<div className="nameField">
                                     <span>{guest.name}</span>
                                 </div>)}
+                                <Modal open={isOpen} setOpen={setisOpen} guestId={editPicture} close={() => {setisOpen(false)}}>
+                                    <form className="modal___picture" onSubmit={(e) => {upload(editPicture); e.preventDefault()}}>
+                                        <label>Télécharger une photo (format: JPG/JPEG ou PNG)</label>
+                                        <input 
+                                            type="file" 
+                                            name="media" 
+                                            onChange={handleFileInput}
+                                            />
+                                        <button type="submit">Valider</button>
+                                    </form>
+                                </Modal>
                         
-                                <div className="guests___li-btns center-x" >
+                                {/* <div className="guests___li-btns center-x" >
                                     {editPicture === guest._id ?
                                     (<>
                                         <button 
@@ -102,11 +129,11 @@ const Guests = ({ guests, setGuests, deleteGuest, updateGuest, editPicture, sete
                                     )}
                                     
                                     
-                                </div>
+                                </div> */}
                             </div>
-                            <button className="del-btn" onClick={() => {deleteGuest(guest._id)}}>
+                            {/* <button className="del-btn" onClick={() => {deleteGuest(guest._id)}}>
                                 <i className="fas fa-times"></i>
-                            </button>
+                            </button> */}
                         </li>)
                     }
                 </ul>)
