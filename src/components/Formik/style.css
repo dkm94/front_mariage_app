@@ -1,14 +1,14 @@
 label {
     text-align: start;
-    font-size: 0.7rem;
+    /* font-size: 0.7rem; */
 }
 
 .error {
     /* position: absolute; */
     color: darkred;
-    font-size: .8rem;
+    /* font-size: .8rem; */
     text-align: start;
-    font-weight: 500;
+    /* font-weight: 500; */
 
 }
 

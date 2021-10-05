@@ -142,7 +142,7 @@ const Budget = (props) => {
                                 </div>
                             </div>
                         </div>
-                        <div className="chart-component" style={{ width: '100%', height: 300 }}>
+                        <div className="chart-component" style={{ width: '60%', height: 300 }}>
                             <PieChart operations={operations}/>
                         </div>
                     </div>

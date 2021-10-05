@@ -88,3 +88,19 @@
         margin-left: 0;
     }
 }
+@media (max-width: 575.98px) { 
+    .expenses-container {
+        display: flex;
+        flex-direction: column;
+    }
+    .icon___container {
+        display: none;
+    }
+ }
+
+ @media (max-width: 444px) { 
+    .expense__li__style {
+        display: flex;
+        flex-direction: column;
+    }
+ }

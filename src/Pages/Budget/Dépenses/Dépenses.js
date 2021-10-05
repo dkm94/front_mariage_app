@@ -121,7 +121,7 @@ const Expenses = ({ expenses, deleteExpense, updateExpense }) => {
                                     <span>{obj.category}</span>
                                 </div>
                                 <div>
-                                    <span>{financial(prix)}</span>
+                                    <span>{financial(prix)} €</span>
                                     <span>{obj.date}</span>
                                 </div>
                             </div>

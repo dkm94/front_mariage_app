@@ -1,0 +1,24 @@
+.pie {
+    height: 25rem;
+}
+
+@media (max-width: 575.98px) { 
+    .pie {
+        height: 29rem;
+    }
+    .budget___col-1 > .card-component {
+        width: 60%;
+    }
+ }
+
+ @media (max-width: 444px) { 
+    .budget___col-1 > .card-component {
+        width: 100%;
+    }
+    .pie {
+        height: 32rem;
+    }
+    .budget___col-2 {
+        margin-top: 3rem;
+    }
+ }
