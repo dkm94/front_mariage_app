@@ -19,13 +19,6 @@ const Dashboard = (props) => {
     })
     const [tasks, setTasks] = useState([]);
 
-    const cardColor = [
-        '#F9E1E0',
-        '#FEADB9',
-        '#BC85A3',
-        '#9799BA'
-    ]
-
     useEffect(() => {
         let guests = axios.get("/api/admin/guests/");
         let tables = axios.get("/api/admin/tables/");
@@ -49,7 +42,7 @@ const Dashboard = (props) => {
         return Number(sum).toFixed(2);
     }
 
-    const expensesSliced = operations.slice(Math.max(operations.length - 5, 1));
+    // const expensesSliced = operations.slice(Math.max(operations.length - 5, 1));
     
 
     return(

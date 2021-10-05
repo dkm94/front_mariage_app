@@ -13,6 +13,10 @@ ul {
     margin-bottom: 1rem;
 }
 
+.starter___div_form > ul, .maincourse___div_form > ul, .dessert___div_form > ul {
+    padding: 0;
+}
+
 .menu {
     padding-bottom: 100px;
 }

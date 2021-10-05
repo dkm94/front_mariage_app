@@ -1,3 +1,9 @@
+.green-btn {
+    background: #CCD5AE;
+    border-radius: 20px;
+    padding: 1rem;
+}
+
 .budget {
     padding-bottom: 100px;
 }
@@ -31,6 +37,8 @@
     background-color: #f2f2f2;
     margin-top: 20px;
     border-radius: 7px;
+    display: flex;
+    flex-direction: column;
 }
 
 .budget-form___style > span {
@@ -54,20 +62,23 @@
 
 .budget-cols {
     width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 2fr;
+    display: flex;
+    flex-direction: column;
 }
 
-.budget___col-2___style {
-    justify-content: flex-end;
-    width: 100%;
+.budget___col-2 {
+    display: flex;
+    flex-direction: column;
+}
+.budget___col-2 > div, ul{
+    padding: 0 10rem;
 }
 
 .budget-form > form {
     padding: 15px;
     width: 100%;
     text-align: center;
-    background: #E7E3E0;
+    /* background: #E7E3E0; */
     border-radius: 10px;
 }
 
@@ -77,6 +88,18 @@
 
 .budget___select {
     padding-left: 1.5rem;
+    text-align: end;
+}
+.budget___select > select {
+    border-radius: 5px;
+    padding: 0.7rem;
+}
+.budget___col-1 {
+    display: flex;
+    flex-direction: row;
+}
+.budget___col-1 > div {
+    width: 50%;
 }
 .budget___col-1 > .chart-component{
     margin-top: 5rem;
@@ -100,12 +123,6 @@
 }
 
 @media (max-width: 414px) { 
-
-    .budget-cols {
-        margin-left: 0;
-        padding: 0px 20px;
-    }
-
     .budget-form > form {
         margin-left: 0;
     }

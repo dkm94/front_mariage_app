@@ -60,7 +60,7 @@
 .get-tables {
     display: grid;
     justify-content: center;
-    grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
     grid-gap: 2rem;
     padding: 1rem;
     list-style: none;
@@ -136,24 +136,16 @@
 }
 
 .table-style {
-    /* position: relative;
-    background-color: rgba(239, 221, 209, 0.7);
-    width: 100%;
-    margin-bottom: 1rem;
-    color: #212529;
-    padding: 40px 10px;
-    border-radius: 5px;
-    box-shadow: 10px 10px 17px 0px rgb(230 221 230);
-    border: 1px #ead2c3 solid; */
     display: flex;
     flex-direction: column;
     box-shadow: 7px 6px 9px -6px rgba(158,153,158,1);
     height: fit-content;
-    background-color: #FFF;
+    background-color: #fcfbf7;
     position: relative;
     align-items: center;
     padding: 2rem 2rem;
     border: 1px #dfdbd7 solid;
+    border-radius: 10px;
 }
 
 .table-style > .menu-icon {

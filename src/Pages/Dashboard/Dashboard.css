@@ -155,6 +155,21 @@
     display: block;
 }
 
-/* @media only screen and (max-width: 414px){
-	
-} */
+@media only screen and (max-width : 1200px) {
+    .dashboard___elements > .grid-container {
+        grid-template-areas:
+            'invités tables'
+            'menu menu'
+            'tâches dépenses';
+    }
+}
+@media ( max-width : 576px ) {
+    .dashboard___elements > .grid-container {
+        grid-template-areas:
+            'invités'
+            'tables'
+            'tâches'
+            'menu'
+            'dépenses';
+    }
+}
