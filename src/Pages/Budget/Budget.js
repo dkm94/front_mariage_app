@@ -10,7 +10,6 @@ import axios from "axios";
 import "./Budget.css";
 
 const Budget = (props) => {
-    console.log(props)
  
     const { budgetID } = useContext(UserContext)
     const scrollBtn = useContext(ScrollButtonContext)
