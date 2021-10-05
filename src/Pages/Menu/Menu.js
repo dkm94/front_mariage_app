@@ -254,7 +254,7 @@ const Menus = (props) => {
                         <h1>Menu</h1>
                     </div>
                 </div>
-                <div className="container">
+                <div className="">
                     <div className="menu___list">
                         <div className="starter forms">
                             <div className="starter___div_img">

@@ -78,6 +78,16 @@
 .budget___select {
     padding-left: 1.5rem;
 }
+.budget___col-1 > .chart-component{
+    margin-top: 5rem;
+}
+
+.budget___col-1 > .chart-component > .pie > canvas {
+    height: 22rem;
+}
+.card-component > .card {
+    border-radius: 10px;
+}
 
 @media (max-width: 768px) { 
     .card-body > span {

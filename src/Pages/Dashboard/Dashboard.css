@@ -38,6 +38,7 @@
 
 .card-pd {
     padding: 20px;
+    border-radius: 10px;
 }
 
 .item1 { grid-area: invités; background-color: #F8EDEB; }

@@ -108,10 +108,10 @@ button {
     display: flex;
     border: lightgray 1px solid;
     padding: 0 0.5rem;
-    border-radius: 30px;
+    border-radius: 10px;
     background: #FFFFFF;
     padding: .375rem .375rem .375rem .75rem;
-    box-shadow: 7px 6px 25px -6px rgb(158 153 158);
+    /* box-shadow: 7px 6px 25px -6px rgb(158 153 158); */
 }
 
 .menu___forms > form > input {
