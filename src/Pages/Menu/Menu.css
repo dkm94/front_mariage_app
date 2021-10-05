@@ -75,7 +75,7 @@ button {
     display: grid;
     grid-template-columns: 2fr 3fr;
     grid-gap: 2rem;
-    border-radius: 10px 0px;
+    border-radius: 10px;
     background-color: #FFFFFF;
     box-shadow: 7px 6px 9px -6px rgb(158 153 158);
 }    
@@ -175,6 +175,7 @@ button {
     object-fit: cover;
     width: 100%;
     height: 100%;
+    border-radius: 10px;
 }
 
 .starter___div_form > h2, .dessert___div_form > h2 {
@@ -189,5 +190,19 @@ button {
         grid-row-gap: 3rem;
         justify-content: center;
         row-gap: 3rem;
+    }
+    .menu___list > .starter, .dessert {
+        display: flex;
+        flex-direction: column;
+    }
+    .menu___list > .maincourse {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .starter___div_img, .maincourse___div_img, .dessert___div_img {
+        height: 6rem;
+    }
+    .starter___div_form, .maincourse___div_form, .dessert___div_form {
+        padding-top: 0;
     }
 }
