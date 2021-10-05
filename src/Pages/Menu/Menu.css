@@ -182,7 +182,11 @@ button {
     text-align: end;
 }
 
-
+/* @media (max-width: 1024px) {
+    .menu-container > .menu {
+        margin-bottom: 10rem;
+    }
+} */
 @media (max-width: 768px) {
 
     .menu___list {
@@ -190,6 +194,7 @@ button {
         grid-row-gap: 3rem;
         justify-content: center;
         row-gap: 3rem;
+        padding: 0;
     }
     .menu___list > .starter, .dessert {
         display: flex;

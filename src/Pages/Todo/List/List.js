@@ -1,5 +1,7 @@
 import React, { useState, useRef } from 'react';
 import UpdateForm from "../Update/Form";
+import CustomToggle from '../../../components/Dots/Dots';
+import Dropdown from "react-bootstrap/Dropdown";
 import "./List.css";
 import axios from "axios";
 
@@ -103,14 +105,23 @@ const Todos = ({ todos, setTodos, deleteTodo }) => {
                                     />
                                     <span>{obj.text}</span>
                                 </div>
-                                <div className="todolist___li-btns">
+                                <div className="custom-dropdown">
+                                    <Dropdown>
+                                        <Dropdown.Toggle as={CustomToggle} />
+                                        <Dropdown.Menu size="sm" title="">
+                                            <Dropdown.Item onClick={() => getUpdatedId(obj._id, obj.text)}>Modifier</Dropdown.Item>
+                                            <Dropdown.Item onClick={() => {deleteTodo(obj._id)}}>Supprimer</Dropdown.Item>
+                                        </Dropdown.Menu>
+                                    </Dropdown>
+                                </div>
+                                {/* <div className="todolist___li-btns">
                                     <button disabled={obj.isCompleted} onClick={() => getUpdatedId(obj._id, obj.text)}>
                                         <i className="fas fa-pencil-alt"/>
                                     </button>
                                     <button className="del-btn" onClick={() => {deleteTodo(obj._id)}}>
                                         <i className="fas fa-times" aria-hidden="true"></i>
                                     </button>
-                                </div>
+                                </div> */}
                             </>)}
                         </li>
                     )

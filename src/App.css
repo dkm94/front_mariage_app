@@ -284,6 +284,10 @@ a:-webkit-any-link {
     }
     .App-home > .content {
         padding: 0;
+        margin-bottom: 16rem;
+    }
+    .byguests, .budget, .dashboard, .dashboard___elements, .menu-container > .menu {
+        padding-bottom: 0;
     }
 }
 
