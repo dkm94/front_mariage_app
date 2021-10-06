@@ -112,11 +112,17 @@
     .card-body > span {
         font-size: 2.5rem;
     }
+    .budget-cols {
+        padding: 5rem 5rem;
+    }
 }
 
 @media (max-width: 768px) { 
     .card-body > span {
         font-size: 2rem;
+    }
+    .budget-cols {
+        padding: 5rem 5rem;
     }
 }
 
@@ -128,8 +134,8 @@
         align-items: center;
     }
     .card-component {
-        align-self: flex-end;
-        width: 60%;
+        align-self: initial;
+        width: 80%;
     }
     .chart-component {
         margin-top: 3rem;
@@ -142,6 +148,9 @@
     }
     .budget___col-2 > .budget-form {
         padding: 0 5rem;
+    }
+    .budget-form {
+        width: 100%;
     }
  }
 
