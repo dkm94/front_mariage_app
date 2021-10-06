@@ -67,15 +67,15 @@ const Todo = () => {
                         <h1>Liste des tâches</h1>
                     </div>
                 </div>
-                <div className="todo-list container">
-                    <AddForm 
-                    todos={todos}
-                    setTodos={setTodos}
-                    todo={todo}
-                    setTodo={setTodo}
-                    addTodo={addTodo}
-                    handleInput={handleInput}
-                    />
+                <AddForm 
+                todos={todos}
+                setTodos={setTodos}
+                todo={todo}
+                setTodo={setTodo}
+                addTodo={addTodo}
+                handleInput={handleInput}
+                />
+                <div className="todo-list">
                     <List 
                     todos={todos}
                     setTodos={setTodos}

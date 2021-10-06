@@ -8,7 +8,7 @@ const Form = ({ todo, handleInput, addTodo }) => {
   }
 
   return(
-    <div className="add-todo___form input-group mb-3">
+    <div className="add-todo___form mb-3">
       <form onSubmit={addTodo} className="input-group mb-3">
         <div>
           <input

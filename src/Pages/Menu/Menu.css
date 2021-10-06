@@ -22,7 +22,7 @@ ul {
 }
 
 .menu___bgimage {
-    height: 10rem;
+    height: 20rem;
     background-attachment: fixed;
     background-image: url("../../img/menus/menu-4.jpg");
     background-position: center;

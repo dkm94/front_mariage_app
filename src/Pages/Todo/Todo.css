@@ -1,5 +1,5 @@
 .todo___bgimage {
-    height: 10rem;
+    height: 20rem;
     background-attachment: fixed;
     background-image: url("../../img/todo-bg.png");
     background-position: top;
@@ -24,5 +24,7 @@
 
 .todo-list {
     width: 100%;
-    text-align: -webkit-center;
+    margin-top: 10rem;
+    padding: 5rem 10rem;
+    min-height: 500px;
 }
