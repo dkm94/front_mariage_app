@@ -11,28 +11,35 @@
 .guest-form {
     display: flex;
     justify-content: space-around;
-    width: 100%;
-    padding: 0 3rem;
+    width: 50%;
+    box-shadow: 0px 10px 20px -3px rgba(181,174,181,0.5);
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 2rem;
+    border-radius: 5px;
 }
 .guest-form > form {
-    width: 35%;
-    text-align: center;
+    width: 100%;
 }
 
 .guest-form > form > div {
     width: 100%;
     display: flex;
-    border: lightgray 1px solid;
     padding: 0 0.5rem;
     border-radius: 10px;
     background: #FFFFFF;
     padding: .375rem .375rem .375rem .75rem;
-    /* box-shadow: 7px 6px 25px -6px rgba(158,153,158,1); */
+    justify-content: space-around;
 }
 
 
 .guest-form > form > div > input {
     border-style: none;
+    width: 80%;
+    border: 1px solid lightgrey;
+    border-radius: 10px !important;
 }
 
 .guest-form > form > div > input::placeholder {
@@ -42,7 +49,9 @@
 .guest-form > form > div > button {
     margin-left: 10px;
     border-style: none;
-    background: white;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    background-color: #B4BC98;
 }
 
 .guest-form > form > div > button:active {
@@ -65,7 +74,7 @@
 }
 
 .guests___bgimage {
-    height: 10rem;
+    height: 20rem;
     background-attachment: fixed;
     background-image: url("../../img/demoiselles.jpg");
     background-position: center;
@@ -89,8 +98,15 @@
 }
 
 .guests___list {
-    /* background: #FFFAF5; */
     width: 100%;
+    padding: 5rem 10rem;
+}
+
+.guests__search {
+    margin-top: 10rem;
+    padding: 0 10rem;
+    display: flex;
+    justify-content: flex-end;
 }
 
 @media (max-width: 768px) {

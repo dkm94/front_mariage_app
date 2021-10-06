@@ -8,7 +8,7 @@
 }
 
 .dashboard___bgimage {
-    height: 10rem;
+    height: 20rem;
     background-attachment: fixed;
     background-image: url('../../img/dashboard-bg.jpg');
     background-position: center;
@@ -33,7 +33,7 @@
 
 .dashboard___elements {
     width: 100%;
-    padding-bottom: 100px;
+    padding: 10rem;
 }
 
 .card-pd {
@@ -165,7 +165,17 @@
     .dashboard {
         padding-bottom: 0;
     }
+    .dashboard___elements {
+        padding-left: 5rem;
+        padding-right: 5rem;
+    }
 }
+@media (max-width: 991.98px) { 
+    .dashboard___elements {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+ }
 @media ( max-width : 576px ) {
     .dashboard___elements > .grid-container {
         grid-template-areas:

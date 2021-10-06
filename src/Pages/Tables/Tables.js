@@ -4,26 +4,11 @@ import { ScrollButtonContext } from "../../../src/App";
 import axios from "axios";
 import Select from "../../components/AsyncSelect/AsyncSelect";
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
-// import Dropdown from "react-bootstrap/Dropdown";
-// import DropdownButton from "react-bootstrap/DropdownButton";
-// import ButtonGroup from "react-bootstrap/ButtonGroup";
-// import MoreVertIcon from '@material-ui/icons//MoreVert';
+import CustomToggle from "../../components/Dots/Dots";
+import Dropdown from "react-bootstrap/Dropdown";
 
 import "./Tables.css";
 
-// const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
-//     <a
-//       href=""
-//       ref={ref}
-//       onClick={e => {
-//         e.preventDefault();
-//         onClick(e);
-//       }}
-//     >
-//       {children}
-//       <span className="threedots" />
-//     </a>
-//   ));
 const Tables = (props) => {
     console.log(props)
    
@@ -169,16 +154,6 @@ const Tables = (props) => {
                             <ul className="get-tables">
                                 {tables.map((table, i) => {
                                     return <li key={i} data-id={table._id} className="table-style">
-                                        {/* <Dropdown>
-                                            <Dropdown.Toggle as={CustomToggle} />
-                                            <Dropdown.Menu size="sm" title="">
-                                            <Dropdown.Header>Options</Dropdown.Header>
-                                            <Dropdown.Item>abcd</Dropdown.Item>
-                                            <Dropdown.Item>erty</Dropdown.Item>
-                                            <Dropdown.Item>hnjm</Dropdown.Item>
-                                            </Dropdown.Menu>
-                                        </Dropdown> */}
-                                        
                                         <div className="table-name">
                                             {edit.id === table._id ? 
                                             (<form onSubmit={editTableName} className="mb-3">
@@ -204,12 +179,6 @@ const Tables = (props) => {
                                             </form>) : 
                                             (<>
                                                 <span>{table.name}</span>
-                                                <button 
-                                                    onClick={() => getUpdatedId(table._id, table.name)}
-                                                    className=""
-                                                >
-                                                    <i className="fas fa-pencil-alt"/>
-                                                </button>
                                             </>)
                                             }
                                         </div>
@@ -225,18 +194,20 @@ const Tables = (props) => {
                                                         onClick={() => {deleteGuest(guest._id, table._id)}} 
                                                         className=""
                                                     >
-                                                        <i className="fas fa-trash"/>
+                                                        <i className="fas fa-times"></i>
                                                     </button>
                                                 </div>
                                             })}
                                         </div>
-                                        <button 
-                                            onClick={() => {deleteTable(table._id, table.guestID)}}
-                                            className="delete-table shadow-none"
-                                        >
-                                            <i className="fas fa-times"></i>
-                                        </button>
-                                     
+                                        <div className="custom-dropdown">
+                                            <Dropdown>
+                                                <Dropdown.Toggle as={CustomToggle} />
+                                                <Dropdown.Menu size="sm" title="">
+                                                    <Dropdown.Item onClick={() => getUpdatedId(table._id, table.name)}>Modifier</Dropdown.Item>
+                                                    <Dropdown.Item onClick={() => {deleteTable(table._id, table.guestID)}}>Supprimer</Dropdown.Item>
+                                                </Dropdown.Menu>
+                                            </Dropdown>
+                                        </div>
                                     </li>
                                 })}
                             </ul>

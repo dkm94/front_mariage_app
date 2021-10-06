@@ -18,7 +18,7 @@ const Select = ({ tables, table, guests, setTables }) => {
     const enableBtn = {
         boxShadow: "0 1px 3px 0 rgb(0 0 0 / 26%)",
         backgroundColor: "transparent",
-        backgroundImage: "linear-gradient(39deg, #caa5c1, #f2bbb2)",
+        backgroundImage: "linear-gradient(90deg, rgba(181,189,155,1) 0%, rgba(193,201,166,1) 60%, rgba(211,221,181,1) 100%)",
         borderColor: "#caa5c1",
         color: "#FFFFFF",
         fontSize: ".75rem",

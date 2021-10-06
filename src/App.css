@@ -27,8 +27,9 @@ h2 {
 .content {
     display: flex;
     width: 100%;
-    padding: 0 10rem 10rem 10rem;
+    padding-bottom: 10rem;
 }
+
 
 .content-home {
     display: flex;
@@ -277,6 +278,10 @@ a:-webkit-any-link {
     margin-bottom: 15px;
 }
 
+.guests___title, .dashboard___title, .tables___title, .todo___title, .menu___title, .budget___title {
+    display: none;
+}
+
 @media only screen and (max-device-width : 1024px) {
     .App-home {
         width: 70%;
@@ -302,5 +307,6 @@ a:-webkit-any-link {
         position: unset;
         width: 100%;
     }
+
  }
 
