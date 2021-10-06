@@ -4,7 +4,7 @@
 }
 
 .tables___bgimage {
-    height: 10rem;
+    height: 20rem;
     background-attachment: fixed;
     background-image: url("../../img/tables/table-4.jpg");
     background-position: center;
@@ -29,6 +29,9 @@
 
 .tables___list {
     width: 100%;
+    margin-top: 10rem;
+    padding: 5rem 10rem;
+    min-height: 500px;
 }
 
 .tables-form > form > label {
@@ -93,28 +96,37 @@
 }
 
 .table-form {
-    justify-content: center;
-    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+    box-shadow: 0px 10px 20px -3px rgb(181 174 181 / 50%);
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 2rem;
+    border-radius: 5px;
 }
 
 .table-form > form {
-    width: 50%;
-    text-align: center;
+    width: 100%;
 }
 
 .table-form > form > div {
     width: 100%;
     display: flex;
-    border: lightgray 1px solid;
     padding: 0 0.5rem;
     border-radius: 10px;
     background: #FFFFFF;
     padding: .375rem .375rem .375rem .75rem;
-    /* box-shadow: 7px 6px 25px -6px rgba(158,153,158,1); */
+    justify-content: space-around;
 }
 
 .table-form > form > div > input {
     border-style: none;
+    width: 80%;
+    border: 1px solid lightgrey;
+    border-radius: 10px !important;
 }
 
 .table-form > form > div > input::placeholder {
@@ -124,11 +136,9 @@
 .table-form > form > div > button {
     margin-left: 10px;
     border-style: none;
-    background: white;
-}
-
-.check-btn:focus {
-    outline: none;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    background-color: #B4BC98;
 }
 
 .table-style {

@@ -128,27 +128,26 @@ const Tables = (props) => {
                         <h1>Les tables</h1>
                     </div>
                 </div>
-
+                <div className="table-form mb-3">
+                    <form onSubmit={handleSubmit} className="input-group mb-3">
+                        <div>
+                            <input
+                            type="text"
+                            className="form-control shadow-none"
+                            name="name" 
+                            placeholder="Nom/Numéro de la table"
+                            value={newTable.name} 
+                            onChange={handleChange}/>
+                            <button 
+                            type="submit"
+                            className="btn shadow-none check-btn"
+                            id="button-addon2"
+                            ><i className="fas fa-check" /></button>
+                        </div>
+                    </form>
+                </div>
                 <div className="tables___list">
-                    <div className="table-form add-form input-group mb-3">
-                        <form onSubmit={handleSubmit} className="input-group mb-3">
-                            <div>
-                                <input
-                                type="text"
-                                className="form-control shadow-none"
-                                name="name" 
-                                placeholder="Nom/Numéro de la table"
-                                value={newTable.name} 
-                                onChange={handleChange}/>
-                                <button 
-                                type="submit"
-                                className="btn shadow-none check-btn"
-                                id="button-addon2"
-                                ><i className="fas fa-check" /></button>
-                            </div>
-                        </form>
-                    </div>
-                        {tables.length === 0 || null ? 
+                    {tables.length === 0 || null ? 
                         (<div className="block"><span>Vos tables ici.</span></div>) : 
                         (<div className="tables__block">
                             <ul className="get-tables">
