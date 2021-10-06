@@ -75,7 +75,7 @@ const Expenses = ({ expenses, deleteExpense, updateExpense }) => {
     // };
 
     return(
-        <ul className="budget-list">
+        <ul className="col budget-list">
             {
                 expenses.map(obj => {
                     let prix = obj.price/100;

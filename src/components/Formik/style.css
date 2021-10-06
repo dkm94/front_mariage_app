@@ -13,14 +13,22 @@ label {
 }
 
 .textfield-style {
-    margin-top: 15px;
-    padding-left: 1.5rem;
+    /* margin-top: 15px; */
+    /* padding-left: 1.5rem; */
     display: flex;
     flex-direction: column;
-    width: 100%;
+    /* width: 50%; */
+}
+
+.textfield-style > input {
+    border-radius: 5px !important;
 }
 
 .input-style {
     border-bottom: 1px solid;
     width: 100%;
+}
+
+.bd-radius {
+    border-radius: 10px !important;
 }

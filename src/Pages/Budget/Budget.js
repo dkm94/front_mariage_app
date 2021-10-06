@@ -20,7 +20,7 @@ const Budget = (props) => {
         description: ''
     }
 
-    const [operationForm, toggleOperationForm] = useState(false)
+    // const [operationForm, toggleOperationForm] = useState(false)
     const [budget, setBudget] = useState({})
     const [operations, setOperations] = useState([]);
     const [newOperation, setnewOperation] = useState(newOperationValues)
@@ -108,10 +108,10 @@ const Budget = (props) => {
         enableReinitialize: true,
     })
 
-    const newOperationForm = (e) => {
-        e.preventDefault();
-        toggleOperationForm(!operationForm);
-    }
+    // const newOperationForm = (e) => {
+    //     e.preventDefault();
+    //     toggleOperationForm(!operationForm);
+    // }
 
     let sum = operations.reduce((a, b) => a + b.price, 0)/100;
     function total(sum){
@@ -142,18 +142,12 @@ const Budget = (props) => {
                                 </div>
                             </div>
                         </div>
-                        <div className="chart-component" style={{ width: '60%', height: 300 }}>
-                            <PieChart operations={operations}/>
-                        </div>
-                    </div>
-                    <div className="budget___col-2">
                         <Formik>
-                            <div className="budget-form">
-                                <div className="budget-form___add-btn mt-30">
+                            <div className="col budget-form mb3">
+                                {/* <div className="budget-form___add-btn mt-30">
                                     <button onClick={newOperationForm} className="green-btn">Ajouter une nouvelle opération</button>
-                                </div>
-                                <Form className="budget-form___style" onSubmit={formik.handleSubmit} style={{display: operationForm ? 'flex' : 'none'}}>
-                                    
+                                </div> */}
+                                <Form className="input-group mb-3" onSubmit={formik.handleSubmit}>
                                     <div className="budget___select">
                                         <select 
                                             name="category" 
@@ -178,8 +172,8 @@ const Budget = (props) => {
                                         </div>}
                                     </div>
                                     <TextField 
-                                        size="col-12"
-                                        label="Description" 
+                                        size="40%"
+                                        // label="Description" 
                                         name="description" 
                                         type="text" 
                                         value={formik.values.description} 
@@ -188,12 +182,13 @@ const Budget = (props) => {
                                         className="form-control"
                                         errors={formik.errors}
                                         touched={formik.touched}
+                                        placeholder="Description"
                                     />
                                     <TextField 
-                                        size="col-3"
+                                        size="20%"
                                         width="100%"
                                         // inputwidth="5rem"
-                                        label="Montant" 
+                                        // label="Montant" 
                                         name="price" 
                                         type="number"
                                         value={formik.values.price} 
@@ -202,6 +197,8 @@ const Budget = (props) => {
                                         className="form-control"
                                         errors={formik.errors}
                                         touched={formik.touched}
+                                        placeholder="Montant"
+                                        border-radius="10px"
                                     />
                                     <div className="col-12 budget-form___submit">
                                         <button className="btn-style-s" type="submit" disabled={formik.isSubmitting}>
@@ -211,11 +208,16 @@ const Budget = (props) => {
                                 </Form>
                             </div>    
                         </Formik> 
+                    </div>
+                    <div className="budget___col-2">
                         <Expenses 
                         expenses={operations}
                         deleteExpense={deleteExpense}
                         // updateExpense={editExpense}
                         />
+                        <div className="col chart-component" style={{ width: '60%', height: 300 }}>
+                            <PieChart operations={operations}/>
+                        </div>
                     </div>
                 </div>
             </div>
