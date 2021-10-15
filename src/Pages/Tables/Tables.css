@@ -11,6 +11,8 @@
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
+    border-radius: 10px;
+    margin: 3rem;
 }
 
 .tables___list {

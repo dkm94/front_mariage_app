@@ -15,12 +15,14 @@
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
+    border-radius: 10px;
+    margin: 3rem;
 }
 
 .dashboard___elements {
     width: 100%;
     padding: 10rem;
-    margin-top: 10rem;
+    margin-top: 5rem;
 }
 
 .card-pd {
