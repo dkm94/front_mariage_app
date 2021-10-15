@@ -122,10 +122,9 @@ const Budget = (props) => {
         <div className="budget-container page-component">
             {scrollBtn}
             <div className="budget">
-                <div className="budget___bgimage" />
-                <div className="budget___title">
-                    <div className="budget___title_style">
-                        <h1>Dépenses</h1>
+                <div className="budget___bgimage">
+                    <div className="glass-div">
+                        <h1>Souhaitez-vous ajouter une nouvelle dépense ?</h1>
                     </div>
                 </div>
                 <div className="budget-cols">

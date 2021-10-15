@@ -109,26 +109,29 @@ const Byguests = () => {
 
     return(
         <div className="guest-container" style={button_wrapper_style}>
-            <div className="guests___bgimage" />
-            <div className="guest-form mb-3">
-                <form onSubmit={handleSubmit} className="input-group mb-3">
-                    <div>
-                        <input
-                        type="text"
-                        className="form-control shadow-none"
-                        name="name"
-                        placeholder="Nouvel invité"
-                        value={newGuest.name} 
-                        onChange={handleChange}
-                        required
-                        />
-                        <button 
-                        type="submit"
-                        className="btn shadow-none"
-                        id="button-addon2"
-                        ><i className="fas fa-check" /></button>
-                    </div>
-                </form>
+            {scrollBtn}
+            <div className="guests___bgimage">
+                <div className="guest-form glass-div mb-3">
+                    <h1>Souhaitez-vous ajouter de nouveaux invités ?</h1>
+                    <form onSubmit={handleSubmit} className="input-group mb-3">
+                        <div>
+                            <input
+                            type="text"
+                            className="form-control shadow-none"
+                            name="name"
+                            placeholder="Nouvel invité"
+                            value={newGuest.name} 
+                            onChange={handleChange}
+                            required
+                            />
+                            <button 
+                            type="submit"
+                            className="btn shadow-none"
+                            id="button-addon2"
+                            ><i className="fas fa-check" /></button>
+                        </div>
+                    </form>
+                </div>
             </div>
             <div className="guests__search">
                 <SearchBar 
@@ -139,12 +142,6 @@ const Byguests = () => {
                 value={searchValue}
                 onChange={handleSearch}
                 />
-            </div>
-            <div className="guests___title">
-                <div className="guests___title_style" >
-                    {scrollBtn}
-                    <h1>Les invités</h1>
-                </div>
             </div>
             <div className="guests___list">
                 

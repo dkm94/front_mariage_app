@@ -61,20 +61,16 @@ const Todo = () => {
         <div className='todo-container page-component'>
             {scrollBtn}
             <div className="todo">
-                <div className="todo___bgimage" />
-                <div className="todo___title">
-                    <div className="todo___title_style">
-                        <h1>Liste des tâches</h1>
-                    </div>
+                <div className="todo___bgimage">
+                    <AddForm 
+                    todos={todos}
+                    setTodos={setTodos}
+                    todo={todo}
+                    setTodo={setTodo}
+                    addTodo={addTodo}
+                    handleInput={handleInput}
+                    />
                 </div>
-                <AddForm 
-                todos={todos}
-                setTodos={setTodos}
-                todo={todo}
-                setTodo={setTodo}
-                addTodo={addTodo}
-                handleInput={handleInput}
-                />
                 <div className="todo-list">
                     <List 
                     todos={todos}

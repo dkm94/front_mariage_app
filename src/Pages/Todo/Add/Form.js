@@ -8,9 +8,10 @@ const Form = ({ todo, handleInput, addTodo }) => {
   }
 
   return(
-    <div className="add-todo___form mb-3">
+    <div className="glass-div mb-3">
+      <h1>Souhaitez-vous ajouter de nouvelles tâches ?</h1>
       <form onSubmit={addTodo} className="input-group mb-3">
-        <div>
+        <div className="add-task-style">
           <input
           type="text"
           name="text" 

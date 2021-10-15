@@ -48,12 +48,12 @@ const Dashboard = (props) => {
     return(
         <div className="dashboard page-component">
             {scrollBtn}
-            <div className="dashboard___bgimage" />
-            <div className="dashboard___title">
-                <div className="dashboard___title_style">
-                    <h1>Votre tableau de bord</h1>
+            <div className="dashboard___bgimage">
+                <div className="glass-div">
+                    <h1>Que souhaitez-vous faire aujourd'hui ?</h1>
                 </div>
             </div>
+            
             <div className="dashboard___elements">
                 <div className="grid-container">
                     <div className="item1">

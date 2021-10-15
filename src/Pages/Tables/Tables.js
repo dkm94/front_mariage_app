@@ -122,29 +122,26 @@ const Tables = (props) => {
         <div className="tables-container page-component">
             {scrollBtn}
             <div className="tables">
-                <div className="tables___bgimage"/>
-                <div className="tables___title">
-                    <div className="tables___title_style">
-                        <h1>Les tables</h1>
+                <div className="tables___bgimage">
+                    <div className="glass-div table-form mb-3">
+                        <h1>Comment souhaitez-vous organiser votre plan de table ? </h1>
+                        <form onSubmit={handleSubmit} className="input-group mb-3">
+                            <div>
+                                <input
+                                type="text"
+                                className="form-control shadow-none"
+                                name="name" 
+                                placeholder="Nom/Numéro de la table"
+                                value={newTable.name} 
+                                onChange={handleChange}/>
+                                <button 
+                                type="submit"
+                                className="btn shadow-none check-btn"
+                                id="button-addon2"
+                                ><i className="fas fa-check" /></button>
+                            </div>
+                        </form>
                     </div>
-                </div>
-                <div className="table-form mb-3">
-                    <form onSubmit={handleSubmit} className="input-group mb-3">
-                        <div>
-                            <input
-                            type="text"
-                            className="form-control shadow-none"
-                            name="name" 
-                            placeholder="Nom/Numéro de la table"
-                            value={newTable.name} 
-                            onChange={handleChange}/>
-                            <button 
-                            type="submit"
-                            className="btn shadow-none check-btn"
-                            id="button-addon2"
-                            ><i className="fas fa-check" /></button>
-                        </div>
-                    </form>
                 </div>
                 <div className="tables___list">
                     {tables.length === 0 || null ? 

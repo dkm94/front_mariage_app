@@ -16,7 +16,9 @@ body {
 }
 
 h1 {
-    font-size: 2rem !important;
+    font-size: 3rem !important;
+    font-weight: 600 !important;
+    text-align: center;
 }
 
 h2 {
@@ -278,9 +280,7 @@ a:-webkit-any-link {
     margin-bottom: 15px;
 }
 
-.guests___title, .dashboard___title, .tables___title, .todo___title, .menu___title, .budget___title {
-    display: none;
-}
+
 
 @media only screen and (max-device-width : 1024px) {
     .App-home {
