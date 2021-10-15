@@ -1,0 +1,51 @@
+.home {
+    min-height: 92vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url('./../../img/aisle.jpg');
+    background-size: cover;
+    position: relative;
+ }
+
+.home___position {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.home-desc {
+    color: black;
+    background: rgba(255,255,255,0.7);
+    padding: 2rem;
+    margin-bottom: 2em;
+    border-radius: 5px;
+}
+
+.home-btn {
+    position: relative;
+    bottom: 30%;
+    transform: translateY(-30%);
+    color: black;
+}
+
+.home___register-btn {
+    width: 100%;
+    text-align: center;
+}
+
+.home-link {
+    border-radius: 20px;
+    font-size: 1rem;
+}
+
+.home-link > a {
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+a:hover {
+    color: black;
+}
+

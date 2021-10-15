@@ -1,0 +1,106 @@
+.budget-list {
+    list-style: none;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.budget-list > li > ul {
+    list-style: none;
+    background-color: #FFFFFF;
+    padding: 20px;
+    border-radius: 0 10px 10px 0;
+}
+
+.expenses-container {
+    width: 100%;
+    /* border: 1px solid rgba(0,0,0,.125); */
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    box-shadow: 7px 6px 9px -6px rgb(158 153 158);
+    padding: 1rem;
+}
+
+.li___icon {
+    background-color: #FFFFFF;
+}
+
+.icon___container {
+    height: 5rem;
+    border-radius: 50%;
+    background-color: yellow;
+    padding: 15px;
+}
+
+.icon___container > img {
+    height: 100%;
+    /* margin: 5px; */
+
+}
+
+.expense-li {
+    padding: 0.5rem 0;
+    width: 100%;
+    background-color: #FFFFFF;
+}
+
+.expense__li__style {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 4fr 2fr;
+    padding: 0.5rem 1.5rem;
+}
+
+.expense__li__style > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.expense__li__style > div:nth-child(2) {
+    text-align: end;
+}
+
+.expense__li__style > div > span:nth-child(1) {
+    font-size: 1.3rem;;
+    font-weight: 500;
+}
+
+.expense__li__style > div > span:nth-child(2) {
+    margin-top: .5rem;
+    color: grey;
+}
+
+.expense-li___btn {
+    text-align: end;
+    padding-right: 0.4rem;
+}
+
+.expense_li___edit-btn {
+    text-align: end;
+}
+
+.close-btn > button {
+    color: #c1b8b8;
+}
+
+@media (max-width: 768px) { 
+    .budget-list > li {
+        margin-left: 0;
+    }
+}
+@media (max-width: 575.98px) { 
+    .expenses-container {
+        display: flex;
+        flex-direction: column;
+    }
+    .icon___container {
+        display: none;
+    }
+ }
+
+ @media (max-width: 444px) { 
+    .expense__li__style {
+        display: flex;
+        flex-direction: column;
+    }
+ }

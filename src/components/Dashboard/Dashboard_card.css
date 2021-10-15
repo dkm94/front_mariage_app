@@ -1,0 +1,57 @@
+.card {
+    border-radius: 10px;
+    box-shadow: 10px 10px 17px 0px rgb(230 221 230)
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-body > span {
+    font-size: 3em;
+    text-align: center;
+}
+
+.card-body > a {
+    margin-top: 10px;
+    place-self: flex-end;
+}
+
+.card-strip {
+    border-radius: 10px 0 0 10px;
+}
+
+.card-title {
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+.color-strip {
+    background-color: red;
+}
+
+.card-component {
+    margin-bottom: 2rem;
+}
+
+.menu-elements {
+    display: flex;
+    justify-content: space-around;
+}
+
+.menu-elements > div {
+    display: flex;
+    flex-direction: column-reverse;
+    place-self: start;
+    text-align: center;
+}
+
+.element___data-size {
+    font-size: 2em;
+}
+
+@media (max-width: 414px) { 
+    .card-component {
+        margin-bottom: 1rem;
+    }
+}

@@ -1,0 +1,93 @@
+.tasks-list {
+    list-style: none;
+    padding: 0;
+    width: 70%;
+    display: grid;
+    row-gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.tasks-list__li {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem 2rem;
+    background: #D4A373;
+    border-radius: 10px;
+    box-shadow: 7px 6px 9px -6px rgb(158 153 158);
+}
+
+.tasks-list__li__done {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem 2rem;
+    background-color: lightgrey;
+    font-style: italic;
+    color: grey;
+    /* text-decoration: line-through; */
+    border-radius: 10px;
+    box-shadow: 7px 6px 9px -6px rgb(158 153 158);
+    
+}
+
+.tasks-list__li__done > .custom-dropdown {
+    width: fit-content;
+}
+
+.tasks-list__li__done > .todolist___checkbox_span:nth-child(1) {
+text-decoration: line-through;
+}
+.todolist___checkbox_span {
+    width: 100%;
+    text-align: left;
+}
+.tasks-list__li__done > .custom-dropdown > .dropdown > a > span {
+    font-style: initial;
+}
+
+.tasks-list__li > input {
+    align-self: center;
+}
+.tasks-list__li > .custom-dropdown > .dropdown > a, 
+.tasks-list__li__done > .custom-dropdown > .dropdown > a {
+    top: -8px;
+}
+.tasks-list__li__done > .custom-dropdown > .dropdown > div {
+    font-style: initial;
+}
+.tasks-list__li > form > input {
+    width: 80%;
+}
+.todolist___checkbox_span > span {
+    margin-left: 1rem;
+}
+
+.todolist___li-btns {
+    display: flex;
+    flex-direction: row;
+}
+
+.todolist___li-btns > button:nth-child(1) {
+    display: flex;
+    height: -moz-fit-content;
+    height: fit-content;
+    margin: 0px 5px;
+    padding: .375rem 1.5rem;
+    box-shadow: rgb(0 0 0 / 26%) 0px 1px 3px 0px;
+    background-color: #f6f5f3;
+    border-radius: 20px;
+}
+
+.todolist___li-btns > input {
+    margin: 0px 5px;
+    align-self: center;
+}
+
+.todolist___li-btns > button:nth-child(2) {
+    background: transparent;
+}
+
+@media ( max-width : 768px ) {
+    .tasks-list {
+        width: 90%;
+    }
+}

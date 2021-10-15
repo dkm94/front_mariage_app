@@ -1,0 +1,29 @@
+.reset-page {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+}
+
+.reset-form {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+    width: 35rem;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    padding: 2rem 5rem;
+    background-color: #FFF;
+}
+
+.reset-page > .reset-form > form > .submit-reset > input[type=submit] {
+	background: #CCD5AE;
+    border-radius: 20px;
+    padding: 0.5rem;
+    width: 10rem;
+}
+
+.submit-reset {
+    display: flex;
+    justify-content: flex-end;
+}

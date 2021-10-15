@@ -3,12 +3,93 @@
 
 /* Mise en forme */
 html, body {
-    /* background-color: lightseagreen; */
-    /* height: 100%; */
+    min-height: 100vh;
     width: 100%;
     margin: 0;
     font-family: 'Crimson Text', serif;
-    background: whitesmoke;
+    background-color: #F5F7FB;
+    /* font-family: 'Roboto', sans-serif; */
+}
+
+body {
+    position: relative;
+}
+
+h1 {
+    font-size: 2rem !important;
+}
+
+h2 {
+    font-size: 1.75rem !important;
+    font-weight: 700 !important;
+}
+
+.content {
+    display: flex;
+    width: 100%;
+    padding-bottom: 10rem;
+}
+
+
+.content-home {
+    display: flex;
+    width: 100%;
+    padding: 0;
+}
+
+/********Navigation*********/
+.navigation-layout {
+    height: 100%;
+}
+
+.navigation-layout > nav {
+    /* position: fixed;
+    width: 100%;
+    z-index: 1000; */
+    box-shadow: 0px 5px 5px 0px rgba(173,164,173,0.5);
+}
+
+.nav-logo > img {
+    height: 100%;
+}
+
+/*********App Content*******/
+.body-content {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    position: relative;
+    top: 10vh;
+}
+
+.body-content___home {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    position: relative;
+    top: 0;
+}
+
+.App-home {
+    min-height: 90vh;
+    width: 80%;
+    position: absolute;
+    left: 20%;
+    background-color: #FFF;
+}
+
+.App {
+    min-height: 100vh;
+    width: 100%;
+}
+
+/******Components******/
+.page-component {
+    width: 100%;
+}
+
+button:focus {
+    outline: none;
 }
 
 .center-x {
@@ -136,59 +217,6 @@ a:-webkit-any-link {
     text-align: center;
 }
 
-.divGroupbox {
-    width: 90%;
-    display: flex;
-    height: fit-content;
-    flex-wrap: wrap;
-}
-
-.divGroup {
-    display: flex;
-    flex-direction: column;
-    height: 200px;
-    width: 200px;
-    margin: 20px;
-    -webkit-box-shadow: 10px 10px 34px -1px rgba(166,154,166,1);
-    -moz-box-shadow: 10px 10px 34px -1px rgba(166,154,166,1);
-    box-shadow: 10px 10px 34px -1px rgba(166,154,166,1);
-    /* background-color: orange; */
-}
-
-.groupName h1 {
-    margin: 0;
-}
-
-/* Menu tables */
-.tables {
-    height: 100vh;
-    width: 100%; 
-    background-color: green;
-}
-
-.tablesBox {
-    height: 67%;
-    width: 100%;
-}
-
-.addTable {
-    height: 22%;
-    width: 30%;
-    background-color: #FFFFFF;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: red;
-    border-style: dotted;
-    list-style: none;
-    margin: 10%;
-}
-
-.addTableCroix {
-    font-size: 63px;
-    margin-bottom: 15px;
-}
-
 /* Menu menus */
 .menus {
     height: 100vh;
@@ -250,8 +278,35 @@ a:-webkit-any-link {
     margin-bottom: 15px;
 }
 
-.footer {
-    height: 60px;
-    width: 100%;
-    background-color: #000000;
+.guests___title, .dashboard___title, .tables___title, .todo___title, .menu___title, .budget___title {
+    display: none;
 }
+
+@media only screen and (max-device-width : 1024px) {
+    .App-home {
+        width: 70%;
+        left: 30%;
+    }
+    .App-home > .content {
+        padding: 0;
+        margin-bottom: 16rem;
+    }
+    .byguests, .budget, .dashboard, .dashboard___elements, .menu-container > .menu {
+        padding-bottom: 0;
+    }
+}
+
+@media (max-width: 768px) { 
+    h2 {
+        font-size: 2rem;
+    }
+    .body-content > .sidebar {
+        display: none;
+    }
+    .App-home {
+        position: unset;
+        width: 100%;
+    }
+
+ }
+

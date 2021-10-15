@@ -1,0 +1,30 @@
+.todo___bgimage {
+    height: 20rem;
+    background-attachment: fixed;
+    background-image: url("../../img/todo-bg.png");
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.todo___title {
+    padding: 50px;
+    text-align: -webkit-center;
+}
+
+.todo___title_style {
+    padding-bottom: 10px;
+    border-bottom: 1px solid;
+    width: fit-content;
+    padding-right: 30px;
+    padding-left: 30px;
+    text-transform: uppercase;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+.todo-list {
+    width: 100%;
+    margin-top: 10rem;
+    padding: 5rem 10rem;
+    min-height: 500px;
+}

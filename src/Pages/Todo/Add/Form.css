@@ -1,0 +1,41 @@
+.add-todo___form {
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+    box-shadow: 0px 10px 20px -3px rgb(181 174 181 / 50%);
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 2rem;
+    border-radius: 5px;
+}
+
+.add-todo___form > form {
+    width: 100%;
+}
+
+.add-todo___form > form > div {
+    width: 100%;
+    display: flex;
+    padding: 0 0.5rem;
+    border-radius: 10px;
+    background: #FFFFFF;
+    padding: .375rem .375rem .375rem .75rem;
+    justify-content: space-around;
+}
+
+.add-todo___form > form > div > input {
+    border-style: none;
+    width: 80%;
+    border: 1px solid lightgrey;
+    border-radius: 10px !important;
+}
+
+.add-todo___form > form > div > button {
+    margin-left: 10px;
+    border-style: none;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    background-color: #B4BC98;
+  }

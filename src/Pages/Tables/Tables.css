@@ -1,0 +1,304 @@
+/* Menu tables */
+.tables-container {
+    /* padding-bottom: 100px; */
+}
+
+.tables___bgimage {
+    height: 20rem;
+    background-attachment: fixed;
+    background-image: url("../../img/tables/table-4.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.tables___title {
+    padding: 50px;
+    text-align: -webkit-center;
+}
+
+.tables___title_style {
+    padding-bottom: 10px;
+    border-bottom: 1px solid;
+    width: fit-content;
+    padding-right: 30px;
+    padding-left: 30px;
+    text-transform: uppercase;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+.tables___list {
+    width: 100%;
+    margin-top: 10rem;
+    padding: 5rem 10rem;
+    min-height: 500px;
+}
+
+.tables-form > form > label {
+    font-size: 20px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 3.3px;
+    text-align: center;
+    color: #000000;
+    text-transform: uppercase;
+}
+
+.tables-form > form {
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+.tables-form > form > input {
+    border: 1px solid lightgray;
+}
+
+.get-tables {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    grid-gap: 2rem;
+    padding: 1rem;
+    list-style: none;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.tables___block {
+    width: 100%;
+    height: fit-content;
+}
+
+.tablesBox {
+    height: 67%;
+    width: 100%;
+}
+
+.addTable {
+    height: 22%;
+    width: 30%;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: red;
+    border-style: dotted;
+    list-style: none;
+    margin: 10%;
+}
+
+.addTableCroix {
+    font-size: 63px;
+    margin-bottom: 15px;
+}
+
+.table-form {
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+    box-shadow: 0px 10px 20px -3px rgb(181 174 181 / 50%);
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 2rem;
+    border-radius: 5px;
+}
+
+.table-form > form {
+    width: 100%;
+}
+
+.table-form > form > div {
+    width: 100%;
+    display: flex;
+    padding: 0 0.5rem;
+    border-radius: 10px;
+    background: #FFFFFF;
+    padding: .375rem .375rem .375rem .75rem;
+    justify-content: space-around;
+}
+
+.table-form > form > div > input {
+    border-style: none;
+    width: 80%;
+    border: 1px solid lightgrey;
+    border-radius: 10px !important;
+}
+
+.table-form > form > div > input::placeholder {
+    font: italic;
+}
+
+.table-form > form > div > button {
+    margin-left: 10px;
+    border-style: none;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    background-color: #B4BC98;
+}
+
+.table-style {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 7px 6px 9px -6px rgba(158,153,158,1);
+    height: fit-content;
+    background-color: #fcfbf7;
+    position: relative;
+    align-items: center;
+    padding: 2rem 2rem;
+    /* border: 1px #dfdbd7 solid; */
+    border-radius: 10px;
+}
+
+.table-style > .menu-icon {
+    position: absolute;
+    bottom: 84%;
+    left: 89%;
+    color: #D3D3D3;
+    cursor: pointer;
+}
+.table-style > .custom-dropdown{
+    position: absolute;
+    bottom: 86%;
+    left: -5%;
+}
+.table-name {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    padding-bottom: 20px;
+    margin-top: 2rem;
+}
+
+.table-name > button {
+    display: flex;
+    font-size: 0.7rem;
+    height: fit-content;
+    padding: .25rem;
+    margin-right: .5rem;
+    box-shadow: rgb(0 0 0 / 26%) 0px 1px 3px 0px;
+    background-color: #fce8ea;
+    border-radius: 20px;
+}
+
+.table-name > button:focus {
+    outline: none;
+}
+
+.table-name > span {
+    font-weight: 300;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.table-name > form {
+    display: flex;
+    flex-direction: row;
+}
+
+.table-name > form > input {
+    border-radius: 20px;
+}
+
+.select-style {
+    width: 100%;
+}
+
+.select-style > div > div > div > div {
+    padding: 0px 5px;
+}
+
+.delete-table {
+    position: absolute;
+    bottom: 83%;
+    left: 5%;
+    color: #D3D3D3;
+}
+
+.delete-table:focus {
+    outline: none;
+}
+
+
+.icon-style {
+    cursor: pointer;
+}
+
+.guest-del {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    margin-left: 1rem;
+}
+
+.guest-del > button {
+    /* display: flex;
+    height: -moz-fit-content;
+    height: fit-content;
+    margin: 0px 5px;
+    padding: .375rem 1.5rem;
+    box-shadow: rgb(0 0 0 / 26%) 0px 1px 3px 0px;
+    background-color: #f6f5f3;
+    border-radius: 20px; */
+    background-color: inherit;
+}
+
+.guest-del > button:focus {
+    outline: none;
+}
+
+.undo-btn {
+    background-color: transparent;
+}
+
+.undo-btn:focus {
+    outline: none;
+}
+
+.block {
+    border-radius: 10px;
+ }
+
+ .block > span {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+ @media (max-width: 768px) { 
+
+    .get-tables {
+        grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    }
+
+    .table-name {
+        font-size: 1.3rem;
+    }
+
+    .add-form > form {
+        width: 80%;
+    }
+ }
+
+ @media (max-width: 451px) { 
+    .get-tables {
+        grid-template-columns: repeat(2, 1fr);
+    }
+ }
+
+ @media (max-width: 414px) { 
+    .table-form > form {
+        padding: 2rem;
+    }
+
+    .get-tables {
+        padding: 50px;
+    }
+ }
+
+ 

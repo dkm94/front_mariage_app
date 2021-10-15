@@ -1,0 +1,111 @@
+.wedding-img {
+    height: 40rem;
+    background-color: greenyellow;
+    /* background-image: url("../../../../img/couple.jpg"); */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.wedding-img > img {
+    height: inherit;
+    width: 100%;
+    object-fit: cover;
+}
+
+.schedule, .additionnal-info > h3 {
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+.schedule-cols > li > h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: .7rem;
+}
+
+.schedule-cols > li > p {
+    margin-bottom: 0.4rem;
+}
+
+.info {
+    padding: 20px;
+}
+
+.wedding-intro {
+    background: #FFFFFF;
+    text-align: center;
+}
+
+.wedding-card {
+    padding: 16px;
+}
+
+.wedding-card___name {
+    font-family: 'Alex Brush', cursive;
+    font-size: 6em;
+    margin: 0;
+}
+
+.wedding-card___and {
+    font-family: 'Alex Brush', cursive;
+    font-size: 2em;
+    margin: 0px 10px;
+}
+
+.wedding-card___date {
+    font-size: 1.5em;
+}
+
+.wedding-card___title {
+    font-family: 'Alex Brush', cursive;
+    font-size: 2em;
+    margin: 0px 10px;
+}
+
+
+
+.schedule {
+    background: #fcdccc;
+    text-align: center;
+}
+
+.schedule > h3 {
+    margin-top: 20px;
+    text-transform: uppercase;
+}
+
+.schedule-cols {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    grid-gap: 2rem;
+    padding: 1rem;
+    margin-bottom: 0px;
+    box-sizing: border-box;
+}
+
+.schedule-cols > li {
+    text-align: center;
+    padding: 20px 10px;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #000000;
+    margin-bottom: 5px;
+}
+
+.additionnal-info {
+    text-align: center;
+    background: #FFFFFF;
+    box-shadow: 0px 10px 26px 2px rgba(0,0,0,0.33);
+    min-height: 200px;
+}
+
+.additionnal-info > h3 {
+    margin-top: 20px;
+    text-transform: uppercase;
+}
+
+.additionnal-info > p {
+    padding: 16px;
+}

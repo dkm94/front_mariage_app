@@ -1,0 +1,28 @@
+.todo-form {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.todo-form > input {
+    background: transparent;
+}
+
+.todo-form___update-btns {
+    display: flex;
+    flex-direction: row;
+}
+
+.todo-form > div > button:nth-child(1){
+    display: flex;
+    height: fit-content;
+    margin: 0px 5px;
+    padding: .375rem 1.5rem;
+    box-shadow: rgb(0 0 0 / 26%) 0px 1px 3px 0px;
+    background-color: #f6f5f3;
+    border-radius: 20px;
+}
+
+.todo-form > div > button:nth-child(2){
+    background: transparent;
+}

@@ -1,0 +1,88 @@
+.grid-item-title > a > h2 {
+    font-family: 'Alex Brush', cursive;
+    text-align: center;
+    font-size: 4rem;
+    font-weight: 500;
+    text-shadow: 1px 1px 0px #fff;
+}
+
+.menu-adm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    /* background: white; */
+    padding: 50px;
+    /* box-shadow: 10px 10px 13px -6px rgba(184,178,184,1); */
+}
+
+.menu-adm-desc {
+    font-size: 20px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 3.3px;
+    text-align: center;
+    /* color: #e4bdb7; */
+    color: #000000;
+    text-transform: uppercase;
+}
+
+.menu-admin-container {
+    /* background-image: url("../../img/rose-bg.jpg"); */
+}
+
+.grid-container {
+    display: grid;
+    grid-gap: 2rem;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    margin-top: 2rem;
+    padding: 20px;
+}
+
+.grid-item {
+    display: flex;
+    flex-direction: column;
+    height: 8rem;
+}
+
+.item1 {
+    background-image: url("../../img/faire-part.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.item2 {
+    background-image: url("../../img/cartes.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.item3 {
+    background-image: url("../../img/tables.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.item4 {
+    background-image: url("../../img/cake.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.grid-item > .grid-item-title {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    color: black;
+    background: rgba(255,255,255,0.5);
+    padding: 1.4em;
+    text-align: center;
+}
+
+.grid-item-title > a {
+    color: black;
+}
