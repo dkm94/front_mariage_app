@@ -120,6 +120,16 @@ button:focus {
     margin: 20px 0px 20px 0px;
 }
 
+.titles {
+    text-shadow: 1px 1px 1px rgb(0 0 0 / 15%);
+    padding-bottom: 2rem;
+    padding-left: 1rem;
+    border-bottom: 1px solid #d3d3d3;
+    margin: 5rem 3rem 3rem 3rem;
+}
+.titles > h1 {
+    text-align: start;
+}
 
 
 /* Admin Login */

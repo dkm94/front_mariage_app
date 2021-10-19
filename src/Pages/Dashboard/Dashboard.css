@@ -9,8 +9,8 @@
 
 .dashboard___bgimage {
     height: 20rem;
-    background-attachment: fixed;
-    background-image: url('../../img/dashboard-bg.jpg');
+    /* background-attachment: fixed; */
+    background-image: url('../../img/frame.jpg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -21,7 +21,7 @@
 
 .dashboard___elements {
     width: 100%;
-    padding: 10rem;
+    padding: 0 10rem 10rem 10rem;
     margin-top: 5rem;
 }
 

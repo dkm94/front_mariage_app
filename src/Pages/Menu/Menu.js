@@ -250,10 +250,9 @@ const Menus = (props) => {
         <div className="menu-container page-component">
             {scrollBtn}
             <div className="menu">
-                <div className="menu___bgimage">
-                    <div class="glass-div mb-3">
-                        <h1>Avez-vous prévu une réception ?</h1>
-                    </div>
+                <div className="menu___bgimage" />
+                <div className="titles mb-3">
+                    <h1>Avez-vous prévu une réception ?</h1>
                 </div>
                 <div className="menu__list__container">
                     <div className="menu___list">

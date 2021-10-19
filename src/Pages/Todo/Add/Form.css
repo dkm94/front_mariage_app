@@ -18,6 +18,13 @@
 .add-task-style {
     display: flex;
 }
+.add-task-style > input {
+    border-style: none;
+    width: 80%;
+    border: 1px solid lightgrey;
+    border-radius: 10px !important;
+    padding: 2rem;
+}
 .add-task-style > button {
     margin-left: 10px;
     border-style: none;

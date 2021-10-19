@@ -17,7 +17,6 @@
 
 .tables___list {
     width: 100%;
-    margin-top: 10rem;
     padding: 5rem 10rem;
     min-height: 500px;
 }
@@ -88,13 +87,8 @@
     flex-direction: column;
     justify-content: space-around;
     width: 50%;
-    box-shadow: 0px 10px 20px -3px rgb(181 174 181 / 50%);
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    padding: 2rem;
     border-radius: 5px;
+    padding: 2rem 4rem;
 }
 
 .table-form > form {
