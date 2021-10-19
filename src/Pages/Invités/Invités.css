@@ -53,7 +53,8 @@
     border-style: none;
     border: 1px solid lightgrey;
     border-radius: 10px;
-    background-color: #B4BC98;
+    background-color: #b2a9a9;
+    color: #FFF;
 }
 
 .guest-form > form > div > button:active {

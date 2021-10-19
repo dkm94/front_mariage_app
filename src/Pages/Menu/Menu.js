@@ -3,6 +3,8 @@ import starterImg from "../../img/menus/starter_img.jpg";
 import maincourseImg from "../../img/menus/maincourse_img.jpg";
 import dessertImg from "../../img/menus/dessert_img.jpg";
 import { ScrollButtonContext } from "../../../src/App";
+import CustomToggle from "../../components/Dots/Dots";
+import Dropdown from "react-bootstrap/Dropdown";
 import axios from "axios";
 import "./Menu.css";
 
@@ -290,7 +292,7 @@ const Menus = (props) => {
                                             (<span>{starter.name}</span>)}
                                             
                                             <div className="menu___li-btns">
-                                                {edit.id === starter._id ? 
+                                                {/* {edit.id === starter._id ? 
                                                 (<><button onClick={(e) => {editStarter(e)}}>
                                                     <i className="fas fa-check"/>
                                                 </button>
@@ -305,7 +307,21 @@ const Menus = (props) => {
                                                 
                                                 <button className="del-btn" onClick={() => {deleteStarter(starter._id)}}>
                                                     <i className="fas fa-trash"/>
-                                                </button>
+                                                </button> */}
+                                                <div className="custom-dropdown">
+                                                    <Dropdown>
+                                                        <Dropdown.Toggle as={CustomToggle} />
+                                                        <Dropdown.Menu size="sm" title="">
+                                                            {edit.id ? (<>
+                                                                <Dropdown.Item onClick={() => setEdit({id: null})}>Annuler</Dropdown.Item>
+                                                                <Dropdown.Item onClick={(e) => {editStarter(e)}}>Valider</Dropdown.Item>
+                                                            </>) : (<>
+                                                                <Dropdown.Item onClick={() => getUpdatedId(starter._id, starter.name)}>Modifier</Dropdown.Item>
+                                                                <Dropdown.Item onClick={() => {deleteStarter(starter._id)}}>Supprimer</Dropdown.Item>
+                                                            </>)}
+                                                        </Dropdown.Menu>
+                                                    </Dropdown>
+                                                </div>
                                             </div>
                                         </li>)
                                     }
@@ -345,7 +361,7 @@ const Menus = (props) => {
                                             (<span>{maincourse.name}</span>)}
                                             
                                             <div className="menu___li-btns">
-                                                {edit.id === maincourse._id ? 
+                                                {/* {edit.id === maincourse._id ? 
                                                 (<>
                                                     <button onClick={(e) => {editMaincourse(e)}}>
                                                         <i className="fas fa-check"/>
@@ -360,7 +376,21 @@ const Menus = (props) => {
                                                 
                                                 <button className="del-btn" onClick={() => {deleteMaincourse(maincourse._id)}}>
                                                     <i className="fas fa-trash"/>
-                                                </button>
+                                                </button> */}
+                                                <div className="custom-dropdown">
+                                                    <Dropdown>
+                                                        <Dropdown.Toggle as={CustomToggle} />
+                                                        <Dropdown.Menu size="sm" title="">
+                                                            {edit.id ? (<>
+                                                                <Dropdown.Item onClick={() => setEdit({id: null})}>Annuler</Dropdown.Item>
+                                                                <Dropdown.Item onClick={(e) => {editMaincourse(e)}}>Valider</Dropdown.Item>
+                                                            </>) : (<>
+                                                                <Dropdown.Item onClick={() => getUpdatedId(maincourse._id, maincourse.name)}>Modifier</Dropdown.Item>
+                                                                <Dropdown.Item onClick={() => {deleteMaincourse(maincourse._id)}}>Supprimer</Dropdown.Item>
+                                                            </>)}
+                                                        </Dropdown.Menu>
+                                                    </Dropdown>
+                                                </div>
                                             </div>
                                         </li>)
                                         }
@@ -405,7 +435,7 @@ const Menus = (props) => {
                                             (<span>{dessert.name}</span>)}
                                             
                                             <div className="menu___li-btns">
-                                                {edit.id === dessert._id ? 
+                                                {/* {edit.id === dessert._id ? 
                                                 (<>
                                                     <button onClick={(e) => {editDessert(e)}}>
                                                         <i className="fas fa-check"/>
@@ -420,7 +450,21 @@ const Menus = (props) => {
                                                 
                                                 <button className="del-btn" onClick={() => {deleteDessert(dessert._id)}}>
                                                     <i className="fas fa-trash"/>
-                                                </button>
+                                                </button> */}
+                                                <div className="custom-dropdown">
+                                                    <Dropdown>
+                                                        <Dropdown.Toggle as={CustomToggle} />
+                                                        <Dropdown.Menu size="sm" title="">
+                                                            {edit.id ? (<>
+                                                                <Dropdown.Item onClick={() => setEdit({id: null})}>Annuler</Dropdown.Item>
+                                                                <Dropdown.Item onClick={(e) => {editDessert(e)}}>Valider</Dropdown.Item>
+                                                            </>) : (<>
+                                                                <Dropdown.Item onClick={() => getUpdatedId(dessert._id, dessert.name)}>Modifier</Dropdown.Item>
+                                                                <Dropdown.Item onClick={() => {deleteDessert(dessert._id)}}>Supprimer</Dropdown.Item>
+                                                            </>)}
+                                                        </Dropdown.Menu>
+                                                    </Dropdown>
+                                                </div>
                                             </div>
                                         </li>)
                                     }

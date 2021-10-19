@@ -10,8 +10,8 @@
 .tasks-list__li {
     display: flex;
     justify-content: space-between;
-    padding: 2rem 2rem;
-    background: #D4A373;
+    padding: 2rem 2rem 2rem 4rem;
+    background: #f2eede;
     border-radius: 10px;
     box-shadow: 7px 6px 9px -6px rgb(158 153 158);
 }
@@ -19,7 +19,7 @@
 .tasks-list__li__done {
     display: flex;
     justify-content: space-between;
-    padding: 2rem 2rem;
+    padding: 2rem 2rem 2rem 4rem;
     background-color: lightgrey;
     font-style: italic;
     color: grey;
@@ -55,7 +55,10 @@ text-decoration: line-through;
     font-style: initial;
 }
 .tasks-list__li > form > input {
-    width: 80%;
+    width: 100%;
+    /* border-radius: 5px;
+    padding: 0.7rem;
+    background-color: white; */
 }
 .todolist___checkbox_span > span {
     margin-left: 1rem;

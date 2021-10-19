@@ -85,7 +85,11 @@ const Todos = ({ todos, setTodos, deleteTodo }) => {
             {
                 todos.map(obj => {
                     return(
-                        <li key={obj._id} className={obj.isCompleted ? 'col-12 tasks-list__li__done' : "col-12 tasks-list__li"} style={obj.isCompleted ? null : {backgroundColor: `#${obj.color}`}}>
+                        <li 
+                        key={obj._id} 
+                        className={obj.isCompleted ? 'col-12 tasks-list__li__done' : "col-12 tasks-list__li"} 
+                        style={edit.id === obj._id ? {backgroundColor: `#F5F5F5`} : null}
+                        >
                             {edit.id === obj._id ? 
                             (<UpdateForm 
                                 edit={edit} 
@@ -105,15 +109,7 @@ const Todos = ({ todos, setTodos, deleteTodo }) => {
                                     />
                                     <span>{obj.text}</span>
                                 </div>
-                                <div className="custom-dropdown">
-                                    <Dropdown>
-                                        <Dropdown.Toggle as={CustomToggle} />
-                                        <Dropdown.Menu size="sm" title="">
-                                            <Dropdown.Item onClick={() => getUpdatedId(obj._id, obj.text)}>Modifier</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => {deleteTodo(obj._id)}}>Supprimer</Dropdown.Item>
-                                        </Dropdown.Menu>
-                                    </Dropdown>
-                                </div>
+                                
                                 {/* <div className="todolist___li-btns">
                                     <button disabled={obj.isCompleted} onClick={() => getUpdatedId(obj._id, obj.text)}>
                                         <i className="fas fa-pencil-alt"/>
@@ -123,6 +119,23 @@ const Todos = ({ todos, setTodos, deleteTodo }) => {
                                     </button>
                                 </div> */}
                             </>)}
+                            <div className="custom-dropdown">
+                                <Dropdown>
+                                    <Dropdown.Toggle as={CustomToggle} />
+                                    <Dropdown.Menu size="sm" title="">
+                                        {edit.id ? (<>
+                                            <Dropdown.Item onClick={() => setEdit({id: null})}>Annuler</Dropdown.Item>
+                                            <Dropdown.Item onClick={(e) => {editTodo(e)}}>Valider</Dropdown.Item>
+                                        </>) : (<>
+                                            {!obj.isCompleted ? 
+                                            <Dropdown.Item onClick={() => getUpdatedId(obj._id, obj.text)}>Modifier</Dropdown.Item> :
+                                            null
+                                            }
+                                            <Dropdown.Item onClick={() => {deleteTodo(obj._id)}}>Supprimer</Dropdown.Item>
+                                        </>)}
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                            </div>
                         </li>
                     )
                 })

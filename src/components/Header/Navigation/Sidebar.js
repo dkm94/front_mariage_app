@@ -37,7 +37,7 @@ const Login = (props) => {
                                 key={key}
                                 className="menu-row"
                                 id={window.location.pathname === val.pathname ? "active" : ""}
-                                onClick={() => {window.location.pathname = val.pathname}}
+                                onClick={() => {window.location.pathname = val.pathname }}
                             >
                                 <div id="icon">{val.icon}</div>
                                 <div id="title">{val.title}</div>

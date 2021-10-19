@@ -2,14 +2,21 @@ ul {
     list-style: none;
 }
 
+.starter___div_form > ul, .maincourse___div_form > ul, .dessert___div_form > ul {
+    padding: 0;
+}
 .starter___div_form > ul > li, .maincourse___div_form > ul > li, .dessert___div_form > ul > li {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
 }
-
-.starter___div_form > ul, .maincourse___div_form > ul, .dessert___div_form > ul {
-    padding: 0;
+.starter___div_form > ul > li > form, .maincourse___div_form > ul > li > form, .dessert___div_form > ul > li > form {
+    width: 70%;
+}
+.starter___div_form > ul > li > form > input, .maincourse___div_form > ul > li > form > input, .dessert___div_form > ul > li > form > input {
+    width: 100%;
+    border-radius: 5px;
+    padding: 0.5rem;
 }
 
 .menu {
@@ -56,14 +63,14 @@ button {
 .forms {
     display: grid;
     grid-template-columns: 2fr 3fr;
-    grid-gap: 2rem;
+    /* grid-gap: 2rem; */
     border-radius: 10px;
     background-color: #FFFFFF;
     box-shadow: 7px 6px 9px -6px rgb(158 153 158);
 }    
 
 .starter___div_form, .maincourse___div_form, .dessert___div_form {
-    padding: 2rem;
+    padding: 2rem 4rem;
 }
 
 #forms_reverse {
@@ -81,8 +88,8 @@ button {
     border-style: unset;
 }
 
-.starter {
-    background-color: #FAEDCD;
+.starter, .maincourse, .dessert {
+    background-color: #FAF8F4;
 }
 
 .menu___forms {
@@ -113,9 +120,10 @@ button {
     outline: none;
 }
 
-.menu___li-btns {
-    height: fit-content;
-    display: flex;
+.menu___li-btns > .custom-dropdown > .dropdown > a {
+    top: -8px;
+    transform: rotate(90deg);
+    right: 10px;
 }
 
 .menu___li-btns > button {
@@ -133,18 +141,10 @@ button {
     outline: none;
 }
 
-.maincourse {
-    background-color: #FAEDCD;
-}
-
 .maincourse > ul > li > form > input, .starter > ul > li > form > input, .dessert > ul > li > form > input {
     width: 85%;
     border-radius: 5px;
     padding-left: 5px;
-}
-
-.dessert {
-    background-color: #FAEDCD;
 }
 
 .starter___div_img > img , .maincourse___div_img > img, .dessert___div_img > img{
@@ -163,6 +163,10 @@ button {
     margin-top: 10rem;
     padding: 5rem 10rem;
     min-height: 500px;
+}
+
+.hideParamsBtns {
+    display: none !important;
 }
 
 @media (max-width: 1024px) {

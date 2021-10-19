@@ -6,8 +6,9 @@ import axios from 'axios';
 import { LoaderContext, ScrollButtonContext } from "../../../src/App";
 import './Dashboard.css';
 
-const Dashboard = (props) => {
+const Dashboard = () => {
 
+    
     const scrollBtn = useContext(ScrollButtonContext)
     const loader = useContext(LoaderContext)
 
@@ -43,6 +44,8 @@ const Dashboard = (props) => {
     }
 
     // const expensesSliced = operations.slice(Math.max(operations.length - 5, 1));
+    const isCompleted = tasks.filter(task => task.isCompleted);
+    const notCompleted = tasks.filter(task => !task.isCompleted);
     
 
     return(
@@ -71,7 +74,7 @@ const Dashboard = (props) => {
                                 <div className="item__resume__style"><h3>Total des invités</h3></div>
                                 <div className="sum"><span>{guests === undefined ? loader : guests.length}</span></div>
                                 <div className="show-more">
-                                    <Link to={`/menu/invites`}>Voir plus...</Link>
+                                    <Link to={`/menu/invites`}>Voir plus  →</Link>
                                 </div>
                             </div>
                         </div>
@@ -83,7 +86,7 @@ const Dashboard = (props) => {
                             <div>
                                 <div className="sum"><span>{nbOfTables}</span></div>
                                 <div className="show-more">
-                                    <Link to={`/menu/tables`}>Voir plus...</Link>
+                                    <Link to={`/menu/tables`}>Voir plus  →</Link>
                                 </div>
                             </div>
                         </div>  
@@ -93,13 +96,13 @@ const Dashboard = (props) => {
                         <div className="tasks__resume___container">
                             <div className="task__count">
                                 <p>
-                                    <span>Effectuées: </span>
-                                    <span>Restantes: </span>
+                                    <span>Effectuées: {isCompleted.length} </span>
+                                    <span>Restantes: {notCompleted.length}</span>
                                 </p>
                             </div>
                             <div className="sum"><span>{tasks === undefined ? loader : tasks.length}</span></div>
                             <div className="show-more">
-                                <Link to={`/menu/taches`}>Voir plus...</Link>
+                                <Link to={`/menu/taches`}>Voir plus  →</Link>
                             </div>
                         </div>
                     </div>
@@ -121,7 +124,7 @@ const Dashboard = (props) => {
                                 </div>
                             </div>
                             <div className="show-more">
-                                <Link to={`/menu/carte`}>Voir plus...</Link>
+                                <Link to={`/menu/carte`}>Voir plus  →</Link>
                             </div>
                         </div>
                     </div>
@@ -134,14 +137,14 @@ const Dashboard = (props) => {
                                     <ul className="dashboard__ul">{expensesSliced.map(expense => <li key={expense._id}>{expense.description}</li>)}</ul>
                                 </div>
                                 <div className="show-more">
-                                    <Link to={`/menu/budget`}>Voir plus...</Link>
+                                    <Link to={`/menu/budget`}>.</Link>
                                 </div>
                             </div> */}
                             <div className="item__total">
                                 <div className="item__resume__style"><h3>Total des dépenses</h3></div>
                                 <div className="sum"><span>{operations === undefined ? loader :` ${total(sum)} €`}</span></div>
                                 <div className="show-more">
-                                    <Link to={`/menu/budget`}>Voir plus...</Link>
+                                    <Link to={`/menu/budget`}>Voir plus  →</Link>
                                 </div>
                             </div>
                         </div>

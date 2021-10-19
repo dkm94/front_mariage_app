@@ -28,7 +28,7 @@ export const NavigationData = [
         pathname: "/menu/taches"
     },
     {
-        title: "La carte",
+        title: "Le menu",
         icon: <RestaurantIcon />,
         pathname: "/menu/carte"
     },

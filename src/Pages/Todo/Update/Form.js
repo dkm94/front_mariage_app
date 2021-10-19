@@ -22,14 +22,14 @@ const UpdateTask = ({ edit, setEdit, input, handleChange, inputRef, editTodo }) 
                     value={input.text}
                     ref={inputRef} />
 
-                    <div className="todo-form___update-btns">
+                    {/* <div className="todo-form___update-btns">
                         <button type="submit">
                             <i className="fas fa-check"/>
                         </button>
                         <button onClick={() => setEdit({id: null})}>
                             <i className="fas fa-undo"></i>
                         </button>
-                    </div>
+                    </div> */}
                 </>
             : null }
         </form>

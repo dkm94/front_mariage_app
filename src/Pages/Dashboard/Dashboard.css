@@ -30,9 +30,9 @@
     border-radius: 10px;
 }
 
-.item1 { grid-area: invités; background-color: #F8EDEB; }
-.item2 { grid-area: tables; background-color: #FEFAE0; }
-.item3 { grid-area: tâches; background-color: #E8E8E4; }
+.item1 { grid-area: invités; background-color: #e8e3e3; }
+.item2 { grid-area: tables; background-color: #f8edeb; }
+.item3 { grid-area: tâches; background-color: #f2eede; }
 .item4 { grid-area: menu; background-color: #FAF8F4; }
 .item5 { grid-area: dépenses; background-color: #F4F6FA; }
 
@@ -117,7 +117,9 @@
     text-align: end;
 }
 .show-more > a {
-    text-decoration: underline;
+    text-decoration: none;
+    color: #6b6565 !important;
+    font-weight: 700;
 }
 
 .item__total {

@@ -2,17 +2,19 @@ import React, { useState, useRef, useEffect, useContext } from "react";
 import { withRouter } from "react-router-dom";
 import { ScrollButtonContext } from "../../../src/App";
 import axios from "axios";
-import Select from "../../components/AsyncSelect/AsyncSelect";
-import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import CustomToggle from "../../components/Dots/Dots";
-import Dropdown from "react-bootstrap/Dropdown";
+// import Select from "../../components/AsyncSelect/AsyncSelect";
+// import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+// import CustomToggle from "../../components/Dots/Dots";
+// import Dropdown from "react-bootstrap/Dropdown";
+import Table from "./Table";
+import { LoaderContext } from "../../../src/App";
 
 import "./Tables.css";
 
 const Tables = (props) => {
-    console.log(props)
    
-    const scrollBtn = useContext(ScrollButtonContext)
+    const scrollBtn = useContext(ScrollButtonContext);
+    const loader = useContext(LoaderContext);
 
     const [tables, setTables] = useState([]);
     const [newTable, setNewTable] = useState({name: ''})
@@ -20,6 +22,7 @@ const Tables = (props) => {
         id: null,
         name: ''
     })
+    const [loading, setLoading] = useState(false);
     const [input, setInput] = useState('')
 
     const inputRef = useRef(null);
@@ -30,17 +33,21 @@ const Tables = (props) => {
     
     const [guests, setGuests] = useState([])
    
+    let dependency = JSON.stringify(tables);
+
     useEffect(() => {
-        const fetchData = async () => {
-            const result = await axios.get("/api/admin/tables/")
-            setTables(result.data)
+        const fetchData = () => {
+            axios.get("/api/admin/tables/")
+            .then(result => {
+                setTables(result.data)
+            })
+            .catch(err => err.json("Fail de load de ressource"))
         }
         fetchData();
-    }, [])
+    }, [dependency])
 
     const handleChange = (e) => {
         const {value, name} = e.target;
-        console.log(value)
         setNewTable(prevState => ({
             ...prevState,
             [name]: value
@@ -48,17 +55,16 @@ const Tables = (props) => {
     }
     
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        axios.post("/api/admin/tables/add", newTable)
+        await axios.post("/api/admin/tables/add", newTable)
             .then((res) => {
-                // if(res.data != null){
-                //     setTables([...tables, newTable])
-                //     setNewTable({name:""})
-                // }
-                setTimeout(() => {
-                    window.location.reload()
-                }, 1500);
+                if(res.data != null){
+                    setTimeout(() => {
+                        setTables([...tables, newTable])
+                        setNewTable({name:""})
+                    }, 500)
+                }
             })
             .catch((err) => {
                 console.log(err)})
@@ -106,16 +112,21 @@ const Tables = (props) => {
                 console.log(err)})
     }
 
-    const deleteTable = (id) => {
-        axios.delete(`/api/admin/tables/delete/${id}`)
+    const deleteTable = (e, tableId, guest) => {
+       e.preventDefault();
+        axios.delete(`/api/admin/tables/delete/${tableId}`)
             .then(res => {
                 if(res.data != null) {
-                    setTables(tables.filter(table => table._id !== id))
+                    // const updateList = tables.filter(table => table._id !== tableId)
+                    // setTables(updateList)
+                    window.location.reload();
                 }
-                window.location.reload();
             })
             .catch((err) => {
                 console.log(err)})
+        // console.log("🚀 ~ file: Tables.js ~ line 128 ~ deleteTable ~ a", e)
+        // console.log("🚀 ~ file: Tables.js ~ line 128 ~ deleteTable ~ b", table)
+        // console.log("🚀 ~ file: Tables.js ~ line 128 ~ deleteTable ~ c", guest)
     }
 
     return(
@@ -138,74 +149,100 @@ const Tables = (props) => {
                                 type="submit"
                                 className="btn shadow-none check-btn"
                                 id="button-addon2"
-                                ><i className="fas fa-check" /></button>
+                                ><i className="fas fa-long-arrow-alt-right" /></button>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div className="tables___list">
                     {tables.length === 0 || null ? 
-                        (<div className="block"><span>Vos tables ici.</span></div>) : 
+                        (<div className="block" style={tables ? {display: "none"} : null}><span>Vos tables ici.</span></div>) : 
+                        loading === true ? loader :
                         (<div className="tables__block">
                             <ul className="get-tables">
-                                {tables.map((table, i) => {
-                                    return <li key={i} data-id={table._id} className="table-style">
-                                        <div className="table-name">
-                                            {edit.id === table._id ? 
-                                            (<form onSubmit={editTableName} className="mb-3">
-                                                <input
-                                                type="text"
-                                                className="form-control shadow-none"
-                                                name="name" 
-                                                onChange={handleUpdatedTable}
-                                                value={input}
-                                                ref={inputRef}
-                                                />
-                                                <button 
-                                                type="submit"
-                                                className="btn shadow-none"
-                                                id="button-addon2"
-                                                onClick={(e) => editTableName(e)}
-                                                >
-                                                    <i className="fas fa-check"/>
-                                                </button>
-                                                <button className="undo-btn shadow-none" onClick={() => setEdit({id: null})}>
-                                                    <i className="fas fa-undo"/>
-                                                </button>
-                                            </form>) : 
-                                            (<>
-                                                <span>{table.name}</span>
-                                            </>)
-                                            }
-                                        </div>
+                                {tables.map((table, i) =>
+                                    <Table 
+                                    tables={tables}
+                                    table={table}
+                                    key={i}
+                                    edit={edit}
+                                    editTableName={editTableName}
+                                    // ref={inputRef}
+                                    handleUpdatedTable={handleUpdatedTable}
+                                    input={input}
+                                    setTables={setTables}
+                                    guests={table.guestID}
+                                    deleteGuest={deleteGuest}
+                                    setEdit={setEdit}
+                                    getUpdatedId={getUpdatedId}
+                                    deleteTable={deleteTable}
+                                    handleSubmit={handleSubmit}
+                                    />
+                                    // return <li key={i} data-id={table._id} className="table-style" style={edit.id === table._id ? {backgroundColor: `#F5F5F5`} : null}>
+                                    //     <div className="table-name">
+                                    //         {edit.id === table._id ? 
+                                    //         (<form onSubmit={editTableName} className="mb-3">
+                                    //             <input
+                                    //             ref={inputRef}
+                                    //             type="text"
+                                    //             className="shadow-none"
+                                    //             name="name" 
+                                    //             onChange={handleUpdatedTable}
+                                    //             value={input}
+                                    //             style={{background: "white"}}
+                                    //             />
+                                    //             {/* <button 
+                                    //             type="submit"
+                                    //             className="btn shadow-none"
+                                    //             id="button-addon2"
+                                    //             onClick={(e) => editTableName(e)}
+                                    //             >
+                                    //                 <i className="fas fa-check"/>
+                                    //             </button>
+                                    //             <button className="undo-btn shadow-none" onClick={() => setEdit({id: null})}>
+                                    //                 <i className="fas fa-undo"/>
+                                    //             </button> */}
+                                    //         </form>) : 
+                                    //         (<>
+                                    //             <span>{table.name}</span>
+                                    //         </>)
+                                    //         }
+                                    //     </div>
                                     
-                                        <Select table={table} tables={tables} setTables={setTables} guests={table.guestID}/>
+                                    //     <Select table={table} tables={tables} setTables={setTables} guests={table.guestID}/>
 
-                                        <div style={{marginBottom: '20px', marginTop: '20px', width: "100%"}}>
-                                            {table.guestID.map(guest => {
+                                    //     <div style={{marginBottom: '20px', marginTop: '20px', width: "100%"}}>
+                                    //         {table.guestID.map(guest => {
                                                 
-                                                return <div key={guest._id} className="guest-del">
-                                                    <span>{guest.name}</span>
-                                                    <button 
-                                                        onClick={() => {deleteGuest(guest._id, table._id)}} 
-                                                        className=""
-                                                    >
-                                                        <i className="fas fa-times"></i>
-                                                    </button>
-                                                </div>
-                                            })}
-                                        </div>
-                                        <div className="custom-dropdown">
-                                            <Dropdown>
-                                                <Dropdown.Toggle as={CustomToggle} />
-                                                <Dropdown.Menu size="sm" title="">
-                                                    <Dropdown.Item onClick={() => getUpdatedId(table._id, table.name)}>Modifier</Dropdown.Item>
-                                                    <Dropdown.Item onClick={() => {deleteTable(table._id, table.guestID)}}>Supprimer</Dropdown.Item>
-                                                </Dropdown.Menu>
-                                            </Dropdown>
-                                        </div>
-                                    </li>
-                                })}
+                                    //             return <div key={guest._id} className="guest-del">
+                                    //                 <span>{guest.name}</span>
+                                    //                 <button 
+                                    //                     onClick={() => {deleteGuest(guest._id, table._id)}} 
+                                    //                     className=""
+                                    //                 >
+                                    //                     <i className="fas fa-times"></i>
+                                    //                 </button>
+                                    //             </div>
+                                    //         })}
+                                    //     </div>
+                                    //     <div className="custom-dropdown">
+                                    //         <Dropdown>
+                                    //             <Dropdown.Toggle as={CustomToggle} />
+                                    //             <Dropdown.Menu size="sm" title="">
+                                    //                 {edit.id ? (<>
+                                    //                     <Dropdown.Item onClick={() => setEdit({id: null})}>Annuler</Dropdown.Item>
+                                    //                     <Dropdown.Item onClick={(e) => {editTableName(e)}}>Valider</Dropdown.Item>
+                                    //                 </>) : (<>
+                                    //                     <Dropdown.Item onClick={() => getUpdatedId(table._id, table.name)}>Modifier</Dropdown.Item>
+                                    //                     <Dropdown.Item onClick={(e) => {
+                                    //                         deleteTable(e, table._id, table.guestID)}}>
+                                    //                         Supprimer</Dropdown.Item>
+                                    //                 </>)}
+                                    //             </Dropdown.Menu>
+                                    //         </Dropdown>
+                                    //     </div>
+                                    // </li>
+                                )}
                             </ul>
                         </div>)
                     }

@@ -52,7 +52,7 @@ const MyAccount = () => {
             .then((res) => {
                 if(res.data != null){
                     setTimeout(() => {
-                        alert('Le mot de passe a été modifié.')
+                        alert('Le mot de passe a été mofidié avec succès.')
                     }, 1000);
                 }
             })

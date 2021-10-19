@@ -127,15 +127,16 @@
     border-style: none;
     border: 1px solid lightgrey;
     border-radius: 10px;
-    background-color: #B4BC98;
+    background-color: #b2a9a9;
+    color: #FFF;
 }
 
-.table-style {
+.tbStyle {
     display: flex;
     flex-direction: column;
     box-shadow: 7px 6px 9px -6px rgba(158,153,158,1);
-    height: fit-content;
-    background-color: #fcfbf7;
+    height: auto;
+    background-color: #f8edeb;
     position: relative;
     align-items: center;
     padding: 2rem 2rem;
@@ -143,19 +144,19 @@
     border-radius: 10px;
 }
 
-.table-style > .menu-icon {
+.tbStyle > .menu-icon {
     position: absolute;
     bottom: 84%;
     left: 89%;
     color: #D3D3D3;
     cursor: pointer;
 }
-.table-style > .custom-dropdown{
+.tbStyle > .custom-dropdown{
     position: absolute;
     bottom: 86%;
     left: -5%;
 }
-.table-name {
+.tbName {
     display: flex;
     flex-direction: row-reverse;
     justify-content: center;
@@ -165,7 +166,7 @@
     margin-top: 2rem;
 }
 
-.table-name > button {
+.tbName > button {
     display: flex;
     font-size: 0.7rem;
     height: fit-content;
@@ -176,23 +177,27 @@
     border-radius: 20px;
 }
 
-.table-name > button:focus {
+.tbName > button:focus {
     outline: none;
 }
 
-.table-name > span {
-    font-weight: 300;
+.tbName > span {
+    font-weight: 400;
     font-size: 1.5rem;
     text-align: center;
 }
 
-.table-name > form {
+.tbName > form {
     display: flex;
     flex-direction: row;
+    margin: 0 2rem;
 }
 
-.table-name > form > input {
-    border-radius: 20px;
+.tbName > form > input {
+    background-color: white;
+    text-align: center;
+    padding: 0.7rem;
+    border-radius: 5px;
 }
 
 .select-style {
@@ -265,7 +270,7 @@
         grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
     }
 
-    .table-name {
+    .tbName {
         font-size: 1.3rem;
     }
 

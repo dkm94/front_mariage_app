@@ -83,7 +83,7 @@
 
 .nameField > span {
     font-size: 1.2em;
-    font-weight: 300;
+    font-weight: 400;
     color: #7c7676;
 }
 
@@ -115,7 +115,8 @@
 }
 
 .guest-picture {
-    /* width: 80%; */
+    box-shadow: 7px 6px 9px -6px rgb(158 153 158);
+    border-radius: 50%;
 }
 
 

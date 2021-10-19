@@ -25,3 +25,12 @@
 .select-style > div {
     width: 100%;
 }
+
+.select-style > div > div {
+    box-shadow: none;
+    border-color: lightgrey;
+}
+.select-style > div > div:hover {
+    box-shadow: none;
+    border-color: grey;
+}

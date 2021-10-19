@@ -21,7 +21,7 @@ const Form = ({ todo, handleInput, addTodo }) => {
           placeholder="Nouvelle tâche"
           required
           />
-          <button type="submit" className="btn shadow-none"><i className="fas fa-check" aria-hidden="true"></i></button>
+          <button type="submit" className="btn shadow-none"><i className="fas fa-long-arrow-alt-right" /></button>
         </div>
       </form>
     </div>

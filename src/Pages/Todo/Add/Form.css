@@ -18,6 +18,14 @@
 .add-task-style {
     display: flex;
 }
+.add-task-style > button {
+    margin-left: 10px;
+    border-style: none;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    background-color: #b2a9a9;
+    color: #FFF;
+}
 
 .add-todo___form > form > div {
     width: 100%;

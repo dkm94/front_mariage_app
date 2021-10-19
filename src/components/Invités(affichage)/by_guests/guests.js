@@ -128,7 +128,7 @@ const Byguests = () => {
                             type="submit"
                             className="btn shadow-none"
                             id="button-addon2"
-                            ><i className="fas fa-check" /></button>
+                            ><i className="fas fa-long-arrow-alt-right" /></button>
                         </div>
                     </form>
                 </div>

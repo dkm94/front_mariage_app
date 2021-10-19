@@ -12,7 +12,7 @@ const Select = ({ tables, table, guests, setTables }) => {
         backgroundColor: '#d6d6d6',
         color: '#878787',
         padding: '6px 19px',
-        fontSize: ".75rem"
+        // fontSize: ".75rem"
     }
 
     const enableBtn = {
@@ -21,7 +21,7 @@ const Select = ({ tables, table, guests, setTables }) => {
         backgroundImage: "linear-gradient(90deg, rgba(181,189,155,1) 0%, rgba(193,201,166,1) 60%, rgba(211,221,181,1) 100%)",
         borderColor: "#caa5c1",
         color: "#FFFFFF",
-        fontSize: ".75rem",
+        // fontSize: ".75rem",
         padding: "6px 19px",
         fontWeight: "400",
         width: "fit-content",
