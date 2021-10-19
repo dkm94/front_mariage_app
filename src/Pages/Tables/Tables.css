@@ -110,6 +110,7 @@
     width: 80%;
     border: 1px solid lightgrey;
     border-radius: 10px !important;
+    padding: 2rem;
 }
 
 .table-form > form > div > input::placeholder {
