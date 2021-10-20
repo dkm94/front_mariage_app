@@ -322,6 +322,7 @@ a:-webkit-any-link {
     .App-home {
         position: unset;
         width: 100%;
+        min-height: 92vh;
     }
 
  }

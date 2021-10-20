@@ -272,7 +272,7 @@ const Menus = (props) => {
                                         onChange={handleStarter}
                                         required
                                         />
-                                        <button type="submit" className="btn shadow-none"><i className="fas fa-check" aria-hidden="true"></i></button>
+                                        <button type="submit" className="btn shadow-none submit-menu-item"><i className="fas fa-check" aria-hidden="true"></i></button>
                                     </form>
                                 </div>
                                 {starters.length === 0 ? (<div style={{ textAlign: "center"}}><span>Vos entrées ici</span></div>) : (<ul>
@@ -340,7 +340,7 @@ const Menus = (props) => {
                                         onChange={handleMaincourse}
                                         required
                                         />
-                                        <button type="submit" className="btn shadow-none"><i className="fas fa-check" aria-hidden="true"></i></button>
+                                        <button type="submit" className="btn shadow-none submit-menu-item"><i className="fas fa-check" aria-hidden="true"></i></button>
                                     </form>
 
                                 </div>
@@ -415,7 +415,7 @@ const Menus = (props) => {
                                         onChange={handleDessert}
                                         required
                                         />
-                                        <button type="submit" className="btn shadow-none"><i className="fas fa-check" aria-hidden="true"></i></button>
+                                        <button type="submit" className="btn shadow-none submit-menu-item"><i className="fas fa-check" aria-hidden="true"></i></button>
                                     </form>
                                 </div>
                                 {desserts.length === 0 ? (<div style={{ textAlign: "center"}}><span>Vos desserts ici</span></div>) : (<ul>

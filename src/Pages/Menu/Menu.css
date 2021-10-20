@@ -54,7 +54,7 @@ ul {
     margin-bottom: 5px;
 }
 
-button {
+.submit-menu-item {
     border-style: none;
     background: white;
     border-radius: 5px;
