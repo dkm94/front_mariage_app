@@ -5,7 +5,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import "./List.css";
 import axios from "axios";
 
-const Todos = ({ todos, setTodos, deleteTodo }) => {
+const Todos = ({ todos, setTodos, deleteTodo, searchValue, setSearchValue }) => {
 
     const [edit, setEdit] = useState({
         id: null,
@@ -80,10 +80,18 @@ const Todos = ({ todos, setTodos, deleteTodo }) => {
             })
    }
 
+//    const result = todos.sort((a,b)=>{
+//     return a.name > b.name ? 1 : - 1
+//     })
+
     return(
         <ul className="tasks-list">
             {
-                todos.map(obj => {
+                todos
+                .filter((todo) => {
+                    return todo.text.toLowerCase().indexOf(searchValue.toLowerCase()) >= 0;
+                })
+                .map(obj => {
                     return(
                         <li 
                         key={obj._id} 

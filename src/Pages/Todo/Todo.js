@@ -1,4 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
 import AddForm from "./Add/Form";
 import List from "./List/List"
 import { ScrollButtonContext } from "../../../src/App";
@@ -11,7 +13,8 @@ const Todo = () => {
 
     const [todos, setTodos] = useState([]);
     const [todo, setTodo] = useState({text:"", color: ""})
-    
+    const [searchValue, setSearchValue] = useState("");
+
     useEffect(() => {
         const fetchData = async () => {
             const result = await axios.get("/api/admin/todolist/")
@@ -27,6 +30,10 @@ const Todo = () => {
             [name]: value
         }))
     } 
+
+    const handleSearch = (e) => {
+        setSearchValue(e.target.value)
+    }
 
     const addTodo = (e) => {
         e.preventDefault();
@@ -65,19 +72,35 @@ const Todo = () => {
                 <div className="titles mb-3">
                     <h1>Souhaitez-vous ajouter de nouvelles tâches ?</h1>
                 </div>
-                <AddForm 
-                    todos={todos}
-                    setTodos={setTodos}
-                    todo={todo}
-                    setTodo={setTodo}
-                    addTodo={addTodo}
-                    handleInput={handleInput}
-                />
+                <Container style={{ padding: "2rem 4rem"}} fluid>
+                    <Row>
+                        <AddForm 
+                        todos={todos}
+                        setTodos={setTodos}
+                        todo={todo}
+                        setTodo={setTodo}
+                        addTodo={addTodo}
+                        handleInput={handleInput}
+                        />
+                        <Col xs={8} md={6} className="searchbar">
+                            <SearchBar 
+                            className="search__input"
+                            type="text"
+                            placeholder="Rechercher une tâche"
+                            name="searchbar"
+                            value={searchValue}
+                            onChange={handleSearch}
+                            />
+                        </Col>
+                    </Row>
+                </Container>
                 <div className="todo-list">
                     <List 
                     todos={todos}
                     setTodos={setTodos}
                     deleteTodo={deleteTodo}
+                    searchValue={searchValue}
+                    setSearchValue={setSearchValue}
                     />
                 </div>
             </div>

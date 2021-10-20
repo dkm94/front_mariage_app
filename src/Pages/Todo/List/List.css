@@ -93,4 +93,8 @@ text-decoration: line-through;
     .tasks-list {
         width: 90%;
     }
+    .todo > .container-fluid > .row {
+        display: flex;
+        justify-content: center;
+    }
 }

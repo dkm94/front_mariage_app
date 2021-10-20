@@ -131,15 +131,15 @@ const Tables = (props) => {
                 console.log(err)})
     }
 
-    const result = tables.sort((a,b)=>{
-        return a.name > b.name ? 1 : - 1
-        }
-    )
+    // const result = tables.sort((a,b)=>{
+    //     return a.name > b.name ? 1 : - 1
+    //     }
+    // )
 
     return(
-        <div className="tables-container page-component">
+        <div className="tables page-component">
             {scrollBtn}
-            <div className="tables">
+            <div className="tables-container">
                 <div className="tables___bgimage" />
                 <div className="titles mb-3">
                     <h1>Comment souhaitez-vous organiser votre plan de table ? </h1>
