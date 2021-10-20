@@ -1,22 +1,22 @@
-import React, { useState, useRef, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { withRouter } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
-import { withRouter } from "react-router-dom";
+import Table from "./Table";
 import { ScrollButtonContext } from "../../../src/App";
 import axios from "axios";
 // import Select from "../../components/AsyncSelect/AsyncSelect";
 // import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 // import CustomToggle from "../../components/Dots/Dots";
 // import Dropdown from "react-bootstrap/Dropdown";
-import Table from "./Table";
-import { LoaderContext } from "../../../src/App";
+// import { LoaderContext } from "../../../src/App";
 
 import "./Tables.css";
 
 const Tables = (props) => {
    
     const scrollBtn = useContext(ScrollButtonContext);
-    const loader = useContext(LoaderContext);
+    // const loader = useContext(LoaderContext);
 
     const [searchValue, setSearchValue] = useState("");
     const [tables, setTables] = useState([]);
@@ -25,10 +25,10 @@ const Tables = (props) => {
         id: null,
         name: ''
     })
-    const [loading, setLoading] = useState(false);
+    // const [loading, setLoading] = useState(false);
     const [input, setInput] = useState('')
 
-    const inputRef = useRef(null);
+    // const inputRef = useRef(null);
 
     const handleUpdatedTable = (e) => {
         setInput(e.target.value)
@@ -179,7 +179,7 @@ const Tables = (props) => {
                 <div className="tables___list">
                     {tables.length === 0 || null ? 
                         (<div className="block" style={tables ? {display: "none"} : null}><span>Vos tables ici.</span></div>) : 
-                        loading === true ? loader :
+                        // loading === true ? loader :
                         (<div className="tables__block">
                             <ul className="get-tables">
                                 {tables

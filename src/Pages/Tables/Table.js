@@ -12,12 +12,13 @@ const TableId = (props) => {
         handleUpdatedTable, 
         input, 
         setTables, 
-        guests, 
+        // guests, 
         deleteGuest, 
         setEdit, 
         getUpdatedId, 
         deleteTable, 
-        handleSubmit } = props;
+        // handleSubmit 
+    } = props;
 
     return(
         (
