@@ -117,7 +117,7 @@ const Byguests = () => {
             </div>
             <Container style={{ padding: "2rem 4rem"}} fluid>
                 <Row>
-                    <Col className="guest-form">
+                    <Col xs={8} md={6} className="guest-form">
                         <form onSubmit={handleSubmit} className="input-group mb-3">
                             <div>
                                 <input
@@ -137,7 +137,7 @@ const Byguests = () => {
                             </div>
                         </form>
                     </Col>
-                    <Col className="guests__search">
+                    <Col xs={8} md={6} className="guests__search">
                         <SearchBar 
                         className="search__input"
                         type="text"

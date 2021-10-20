@@ -272,6 +272,13 @@
     .add-form > form {
         width: 80%;
     }
+    /* .table-form {
+        width: 100%;
+        align-items: center;
+    }
+    .table-form > form {
+        width: 70%;
+    } */
  }
 
  @media (max-width: 451px) { 

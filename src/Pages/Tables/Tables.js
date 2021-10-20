@@ -1,4 +1,6 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
 import { withRouter } from "react-router-dom";
 import { ScrollButtonContext } from "../../../src/App";
 import axios from "axios";
@@ -16,6 +18,7 @@ const Tables = (props) => {
     const scrollBtn = useContext(ScrollButtonContext);
     const loader = useContext(LoaderContext);
 
+    const [searchValue, setSearchValue] = useState("");
     const [tables, setTables] = useState([]);
     const [newTable, setNewTable] = useState({name: ''})
     const [edit, setEdit] = useState({
@@ -30,7 +33,9 @@ const Tables = (props) => {
     const handleUpdatedTable = (e) => {
         setInput(e.target.value)
     }
-    
+    const handleSearch = (e) => {
+        setSearchValue(e.target.value)
+    }
     const [guests, setGuests] = useState([])
    
     let dependency = JSON.stringify(tables);
@@ -124,10 +129,12 @@ const Tables = (props) => {
             })
             .catch((err) => {
                 console.log(err)})
-        // console.log("🚀 ~ file: Tables.js ~ line 128 ~ deleteTable ~ a", e)
-        // console.log("🚀 ~ file: Tables.js ~ line 128 ~ deleteTable ~ b", table)
-        // console.log("🚀 ~ file: Tables.js ~ line 128 ~ deleteTable ~ c", guest)
     }
+
+    const result = tables.sort((a,b)=>{
+        return a.name > b.name ? 1 : - 1
+        }
+    )
 
     return(
         <div className="tables-container page-component">
@@ -137,31 +144,49 @@ const Tables = (props) => {
                 <div className="titles mb-3">
                     <h1>Comment souhaitez-vous organiser votre plan de table ? </h1>
                 </div>
-                <div className="table-form">
-                    <form onSubmit={handleSubmit} className="input-group mb-3">
-                        <div>
-                            <input
+                <Container style={{ padding: "2rem 4rem"}} fluid>
+                    <Row>
+                        <Col xs={8} md={6} className="table-form">
+                            <form onSubmit={handleSubmit} className="input-group mb-3">
+                                <div>
+                                    <input
+                                    type="text"
+                                    className="form-control shadow-none"
+                                    name="name" 
+                                    placeholder="Nom/Numéro de la table"
+                                    value={newTable.name} 
+                                    onChange={handleChange}/>
+                                    <button 
+                                    type="submit"
+                                    className="btn shadow-none check-btn"
+                                    id="button-addon2"
+                                    ><i className="fas fa-long-arrow-alt-right" /></button>
+                                </div>
+                            </form>
+                        </Col>
+                        <Col xs={8} md={6} className="guests__search">
+                            <SearchBar 
+                            className="search__input"
                             type="text"
-                            className="form-control shadow-none"
-                            name="name" 
-                            placeholder="Nom/Numéro de la table"
-                            value={newTable.name} 
-                            onChange={handleChange}/>
-                            <button 
-                            type="submit"
-                            className="btn shadow-none check-btn"
-                            id="button-addon2"
-                            ><i className="fas fa-long-arrow-alt-right" /></button>
-                        </div>
-                    </form>
-                </div>
+                            placeholder="Rechercher une table"
+                            name="searchbar"
+                            value={searchValue}
+                            onChange={handleSearch}
+                            />
+                        </Col>
+                    </Row>
+                </Container>
                 <div className="tables___list">
                     {tables.length === 0 || null ? 
                         (<div className="block" style={tables ? {display: "none"} : null}><span>Vos tables ici.</span></div>) : 
                         loading === true ? loader :
                         (<div className="tables__block">
                             <ul className="get-tables">
-                                {tables.map((table, i) =>
+                                {tables
+                                .filter((table) => {
+                                    return table.name.toLowerCase().indexOf(searchValue.toLowerCase()) >= 0;
+                                })
+                                .map((table, i) =>
                                     <Table 
                                     tables={tables}
                                     table={table}
