@@ -42,8 +42,8 @@
     
 }
 .navbar__burger {
-    width: 40px;
-    height: 40px;
+    width: 20px;
+    height: 12px;
     background: transparent;
     border: none;
     color: red;
@@ -201,6 +201,7 @@
         align-items: center;
         position: fixed;
         visibility: hidden;
+        margin: 0;
         right: -100vw;
         bottom: 0;
         width: 0;
@@ -217,7 +218,7 @@
     }
     .navbar__link {
         display: block;
-        padding: 2.5rem !important;
+        padding: 2rem !important;
         font-size: 5vw;
     }
     .navbar__burger {

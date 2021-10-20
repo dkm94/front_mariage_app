@@ -72,9 +72,10 @@
 .budget___col-2 {
     display: flex;
 }
-.budget___col-2 > div, ul{
+/* .budget___col-2 > .budget-list, .chart-component {
     padding: 0 10rem;
-}
+} */
+
 .budget-form {
     display: flex;
     flex-direction: column;
@@ -157,7 +158,7 @@
         height: 29rem;
     }
     .budget___col-2 > ul {
-        padding: 0px 5rem;
+        padding: 0px 3rem;
     }
     .budget___col-2 > .budget-form {
         padding: 0 5rem;
@@ -182,5 +183,8 @@
     }
     .budget-form___style {
         font-size: 75%;
+    }
+    .budget___col-2 > ul {
+        padding: 0;
     }
 }

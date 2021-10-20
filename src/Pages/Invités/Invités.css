@@ -84,7 +84,7 @@
 }
 @media (max-width: 1024px) {
     .guest-form > div, form {
-        width: 50%;
+        width: 100%;
     }
 
     .guest-form > form > label {
@@ -101,9 +101,6 @@
 }
 
 @media (max-width: 913px) {
-    .guest-form > div, form {
-        width: 50%;
-    }
 
     .guest-form > form > label {
         font-size: 1rem;
@@ -125,10 +122,7 @@
 }
 
 @media (max-width: 768px) {
-    .guest-form > div, form {
-        width: 50%;
-    }
-
+   
     .guest-form > form > label {
         font-size: 1rem;
     }
@@ -154,6 +148,34 @@
 
 @media (max-width: 459px) {
     .get-guestlist {
-        grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+        grid-template-columns: 1fr;
+    }
+    .div-guest___container {
+        display: flex;
+        width: 100%;
+        margin-top: 0;
+        flex-direction: row;
+    }
+    .dropdown > a {
+        position: absolute;
+        top: -15px;
+        right: -8px;
+        cursor: pointer;
+    }
+    .guest-picture {
+        margin-left: 3rem;
+    }
+    .div-guest___container > .nameField {
+        position: relative;
+    }
+    .div-guest___container > .nameField > span {
+        position: absolute;
+        left: 39px;
+        top: -8px;
+        font-size: 1.5em;
+    }
+    .guest__updateForm > form {
+        position: absolute;
+        top: 50%;
     }
 }

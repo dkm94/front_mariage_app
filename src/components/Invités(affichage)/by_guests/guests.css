@@ -54,6 +54,9 @@
 
 .div-guest___container {
     margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .guests___li-btns > button {
@@ -88,13 +91,15 @@
 }
 
 .nameField > form > input {
-    width: 50%;
+    width: 80%;
 }
 
 .guest__updateForm > form > input {
     font-size: 1.1em;
     font-weight: 300;
     color: #7c7676;
+    padding: 0.5rem;
+    border-radius: 5px;
 }
 
 #input___nameField {
@@ -117,6 +122,7 @@
 .guest-picture {
     box-shadow: 7px 6px 9px -6px rgb(158 153 158);
     border-radius: 50%;
+    width: fit-content;
 }
 
 
@@ -174,24 +180,21 @@
     .get-guestlist{
         padding: 1rem 3rem;
     }
+    /* .guest__updateForm > form {
+        width: 100%;
+    }
+    .guest__updateForm > form > input {
+        width: 100%;
+    } */
 }
 @media (max-width: 786px) { 
     .get-guestlist {
         grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
     }
-
-    /* .guest-picture > img {
-        height: 7rem;
-    } */
 }
 
 @media (max-width: 460px) { 
-    /* .get-guestlist {
-        grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
-    } */
-
-    /* .div-guest___container {
-        display: flex;
-        flex-direction: row;
-    } */
+    .guest__updateForm > form {
+        width: 100%;
+    }
 }

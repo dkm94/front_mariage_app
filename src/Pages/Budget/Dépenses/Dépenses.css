@@ -75,6 +75,10 @@
     padding-right: 0.4rem;
 }
 
+.expense-li___btn > button {
+    background: white;
+}
+
 .expense_li___edit-btn {
     text-align: end;
 }

@@ -35,12 +35,12 @@ const UpdateGuest = ({ edit, setEdit, onSubmit }) => {
                     ref={inputRef}
                     required
                     />
-                    <button onClick={handleSubmit} className="nameField___btns">
+                    {/* <button onClick={handleSubmit} className="nameField___btns">
                         <i className="fas fa-check"/>
                     </button>
                     <button onClick={() => setEdit({id: null})} className="nameField___btns">
                         <i className="fas fa-undo"></i>
-                    </button>
+                    </button> */}
                </form>
             </div>
         </>
