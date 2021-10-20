@@ -61,7 +61,7 @@
 
 .guests___bgimage {
     height: 20rem;
-    background-attachment: fixed;
+    /* background-attachment: fixed; */
     background-image: url("../../img/demoiselles.jpg");
     background-position: center;
     background-repeat: no-repeat;
@@ -75,6 +75,53 @@
     width: 100%;
     padding: 5rem 10rem;
     min-height: 500px;
+}
+
+@media (max-width: 1312px) {
+    .get-guestlist {
+        grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+    }
+}
+@media (max-width: 1024px) {
+    .guest-form > div, form {
+        width: 50%;
+    }
+
+    .guest-form > form > label {
+        font-size: 1rem;
+    }
+    .guest-container > .container-fluid .row {
+        display: flex;
+        justify-content: center;
+    }
+    .guests___list {
+        padding: 5rem 0rem;
+        grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+    }
+}
+
+@media (max-width: 913px) {
+    .guest-form > div, form {
+        width: 50%;
+    }
+
+    .guest-form > form > label {
+        font-size: 1rem;
+    }
+    .guest-container > .container-fluid .row {
+        display: flex;
+        justify-content: center;
+    }
+    .guests___list {
+        padding: 5rem 0rem;
+    }
+    .get-guestlist {
+        grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+    }
+    .guest-picture > img {
+        width: 8rem;
+        height: 8rem;
+    }    
 }
 
 @media (max-width: 768px) {
@@ -105,9 +152,11 @@
     }
 }
 
-@media (max-width: 414px) {
+@media (max-width: 459px) {
     .guest-form > form {
         padding: 2rem;
     }
-
+    .get-guestlist {
+        grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+    }
 }

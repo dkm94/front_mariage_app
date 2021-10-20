@@ -1,8 +1,8 @@
 .todo___bgimage {
     height: 20rem;
-    background-attachment: fixed;
+    /* background-attachment: fixed; */
     background-image: url("../../img/todo-bg.png");
-    background-position: top;
+    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
