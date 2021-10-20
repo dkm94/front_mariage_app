@@ -131,7 +131,10 @@ button:focus {
     text-align: start;
 }
 
-
+.searchbar {
+    display: flex;
+    justify-content: flex-end;
+}
 /* Admin Login */
 .loginAdmin {
     height: 100vh;

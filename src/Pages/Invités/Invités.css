@@ -77,11 +77,6 @@
     min-height: 500px;
 }
 
-.guests__search {
-    display: flex;
-    justify-content: flex-end;
-}
-
 @media (max-width: 768px) {
     .guest-form > div, form {
         width: 50%;

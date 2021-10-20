@@ -164,7 +164,7 @@ const Tables = (props) => {
                                 </div>
                             </form>
                         </Col>
-                        <Col xs={8} md={6} className="guests__search">
+                        <Col xs={8} md={6} className="searchbar">
                             <SearchBar 
                             className="search__input"
                             type="text"
