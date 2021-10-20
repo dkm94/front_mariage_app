@@ -8,6 +8,7 @@ import * as Yup from "yup";
 import axios from "axios";
 
 import "./Budget.css";
+import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
 
 const Budget = (props) => {
  
@@ -24,6 +25,8 @@ const Budget = (props) => {
     const [budget, setBudget] = useState({})
     const [operations, setOperations] = useState([]);
     const [newOperation, setnewOperation] = useState(newOperationValues)
+    const [searchValue, setSearchValue] = useState("");
+
 
     useEffect(() => {
         let budget = axios.get(`/api/admin/budget/details/${budgetID}`);
@@ -36,6 +39,10 @@ const Budget = (props) => {
         }
         getDatas();
     }, [budgetID])
+
+    const handleSearch = (e) => {
+        setSearchValue(e.target.value)
+    }
 
     // const editExpense = (updatedExpense) => {
     //     console.log(updatedExpense)
@@ -127,6 +134,18 @@ const Budget = (props) => {
                     <h1>Souhaitez-vous ajouter une nouvelle dépense ?</h1>
                 </div>
                 <div className="budget-cols">
+                    <div className="budget___search">
+                        <div>
+                            <SearchBar 
+                            className="search__input"
+                            type="text"
+                            placeholder="Rechercher une tâche"
+                            name="searchbar"
+                            value={searchValue}
+                            onChange={handleSearch}
+                            />
+                        </div>
+                    </div>
                     <div className="budget___col-1">
                         <div className="col card-component">
                             <div className="card">
@@ -142,9 +161,6 @@ const Budget = (props) => {
                         </div>
                         <Formik>
                             <div className="col budget-form mb3">
-                                {/* <div className="budget-form___add-btn mt-30">
-                                    <button onClick={newOperationForm} className="green-btn">Ajouter une nouvelle opération</button>
-                                </div> */}
                                 <Form className="input-group mb-3" onSubmit={formik.handleSubmit}>
                                     <div className="budget___select">
                                         <select 
@@ -211,6 +227,7 @@ const Budget = (props) => {
                         <Expenses 
                         expenses={operations}
                         deleteExpense={deleteExpense}
+                        searchValue={searchValue}
                         // updateExpense={editExpense}
                         />
                         <div className="col chart-component" style={{ width: '60%', height: 300 }}>

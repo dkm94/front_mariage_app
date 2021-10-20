@@ -10,7 +10,7 @@ import foodIcon from "../../../img/categoryIcons/food.png";
 // import UpdateForm from "./UpdateDépense";
 import "./Dépenses.css";
 
-const Expenses = ({ expenses, deleteExpense, updateExpense }) => {
+const Expenses = ({ expenses, deleteExpense, updateExpense, searchValue }) => {
 
     const renderSwitch = (categoryIcons) => {
         switch(categoryIcons) {
@@ -74,10 +74,15 @@ const Expenses = ({ expenses, deleteExpense, updateExpense }) => {
     //     // });
     // };
 
+
     return(
         <ul className="col budget-list">
             {
-                expenses.map(obj => {
+                expenses
+                .filter((expense) => {
+                    return expense.description.toLowerCase().indexOf(searchValue.toLowerCase()) >= 0;
+                })
+                .map(obj => {
                     let prix = obj.price/100;
                     function financial(prix) {
                         return Number(prix).toFixed(2);
