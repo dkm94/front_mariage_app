@@ -15,3 +15,17 @@
     padding: 5rem 10rem;
     min-height: 500px;
 }
+
+@media (max-width: 786px) {
+    .todo-list {
+        padding: 0rem 5rem;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 414px) {
+    .todo-list {
+        padding: 0rem 1rem;
+    }
+}

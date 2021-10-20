@@ -266,10 +266,6 @@
 }
 
 @media (max-width: 1099px) {
-    .get-tables {
-        /* grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); */
-        /* grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); */
-    }
     .tables___list {
         padding: 5rem 2rem;
     }
@@ -279,10 +275,6 @@
 
 }
  @media (max-width: 768px) { 
-
-    .get-tables {
-        /* grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); */
-    }
 
     .tbName {
         font-size: 1.3rem;
