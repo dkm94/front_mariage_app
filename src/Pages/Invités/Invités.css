@@ -148,14 +148,11 @@
     }
     .guest-form > form {
         align-self: center;
-        width: 60%;
+        width: 100%;
     }
 }
 
 @media (max-width: 459px) {
-    .guest-form > form {
-        padding: 2rem;
-    }
     .get-guestlist {
         grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
     }
