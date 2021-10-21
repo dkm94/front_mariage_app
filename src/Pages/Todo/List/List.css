@@ -13,7 +13,8 @@
     padding: 2rem 2rem 2rem 4rem;
     background: #f2eede;
     border-radius: 10px;
-    box-shadow: 7px 6px 9px -6px rgb(158 153 158);
+    /* box-shadow: 7px 6px 9px -6px rgb(158 153 158); */
+    border-bottom: 1px #c4c1c0 solid;
 }
 
 .tasks-list__li__done {
@@ -25,8 +26,8 @@
     color: grey;
     /* text-decoration: line-through; */
     border-radius: 10px;
-    box-shadow: 7px 6px 9px -6px rgb(158 153 158);
-    
+    /* box-shadow: 7px 6px 9px -6px rgb(158 153 158); */
+    border-bottom: 1px #b7b5b5 solid;
 }
 
 .tasks-list__li__done > .custom-dropdown {

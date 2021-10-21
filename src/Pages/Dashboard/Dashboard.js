@@ -1,10 +1,13 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Link } from "react-router-dom";
-import axios from 'axios';
-// import Card from "../../components/Dashboard/Dashboard_card";
-// import PieChart from "../../components/Expenses/Graph/PieChart"
 import { LoaderContext, ScrollButtonContext } from "../../../src/App";
+import groupIcon from "../../img/dashboardIcons/groupe.png";
+import tableIcon from "../../img/dashboardIcons/dinner-table.png";
+import menuIcon from "../../img/dashboardIcons/plate.png";
+import todoIcon from "../../img/dashboardIcons/todo.png";
+import calculatorIcon from "../../img/dashboardIcons/calculator.png";
 import './Dashboard.css';
+import axios from 'axios';
 
 const Dashboard = () => {
 
@@ -58,18 +61,15 @@ const Dashboard = () => {
             <div className="dashboard___elements">
                 <div className="grid-container">
                     <div className="item1">
-                        <div className="item__title"><h2>Invités</h2></div>
+                        <div className="item__title">
+                            <div className="dashboard-icon" id="bg-item1" >
+                                <img src={groupIcon} alt="icône invités" />
+                            </div>
+                            {/* <div className="dashboard-title"><h2>Invités</h2></div> */}
+                        </div>
+                        <div><span>Total</span></div>
                         <div className="guests__resume___container">
-                            {/* <div className="item__resume">
-                                <div className="item__resume__style">
-                                    <h3>Derniers invités ajoutés</h3>
-                                    <ul className="dashboard__ul">{guests === undefined ? loader : (
-                                        guests.slice(Math.max(guests.length - 5, 1)).map(guest => <li key={guest._id}>{guest.name}</li>)
-                                    )}</ul>
-                                </div>
-                            </div> */}
                             <div className="item__total">
-                                <div className="item__resume__style"><h3>Total des invités</h3></div>
                                 <div className="sum"><span>{guests === undefined ? loader : guests.length}</span></div>
                                 <div className="show-more">
                                     <Link to={`/menu/invites`}>Voir plus  →</Link>
@@ -78,9 +78,14 @@ const Dashboard = () => {
                         </div>
                     </div>
                     <div className="item2">
-                        <div className="item__title"><h2>Tables</h2></div>
+                        <div className="item__title">
+                            <div className="dashboard-icon" id="bg-item2" >
+                                <img src={tableIcon} alt="icône tables" />
+                            </div>
+                            {/* <div className="dashboard-title"><h2>Tables</h2></div> */}
+                        </div>
+                        <div><span>Total</span></div>
                         <div className="tables__resume___container">
-                            <div className="item__resume__style"><h3>Total des tables</h3></div> 
                             <div>
                                 <div className="sum"><span>{nbOfTables}</span></div>
                                 <div className="show-more">
@@ -90,34 +95,46 @@ const Dashboard = () => {
                         </div>  
                     </div>
                     <div className="item3">
-                        <div className="item__title"><h2>Tâches</h2></div>
+                        <div className="item__title">
+                            <div className="dashboard-icon" id="bg-item3" >
+                                <img src={todoIcon} alt="icône tâches" />
+                            </div>                        
+                        </div>
                         <div className="tasks__resume___container">
-                            <div className="task__count">
-                                <p>
-                                    <span>Effectuées: {isCompleted.length} </span>
-                                    <span>Restantes: {notCompleted.length}</span>
-                                </p>
+                            <div className="task-count">
+                                <div className="task-count__element">
+                                    <span>Effectuées:</span>
+                                    <span className="sum">{isCompleted.length}</span>
+                                </div>
+                                <div className="task-count__element">
+                                    <span>Restantes:</span>
+                                    <span className="sum">{notCompleted.length}</span>
+                                </div>
                             </div>
-                            <div className="sum"><span>{tasks === undefined ? loader : tasks.length}</span></div>
+                            {/* <div className="sum"><span>{tasks === undefined ? loader : tasks.length}</span></div> */}
                             <div className="show-more">
                                 <Link to={`/menu/taches`}>Voir plus  →</Link>
                             </div>
                         </div>
                     </div>
                     <div className="item4">
-                        <div className="item__title"><h2>Menu</h2></div>
+                        <div className="item__title">
+                            <div className="dashboard-icon" id="bg-item4" >
+                                <img src={menuIcon} alt="icône menu" />
+                            </div>  
+                        </div>
                         <div className="menu__resume___container">
                             <div className="menu__resume___grid">
                                 <div>
-                                    <div className="item__resume__style"><h3>{detailedMenu.starterID.length > 0 ? "Entrées" : "Entrée"}</h3></div> 
+                                    <div><span>{detailedMenu.starterID.length > 0 ? "Entrées" : "Entrée"}</span></div> 
                                     <div className="sum"><span>{detailedMenu === undefined ? loader : detailedMenu.starterID.length}</span></div>
                                 </div>
                                 <div>
-                                    <div className="item__resume__style"><h3>{detailedMenu.maincourseID.length > 0 ? "Plats" : "Plat"}</h3></div> 
+                                    <div><span>{detailedMenu.maincourseID.length > 0 ? "Plats" : "Plat"}</span></div> 
                                     <div className="sum"><span>{detailedMenu === undefined ? loader : detailedMenu.maincourseID.length}</span></div>
                                 </div>
                                 <div>
-                                    <div className="item__resume__style"><h3>{detailedMenu.dessertID.length > 0 ? "Desserts" : "Dessert"}</h3></div> 
+                                    <div><span>{detailedMenu.dessertID.length > 0 ? "Desserts" : "Dessert"}</span></div> 
                                     <div className="sum"><span>{detailedMenu === undefined ? loader : detailedMenu.dessertID.length}</span></div>
                                 </div>
                             </div>
@@ -127,19 +144,14 @@ const Dashboard = () => {
                         </div>
                     </div>
                     <div className="item5">
-                        <div className="item__title"><h2>Dépenses</h2></div>
+                        <div className="item__title">
+                            <div className="dashboard-icon" id="bg-item5">
+                                <img src={calculatorIcon} alt="icône calculatrice" />
+                            </div>
+                        </div>        
+                        <div><span>Total</span></div>
                         <div className="expenses__resume___container">
-                            {/* <div className="item__resume">
-                                <div className="item__resume__style">
-                                    <h3>Vos dernières dépenses</h3>
-                                    <ul className="dashboard__ul">{expensesSliced.map(expense => <li key={expense._id}>{expense.description}</li>)}</ul>
-                                </div>
-                                <div className="show-more">
-                                    <Link to={`/menu/budget`}>.</Link>
-                                </div>
-                            </div> */}
                             <div className="item__total">
-                                <div className="item__resume__style"><h3>Total des dépenses</h3></div>
                                 <div className="sum"><span>{operations === undefined ? loader :` ${total(sum)} €`}</span></div>
                                 <div className="show-more">
                                     <Link to={`/menu/budget`}>Voir plus  →</Link>

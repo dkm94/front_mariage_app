@@ -35,13 +35,14 @@
 .div-guest {
     display: flex;
     flex-direction: column;
-    box-shadow: 7px 6px 9px -6px rgba(158,153,158,1);
+    /* box-shadow: 7px 6px 9px -6px rgb(158 153 158); */
+    height: -moz-fit-content;
     height: fit-content;
-    background-color: #e8e3e3;
+    background-color: whitesmoke;
     position: relative;
     align-items: center;
     padding: 2rem 1rem;
-    border: 1px #dfdbd7 solid;
+    border-bottom: 1px #dfdbd7 solid;
     border-radius: 10px;
 }
 

@@ -13,16 +13,16 @@
 
 .expenses-container {
     width: 100%;
-    /* border: 1px solid rgba(0,0,0,.125); */
     border-radius: 10px;
     display: grid;
     grid-template-columns: 1fr 5fr;
-    box-shadow: 7px 6px 9px -6px rgb(158 153 158);
     padding: 1rem;
+    border-bottom: 1px #dfdbd7 solid;
+    background-color: whitesmoke;
 }
 
 .li___icon {
-    background-color: #FFFFFF;
+    background-color: inherit;
 }
 
 .icon___container {
@@ -41,7 +41,7 @@
 .expense-li {
     padding: 0.5rem 0;
     width: 100%;
-    background-color: #FFFFFF;
+    background-color: inherit;
 }
 
 .expense__li__style {
@@ -76,7 +76,7 @@
 }
 
 .expense-li___btn > button {
-    background: white;
+    background: inherit;
 }
 
 .expense_li___edit-btn {

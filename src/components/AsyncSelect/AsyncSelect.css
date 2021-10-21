@@ -16,6 +16,10 @@
     text-align: center;
 }
 
+.select-style {
+    text-align: center;
+}
+
 #select-style > select {
     position: absolute;
     right: 0;

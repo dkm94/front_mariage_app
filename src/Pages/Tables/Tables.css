@@ -129,13 +129,13 @@
 .tbStyle {
     display: flex;
     flex-direction: column;
-    box-shadow: 7px 6px 9px -6px rgba(158,153,158,1);
+    /* box-shadow: 7px 6px 9px -6px rgb(158 153 158); */
     height: auto;
-    background-color: #f8edeb;
+    background-color: #f4eeed;
     position: relative;
     align-items: center;
     padding: 2rem 2rem;
-    /* border: 1px #dfdbd7 solid; */
+    border-bottom: 1px #dfdbd7 solid;
     border-radius: 10px;
 }
 
@@ -227,15 +227,8 @@
 }
 
 .guest-del > button {
-    /* display: flex;
-    height: -moz-fit-content;
-    height: fit-content;
-    margin: 0px 5px;
-    padding: .375rem 1.5rem;
-    box-shadow: rgb(0 0 0 / 26%) 0px 1px 3px 0px;
-    background-color: #f6f5f3;
-    border-radius: 20px; */
     background-color: inherit;
+    color: #A9A9A9;
 }
 
 .guest-del > button:focus {

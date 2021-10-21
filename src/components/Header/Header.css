@@ -27,7 +27,7 @@
     z-index: 999;
 }
 .topNavbar > div {
-    height: 8vh;
+    height: 9vh;
     padding: 1rem;
 }
 .navbar__links {
@@ -46,7 +46,6 @@
     height: 12px;
     background: transparent;
     border: none;
-    color: red;
     display: none;
 }
 
@@ -220,6 +219,7 @@
         display: block;
         padding: 2rem !important;
         font-size: 5vw;
+        background: inherit;
     }
     .navbar__burger {
         display: block;

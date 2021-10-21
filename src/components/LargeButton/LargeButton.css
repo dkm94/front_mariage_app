@@ -31,9 +31,9 @@
     font-size: 12px;
     padding: 6px 19px;
     font-weight: 400;
+    border-radius: 10px;
     width: -moz-fit-content;
     width: fit-content;
     margin-top: 10px;
     letter-spacing: 1px;
-    border-radius: 5px;
 }

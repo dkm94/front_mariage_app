@@ -87,7 +87,8 @@ const Expenses = ({ expenses, deleteExpense, updateExpense, searchValue }) => {
                     function financial(prix) {
                         return Number(prix).toFixed(2);
                     }
-                    return <li key={obj._id} className="mb-3 expenses-container" style={{ backgroundColor: `${renderSwitchColors(obj.category)}` }}>
+                    return <li key={obj._id} className="mb-3 expenses-container">
+                        {/* style={{ backgroundColor: `${renderSwitchColors(obj.category)}` }} */}
                         <div className="li___icon center-x">
                             <div className="icon___container" style={{ backgroundColor: renderSwitchColors(obj.category)}}>
                                 <img src={renderSwitch(obj.category)} alt="divers"/>

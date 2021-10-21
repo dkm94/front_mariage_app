@@ -63,10 +63,9 @@ ul {
 .forms {
     display: grid;
     grid-template-columns: 2fr 3fr;
-    /* grid-gap: 2rem; */
     border-radius: 10px;
     background-color: #FFFFFF;
-    box-shadow: 7px 6px 9px -6px rgb(158 153 158);
+    border-bottom: 2px #e2e0e0 solid;
 }    
 
 .starter___div_form, .maincourse___div_form, .dessert___div_form {
