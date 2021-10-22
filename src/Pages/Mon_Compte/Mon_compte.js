@@ -6,10 +6,13 @@ import * as Yup from "yup";
 import axios from "axios";
 import "./Mon_compte.css";
 
-const MyAccount = () => {
+const MyAccount = ({ token }) => {
+console.log("🚀 ~ file: Mon_compte.js ~ line 10 ~ MyAccount ~ props", token)
    
     const { id } = useContext(UserContext)
     const scrollBtn = useContext(ScrollButtonContext)
+    const [successfulDeletionMessage, setsuccessfulDeletionMessage] = useState("")
+
     
     const [account, setaccount] = useState({})
     const [deleteValidation, setdeleteValidation] = useState(false)
@@ -64,12 +67,19 @@ const MyAccount = () => {
         await axios.delete(`/api/admin/admin/deleteAccount/${id}`)
             .then(res => {
                 if(res.data === 200){
-                    localStorage.removeItem("token")
-                    window.location.reload()
+                    setsuccessfulDeletionMessage(res.statusText)
                 }
                 console.log(res.data)
                 console.log(res.status)
                 console.log(res.statusText)
+            })
+            .then(() => {
+                if(token){
+                    localStorage.removeItem("token")
+                    setTimeout(() => {
+                        window.location.reload()
+                    }, 2000);
+                }
             })
             .catch(err => console.log(err))
     }
@@ -158,6 +168,7 @@ const MyAccount = () => {
                     </div>
                 </div>
             </div>
+            <div><span>{successfulDeletionMessage}</span></div>
         </div>
     )
 }
