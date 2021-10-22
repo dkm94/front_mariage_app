@@ -63,10 +63,10 @@ const MyAccount = () => {
     const deleteAccount = async () => {
         await axios.delete(`/api/admin/admin/deleteAccount/${id}`)
             .then(res => {
-                // if(res.data === 200){
-                //     localStorage.removeItem("token")
-                //     window.location.reload()
-                // }
+                if(res.data === 200){
+                    localStorage.removeItem("token")
+                    window.location.reload()
+                }
                 console.log(res.data)
                 console.log(res.status)
                 console.log(res.statusText)

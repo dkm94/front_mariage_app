@@ -5,22 +5,21 @@ import { NavigationData } from "./NavigationData";
 import axios from "axios";
 
 const Login = (props) => {
-    const id = props.userInfos.id;
-
-    const [account, setaccount] = useState({})
+    const id = props.userInfos.mariageID;
+    const [weddingId, setWeddingId] = useState({})
     
     useEffect(() => {
         const fetchData = async () => {
-            await axios.get(`/api/admin/admin/myAccount/${id}`, {withCredentials: true})
+            await axios.get(`/api/admin/wedding/${id}`, {withCredentials: true})
                 .then(res => {
-                    setaccount(res.data)
+                    setWeddingId(res.data)
                 })
                 .catch(err => console.log(err))
         }
         fetchData()}, [id])
     
-    const firstPerson = account["firstPerson"];
-    const secondPerson = account["secondPerson"];
+    const firstPerson = weddingId["firstPerson"];
+    const secondPerson = weddingId["secondPerson"];
     
         return (
 

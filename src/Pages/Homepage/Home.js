@@ -4,7 +4,6 @@ import './Home.css';
 import "../../components/LargeButton/LargeButton.css"
 
 const Home = (props) => {
-    console.log("Home: ",props)
         return (
             <div className="home">
                 <div className="home___position">

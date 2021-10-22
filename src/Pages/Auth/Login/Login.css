@@ -3,8 +3,9 @@
 }
 
 form > .form-group > span {
-	font-size: 60%;
+	font-size: 80%;
     color: darkred;
+	padding: 0.5rem 1rem;
 }
 
 .login__row__icon > svg {

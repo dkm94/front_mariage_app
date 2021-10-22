@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -9,20 +9,30 @@ import flowers from "../../../img/login-register/flowers.jpeg";
 
 const Register = () => {
 
-    const [emails, setEmails] = useState([])
-    // let emails ;
+    let tempArr = [];
+    console.log(tempArr);
    
     const validationSchema = Yup.object().shape({
+        checkEmail: Yup.boolean(),
         email: Yup.string()
             .email('Cet email est invalide.')
             .required('Veuiller compléter ce champ.')
-            .notOneOf(emails, 'Cet utilisateur existe déjà.'),
+            .test('checkEmail', 'Cet utilisateur existe déjà.', (value) => !tempArr.includes(value)),
         password: Yup.string()
             .required('Veuiller compléter ce champ.')
             .matches(
                 /^.*(?=.{6,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
                 "Le mot de passe doit contenir au moins 6 caractères, une majuscule, un nombre et caractère spécial."
               ),
+        firstPerson: Yup.string()
+            .required('Veuiller compléter ce champ.')
+            .min(1, 'Le nom doit au moins contenir 1 caractère.')
+            .max(50, 'Le nom ne peut comporter plus de 50 caractères.'),
+        secondPerson: Yup.string()
+            .required('Veuiller compléter ce champ.')
+            .min(1, 'Le nom doit au moins contenir 1 caractère.')
+            .max(50, 'Le nom ne peut comporter plus de 50 caractères.')
+        ,
         confirmPassword: Yup.string()
             .when("password", {
                 is: password => (password && password.length > 0 ? true : false),
@@ -46,20 +56,24 @@ const Register = () => {
                mode: 'cors'};
             await fetch(`https://backend-mywedding-app.herokuapp.com/api/admin/admin/`, myInit)
                 .then(res => res.json())
-                .then(data => {
-                    setEmails(data)
-                    // emails.push(data);
+                .then(emailArr => {
+                    emailArr.forEach(email => {
+                        tempArr.push(email.email)
+                    })
                 })
                 .catch(err => console.log(err))
         }
         fetchData();
-    }, [emails])
+    })
 
-    const onSubmit = async ({email, password}) => {
+    const onSubmit = async ({firstPerson, secondPerson, email, password}) => {
+        console.log(tempArr)
         await axios.post(`/api/auth/createAccount`,
             {
-                email:email,
-                password: password
+                firstPerson: firstPerson,
+                secondPerson: secondPerson,
+                email: email,
+                password: password  
             })
             .then((res) => {
                 if(res.data != null){
@@ -67,6 +81,7 @@ const Register = () => {
                         alert('Votre compte a été créé avec succès. Vous allez être redirigé.e vers la page de connexion...')
                         window.location = "/login" ;
                     }, 1000);
+                    tempArr = []
                 }
             })
             .catch((err) => {
@@ -88,6 +103,30 @@ const Register = () => {
                         </div>
                         <div className="register__form">
                             <form onSubmit={handleSubmit(onSubmit)}>
+                                <div className="form-group">
+                                    <label>Prénom 1</label>
+                                    <input
+                                        {...register('firstPerson', { required: true })}
+                                        id="firstPerson"
+                                        name="firstPerson"
+                                        type="text"
+                                        className="form-control shadow-none"
+                                        style={{ borderColor: "#D1D4D5"}}
+                                    />
+                                    <span>{errors.firstPerson?.message}</span>
+                                </div>
+                                <div className="form-group">
+                                    <label>Prénom 2</label>
+                                    <input
+                                        {...register('secondPerson', { required: true })}
+                                        id="secondPerson"
+                                        name="secondPerson"
+                                        type="text"
+                                        className="form-control shadow-none"
+                                        style={{ borderColor: "#D1D4D5"}}
+                                    />
+                                    <span>{errors.secondPerson?.message}</span>
+                                </div>
                                 <div className="form-group">
                                     <label>Email</label>
                                     <input
