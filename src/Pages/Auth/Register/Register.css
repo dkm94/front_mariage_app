@@ -84,6 +84,10 @@ input, button {
     padding: 1rem;
 }
 
+.register__form > form > div > input[type=submit]:hover {
+	background: #d7e0b8;
+}
+
 .register.inactive {
 	opacity: 0;
 	transform: scale(1.1);
@@ -249,5 +253,11 @@ input, button {
 	}
 	.register-page {
 		min-height: 92vh;
+	}
+}
+
+@media (max-width: 414px) {
+	.register-grid > .grid-item-2 {
+		padding: 40px 40px;
 	}
 }

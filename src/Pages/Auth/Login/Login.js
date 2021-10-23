@@ -56,7 +56,7 @@ const Login = () => {
                 <div className="grid-item-2 center-x">
                     <div className="login">
                         <div className="form-group">
-                            <span>Connectez-vous</span>
+                            <h1>Connectez-vous</h1>
                         </div>
                         <div className="login__form">
                             <form onSubmit={handleSubmit(onSubmit)}>
@@ -84,12 +84,12 @@ const Login = () => {
                                     />
                                     <div>{errors.password?.message}</div>
                                 </div>
-                                <div className="login__signup">
-                                    <p>Pas encore membre? &nbsp;<Link to={"/register"}>Inscrivez-vous</Link></p>
-                                    <p><Link to={"/reset-password"}>Mot de passe oublié ?</Link></p>
-                                </div>
                                 <div className="login__submit">
                                     <input type="submit" />
+                                </div>
+                                <div className="login__signup">
+                                    <p>Pas encore membre? &nbsp;<Link to={"/register"}>Inscrivez-vous</Link></p>
+                                    <p className="forgotten-password"><Link to={"/reset-password"}>Mot de passe oublié ?</Link></p>
                                 </div>
                             </form>
                         </div>

@@ -163,11 +163,11 @@ const Register = () => {
                                     />
                                     <span>{errors.confirmPassword?.message}</span>
                                 </div>
-                                <div className="register__signup">
-                                    <p>Déjà inscrit ? &nbsp;<Link to={"/login"}>Connectez-vous</Link></p>
-                                </div>
                                 <div className="form-group">
                                     <input type="submit" />
+                                </div>
+                                <div className="register__signup">
+                                    <p>Déjà inscrit ? &nbsp;<Link to={"/login"}>Connectez-vous</Link></p>
                                 </div>
                             </form>
                         </div>

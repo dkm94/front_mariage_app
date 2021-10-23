@@ -1,5 +1,6 @@
 .login-page {
     height: 92vh;
+	width: 100%;
 }
 
 form > .form-group > span {
@@ -31,9 +32,12 @@ input, button {
 }
 
 .login-grid {
-	display: grid;
-	grid-template-columns: 2fr 1fr;
+	display: flex;
 	height: 100%;
+}
+
+.login-grid > .grid-item-1 {
+	width: 50%;
 }
 
 .login-grid > .grid-item-1 > img {
@@ -45,6 +49,7 @@ input, button {
 .login-grid > .grid-item-2 {
 	height: 100%;
 	padding: 0 1rem;
+	width: 50%;
 }
 
 .demo {
@@ -62,7 +67,8 @@ input, button {
 .login {
 	display: flex;
     flex-direction: column;
-	width: 75%;
+	width: 100%;
+	padding: 40px 100px;
 }
 
 .login.inactive {
@@ -82,9 +88,13 @@ input, button {
 
 .login__form > form > div > input[type=submit] {
 	background: #CCD5AE;
-    border-radius: 20px;
-    padding: 0.5rem;
-	width: 10rem;
+    border-radius: 5px;
+    padding: 1rem;
+	width: 100%;
+	margin: 30px 0;
+}
+.login__form > form > div > input[type=submit]:hover {
+	background: #d7e0b8;
 }
 
 .login__row {
@@ -127,7 +137,6 @@ input, button {
 }
 
 .login__signup {
-	font-size: .8rem;
 	color: #ABA8AE;
 	height: 15%
 }
@@ -136,8 +145,8 @@ input, button {
     text-align: center;
 }
 
-.login__signup:nth-child(odd) {
-    text-align: end;
+.forgotten-password {
+    align-self: flex-end;
 }
 
 .login__signup a {
@@ -175,5 +184,24 @@ input, button {
 @keyframes animatePath {
 	to {
 		stroke-dashoffset: 0;
+	}
+}
+
+@media (max-width: 767px) {
+	.login-grid > .grid-item-1 {
+		display: none;
+	}
+	.login-grid > .grid-item-2 {
+		width: 100%;
+		display: initial;
+	}
+	.login-page {
+		min-height: 92vh;
+	}
+}
+
+@media (max-width: 414px) {
+	.login {
+		padding: 40px;
 	}
 }
