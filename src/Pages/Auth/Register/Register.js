@@ -96,10 +96,10 @@ const Register = () => {
                 <div className="grid-item-1">
                     <img alt="couple img" src={flowers} />
                 </div>
-                <div className="grid-item-2 center-x">
+                <div className="grid-item-2">
                     <div className="register">
                         <div className="form-group">
-                            <span>Inscrivez-vous</span>
+                            <h1>Inscrivez-vous</h1>
                         </div>
                         <div className="register__form">
                             <form onSubmit={handleSubmit(onSubmit)}>

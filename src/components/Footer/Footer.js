@@ -13,7 +13,7 @@ const mailgoConfig: MailgoConfig = {
 };
 
 
-const Footer = () => {
+const Footer = ({token}) => {
     
     useEffect(() => {
         mailgo(mailgoConfig);
@@ -23,18 +23,18 @@ const Footer = () => {
         <div className="footer">
             <div className="footer-dims">
                 <div className="footer-dims___span">
-                    {/* <span>Développé par <Link to="https://github.com/dkm94">Diane M.</Link></span> */}
+                    <span>© Copyright 2021 - Tous droits réservés</span>
                 </div>
-                <div className="footer-dims___links">
-                    {/* <a
+                {/* <div className="footer-dims___links">
+                    <a
                     className="App-link"
                     href="mailto:diane.mpacko@gmail.com"
                     target="_blank"
                     rel="noopener noreferrer"
                     >
                         <img src={enveloppe} alt="Envoyer un message" id="enveloppe-logo" />
-                    </a> */}
-                </div>
+                    </a>
+                </div> */}
             </div>
         </div>
     )

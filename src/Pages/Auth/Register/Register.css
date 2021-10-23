@@ -1,5 +1,6 @@
 .register-page {
-    height: 92vh;
+    min-height: 100vh;
+	width: 100%;
 }
 
 form > .form-group > span {
@@ -9,7 +10,7 @@ form > .form-group > span {
 }
 
 input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, textarea:-webkit-autofill, textarea:-webkit-autofill:hover, textarea:-webkit-autofill:focus, select:-webkit-autofill, select:-webkit-autofill:hover, select:-webkit-autofill:focus {
-	border: none;
+	/* border: none; */
 	-webkit-text-fill-color: #000000;
 	-webkit-box-shadow: 0 0 0px 1000px transparent inset;
 	transition: background-color 5000s ease-in-out 0s;
@@ -38,26 +39,38 @@ input, button {
 }
 
 .register-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
+	display: flex;
+    /* grid-template-columns: 1fr 1fr; */
     height: 100%;
+    position: relative;
+    flex-direction: row;
+}
+
+.register-grid > .grid-item-1 {
+	position: absolute;
+    width: 50%;
+    height: inherit;
 }
 
 .register-grid > .grid-item-1 > img {
 	object-fit: cover;
     width: 100%;
     height: 100%;
-	object-position: right;
+	/* object-position: right; */
 }
 
 .register-grid > .grid-item-2 {
 	height: 100%;
-	padding: 0 1rem;
+    padding: 40px 100px;
+    width: 50%;
+    position: absolute;
+    right: 0;
 }
 
 .register {
 	display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .register__form > form > div {
@@ -67,8 +80,8 @@ input, button {
 
 .register__form > form > div > input[type=submit] {
 	background: #CCD5AE;
-    border-radius: 20px;
-    padding: 0.5rem;
+    border-radius: 5px;
+    padding: 1rem;
 }
 
 .register.inactive {
@@ -174,7 +187,6 @@ input, button {
 }
 
 .register__signup {
-	font-size: .8rem;
     color: #ABA8AE;
     height: 15%;
 }
@@ -223,11 +235,19 @@ input, button {
 
 
 @media (max-width: 1024px) {
-	/* html, body {
-		font-size: 120%;
-	} */
-
 	.footer-dims, .navbar-nav, .dropdownmenu > a {
 		font-size: 1rem;
+	}
+}
+
+@media (max-width: 767px) {
+	.register-grid > .grid-item-1 {
+		display: none;
+	}
+	.register-grid > .grid-item-2 {
+		width: 100%;
+	}
+	.register-page {
+		min-height: 92vh;
 	}
 }

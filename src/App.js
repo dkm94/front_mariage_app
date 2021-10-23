@@ -138,7 +138,7 @@ function App() {
           </ScrollButtonContext.Provider>
         </UserContext.Provider>
       </AuthenticationContext.Provider>
-      <Footer />
+      <Footer token={token} />
     </div>
   );
 }
