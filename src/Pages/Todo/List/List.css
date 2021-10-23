@@ -90,10 +90,16 @@ text-decoration: line-through;
     background: transparent;
 }
 
-@media ( max-width : 768px ) {
+@media ( max-width : 1024px ) {
     .tasks-list {
-        width: 90%;
+        width: 100%;
     }
+}
+
+@media ( max-width : 768px ) {
+    /* .tasks-list {
+        width: 90%;
+    } */
     .todo > .container-fluid > .row {
         display: flex;
         justify-content: center;

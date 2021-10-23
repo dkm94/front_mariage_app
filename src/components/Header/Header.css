@@ -224,7 +224,7 @@
     .navbar__burger {
         display: block;
         position: fixed;
-        top: 2rem;
+        /* top: 2rem; */
         right: 4rem;
     }
     .navbar__burger:hover {

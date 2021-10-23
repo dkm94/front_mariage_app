@@ -19,13 +19,16 @@
 @media (max-width: 786px) {
     .todo-list {
         padding: 0rem 5rem;
-        display: flex;
+        /* display: flex; */
         justify-content: center;
     }
 }
 
 @media (max-width: 414px) {
     .todo-list {
-        padding: 0rem 1rem;
+        padding: 0rem 3rem;
+    }
+    .todolist___checkbox_span {
+        margin-right: 10px;
     }
 }
