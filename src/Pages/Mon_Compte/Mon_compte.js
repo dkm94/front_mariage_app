@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext, useMemo } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { UserContext, ScrollButtonContext } from "../../../src/App";
 import Button from "../../../src/components/LargeButton/LargeButton";
-import { useForm, useFormState } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from "axios";
@@ -18,6 +18,7 @@ console.log("🚀 ~ file: Mon_compte.js ~ line 10 ~ MyAccount ~ props", token)
     const [wedding, setWedding] = useState({})
     const [deleteValidation, setdeleteValidation] = useState(false)
     
+    // Fetch data
     useEffect(() => {
         let account = axios.get(`/api/admin/admin/myAccount/${id}`);
         let wedding = axios.get(`/api/admin/wedding/${mariageID}`);
@@ -29,6 +30,8 @@ console.log("🚀 ~ file: Mon_compte.js ~ line 10 ~ MyAccount ~ props", token)
         }
         fetchData()}, [id, mariageID])
 
+
+    // Handle wedding Form
     const weddingValidationSchema = Yup.object().shape({
         firstPerson: Yup.string()
             .min(2, "Le prénom doit contenir au moins 2 caractères.")
@@ -45,41 +48,20 @@ console.log("🚀 ~ file: Mon_compte.js ~ line 10 ~ MyAccount ~ props", token)
                 "Le prénom ne doit contenir que des lettres."
             ),
     })
-    // const validationSchema = Yup.object().shape({
-    //     password: Yup.string()
-    //         .required('Veuiller compléter ce champ.')
-    //         .matches(
-    //             /^.*(?=.{6,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
-    //             "Le mot de passe doit contenir au moins 6 caractères, une majuscule, un nombre et caractère spécial."
-    //           ),
-    //     confirmPassword: Yup.string()
-    //         .when("password", {
-    //             is: password => (password && password.length > 0 ? true : false),
-    //             then: Yup.string().oneOf([Yup.ref("password")], "La confirmation du mot de passe doit correspondre au mot de passe saisi précédemment.")
-    //           })
-    //         .required('Veuiller compléter ce champ.')
-    // })
 
-    const { register, formState: { errors }, handleSubmit, reset, control, setValue} = useForm({
+    const { register, formState: { errors }, handleSubmit, reset } = useForm({
         mode: "onBlur",
         resolver: yupResolver(weddingValidationSchema)
       });
+
+    // mount DefaultValues 
       useEffect(() => {
         if (wedding) {
             reset(wedding)
         }
     }, [reset, wedding]);
-    
-    const { register: register2, formState: { errors: errors2 }, handleSubmit: handleSubmit2, control: control2 } = useForm({
-        mode: "onBlur",
-        // defaultValues: {
-        //     email: account.email,
-        //     password: ''
-        // }
-    });
 
     const onSubmitWedding = async ({firstPerson, secondPerson}) => {
-        // alert(JSON.stringify(data));
         console.log(firstPerson, secondPerson);
         await axios.post(`/api/admin/wedding/edit/${mariageID}`,
             {
@@ -97,34 +79,55 @@ console.log("🚀 ~ file: Mon_compte.js ~ line 10 ~ MyAccount ~ props", token)
                 console.log(err)
             })
       };
+
+
+
+    // Handle account form
+     const accountValidationSchema = Yup.object().shape({
+        password: Yup.string()
+            .required('Veuiller compléter ce champ.')
+            .matches(
+                /^.*(?=.{6,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
+                "Le mot de passe doit contenir au moins 6 caractères, une majuscule, un nombre et caractère spécial."
+              ),
+        confirmPassword: Yup.string()
+            .when("password", {
+                is: password => (password && password.length > 0 ? true : false),
+                then: Yup.string().oneOf([Yup.ref("password")], "La confirmation du mot de passe doit correspondre au mot de passe saisi précédemment.")
+              })
+            .required('Veuiller compléter ce champ.')
+    })
     
-      const onSubmitAccount = (data) => {
-        alert(JSON.stringify(data));
+    const { register: register2, formState: { errors: errors2 }, handleSubmit: handleSubmit2, reset: updateAccountData } = useForm({
+        mode: "onBlur",
+        resolver: yupResolver(accountValidationSchema)
+    });
+    useEffect(() => {
+        if (account) {
+            updateAccountData(account)
+        }
+    }, [updateAccountData, account]);
+
+    
+    
+      const onSubmitAccount = async ({ password }) => {
+        await axios.post(`/api/admin/admin/editAccount/${id}`,
+        {
+            password: password
+        })
+        .then((res) => {
+            if(res.data != null){
+                setTimeout(() => {
+                    alert('Le mot de passe a été mofidié avec succès.')
+                    window.location.reload()
+                }, 1000);
+            }
+        })
+        .catch((err) => {
+            alert("Une erreur est survenue. Veuillez rééssayer plus tard.", JSON.stringify(err));
+            console.log(err)
+        })
       };
-
-
-    
-
-    // const formik = useFormik({
-    //     initialValues: {
-    //         password: '',
-    //         confirmPassword: ''
-    //     },
-    //     onSubmit: async (values) => {
-    //         await axios.post(`/api/admin/admin/editAccount/${id}`,
-    //         {
-    //             password: values.password
-    //         })
-    //         .then((res) => {
-    //             if(res.data != null){
-    //                 setTimeout(() => {
-    //                     alert('Le mot de passe a été mofidié avec succès.')
-    //                 }, 1000);
-    //             }
-    //         })
-    //     },
-    //     validationSchema: validationSchema
-    // })
 
     const deleteAccount = async () => {
         await axios.delete(`/api/admin/admin/deleteAccount/${id}`)
@@ -175,11 +178,6 @@ console.log("🚀 ~ file: Mon_compte.js ~ line 10 ~ MyAccount ~ props", token)
                                     name="firstPerson"
                                     type="text"
                                     {...register('firstPerson')}
-                                    // {...register('firstPerson', {
-                                    //     onChange: (e) => e.target.value
-                                    // })
-                                    // }
-                                    // placeholder={wedding.firstPerson}
                                     className="form-control"
                                     />
                                     <span>{errors.firstPerson?.message}</span>
@@ -235,7 +233,6 @@ console.log("🚀 ~ file: Mon_compte.js ~ line 10 ~ MyAccount ~ props", token)
                                         />
                                         <span>{errors2.confirmPassword?.message}</span>
                                     </div>
-                                    
                                 </div>
                                 <div className="account___btn_container">
                                     <Button title="Enregistrer les changements" type="submit"/>
