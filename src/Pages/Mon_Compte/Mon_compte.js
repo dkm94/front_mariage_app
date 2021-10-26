@@ -1,67 +1,130 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Formik, useFormik, Form } from "formik";
+import React, { useState, useEffect, useContext, useMemo } from 'react';
 import { UserContext, ScrollButtonContext } from "../../../src/App";
 import Button from "../../../src/components/LargeButton/LargeButton";
+import { useForm, useFormState } from "react-hook-form";
 import * as Yup from "yup";
+import { yupResolver } from '@hookform/resolvers/yup';
 import axios from "axios";
 import "./Mon_compte.css";
 
 const MyAccount = ({ token }) => {
 console.log("🚀 ~ file: Mon_compte.js ~ line 10 ~ MyAccount ~ props", token)
    
-    const { id } = useContext(UserContext)
+    const { id, mariageID } = useContext(UserContext)
     const scrollBtn = useContext(ScrollButtonContext)
     const [successfulDeletionMessage, setsuccessfulDeletionMessage] = useState("")
-
     
-    const [account, setaccount] = useState({})
+    const [account, setAccount] = useState({})
+    const [wedding, setWedding] = useState({})
     const [deleteValidation, setdeleteValidation] = useState(false)
     
     useEffect(() => {
+        let account = axios.get(`/api/admin/admin/myAccount/${id}`);
+        let wedding = axios.get(`/api/admin/wedding/${mariageID}`);
+
         const fetchData = async () => {
-            await axios.get(`/api/admin/admin/myAccount/${id}`, {withCredentials: true})
-                .then(res => {
-                    setaccount(res.data)
-                })
-                .catch(err => console.log(err))
+            let res = await Promise.all([account, wedding])
+            setAccount(res[0].data)
+            setWedding(res[1].data)
         }
-        fetchData()}, [id])
+        fetchData()}, [id, mariageID])
 
-    const validationSchema = Yup.object().shape({
-        password: Yup.string()
-            .required('Veuiller compléter ce champ.')
+    const weddingValidationSchema = Yup.object().shape({
+        firstPerson: Yup.string()
+            .min(2, "Le prénom doit contenir au moins 2 caractères.")
+            .max(30, "Le prénom ne peut contenir plus de 30 caractères.")
             .matches(
-                /^.*(?=.{6,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
-                "Le mot de passe doit contenir au moins 6 caractères, une majuscule, un nombre et caractère spécial."
+                /^[a-zA-Z\s]*$/,
+                "Le prénom ne doit contenir que des lettres."
               ),
-        confirmPassword: Yup.string()
-            .when("password", {
-                is: password => (password && password.length > 0 ? true : false),
-                then: Yup.string().oneOf([Yup.ref("password")], "La confirmation du mot de passe doit correspondre au mot de passe saisi précédemment.")
-              })
-            .required('Veuiller compléter ce champ.')
+        secondPerson: Yup.string()
+            .min(2, "Le prénom doit contenir au moins 2 caractères.")
+            .max(30, "Le prénom ne peut contenir plus de 30 caractères.")
+            .matches(
+                /^[a-zA-Z\s]*$/,
+                "Le prénom ne doit contenir que des lettres."
+            ),
     })
+    // const validationSchema = Yup.object().shape({
+    //     password: Yup.string()
+    //         .required('Veuiller compléter ce champ.')
+    //         .matches(
+    //             /^.*(?=.{6,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
+    //             "Le mot de passe doit contenir au moins 6 caractères, une majuscule, un nombre et caractère spécial."
+    //           ),
+    //     confirmPassword: Yup.string()
+    //         .when("password", {
+    //             is: password => (password && password.length > 0 ? true : false),
+    //             then: Yup.string().oneOf([Yup.ref("password")], "La confirmation du mot de passe doit correspondre au mot de passe saisi précédemment.")
+    //           })
+    //         .required('Veuiller compléter ce champ.')
+    // })
 
-    const formik = useFormik({
-        initialValues: {
-            password: '',
-            confirmPassword: ''
-        },
-        onSubmit: async (values) => {
-            await axios.post(`/api/admin/admin/editAccount/${id}`,
+    const { register, formState: { errors }, handleSubmit, reset, control, setValue} = useForm({
+        mode: "onBlur",
+        resolver: yupResolver(weddingValidationSchema)
+      });
+      useEffect(() => {
+        if (wedding) {
+            reset(wedding)
+        }
+    }, [reset, wedding]);
+    
+    const { register: register2, formState: { errors: errors2 }, handleSubmit: handleSubmit2, control: control2 } = useForm({
+        mode: "onBlur",
+        // defaultValues: {
+        //     email: account.email,
+        //     password: ''
+        // }
+    });
+
+    const onSubmitWedding = async ({firstPerson, secondPerson}) => {
+        // alert(JSON.stringify(data));
+        console.log(firstPerson, secondPerson);
+        await axios.post(`/api/admin/wedding/edit/${mariageID}`,
             {
-                password: values.password
+                firstPerson: firstPerson,
+                secondPerson: secondPerson
             })
             .then((res) => {
                 if(res.data != null){
-                    setTimeout(() => {
-                        alert('Le mot de passe a été mofidié avec succès.')
-                    }, 1000);
+                    wedding.firstPerson = firstPerson;
+                    wedding.secondPerson = secondPerson;
                 }
             })
-        },
-        validationSchema: validationSchema
-    })
+            .catch((err) => {
+                alert("Une erreur est survenue. Veuillez rééssayer plus tard.", JSON.stringify(err));
+                console.log(err)
+            })
+      };
+    
+      const onSubmitAccount = (data) => {
+        alert(JSON.stringify(data));
+      };
+
+
+    
+
+    // const formik = useFormik({
+    //     initialValues: {
+    //         password: '',
+    //         confirmPassword: ''
+    //     },
+    //     onSubmit: async (values) => {
+    //         await axios.post(`/api/admin/admin/editAccount/${id}`,
+    //         {
+    //             password: values.password
+    //         })
+    //         .then((res) => {
+    //             if(res.data != null){
+    //                 setTimeout(() => {
+    //                     alert('Le mot de passe a été mofidié avec succès.')
+    //                 }, 1000);
+    //             }
+    //         })
+    //     },
+    //     validationSchema: validationSchema
+    // })
 
     const deleteAccount = async () => {
         await axios.delete(`/api/admin/admin/deleteAccount/${id}`)
@@ -104,59 +167,80 @@ console.log("🚀 ~ file: Mon_compte.js ~ line 10 ~ MyAccount ~ props", token)
                 </div>
                 <div className="row align-items-center account___form container">
                     <div className="col">
-                        <Formik>
-                            <Form onSubmit={formik.handleSubmit}>
+                        <form key={1} onSubmit={handleSubmit(onSubmitWedding)}>
+                            <div className="account__row">
+                                <div className={`textfield-style account___form-style`}>
+                                    <label>Prénom de l'époux/épouse 1</label>
+                                    <input
+                                    name="firstPerson"
+                                    type="text"
+                                    {...register('firstPerson')}
+                                    // {...register('firstPerson', {
+                                    //     onChange: (e) => e.target.value
+                                    // })
+                                    // }
+                                    // placeholder={wedding.firstPerson}
+                                    className="form-control"
+                                    />
+                                    <span>{errors.firstPerson?.message}</span>
+                                </div>
+                            </div>
+                            <div className="account__row">
+                                <div className={`textfield-style account___form-style`}>
+                                    <label>Prénom de l'époux/épouse 2</label>
+                                    <input
+                                    {...register('secondPerson')}
+                                    type="text"
+                                    name="secondPerson"
+                                    className="form-control"
+                                    />
+                                    <span>{errors.secondPerson?.message}</span>
+                                </div>
+                            </div>
+                            <input type="submit" />
+                        </form>
+                            <form key={2} onSubmit={handleSubmit2(onSubmitAccount)}>
                                 <div className="account__row">
                                     <div className={`textfield-style account___form-style`}>
                                         <label>Email</label>
                                         <input
+                                        {...register2('email')}
                                         disabled
                                         className="form-control"
                                         name="email"
                                         type="email"
-                                        value={account.email ||''}
+                                        placeholder={account.email}
                                         />
                                     </div>
-                                    
                                 </div>
                                 <div className="account__row">
                                     <div className={`textfield-style account___form-style`}>
                                         <label>Nouveau mot de passe</label>
                                         <input
-                                        className="form-control"
+                                        {...register2('password')}
                                         name="password"
                                         type="password"
-                                        value={formik.values.password}
-                                        onChange={formik.handleChange}
-                                        {...formik.getFieldProps('password')}
+                                        className="form-control"
                                         />
-                                        {formik.touched.password && formik.errors.password ? (
-                                            <div className="error">{formik.errors.password}</div>
-                                        ) : null}
                                     </div>
                                 </div>
                                 <div className="account__row">
                                     <div className={`textfield-style account___form-style`}>
                                         <label>Confirmer le nouveau mot de passe</label>
                                         <input
-                                        className="form-control"
+                                        {...register2('confirmPassword')}
                                         name="confirmPassword"
                                         type="password"
-                                        value={formik.values.confirmPassword}
-                                        onChange={formik.handleChange}
-                                        {...formik.getFieldProps('confirmPassword')}
+                                        className="form-control"
                                         />
-                                        {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
-                                            <div className="error">{formik.errors.confirmPassword}</div>
-                                        ) : null}
+                                        <span>{errors2.confirmPassword?.message}</span>
                                     </div>
                                     
                                 </div>
                                 <div className="account___btn_container">
                                     <Button title="Enregistrer les changements" type="submit"/>
                                 </div>
-                        </Form>
-                    </Formik>
+                        </form>
                     <div className="account__row" id="delete-account___link">
                         <span onClick={() => setdeleteValidation(!deleteValidation)}>Supprimer le compte</span>
                         <div style={deleteValidation ? showButtons : hideButtons}>
