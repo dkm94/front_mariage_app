@@ -2,25 +2,63 @@
     min-height: 92vh;
     width: 100%;
     display: flex;
-    flex-direction: column;
+    margin-top: 8vh;  
+    padding-left: 10rem;
+    background-color: #e8e8e4;
+    /* flex-direction: column;
     align-items: center;
     background-image: url('./../../img/aisle.jpg');
     background-size: cover;
-    position: relative;
+    position: relative; */
  }
 
-.home___position {
+/* .home___position {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+} */
+
+.home___position {
+    width: 100%;
+    position: relative;
+}
+
+.home___position-style {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+}
+
+.home__picture {
+    width: 100%;
+    height: fit-content;
+}
+
+.home__picture > img {
+    width: inherit;
 }
 
 .home-desc {
     color: black;
-    background: rgba(255,255,255,0.7);
+    /* background: rgba(255,255,255,0.7); */
     padding: 2rem;
     margin-bottom: 2em;
     border-radius: 5px;
+}
+
+.home-desc > h1 {
+    font-size: 6rem;
+}
+
+.home-desc > p {
+    margin-right: 150px;
+    line-height: 2.4rem;
+}
+
+.home-desc > p > span {
+    display: block;
 }
 
 .home-btn {

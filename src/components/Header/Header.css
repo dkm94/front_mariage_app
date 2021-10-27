@@ -1,6 +1,8 @@
 .header {
     height: 10vh;
     width: 100%;
+    position: absolute;
+    z-index: 1000;
 }
 
 .navigation {
@@ -83,20 +85,19 @@
     height: 100%;
     margin: 0;
     padding: 0;
-    /* display: inline-block; */
-    /* float: right; */
-    /* box-shadow: -20px 18px 46px -13px rgb(204 198 204); */
 }
+
 .navbar-menu > li {
     display: inline-block;
     margin: 0 10px;
-    text-transform: uppercase;
-    color: rgb(156, 154, 154);
+    padding: 0.7rem 1rem;
+    background: #000;
+    border-radius: 3px;
 }
 
 .navbar-menu > li > a, .navbar-menu > li > button {
-    color: rgb(156, 154, 154);
-}
+    color: #fff
+;}
 .hidden-links {
     display: none;
 }
