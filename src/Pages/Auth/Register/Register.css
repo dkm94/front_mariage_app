@@ -1,6 +1,7 @@
 .register-page {
     min-height: 100vh;
 	width: 100%;
+	margin-top: 8vh;
 }
 
 form > .form-group > span {

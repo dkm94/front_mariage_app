@@ -1,4 +1,7 @@
 .home {
+    width: 100%;
+}
+.section-1 {
     min-height: 92vh;
     width: 100%;
     display: flex;
@@ -50,6 +53,7 @@
 
 .home-desc > h1 {
     font-size: 6rem;
+    margin-bottom: 2rem;
 }
 
 .home-desc > p {
@@ -87,3 +91,62 @@ a:hover {
     color: black;
 }
 
+.home > .section-2 {
+    padding: 10rem 15rem;
+}
+
+.section-2___titre {
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.section-2___titre > h2 {
+    font-size: 1.5rem !important;
+}
+
+.section-2___contenu {
+    text-align: center;
+}
+
+.section-2___sous-titre {
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 8rem;
+}
+.section-2___sous-titre > span {
+    font-size: 4rem;
+}
+
+.home-cards {
+    box-shadow: 0 2px 10px 0 rgb(0 0 0 / 14%);
+    border: solid 1px rgb(151, 151, 151, 0.18);
+    padding: 3rem 5rem;
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.home-cards__style {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 3rem;
+}
+
+.home-cards__img {
+    height: 7rem;
+    width: 7rem;
+    border-radius: 50%;
+    background: #f0efeb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.home-cards__img > img{
+    height: 65%;
+}
+
+.home-cards__title > h3 {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+}
