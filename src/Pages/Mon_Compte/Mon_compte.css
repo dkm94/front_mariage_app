@@ -3,12 +3,18 @@
 }
 
 .account___bgimage {
-    height: 10rem;
-    background-attachment: fixed;
+    height: 20rem;
     background-image: url("../../img/pen.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    position: relative;
+    border-radius: 10px;
+    margin: 3rem;
+}
+
+.account__content {
+    padding: 5rem 10rem;
 }
 
 .account__row {
@@ -20,21 +26,6 @@
 
 .account__row > span {
     padding-left: 1.5rem;
-}
-
-.account___title {
-    padding: 50px;
-    text-align: -webkit-center;
-}
-
-.account___title_style {
-    padding-bottom: 10px;
-    border-bottom: 1px solid;
-    width: fit-content;
-    padding-right: 30px;
-    padding-left: 30px;
-    text-transform: uppercase;
-    font-family: 'Noto Sans JP', sans-serif;
 }
 
 .account___form {
@@ -52,15 +43,10 @@
     text-align: end;
 }
 
-.account___title > h1 {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 300;
-}
-
 #delete-account___link {
     margin-top: 50px;
     flex-direction: column;
-    font-size: 0.7rem;
+    /* font-size: 0.7rem; */
 }
 
 #delete-account___link > span {
@@ -71,22 +57,29 @@
 
 #delete-account___link > div {
     padding-left: 1.5rem;
-    font-size: 0.7rem;
+    /* font-size: 0.7rem; */
 }
 
 #delete-account___link > div > button {
     margin: 0px 5px;
 }
 
+.account-form__style {
+    width: 100%;
+}
+
+.account___form-style, .wedding-form__style {
+    width: 100%;
+}
 @media (max-width: 1024px) {
-	.account___bgimage {
+	/* .account___bgimage {
         background-attachment: unset;
         height: 300px;
-    }
+    } */
 
-    .account___form {
+    /* .account___form {
         padding: 0;
-    }
+    } */
 }
 
 @media (max-width: 767.98px) { 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { UserContext, ScrollButtonContext } from "../../../src/App";
+import { Container, Row, Col } from "react-bootstrap";
 import Button from "../../../src/components/LargeButton/LargeButton";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -17,6 +18,7 @@ console.log("🚀 ~ file: Mon_compte.js ~ line 10 ~ MyAccount ~ props", token)
     const [account, setAccount] = useState({})
     const [wedding, setWedding] = useState({})
     const [deleteValidation, setdeleteValidation] = useState(false)
+    // const [saving, setSaving] = useState(false);
     
     // Fetch data
     useEffect(() => {
@@ -63,6 +65,7 @@ console.log("🚀 ~ file: Mon_compte.js ~ line 10 ~ MyAccount ~ props", token)
 
     const onSubmitWedding = async ({firstPerson, secondPerson}) => {
         console.log(firstPerson, secondPerson);
+        // setSaving(true)
         await axios.post(`/api/admin/wedding/edit/${mariageID}`,
             {
                 firstPerson: firstPerson,
@@ -72,6 +75,7 @@ console.log("🚀 ~ file: Mon_compte.js ~ line 10 ~ MyAccount ~ props", token)
                 if(res.data != null){
                     wedding.firstPerson = firstPerson;
                     wedding.secondPerson = secondPerson;
+                    // setSaving(false)
                 }
             })
             .catch((err) => {
@@ -163,15 +167,13 @@ console.log("🚀 ~ file: Mon_compte.js ~ line 10 ~ MyAccount ~ props", token)
             {scrollBtn}
             <div className="account___container">
                 <div  className="account___bgimage" />
-                <div className="account___title">
-                    <div className="account___title_style">
-                        <h1>Votre compte</h1>
-                    </div>
+                <div className="titles mb-3">
+                    <h1>Votre compte</h1>
                 </div>
-                <div className="row align-items-center account___form container">
-                    <div className="col">
-                        <form key={1} onSubmit={handleSubmit(onSubmitWedding)}>
-                            <div className="account__row">
+                <Container style={{ padding: "5rem 10rem" }} fluid>
+                    <Row style={{ marginBottom: "8rem"}}>
+                        <form className="wedding-form__style" key={1} onSubmit={handleSubmit(onSubmitWedding)}>
+                            <Col xs={12} md={6} className="account__row">
                                 <div className={`textfield-style account___form-style`}>
                                     <label>Prénom de l'époux/épouse 1</label>
                                     <input
@@ -182,8 +184,8 @@ console.log("🚀 ~ file: Mon_compte.js ~ line 10 ~ MyAccount ~ props", token)
                                     />
                                     <span>{errors.firstPerson?.message}</span>
                                 </div>
-                            </div>
-                            <div className="account__row">
+                            </Col>
+                            <Col xs={12} md={6} className="account__row">
                                 <div className={`textfield-style account___form-style`}>
                                     <label>Prénom de l'époux/épouse 2</label>
                                     <input
@@ -194,60 +196,77 @@ console.log("🚀 ~ file: Mon_compte.js ~ line 10 ~ MyAccount ~ props", token)
                                     />
                                     <span>{errors.secondPerson?.message}</span>
                                 </div>
-                            </div>
-                            <input type="submit" />
+                            </Col>
+                            <Col xs={12} style={{ display: "flex", justifyContent: "end"}}>
+                                <Button type="submit" title="Enregistrer"/>
+                            </Col>
                         </form>
-                            <form key={2} onSubmit={handleSubmit2(onSubmitAccount)}>
-                                <div className="account__row">
-                                    <div className={`textfield-style account___form-style`}>
-                                        <label>Email</label>
-                                        <input
-                                        {...register2('email')}
-                                        disabled
-                                        className="form-control"
-                                        name="email"
-                                        type="email"
-                                        placeholder={account.email}
-                                        />
-                                    </div>
+                    </Row>
+                </Container>
+                <Container style={{ padding: "5rem 10rem" }} fluid>
+                    <form className="account-form__style" key={2} onSubmit={handleSubmit2(onSubmitAccount)}>
+                        <Row>
+                            <Col xs={12} md={6} className="account__row">
+                                <div className={`account___form-style textfield-style`}>
+                                    <label>Email</label>
+                                    <input
+                                    {...register2('email')}
+                                    disabled
+                                    className="form-control"
+                                    name="email"
+                                    type="email"
+                                    placeholder={account.email}
+                                    />
                                 </div>
-                                <div className="account__row">
-                                    <div className={`textfield-style account___form-style`}>
-                                        <label>Nouveau mot de passe</label>
-                                        <input
-                                        {...register2('password')}
-                                        name="password"
-                                        type="password"
-                                        className="form-control"
-                                        />
-                                    </div>
+                            </Col>
+                        </Row>
+                        <Row>
+
+                            <Col xs={12} md={6} className="account__row">
+                                <div className={`textfield-style account___form-style`}>
+                                    <label>Nouveau mot de passe</label>
+                                    <input
+                                    {...register2('password')}
+                                    name="password"
+                                    type="password"
+                                    className="form-control"
+                                    />
                                 </div>
-                                <div className="account__row">
-                                    <div className={`textfield-style account___form-style`}>
-                                        <label>Confirmer le nouveau mot de passe</label>
-                                        <input
-                                        {...register2('confirmPassword')}
-                                        name="confirmPassword"
-                                        type="password"
-                                        className="form-control"
-                                        />
-                                        <span>{errors2.confirmPassword?.message}</span>
-                                    </div>
+                            </Col>
+                            <Col xs={12} md={6} className="account__row">
+                                <div className={`textfield-style account___form-style`}>
+                                    <label>Confirmer le nouveau mot de passe</label>
+                                    <input
+                                    {...register2('confirmPassword')}
+                                    name="confirmPassword"
+                                    type="password"
+                                    className="form-control"
+                                    />
+                                    <span>{errors2.confirmPassword?.message}</span>
                                 </div>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col xs={12} style={{ display: "flex", justifyContent: "end"}} >
                                 <div className="account___btn_container">
-                                    <Button title="Enregistrer les changements" type="submit"/>
+                                    <Button title="Enregistrer" type="submit"/>
                                 </div>
-                        </form>
-                    <div className="account__row" id="delete-account___link">
-                        <span onClick={() => setdeleteValidation(!deleteValidation)}>Supprimer le compte</span>
-                        <div style={deleteValidation ? showButtons : hideButtons}>
-                            <span>La suppression du compte étant définitive, toutes les données seront perdues. Souhaitez-vous continuer ?</span>
-                            <button onClick={deleteAccount}>OUI</button>
-                            <button type="submit" onClick={() => setdeleteValidation(!deleteValidation)}>NON</button>
-                        </div>
-                    </div>
-                    </div>
-                </div>
+                            </Col>
+                        </Row>
+                    </form>
+                </Container>
+                <Container style={{ padding: "5rem 10rem" }} fluid>
+                    <Row>
+                        <Col xs={12} md={8} id="delete-account___link">
+                            <span onClick={() => setdeleteValidation(!deleteValidation)}>Supprimer le compte</span>
+                            <div style={deleteValidation ? showButtons : hideButtons}>
+                                <span>La suppression du compte étant définitive, toutes les données seront perdues. Souhaitez-vous continuer ?</span>
+                                <button onClick={deleteAccount}>OUI</button>
+                                <button type="submit" onClick={() => setdeleteValidation(!deleteValidation)}>NON</button>
+                            </div>
+                        </Col>
+                    </Row>
+                </Container>
             </div>
             <div><span>{successfulDeletionMessage}</span></div>
         </div>
