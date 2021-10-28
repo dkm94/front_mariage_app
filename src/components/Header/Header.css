@@ -39,6 +39,7 @@
 .navbar__item > a {
     padding: 0 .3rem;
     color: darkgrey;
+    text-decoration: none;
 }
 .navbar__burger {
     
@@ -96,8 +97,9 @@
 }
 
 .navbar-menu > li > a, .navbar-menu > li > button {
-    color: #fff
-;}
+    color: #fff;
+    text-decoration: none;
+}
 .hidden-links {
     display: none;
 }
@@ -119,7 +121,7 @@
 .sidebar {
     width: 20%;
     height: 90vh;
-    background-color: #f9fcef;
+    background-color: #E8E8E4;
     /* background: rgb(193,201,166);
     background: linear-gradient(90deg, rgba(193,201,166,1) 0%, rgba(211,221,181,1) 53%, rgba(244,242,194,1) 100%); */
     position: fixed;
@@ -145,11 +147,11 @@
 
 .sidebarList > .menu-row:hover {
     cursor: pointer;
-    background-color: #edf7ca;
+    background-color: #f7f7f2;
 }
 
 .sidebarList > #active {
-    background-color: #B4BC98;
+    background-color: #bcbcad;
     /* background-color: #B4BC98; */
 }
 
@@ -165,6 +167,7 @@
 .sidebar__greetings {
     padding: 3rem 2rem;
     word-break: break-word;
+    text-shadow: 1px 1px 1px rgb(0 0 0 / 15%);
 }
 .sidebar__greetings > p{
     word-break: break-word;
@@ -183,6 +186,16 @@
 
 #showNavLinks {
     display: block;
+    align-self: center;
+}
+
+#showNavLinks > button {
+    display: inline-block;
+    margin: 0 10px;
+    padding: 0.7rem 1rem;
+    background: #000 !important;
+    border-radius: 3px;
+    color: whitesmoke;
 }
 
 @media only screen and (max-width : 1024px) {
@@ -216,6 +229,7 @@
         width: 100vw;
         visibility: visible;
     }
+    
     .navbar__link {
         display: block;
         padding: 2rem !important;
@@ -296,6 +310,10 @@
     }
     .navbar__item:last-child::after {
         display: none;
+    }
+
+    #showNavLinks > button {
+        color: darkgrey;
     }
 
     /* animation li */

@@ -63,6 +63,7 @@
 .home-desc > h1 {
     font-size: 6rem;
     margin-bottom: 2rem;
+    text-shadow: 1px 1px 1px rgb(0 0 0 / 15%);
 }
 
 .home-desc > p {
