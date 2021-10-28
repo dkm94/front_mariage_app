@@ -17,6 +17,9 @@ const Home = () => {
                         <div className="home___position-style">
                             <div className="home-desc">
                                 <h1>Simplifiez l'organisation de votre mariage</h1>
+                                <div className="home__picture" id="hidden-picture">
+                                    <img src={flowers} alt="home page illustration flowers" />
+                                </div>
                                 <p>
                                     <span>Consultez et gérez facilement les étapes clés de votre mariage en quelques clics.</span>
                                     <span>My Wedding, l'outil indispensable pour ne rien oublier des préparatifs de l'un des plus beaux évènements de votre vie.</span>
@@ -29,7 +32,7 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="home__picture">
+                    <div className="home__picture" id="show-home-picture">
                         <img src={flowers} alt="home page illustration flowers" />
                     </div>
                 </div>
