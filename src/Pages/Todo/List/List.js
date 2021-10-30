@@ -91,10 +91,11 @@ const Todos = ({ todos, setTodos, deleteTodo, searchValue, setSearchValue }) => 
                 .filter((todo) => {
                     return todo.text.toLowerCase().indexOf(searchValue.toLowerCase()) >= 0;
                 })
-                .map(obj => {
+                .map((obj, i) => {
                     return(
                         <li 
-                        key={obj._id} 
+                        key={i}
+                        data-id={obj._id}
                         className={obj.isCompleted ? 'col-12 tasks-list__li__done' : "col-12 tasks-list__li"} 
                         style={edit.id === obj._id ? {backgroundColor: `#F5F5F5`} : null}
                         >

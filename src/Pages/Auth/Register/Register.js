@@ -10,7 +10,6 @@ import flowers from "../../../img/login-register/flowers.jpeg";
 const Register = () => {
 
     let tempArr = [];
-    console.log(tempArr);
    
     const validationSchema = Yup.object().shape({
         checkEmail: Yup.boolean(),

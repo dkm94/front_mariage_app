@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from "../../../../Modals/Set_guest_picture";
 import Form from "../Form/UpdateGuest";
+import PickFamilyForm from "../FamilySideForm/Form";
 import avatar from "../../../../../img/avatar.jpg";
 import Dropdown from "react-bootstrap/Dropdown";
 import CustomToggle from '../../../../Dots/Dots';
@@ -19,19 +20,9 @@ const Guests = ({ guests, setGuests, deleteGuest, updateGuest, editPicture, sete
         handleFile(fileValue)
     }
 
-    const submitUpdate = name => {
-        updateGuest(name);
-        setEdit({
-            id: null,
-            name: ''
-        });
+    const submitUpdate = (props) => {
+    updateGuest(props)
     };
-
-    const result = guests.sort((a,b)=>{
-        return a.name > b.name ? 1 : - 1
-      }
-    )
-    setGuests(result);
 
     return (
         <>
@@ -41,10 +32,12 @@ const Guests = ({ guests, setGuests, deleteGuest, updateGuest, editPicture, sete
                 (<ul className="get-guestlist">
                     {
                         guests
+                        .sort((a,b)=>{ return a.name > b.name ? 1 : - 1 })
                         .filter((guest) => {
                             return guest.name.toLowerCase().indexOf(searchValue.toLowerCase()) >= 0;
                           })
-                        .map((guest) => <li className="div-guest" key={guest._id} >
+                        .map((guest) => {
+                        return <li className="div-guest" key={guest._id} >
                             <div className="custom-dropdown">
                                 <Dropdown>
                                     <Dropdown.Toggle as={CustomToggle} />
@@ -52,7 +45,7 @@ const Guests = ({ guests, setGuests, deleteGuest, updateGuest, editPicture, sete
                                         {edit.id ? (<>
                                             <Dropdown.Item onClick={() => {setisOpen(!isOpen); seteditPicture(guest._id)}}>Changer la photo</Dropdown.Item>
                                             {/* <Dropdown.Item>Supprimer la photo</Dropdown.Item> */}
-                                            <Dropdown.Item onClick={() => {submitUpdate(edit.name)}}>Valider</Dropdown.Item>
+                                            <Dropdown.Item ><button form="update-form" type="submit" onClick={() => {submitUpdate(edit.name)}}>Valider</button></Dropdown.Item>
                                             <Dropdown.Item onClick={() => setEdit({id: null})}>Annuler</Dropdown.Item>
                                         </>) : (<>
                                             <Dropdown.Item onClick={() => setEdit({
@@ -72,7 +65,10 @@ const Guests = ({ guests, setGuests, deleteGuest, updateGuest, editPicture, sete
                                 </div>
                         
                                 {edit.id === guest._id ? 
-                                (<Form edit={edit} setEdit={setEdit} onSubmit={submitUpdate}/>) : 
+                                (<>
+                                    <Form edit={edit} setEdit={setEdit} onSubmit={submitUpdate}/>
+                                    <PickFamilyForm onSubmit={submitUpdate} />
+                                </>) : 
                                 (<div className="nameField">
                                     <span>{guest.name}</span>
                                 </div>)}
@@ -139,7 +135,8 @@ const Guests = ({ guests, setGuests, deleteGuest, updateGuest, editPicture, sete
                             {/* <button className="del-btn" onClick={() => {deleteGuest(guest._id)}}>
                                 <i className="fas fa-times"></i>
                             </button> */}
-                        </li>)
+                        </li>
+                        })
                     }
                 </ul>)
             }

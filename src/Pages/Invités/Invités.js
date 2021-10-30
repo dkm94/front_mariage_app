@@ -1,38 +1,166 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { withRouter } from "react-router-dom";
-import Byguests from "../../components/Invités(affichage)/by_guests/guests";
-// import Bygroups from "../../components/Invités(affichage)/by_groups/groups";
+import { Container, Row, Col } from "react-bootstrap";
+// import Button from "../../LargeButton/LargeButton";
+import { ScrollButtonContext } from "../../App";
+import AddForm from "../../components/Invités(affichage)/by_guests/Components/Form/AddGuest";
+import GuestList from "../../components/Invités(affichage)/by_guests/Components/Guests/Guests";
+import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
+import "../../components/Invités(affichage)/by_guests/guests.css";
 import "./Invités.css";
+import axios from "axios";
 
-const Guests = () => {
-    // const [selectedSection, setSelectedSection] = useState("");
+const Byguests = (props) => {
+const token = props.token;
+    
+    const scrollBtn = useContext(ScrollButtonContext)
 
-    // const selectSection = (e) => {
-    //     setSelectedSection(e.target.value)
-    // }
+    const [guests, setGuests] = useState([]);
+    const [editPicture, seteditPicture] = useState(null)
+    const [file, setFile] = useState(null)
+    const [value, setValue] = useState("")
+    const [searchValue, setSearchValue] = useState("");
+    const [newUser, setNewUser] = useState({});
 
-    let section;
-    // if (selectedSection ===  "guests"){
-    //     section = <Byguests/>
-    // } else
-    //     section = <Bygroups/>
-    section = <Byguests />
- 
+    useEffect(() => {
+        const fetchData = () => {
+            axios.get("/api/admin/guests/")
+            .then(result => {
+                setGuests(result.data)
+            })
+            .catch(err => err.json("Fail de load de ressource"))
+        }
+        fetchData();
+    }, [newUser]) 
+
+    const handleSearch = (e) => {
+        setSearchValue(e.target.value)
+    }
+
+    const addGuest = newGuest => {
+        setNewUser(newGuest)
+        setGuests([...guests, newGuest])
+    }
+
+    const editGuest = updatedGuest => {
+        const updatedGueslist = [...guests].map((guest) => {
+            if(guest._id === updatedGuest.id) {
+                guest.name = updatedGuest.name
+            }
+            return guest
+        })
+        axios.post(`api/admin/guests/edit/${updatedGuest.id}`, {name: updatedGuest.name})
+            .then((res) => {
+                if(res.data != null){
+                    setTimeout(() => {
+                        setGuests(updatedGueslist)
+                    }, 1500);
+                }
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+
+    const deleteGuest = (id) => {
+        axios.delete(`/api/admin/guests/delete/${id}`)
+            .then(result => {
+                if(result.data != null) {
+                    setGuests(guests.filter(guest => guest._id !== id))
+                }
+            })
+            .catch((err) => {
+                console.log(err)})
+    }
+
+    const handleFile = file => {
+        console.log(file)
+        setFile(file)
+    }
+
+    const uploadPicture = (id) => {
+        let formData = new FormData();
+        formData.append('media', file)
+        axios.post(`/api/admin/guests/edit/${id}`, formData)
+            .then(result => {
+                if(result.data != null) {
+                    setFile(null)
+                    window.location.reload()
+                }
+                console.log(result)
+            })
+            .catch((err) => {
+                console.log(err)})
+    }
+    
+    const button_wrapper_style = {
+        position: 'relative',
+        zIndex: 1
+    }
+
     return(
         <div className="byguests page-component">
-            {/* {scroll} */}
-            {/* <div className="select-section">
-                <label htmlFor="affichage-select">Affichage par:</label>
-                <select name="affichage" onChange={selectSection}>
-                    <option value="groups">groupes</option>
-                    <option value="guests">invités</option>
-                </select>
-            </div> */}
-            {/* <div className="section"> */}
-                {section}
-            {/* </div> */}
+            <div className="guest-container" style={button_wrapper_style}>
+            {scrollBtn}
+                <div className="guests___bgimage" />
+                <div className="titles mb-3">
+                    <h1>Souhaitez-vous ajouter de nouveaux invités ?</h1>
+                </div>
+                <Container style={{ padding: "2rem 4rem"}} fluid>
+                    <Row>
+                        <Col xs={10} md={6} className="guest-form">
+                            <AddForm addGuest={addGuest} token={token} />
+                            {/* <form onSubmit={handleSubmit} className="input-group mb-3">
+                                <div>
+                                    <input
+                                    type="text"
+                                    className="form-control shadow-none"
+                                    name="name"
+                                    placeholder="Nouvel invité"
+                                    value={newGuest.name} 
+                                    onChange={handleChange}
+                                    required
+                                    />
+                                    <button 
+                                    type="submit"
+                                    className="btn shadow-none"
+                                    id="button-addon2"
+                                    ><i className="fas fa-long-arrow-alt-right" /></button>
+                                </div>
+                            </form> */}
+                        </Col>
+                        <Col xs={10} md={6} className="searchbar">
+                            <SearchBar 
+                            className="search__input"
+                            type="text"
+                            placeholder="Rechercher un invité"
+                            name="searchbar"
+                            value={searchValue}
+                            onChange={handleSearch}
+                            />
+                        </Col>
+                    </Row>
+                </Container>
+                <div className="guests___list">
+                    
+                    <div className="byguests___block">
+                        <GuestList 
+                        guests={guests}
+                        setGuests={setGuests}
+                        deleteGuest={deleteGuest}
+                        updateGuest={editGuest}
+                        editPicture={editPicture}
+                        seteditPicture={seteditPicture}
+                        upload={uploadPicture}
+                        handleFile={handleFile}
+                        value={value}
+                        searchValue={searchValue}
+                        />
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
 
-export default withRouter(Guests)
+export default withRouter(Byguests);

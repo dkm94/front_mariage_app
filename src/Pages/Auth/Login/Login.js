@@ -20,8 +20,6 @@ const Login = () => {
     });
     
     const onSubmit = ({email, password}) => {
-    console.log("🚀 ~ file: Login.js ~ line 23 ~ onSubmit ~ password", password)
-    console.log("🚀 ~ file: Login.js ~ line 23 ~ onSubmit ~ email", email)
         axios.post(`/api/auth/adminLogin`,
         {
             email: email,

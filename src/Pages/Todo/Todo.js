@@ -15,13 +15,13 @@ const Todo = () => {
     const [todo, setTodo] = useState({text:"", color: ""})
     const [searchValue, setSearchValue] = useState("");
 
+    const fetchData = async () => {
+        const result = await axios.get("/api/admin/todolist/")
+        setTodos(result.data)
+    }
     useEffect(() => {
-        const fetchData = async () => {
-            const result = await axios.get("/api/admin/todolist/")
-            setTodos(result.data)
-        }
         fetchData();
-    }, [todos]) 
+    }, []) 
 
     const handleInput = (e) => {
         const {value, name} = e.target;

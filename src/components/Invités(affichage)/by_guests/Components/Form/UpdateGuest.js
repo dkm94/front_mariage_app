@@ -12,9 +12,15 @@ const UpdateGuest = ({ edit, setEdit, onSubmit }) => {
 
     const handleChange = (e) => {
         setInput(e.target.value)
+        console.log(input)
     }
 
+    useEffect(() => {
+        console.log(input)
+    }, [input])
+
     const handleSubmit = e => {
+        alert("triggered aussi")
         e.preventDefault();
         onSubmit({
             id: edit.id,
@@ -22,11 +28,17 @@ const UpdateGuest = ({ edit, setEdit, onSubmit }) => {
         });
         setInput('');
     };
+    useEffect(() => {
+        onSubmit({
+            id: edit.id,
+            name: input
+        })
+    })
 
     return (
         <>
             <div className="nameField guest__updateForm" id="input___nameField">
-               <form onSubmit={handleSubmit}>
+               <form onSubmit={handleSubmit} id="update-form">
                     <input 
                     type="text"
                     name="name"

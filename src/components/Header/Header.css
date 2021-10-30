@@ -120,8 +120,9 @@
 
 .sidebar {
     width: 20%;
-    height: 90vh;
+    height: 91vh;
     background-color: #E8E8E4;
+    border-radius: 0 10px 10px 0;
     /* background: rgb(193,201,166);
     background: linear-gradient(90deg, rgba(193,201,166,1) 0%, rgba(211,221,181,1) 53%, rgba(244,242,194,1) 100%); */
     position: fixed;
@@ -129,7 +130,7 @@
 
 .sidebarList {
     height: auto;
-    padding: 0;
+    padding: 15px;
     width: 100%;
     font-size: 1.7rem;
 }
@@ -143,6 +144,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    border-radius: 5px;
 }
 
 .sidebarList > .menu-row:hover {
@@ -152,6 +154,7 @@
 
 .sidebarList > #active {
     background-color: #bcbcad;
+    border-radius: 5px;
     /* background-color: #B4BC98; */
 }
 
