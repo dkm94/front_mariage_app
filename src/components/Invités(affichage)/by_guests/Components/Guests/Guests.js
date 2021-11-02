@@ -60,6 +60,9 @@ const Guests = ({ guests, deleteGuest, updateGuest, editPicture, seteditPicture,
                                     {guest.media === "" ? 
                                     (<img alt="avatar" src={avatar}  />) : 
                                     (<img alt="notre mariage" src={`http://backend-mywedding-app.herokuapp.com/api/admin/guests/media/${guest.media}`} />)}
+                                    {edit.id === guest._id ? (<div><button  onClick={() => {setisOpen(!isOpen); seteditPicture(guest._id)}}>
+                                        <i className="fas fa-camera"/>
+                                    </button></div>) : null}
                                 </div>
                         
                                 {edit.id === guest._id ? 

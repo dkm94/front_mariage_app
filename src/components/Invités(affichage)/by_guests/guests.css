@@ -130,6 +130,7 @@
     box-shadow: 7px 6px 9px -6px rgb(158 153 158);
     border-radius: 50%;
     width: fit-content;
+    position: relative;
 }
 
 
@@ -141,10 +142,33 @@
     /* border: 3px solid #fcdee3; */
 }
 
+.guest-picture > div {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.guest-picture > div > button {
+    border-radius: 50%;
+    padding: 8px;
+    height: 3.5rem;
+    width: 3.5rem;
+    background-color: #000;
+    color: #fff;
+}
+
 .modal___picture {
     display: flex;
     flex-direction: column;
     align-self: flex-end;
+    height: 10rem;
+    justify-content: space-around;
+}
+
+.modal___picture > button {
+    padding: 0.7rem;
+    border-radius: 5px;
+    margin-top: 10px;
 }
 
 .custom-dropdown {

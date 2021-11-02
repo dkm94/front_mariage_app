@@ -15,7 +15,8 @@ const modalStyle = {
   }
 
 const buttonStyle = {
-    alignSelf: 'flex-end'
+    alignSelf: 'flex-end',
+    margin: '1rem'
 }
 
 const overlayStyle = {
