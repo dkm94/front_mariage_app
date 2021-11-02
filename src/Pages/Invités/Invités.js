@@ -10,17 +10,16 @@ import "../../components/Invités(affichage)/by_guests/guests.css";
 import "./Invités.css";
 import axios from "axios";
 
-const Byguests = (props) => {
-const token = props.token;
-    
+const Byguests = ({ userInfos }) => {
+
+    const mariageID = userInfos.mariageID;
     const scrollBtn = useContext(ScrollButtonContext)
 
     const [guests, setGuests] = useState([]);
     const [editPicture, seteditPicture] = useState(null)
     const [file, setFile] = useState(null)
-    const [value, setValue] = useState("")
     const [searchValue, setSearchValue] = useState("");
-    const [newUser, setNewUser] = useState({});
+    const [user, setUser] = useState({});
 
     useEffect(() => {
         const fetchData = () => {
@@ -28,38 +27,29 @@ const token = props.token;
             .then(result => {
                 setGuests(result.data)
             })
-            .catch(err => err.json("Fail de load de ressource"))
+            .catch(err => err.json("Failed to load the ressource"))
         }
         fetchData();
-    }, [newUser]) 
+    }, [user]) 
 
     const handleSearch = (e) => {
         setSearchValue(e.target.value)
     }
 
     const addGuest = newGuest => {
-        setNewUser(newGuest)
+        setUser(newGuest)
         setGuests([...guests, newGuest])
     }
 
-    const editGuest = updatedGuest => {
+    const editGuest = (updatedGuest) => {
         const updatedGueslist = [...guests].map((guest) => {
             if(guest._id === updatedGuest.id) {
                 guest.name = updatedGuest.name
             }
             return guest
         })
-        axios.post(`api/admin/guests/edit/${updatedGuest.id}`, {name: updatedGuest.name})
-            .then((res) => {
-                if(res.data != null){
-                    setTimeout(() => {
-                        setGuests(updatedGueslist)
-                    }, 1500);
-                }
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+        setUser(updatedGuest)
+        setGuests(updatedGueslist);
     }
 
     const deleteGuest = (id) => {
@@ -74,7 +64,6 @@ const token = props.token;
     }
 
     const handleFile = file => {
-        console.log(file)
         setFile(file)
     }
 
@@ -87,7 +76,6 @@ const token = props.token;
                     setFile(null)
                     window.location.reload()
                 }
-                console.log(result)
             })
             .catch((err) => {
                 console.log(err)})
@@ -109,25 +97,7 @@ const token = props.token;
                 <Container style={{ padding: "2rem 4rem"}} fluid>
                     <Row>
                         <Col xs={10} md={6} className="guest-form">
-                            <AddForm addGuest={addGuest} token={token} />
-                            {/* <form onSubmit={handleSubmit} className="input-group mb-3">
-                                <div>
-                                    <input
-                                    type="text"
-                                    className="form-control shadow-none"
-                                    name="name"
-                                    placeholder="Nouvel invité"
-                                    value={newGuest.name} 
-                                    onChange={handleChange}
-                                    required
-                                    />
-                                    <button 
-                                    type="submit"
-                                    className="btn shadow-none"
-                                    id="button-addon2"
-                                    ><i className="fas fa-long-arrow-alt-right" /></button>
-                                </div>
-                            </form> */}
+                            <AddForm addGuest={addGuest} />
                         </Col>
                         <Col xs={10} md={6} className="searchbar">
                             <SearchBar 
@@ -142,7 +112,6 @@ const token = props.token;
                     </Row>
                 </Container>
                 <div className="guests___list">
-                    
                     <div className="byguests___block">
                         <GuestList 
                         guests={guests}
@@ -153,8 +122,8 @@ const token = props.token;
                         seteditPicture={seteditPicture}
                         upload={uploadPicture}
                         handleFile={handleFile}
-                        value={value}
                         searchValue={searchValue}
+                        mariageID={mariageID}
                         />
                     </div>
                 </div>

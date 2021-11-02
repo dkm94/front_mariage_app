@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Modal from "../../../../Modals/Set_guest_picture";
 import Form from "../Form/UpdateGuest";
-import PickFamilyForm from "../FamilySideForm/Form";
 import avatar from "../../../../../img/avatar.jpg";
 import Dropdown from "react-bootstrap/Dropdown";
 import CustomToggle from '../../../../Dots/Dots';
 
-const Guests = ({ guests, setGuests, deleteGuest, updateGuest, editPicture, seteditPicture, upload, handleFile, searchValue }) => {
+const Guests = ({ guests, deleteGuest, updateGuest, editPicture, seteditPicture, upload, handleFile, searchValue, mariageID }) => {
 
-    const [isOpen, setisOpen] = useState(false)
-
+    const [isOpen, setisOpen] = useState(false);
     const [edit, setEdit] = useState({
         id: null,
         name: ''
@@ -21,7 +19,7 @@ const Guests = ({ guests, setGuests, deleteGuest, updateGuest, editPicture, sete
     }
 
     const submitUpdate = (props) => {
-    updateGuest(props)
+        updateGuest(props)
     };
 
     return (
@@ -45,7 +43,7 @@ const Guests = ({ guests, setGuests, deleteGuest, updateGuest, editPicture, sete
                                         {edit.id ? (<>
                                             <Dropdown.Item onClick={() => {setisOpen(!isOpen); seteditPicture(guest._id)}}>Changer la photo</Dropdown.Item>
                                             {/* <Dropdown.Item>Supprimer la photo</Dropdown.Item> */}
-                                            <Dropdown.Item ><button form="update-form" type="submit" onClick={() => {submitUpdate(edit.name)}}>Valider</button></Dropdown.Item>
+                                            {/* <Dropdown.Item ><button form="update-form" type="submit" onClick={() => {submitUpdate(edit.name)}}>Valider</button></Dropdown.Item> */}
                                             <Dropdown.Item onClick={() => setEdit({id: null})}>Annuler</Dropdown.Item>
                                         </>) : (<>
                                             <Dropdown.Item onClick={() => setEdit({
@@ -66,8 +64,12 @@ const Guests = ({ guests, setGuests, deleteGuest, updateGuest, editPicture, sete
                         
                                 {edit.id === guest._id ? 
                                 (<>
-                                    <Form edit={edit} setEdit={setEdit} onSubmit={submitUpdate}/>
-                                    <PickFamilyForm onSubmit={submitUpdate} />
+                                    <Form 
+                                    edit={edit} 
+                                    setEdit={setEdit} 
+                                    onSubmit={submitUpdate} 
+                                    mariageID={mariageID} 
+                                    />
                                 </>) : 
                                 (<div className="nameField">
                                     <span>{guest.name}</span>

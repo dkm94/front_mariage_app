@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import axios from 'axios';
 import "../../../../../Pages/Invités/Invités.css";
 
-const AddGuestForm = ({ addGuest, token }) => {
+const AddGuestForm = ({ addGuest }) => {
 
     const [input, setInput] = useState("");
     const inputRef = useRef(null);
@@ -16,7 +16,10 @@ const AddGuestForm = ({ addGuest, token }) => {
         axios.post("/api/admin/guests/add", {
             name: input
         })
-        .then(res => addGuest(res.data))
+        .then(res => {
+            addGuest(res.data);
+            setInput("");
+        })
         .catch(err => console.log(err))       
     }
 
