@@ -114,7 +114,8 @@ const Todos = ({ todos, setTodos, deleteTodo, searchValue, setSearchValue }) => 
                                     <input 
                                         type="checkbox"
                                         onClick={() => toggleCompleted(obj)}
-                                        checked={obj.isCompleted} 
+                                        checked={obj.isCompleted}
+                                        className="toggle"
                                     />
                                     <span>{obj.text}</span>
                                 </div>

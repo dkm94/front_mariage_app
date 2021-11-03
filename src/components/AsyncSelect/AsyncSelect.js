@@ -30,13 +30,9 @@ const Select = ({ tables, table, guests, setTables }) => {
         letterSpacing: "1px"
     }
 
-    // useEffect(() => {
-    //     console.log(tables)
-    // }, [tables])
-
+    
     const [selectedGuest, setSelectedGuest] = useState(null);
     const [guest, setGuest] = useState(null);
-    // console.log(guest)
 
     const onSearchChange = (name) => {
         if(name){
@@ -56,7 +52,7 @@ const Select = ({ tables, table, guests, setTables }) => {
             .then((res) => {
                 if(res.data != null) {
                     setTimeout(() => {
-                        // setTables(updatedTables)
+                        // setUpdateTables(tableID)
                         setloadingList(updatedTables)
                         window.location.reload()
                     }, 1000);

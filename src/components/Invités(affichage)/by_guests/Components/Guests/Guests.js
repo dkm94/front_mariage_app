@@ -41,7 +41,7 @@ const Guests = ({ guests, deleteGuest, updateGuest, editPicture, seteditPicture,
                                     <Dropdown.Toggle as={CustomToggle} />
                                     <Dropdown.Menu size="sm" title="">
                                         {edit.id ? (<>
-                                            <Dropdown.Item onClick={() => {setisOpen(!isOpen); seteditPicture(guest._id)}}>Changer la photo</Dropdown.Item>
+                                            {/* <Dropdown.Item onClick={() => {setisOpen(!isOpen); seteditPicture(guest._id)}}>Changer la photo</Dropdown.Item> */}
                                             {/* <Dropdown.Item>Supprimer la photo</Dropdown.Item> */}
                                             {/* <Dropdown.Item ><button form="update-form" type="submit" onClick={() => {submitUpdate(edit.name)}}>Valider</button></Dropdown.Item> */}
                                             <Dropdown.Item onClick={() => setEdit({id: null})}>Annuler</Dropdown.Item>

@@ -3,13 +3,9 @@ import { withRouter } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
 import Table from "./Table";
+import AddTableForm from "./Forms/Add";
 import { ScrollButtonContext } from "../../../src/App";
 import axios from "axios";
-// import Select from "../../components/AsyncSelect/AsyncSelect";
-// import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
-// import CustomToggle from "../../components/Dots/Dots";
-// import Dropdown from "react-bootstrap/Dropdown";
-// import { LoaderContext } from "../../../src/App";
 
 import "./Tables.css";
 
@@ -20,15 +16,12 @@ const Tables = (props) => {
 
     const [searchValue, setSearchValue] = useState("");
     const [tables, setTables] = useState([]);
-    const [newTable, setNewTable] = useState({name: ''})
+    const [table, setTable] = useState({})
     const [edit, setEdit] = useState({
         id: null,
         name: ''
     })
-    // const [loading, setLoading] = useState(false);
     const [input, setInput] = useState('')
-
-    // const inputRef = useRef(null);
 
     const handleUpdatedTable = (e) => {
         setInput(e.target.value)
@@ -38,7 +31,7 @@ const Tables = (props) => {
     }
     const [guests, setGuests] = useState([])
    
-    let dependency = JSON.stringify(tables);
+    // let dependency = JSON.stringify(tables);
 
     useEffect(() => {
         const fetchData = () => {
@@ -49,30 +42,11 @@ const Tables = (props) => {
             .catch(err => err.json("Fail de load de ressource"))
         }
         fetchData();
-    }, [dependency])
+    }, [table, guests])
 
-    const handleChange = (e) => {
-        const {value, name} = e.target;
-        setNewTable(prevState => ({
-            ...prevState,
-            [name]: value
-        }))
-    }
-    
-
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        await axios.post("/api/admin/tables/add", newTable)
-            .then((res) => {
-                if(res.data != null){
-                    setTimeout(() => {
-                        setTables([...tables, newTable])
-                        setNewTable({name:""})
-                    }, 500)
-                }
-            })
-            .catch((err) => {
-                console.log(err)})
+    const addTable = newTable => {
+        setTable(newTable)
+        setTables([...tables, newTable])
     }
 
     const getUpdatedId = (tableId, tableName) => {
@@ -131,11 +105,6 @@ const Tables = (props) => {
                 console.log(err)})
     }
 
-    // const result = tables.sort((a,b)=>{
-    //     return a.name > b.name ? 1 : - 1
-    //     }
-    // )
-
     return(
         <div className="tables page-component">
             {scrollBtn}
@@ -147,22 +116,7 @@ const Tables = (props) => {
                 <Container style={{ padding: "2rem 4rem"}} fluid>
                     <Row>
                         <Col xs={8} md={6} className="table-form">
-                            <form onSubmit={handleSubmit} className="input-group mb-3">
-                                <div>
-                                    <input
-                                    type="text"
-                                    className="form-control shadow-none"
-                                    name="name" 
-                                    placeholder="Nom/Numéro de la table"
-                                    value={newTable.name} 
-                                    onChange={handleChange}/>
-                                    <button 
-                                    type="submit"
-                                    className="btn shadow-none check-btn"
-                                    id="button-addon2"
-                                    ><i className="fas fa-long-arrow-alt-right" /></button>
-                                </div>
-                            </form>
+                            <AddTableForm addTable={addTable} />
                         </Col>
                         <Col xs={8} md={6} className="searchbar">
                             <SearchBar 
@@ -183,17 +137,18 @@ const Tables = (props) => {
                         (<div className="tables__block">
                             <ul className="get-tables">
                                 {tables
+                                .sort((a,b)=>{ return a.name > b.name ? 1 : - 1 })
                                 .filter((table) => {
                                     return table.name.toLowerCase().indexOf(searchValue.toLowerCase()) >= 0;
                                 })
-                                .map((table, i) =>
+                                .map((table) =>
                                     <Table 
                                     tables={tables}
                                     table={table}
-                                    key={i}
+                                    id={table._id}
+                                    key={table._id}
                                     edit={edit}
                                     editTableName={editTableName}
-                                    // ref={inputRef}
                                     handleUpdatedTable={handleUpdatedTable}
                                     input={input}
                                     setTables={setTables}
@@ -202,72 +157,8 @@ const Tables = (props) => {
                                     setEdit={setEdit}
                                     getUpdatedId={getUpdatedId}
                                     deleteTable={deleteTable}
-                                    handleSubmit={handleSubmit}
+                                    addTable={addTable}
                                     />
-                                    // return <li key={i} data-id={table._id} className="table-style" style={edit.id === table._id ? {backgroundColor: `#F5F5F5`} : null}>
-                                    //     <div className="table-name">
-                                    //         {edit.id === table._id ? 
-                                    //         (<form onSubmit={editTableName} className="mb-3">
-                                    //             <input
-                                    //             ref={inputRef}
-                                    //             type="text"
-                                    //             className="shadow-none"
-                                    //             name="name" 
-                                    //             onChange={handleUpdatedTable}
-                                    //             value={input}
-                                    //             style={{background: "white"}}
-                                    //             />
-                                    //             {/* <button 
-                                    //             type="submit"
-                                    //             className="btn shadow-none"
-                                    //             id="button-addon2"
-                                    //             onClick={(e) => editTableName(e)}
-                                    //             >
-                                    //                 <i className="fas fa-check"/>
-                                    //             </button>
-                                    //             <button className="undo-btn shadow-none" onClick={() => setEdit({id: null})}>
-                                    //                 <i className="fas fa-undo"/>
-                                    //             </button> */}
-                                    //         </form>) : 
-                                    //         (<>
-                                    //             <span>{table.name}</span>
-                                    //         </>)
-                                    //         }
-                                    //     </div>
-                                    
-                                    //     <Select table={table} tables={tables} setTables={setTables} guests={table.guestID}/>
-
-                                    //     <div style={{marginBottom: '20px', marginTop: '20px', width: "100%"}}>
-                                    //         {table.guestID.map(guest => {
-                                                
-                                    //             return <div key={guest._id} className="guest-del">
-                                    //                 <span>{guest.name}</span>
-                                    //                 <button 
-                                    //                     onClick={() => {deleteGuest(guest._id, table._id)}} 
-                                    //                     className=""
-                                    //                 >
-                                    //                     <i className="fas fa-times"></i>
-                                    //                 </button>
-                                    //             </div>
-                                    //         })}
-                                    //     </div>
-                                    //     <div className="custom-dropdown">
-                                    //         <Dropdown>
-                                    //             <Dropdown.Toggle as={CustomToggle} />
-                                    //             <Dropdown.Menu size="sm" title="">
-                                    //                 {edit.id ? (<>
-                                    //                     <Dropdown.Item onClick={() => setEdit({id: null})}>Annuler</Dropdown.Item>
-                                    //                     <Dropdown.Item onClick={(e) => {editTableName(e)}}>Valider</Dropdown.Item>
-                                    //                 </>) : (<>
-                                    //                     <Dropdown.Item onClick={() => getUpdatedId(table._id, table.name)}>Modifier</Dropdown.Item>
-                                    //                     <Dropdown.Item onClick={(e) => {
-                                    //                         deleteTable(e, table._id, table.guestID)}}>
-                                    //                         Supprimer</Dropdown.Item>
-                                    //                 </>)}
-                                    //             </Dropdown.Menu>
-                                    //         </Dropdown>
-                                    //     </div>
-                                    // </li>
                                 )}
                             </ul>
                         </div>)

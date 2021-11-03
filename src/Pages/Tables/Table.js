@@ -7,22 +7,22 @@ import Dropdown from "react-bootstrap/Dropdown";
 const TableId = (props) => {
     const { tables, 
         table, 
+        id,
         edit, 
         editTableName, 
         handleUpdatedTable, 
         input, 
         setTables, 
-        // guests, 
         deleteGuest, 
         setEdit, 
         getUpdatedId, 
         deleteTable, 
         // handleSubmit 
     } = props;
-
+    
     return(
         (
-            <li data-id={props.table._id} className="tbStyle" style={props.edit.id === props.table._id ? {backgroundColor: `#F5F5F5`} : null}>
+            <li key={id} className="tbStyle" style={props.edit.id === props.table._id ? {backgroundColor: `#F5F5F5`} : null}>
                 <div className="tbName">
                     {edit.id === table._id ? 
                     (<form onSubmit={editTableName} className="mb-3">
@@ -46,7 +46,6 @@ const TableId = (props) => {
         
                 <div style={{marginBottom: '20px', marginTop: '20px', width: "100%"}}>
                     {table.guestID ? table.guestID.map(guest => {
-                        
                         return <div key={guest._id} className="guest-del">
                             <span>{guest.name}</span>
                             <button 
