@@ -13,7 +13,6 @@ const AddGuestForm = ({ addGuest }) => {
 
     const handleSumbit = e => {
         e.preventDefault();
-        console.log("🚀 ~ file: AddGuest.js ~ line 17 ~ AddGuestForm ~ input", input)
         axios.post("/api/admin/guests/add", {
             name: input
         })

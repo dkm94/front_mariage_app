@@ -7,20 +7,22 @@ import CustomToggle from "../../components/Dots/Dots";
 import Dropdown from "react-bootstrap/Dropdown";
 import axios from "axios";
 import "./Menu.css";
+import AddStarterForm from "./Forms/Add/AddStarter";
+import AddMaincourseForm from "./Forms/Add/AddMaincourse";
+import AddDessertForm from "./Forms/Add/AddDessert";
 
-const Menus = (props) => {
-    console.log(props)
+const Menus = () => {
 
     const scrollBtn = useContext(ScrollButtonContext)
 
     const [starters, setStarters] = useState([]);
-    const [starter, setStarter] = useState({name:""})
+    const [starter, setStarter] = useState({})
 
     const [maincourses, setMaincourses] = useState([]);
-    const [maincourse, setMaincourse] = useState({name:""})
+    const [maincourse, setMaincourse] = useState({})
 
     const [desserts, setDesserts] = useState([]);
-    const [dessert, setDessert] = useState({name:""})
+    const [dessert, setDessert] = useState({})
 
     const [edit, setEdit] = useState({
         id: null,
@@ -43,114 +45,33 @@ const Menus = (props) => {
         setInput(objName)
     }
 
-
-    const handleStarter = (e) => {
-        const {value, name} = e.target;
-        setStarter(prevState => ({
-            ...prevState,
-            [name]: value
-        }))
-    }
-
-    const handleMaincourse = (e) => {
-        const {value, name} = e.target;
-        setMaincourse(prevState => ({
-            ...prevState,
-            [name]: value
-        }))
-    }
-
-    const handleDessert = (e) => {
-        const {value, name} = e.target;
-        setDessert(prevState => ({
-            ...prevState,
-            [name]: value
-        }))
-    }
-
     useEffect(() => {
-        const fetchData = async () => {
-            const result = await axios.get("/api/admin/menu/starters/")
-            setStarters(result.data)
+        let starterData = axios.get("/api/admin/menu/starters/");
+        let maincourseData = axios.get("/api/admin/menu/maincourses/");
+        let dessertData = axios.get("/api/admin/menu/desserts/");
+        async function getDatas(){
+            let res = await Promise.all([starterData, maincourseData, dessertData])
+            setStarters(res[0].data)
+            setMaincourses(res[1].data)
+            setDesserts(res[2].data)
         }
-        fetchData();
-    }, [])
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const result = await axios.get("/api/admin/menu/maincourses/")
-            setMaincourses(result.data)
-        }
-        fetchData();
-    }, [])
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const result = await axios.get("/api/admin/menu/desserts/")
-            setDesserts(result.data)
-        }
-        fetchData();
-    }, [])
+        getDatas();
+    }, [starter, maincourse, dessert])
 
 
-    const submitStarter = (e) => {
-        e.preventDefault();
-        axios.get("/api/admin/menu")
-        .then((res) => {
-            const data = res.data;
-            const result = data._id
-            if(data){
-                axios.post(`/api/admin/menu/starters/add/${result}`,starter)
-                .then((res) => {
-                    if(res.data != null){
-                        setStarters([...starters, starter])
-                        setStarter({name:""})
-                    }
-                })
-                .catch((err) => {
-                    console.log(err)})
-                }
-        })
+    const addStarter = newStarter => {
+       setStarter(newStarter);
+       setStarters([...starters, newStarter])
     }
 
-    const submitMaincourse = (e) => {
-        e.preventDefault();
-        axios.get("/api/admin/menu")
-        .then((res) => {
-            const data = res.data;
-            const result = data._id
-            if(data){
-                axios.post(`/api/admin/menu/maincourses/add/${result}`,maincourse)
-                .then((res) => {
-                    if(res.data != null){
-                        setMaincourses([...maincourses, maincourse])
-                        setMaincourse({name:""})
-                    }
-                })
-                .catch((err) => {
-                    console.log(err)})
-                }
-        })
+    const addMaincourse = newMaincourse => {
+        setMaincourse(newMaincourse);
+        setMaincourses([...maincourses, newMaincourse])
     }
 
-    const submitDessert = (e) => {
-        e.preventDefault();
-        axios.get("/api/admin/menu")
-        .then((res) => {
-            const data = res.data;
-            const result = data._id
-            if(data){
-                axios.post(`/api/admin/menu/desserts/add/${result}`,dessert)
-                .then((res) => {
-                    if(res.data != null){
-                        setDesserts([...desserts, dessert])
-                        setDessert({name:""})
-                    }
-                })
-                .catch((err) => {
-                    console.log(err)})
-                }
-        })
+    const addDessert = newDessert => {
+       setDessert(newDessert);
+       setDesserts([...desserts, newDessert])
     }
 
     const editStarter = (e) => {
@@ -263,17 +184,7 @@ const Menus = (props) => {
                             <div className="starter___div_form">
                                 {starters.length === 0 || starters.length === 1 ? <h2>Entrée</h2> : <h2>Entrées</h2>}
                                 <div className="menu___forms">
-                                    <form onSubmit={submitStarter}>
-                                        <input
-                                        type="text"
-                                        
-                                        name="name" 
-                                        value={starter.name} 
-                                        onChange={handleStarter}
-                                        required
-                                        />
-                                        <button type="submit" className="btn shadow-none submit-menu-item"><i className="fas fa-check" aria-hidden="true"></i></button>
-                                    </form>
+                                    <AddStarterForm addStarter={addStarter} />
                                 </div>
                                 {starters.length === 0 ? (<div style={{ textAlign: "center"}}><span>Vos entrées ici</span></div>) : (<ul>
                                     {
@@ -291,22 +202,6 @@ const Menus = (props) => {
                                             (<span>{starter.name}</span>)}
                                             
                                             <div className="menu___li-btns">
-                                                {/* {edit.id === starter._id ? 
-                                                (<><button onClick={(e) => {editStarter(e)}}>
-                                                    <i className="fas fa-check"/>
-                                                </button>
-                                                <button onClick={() => setEdit({id: null})}>
-                                                    <i className="fas fa-undo"/>
-                                                </button>
-                                                </>
-                                                ) : 
-                                                (<button onClick={() => getUpdatedId(starter._id, starter.name)}>
-                                                    <i className="fas fa-pencil-alt"/>
-                                                </button>)}
-                                                
-                                                <button className="del-btn" onClick={() => {deleteStarter(starter._id)}}>
-                                                    <i className="fas fa-trash"/>
-                                                </button> */}
                                                 <div className="custom-dropdown">
                                                     <Dropdown>
                                                         <Dropdown.Toggle as={CustomToggle} />
@@ -331,18 +226,7 @@ const Menus = (props) => {
                             <div className="maincourse___div_form">
                             {maincourses.length === 0 || maincourses.length === 1 ? <h2>Plat</h2> : <h2>Plats</h2>}
                                 <div className="menu___forms">
-                                    <form onSubmit={submitMaincourse}>
-                                        <input
-                                        type="text"
-                                        
-                                        name="name" 
-                                        value={maincourse.name} 
-                                        onChange={handleMaincourse}
-                                        required
-                                        />
-                                        <button type="submit" className="btn shadow-none submit-menu-item"><i className="fas fa-check" aria-hidden="true"></i></button>
-                                    </form>
-
+                                    <AddMaincourseForm addMaincourse={addMaincourse} />
                                 </div>
                                 {maincourses.length === 0 ? (<div style={{ textAlign: "center"}}><span>Vos plats ici</span></div>) : (<ul>
                                     {
@@ -351,7 +235,6 @@ const Menus = (props) => {
                                             (<form onSubmit={editMaincourse}>
                                                 <input 
                                                 type="text"
-                                                
                                                 onChange={handleUpdate} 
                                                 value={input}
                                                 ref={inputRef}
@@ -360,22 +243,6 @@ const Menus = (props) => {
                                             (<span>{maincourse.name}</span>)}
                                             
                                             <div className="menu___li-btns">
-                                                {/* {edit.id === maincourse._id ? 
-                                                (<>
-                                                    <button onClick={(e) => {editMaincourse(e)}}>
-                                                        <i className="fas fa-check"/>
-                                                    </button>
-                                                    <button onClick={() => setEdit({id: null})}>
-                                                    <i className="fas fa-undo"/>
-                                                    </button>
-                                                </>) : 
-                                                (<button onClick={() => getUpdatedId(maincourse._id, maincourse.name)}>
-                                                    <i className="fas fa-pencil-alt"/>
-                                                </button>)}
-                                                
-                                                <button className="del-btn" onClick={() => {deleteMaincourse(maincourse._id)}}>
-                                                    <i className="fas fa-trash"/>
-                                                </button> */}
                                                 <div className="custom-dropdown">
                                                     <Dropdown>
                                                         <Dropdown.Toggle as={CustomToggle} />
@@ -406,17 +273,7 @@ const Menus = (props) => {
                             <div className="dessert___div_form">
                             {desserts.length === 0 || desserts.length === 1 ? <h2>Dessert</h2> : <h2>Desserts</h2>}
                                 <div className="menu___forms">
-                                    <form onSubmit={submitDessert}>
-                                        <input
-                                        type="text"
-                                        
-                                        name="name" 
-                                        value={dessert.name} 
-                                        onChange={handleDessert}
-                                        required
-                                        />
-                                        <button type="submit" className="btn shadow-none submit-menu-item"><i className="fas fa-check" aria-hidden="true"></i></button>
-                                    </form>
+                                    <AddDessertForm addDessert={addDessert} />
                                 </div>
                                 {desserts.length === 0 ? (<div style={{ textAlign: "center"}}><span>Vos desserts ici</span></div>) : (<ul>
                                     {
@@ -434,22 +291,6 @@ const Menus = (props) => {
                                             (<span>{dessert.name}</span>)}
                                             
                                             <div className="menu___li-btns">
-                                                {/* {edit.id === dessert._id ? 
-                                                (<>
-                                                    <button onClick={(e) => {editDessert(e)}}>
-                                                        <i className="fas fa-check"/>
-                                                    </button>
-                                                    <button onClick={() => setEdit({id: null})}>
-                                                    <i className="fas fa-undo"/>
-                                                    </button>
-                                                </>) : 
-                                                (<button onClick={() => getUpdatedId(dessert._id, dessert.name)}>
-                                                    <i className="fas fa-pencil-alt"/>
-                                                </button>)}
-                                                
-                                                <button className="del-btn" onClick={() => {deleteDessert(dessert._id)}}>
-                                                    <i className="fas fa-trash"/>
-                                                </button> */}
                                                 <div className="custom-dropdown">
                                                     <Dropdown>
                                                         <Dropdown.Toggle as={CustomToggle} />
