@@ -1,12 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
 import axios from "axios";
 
-const UpdateGuest = ({ edit, setEdit, onSubmit, mariageID }) => {
+const UpdateGuest = ({ edit, setEdit, onSubmit, mariageID, guestFamily }) => {
+
     const [family, setFamily] = useState({
         firstPerson: "",
         secondPerson: ""
     })
-    const [radioValue, setRadioValue] = useState("");
+    const [radioValue, setRadioValue] = useState(guestFamily);
+
     useEffect(() => {
         const fetchData = async () => {
             await axios.get(`/api/admin/wedding/${mariageID}`, {withCredentials: true})
@@ -30,9 +32,9 @@ const UpdateGuest = ({ edit, setEdit, onSubmit, mariageID }) => {
     const handleChange = (e) => {
         setInput(e.target.value)
     }
-    const handleRadio = (e) => {
-        setRadioValue(e.target.value)
-    }
+    // const handleRadio = (e) => {
+    //     setRadioValue(e.target.value)
+    // }
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -73,11 +75,11 @@ const UpdateGuest = ({ edit, setEdit, onSubmit, mariageID }) => {
                     />
                     <div className="chose-family">
                         <p>
-                            <input type="radio" id="test1" name="radio-group" value="1" onChange={handleRadio} />
+                            <input type="radio" id="test1" name="family" value="1" onChange={e => setRadioValue(e.target.value)} checked={radioValue === "1"} />
                             <label htmlFor="test1">Famille de {family.firstPerson}</label>
                         </p>
                         <p>
-                            <input type="radio" id="test2" name="radio-group" value="2" onChange={handleRadio} />
+                            <input type="radio" id="test2" name="family" value="2" onChange={e => setRadioValue(e.target.value)} checked={radioValue === "2"} />
                             <label htmlFor="test2">Famille de {family.secondPerson} </label>
                         </p>
                     </div>

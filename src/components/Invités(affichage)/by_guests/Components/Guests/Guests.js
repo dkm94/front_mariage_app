@@ -71,7 +71,9 @@ const Guests = ({ guests, deleteGuest, updateGuest, editPicture, seteditPicture,
                                     edit={edit} 
                                     setEdit={setEdit} 
                                     onSubmit={submitUpdate} 
-                                    mariageID={mariageID} 
+                                    mariageID={mariageID}
+                                    guestId={guest._id}
+                                    guestFamily={guest.family}
                                     />
                                 </>) : 
                                 (<div className="nameField">
