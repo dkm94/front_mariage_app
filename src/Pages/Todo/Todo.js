@@ -12,47 +12,25 @@ const Todo = () => {
     const scrollBtn = useContext(ScrollButtonContext);
 
     const [todos, setTodos] = useState([]);
-    const [todo, setTodo] = useState({text:"", color: ""})
+    const [todo, setTodo] = useState({})
     const [searchValue, setSearchValue] = useState("");
 
-    const fetchData = async () => {
-        const result = await axios.get("/api/admin/todolist/")
-        setTodos(result.data)
-    }
+    
     useEffect(() => {
+        const fetchData = async () => {
+            const result = await axios.get("/api/admin/todolist/")
+            setTodos(result.data)
+        }
         fetchData();
-    }, []) 
-
-    const handleInput = (e) => {
-        const {value, name} = e.target;
-        setTodo(prevState => ({
-            ...prevState,
-            [name]: value
-        }))
-    } 
+    }, [todo])
 
     const handleSearch = (e) => {
         setSearchValue(e.target.value)
     }
 
-    const addTodo = (e) => {
-        e.preventDefault();
-        const newTodo = {
-            // _id: undefined,
-            text: todo.text,
-            color: "#EAE3C9",
-            isCompleted: false,
-            // mariageId: undefined
-        }
-        axios.post(`/api/admin/todolist/add`, newTodo)
-            .then((res) => {
-                if(res.data != null){
-                    setTodos([...todos, todo])
-                    setTodo({text:"", color: ""})
-                }
-            })
-            .catch((err) => {
-                console.log(err)})
+    const addTodo = newTodo => {
+        setTodo(newTodo)
+        setTodos([...todos, newTodo])
     }
 
     const deleteTodo = (id) => {
@@ -75,12 +53,12 @@ const Todo = () => {
                 <Container style={{ padding: "2rem 4rem"}} fluid>
                     <Row>
                         <AddForm 
-                        todos={todos}
-                        setTodos={setTodos}
-                        todo={todo}
-                        setTodo={setTodo}
+                        // todos={todos}
+                        // setTodos={setTodos}
+                        // todo={todo}
+                        // setTodo={setTodo}
                         addTodo={addTodo}
-                        handleInput={handleInput}
+                        // handleInput={handleInput}
                         />
                         <Col xs={8} md={6} className="searchbar">
                             <SearchBar 

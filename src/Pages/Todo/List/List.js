@@ -80,10 +80,6 @@ const Todos = ({ todos, setTodos, deleteTodo, searchValue, setSearchValue }) => 
             })
    }
 
-//    const result = todos.sort((a,b)=>{
-//     return a.name > b.name ? 1 : - 1
-//     })
-
     return(
         <ul className="tasks-list">
             {
@@ -119,15 +115,6 @@ const Todos = ({ todos, setTodos, deleteTodo, searchValue, setSearchValue }) => 
                                     />
                                     <span>{obj.text}</span>
                                 </div>
-                                
-                                {/* <div className="todolist___li-btns">
-                                    <button disabled={obj.isCompleted} onClick={() => getUpdatedId(obj._id, obj.text)}>
-                                        <i className="fas fa-pencil-alt"/>
-                                    </button>
-                                    <button className="del-btn" onClick={() => {deleteTodo(obj._id)}}>
-                                        <i className="fas fa-times" aria-hidden="true"></i>
-                                    </button>
-                                </div> */}
                             </>)}
                             <div className="custom-dropdown">
                                 <Dropdown>
