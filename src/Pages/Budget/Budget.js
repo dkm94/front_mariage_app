@@ -10,10 +10,10 @@ import axios from "axios";
 import "./Budget.css";
 import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
 
-const Budget = (props) => {
+const Budget = () => {
  
-    const { budgetID } = useContext(UserContext)
-    const scrollBtn = useContext(ScrollButtonContext)
+    const { budgetID } = useContext(UserContext);
+    const scrollBtn = useContext(ScrollButtonContext);
 
     const newOperationValues = {
         category: '', 
@@ -21,11 +21,10 @@ const Budget = (props) => {
         description: ''
     }
 
-    // const [operationForm, toggleOperationForm] = useState(false)
-    const [budget, setBudget] = useState({})
+    const [budget, setBudget] = useState({});
     const [operations, setOperations] = useState([]);
-    const [newOperation, setnewOperation] = useState(newOperationValues)
     const [searchValue, setSearchValue] = useState("");
+    const [operation, setOperation] = useState({});
 
 
     useEffect(() => {
@@ -38,7 +37,7 @@ const Budget = (props) => {
             setOperations(res[1].data)
         }
         getDatas();
-    }, [budgetID])
+    }, [operation, budgetID])
 
     const handleSearch = (e) => {
         setSearchValue(e.target.value)
@@ -103,10 +102,9 @@ const Budget = (props) => {
                 description: values.description
             })
             .then((res) => {
-                if(res.data != null){
-                    setnewOperation(newOperation)
-                    window.location.reload()
-                }
+                setOperation(res.data);
+                setOperations([...operations, res.data])
+                formik.resetForm({})
             })
             .catch((err) => {
                 console.log(err)})
@@ -114,11 +112,6 @@ const Budget = (props) => {
         validationSchema: operationValidationSchema,
         enableReinitialize: true,
     })
-
-    // const newOperationForm = (e) => {
-    //     e.preventDefault();
-    //     toggleOperationForm(!operationForm);
-    // }
 
     let sum = operations.reduce((a, b) => a + b.price, 0)/100;
     function total(sum){
@@ -201,8 +194,6 @@ const Budget = (props) => {
                                     <TextField 
                                         size="20%"
                                         width="100%"
-                                        // inputwidth="5rem"
-                                        // label="Montant" 
                                         name="price" 
                                         type="number"
                                         value={formik.values.price} 
@@ -228,7 +219,6 @@ const Budget = (props) => {
                         expenses={operations}
                         deleteExpense={deleteExpense}
                         searchValue={searchValue}
-                        // updateExpense={editExpense}
                         />
                         <div className="col chart-component" style={{ width: '60%', height: 300 }}>
                             <PieChart operations={operations}/>
