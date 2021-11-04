@@ -32,9 +32,6 @@ const UpdateGuest = ({ edit, setEdit, onSubmit, mariageID, guestFamily }) => {
     const handleChange = (e) => {
         setInput(e.target.value)
     }
-    // const handleRadio = (e) => {
-    //     setRadioValue(e.target.value)
-    // }
 
     const handleSubmit = e => {
         e.preventDefault();

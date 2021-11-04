@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import starterImg from "../../img/menus/starter_img.jpg";
 import maincourseImg from "../../img/menus/maincourse_img.jpg";
 import dessertImg from "../../img/menus/dessert_img.jpg";
@@ -10,6 +10,9 @@ import "./Menu.css";
 import AddStarterForm from "./Forms/Add/AddStarter";
 import AddMaincourseForm from "./Forms/Add/AddMaincourse";
 import AddDessertForm from "./Forms/Add/AddDessert";
+import UpdateStarter from "./Forms/Update/Starter";
+import UpdateMaincourse from "./Forms/Update/Maincourse";
+import UpdateDessert from "./Forms/Update/Dessert";
 
 const Menus = () => {
 
@@ -30,12 +33,6 @@ const Menus = () => {
     })
 
     const [input, setInput] = useState('')
-
-    const inputRef = useRef(null);
-
-    const handleUpdate = (e) => {
-        setInput(e.target.value)
-    }
 
     const getUpdatedId = (objId, objName) => {
         setEdit({
@@ -74,70 +71,37 @@ const Menus = () => {
        setDesserts([...desserts, newDessert])
     }
 
-    const editStarter = (e) => {
-        e.preventDefault()
-        const updatedStarters = [...starters].map((starter) => {
-            if(starter._id === edit.id) {
-                starter.name = input
-            }
-            return starter
-        })
-        axios.post(`/api/admin/menu/starters/edit/${edit.id}`, {name: input})
-            .then((res) => {
-                if(res.data != null){
-                    setTimeout(() => {
-                        setStarters(updatedStarters)
-                        setEdit('')
-                    }, 1000);
+    const editStarter = updatedStarter => {
+        const updatedStartersList = [...starters].map((starter) => {
+                if(starter._id === updatedStarter.id) {
+                    starter.name = updatedStarter.name
                 }
+                return starter
             })
-            .catch((err) => {
-                console.log(err)
-            })
+        setStarter(updatedStarter);
+        setStarters(updatedStartersList);
     }
 
-    const editMaincourse = (e) => {
-        e.preventDefault()
-        const updatedMaincourses = [...maincourses].map((maincourse) => {
+    const editMaincourse = updatedMaincourse => {
+        const updatedMaincourseList= [...maincourses].map((maincourse) => {
             if(maincourse._id === edit.id) {
                 maincourse.name = input
             }
             return maincourse
         })
-        axios.post(`/api/admin/menu/maincourses/edit/${edit.id}`, {name: input})
-            .then((res) => {
-                if(res.data != null){
-                    setTimeout(() => {
-                        setMaincourses(updatedMaincourses)
-                        setEdit('')
-                    }, 1000);
-                }
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+        setMaincourse(updatedMaincourse);
+        setMaincourses(updatedMaincourseList);
     }
 
-    const editDessert = (e) => {
-        e.preventDefault()
-        const updatedDesserts = [...desserts].map((dessert) => {
+    const editDessert = updatedDessert => {
+        const updatedDessertList = [...desserts].map((dessert) => {
             if(dessert._id === edit.id) {
                 dessert.name = input
             }
             return dessert
         })
-        axios.post(`/api/admin/menu/desserts/edit/${edit.id}`, {name: input})
-            .then((res) => {
-                if(res.data != null){
-                    setTimeout(() => {
-                        setDesserts(updatedDesserts)
-                        setEdit('')
-                    }, 1000);
-                }
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+        setMaincourse(updatedDessert);
+        setMaincourses(updatedDessertList);
     }
 
     const deleteStarter = (id) => {
@@ -190,15 +154,7 @@ const Menus = () => {
                                     {
                                         starters.map((starter) => <li key={starter._id} >
                                             {edit.id === starter._id ? 
-                                            (<form onSubmit={editStarter}>
-                                                <input 
-                                                type="text"
-                                                
-                                                onChange={handleUpdate} 
-                                                value={input}
-                                                ref={inputRef}
-                                                />
-                                            </form>) : 
+                                            (<UpdateStarter edit={edit} setEdit={setEdit} editStarter={editStarter} />) : 
                                             (<span>{starter.name}</span>)}
                                             
                                             <div className="menu___li-btns">
@@ -232,14 +188,7 @@ const Menus = () => {
                                     {
                                         maincourses.map((maincourse) => <li key={maincourse._id} >
                                             {edit.id === maincourse._id ? 
-                                            (<form onSubmit={editMaincourse}>
-                                                <input 
-                                                type="text"
-                                                onChange={handleUpdate} 
-                                                value={input}
-                                                ref={inputRef}
-                                                />
-                                            </form>) : 
+                                            (<UpdateMaincourse edit={edit} setEdit={setEdit} editMaincourse={editMaincourse} />) : 
                                             (<span>{maincourse.name}</span>)}
                                             
                                             <div className="menu___li-btns">
@@ -279,15 +228,7 @@ const Menus = () => {
                                     {
                                         desserts.map((dessert) => <li key={dessert._id} >
                                             {edit.id === dessert._id ? 
-                                            (<form onSubmit={editDessert}>
-                                                <input 
-                                                type="text"
-                                                
-                                                onChange={handleUpdate} 
-                                                value={input}
-                                                ref={inputRef}
-                                                />
-                                            </form>) : 
+                                            (<UpdateDessert edit={edit} setEdit={setEdit} editDessert={editDessert} />) : 
                                             (<span>{dessert.name}</span>)}
                                             
                                             <div className="menu___li-btns">
