@@ -66,6 +66,7 @@ input, button {
     width: 50%;
     position: absolute;
     right: 0;
+	background-color: #FFF;
 }
 
 .register {

@@ -10,6 +10,7 @@ import "./Login.css";
 
 const Login = () => {
     const [showError, setShowError] = useState(false);
+    const [loadingButton, setLoadingButton] = useState(false)
     const history = useHistory();
     const validationSchema = Yup.object().shape({
         email: Yup.string()
@@ -22,22 +23,22 @@ const Login = () => {
     });
     
     const onSubmit = ({email, password}) => {
+        setLoadingButton(true)
         axios.post(`/api/auth/adminLogin`,
         {
             email: email,
             password: password,
         })
             .then((res) => {
-                if(res.data != null){
-                    localStorage.setItem("token", res.data.token)
+                localStorage.setItem("token", res.data.token)
                     const token = localStorage.getItem('token')
                     if(token){
                         setTimeout(() => {
+                            setLoadingButton(false)
                             window.location = "/tableau-de-bord" ;
                             history.push("/tableau-de-bord");
                         }, 500);
                     }
-                }
             })
             .catch((err) => {
                 console.log(err)
@@ -90,7 +91,7 @@ const Login = () => {
                                     <div>{errors.password?.message}</div>
                                 </div>
                                 <div className="login__submit">
-                                    <input type="submit" />
+                                    <input type="submit" value={loadingButton ? "Veuillez patienter..." : "Se connecter"} />
                                 </div>
                                 <div className="login__signup">
                                     <p>Pas encore membre? &nbsp;<Link to={"/register"}>Inscrivez-vous</Link></p>

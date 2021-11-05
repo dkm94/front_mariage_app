@@ -15,6 +15,7 @@ const Register = () => {
 
     const [showAlert, setShowAlert] = useState(false)
     const [showError, setShowError] = useState(false);
+    const [loadingButton, setLoadingButton] = useState(false)
 
     const validationSchema = Yup.object().shape({
         checkEmail: Yup.boolean(),
@@ -71,7 +72,7 @@ const Register = () => {
     })
 
     const onSubmit = async ({firstPerson, secondPerson, email, password}) => {
-        console.log(tempArr)
+        setLoadingButton(true)
         await axios.post(`/api/auth/createAccount`,
             {
                 firstPerson: firstPerson,
@@ -80,8 +81,9 @@ const Register = () => {
                 password: password  
             })
             .then((res) => {
-                setShowAlert(true)
-                tempArr = []
+                setShowAlert(true);
+                setLoadingButton(false);
+                tempArr = [];
                 setTimeout(() => {
                     setShowAlert(false)
                     window.location = "/login" ;
@@ -172,7 +174,7 @@ const Register = () => {
                                     <span>{errors.confirmPassword?.message}</span>
                                 </div>
                                 <div className="form-group">
-                                    <input type="submit" />
+                                    <input type="submit" value={loadingButton ? "Veuillez patienter..." : "Créer mon compte"}/>
                                 </div>
                                 <div className="register__signup">
                                     <p>Déjà inscrit ? &nbsp;<Link to={"/login"}>Connectez-vous</Link></p>
