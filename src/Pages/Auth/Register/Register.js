@@ -1,6 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import Alert from '@material-ui/lab/Alert';
+import AlertTitle from '@material-ui/lab/AlertTitle';
 import * as Yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from "axios";
@@ -10,6 +12,7 @@ import flowers from "../../../img/login-register/flowers.jpeg";
 const Register = () => {
 
     let tempArr = [];
+    const [showAlert, setShowAlert] = useState(false)
    
     const validationSchema = Yup.object().shape({
         checkEmail: Yup.boolean(),
@@ -75,13 +78,12 @@ const Register = () => {
                 password: password  
             })
             .then((res) => {
-                if(res.data != null){
-                    setTimeout(() => {
-                        alert('Votre compte a été créé avec succès. Vous allez être redirigé.e vers la page de connexion...')
-                        window.location = "/login" ;
-                    }, 1000);
-                    tempArr = []
-                }
+                setShowAlert(true)
+                tempArr = []
+                setTimeout(() => {
+                    setShowAlert(false)
+                    window.location = "/login" ;
+                },4500);
             })
             .catch((err) => {
                 alert("Une erreur est survenue. Veuillez rééssayer plus tard.", JSON.stringify(err));
@@ -91,6 +93,12 @@ const Register = () => {
 
     return (
         <div className="register-page">
+            <div style={{ display: showAlert ? "block" : "none" }} className="register-alert fade-in" >
+                <Alert severity="success">
+                    <AlertTitle>Compte créé avec succès</AlertTitle>
+                    Vous allez être redirigé vers la page de connexion...
+                </Alert>
+            </div>
             <div className="register-grid">
                 <div className="grid-item-1">
                     <img alt="couple img" src={flowers} />

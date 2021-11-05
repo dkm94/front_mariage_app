@@ -147,7 +147,7 @@ console.log("🚀 ~ file: Mon_compte.js ~ line 10 ~ MyAccount ~ props", token)
                 if(token){
                     localStorage.removeItem("token")
                     setTimeout(() => {
-                        window.location.reload()
+                        window.location = "/"
                     }, 2000);
                 }
             })
