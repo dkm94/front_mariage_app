@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, withRouter, useHistory } from "react-router-dom";
-import "./Login.css";
 import { useForm } from "react-hook-form";
-import axios from "axios";
+import ErrorAlert from "../../../components/Alert/Error/Error";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from "yup";
+import axios from "axios";
 import cake from "../../../img/login-register/cake.jpeg";
+import "./Login.css";
 
 const Login = () => {
+    const [showError, setShowError] = useState(false);
     const history = useHistory();
     const validationSchema = Yup.object().shape({
         email: Yup.string()
@@ -39,11 +41,16 @@ const Login = () => {
             })
             .catch((err) => {
                 console.log(err)
+                setShowError(true)
+                setTimeout(() => {
+                    setShowError(false)
+                }, 5000);
             })
       };
 
     return (
         <div className="login-page">
+            <ErrorAlert showError={showError} title="Oups, une erreur est survenue" description="Veuillez réessayer plus tard" />
             <div className="login-grid">
                 <div className="grid-item-1">
                     <img 

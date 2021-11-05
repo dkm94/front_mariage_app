@@ -10,17 +10,18 @@
 .tasks-list__li {
     display: flex;
     justify-content: space-between;
-    padding: 2rem 2rem 2rem 4rem;
+    padding: 2rem 2rem 2rem 4rem !important;
     background: #f2eede;
     border-radius: 10px;
     /* box-shadow: 7px 6px 9px -6px rgb(158 153 158); */
     border-bottom: 1px #c4c1c0 solid;
+    margin-top: 2rem;
 }
 
 .tasks-list__li__done {
     display: flex;
     justify-content: space-between;
-    padding: 2rem 2rem 2rem 4rem;
+    padding: 2rem 2rem 2rem 4rem !important;
     background-color: lightgrey;
     font-style: italic;
     color: grey;
@@ -28,6 +29,7 @@
     border-radius: 10px;
     /* box-shadow: 7px 6px 9px -6px rgb(158 153 158); */
     border-bottom: 1px #b7b5b5 solid;
+    margin-top: 2rem;
 }
 
 .tasks-list__li__done > .custom-dropdown {
@@ -51,7 +53,7 @@ text-decoration: line-through;
 }
 .tasks-list__li > .custom-dropdown > .dropdown > a, 
 .tasks-list__li__done > .custom-dropdown > .dropdown > a {
-    top: -8px;
+    top: -20px;
 }
 .tasks-list__li__done > .custom-dropdown > .dropdown > div {
     font-style: initial;

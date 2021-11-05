@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import Button from '@material-ui/core/Button/Button';
 import axios from 'axios';
 import "../../../../../Pages/Invités/Invités.css";
 
@@ -36,11 +37,11 @@ const AddGuestForm = ({ addGuest }) => {
                 ref={inputRef}
                 required
                 />
-                <button 
+                <Button 
                 type="submit"
                 className="btn shadow-none"
                 id="button-addon2"
-                ><i className="fas fa-long-arrow-alt-right" /></button>
+                ><i className="fas fa-long-arrow-alt-right" /></Button>
            </div>
         </form>
     )
