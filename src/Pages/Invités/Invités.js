@@ -20,11 +20,13 @@ const Byguests = ({ userInfos }) => {
     const [file, setFile] = useState(null)
     const [searchValue, setSearchValue] = useState("");
     const [user, setUser] = useState({});
+    const [appear, setAppear] = useState(false);
 
     useEffect(() => {
         const fetchData = () => {
             axios.get("/api/admin/guests/")
             .then(result => {
+                setAppear(true)
                 setGuests(result.data)
             })
             .catch(err => err.json("Failed to load the ressource"))
@@ -124,6 +126,7 @@ const Byguests = ({ userInfos }) => {
                         handleFile={handleFile}
                         searchValue={searchValue}
                         mariageID={mariageID}
+                        appear={appear}
                         />
                     </div>
                 </div>

@@ -47,6 +47,7 @@ function App() {
   }
 
   axios.defaults.baseURL = 'https://backend-mywedding-app.herokuapp.com';
+  axios.defaults.withCredentials = true;
   // axios.defaults.baseURL = 'http://localhost:3050';
   axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
 

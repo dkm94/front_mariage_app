@@ -43,6 +43,7 @@ const Login = () => {
             .catch((err) => {
                 console.log(err)
                 setShowError(true)
+                setLoadingButton(false)
                 setTimeout(() => {
                     setShowError(false)
                 }, 5000);
