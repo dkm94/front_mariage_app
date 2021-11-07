@@ -1,24 +1,20 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import Modal from "../../../../Modals/Set_guest_picture";
 import Form from "../Form/UpdateGuest";
 import avatar from "../../../../../img/avatar.jpg";
 import Dropdown from "react-bootstrap/Dropdown";
 import CustomToggle from '../../../../Dots/Dots';
-import { CSSTransition, TransitionGroup } from "react-transition-group";
-import { Box, Grow } from '@material-ui/core';
+// import { CSSTransition, TransitionGroup, Transition } from "react-transition-group";
+// import { Box, Fade, Grow } from '@material-ui/core';
 
 const Guests = ({ guests, deleteGuest, updateGuest, editPicture, seteditPicture, upload, handleFile, searchValue, mariageID, appear }) => {
 
     const [isOpen, setisOpen] = useState(false);
-    const [isFadingOut, setIsFadingOut] = useState(false);
-    const fadeOut = ()=>{
-        setIsFadingOut(true);
-      }
     const [edit, setEdit] = useState({
         id: null,
         name: ''
     })
-    const [deleteId, setDeleteId] = useState("")
+    // const [deleteId, setDeleteId] = useState("")
     // const nodeRef = useRef(null)
 
     const handleFileInput = (e) => {
@@ -31,8 +27,8 @@ const Guests = ({ guests, deleteGuest, updateGuest, editPicture, seteditPicture,
     };
     
     const handleRemoveGuest = (props) => {
+        // setIsFadingOut(false)
         deleteGuest(props)
-        setIsFadingOut(false)
     }
 
     return (
@@ -41,8 +37,8 @@ const Guests = ({ guests, deleteGuest, updateGuest, editPicture, seteditPicture,
                 guests.length === 0 || null ? 
                 (<div className="block"><span>Vos invités ici.</span></div>) :
                 (
-                    <Box className="get-guestlist">
-                        {/* <Box style={{ display: "flex" }} > */}
+                    <ul className="get-guestlist">
+                
                             {
                                 guests
                                 .sort((a,b)=>{ return a.name > b.name ? 1 : - 1 })
@@ -51,8 +47,8 @@ const Guests = ({ guests, deleteGuest, updateGuest, editPicture, seteditPicture,
                                 })
                                 .map((guest) => {
                                     
-                                return <Grow in out >
-                                    <li key={guest._id} className={(isFadingOut && guest._id === deleteId) ? 'div-guest item-fadeout' :'div-guest'}>
+                                return <li key={guest._id} className='div-guest fade-in'>
+                                    {/* <li className={(isFadingOut && guest._id === deleteId) ? 'div-guest item-fadeout' :'div-guest'}> */}
                                         <div className="custom-dropdown">
                                             <Dropdown>
                                                 <Dropdown.Toggle as={CustomToggle} />
@@ -68,7 +64,7 @@ const Guests = ({ guests, deleteGuest, updateGuest, editPicture, seteditPicture,
                                                             name: guest.name
                                                         })}>Modifier</Dropdown.Item>
                                                         
-                                                        <Dropdown.Item onClick={()=>fadeOut(setTimeout(()=>{handleRemoveGuest(guest._id); setDeleteId(guest._id)},800))}>Supprimer l'invité</Dropdown.Item>
+                                                        <Dropdown.Item onClick={()=>{handleRemoveGuest(guest._id)}}>Supprimer l'invité</Dropdown.Item>
                                                     </>)}
                                                 </Dropdown.Menu>
                                             </Dropdown>
@@ -110,10 +106,11 @@ const Guests = ({ guests, deleteGuest, updateGuest, editPicture, seteditPicture,
                                             </Modal>
                                         </div>
                                     </li>
-                                </Grow>}
+                                }
                             )}
-                        {/* </Box> */}
-                    </Box>
+                      
+                   
+                    </ul>
                 )
             }
         </>
