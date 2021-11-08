@@ -230,8 +230,9 @@
     }
     .show_nav .navbar__links {
         right: 0;
-        width: 100vw;
+        width: 70vw;
         visibility: visible;
+        /* opacity: 0.85; */
     }
     
     .navbar__link {
@@ -350,5 +351,11 @@
     }
     .show_nav .slideDown-8 {
         transition: all 1.7s ease-out;
+    }
+}
+
+@media (max-width: 576px) {
+    .show_nav .navbar__links {
+        width: 100vw;
     }
 }

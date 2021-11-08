@@ -65,7 +65,7 @@ const Dashboard = () => {
                             <div className="dashboard-icon" id="bg-item1" >
                                 <img src={groupIcon} alt="icône invités" />
                             </div>
-                            {/* <div className="dashboard-title"><h2>Invités</h2></div> */}
+                            <div className="dashboard-title"><h2>Invités</h2></div>
                         </div>
                         <div><span>Total</span></div>
                         <div className="guests__resume___container">
@@ -82,7 +82,7 @@ const Dashboard = () => {
                             <div className="dashboard-icon" id="bg-item2" >
                                 <img src={tableIcon} alt="icône tables" />
                             </div>
-                            {/* <div className="dashboard-title"><h2>Tables</h2></div> */}
+                            <div className="dashboard-title"><h2>Tables</h2></div>
                         </div>
                         <div><span>Total</span></div>
                         <div className="tables__resume___container">
@@ -98,7 +98,8 @@ const Dashboard = () => {
                         <div className="item__title">
                             <div className="dashboard-icon" id="bg-item3" >
                                 <img src={todoIcon} alt="icône tâches" />
-                            </div>                        
+                            </div>
+                            <div className="dashboard-title"><h2>Tâches</h2></div>                      
                         </div>
                         <div className="tasks__resume___container">
                             <div className="task-count">
@@ -121,7 +122,8 @@ const Dashboard = () => {
                         <div className="item__title">
                             <div className="dashboard-icon" id="bg-item4" >
                                 <img src={menuIcon} alt="icône menu" />
-                            </div>  
+                            </div>
+                            <div className="dashboard-title"><h2>Carte</h2></div>
                         </div>
                         <div className="menu__resume___container">
                             <div className="menu__resume___grid">
@@ -148,6 +150,7 @@ const Dashboard = () => {
                             <div className="dashboard-icon" id="bg-item5">
                                 <img src={calculatorIcon} alt="icône calculatrice" />
                             </div>
+                            <div className="dashboard-title"><h2>Budget</h2></div>
                         </div>        
                         <div><span>Total</span></div>
                         <div className="expenses__resume___container">
