@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
 import AddForm from "./Add/Form";
@@ -46,9 +47,10 @@ const Todo = () => {
         <div className='todo-container page-component'>
             {scrollBtn}
             <div className="todo">
-                <div className="todo___bgimage" />
+                <div className="page-location"><div><Link to={"/"} >Dashboard</Link>{'>'} Tâches</div></div>
+                <div className="todo___bgimage"><div className="component-title"><h1>Les tâches</h1></div></div>
                 <div className="titles mb-3">
-                    <h1>Souhaitez-vous ajouter de nouvelles tâches ?</h1>
+                    <h2>Souhaitez-vous ajouter de nouvelles tâches ?</h2>
                 </div>
                 <Container style={{ padding: "2rem 4rem"}} fluid>
                     <Row>
@@ -60,7 +62,7 @@ const Todo = () => {
                         addTodo={addTodo}
                         // handleInput={handleInput}
                         />
-                        <Col xs={8} md={6} className="searchbar">
+                        <Col xs={12} sm={10} md={6} className="searchbar">
                             <SearchBar 
                             className="search__input"
                             type="text"

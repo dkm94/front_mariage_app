@@ -374,8 +374,20 @@ a:-webkit-any-link {
         width: 100%;
         min-height: 92vh;
     }
+    .page-location {
+        display: block;
+    }
+ }
+
+ @media (max-width: 576px) {
+    .page-location {
+        display: none;
+    }
     .component-title {
         display: block;
+    }
+    .navigation-layout > nav {
+        box-shadow: none;
     }
  }
 

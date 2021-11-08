@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Formik, Form, useFormik } from "formik";
+import { Link } from "react-router-dom";
 import PieChart from "../../components/Expenses/Graph/PieChart";
 import TextField from "../../components/Formik/TextField-operations";
 import { UserContext, ScrollButtonContext } from "../../../src/App";
@@ -121,8 +122,9 @@ const Budget = () => {
     return(
         <div className="budget-container page-component">
             {scrollBtn}
+            <div className="page-location"><div><Link to={"/"} >Dashboard</Link>{'>'} Dépenses</div></div>
+            <div className="budget___bgimage"><div className="component-title"><h1>Les dépenses</h1></div></div>
             <div className="budget">
-                <div className="budget___bgimage" />
                 <div className="titles mb-3">
                     <h1>Souhaitez-vous ajouter une nouvelle dépense ?</h1>
                 </div>

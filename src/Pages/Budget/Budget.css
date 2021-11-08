@@ -138,6 +138,10 @@
     .budget-cols {
         padding: 5rem 5rem;
     }
+    .budget___bgimage {
+        border-radius: 0;
+        margin: 0;
+    }
 }
 
 @media (max-width: 575.98px) { 

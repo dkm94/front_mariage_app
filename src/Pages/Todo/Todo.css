@@ -76,6 +76,10 @@
         /* display: flex; */
         justify-content: center;
     }
+    .todo___bgimage {
+      border-radius: 0;
+      margin: 0;
+  }
 }
 
 @media (max-width: 414px) {

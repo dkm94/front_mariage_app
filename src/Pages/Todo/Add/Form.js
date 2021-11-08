@@ -26,7 +26,7 @@ const Form = ({ addTodo }) => {
   }
 
   return(
-    <Col xs={8} md={6}>
+    <Col xs={12} sm={10} md={6}>
       <form onSubmit={handleSumbit} className="input-group mb-3">
         <div className="add-task-style">
           <input

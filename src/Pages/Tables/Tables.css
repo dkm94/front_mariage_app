@@ -280,9 +280,6 @@
         display: flex;
         justify-content: center;
     }
-    .page-location {
-        display: block;
-    }
 
     .tables___bgimage {
         border-radius: 0;
@@ -290,15 +287,16 @@
     }
  }
 
- @media (max-width: 451px) { 
+ @media (max-width: 576px) { 
     .get-tables {
-        grid-template-columns: repeat(2, 1fr);
+        
     }
  }
 
  @media (max-width: 414px) { 
     .get-tables {
         padding: 50px;
+        grid-template-columns: repeat(2, 1fr);
     }
     .tables___list {
         padding: 0rem 2rem;

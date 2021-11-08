@@ -26,7 +26,7 @@ const TopNav = () => {
                 <li className="navbar__item hidden-links slideDown-4"><Link className="navbar__link" to="/menu/carte" onClick={() => setShowLinks(!showLinks)}>La carte</Link></li>
                 <li className="navbar__item hidden-links slideDown-5"><Link className="navbar__link" to="/menu/budget" onClick={() => setShowLinks(!showLinks)}>Les dépenses</Link></li>
                 <li className="navbar__item hidden-links slideDown-6"><Link className="navbar__link" to="/menu/taches" onClick={() => setShowLinks(!showLinks)}>Liste des tâches</Link></li>
-                <li className="navbar__item hidden-links slideDown-7" id="showNavLinks"><Link className="navbar__link" to={"/menu/mon-compte"}>Votre compte</Link></li>
+                <li className="navbar__item hidden-links slideDown-7" id="showNavLinks"><Link className="navbar__link" to={"/menu/mon-compte"} onClick={() => setShowLinks(!showLinks)}>Votre compte</Link></li>
                 <li className="navbar__item hidden-links slideDown-8" id="showNavLinks"><button className="navbar__link" type="submit" onClick={LogOut}>Déconnexion</button></li>
             </ul>
             <button className="navbar__burger" onClick={handleShowLinks} >
