@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
 import starterImg from "../../img/menus/starter_img.jpg";
 import maincourseImg from "../../img/menus/maincourse_img.jpg";
 import dessertImg from "../../img/menus/dessert_img.jpg";
@@ -135,9 +136,10 @@ const Menus = () => {
         <div className="menu-container page-component">
             {scrollBtn}
             <div className="menu">
-                <div className="menu___bgimage" />
+                <div className="page-location"><div><Link to={"/"} >Dashboard</Link>{'>'} Carte</div></div>
+                <div className="menu___bgimage"><div className="component-title"><h1>La carte</h1></div></div>
                 <div className="titles mb-3">
-                    <h1>Avez-vous prévu une réception ?</h1>
+                    <h2>Avez-vous prévu une réception ?</h2>
                 </div>
                 <div className="menu__list__container">
                     <div className="menu___list">
@@ -146,7 +148,7 @@ const Menus = () => {
                                 <img src={starterImg} alt="starter"/>
                             </div>
                             <div className="starter___div_form">
-                                {starters.length === 0 || starters.length === 1 ? <h2>Entrée</h2> : <h2>Entrées</h2>}
+                                {starters.length === 0 || starters.length === 1 ? <h3>Entrée</h3> : <h3>Entrées</h3>}
                                 <div className="menu___forms">
                                     <AddStarterForm addStarter={addStarter} />
                                 </div>
@@ -180,7 +182,7 @@ const Menus = () => {
                         </div>
                         <div className="maincourse forms" id="forms_reverse">
                             <div className="maincourse___div_form">
-                            {maincourses.length === 0 || maincourses.length === 1 ? <h2>Plat</h2> : <h2>Plats</h2>}
+                            {maincourses.length === 0 || maincourses.length === 1 ? <h3>Plat</h3> : <h3>Plats</h3>}
                                 <div className="menu___forms">
                                     <AddMaincourseForm addMaincourse={addMaincourse} />
                                 </div>
@@ -220,7 +222,7 @@ const Menus = () => {
                                 <img src={dessertImg} alt="dessert" />
                             </div>
                             <div className="dessert___div_form">
-                            {desserts.length === 0 || desserts.length === 1 ? <h2>Dessert</h2> : <h2>Desserts</h2>}
+                            {desserts.length === 0 || desserts.length === 1 ? <h3>Dessert</h3> : <h3>Desserts</h3>}
                                 <div className="menu___forms">
                                     <AddDessertForm addDessert={addDessert} />
                                 </div>

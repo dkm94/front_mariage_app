@@ -63,7 +63,7 @@ ul {
 .forms {
     display: grid;
     grid-template-columns: 2fr 3fr;
-    border-radius: 10px;
+    border-radius: 7px;
     background-color: #FFFFFF;
     border-bottom: 2px #e2e0e0 solid;
 }    
@@ -76,7 +76,7 @@ ul {
     grid-template-columns: 3fr 2fr;
 }
 
-.forms > h2 {
+.forms > h3 {
     font-family: 'Alex Brush', cursive;
     text-align: center;
 }
@@ -153,8 +153,9 @@ ul {
     border-radius: 10px;
 }
 
-.starter___div_form > h2, .dessert___div_form > h2 {
+.starter___div_form > h3, .dessert___div_form > h2 {
     text-align: end;
+    font-size: 2rem;
 }
 
 .menu__list__container {
@@ -198,5 +199,13 @@ ul {
     }
     .menu__list__container {
         padding: 5rem 0rem;
+    }
+    .page-location {
+        display: block;
+    }
+
+    .menu___bgimage {
+        border-radius: 0;
+        margin: 0;
     }
 }
