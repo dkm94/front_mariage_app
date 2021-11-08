@@ -96,7 +96,7 @@ const Login = () => {
                                 </div>
                                 <div className="login__signup">
                                     <p>Pas encore membre? &nbsp;<Link to={"/register"}>Inscrivez-vous</Link></p>
-                                    <p className="forgotten-password"><Link to={"/reset-password"}>Mot de passe oublié ?</Link></p>
+                                    {/* <p className="forgotten-password"><Link to={"/reset-password"}>Mot de passe oublié ?</Link></p> */}
                                 </div>
                             </form>
                         </div>
