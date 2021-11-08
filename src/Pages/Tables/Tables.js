@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
 import Table from "./Table";
@@ -108,17 +108,18 @@ const Tables = (props) => {
     return(
         <div className="tables page-component">
             {scrollBtn}
+            <div className="page-location"><div><Link to={"/"} >Dashboard</Link>{'>'} Tables</div></div>
+            <div className="tables___bgimage"><div className="component-title"><h1>Les tables</h1></div></div>
             <div className="tables-container">
-                <div className="tables___bgimage" />
                 <div className="titles mb-3">
-                    <h1>Comment souhaitez-vous organiser votre plan de table ? </h1>
+                    <h2>Comment souhaitez-vous organiser votre plan de table ? </h2>
                 </div>
                 <Container style={{ padding: "2rem 4rem"}} fluid>
                     <Row>
-                        <Col xs={8} md={6} className="table-form">
+                        <Col xs={12} sm={10} md={6} className="table-form">
                             <AddTableForm addTable={addTable} />
                         </Col>
-                        <Col xs={8} md={6} className="searchbar">
+                        <Col xs={12} sm={10} md={6} className="searchbar">
                             <SearchBar 
                             className="search__input"
                             type="text"

@@ -12,19 +12,6 @@
     min-height: 600px;
 }
 
-.page-location {
-    display: none;
-    height: 82px;
-    position: relative;
-}
-
-.page-location > span {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
 .guest-form {
     display: flex;
     flex-direction: column;
@@ -68,18 +55,6 @@
 }
 .guest-form > form > div > button:focus {
     outline: none;
-}
-
-.search__container {
-    width: 100%;
-    display: flex;
-    border: lightgray 1px solid;
-    padding: 0 0.5rem;
-    border-radius: 10px;
-    background: #FFFFFF;
-    padding: .375rem .375rem .375rem .75rem;
-    /* box-shadow: 7px 6px 25px -6px rgba(158,153,158,1); */
-    text-align: center;
 }
 
 .guests___bgimage {

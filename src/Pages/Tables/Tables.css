@@ -136,7 +136,7 @@
     align-items: center;
     padding: 2rem 2rem;
     border-bottom: 1px #dfdbd7 solid;
-    border-radius: 10px;
+    border-radius: 7px;
 }
 
 .tbStyle > .menu-icon {
@@ -279,6 +279,14 @@
     .tables-container > .container-fluid > .row {
         display: flex;
         justify-content: center;
+    }
+    .page-location {
+        display: block;
+    }
+
+    .tables___bgimage {
+        border-radius: 0;
+        margin: 0;
     }
  }
 
