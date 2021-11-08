@@ -7,7 +7,7 @@ import CustomToggle from '../../../../Dots/Dots';
 // import { CSSTransition, TransitionGroup, Transition } from "react-transition-group";
 // import { Box, Fade, Grow } from '@material-ui/core';
 
-const Guests = ({ guests, deleteGuest, updateGuest, editPicture, seteditPicture, upload, handleFile, searchValue, mariageID, appear }) => {
+const Guests = ({ guests, deleteGuest, updateGuest, editPicture, seteditPicture, upload, handleFile, searchValue, mariageID, appear, firstPerson, secondPerson }) => {
 
     const [isOpen, setisOpen] = useState(false);
     const [edit, setEdit] = useState({
@@ -91,7 +91,11 @@ const Guests = ({ guests, deleteGuest, updateGuest, editPicture, seteditPicture,
                                                 />
                                             </>) : 
                                             (<div className="nameField">
-                                                <span>{guest.name}</span>
+                                                <span id="guest-name">{guest.name}</span>
+                                                {guest.family === "1" ? 
+                                                (<span className="guest-family">Invité de {firstPerson}</span>) :
+                                                ( guest.family === "2") ? 
+                                                (<span className="guest-family">Invité de {secondPerson}</span>) : null }
                                             </div>)}
                                             <Modal open={isOpen} setOpen={setisOpen} guestId={editPicture} close={() => {setisOpen(false)}}>
                                                 <form className="modal___picture" onSubmit={(e) => {upload(editPicture); e.preventDefault()}}>

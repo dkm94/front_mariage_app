@@ -12,6 +12,19 @@
     min-height: 600px;
 }
 
+.page-location {
+    display: none;
+    height: 82px;
+    position: relative;
+}
+
+.page-location > span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .guest-form {
     display: flex;
     flex-direction: column;
@@ -140,6 +153,15 @@
         display: flex;
         justify-content: center;
     }
+    
+    .page-location {
+        display: block;
+    }
+
+    .guests___bgimage {
+        border-radius: 0;
+        margin: 0;
+    }
 }
 
 @media (max-width: 540px) {
@@ -172,18 +194,18 @@
         right: -8px;
         cursor: pointer;
     }
-    .guest-picture {
+    /* .guest-picture {
         margin-left: 3rem;
-    }
+    } */
     .div-guest___container > .nameField {
         position: relative;
     }
-    .div-guest___container > .nameField > span {
+    /* .div-guest___container > .nameField > span {
         position: absolute;
         left: 39px;
         top: -8px;
         font-size: 1.5em;
-    }
+    } */
     .guest__updateForm > form {
         position: absolute;
         top: 50%;

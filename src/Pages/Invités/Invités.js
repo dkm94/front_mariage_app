@@ -13,6 +13,8 @@ import axios from "axios";
 const Byguests = ({ userInfos }) => {
 
     const mariageID = userInfos.mariageID;
+    const firstPerson = userInfos.firstPerson;
+    const secondPerson = userInfos.secondPerson;
     const scrollBtn = useContext(ScrollButtonContext)
 
     const [guests, setGuests] = useState([]);
@@ -92,9 +94,10 @@ const Byguests = ({ userInfos }) => {
         <div className="byguests page-component">
             <div className="guest-container" style={button_wrapper_style}>
             {scrollBtn}
-                <div className="guests___bgimage" />
+                <div className="page-location"><span>Dashboard {'>'} Invités</span></div>
+                <div className="guests___bgimage"><div className="component-title"><h1>Les invités</h1></div></div>
                 <div className="titles mb-3">
-                    <h1>Souhaitez-vous ajouter de nouveaux invités ?</h1>
+                    <h2>Souhaitez-vous ajouter de nouveaux invités ?</h2>
                 </div>
                 <Container style={{ padding: "2rem 4rem"}} fluid>
                     <Row>
@@ -127,6 +130,8 @@ const Byguests = ({ userInfos }) => {
                         searchValue={searchValue}
                         mariageID={mariageID}
                         appear={appear}
+                        firstPerson={firstPerson}
+                        secondPerson={secondPerson}
                         />
                     </div>
                 </div>

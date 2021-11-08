@@ -72,8 +72,8 @@
     display: flex;
     flex-direction: column;
     /* box-shadow: 7px 6px 9px -6px rgb(158 153 158); */
-    height: -moz-fit-content;
-    height: fit-content;
+    height: auto;
+    /* height: fit-content; */
     background-color: whitesmoke;
     position: relative;
     align-items: center;
@@ -119,10 +119,20 @@
     width: 100%;
     text-align: center;
     margin: 10px 0px;
+    display: flex;
+    flex-direction: column;
+}
+
+.nameField > #guest-name {
+    font-size: 1.8rem;
+}
+
+.nameField > .guest-family {
+    font-size: 1.3rem;
 }
 
 .nameField > span {
-    font-size: 1.2em;
+    /* font-size: 1.2em; */
     font-weight: 400;
     color: #7c7676;
 }

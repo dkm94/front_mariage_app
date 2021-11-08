@@ -91,6 +91,23 @@ h2 {
     flex-direction: column;
 }
 
+/**********Bannière*******/
+.component-title {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: lightgray;
+    padding: 1rem 1rem;
+}
+
+.component-title > h1 {
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    margin: 0;
+}
+
 /******Components******/
 .page-component {
     width: 100%;
@@ -130,8 +147,8 @@ button:focus {
     border-bottom: 1px solid #d3d3d3;
     margin: 5rem 3rem 3rem 3rem;
 }
-.titles > h1 {
-    text-align: start;
+.titles > h2 {
+    font-size: 3rem !important;
 }
 
 .searchbar {
@@ -327,6 +344,8 @@ a:-webkit-any-link {
         width: 100%;
         min-height: 92vh;
     }
-
+    .component-title {
+        display: block;
+    }
  }
 
