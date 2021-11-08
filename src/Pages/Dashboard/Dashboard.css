@@ -187,6 +187,13 @@
         padding-right: 2rem;
     }
  }
+
+@media (max-width: 786px) {
+    .dashboard___bgimage {
+        border-radius: 0;
+        margin: 0;
+    }
+}
 @media ( max-width : 576px ) {
     .dashboard___elements > .grid-container {
         grid-template-areas:

@@ -377,6 +377,9 @@ a:-webkit-any-link {
     .page-location {
         display: block;
     }
+    #component-dashboard {
+        display: block;
+    }
  }
 
  @media (max-width: 576px) {

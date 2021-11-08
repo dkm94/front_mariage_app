@@ -54,7 +54,7 @@ const Dashboard = () => {
     return(
         <div className="dashboard page-component">
             {scrollBtn}
-            <div className="dashboard___bgimage" />
+            <div className="dashboard___bgimage"><div className="component-title" id="component-dashboard"><h1>Tableau de bord</h1></div></div>
             <div className="titles">
                 <h1>Que souhaitez-vous faire aujourd'hui ?</h1>
             </div>
