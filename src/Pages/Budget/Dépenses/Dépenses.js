@@ -82,12 +82,13 @@ const Expenses = ({ expenses, deleteExpense, updateExpense, searchValue }) => {
                 .filter((expense) => {
                     return expense.description.toLowerCase().indexOf(searchValue.toLowerCase()) >= 0;
                 })
+                .reverse()
                 .map(obj => {
                     let prix = obj.price/100;
                     function financial(prix) {
                         return Number(prix).toFixed(2);
                     }
-                    return <li key={obj._id} className="mb-3 expenses-container">
+                    return <li key={obj._id} className="mb-3 expenses-container fade-in">
                         {/* style={{ backgroundColor: `${renderSwitchColors(obj.category)}` }} */}
                         <div className="li___icon center-x">
                             <div className="icon___container" style={{ backgroundColor: renderSwitchColors(obj.category)}}>

@@ -22,7 +22,7 @@ const TableId = (props) => {
     
     return(
         (
-            <li key={id} className="tbStyle" style={props.edit.id === props.table._id ? {backgroundColor: `#F5F5F5`} : null}>
+            <li key={id} className="tbStyle fade-in" style={props.edit.id === props.table._id ? {backgroundColor: `#F5F5F5`} : null}>
                 <div className="tbName">
                     {edit.id === table._id ? 
                     (<form onSubmit={editTableName} className="mb-3">

@@ -91,13 +91,14 @@ const Todos = ({ todos, setTodos, deleteTodo, searchValue, setSearchValue }) => 
                         .filter((todo) => {
                             return todo.text.toLowerCase().indexOf(searchValue.toLowerCase()) >= 0;
                         })
+                        .reverse()
                         .map((obj, i) => {
                             return(
                                 <Collapse>
                                     <ListItem 
                                     key={i}
                                     data-id={obj._id}
-                                    className={obj.isCompleted ? 'col-12 tasks-list__li__done' : "col-12 tasks-list__li"} 
+                                    className={obj.isCompleted ? 'col-12 tasks-list__li__done fade-in' : "col-12 tasks-list__li fade-in"} 
                                     style={edit.id === obj._id ? {backgroundColor: `#F5F5F5`} : null}
                                     >
                                         {edit.id === obj._id ? 

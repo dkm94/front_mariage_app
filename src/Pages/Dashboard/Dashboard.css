@@ -193,13 +193,68 @@
         margin: 0;
     }
 }
-@media ( max-width : 576px ) {
-    .dashboard___elements > .grid-container {
+@media ( max-width : 627px ) {
+    /* .dashboard___elements > .grid-container {
         grid-template-areas:
             'invités'
             'tables'
             'tâches'
             'menu'
             'dépenses';
+    } */
+    .sum {
+        font-size: 3rem;
+    }
+    .grid-container {
+        padding: 0;
+    }
+    .item__title {
+        margin-bottom: 1rem;
+    }
+}
+
+@media ( max-width : 479px ) {
+    .sum {
+        font-size: 2rem;
+    }
+    .dashboard-icon {
+        width: 3rem;
+        height: 100%;
+        position: relative;
+        height: 4rem;
+        width: 4rem;
+    }
+    .dashboard-icon > img {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        height: inherit;
+        padding: 0.5rem;
+    }
+    .dashboard-title > h2 {
+        font-size: 1.5rem !important;
+    }
+    .grid-container {
+        grid-template-areas:
+            'invités'
+            'tables'
+            'tâches'
+            'menu'
+            'dépenses' !important;
+        padding: 0 5rem;
+    }
+}
+
+@media (max-width: 379px) {
+    .task-count {
+        flex-direction: column;
+    }
+    .task-count__element {
+        margin-bottom: 1rem;
+    }
+    .menu__resume___grid {
+        grid-template-columns: 1fr;
+        row-gap: 1rem;
     }
 }
