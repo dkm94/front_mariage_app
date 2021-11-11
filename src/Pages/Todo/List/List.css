@@ -11,16 +11,18 @@
     display: flex;
     justify-content: space-between;
     padding: 2rem 2rem 2rem 4rem !important;
-    background: #f2eede;
+    background: whitesmoke;
     border-radius: 10px;
     /* box-shadow: 7px 6px 9px -6px rgb(158 153 158); */
     border-bottom: 1px #c4c1c0 solid;
     margin-top: 2rem;
+    font-size: 1.7rem;
 }
 
 .tasks-list__li__done {
     display: flex;
     justify-content: space-between;
+    font-size: 1.7rem;
     padding: 2rem 2rem 2rem 4rem !important;
     background-color: lightgrey;
     font-style: italic;

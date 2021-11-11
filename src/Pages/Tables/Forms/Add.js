@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import axios from 'axios';
+import addIcon from "../../../img/add-group.png";
 import "../Tables.css";
 
 const AddTableForm = ({ addTable }) => {
@@ -29,6 +30,7 @@ const AddTableForm = ({ addTable }) => {
     return(
         <form onSubmit={handleSumbit} className="input-group mb-3">
             <div className="add-input">
+                <img src={addIcon} alt="add table icon" />
                 <input
                 type="text"
                 className="form-control shadow-none"
