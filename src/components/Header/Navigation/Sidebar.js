@@ -26,7 +26,7 @@ const Login = (props) => {
             <nav className="sidebar">
                 <div className="sidebar__greetings">
                     <p className="greetings">Bienvenue</p>
-                    <p className="names">{firstPerson} & {secondPerson}</p>
+                    <p className="names">{`${firstPerson} & ${secondPerson}`}</p>
                 
                 </div>
                 <ul className="sidebarList">
@@ -38,7 +38,8 @@ const Login = (props) => {
                                 id={window.location.pathname === val.pathname ? "active" : ""}
                                 onClick={() => {window.location.pathname = val.pathname }}
                             >
-                                <div id="icon">{val.icon}</div>
+                                <div id="icon"><img src={val.icon} alt="dashboard icon" /></div>
+                                {/* <div id="icon">{val.icon}</div> */}
                                 <div id="title">{val.title}</div>
                             </li>
                         )

@@ -7,13 +7,14 @@ import CustomToggle from '../../../../Dots/Dots';
 // import { CSSTransition, TransitionGroup, Transition } from "react-transition-group";
 // import { Box, Fade, Grow } from '@material-ui/core';
 
-const Guests = ({ guests, deleteGuest, updateGuest, editPicture, seteditPicture, upload, handleFile, searchValue, mariageID, appear, firstPerson, secondPerson }) => {
+const Guests = ({ guests, setGuests, deleteGuest, updateGuest, editPicture, seteditPicture, upload, handleFile, searchValue, mariageID, appear, firstPerson, secondPerson }) => {
 
     const [isOpen, setisOpen] = useState(false);
     const [edit, setEdit] = useState({
         id: null,
         name: ''
     })
+    const [selected, setSelected] = useState("tous");
     // const [deleteId, setDeleteId] = useState("")
     // const nodeRef = useRef(null)
 
@@ -30,9 +31,15 @@ const Guests = ({ guests, deleteGuest, updateGuest, editPicture, seteditPicture,
         // setIsFadingOut(false)
         deleteGuest(props)
     }
-
+    
     return (
         <>
+    
+            <select value={selected} onChange={(e) => setSelected(e.target.value)} className="select-family">
+                <option value="tous" >Tous les invités</option>
+                <option value="1" >{`Invités de ${firstPerson}`}</option>
+                <option value="2" >{`Invités de ${secondPerson}`}</option>
+            </select>
             {
                 guests.length === 0 || null ? 
                 (<div className="block"><span>Vos invités ici.</span></div>) :
@@ -41,9 +48,22 @@ const Guests = ({ guests, deleteGuest, updateGuest, editPicture, seteditPicture,
                 
                             {
                                 guests
-                                .sort((a,b)=>{ return a.name > b.name ? 1 : - 1 })
+                                //searchbar filter
                                 .filter((guest) => {
                                     return guest.name.toLowerCase().indexOf(searchValue.toLowerCase()) >= 0;
+                                })
+                                //select filter
+                                .filter(guest => {
+                                    if(selected === "1"){
+                                        return guest.family === "1"
+                                    } else if(selected === "2"){
+                                        return guest.family === "2"
+                                    } else {
+                                        return guest
+                                    }
+                                })
+                                .sort((a,b)=>{
+                                    return a.name > b.name ? 1 : - 1
                                 })
                                 .map((guest) => {
                                     
@@ -93,9 +113,9 @@ const Guests = ({ guests, deleteGuest, updateGuest, editPicture, seteditPicture,
                                             (<div className="nameField">
                                                 <span id="guest-name">{guest.name}</span>
                                                 {guest.family === "1" ? 
-                                                (<span className="guest-family">Invité de {firstPerson}</span>) :
+                                                (<span className="guest-family">{`Invité(e) de ${firstPerson}`}</span>) :
                                                 ( guest.family === "2") ? 
-                                                (<span className="guest-family">Invité de {secondPerson}</span>) : null }
+                                                (<span className="guest-family">{`Invité(e) de ${secondPerson}`}</span>) : null }
                                             </div>)}
                                             <Modal open={isOpen} setOpen={setisOpen} guestId={editPicture} close={() => {setisOpen(false)}}>
                                                 <form className="modal___picture" onSubmit={(e) => {upload(editPicture); e.preventDefault()}}>

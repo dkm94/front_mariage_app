@@ -89,7 +89,7 @@ const Byguests = ({ userInfos }) => {
         position: 'relative',
         zIndex: 1
     }
-    console.log(window.location.pathname)
+
     return(
         <div className="byguests page-component">
             <div className="guest-container" style={button_wrapper_style}>

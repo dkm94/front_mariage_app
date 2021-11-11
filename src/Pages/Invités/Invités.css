@@ -26,16 +26,23 @@
 
 .guest-form > form > div {
     display: flex;
+    border: 1px solid lightgrey;
+    border-radius: 10px !important;
 }
 
-
+/* 
 .guest-form > form > div > input {
     border-style: none;
     width: 80%;
-    border: 1px solid lightgrey;
-    border-radius: 10px !important;
     padding: 2rem;
 }
+.guest-form > form > div > img {
+    height: fit-content;
+    align-self: center;
+    padding-left: 5px;
+} */
+
+
 
 .guest-form > form > div > input::placeholder {
     font: italic;
@@ -48,13 +55,22 @@
     border-radius: 10px;
     background-color: #b2a9a9;
     color: #FFF;
+    min-width: 8rem;
+    transition: 0.2s all ease-in-out;
+}
+
+.guest-form > form > div > button:hover {
+    background: #e0d9d9;
+    color: #FFF;
+    animation: none;
+}
+.guest-form > form > div > button:focus {
+    color: #FFF;
+    outline: none;
 }
 
 .guest-form > form > div > button:active {
     color: #D18476;
-}
-.guest-form > form > div > button:focus {
-    outline: none;
 }
 
 .guests___bgimage {
@@ -74,6 +90,17 @@
     padding: 5rem 10rem;
     min-height: 500px;
 }
+
+
+.select-family {
+    width: 20rem;
+    border-radius: 5px;
+    padding: 0.7rem;
+    border-color: #ccc;
+    align-self: flex-end;
+    margin-bottom: 3rem;
+}
+
 
 @media (max-width: 1312px) {
     .get-guestlist {
