@@ -6,6 +6,7 @@ import dessertImg from "../../img/menus/dessert_img.jpg";
 import { ScrollButtonContext } from "../../../src/App";
 import CustomToggle from "../../components/Dots/Dots";
 import Dropdown from "react-bootstrap/Dropdown";
+import addIcon from "../../img/plus.png";
 import axios from "axios";
 import "./Menu.css";
 import AddStarterForm from "./Forms/Add/AddStarter";
@@ -150,9 +151,9 @@ const Menus = () => {
                             <div className="starter___div_form">
                                 {starters.length === 0 || starters.length === 1 ? <h3>Entrée</h3> : <h3>Entrées</h3>}
                                 <div className="menu___forms">
-                                    <AddStarterForm addStarter={addStarter} />
+                                    <AddStarterForm addStarter={addStarter} icon={addIcon} />
                                 </div>
-                                {starters.length === 0 ? (<div style={{ textAlign: "center"}}><span>Vos entrées ici</span></div>) : (<ul>
+                                {starters.length === 0 ? (<div className="empty-div"><span>Vos entrées ici</span></div>) : (<ul>
                                     {
                                         starters.map((starter) => <li key={starter._id} >
                                             {edit.id === starter._id ? 
@@ -184,9 +185,9 @@ const Menus = () => {
                             <div className="maincourse___div_form">
                             {maincourses.length === 0 || maincourses.length === 1 ? <h3>Plat</h3> : <h3>Plats</h3>}
                                 <div className="menu___forms">
-                                    <AddMaincourseForm addMaincourse={addMaincourse} />
+                                    <AddMaincourseForm addMaincourse={addMaincourse} icon={addIcon} />
                                 </div>
-                                {maincourses.length === 0 ? (<div style={{ textAlign: "center"}}><span>Vos plats ici</span></div>) : (<ul>
+                                {maincourses.length === 0 ? (<div className="empty-div"><span>Vos plats ici</span></div>) : (<ul>
                                     {
                                         maincourses.map((maincourse) => <li key={maincourse._id} >
                                             {edit.id === maincourse._id ? 
@@ -224,9 +225,9 @@ const Menus = () => {
                             <div className="dessert___div_form">
                             {desserts.length === 0 || desserts.length === 1 ? <h3>Dessert</h3> : <h3>Desserts</h3>}
                                 <div className="menu___forms">
-                                    <AddDessertForm addDessert={addDessert} />
+                                    <AddDessertForm addDessert={addDessert} icon={addIcon} />
                                 </div>
-                                {desserts.length === 0 ? (<div style={{ textAlign: "center"}}><span>Vos desserts ici</span></div>) : (<ul>
+                                {desserts.length === 0 ? (<div className="empty-div"><span>Vos desserts ici</span></div>) : (<ul>
                                     {
                                         desserts.map((dessert) => <li key={dessert._id} >
                                             {edit.id === dessert._id ? 

@@ -4,6 +4,7 @@ ul {
 
 .starter___div_form > ul, .maincourse___div_form > ul, .dessert___div_form > ul {
     padding: 0;
+    margin-top: 2rem;
 }
 .starter___div_form > ul > li, .maincourse___div_form > ul > li, .dessert___div_form > ul > li {
     display: flex;
@@ -91,32 +92,33 @@ ul {
     background-color: #FAF8F4;
 }
 
-.menu___forms {
-    margin-bottom: 2rem;
-}
-
-.menu___forms > form {
-    width: 100%;
-    display: flex;
-    border: lightgray 1px solid;
-    padding: 0 0.5rem;
-    border-radius: 10px;
-    background: #FFFFFF;
-    padding: .375rem .375rem .375rem .75rem;
-}
-
-.menu___forms > form > input {
+.menu___forms input {
     width: 100%;
 }
 
-.menu___forms > form > button {
+.menu___forms > form > div > button {
     margin-left: 10px;
     border-style: none;
-    background: white;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    background-color: #b2a9a9;
+    color: #FFF;
+    min-width: 8rem;
+    transition: 0.2s all ease-in-out;
 }
 
-.menu___forms > form > button:focus {
+.menu___forms > form > div > button:hover {
+    background: #e0d9d9;
+    color: #FFF;
+    animation: none;
+}
+.menu___forms > form > div > button:focus {
+    color: #FFF;
     outline: none;
+}
+
+.menu___forms > form > div > button:active {
+    color: #D18476;
 }
 
 .menu___li-btns > .custom-dropdown > .dropdown > a {
@@ -167,6 +169,11 @@ ul {
 .hideParamsBtns {
     display: none !important;
 }
+.empty-div {
+    margin: 5rem 0;
+    text-align: center;
+}
+
 
 @media (max-width: 1024px) {
     .menu > .menu__list {

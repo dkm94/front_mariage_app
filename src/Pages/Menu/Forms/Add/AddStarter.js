@@ -2,10 +2,11 @@ import React, { useState, useRef } from "react";
 import axios from 'axios';
 import "../../Menu.css";
 
-const AddStarterForm = ({ addStarter }) => {
+const AddStarterForm = ({ addStarter, icon }) => {
 
     const [input, setInput] = useState("");
     const inputRef = useRef(null);
+    const [loading, setLoading] = useState(false)
 
     const handleChange = e => {
         setInput(e.target.value)
@@ -13,6 +14,7 @@ const AddStarterForm = ({ addStarter }) => {
 
     const handleSumbit = e => {
         e.preventDefault();
+        setLoading(true)
         axios.get("/api/admin/menu")
         .then((res) => {
             const data = res.data;
@@ -22,8 +24,9 @@ const AddStarterForm = ({ addStarter }) => {
                     name: input
                 })
                 .then((res) => {
-                    addStarter(res.data)
-                    setInput("")
+                    addStarter(res.data);
+                    setInput("");
+                    setLoading(false)
                 })
                 .catch((err) => {
                     console.log(err)})
@@ -32,16 +35,20 @@ const AddStarterForm = ({ addStarter }) => {
     }
 
     return(
-        <form onSubmit={handleSumbit}>
-            <input
-            type="text"
-            name="name" 
-            value={input} 
-            onChange={handleChange}
-            ref={inputRef}
-            required
-            />
-            <button type="submit" className="btn shadow-none submit-menu-item"><i className="fas fa-check" aria-hidden="true"></i></button>
+        <form onSubmit={handleSumbit}  className="input-group mb-3">
+            <div className="add-input" >
+                {/* <img src={icon} alt="icone d'ajout"/> */}
+                <input
+                type="text"
+                name="name" 
+                value={input} 
+                onChange={handleChange}
+                ref={inputRef}
+                placeholder="Verrine d'avocat et saumon fumé..."
+                required
+                />
+                <button type="submit" className="btn shadow-none submit-menu-item">{loading ? "..." : "Ajouter"}</button>
+            </div>
         </form>
     )
 }
