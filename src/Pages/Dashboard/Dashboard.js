@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Link } from "react-router-dom";
 import { LoaderContext, ScrollButtonContext } from "../../../src/App";
-import groupIcon from "../../img/dashboardIcons/groupe.png";
-import tableIcon from "../../img/dashboardIcons/dinner-table.png";
-import menuIcon from "../../img/dashboardIcons/plate.png";
-import todoIcon from "../../img/dashboardIcons/todo.png";
-import calculatorIcon from "../../img/dashboardIcons/calculator.png";
+import groupIcon from "../../img/SidebareIcons/guests.png";
+import tableIcon from "../../img/SidebareIcons/tables.png";
+import menuIcon from "../../img/SidebareIcons/menu.png";
+import todoIcon from "../../img/SidebareIcons/todo.png";
+import calculatorIcon from "../../img/SidebareIcons/money.png";
 import './Dashboard.css';
 import axios from 'axios';
 

@@ -12,22 +12,21 @@ const Select = ({ tables, table, guests, setTables }) => {
         backgroundColor: '#d6d6d6',
         color: '#878787',
         padding: '6px 19px',
+        borderRadius: '7px',
+        transition: '0.2s all ease-in-out'
         // fontSize: ".75rem"
     }
 
     const enableBtn = {
         boxShadow: "0 1px 3px 0 rgb(0 0 0 / 26%)",
-        backgroundColor: "transparent",
-        backgroundImage: "linear-gradient(90deg, rgba(181,189,155,1) 0%, rgba(193,201,166,1) 60%, rgba(211,221,181,1) 100%)",
+        backgroundColor: "darkgrey",
         borderColor: "#caa5c1",
         color: "#FFFFFF",
-        // fontSize: ".75rem",*
         borderRadius: "5px",
         padding: "6px 19px",
         fontWeight: "400",
         width: "fit-content",
-        marginTop: "10px",
-        letterSpacing: "1px"
+        marginTop: "10px"
     }
 
     

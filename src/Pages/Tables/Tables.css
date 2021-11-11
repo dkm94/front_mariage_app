@@ -124,6 +124,23 @@
     border-radius: 10px;
     background-color: #b2a9a9;
     color: #FFF;
+    min-width: 8rem;
+    transition: 0.2s all ease-in-out;
+}
+
+
+.table-form > form > div > button:hover {
+    background: #e0d9d9;
+    color: #FFF;
+    animation: none;
+}
+.table-form > form > div > button:focus {
+    color: #FFF;
+    outline: none;
+}
+
+.table-form > form > div > button:active {
+    color: #D18476;
 }
 
 .tbStyle {
@@ -131,11 +148,11 @@
     flex-direction: column;
     /* box-shadow: 7px 6px 9px -6px rgb(158 153 158); */
     height: auto;
-    background-color: #f4eeed;
+    background-color: whitesmoke;
     position: relative;
     align-items: center;
     padding: 2rem 2rem;
-    border-bottom: 1px #dfdbd7 solid;
+    border-bottom: 3px #dfdbd7 solid;
     border-radius: 7px;
 }
 
