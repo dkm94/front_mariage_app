@@ -94,7 +94,35 @@
 }
 
 .budget-form___add-btn, .budget-form___submit {
+    margin-top: 1.5rem;
     text-align: end;
+}
+
+.budget-form___submit > button {
+    margin-left: 10px;
+    border-style: none;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    background-color: #b2a9a9;
+    color: #FFF;
+    min-width: 8rem;
+    transition: 0.2s all ease-in-out;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 26%);
+    text-shadow: 0px 0px 1px #333;
+}
+
+.budget-form___submit > button:hover {
+    background: #e0d9d9;
+    color: #FFF;
+    animation: none;
+}
+.budget-form___submit > button:focus {
+    color: #FFF;
+    outline: none;
+}
+
+.budget-form___submit > button:active {
+    color: #D18476;
 }
 
 .budget___select {

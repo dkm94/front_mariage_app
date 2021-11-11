@@ -25,8 +25,8 @@ const Byguests = ({ userInfos }) => {
     const [appear, setAppear] = useState(false);
 
     useEffect(() => {
-        const fetchData = () => {
-            axios.get("/api/admin/guests/")
+        const fetchData = async () => {
+            await axios.get("/api/admin/guests/")
             .then(result => {
                 setAppear(true)
                 setGuests(result.data)

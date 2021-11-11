@@ -208,7 +208,7 @@ const Budget = () => {
                                         border-radius="10px"
                                     />
                                     <div className="col-12 budget-form___submit">
-                                        <button className="btn-style-s" type="submit" disabled={formik.isSubmitting}>
+                                        <button className="btn shadow-none" type="submit" disabled={formik.isSubmitting}>
                                             Valider
                                         </button>
                                     </div>
