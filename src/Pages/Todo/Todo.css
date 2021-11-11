@@ -68,6 +68,31 @@
   .toggle:disabled::before {
      background: #2be;
   }
+
+  .add-task-form > form > div > button {
+    margin-left: 10px;
+    border-style: none;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    background-color: #b2a9a9;
+    color: #FFF;
+    min-width: 8rem;
+    transition: 0.2s all ease-in-out;
+}
+
+.add-task-form > form > div > button:hover {
+    background: #e0d9d9;
+    color: #FFF;
+    animation: none;
+}
+.add-task-form > form > div > button:focus {
+    color: #FFF;
+    outline: none;
+}
+
+.add-task-form > form > div > button:active {
+    color: #D18476;
+}
   
 
 @media (max-width: 786px) {
