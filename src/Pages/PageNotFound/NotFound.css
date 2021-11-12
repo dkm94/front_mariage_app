@@ -1,0 +1,36 @@
+.not-found {
+    height: 91vh;
+    position: relative;
+    width: 100%;
+}
+
+.not-found > div {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.not-found > div > h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20rem;
+}
+
+.not-found > div > h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem !important;
+}
+
+.not-found > div > div {
+    display: flex;
+}
+
+.not-found > div > div > a {
+    margin-top: 1rem;
+    justify-content: center;
+    padding: 1rem 2rem;
+    border-radius: 7px;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid grey;
+}

@@ -1,0 +1,17 @@
+import { Link } from "react-router-dom";
+import "./NotFound.css";
+
+const NotFount = () => {
+    return(
+        <div className="not-found">
+            <div>
+                <h1>404</h1>
+                <h2>Oups, cette page est introuvable</h2>
+                <div>
+                    <Link to="/">Retourner sur le tableau de bord</Link>
+                </div>
+            </div>
+        </div>
+    )
+}
+export default NotFount;

@@ -23,6 +23,7 @@ import LesTables from "../src/Pages/Tables/Tables";
 import LaCarte from "../src/Pages/Menu/Menu";
 import LesDépenses from "../src/Pages/Budget/Budget.js";
 import Todo from "../src/Pages/Todo/Todo";
+import NotFound from './Pages/PageNotFound/NotFound';
 
 // <------- Packages ---------->
 import axios from "axios";
@@ -132,7 +133,7 @@ function App() {
                   <ProtectedRoute path="/menu/carte" component={Carte} isAuth={role}/>
                   <ProtectedRoute path="/menu/budget" component={Budget} isAuth={role}/>
                   <ProtectedRoute path="/menu/taches" component={TodoList} isAuth={role}/>
-                  {/* <Route path="*" component={() => "Contenu introuvable"}/> */}
+                  <Route component={NotFound}/>
                 </Switch>
               </div>
             </LoaderContext.Provider>
