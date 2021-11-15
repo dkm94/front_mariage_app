@@ -9,7 +9,6 @@ import axios from "axios";
 import "./Mon_compte.css";
 
 const MyAccount = ({ token }) => {
-console.log("🚀 ~ file: Mon_compte.js ~ line 10 ~ MyAccount ~ props", token)
    
     const { id, mariageID } = useContext(UserContext)
     const scrollBtn = useContext(ScrollButtonContext)
@@ -18,6 +17,9 @@ console.log("🚀 ~ file: Mon_compte.js ~ line 10 ~ MyAccount ~ props", token)
     const [account, setAccount] = useState({})
     const [wedding, setWedding] = useState({})
     const [deleteValidation, setdeleteValidation] = useState(false)
+    const [newPassword, setNewPassword] = useState("")
+    const [editSuccess, setEditSuccess] = useState("")
+    console.log("🚀 ~ file: Mon_compte.js ~ line 22 ~ MyAccount ~ editSuccess", editSuccess)
     // const [saving, setSaving] = useState(false);
     
     // Fetch data
@@ -64,8 +66,6 @@ console.log("🚀 ~ file: Mon_compte.js ~ line 10 ~ MyAccount ~ props", token)
     }, [reset, wedding]);
 
     const onSubmitWedding = async ({firstPerson, secondPerson}) => {
-        console.log(firstPerson, secondPerson);
-        // setSaving(true)
         await axios.post(`/api/admin/wedding/edit/${mariageID}`,
             {
                 firstPerson: firstPerson,
@@ -75,7 +75,10 @@ console.log("🚀 ~ file: Mon_compte.js ~ line 10 ~ MyAccount ~ props", token)
                 if(res.data != null){
                     wedding.firstPerson = firstPerson;
                     wedding.secondPerson = secondPerson;
-                    // setSaving(false)
+                    setEditSuccess("La modification a été enregistrée.");
+                    setTimeout(() => {
+                        window.location.reload()
+                    }, 2500);
                 }
             })
             .catch((err) => {
@@ -114,15 +117,16 @@ console.log("🚀 ~ file: Mon_compte.js ~ line 10 ~ MyAccount ~ props", token)
 
     
     
-      const onSubmitAccount = async ({ password }) => {
+      const onSubmitAccount = async () => {
         await axios.post(`/api/admin/admin/editAccount/${id}`,
         {
-            password: password
+            password: newPassword
         })
         .then((res) => {
             if(res.data != null){
                 setTimeout(() => {
-                    alert('Le mot de passe a été mofidié avec succès.')
+                    setEditSuccess("La modification a été enregistrée.");
+                    setNewPassword("");
                     window.location.reload()
                 }, 1000);
             }
@@ -200,6 +204,7 @@ console.log("🚀 ~ file: Mon_compte.js ~ line 10 ~ MyAccount ~ props", token)
                             <Col xs={12} style={{ display: "flex", justifyContent: "end"}}>
                                 <Button type="submit" title="Enregistrer"/>
                             </Col>
+                            {editSuccess}
                         </form>
                     </Row>
                 </Container>
@@ -230,6 +235,8 @@ console.log("🚀 ~ file: Mon_compte.js ~ line 10 ~ MyAccount ~ props", token)
                                     name="password"
                                     type="password"
                                     className="form-control"
+                                    value={newPassword}
+                                    onChange={(e) => setNewPassword(e.target.value)}
                                     />
                                 </div>
                             </Col>
@@ -252,6 +259,7 @@ console.log("🚀 ~ file: Mon_compte.js ~ line 10 ~ MyAccount ~ props", token)
                                     <Button title="Enregistrer" type="submit"/>
                                 </div>
                             </Col>
+                            {editSuccess}
                         </Row>
                     </form>
                 </Container>
