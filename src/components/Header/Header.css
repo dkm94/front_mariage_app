@@ -172,7 +172,6 @@
 .sidebar__greetings {
     padding: 1.5rem 2rem;
     word-break: break-word;
-    border-bottom: 3px solid #fff;
 }
 .sidebar__greetings > p{
     word-break: break-word;
