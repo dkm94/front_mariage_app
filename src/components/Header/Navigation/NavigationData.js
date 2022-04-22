@@ -20,28 +20,28 @@ export const NavigationData = [
         pathname: "/tableau-de-bord"
     },
     {
-        title: "Les invités",
+        title: "invités",
         // icon: <PeopleAltIcon />,
         icon: guestsIcon,
         pathname: "/menu/invites"
     },
     {
-        title: "Les tables",
+        title: "tables",
         icon: tablesIcon,
         pathname: "/menu/tables"
     },
     {
-        title: "Liste des tâches",
+        title: "tâches",
         icon: todoIcon,
         pathname: "/menu/taches"
     },
     {
-        title: "Le menu",
+        title: "menu",
         icon: menuIcon,
         pathname: "/menu/carte"
     },
     {
-        title: "Les dépenses",
+        title: "dépenses",
         icon: expensesIcon,
         pathname: "/menu/budget"
     }

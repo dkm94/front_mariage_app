@@ -48,10 +48,10 @@ const Todo = () => {
             {scrollBtn}
             <div className="todo">
                 <div className="page-location"><div><Link to={"/"} >Dashboard</Link>{'>'} Tâches</div></div>
-                <div className="todo___bgimage"><div className="component-title"><h1>Les tâches</h1></div></div>
                 <div className="titles mb-3">
                     <h2>Souhaitez-vous ajouter de nouvelles tâches ?</h2>
                 </div>
+                <div className="todo___bgimage"><div className="component-title"><h1>Les tâches</h1></div></div>
                 <Container style={{ padding: "2rem 4rem"}} fluid>
                     <Row>
                         <AddForm 

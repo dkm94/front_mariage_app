@@ -138,10 +138,10 @@ const Menus = () => {
             {scrollBtn}
             <div className="menu">
                 <div className="page-location"><div><Link to={"/"} >Dashboard</Link>{'>'} Carte</div></div>
-                <div className="menu___bgimage"><div className="component-title"><h1>La carte</h1></div></div>
                 <div className="titles mb-3">
                     <h2>Avez-vous prévu une réception ?</h2>
                 </div>
+                <div className="menu___bgimage"><div className="component-title"><h1>La carte</h1></div></div>
                 <div className="menu__list__container">
                     <div className="menu___list">
                         <div className="starter forms">
