@@ -54,17 +54,17 @@ const Dashboard = () => {
     return(
         <div className="dashboard page-component">
             {scrollBtn}
-            <div className="dashboard___bgimage"><div className="component-title" id="component-dashboard"><h1>Tableau de bord</h1></div></div>
-            <div className="titles">
-                <h1>Que souhaitez-vous faire aujourd'hui ?</h1>
+            <div className="titles mb3">
+                <h2>Que souhaitez-vous faire aujourd'hui ?</h2>
             </div>
+            <div className="dashboard___bgimage"><div className="component-title" id="component-dashboard"><h1>Tableau de bord</h1></div></div>
             <div className="dashboard___elements">
                 <div className="grid-container">
-                    <div className="item1">
+                    <div className="item">
                         <div className="item__title">
-                            <div className="dashboard-icon" id="bg-item1" >
+                            {/* <div className="dashboard-icon" id="bg-item1" >
                                 <img src={groupIcon} alt="icône invités" />
-                            </div>
+                            </div> */}
                             <div className="dashboard-title"><h2>Invités</h2></div>
                         </div>
                         <div><span>Total</span></div>
@@ -77,11 +77,11 @@ const Dashboard = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="item2">
+                    <div className="item">
                         <div className="item__title">
-                            <div className="dashboard-icon" id="bg-item2" >
+                            {/* <div className="dashboard-icon" id="bg-item2" >
                                 <img src={tableIcon} alt="icône tables" />
-                            </div>
+                            </div> */}
                             <div className="dashboard-title"><h2>Tables</h2></div>
                         </div>
                         <div><span>Total</span></div>
@@ -94,11 +94,11 @@ const Dashboard = () => {
                             </div>
                         </div>  
                     </div>
-                    <div className="item3">
+                    <div className="item">
                         <div className="item__title">
-                            <div className="dashboard-icon" id="bg-item3" >
+                            {/* <div className="dashboard-icon" id="bg-item3" >
                                 <img src={todoIcon} alt="icône tâches" />
-                            </div>
+                            </div> */}
                             <div className="dashboard-title"><h2>Tâches</h2></div>                      
                         </div>
                         <div className="tasks__resume___container">
@@ -118,11 +118,11 @@ const Dashboard = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="item4">
+                    <div className="item">
                         <div className="item__title">
-                            <div className="dashboard-icon" id="bg-item4" >
+                            {/* <div className="dashboard-icon" id="bg-item4" >
                                 <img src={menuIcon} alt="icône menu" />
-                            </div>
+                            </div> */}
                             <div className="dashboard-title"><h2>Carte</h2></div>
                         </div>
                         <div className="menu__resume___container">
@@ -145,11 +145,11 @@ const Dashboard = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="item5">
+                    <div className="item">
                         <div className="item__title">
-                            <div className="dashboard-icon" id="bg-item5">
+                            {/* <div className="dashboard-icon" id="bg-item5">
                                 <img src={calculatorIcon} alt="icône calculatrice" />
-                            </div>
+                            </div> */}
                             <div className="dashboard-title"><h2>Budget</h2></div>
                         </div>        
                         <div><span>Total</span></div>

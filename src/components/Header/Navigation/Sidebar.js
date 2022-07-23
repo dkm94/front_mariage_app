@@ -29,7 +29,6 @@ const Login = (props) => {
                     <div className="profile-picture" >
                         <img alt='profile' src={profilePicture} />
                     </div>
-                    <p className="greetings">Bienvenue</p>
                     <p className="names">{`${firstPerson} & ${secondPerson}`}</p>
                 
                 </div>

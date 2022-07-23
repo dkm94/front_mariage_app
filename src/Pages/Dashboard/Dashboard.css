@@ -54,31 +54,24 @@
 }
 
 .dashboard-title {
-    align-self: center;
-    position: absolute;
-    top: 0;
-    right: 0;
+    
 }
 .dashboard-title > h2 {
     margin-top: 0;
 }
 .grid-container {
   display: grid;
-  grid-template-areas:
-    'invités tables tâches'
-    ' menu menu dépenses';
+  grid-template-columns: repeat(2, 1fr);
   grid-gap: 3rem;
   /* background-color: #2196F3; */
-  padding: 10px 5rem;
 }
 
 .grid-container > div {
-  /* background-color: rgba(255, 255, 255, 0.8); */
-  text-align: center;
-  /* border: 1px solid lightgrey; */
-  border-bottom: 3px #dfdbd7 solid;
-  border-radius: 7px;
-  padding: 2rem;
+    background: rgb(247, 245, 243, 0.5);
+    text-align: center;
+    /* border: 1px solid lightgrey; */
+    /* border: 1px #dfdbd7 solid; */
+    padding: 2rem;
 }
 
 .dashboard___elements > div > div > .item__title {
@@ -86,7 +79,6 @@
     padding-left: 2rem;
     display: flex;
     width: 100%;
-    justify-content: space-between;
     position: relative;
     min-height: 3rem;
 }
