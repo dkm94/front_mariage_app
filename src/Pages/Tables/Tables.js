@@ -109,11 +109,11 @@ const Tables = (props) => {
         <div className="tables page-component">
             {scrollBtn}
             <div className="page-location"><div><Link to={"/"} >Dashboard</Link>{'>'} Tables</div></div>
-            <div className="tables___bgimage"><div className="component-title"><h1>Les tables</h1></div></div>
             <div className="tables-container">
                 <div className="titles mb-3">
                     <h2>Comment souhaitez-vous organiser votre plan de table ? </h2>
                 </div>
+            <div className="tables___bgimage"><div className="component-title"><h1>Les tables</h1></div></div>
                 <Container style={{ padding: "2rem 4rem"}} fluid>
                     <Row>
                         <Col xs={12} sm={10} md={6} className="table-form">

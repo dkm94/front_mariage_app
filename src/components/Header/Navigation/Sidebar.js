@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import "../Header.css";
 import { NavigationData } from "./NavigationData";
+import profilePicture from "../../../img/couple-img.jpg";
 import axios from "axios";
 
 const Login = (props) => {
@@ -25,7 +26,9 @@ const Login = (props) => {
 
             <nav className="sidebar">
                 <div className="sidebar__greetings">
-                    <p className="greetings">Bienvenue</p>
+                    <div className="profile-picture" >
+                        <img alt='profile' src={profilePicture} />
+                    </div>
                     <p className="names">{`${firstPerson} & ${secondPerson}`}</p>
                 
                 </div>
@@ -38,7 +41,7 @@ const Login = (props) => {
                                 id={window.location.pathname === val.pathname ? "active" : ""}
                                 onClick={() => {window.location.pathname = val.pathname }}
                             >
-                                <div id="icon"><img src={val.icon} alt="dashboard icon" /></div>
+                                {/* <div id="icon"><img src={val.icon} alt="dashboard icon" /></div> */}
                                 {/* <div id="icon">{val.icon}</div> */}
                                 <div id="title">{val.title}</div>
                             </li>

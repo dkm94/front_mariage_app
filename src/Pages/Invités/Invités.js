@@ -95,10 +95,10 @@ const Byguests = ({ userInfos }) => {
             <div className="guest-container" style={button_wrapper_style}>
             {scrollBtn}
                 <div className="page-location"><div><Link to={"/"} >Dashboard</Link>{'>'} Invités</div></div>
-                <div className="guests___bgimage"><div className="component-title"><h1>Les invités</h1></div></div>
                 <div className="titles mb-3">
                     <h2>Souhaitez-vous ajouter de nouveaux invités ?</h2>
                 </div>
+                <div className="guests___bgimage"><div className="component-title"><h1>Les invités</h1></div></div>
                 <Container style={{ padding: "2rem 4rem"}} fluid>
                     <Row>
                         <Col xs={12} sm={10} md={6} className="guest-form">

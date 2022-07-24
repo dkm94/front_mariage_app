@@ -123,11 +123,11 @@ const Budget = () => {
         <div className="budget-container page-component">
             {scrollBtn}
             <div className="page-location"><div><Link to={"/"} >Dashboard</Link>{'>'} Dépenses</div></div>
-            <div className="budget___bgimage"><div className="component-title"><h1>Les dépenses</h1></div></div>
             <div className="budget">
                 <div className="titles mb-3">
-                    <h1>Souhaitez-vous ajouter une nouvelle dépense ?</h1>
+                    <h2>Souhaitez-vous ajouter une nouvelle dépense ?</h2>
                 </div>
+                <div className="budget___bgimage"><div className="component-title"><h1>Les dépenses</h1></div></div>
                 <div className="budget-cols">
                     <div className="budget___search">
                         <div>

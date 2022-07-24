@@ -6,11 +6,10 @@ html, body {
     min-height: 100vh;
     width: 100%;
     margin: 0;
-    font-family: 'Lato', sans-serif !important;
     font-weight: 400 !important;
     background-color: #F5F7FB;
-    /* font-size: 0.6rem !important; */
-    /* font-family: 'Roboto', sans-serif; */
+    font-size: 0.9rem;
+    font-family: 'Playfair Display', serif !important;
 }
 
 body {
@@ -177,11 +176,13 @@ button:focus {
     text-shadow: 1px 1px 1px rgb(0 0 0 / 15%);
     padding-bottom: 2rem;
     padding-left: 1rem;
-    border-bottom: 1px solid #d3d3d3;
     margin: 5rem 3rem 3rem 3rem;
+    font-family: 'Permanent Marker', cursive;
+    /* font-family: 'David Libre', serif !important; */
 }
 .titles > h2 {
     font-size: 3rem !important;
+    text-align: center;
 }
 
 .searchbar {
@@ -402,6 +403,14 @@ a:-webkit-any-link {
  .add-input > input {
     border: none !important;
  }
+
+ .center-h-v{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+ }
+
  @media (max-width: 576px) {
     .page-location {
         display: none;
