@@ -1,12 +1,30 @@
 .db-component-content {
     font-size: 4rem;
+    margin-bottom: 2rem;
 }
 
 #home-cards {
     max-width: 20rem;
+    position: relative;
 }
 
 .db-component-style > h3 {
     font-size: 1rem;
     text-transform: uppercase;
+}
+
+.dashbord-content {
+    padding: 0;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.dashbord-return-content {
+    margin-bottom: 5rem;
+    text-align: center;
+}
+
+.dashbord-view-details {
+    position: absolute;
+    bottom: 10%;
 }

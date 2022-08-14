@@ -4,9 +4,10 @@ import './Dashboard.css';
 import axios from 'axios';
 import Card from "./Card/Card.jsx";
 
-const Dashboard = () => {
+const Dashboard = (props) => {
     const scrollBtn = useContext(ScrollButtonContext)
     //const loader = useContext(LoaderContext)
+    const id = props.userInfos.mariageID;
 
     const [guests, setGuests] = useState();
     const [tables, setTables] = useState();
@@ -15,6 +16,7 @@ const Dashboard = () => {
     const [maincourses, setMaincourses] = useState([]);
     const [starters, setStarters] = useState([]);
     const [desserts, setDesserts] = useState([]);
+    const [wedding, setWeddding] = useState([]);
 
     useEffect(() => {
         let guests = axios.get("/api/admin/guests/");
@@ -24,9 +26,10 @@ const Dashboard = () => {
         let starters = axios.get("/api/admin/menu/starters/");
         let maincourses = axios.get("/api/admin/menu/maincourses/");
         let desserts = axios.get("/api/admin/menu/desserts/");
+        let wedding = axios.get(`/api/admin/wedding/${id}`);
 
         async function getDatas(){
-            let res = await Promise.all([guests, tables, operations, todos, starters, maincourses, desserts])
+            let res = await Promise.all([guests, tables, operations, todos, starters, maincourses, desserts, wedding])
             setGuests(res[0].data)
             setTables(res[1].data)
             setOperations(res[2].data)
@@ -34,17 +37,26 @@ const Dashboard = () => {
             setStarters(res[4].data)
             setMaincourses(res[5].data)
             setDesserts(res[6].data)
+            setWeddding(res[7].data)
         }
         getDatas();
-    }, [])
+    }, [id])
 
     let sum = operations.reduce((a, b) => a + b.price, 0)/100;
     function total(sum){
         return Number(sum).toFixed(2);
     }
 
+    console.log(sum >= 10000)
+
     const isCompleted = tasks?.filter(task => task?.isCompleted);
     const notCompleted = tasks?.filter(task => !task?.isCompleted);
+
+   
+    const { firstPerson, secondPerson } = wedding;
+    
+    const firstFamilyGuests = guests?.filter(guest => guest?.family === "1");
+    const secondFamilyGuests = guests?.filter(guest => guest?.family === "2");
 
     const meal = starters?.length + maincourses?.length + desserts?.length;
     
@@ -64,16 +76,20 @@ const Dashboard = () => {
                     title={"Invités"} 
                     content={guests?.length} 
                     array={guests} 
-                    resume={"lastAdded"} 
+                    resume={"repartition"} 
                     extraProp={"name"} 
                     path={"menu/invites"}
+                    firstPerson={firstPerson}
+                    secondPerson={secondPerson}
+                    firstFamilyGuests={firstFamilyGuests}
+                    secondFamilyGuests={secondFamilyGuests}
                 />
                 <Card 
                     title={"Tables"} 
                     content={tables?.length} 
                     array={tables} 
-                    resume={"lastAdded"} 
-                    extraProp={"name"}
+                    resume={"tables"} 
+                    extraProp={"tables"}
                     path={"menu/tables"}
                 />
                 <Card 
@@ -83,7 +99,7 @@ const Dashboard = () => {
                     subArrayTwo={maincourses?.length}
                     subArrayThree={desserts?.length}
                     resume={"composition"}
-                    extraProp={"multiname"}
+                    extraProp={"composition"}
                     path={"menu/carte"}
                 />
                 <Card 
@@ -94,7 +110,7 @@ const Dashboard = () => {
                     array={tasks}
                     elements={"text"}
                     resume={"status"}
-                    extraProp={"multiname"}
+                    extraProp={"tache"}
                     path={"menu/taches"}
                 />
                 <Card 
