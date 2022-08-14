@@ -1,0 +1,12 @@
+.db-component-content {
+    font-size: 4rem;
+}
+
+#home-cards {
+    max-width: 20rem;
+}
+
+.db-component-style > h3 {
+    font-size: 1rem;
+    text-transform: uppercase;
+}
