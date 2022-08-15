@@ -27,7 +27,8 @@ const Card = ({
   firstPerson,
   secondPerson,
   firstFamilyGuests,
-  secondFamilyGuests
+  secondFamilyGuests,
+  sumLength
 }) => {
 
   const subContent = <div>
@@ -66,7 +67,7 @@ const Card = ({
   
 
   const returnDescription = (array) => {
-    const getElement = array?.map(el => <li key={el?._id}>{el?.description}</li>);
+    const getElement = array?.map(el => <li className='overflow' key={el?._id}>{el?.description}</li>);
     const getLast = getElement?.slice(-3);
     return getLast;
   }
@@ -74,6 +75,8 @@ const Card = ({
   const resumeTitle = (resume) => {
     switch (resume) {
       case "tables":
+        return "Récemment ajouté";
+      case "expenses":
         return "Récemment ajouté";
       case "repartition":
         return "Répartition";
@@ -111,6 +114,7 @@ const Card = ({
       {content && <div className='db-component-content'>{content}</div>}
       <div className='dashbord-return-content' >
         <span>{resumeTitle(resume)}</span>
+        <hr />
         <ul className='dashbord-content'>{returnContent(extraProp)}</ul>
       </div>
       <div className='dashbord-view-details' >

@@ -1,11 +1,13 @@
 .db-component-content {
-    font-size: 4rem;
+    font-size: 3rem;
     margin-bottom: 2rem;
 }
 
 #home-cards {
     max-width: 20rem;
     position: relative;
+    padding-right: 2rem;
+    padding-left: 2rem;
 }
 
 .db-component-style > h3 {
@@ -22,9 +24,16 @@
 .dashbord-return-content {
     margin-bottom: 5rem;
     text-align: center;
+    width: 100%;
 }
 
 .dashbord-view-details {
     position: absolute;
     bottom: 10%;
+}
+
+.overflow {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

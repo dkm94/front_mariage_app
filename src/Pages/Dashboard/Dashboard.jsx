@@ -47,7 +47,7 @@ const Dashboard = (props) => {
         return Number(sum).toFixed(2);
     }
 
-    console.log(sum >= 10000)
+    const sumLength = sum.toString().length;
 
     const isCompleted = tasks?.filter(task => task?.isCompleted);
     const notCompleted = tasks?.filter(task => !task?.isCompleted);
@@ -116,9 +116,10 @@ const Dashboard = (props) => {
                 <Card 
                     title={"Dépenses"} 
                     content={` ${total(sum)} €`}
+                    sumLength={sumLength}
                     array={operations}
                     elements={"description"}
-                    resume={"lastAdded"}
+                    resume={"expenses"}
                     extraProp={"description"}
                     path={"menu/budget"}
                     />
