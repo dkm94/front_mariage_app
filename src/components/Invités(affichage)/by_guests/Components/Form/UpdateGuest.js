@@ -80,7 +80,7 @@ const UpdateGuest = ({ edit, setEdit, onSubmit, mariageID, guestFamily }) => {
                             <label htmlFor="test2">Famille de {family.secondPerson} </label>
                         </p>
                     </div>
-                    <button className="nameField___btns">
+                    <button style={{ width: "fit-content", padding: "7px 30px", alignSelf: "center", borderRadius: "7px"}} >
                         <i className="fas fa-check"/>
                     </button>
                </form>
