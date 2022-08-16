@@ -7,6 +7,7 @@ import List from "./List/List"
 import { ScrollButtonContext } from "../../../src/App";
 import "./Todo.css";
 import axios from 'axios';
+import { TransitionGroup } from 'react-transition-group';
 
 
 const Todo = () => {
@@ -75,13 +76,23 @@ const Todo = () => {
                     </Row>
                 </Container>
                 <div className="todo-list">
-                    <List 
-                    todos={todos}
-                    setTodos={setTodos}
-                    deleteTodo={deleteTodo}
-                    searchValue={searchValue}
-                    setSearchValue={setSearchValue}
-                    />
+                    {todos
+                    .filter((todo) => {
+                        return todo.text.toLowerCase().indexOf(searchValue.toLowerCase()) >= 0;
+                    })
+                    .reverse()
+                    .map((todo, i) => (
+                        <List
+                        todos={todos}
+                        obj={todo}
+                        i={i}
+                        setTodos={setTodos}
+                        deleteTodo={deleteTodo}
+                        searchValue={searchValue}
+                        setSearchValue={setSearchValue}
+                        />
+                    ))
+                    }
                 </div>
             </div>
         </div>
