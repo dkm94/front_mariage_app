@@ -19,11 +19,14 @@
     }
     .budget___col-2 > .chart-component {
         width: 100%;
-        margin-bottom: 6rem;
+        margin-bottom: 2rem;
         padding: 0;
     }
     .budget___col-2 > div {
         padding: 0;
+    }
+    .pie {
+        height: 14rem;
     }
  }
 /* @media (max-width: 575.98px) { 
