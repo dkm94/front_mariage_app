@@ -134,7 +134,7 @@ const Budget = () => {
                             <SearchBar 
                             className="search__input"
                             type="text"
-                            placeholder="Rechercher une tâche"
+                            placeholder="Rechercher une dépense"
                             name="searchbar"
                             value={searchValue}
                             onChange={handleSearch}

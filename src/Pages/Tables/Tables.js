@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { withRouter, Link } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
-import Table from "./Table";
+import Table from "./Forms/Edit";
 import AddTableForm from "./Forms/Add";
 import { ScrollButtonContext } from "../../../src/App";
 import axios from "axios";

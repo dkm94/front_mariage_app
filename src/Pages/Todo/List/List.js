@@ -1,13 +1,14 @@
 import React, { useState, useRef } from 'react';
 import UpdateForm from "../Update/Form";
-import CustomToggle from '../../../components/Dots/Dots';
-import Dropdown from "react-bootstrap/Dropdown";
-import { Collapse, ListItem, List, Box } from '@material-ui/core';
-import { TransitionGroup } from 'react-transition-group';
+import { ListItem } from '@material-ui/core';
 import "./List.css";
 import axios from "axios";
+import { Button } from '@material-ui/core';
 
-const Todos = ({ todos, setTodos, deleteTodo, searchValue, setSearchValue }) => {
+const Todos = ({ todos, setTodos, deleteTodo, searchValue, setSearchValue, obj, i }) => {
+    console.log(todos)
+
+    console.log(obj);
 
     const [edit, setEdit] = useState({
         id: null,
@@ -83,70 +84,58 @@ const Todos = ({ todos, setTodos, deleteTodo, searchValue, setSearchValue }) => 
    }
 
     return(
-        <Box>
-            <List className="tasks-list">
-                <TransitionGroup>
-                    {
-                        todos
-                        .filter((todo) => {
-                            return todo.text.toLowerCase().indexOf(searchValue.toLowerCase()) >= 0;
-                        })
-                        .reverse()
-                        .map((obj, i) => {
-                            return(
-                                <Collapse>
-                                    <ListItem 
-                                    key={i}
-                                    data-id={obj._id}
-                                    className={obj.isCompleted ? 'col-12 tasks-list__li__done fade-in' : "col-12 tasks-list__li fade-in"} 
-                                    style={edit.id === obj._id ? {backgroundColor: `#F5F5F5`} : null}
-                                    >
-                                        {edit.id === obj._id ? 
-                                        (<UpdateForm 
-                                            edit={edit} 
-                                            setEdit={setEdit}
-                                            input={input}
-                                            setInput={setInput}
-                                            inputRef={inputRef}
-                                            editTodo={editTodo}
-                                            handleChange={handleChange}
-                                        />) : 
-                                        (<>
-                                            <div className="todolist___checkbox_span">
-                                                <input 
-                                                    type="checkbox"
-                                                    onClick={() => toggleCompleted(obj)}
-                                                    checked={obj.isCompleted}
-                                                    className="toggle"
-                                                />
-                                                <span>{obj.text}</span>
-                                            </div>
-                                        </>)}
-                                        <div className="custom-dropdown">
-                                            <Dropdown>
-                                                <Dropdown.Toggle as={CustomToggle} />
-                                                <Dropdown.Menu size="sm" title="">
-                                                    {edit.id ? (<>
-                                                        <Dropdown.Item onClick={() => setEdit({id: null})}>Annuler</Dropdown.Item>
-                                                        <Dropdown.Item onClick={(e) => {editTodo(e)}}>Valider</Dropdown.Item>
-                                                    </>) : (<>
-                                                        {!obj.isCompleted ? 
-                                                        <Dropdown.Item onClick={() => getUpdatedId(obj._id, obj.text)}>Modifier</Dropdown.Item> :
-                                                        null
-                                                        }
-                                                        <Dropdown.Item onClick={() => {deleteTodo(obj._id)}}>Supprimer</Dropdown.Item>
-                                                    </>)}
-                                                </Dropdown.Menu>
-                                            </Dropdown>
-                                        </div>
-                                    </ListItem>
-                                </Collapse>
-                            )
-                        })
-                    }
-                </TransitionGroup>
-            </List>
-        </Box>
+        <ListItem 
+        key={i}
+        data-id={obj._id}
+        className={obj.isCompleted ? 'col-12 tasks-list__li__done fade-in' : "col-12 tasks-list__li fade-in"} 
+        style={edit.id === obj._id ? {backgroundColor: `#F5F5F5`} : null}
+        >
+            {edit.id === obj._id ? 
+            (<UpdateForm 
+                edit={edit} 
+                setEdit={setEdit}
+                input={input}
+                setInput={setInput}
+                inputRef={inputRef}
+                editTodo={editTodo}
+                handleChange={handleChange}
+            />) : 
+            (<>
+                <div className="todolist___checkbox_span">
+                    <input 
+                        type="checkbox"
+                        onClick={() => toggleCompleted(obj)}
+                        checked={obj.isCompleted}
+                        className="toggle"
+                    />
+                </div>
+                <div>
+                    <span>{obj.text}</span>
+                </div>
+            </>)}
+            {/* <div className="custom-dropdown">
+                <Dropdown>
+                    <Dropdown.Toggle as={CustomToggle} />
+                    <Dropdown.Menu size="sm" title="">
+                        {edit.id ? (<>
+                            <Dropdown.Item onClick={() => setEdit({id: null})}>Annuler</Dropdown.Item>
+                            <Dropdown.Item onClick={(e) => {editTodo(e)}}>Valider</Dropdown.Item>
+                        </>) : (<>
+                            {!obj.isCompleted ? 
+                            <Dropdown.Item onClick={() => getUpdatedId(obj._id, obj.text)}>Modifier</Dropdown.Item> :
+                            null
+                            }
+                            <Dropdown.Item onClick={() => {deleteTodo(obj._id)}}>Supprimer</Dropdown.Item>
+                        </>)}
+                    </Dropdown.Menu>
+                </Dropdown>
+            </div> */}
+            <div className='dashbord-view-details' >
+                {edit.id ? (<Button onClick={(e) => {editTodo(e)}} style={{ backgroundColor: "#efebe9" }} >Valider</Button>) :
+                (<Button onClick={() => getUpdatedId(obj._id, obj.text)} style={{ backgroundColor: "#efebe9" }} >Modifier</Button>)}
+            </div>
+        </ListItem>
+   
     )
 }
 

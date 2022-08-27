@@ -75,13 +75,23 @@ const Todo = () => {
                     </Row>
                 </Container>
                 <div className="todo-list">
-                    <List 
-                    todos={todos}
-                    setTodos={setTodos}
-                    deleteTodo={deleteTodo}
-                    searchValue={searchValue}
-                    setSearchValue={setSearchValue}
-                    />
+                    {todos
+                    .filter((todo) => {
+                        return todo.text.toLowerCase().indexOf(searchValue.toLowerCase()) >= 0;
+                    })
+                    .reverse()
+                    .map((todo, i) => (
+                        <List
+                        todos={todos}
+                        obj={todo}
+                        i={i}
+                        setTodos={setTodos}
+                        deleteTodo={deleteTodo}
+                        searchValue={searchValue}
+                        setSearchValue={setSearchValue}
+                        />
+                    ))
+                    }
                 </div>
             </div>
         </div>

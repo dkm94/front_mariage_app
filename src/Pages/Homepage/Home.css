@@ -6,13 +6,8 @@
     width: 100%;
     display: flex;
     margin-top: 8vh;  
-    padding-left: 10rem;
+    padding: 0 0 5rem 10rem;
     background-color: #e8e8e4;
-    /* flex-direction: column;
-    align-items: center;
-    background-image: url('./../../img/aisle.jpg');
-    background-size: cover;
-    position: relative; */
  }
 
 /* .home___position {
@@ -23,25 +18,22 @@
 
 .home___position {
     width: 100%;
-    position: relative;
 }
 
 .home___position-style {
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     width: 100%;
+    height: 100%;
 }
 
 .home__picture {
     width: 100%;
-    height: fit-content;
+    height: inherit;
 }
 
 .home__picture > img {
     width: inherit;
     margin-top: 10%;
+    width: 100%;
 }
 
 #hidden-picture {
@@ -61,13 +53,13 @@
 }
 
 .home-desc > h1 {
-    font-size: 6rem;
+    font-size: 5rem;
     margin-bottom: 2rem;
     text-shadow: 1px 1px 1px rgb(0 0 0 / 15%);
 }
 
 .home-desc > p {
-    margin-right: 150px;
+    /* margin-right: 150px; */
     line-height: 2.4rem;
 }
 
@@ -114,32 +106,26 @@ a:hover {
     font-size: 1.5rem !important;
 }
 
-.section-2___contenu {
-    text-align: center;
-}
-
 .section-2___sous-titre {
     text-align: center;
     margin-top: 2rem;
     margin-bottom: 8rem;
 }
 .section-2___sous-titre > span {
-    font-size: 4rem;
+    font-size: 3rem;
 }
 
 .home-cards {
     box-shadow: 0 2px 10px 0 rgb(0 0 0 / 14%);
     border: solid 1px rgb(151, 151, 151, 0.18);
-    padding: 3rem 5rem;
-    margin: 1rem;
-    display: flex;
+    padding: 3rem 5rem !important;
     flex-direction: column;
     align-items: center;
-}
-.home-cards__style {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 3rem;
+    max-width: 400px;
+    height: 100%;
+    justify-items: center;
+    text-align: center;
+    display: flex;
 }
 
 .home-cards__img {
@@ -165,80 +151,75 @@ a:hover {
     .home__picture > img {
         margin-top: 20%;
     }
+    .home-desc > h1 {
+        font-size: 4rem;
+    }
  }
 
  @media (max-width: 991.98px) { 
-    .section-1 {
-        padding: 5rem;
+    .home > .section-2 {
+        padding: 4rem 4rem;
+    }
+    #show-home-picture {
+        display: none;
+    }
+    #hidden-picture {
+      display: flex;
+      justify-content: center;
+
+    }
+    #hidden-picture > img {
+      margin-bottom: 50px;
+  }
+    .home___position-style {
+      position: unset;
+      top: unset;
+      left: unset;
+      transform: unset;
+      width: 100%;
     }
     .home__picture > img {
-        margin-top: 30%;
-    }
-    .home > .section-2 {
-        padding: 10rem 10rem;
+      margin-top: unset;
+      height: 325px;
+      width: auto;
+  }
+  .home-desc > h1 {
+      /* padding: 0 3rem; */
+      font-size: 5rem;
+      width: 75%;
+  }
+  .home-desc > p {
+      margin-right: 0;
+  }
+  .section-1 {
+      padding-bottom: 10rem
+  }
+  .section-2___sous-titre > span {
+    font-size: 2rem;
     }
   }
 
   @media (max-width: 767.98px) { 
-      #show-home-picture {
-          display: none;
-      }
-      #hidden-picture {
-        display: flex;
-        justify-content: center;
-
-      }
-      #hidden-picture > img {
-        margin-bottom: 50px;
-    }
-      .home___position-style {
-        position: unset;
-        top: unset;
-        left: unset;
-        transform: unset;
-        width: 100%;
-      }
-      .home__picture > img {
-        margin-top: unset;
-        height: 325px;
-        width: auto;
-    }
     .home-desc > h1 {
-        /* padding: 0 3rem; */
-        font-size: 5rem;
-        width: 75%;
-    }
-    .home-desc > p {
-        margin-right: 0;
+        font-size: 3.5rem;
     }
     .section-1 {
-        padding-bottom: 10rem
-    }
-    .home-cards__style {
-        grid-template-columns: 1fr 1fr;
-    }
-    .section-2___sous-titre > span {
-        font-size: 3rem;
+        padding-left: 5rem;
     }
    }
 
    @media (max-width: 576px) { 
     .home-desc > h1 {
-        font-size: 4rem;
+        font-size: 3rem;
     }
     .home__picture > img {
-        height: 25rem
+        height: 20rem
     }
     .section-1 {
         padding-top: 0;
-    }
-    .home-cards__style {
-        grid-template-columns: 1fr;
+        padding-left: 1rem;
     }
     .section-2___sous-titre > span {
-        font-size: 2.5rem;
-    }
-    .home > .section-2 {
-        padding: 10rem 6rem;
+        font-size: 1.5rem;
     }
     }

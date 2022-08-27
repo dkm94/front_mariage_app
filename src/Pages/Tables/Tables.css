@@ -19,6 +19,7 @@
     width: 100%;
     padding-top: 5rem;
     min-height: 500px;
+    padding: 2rem 4rem;
 }
 
 .tables-form > form > label {
@@ -110,7 +111,7 @@
     width: 80%;
     border: 1px solid lightgrey;
     border-radius: 10px !important;
-    padding: 2rem;
+    /* padding: 2rem; */
 }
 
 .table-form > form > div > input::placeholder {
@@ -269,6 +270,48 @@
  .block > span {
     font-size: 20px;
     font-weight: 500;
+}
+
+.dots-menu {
+    position: absolute;
+    right: 28px;
+}
+
+.dots-menu-edit {
+    position: absolute;
+    right: 29px;
+    top: 43px;
+}
+
+.render-tables {
+    position: relative;
+}
+
+.table-name-span {
+    font-size: 1.5rem;
+    text-align: center;
+    line-height: 23px;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+}
+
+.div-table-name-span {
+    min-height: 80px;
+    text-align: center;
+}
+
+#table-form-style {
+    padding: 0 15px;
+}
+
+.edit-table-btn {
+    padding: 6px 25px;
+    font-size: 1rem;
+}
+
+.table-view-details {
+    position: absolute;
+    bottom: 10%;
 }
 
 @media (max-width: 1299px) {

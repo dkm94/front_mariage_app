@@ -14,6 +14,7 @@ const Guests = ({ guests, setGuests, deleteGuest, updateGuest, editPicture, sete
         id: null,
         name: ''
     })
+
     const [selected, setSelected] = useState("tous");
     // const [deleteId, setDeleteId] = useState("")
     // const nodeRef = useRef(null)
@@ -67,7 +68,7 @@ const Guests = ({ guests, setGuests, deleteGuest, updateGuest, editPicture, sete
                                 })
                                 .map((guest) => {
                                     
-                                return <li key={guest._id} className='div-guest fade-in'>
+                                return <li key={guest._id} className={`fade-in`}>
                                     {/* <li className={(isFadingOut && guest._id === deleteId) ? 'div-guest item-fadeout' :'div-guest'}> */}
                                         <div className="custom-dropdown">
                                             <Dropdown>
