@@ -365,6 +365,9 @@ a:-webkit-any-link {
     .byguests, .budget, .dashboard, .dashboard___elements, .menu-container > .menu {
         padding-bottom: 0;
     }
+    .titles > h2 {
+        font-size: 2rem !important;
+    }
 }
 
 @media (max-width: 768px) { 
@@ -384,6 +387,12 @@ a:-webkit-any-link {
     }
     #component-dashboard {
         display: block;
+    }
+    /* .titles > h2 {
+        margin: 2rem 3rem 0rem;
+    } */
+    .titles {
+        display: none;
     }
  }
 

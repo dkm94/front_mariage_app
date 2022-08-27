@@ -4,6 +4,8 @@ import './Dashboard.css';
 import axios from 'axios';
 import Card from "./Card/Card.jsx";
 import { Container, Row } from 'react-bootstrap';
+import { Link } from "react-router-dom";
+
 
 const Dashboard = (props) => {
     const scrollBtn = useContext(ScrollButtonContext)
@@ -64,11 +66,12 @@ const Dashboard = (props) => {
     return(
         <div className="dashboard page-component">
             {scrollBtn}
+            <div className="page-location"><div><span>Dashboard</span></div></div>
             <div className="titles mb3">
                 <h2>Que souhaitez-vous faire aujourd'hui ?</h2>
             </div>
             <div className="dashboard___bgimage">
-                <div className="component-title" id="component-dashboard">
+                <div className="component-title">
                     <h1>Tableau de bord</h1>
                 </div>
             </div>
