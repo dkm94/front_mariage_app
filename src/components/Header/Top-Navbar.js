@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Logo from "../../img/logo2.png";
+import Logo from "../../img/desktop-logo.png";
 import MobileLogo from "../../img/mobile-logo.png";
 
 const TopNav = () => {
