@@ -227,6 +227,14 @@
     color: #F7F5F3;
 }
 
+#logo {
+    display: block;
+}
+
+#mobile-logo {
+    display: none;
+}
+
 @media only screen and (max-width : 1150px) {
     .sidebar {
         width: 25%;
@@ -382,5 +390,14 @@
 @media (max-width: 576px) {
     .show_nav .navbar__links {
         width: 100vw;
+    }
+    .mywedding-nav > span {
+        display: none;
+    }
+    #mobile-logo {
+        display: block;
+    }
+    #logo {
+        display: none;
     }
 }

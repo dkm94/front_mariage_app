@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Logo from "../../img/logo2.png";
+import Logo from "../../img/desktop-logo.png";
+import MobileLogo from "../../img/mobile-logo.png";
 
 const TopNav = () => {
 
@@ -18,7 +19,10 @@ const TopNav = () => {
     
     return(
         <nav className={`topNavbar ${showLinks ? "show_nav" : "bg-desktop"}`}>
-            <div className="div-logo" onClick={() => {window.location.pathname = "/"}}><img alt="logo" src={Logo} id="logo" /></div>
+            <div className="div-logo" onClick={() => {window.location.pathname = "/"}}>
+                <img alt="logo" src={Logo} id="logo" />
+                <img alt="mobile-logo" src={MobileLogo} id="mobile-logo" />
+            </div>
             <div className="center-h-v mywedding-nav"><span className="center-h-v">MYWEDDING</span></div>
             <ul className="navbar__links">
                 <li className="navbar__item hidden-links slideDown-1"><Link className="navbar__link" to="/tableau-de-bord" onClick={() => setShowLinks(!showLinks)}>Tableau de bord</Link></li>

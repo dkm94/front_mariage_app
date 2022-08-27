@@ -316,6 +316,18 @@
     transform: scale(1);
 }
 
+.guest-card-style {
+    background: #FAF8F4;
+    box-shadow: 0 2px 10px 0 rgb(0 0 0 / 14%);
+    padding: 1rem 1rem !important;
+    flex-direction: column;
+    align-items: center;
+    height: -moz-fit-content;
+    height: fit-content;
+    justify-items: center;
+    text-align: center;
+}
+
 @media only screen and (max-device-width : 1024px) {
     .get-guestlist{
         padding: 1rem 3rem;

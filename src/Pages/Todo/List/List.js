@@ -4,6 +4,7 @@ import { ListItem } from '@material-ui/core';
 import "./List.css";
 import axios from "axios";
 import { Button } from '@material-ui/core';
+import { Col } from 'react-bootstrap';
 
 const Todos = ({ todos, setTodos, deleteTodo, searchValue, setSearchValue, obj, i }) => {
     console.log(todos)
@@ -84,7 +85,11 @@ const Todos = ({ todos, setTodos, deleteTodo, searchValue, setSearchValue, obj, 
    }
 
     return(
-        <ListItem 
+        <Col 
+        lg={2}
+        md={4}
+        sm={6}
+        XS={12}
         key={i}
         data-id={obj._id}
         className={obj.isCompleted ? 'col-12 tasks-list__li__done fade-in' : "col-12 tasks-list__li fade-in"} 
@@ -106,10 +111,11 @@ const Todos = ({ todos, setTodos, deleteTodo, searchValue, setSearchValue, obj, 
                         type="checkbox"
                         onClick={() => toggleCompleted(obj)}
                         checked={obj.isCompleted}
-                        className="toggle"
+                        className="checkbox"
                     />
                 </div>
-                <div>
+                
+                <div style={{ marginTop: "2rem" }}>
                     <span>{obj.text}</span>
                 </div>
             </>)}
@@ -132,9 +138,9 @@ const Todos = ({ todos, setTodos, deleteTodo, searchValue, setSearchValue, obj, 
             </div> */}
             <div className='dashbord-view-details' >
                 {edit.id ? (<Button onClick={(e) => {editTodo(e)}} style={{ backgroundColor: "#efebe9" }} >Valider</Button>) :
-                (<Button onClick={() => getUpdatedId(obj._id, obj.text)} style={{ backgroundColor: "#efebe9" }} >Modifier</Button>)}
+                (<Button disabled={obj.isCompleted && true} onClick={() => getUpdatedId(obj._id, obj.text)} style={{ backgroundColor: "#efebe9" }} >Modifier</Button>)}
             </div>
-        </ListItem>
+        </Col>
    
     )
 }

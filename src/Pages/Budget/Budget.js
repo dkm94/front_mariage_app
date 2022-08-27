@@ -142,7 +142,7 @@ const Budget = () => {
                         </div>
                     </div>
                     <div className="budget___col-1">
-                        <div className="col card-component">
+                        <div className="col card-expense-component">
                             <div className="card">
                                 <div className="g-0">
                                     <div className="card-pd">
@@ -222,7 +222,7 @@ const Budget = () => {
                         deleteExpense={deleteExpense}
                         searchValue={searchValue}
                         />
-                        <div className="col chart-component" style={{ width: '60%', height: 300 }}>
+                        <div className="col chart-component" style={{ width: '40%', height: 200 }}>
                             <PieChart operations={operations}/>
                         </div>
                     </div>
