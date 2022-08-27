@@ -4,8 +4,6 @@ import './Dashboard.css';
 import axios from 'axios';
 import Card from "./Card/Card.jsx";
 import { Container, Row } from 'react-bootstrap';
-import { Link } from "react-router-dom";
-
 
 const Dashboard = (props) => {
     const scrollBtn = useContext(ScrollButtonContext)
