@@ -227,9 +227,9 @@
     color: #F7F5F3;
 }
 
-@media only screen and (max-width : 1024px) {
+@media only screen and (max-width : 1150px) {
     .sidebar {
-        width: 30%;
+        width: 25%;
     }
     }
 

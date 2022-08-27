@@ -44,7 +44,6 @@ const Home = () => {
                 <Container>
                     <Row>
                         {dashboardCards.map((card, i) => {
-                            console.log(card)
                             return(
                                 <Card
                                 index={i}

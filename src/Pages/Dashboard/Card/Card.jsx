@@ -1,18 +1,8 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
 import { Link } from "react-router-dom";
-// import { styled } from '@mui/styles';
 import "./Card.css";
-// import { ButtonGroup } from 'react-bootstrap';
-// import { array } from 'yup/lib/locale';
-
-// const ColorButton = styled(Button)({
-//   backgroundColor: "#efebe9",
-//   borderRadius: "10px",
-//   '&:hover': {
-//     backgroundColor: "#d7ccc8",
-//   },
-// });
+import { Col, Container } from 'react-bootstrap';
 
 const Card = ({ 
   title, 
@@ -109,18 +99,20 @@ const Card = ({
   };
 
   return (
-    <div className='home-cards db-component-style' id="home-cards">
-      <h3>{title}</h3>
-      {content && <div className='db-component-content'>{content}</div>}
-      <div className='dashbord-return-content' >
-        <span>{resumeTitle(resume)}</span>
-        <hr />
-        <ul className='dashbord-content'>{returnContent(extraProp)}</ul>
-      </div>
-      <div className='dashbord-view-details' >
-        <Button style={{ backgroundColor: "#efebe9" }} component={Link} to={path} >Voir détails</Button>
-      </div>
-    </div>
+    <Col sm={6} md={6} lg={4} style={{ marginTop: "2rem" }} >
+      <Container className='dashboard-cards db-component-style' id="dashboard-cards">
+        <h3>{title}</h3>
+        {content && <div className='db-component-content'>{content}</div>}
+        <div className='dashbord-return-content' >
+          <span>{resumeTitle(resume)}</span>
+          <hr />
+          <ul className='dashbord-content'>{returnContent(extraProp)}</ul>
+        </div>
+        <div className='dashbord-view-details' >
+          <Button style={{ backgroundColor: "#efebe9" }} component={Link} to={path} >Voir détails</Button>
+        </div>
+      </Container>
+    </Col>
   )
 }
 

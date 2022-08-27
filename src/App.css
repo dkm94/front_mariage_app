@@ -350,13 +350,14 @@ a:-webkit-any-link {
     margin-bottom: 15px;
 }
 
-
+@media only screen and (max-width : 1150px) {
+    .App-home {
+        width: 75%;
+        left: 25%;
+    }
+    }
 
 @media only screen and (max-device-width : 1024px) {
-    .App-home {
-        width: 70%;
-        left: 30%;
-    }
     .App-home > .content {
         padding: 0;
         margin-bottom: 16rem;

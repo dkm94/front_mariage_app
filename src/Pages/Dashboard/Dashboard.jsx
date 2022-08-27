@@ -3,6 +3,7 @@ import { ScrollButtonContext } from "../../App";
 import './Dashboard.css';
 import axios from 'axios';
 import Card from "./Card/Card.jsx";
+import { Container, Row } from 'react-bootstrap';
 
 const Dashboard = (props) => {
     const scrollBtn = useContext(ScrollButtonContext)
@@ -71,58 +72,62 @@ const Dashboard = (props) => {
                     <h1>Tableau de bord</h1>
                 </div>
             </div>
-            <div className='home-cards__style' style={{ padding: "5rem" }}>
-                <Card 
-                    title={"Invités"} 
-                    content={guests?.length} 
-                    array={guests} 
-                    resume={"repartition"} 
-                    extraProp={"name"} 
-                    path={"menu/invites"}
-                    firstPerson={firstPerson}
-                    secondPerson={secondPerson}
-                    firstFamilyGuests={firstFamilyGuests}
-                    secondFamilyGuests={secondFamilyGuests}
-                />
-                <Card 
-                    title={"Tables"} 
-                    content={tables?.length} 
-                    array={tables} 
-                    resume={"tables"} 
-                    extraProp={"tables"}
-                    path={"menu/tables"}
-                />
-                <Card 
-                    title={"Réception"}
-                    content={meal}
-                    subArrayOne={starters?.length} 
-                    subArrayTwo={maincourses?.length}
-                    subArrayThree={desserts?.length}
-                    resume={"composition"}
-                    extraProp={"composition"}
-                    path={"menu/carte"}
-                />
-                <Card 
-                    title={"Tâches"} 
-                    content={tasks?.length}
-                    subArrayOne={isCompleted?.length} 
-                    subArrayTwo={notCompleted?.length}
-                    array={tasks}
-                    elements={"text"}
-                    resume={"status"}
-                    extraProp={"tache"}
-                    path={"menu/taches"}
-                />
-                <Card 
-                    title={"Dépenses"} 
-                    content={` ${total(sum)} €`}
-                    sumLength={sumLength}
-                    array={operations}
-                    elements={"description"}
-                    resume={"expenses"}
-                    extraProp={"description"}
-                    path={"menu/budget"}
-                    />
+            <div className='dashboard-cards__style'>
+                <Container>
+                    <Row className='mid-device-width'>
+                        <Card 
+                            title={"Invités"} 
+                            content={guests?.length} 
+                            array={guests} 
+                            resume={"repartition"} 
+                            extraProp={"name"} 
+                            path={"menu/invites"}
+                            firstPerson={firstPerson}
+                            secondPerson={secondPerson}
+                            firstFamilyGuests={firstFamilyGuests}
+                            secondFamilyGuests={secondFamilyGuests}
+                        />
+                        <Card 
+                            title={"Tables"} 
+                            content={tables?.length} 
+                            array={tables} 
+                            resume={"tables"} 
+                            extraProp={"tables"}
+                            path={"menu/tables"}
+                        />
+                        <Card 
+                            title={"Réception"}
+                            content={meal}
+                            subArrayOne={starters?.length} 
+                            subArrayTwo={maincourses?.length}
+                            subArrayThree={desserts?.length}
+                            resume={"composition"}
+                            extraProp={"composition"}
+                            path={"menu/carte"}
+                        />
+                        <Card 
+                            title={"Tâches"} 
+                            content={tasks?.length}
+                            subArrayOne={isCompleted?.length} 
+                            subArrayTwo={notCompleted?.length}
+                            array={tasks}
+                            elements={"text"}
+                            resume={"status"}
+                            extraProp={"tache"}
+                            path={"menu/taches"}
+                        />
+                        <Card 
+                            title={"Dépenses"} 
+                            content={` ${total(sum)} €`}
+                            sumLength={sumLength}
+                            array={operations}
+                            elements={"description"}
+                            resume={"expenses"}
+                            extraProp={"description"}
+                            path={"menu/budget"}
+                            />
+                    </Row>
+                </Container>
             </div>
         </div>
     )
