@@ -26,7 +26,7 @@ export const NavigationData = [
         pathname: "/menu/invites"
     },
     {
-        title: "tables",
+        title: "plan de table",
         icon: tablesIcon,
         pathname: "/menu/tables"
     },
@@ -36,7 +36,7 @@ export const NavigationData = [
         pathname: "/menu/taches"
     },
     {
-        title: "menu",
+        title: "réception",
         icon: menuIcon,
         pathname: "/menu/carte"
     },

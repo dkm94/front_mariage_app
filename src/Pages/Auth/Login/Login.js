@@ -52,7 +52,7 @@ const Login = () => {
 
     return (
         <div className="login-page">
-            <ErrorAlert showError={showError} title="Oups, une erreur est survenue" description="Veuillez réessayer plus tard" />
+            <ErrorAlert showError={showError} title="Oups, une erreur est survenue. Veuillez vérifier vos identifiants ou essayer plus tard." description="Veuillez réessayer plus tard" />
             <div className="login-grid">
                 <div className="grid-item-1">
                     <img 

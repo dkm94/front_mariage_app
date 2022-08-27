@@ -93,7 +93,7 @@ const Dashboard = (props) => {
                     path={"menu/tables"}
                 />
                 <Card 
-                    title={"Plats"}
+                    title={"Réception"}
                     content={meal}
                     subArrayOne={starters?.length} 
                     subArrayTwo={maincourses?.length}
