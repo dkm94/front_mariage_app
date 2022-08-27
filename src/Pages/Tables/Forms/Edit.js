@@ -1,8 +1,6 @@
 import React from "react";
 import Select from "../../../components/AsyncSelect/AsyncSelect";
 import '../../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import CustomToggle from "../../../components/Dots/Dots";
-import Dropdown from "react-bootstrap/Dropdown";
 import "../Tables.css";
 import Table from "../Table";
 

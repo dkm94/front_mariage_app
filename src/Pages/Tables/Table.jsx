@@ -1,6 +1,4 @@
 import React from 'react';
-import CustomToggle from "../../components/Dots/Dots";
-import Dropdown from "react-bootstrap/Dropdown";
 import { Button } from '@material-ui/core';
 import "./Tables.css";
 
