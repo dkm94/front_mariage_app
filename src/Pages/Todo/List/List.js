@@ -1,9 +1,6 @@
 import React, { useState, useRef } from 'react';
 import UpdateForm from "../Update/Form";
-import CustomToggle from '../../../components/Dots/Dots';
-import Dropdown from "react-bootstrap/Dropdown";
-import { Collapse, ListItem, List, Box } from '@material-ui/core';
-import { TransitionGroup } from 'react-transition-group';
+import { ListItem } from '@material-ui/core';
 import "./List.css";
 import axios from "axios";
 import { Button } from '@material-ui/core';
