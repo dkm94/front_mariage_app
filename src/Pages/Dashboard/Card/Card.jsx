@@ -13,6 +13,8 @@ const Card = ({
   subArrayOne, 
   subArrayTwo, 
   subArrayThree,
+  subArrayFour, 
+  subArrayFive,
   path,
   firstPerson,
   secondPerson,
@@ -53,6 +55,8 @@ const Card = ({
     <span>Entrées </span><span style={{ fontWeight: "bold"}}>{`(${subArrayOne})`}</span><br/>
     <span>Plats </span><span style={{ fontWeight: "bold"}}>{`(${subArrayTwo})`}</span><br/>
     <span>Desserts </span><span style={{ fontWeight: "bold"}}>{`(${subArrayThree})`}</span><br/>
+    <span>Apéritifs </span><span style={{ fontWeight: "bold"}}>{`(${subArrayFour})`}</span><br/>
+    <span>Boissons </span><span style={{ fontWeight: "bold"}}>{`(${subArrayFive})`}</span><br/>
   </div>
   
 
@@ -102,7 +106,7 @@ const Card = ({
     <Col sm={6} md={6} lg={4} style={{ marginTop: "2rem" }} >
       <Container className='dashboard-cards db-component-style' id="dashboard-cards">
         <h3>{title}</h3>
-        {content && <div className='db-component-content'>{content}</div>}
+        {content ? (<div className='db-component-content'><span style={{ fontSize: "3rem"}}>{content}</span></div>) : <div className='db-component-content'><span style={{ fontSize: "3rem"}}>0</span></div>}
         <div className='dashbord-return-content' >
           <span>{resumeTitle(resume)}</span>
           <hr />
