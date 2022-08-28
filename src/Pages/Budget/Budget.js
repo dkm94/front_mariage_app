@@ -3,7 +3,7 @@ import { Formik, Form, useFormik } from "formik";
 import { Link } from "react-router-dom";
 import PieChart from "../../components/Expenses/Graph/PieChart";
 import TextField from "../../components/Formik/TextField-operations";
-import { UserContext, ScrollButtonContext } from "../../../src/App";
+import { ScrollButtonContext } from "../../../src/App";
 import Expenses from "./Dépenses/Dépenses";
 import * as Yup from "yup";
 import axios from "axios";
@@ -13,7 +13,6 @@ import SearchBar from "../../components/Invités(affichage)/by_guests/Components
 
 const Budget = () => {
  
-    const { budgetID } = useContext(UserContext);
     const scrollBtn = useContext(ScrollButtonContext);
 
     const newOperationValues = {
@@ -22,23 +21,19 @@ const Budget = () => {
         description: ''
     }
 
-    const [budget, setBudget] = useState({});
     const [operations, setOperations] = useState([]);
     const [searchValue, setSearchValue] = useState("");
     const [operation, setOperation] = useState({});
 
 
     useEffect(() => {
-        let budget = axios.get(`/api/admin/budget/details/${budgetID}`);
         let operations = axios.get(`/api/admin/budget/operations/`);
-
         async function getDatas(){
-            let res = await Promise.all([budget, operations])
-            setBudget(res[0].data)
-            setOperations(res[1].data)
+            let res = await Promise.resolve(operations)
+            setOperations(res.data)
         }
         getDatas();
-    }, [operation, budgetID])
+    }, [operation])
 
     const handleSearch = (e) => {
         setSearchValue(e.target.value)
@@ -96,7 +91,7 @@ const Budget = () => {
     const formik = useFormik({
         initialValues: newOperationValues,
         onSubmit: async (values) => {
-            axios.post(`/api/admin/budget/operations/add/${budgetID}`,
+            axios.post(`/api/admin/budget/operations/add`,
             {
                 category: values.category,
                 price: values.price,
@@ -147,7 +142,7 @@ const Budget = () => {
                                 <div className="g-0">
                                     <div className="card-pd">
                                         <div className="card-body">
-                                            <h5 className="card-title">Dépenses <small>(en {budget.currency})</small></h5>
+                                            <h5 className="card-title">Dépenses <small>(en €)</small></h5>
                                             <span>{total(sum)}</span>
                                         </div>
                                     </div>
