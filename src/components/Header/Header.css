@@ -396,6 +396,7 @@
     }
     #mobile-logo {
         display: block;
+        height: 100%;
     }
     #logo {
         display: none;
