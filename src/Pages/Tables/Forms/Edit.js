@@ -20,7 +20,9 @@ const TableId = (props) => {
         guests
         // handleSubmit 
     } = props;
-    
+
+    const filteredGuests = guests?.filter(guest => guest.tableID === table._id);
+
     return(
         <>
             {edit.id === table._id ? (
@@ -42,7 +44,7 @@ const TableId = (props) => {
                 <Select table={table} tables={tables} setTables={setTables} guests={table.guestID}/>
         
                 <div style={{marginBottom: '20px', marginTop: '20px', width: "100%"}}>
-                    {guests && guests.map(guest => {
+                    {guests && filteredGuests.map(guest => {
                         return <div key={guest._id} className="guest-del">
                             <span>{guest.name}</span>
                             <button 
