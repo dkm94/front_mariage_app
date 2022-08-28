@@ -15,24 +15,17 @@ const AddStarterForm = ({ addStarter, icon }) => {
     const handleSumbit = e => {
         e.preventDefault();
         setLoading(true)
-        axios.get("/api/admin/menu")
+        axios.post(`/api/admin/menu/starters/add`,{
+            name: input
+        })
         .then((res) => {
-            const data = res.data;
-            const result = data._id
-            if(data){
-                axios.post(`/api/admin/menu/starters/add/${result}`,{
-                    name: input
-                })
-                .then((res) => {
-                    addStarter(res.data);
-                    setInput("");
-                    setLoading(false)
-                })
-                .catch((err) => {
-                    console.log(err)})
-                }
-        })     
-    }
+            addStarter(res.data);
+            setInput("");
+            setLoading(false)
+        })
+        .catch((err) => {
+            console.log(err)})
+    }    
 
     return(
         <form onSubmit={handleSumbit}  className="input-group mb-3">
