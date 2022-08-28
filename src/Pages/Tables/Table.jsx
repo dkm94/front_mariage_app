@@ -3,8 +3,8 @@ import { Button } from '@material-ui/core';
 import "./Tables.css";
 
 
-const Table = ({ table, getUpdatedId, deleteTable }) => {
-    console.log(table)
+const Table = ({ table, getUpdatedId, guests }) => {
+    console.log(guests)
   return (
     <div className='home-cards render-tables'>
         
@@ -12,7 +12,7 @@ const Table = ({ table, getUpdatedId, deleteTable }) => {
             <span className='table-name-span'>{table.name}</span>
         </div>
         <div style={{ marginBottom: "60px"}}>
-        {table.guestID.map(guest => <><span style={{ color: "#7c7676"}}>{guest.name}</span><br/></>)}
+        {guests?.map(guest => <><span style={{ color: "#7c7676"}}>{guest.name}</span><br/></>)}
         </div>
         {/* <div className="custom-dropdown dots-menu">
             <Dropdown>

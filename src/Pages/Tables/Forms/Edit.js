@@ -16,14 +16,15 @@ const TableId = (props) => {
         deleteGuest, 
         setEdit, 
         getUpdatedId, 
-        deleteTable, 
+        deleteTable,
+        guests
         // handleSubmit 
     } = props;
     
     return(
         <>
             {edit.id === table._id ? (
-                <li key={id} className="home-cards fade-in render-tables" id="table-form-style" style={props.edit.id === props.table._id ? {backgroundColor: `#F5F5F5`} : null}>
+                <li key={id} className="home-cards fade-in render-tables" id="table-form-style table-card" style={props.edit.id === props.table._id ? {backgroundColor: `#F5F5F5`} : null}>
                 <div className="tbName">
                     <form onSubmit={editTableName} className="mb-3">
                         <input
@@ -41,7 +42,7 @@ const TableId = (props) => {
                 <Select table={table} tables={tables} setTables={setTables} guests={table.guestID}/>
         
                 <div style={{marginBottom: '20px', marginTop: '20px', width: "100%"}}>
-                    {table.guestID ? table.guestID.map(guest => {
+                    {guests && guests.map(guest => {
                         return <div key={guest._id} className="guest-del">
                             <span>{guest.name}</span>
                             <button 
@@ -51,7 +52,7 @@ const TableId = (props) => {
                                 <i className="fas fa-times"></i>
                             </button>
                         </div>
-                    }) : null}
+                    })}
                 </div>
                 {/* <div className="custom-dropdown dots-menu-edit">
                     <Dropdown>
@@ -75,7 +76,7 @@ const TableId = (props) => {
                 </div>
             </li>
             ) : (
-                <Table table={table} edit={edit} setEdit={setEdit} getUpdatedId={getUpdatedId} deleteTable={deleteTable} />
+                <Table table={table} edit={edit} setEdit={setEdit} getUpdatedId={getUpdatedId} deleteTable={deleteTable} guests={guests} />
             )}
         </>
     )

@@ -17,6 +17,8 @@ const Dashboard = (props) => {
     const [maincourses, setMaincourses] = useState([]);
     const [starters, setStarters] = useState([]);
     const [desserts, setDesserts] = useState([]);
+    const [apetizers, setApetizers] = useState([]);
+    const [beverages, setBeverages] = useState([]);
     const [wedding, setWeddding] = useState([]);
 
     useEffect(() => {
@@ -28,9 +30,11 @@ const Dashboard = (props) => {
         let maincourses = axios.get("/api/admin/menu/maincourses/");
         let desserts = axios.get("/api/admin/menu/desserts/");
         let wedding = axios.get(`/api/admin/wedding/${id}`);
+        let apetizers = axios.get("/api/admin/menu/apetizers/");
+        let beverages = axios.get("/api/admin/menu/beverages/");
 
         async function getDatas(){
-            let res = await Promise.all([guests, tables, operations, todos, starters, maincourses, desserts, wedding])
+            let res = await Promise.all([guests, tables, operations, todos, starters, maincourses, desserts, wedding, apetizers, beverages])
             setGuests(res[0].data)
             setTables(res[1].data)
             setOperations(res[2].data)
@@ -39,6 +43,8 @@ const Dashboard = (props) => {
             setMaincourses(res[5].data)
             setDesserts(res[6].data)
             setWeddding(res[7].data)
+            setApetizers(res[8].data)
+            setBeverages(res[9].data)
         }
         getDatas();
     }, [id])
@@ -59,7 +65,7 @@ const Dashboard = (props) => {
     const firstFamilyGuests = guests?.filter(guest => guest?.family === "1");
     const secondFamilyGuests = guests?.filter(guest => guest?.family === "2");
 
-    const meal = starters?.length + maincourses?.length + desserts?.length;
+    const meal = starters?.length + maincourses?.length + desserts?.length + apetizers?.length + beverages?.length;
     
     return(
         <div className="dashboard page-component">
@@ -102,6 +108,8 @@ const Dashboard = (props) => {
                             subArrayOne={starters?.length} 
                             subArrayTwo={maincourses?.length}
                             subArrayThree={desserts?.length}
+                            subArrayFour={maincourses?.length}
+                            subArrayFive={desserts?.length}
                             resume={"composition"}
                             extraProp={"composition"}
                             path={"menu/carte"}
@@ -118,8 +126,8 @@ const Dashboard = (props) => {
                             path={"menu/taches"}
                         />
                         <Card 
-                            title={"Dépenses"} 
-                            content={` ${total(sum)} €`}
+                            title={"Dépenses (en €)"} 
+                            content={` ${total(sum)}`}
                             sumLength={sumLength}
                             array={operations}
                             elements={"description"}

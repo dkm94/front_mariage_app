@@ -16,22 +16,16 @@ const AddDessertForm = ({ addDessert, icon }) => {
         e.preventDefault();
         setLoading(true)
         axios.get("/api/admin/menu")
+        axios.post(`/api/admin/menu/desserts/add`,{
+            name: input
+        })
         .then((res) => {
-            const data = res.data;
-            const result = data._id
-            if(data){
-                axios.post(`/api/admin/menu/desserts/add/${result}`,{
-                    name: input
-                })
-                .then((res) => {
-                    addDessert(res.data);
-                    setInput("");
-                    setLoading(false)
-                })
-                .catch((err) => {
-                    console.log(err)})
-                }
-        })      
+            addDessert(res.data);
+            setInput("");
+            setLoading(false)
+        })
+        .catch((err) => {
+            console.log(err)})    
     }
 
     return(

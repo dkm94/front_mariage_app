@@ -18,6 +18,7 @@
     align-items: center;
     /* min-width: 200px; */
     min-height: 300px;
+    position: relative;
 }
 
 .tasks-list__li__done {
@@ -30,6 +31,7 @@
     text-decoration: line-through;
     /* min-width: 200px; */
     min-height: 300px;
+    position: relative;
 }
 
 .tasks-list__li__done > .custom-dropdown {
@@ -99,6 +101,10 @@ text-decoration: line-through;
     width: 2rem;
   }
 
+  .todo-view-details {
+    bottom: 10%;
+    position: absolute;
+} 
   @media ( max-width : 1224px ) {
  
 } 
