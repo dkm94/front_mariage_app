@@ -135,7 +135,7 @@ const Todos = ({ todos, setTodos, deleteTodo, searchValue, setSearchValue, obj, 
                     </Dropdown.Menu>
                 </Dropdown>
             </div> */}
-            <div className='dashbord-view-details' >
+            <div className='todo-view-details' >
                 {edit.id ? (<Button onClick={(e) => {editTodo(e)}} style={{ backgroundColor: "#efebe9" }} >Valider</Button>) :
                 (<Button disabled={obj.isCompleted && true} onClick={() => getUpdatedId(obj._id, obj.text)} style={{ backgroundColor: "#efebe9" }} >Modifier</Button>)}
             </div>

@@ -47,11 +47,10 @@ const Select = ({ tables, table, guests, setTables }) => {
             }
             return table
         })
-        axios.put(`/api/admin/tables/addGuest/${tableID._id}`, {guestID: selectedGuest})
+        axios.put(`/api/admin/guests/addtable/${selectedGuest}`, {tableID: table._id})
             .then((res) => {
                 if(res.data != null) {
                     setTimeout(() => {
-                        // setUpdateTables(tableID)
                         setloadingList(updatedTables)
                         window.location.reload()
                     }, 1000);

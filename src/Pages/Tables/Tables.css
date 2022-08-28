@@ -285,6 +285,8 @@
 
 .render-tables {
     position: relative;
+    padding: 3rem 1rem !important;
+    min-height: 100px !important;
 }
 
 .table-name-span {
@@ -313,6 +315,7 @@
     position: absolute;
     bottom: 10%;
 }
+
 
 @media (max-width: 1299px) {
     .get-tables {

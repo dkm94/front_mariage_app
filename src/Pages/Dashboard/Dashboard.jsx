@@ -65,7 +65,7 @@ const Dashboard = (props) => {
     const firstFamilyGuests = guests?.filter(guest => guest?.family === "1");
     const secondFamilyGuests = guests?.filter(guest => guest?.family === "2");
 
-    const meal = starters?.length + maincourses?.length + desserts?.length;
+    const meal = starters?.length + maincourses?.length + desserts?.length + apetizers?.length + beverages?.length;
     
     return(
         <div className="dashboard page-component">
