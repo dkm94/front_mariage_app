@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button } from '@material-ui/core';
 import "./Tables.css";
 
 
 const Table = ({ table, getUpdatedId, guests }) => {
-    console.log(guests)
+  
+ const filteredGuests = guests?.filter(guest => guest.tableID === table._id);
+
   return (
     <div className='home-cards render-tables'>
         
@@ -12,7 +14,7 @@ const Table = ({ table, getUpdatedId, guests }) => {
             <span className='table-name-span'>{table.name}</span>
         </div>
         <div style={{ marginBottom: "60px"}}>
-        {guests?.map(guest => <><span style={{ color: "#7c7676"}}>{guest.name}</span><br/></>)}
+        {filteredGuests?.map(guest => <><span style={{ color: "#7c7676"}}>{guest.name}</span><br/></>)}
         </div>
         {/* <div className="custom-dropdown dots-menu">
             <Dropdown>

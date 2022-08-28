@@ -80,7 +80,9 @@ const Tables = (props) => {
     }
 
     const deleteGuest = (guest, table) => {
-        axios.put(`/api/admin/guests/deletetable/${table}`, {guestID: guest})
+        console.log(guest)
+        console.log(table)
+        axios.put(`/api/admin/guests/deletetable/${guest}`, {tableID: table})
             .then((res) => {
                 if(res.data != null){
                     setGuests(guests.filter(table => table._id !== table))
