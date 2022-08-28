@@ -80,8 +80,6 @@ const Tables = (props) => {
     }
 
     const deleteGuest = (guest, table) => {
-        console.log(guest)
-        console.log(table)
         axios.put(`/api/admin/guests/deletetable/${guest}`, {tableID: table})
             .then((res) => {
                 if(res.data != null){
