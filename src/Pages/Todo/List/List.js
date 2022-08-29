@@ -137,7 +137,10 @@ const Todos = ({ todos, setTodos, deleteTodo, searchValue, setSearchValue, obj, 
             </div> */}
             <div className='todo-view-details' >
                 {edit.id ? (<Button onClick={(e) => {editTodo(e)}} style={{ backgroundColor: "#efebe9" }} >Valider</Button>) :
-                (<Button disabled={obj.isCompleted && true} onClick={() => getUpdatedId(obj._id, obj.text)} style={{ backgroundColor: "#efebe9" }} >Modifier</Button>)}
+                (<div style={{ display:"flex", flexDirection: "column"}}>
+                    <Button disabled={obj.isCompleted && true} onClick={() => getUpdatedId(obj._id, obj.text)} style={{ backgroundColor: "#efebe9" }} >Modifier</Button>
+                    <Button onClick={() => {deleteTodo(obj._id)}} style={{ backgroundColor: "#efebe9", marginTop:"1rem" }} >Supprimer</Button>
+                </div>)}
             </div>
         </Col>
    

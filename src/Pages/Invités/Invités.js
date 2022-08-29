@@ -57,6 +57,7 @@ const Byguests = ({ userInfos }) => {
     }
 
     const deleteGuest = (id) => {
+        console.log(id)
         axios.delete(`/api/admin/guests/delete/${id}`)
             .then(result => {
                 if(result.data != null) {
