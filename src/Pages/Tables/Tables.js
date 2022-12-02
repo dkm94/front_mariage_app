@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { withRouter, Link } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
-import Table from "./Table";
+import Table from "./Forms/Edit";
 import AddTableForm from "./Forms/Add";
 import { ScrollButtonContext } from "../../../src/App";
 import axios from "axios";
@@ -31,18 +31,18 @@ const Tables = (props) => {
     }
     const [guests, setGuests] = useState([])
    
-    // let dependency = JSON.stringify(tables);
-
     useEffect(() => {
-        const fetchData = () => {
-            axios.get("/api/admin/tables/")
-            .then(result => {
-                setTables(result.data)
-            })
-            .catch(err => err.json("Fail de load de ressource"))
+        let guests = axios.get("/api/admin/guests/");
+        let tables = axios.get("/api/admin/tables/");
+
+        async function getDatas(){
+            let res = await Promise.all([guests, tables])
+            setGuests(res[0].data)
+            setTables(res[1].data)
         }
-        fetchData();
-    }, [table, guests])
+        getDatas();
+    }, [table])
+
 
     const addTable = newTable => {
         setTable(newTable)
@@ -80,7 +80,7 @@ const Tables = (props) => {
     }
 
     const deleteGuest = (guest, table) => {
-        axios.put(`/api/admin/tables/deleteGuest/${table}`, {guestID: guest})
+        axios.put(`/api/admin/guests/deletetable/${guest}`, {tableID: table})
             .then((res) => {
                 if(res.data != null){
                     setGuests(guests.filter(table => table._id !== table))
@@ -132,7 +132,7 @@ const Tables = (props) => {
                     </Row>
                 </Container>
                 <div className="tables___list">
-                    {tables.length === 0 || null ? 
+                    {tables?.length === 0 || null ? 
                         (<div className="block" style={tables ? {display: "none"} : null}><span>Vos tables ici.</span></div>) : 
                         // loading === true ? loader :
                         (<div className="tables__block">
@@ -153,7 +153,7 @@ const Tables = (props) => {
                                     handleUpdatedTable={handleUpdatedTable}
                                     input={input}
                                     setTables={setTables}
-                                    guests={table.guestID}
+                                    guests={guests}
                                     deleteGuest={deleteGuest}
                                     setEdit={setEdit}
                                     getUpdatedId={getUpdatedId}

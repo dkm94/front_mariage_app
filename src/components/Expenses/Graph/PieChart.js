@@ -1,5 +1,6 @@
 import React from "react";
 import { Pie } from "react-chartjs-2";
+import 'chart.js/auto';
 import "./PieChart.css";
 
 const PieChart = ({operations}) => {

@@ -25,242 +25,31 @@
     margin: 3rem;
 }
 
-.dashboard___elements {
-    width: 100%;
-    /* padding: 0 10rem 10rem 10rem; */
-    margin-top: 5rem;
+.dashboard-cards__style {
+    padding: 3rem;
 }
 
-.card-pd {
-    padding: 20px;
-    border-radius: 10px;
-}
-
-.item1 { grid-area: invités; background-color: whitesmoke; }
-.item2 { grid-area: tables; background-color: whitesmoke; }
-.item3 { grid-area: tâches; background-color: whitesmoke; }
-.item4 { grid-area: menu; background-color: whitesmoke; }
-.item5 { grid-area: dépenses; background-color: whitesmoke; }
-
-.dashboard-icon {
-    /* height: fit-content; */
-    height: 10rem;
-    width: 10rem;
-    border-radius: 50%;
-    padding: 7px;
-    box-shadow: 7px 6px 9px -6px rgb(158 153 158);
-}
-
-.dashboard-icon > img {
-    height: 3rem;
-}
-#bg-item1, #bg-item2, #bg-item3, #bg-item4, #bg-item5 {
-    background-color: #faf0e6;
-}
-
-.dashboard-title {
-    
-}
-
-.dashboard-title > h2 {
-    margin-top: 0;
-}
-.grid-container {
-  display: grid;
-  grid-template-areas:
-    'invités tables tâches'
-    ' menu menu dépenses';
-  grid-gap: 3rem;
-  /* background-color: #2196F3; */
-  padding: 10px 5rem;
-}
-
-.grid-container > div {
-  /* background-color: rgba(255, 255, 255, 0.8); */
-  text-align: center;
-  /* border: 1px solid lightgrey; */
-  border-bottom: 3px #dfdbd7 solid;
-  border-radius: 7px;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.dashboard___elements > div > div > .item__title {
-    width: fit-content;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    justify-content: space-between;
-    min-height: 3rem;
-    justify-content: center;
-}
-
-.item__content {
-    display: flex;
-    flex-direction: row;
-}
-
-.item__content > .item__resume {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.dashboard__ul {
-    padding-left: 0;
-}
-
-.item__content > .chart-component > .pie > canvas {
-    height: 27rem !important;
-}
-
-.title > h3 {
-    font-size: 1.25rem;
-}
-
-.item__content > div > div > p span {
-    display: block;
-    text-align: start;
-}
-
-#expenses__sum > span {
-    font-size: 3rem;
-    font-weight: 500;
-}
-
-.show-more {
-    font-size: 1.25rem;
-    align-self: end;
-    text-align: end;
-}
-.show-more > a {
-    text-decoration: none;
-    color: #6b6565 !important;
-    font-weight: 700;
-}
-
-.item__total {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-}
-.sum {
-    font-size: 5rem;
-}
-.menu__resume___container, 
-.tables__resume___container, 
-.guests__resume___container, 
-.expenses__resume___container, 
-.tasks__resume___container {
-    padding: 0 2rem;
-}
-.menu__resume___grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-}
-
-.task-count {
-    display: flex;
-}
-.task-count__element {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-@media only screen and (max-width : 1200px) {
-    .dashboard___elements > .grid-container {
-        grid-template-areas:
-            'invités tables'
-            'menu menu'
-            'tâches dépenses';
-    }
+@media only screen and (max-width : 1340px) {
     .dashboard {
         padding-bottom: 0;
     }
-    .dashboard___elements {
-        padding-left: 5rem;
-        padding-right: 5rem;
+}
+
+@media only screen and (max-width : 1200px) {
+    .dashboard {
+        padding-bottom: 0;
     }
 }
-@media (max-width: 991.98px) { 
-    .dashboard___elements {
-        padding-left: 2rem;
-        padding-right: 2rem;
+
+@media only screen and (max-width : 1111px) {
+    .dashboard-cards__style {
+        padding: 2rem;
     }
- }
+}
 
 @media (max-width: 786px) {
     .dashboard___bgimage {
         border-radius: 0;
         margin: 0;
-    }
-}
-@media ( max-width : 627px ) {
-    /* .dashboard___elements > .grid-container {
-        grid-template-areas:
-            'invités'
-            'tables'
-            'tâches'
-            'menu'
-            'dépenses';
-    } */
-    .sum {
-        font-size: 3rem;
-    }
-    .grid-container {
-        padding: 0;
-    }
-    .item__title {
-        margin-bottom: 1rem;
-    }
-}
-
-@media ( max-width : 479px ) {
-    .sum {
-        font-size: 2rem;
-    }
-    .dashboard-icon {
-        width: 3rem;
-        height: 100%;
-        position: relative;
-        height: 4rem;
-        width: 4rem;
-    }
-    .dashboard-icon > img {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        height: inherit;
-        padding: 0.5rem;
-    }
-    .dashboard-title > h2 {
-        font-size: 1.5rem !important;
-    }
-    .grid-container {
-        grid-template-areas:
-            'invités'
-            'tables'
-            'tâches'
-            'menu'
-            'dépenses' !important;
-        padding: 0 5rem;
-    }
-}
-
-@media (max-width: 379px) {
-    .task-count {
-        flex-direction: column;
-    }
-    .task-count__element {
-        margin-bottom: 1rem;
-    }
-    .menu__resume___grid {
-        grid-template-columns: 1fr;
-        row-gap: 1rem;
     }
 }

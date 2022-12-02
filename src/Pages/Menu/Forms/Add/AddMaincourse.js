@@ -15,23 +15,16 @@ const AddMaincourseForm = ({ addMaincourse, icon }) => {
     const handleSumbit = e => {
         e.preventDefault();
         setLoading(true);
-        axios.get("/api/admin/menu")
+        axios.post(`/api/admin/menu/maincourses/add`,{
+            name: input
+        })
         .then((res) => {
-            const data = res.data;
-            const result = data._id
-            if(data){
-                axios.post(`/api/admin/menu/maincourses/add/${result}`,{
-                    name: input
-                })
-                .then((res) => {
-                    addMaincourse(res.data);
-                    setInput("");
-                    setLoading(false);
-                })
-                .catch((err) => {
-                    console.log(err)})
-                }
-        })      
+            addMaincourse(res.data);
+            setInput("");
+            setLoading(false);
+        })
+        .catch((err) => {
+            console.log(err)})      
     }
 
     return(

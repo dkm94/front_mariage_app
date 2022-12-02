@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import axios from 'axios';
 import "../../Menu.css";
 
-const AddStarterForm = ({ addStarter, icon }) => {
+const AddApetizerForm = ({ addApetizer, icon }) => {
 
     const [input, setInput] = useState("");
     const inputRef = useRef(null);
@@ -15,11 +15,11 @@ const AddStarterForm = ({ addStarter, icon }) => {
     const handleSumbit = e => {
         e.preventDefault();
         setLoading(true)
-        axios.post(`/api/admin/menu/starters/add`,{
+        axios.post(`/api/admin/menu/apetizers/add`,{
             name: input
         })
         .then((res) => {
-            addStarter(res.data);
+            addApetizer(res.data);
             setInput("");
             setLoading(false)
         })
@@ -37,7 +37,7 @@ const AddStarterForm = ({ addStarter, icon }) => {
                 value={input} 
                 onChange={handleChange}
                 ref={inputRef}
-                placeholder="Verrine d'avocat et saumon fumé..."
+                placeholder="Petits fours..."
                 required
                 />
                 <button type="submit" className="btn shadow-none submit-menu-item">{loading ? "..." : "Ajouter"}</button>
@@ -46,4 +46,4 @@ const AddStarterForm = ({ addStarter, icon }) => {
     )
 }
 
-export default AddStarterForm;
+export default AddApetizerForm;

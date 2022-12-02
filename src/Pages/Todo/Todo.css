@@ -11,12 +11,10 @@
 }
 
 .todo-list {
-    width: 100%;
-    padding: 5rem 10rem;
-    min-height: 500px;
+    padding: 5rem 3rem;
 }
 
-.toggle {
+/* .toggle {
     --size: 1.5rem;
     --width: calc(1.5rem * 2);
     display: inline-grid;
@@ -67,7 +65,7 @@
   
   .toggle:disabled::before {
      background: #2be;
-  }
+  } */
 
   .add-task-form > form > div > button {
     margin-left: 10px;

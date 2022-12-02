@@ -53,6 +53,7 @@
     height: fit-content;
     display: flex;
     flex-direction: column;
+    padding: 2rem 4rem;
 }
 
 
@@ -70,19 +71,17 @@
     transform: translate(-50%, -50%);
 }
 
-.div-guest {
+/* .div-guest {
     display: flex;
     flex-direction: column;
-    /* box-shadow: 7px 6px 9px -6px rgb(158 153 158); */
     height: fit-content;
-    /* height: fit-content; */
     background-color: whitesmoke;
     position: relative;
     align-items: center;
     padding: 2rem 1rem;
     border-bottom: 3px #dfdbd7 solid;
     border-radius: 7px;
-}
+} */
 
 .div-guest > button {
     position: absolute;
@@ -126,12 +125,14 @@
 }
 
 .nameField > #guest-name {
-    font-size: 1.8rem;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    color: #000;
 }
 
-.nameField > .guest-family {
+/* .nameField > .guest-family {
     font-size: 1.3rem;
-}
+} */
 
 .nameField > span {
     /* font-size: 1.2em; */
@@ -146,15 +147,18 @@
 .guest__updateForm > form {
     display: flex;
     flex-direction: column;
+    padding: 5px 20px;
 }
 
 .guest__updateForm > form > input {
     font-size: 1.1em;
     font-weight: 300;
     color: #7c7676;
-    padding: 0.8rem;
+    padding: 0.6rem;
     border-radius: 5px;
     width: 100%;
+    border: 1px solid lightgrey;
+    margin-top: 10px;
 }
 
 #input___nameField {
@@ -311,7 +315,19 @@
     -webkit-transform: scale(1);
     transform: scale(1);
 }
-  
+
+.guest-card-style {
+    background: #FAF8F4;
+    box-shadow: 0 2px 10px 0 rgb(0 0 0 / 14%);
+    padding: 1rem 1rem !important;
+    flex-direction: column;
+    align-items: center;
+    height: -moz-fit-content;
+    height: fit-content;
+    justify-items: center;
+    text-align: center;
+}
+
 @media only screen and (max-device-width : 1024px) {
     .get-guestlist{
         padding: 1rem 3rem;

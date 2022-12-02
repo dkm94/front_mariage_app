@@ -6,12 +6,10 @@ html, body {
     min-height: 100vh;
     width: 100%;
     margin: 0;
-    font-family: 'Lato', sans-serif !important;
-    /* font-family: 'Josefin Sans', sans-serif !important; */
     font-weight: 400 !important;
     background-color: #F5F7FB;
-    /* font-size: 0.6rem !important; */
-    /* font-family: 'Roboto', sans-serif; */
+    font-size: 0.9rem;
+    font-family: 'Playfair Display', serif !important;
 }
 
 body {
@@ -26,7 +24,7 @@ h1 {
 
 h2 {
     font-size: 1.75rem !important;
-    /* font-weight: 700 !important; */
+    font-weight: 700 !important;
     color: #6b6565 !important;
 }
 
@@ -116,9 +114,6 @@ h2 {
 /******Components******/
 .page-component {
     width: 100%;
-    padding-bottom: 5rem;
-    padding-right: 10rem;
-    padding-left: 10rem;
 }
 
 .page-location {
@@ -179,13 +174,15 @@ button:focus {
 
 .titles {
     text-shadow: 1px 1px 1px rgb(0 0 0 / 15%);
-    /* padding-bottom: 2rem; */
+    padding-bottom: 2rem;
     padding-left: 1rem;
-    /* border-bottom: 1px solid #d3d3d3; */
     margin: 5rem 3rem 3rem 3rem;
+    font-family: 'Permanent Marker', cursive;
+    /* font-family: 'David Libre', serif !important; */
 }
 .titles > h2 {
-    /* font-size: 3rem !important; */
+    font-size: 3rem !important;
+    text-align: center;
 }
 
 .searchbar {
@@ -353,19 +350,23 @@ a:-webkit-any-link {
     margin-bottom: 15px;
 }
 
-
+@media only screen and (max-width : 1150px) {
+    .App-home {
+        width: 75%;
+        left: 25%;
+    }
+    }
 
 @media only screen and (max-device-width : 1024px) {
-    .App-home {
-        width: 70%;
-        left: 30%;
-    }
     .App-home > .content {
         padding: 0;
         margin-bottom: 16rem;
     }
     .byguests, .budget, .dashboard, .dashboard___elements, .menu-container > .menu {
         padding-bottom: 0;
+    }
+    .titles > h2 {
+        font-size: 2rem !important;
     }
 }
 
@@ -387,6 +388,12 @@ a:-webkit-any-link {
     #component-dashboard {
         display: block;
     }
+    /* .titles > h2 {
+        margin: 2rem 3rem 0rem;
+    } */
+    .titles {
+        display: none;
+    }
  }
 
  .add-input, .search__container {
@@ -406,6 +413,14 @@ a:-webkit-any-link {
  .add-input > input {
     border: none !important;
  }
+
+ .center-h-v{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+ }
+
  @media (max-width: 576px) {
     .page-location {
         display: none;

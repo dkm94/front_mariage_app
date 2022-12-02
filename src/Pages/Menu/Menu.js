@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import starterImg from "../../img/menus/starter_img.jpg";
 import maincourseImg from "../../img/menus/maincourse_img.jpg";
 import dessertImg from "../../img/menus/dessert_img.jpg";
+import apetizerImg from "../../img/menus/apetizers.jpg";
+import beverageImg from "../../img/menus/beverages.jpg";
 import { ScrollButtonContext } from "../../../src/App";
 import CustomToggle from "../../components/Dots/Dots";
 import Dropdown from "react-bootstrap/Dropdown";
@@ -12,9 +14,13 @@ import "./Menu.css";
 import AddStarterForm from "./Forms/Add/AddStarter";
 import AddMaincourseForm from "./Forms/Add/AddMaincourse";
 import AddDessertForm from "./Forms/Add/AddDessert";
+import AddApetizerForm from "./Forms/Add/AddApetizer";
+import AddBeverageForm from "./Forms/Add/AddBeverage";
 import UpdateStarter from "./Forms/Update/Starter";
 import UpdateMaincourse from "./Forms/Update/Maincourse";
 import UpdateDessert from "./Forms/Update/Dessert";
+import UpdateApetizer from "./Forms/Update/Apetizer";
+import UpdateBeverage from "./Forms/Update/Beverage";
 
 const Menus = () => {
 
@@ -28,6 +34,12 @@ const Menus = () => {
 
     const [desserts, setDesserts] = useState([]);
     const [dessert, setDessert] = useState({})
+
+    const [apetizers, setApetizers] = useState([]);
+    const [apetizer, setApetizer] = useState({})
+
+    const [beverages, setBeverages] = useState([]);
+    const [beverage, setBeverage] = useState({})
 
     const [edit, setEdit] = useState({
         id: null,
@@ -48,16 +60,18 @@ const Menus = () => {
         let starterData = axios.get("/api/admin/menu/starters/");
         let maincourseData = axios.get("/api/admin/menu/maincourses/");
         let dessertData = axios.get("/api/admin/menu/desserts/");
+        let apetizerData = axios.get("/api/admin/menu/apetizers/");
+        let beverageData = axios.get("/api/admin/menu/beverages/");
         async function getDatas(){
-            let res = await Promise.all([starterData, maincourseData, dessertData])
+            let res = await Promise.all([starterData, maincourseData, dessertData, apetizerData, beverageData])
             setStarters(res[0].data)
             setMaincourses(res[1].data)
             setDesserts(res[2].data)
+            setApetizers(res[3].data)
+            setBeverages(res[4].data)
         }
         getDatas();
-        return () => console.log(starters);
-    }, [])
-    // remove starter, maincourse, dessert dependencies
+    }, [starter, maincourse, dessert, apetizer, beverage])
 
 
     const addStarter = newStarter => {
@@ -74,6 +88,16 @@ const Menus = () => {
        setDessert(newDessert);
        setDesserts([...desserts, newDessert])
     }
+
+    const addApetizer = newApetizer => {
+        setApetizer(newApetizer);
+        setApetizers([...apetizers, newApetizer])
+     }
+
+     const addBeverage = newBeverage => {
+        setBeverage(newBeverage);
+        setBeverages([...beverages, newBeverage])
+     }
 
     const editStarter = updatedStarter => {
         const updatedStartersList = [...starters].map((starter) => {
@@ -108,6 +132,28 @@ const Menus = () => {
         setMaincourses(updatedDessertList);
     }
 
+    const editApetizer = updatedApetizer => {
+        const updatedApetizerList = [...apetizers].map((apetizer) => {
+            if(apetizer._id === edit.id) {
+                apetizer.name = input
+            }
+            return dessert
+        })
+        setMaincourse(updatedApetizer);
+        setMaincourses(updatedApetizerList);
+    }
+
+    const editBeverage = updatedBeverage => {
+        const updatedBeverageList = [...beverages].map((beverage) => {
+            if(beverage._id === edit.id) {
+                beverage.name = input
+            }
+            return dessert
+        })
+        setBeverage(updatedBeverage);
+        setBeverages(updatedBeverageList);
+    }
+
     const deleteStarter = (id) => {
         axios.delete(`/api/admin/menu/starters/delete/${id}`)
             .then(res => {
@@ -131,6 +177,24 @@ const Menus = () => {
             .then(res => {
                 if(res.data != null) {
                     setDesserts(desserts.filter(dessert => dessert._id !== id))
+                }
+            })
+    }
+
+    const deleteApetizer = (id) => {
+        axios.delete(`/api/admin/menu/apetizers/delete/${id}`)
+            .then(res => {
+                if(res.data != null) {
+                    setApetizers(apetizers.filter(apetizer => apetizer._id !== id))
+                }
+            })
+    }
+
+    const deleteBeverage = (id) => {
+        axios.delete(`/api/admin/menu/beverages/delete/${id}`)
+            .then(res => {
+                if(res.data != null) {
+                    setBeverages(beverages.filter(beverage => beverage._id !== id))
                 }
             })
     }
@@ -220,11 +284,11 @@ const Menus = () => {
                                 <img src={maincourseImg} alt="main couse" />
                             </div>
                         </div>
-                        <div className="dessert forms">
+                        <div className="starter forms">
                             <div className="dessert___div_img">
                                 <img src={dessertImg} alt="dessert" />
                             </div>
-                            <div className="dessert___div_form fade-in">
+                            <div className="starter___div_form fade-in fade-in">
                             {desserts.length === 0 || desserts.length === 1 ? <h3>Dessert</h3> : <h3>Desserts</h3>}
                                 <div className="menu___forms">
                                     <AddDessertForm addDessert={addDessert} icon={addIcon} />
@@ -247,6 +311,80 @@ const Menus = () => {
                                                             </>) : (<>
                                                                 <Dropdown.Item onClick={() => getUpdatedId(dessert._id, dessert.name)}>Modifier</Dropdown.Item>
                                                                 <Dropdown.Item onClick={() => {deleteDessert(dessert._id)}}>Supprimer</Dropdown.Item>
+                                                            </>)}
+                                                        </Dropdown.Menu>
+                                                    </Dropdown>
+                                                </div>
+                                            </div>
+                                        </li>)
+                                    }
+                                </ul>)}
+                            </div>
+                        </div>
+                        <div className="maincourse forms" id="forms_reverse">
+                            <div className="dessert___div_form fade-in">
+                            {apetizers.length === 0 || apetizers.length === 1 ? <h3>Apéritif</h3> : <h3>Apéritifs</h3>}
+                                <div className="menu___forms">
+                                    <AddApetizerForm addApetizer={addApetizer} icon={addIcon} />
+                                </div>
+                                {apetizers.length === 0 ? (<div className="empty-div"><span>Vos apéritifs ici</span></div>) : (<ul>
+                                    {
+                                        apetizers.map((apetizer) => <li key={apetizer._id} >
+                                            {edit.id === apetizer._id ? 
+                                            (<UpdateApetizer edit={edit} setEdit={setEdit} editApetizer={editApetizer} />) : 
+                                            (<span>{apetizer.name}</span>)}
+                                            
+                                            <div className="menu___li-btns">
+                                                <div className="custom-dropdown">
+                                                    <Dropdown>
+                                                        <Dropdown.Toggle as={CustomToggle} />
+                                                        <Dropdown.Menu size="sm" title="">
+                                                            {edit.id ? (<>
+                                                                <Dropdown.Item onClick={() => setEdit({id: null})}>Annuler</Dropdown.Item>
+                                                                <Dropdown.Item onClick={(e) => {editApetizer(e)}}>Valider</Dropdown.Item>
+                                                            </>) : (<>
+                                                                <Dropdown.Item onClick={() => getUpdatedId(apetizer._id, apetizer.name)}>Modifier</Dropdown.Item>
+                                                                <Dropdown.Item onClick={() => {deleteApetizer(apetizer._id)}}>Supprimer</Dropdown.Item>
+                                                            </>)}
+                                                        </Dropdown.Menu>
+                                                    </Dropdown>
+                                                </div>
+                                            </div>
+                                        </li>)
+                                    }
+                                </ul>)}
+                            </div>
+                            <div className="dessert___div_img">
+                                <img src={apetizerImg} alt="apéritif" />
+                            </div>
+                        </div>
+                        <div className="dessert forms">
+                            <div className="dessert___div_img">
+                                <img src={beverageImg} alt="boisson" />
+                            </div>
+                            <div className="dessert___div_form fade-in">
+                            {beverages.length === 0 || beverages.length === 1 ? <h3>Boisson</h3> : <h3>Boissons</h3>}
+                                <div className="menu___forms">
+                                    <AddBeverageForm addBeverage={addBeverage} icon={addIcon} />
+                                </div>
+                                {beverages.length === 0 ? (<div className="empty-div"><span>Vos boissons ici</span></div>) : (<ul>
+                                    {
+                                        beverages.map((beverage) => <li key={beverage._id} >
+                                            {edit.id === beverage._id ? 
+                                            (<UpdateBeverage edit={edit} setEdit={setEdit} editBeverage={editBeverage} />) : 
+                                            (<span>{beverage.name}</span>)}
+                                            
+                                            <div className="menu___li-btns">
+                                                <div className="custom-dropdown">
+                                                    <Dropdown>
+                                                        <Dropdown.Toggle as={CustomToggle} />
+                                                        <Dropdown.Menu size="sm" title="">
+                                                            {edit.id ? (<>
+                                                                <Dropdown.Item onClick={() => setEdit({id: null})}>Annuler</Dropdown.Item>
+                                                                <Dropdown.Item onClick={(e) => {editBeverage(e)}}>Valider</Dropdown.Item>
+                                                            </>) : (<>
+                                                                <Dropdown.Item onClick={() => getUpdatedId(beverage._id, beverage.name)}>Modifier</Dropdown.Item>
+                                                                <Dropdown.Item onClick={() => {deleteBeverage(beverage._id)}}>Supprimer</Dropdown.Item>
                                                             </>)}
                                                         </Dropdown.Menu>
                                                     </Dropdown>
