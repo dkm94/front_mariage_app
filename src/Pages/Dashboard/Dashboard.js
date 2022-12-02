@@ -54,10 +54,11 @@ const Dashboard = () => {
     return(
         <div className="dashboard page-component">
             {scrollBtn}
-            <div className="dashboard___bgimage"><div className="component-title" id="component-dashboard"><h1>Tableau de bord</h1></div></div>
-            <div className="titles">
-                <h1>Que souhaitez-vous faire aujourd'hui ?</h1>
+            <div className="titles mb-3">
+                <h2>Que souhaitez-vous faire aujourd'hui ?</h2>
             </div>
+            <div className="dashboard___bgimage"><div className="component-title" id="component-dashboard"><h1>Tableau de bord</h1></div></div>
+
             <div className="dashboard___elements">
                 <div className="grid-container">
                     <div className="item1">
@@ -71,9 +72,9 @@ const Dashboard = () => {
                         <div className="guests__resume___container">
                             <div className="item__total">
                                 <div className="sum"><span>{guests === undefined ? loader : guests.length}</span></div>
-                                <div className="show-more">
+                                {/* <div className="show-more">
                                     <Link to={`/menu/invites`}>Voir plus  →</Link>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>
@@ -88,9 +89,9 @@ const Dashboard = () => {
                         <div className="tables__resume___container">
                             <div>
                                 <div className="sum"><span>{nbOfTables}</span></div>
-                                <div className="show-more">
+                                {/* <div className="show-more">
                                     <Link to={`/menu/tables`}>Voir plus  →</Link>
-                                </div>
+                                </div> */}
                             </div>
                         </div>  
                     </div>
@@ -113,9 +114,9 @@ const Dashboard = () => {
                                 </div>
                             </div>
                             {/* <div className="sum"><span>{tasks === undefined ? loader : tasks.length}</span></div> */}
-                            <div className="show-more">
+                            {/* <div className="show-more">
                                 <Link to={`/menu/taches`}>Voir plus  →</Link>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                     <div className="item4">
@@ -140,9 +141,9 @@ const Dashboard = () => {
                                     <div className="sum"><span>{detailedMenu === undefined ? loader : detailedMenu.dessertID.length}</span></div>
                                 </div>
                             </div>
-                            <div className="show-more">
+                            {/* <div className="show-more">
                                 <Link to={`/menu/carte`}>Voir plus  →</Link>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                     <div className="item5">
@@ -156,9 +157,9 @@ const Dashboard = () => {
                         <div className="expenses__resume___container">
                             <div className="item__total">
                                 <div className="sum"><span>{operations === undefined ? loader :` ${total(sum)} €`}</span></div>
-                                <div className="show-more">
+                                {/* <div className="show-more">
                                     <Link to={`/menu/budget`}>Voir plus  →</Link>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>

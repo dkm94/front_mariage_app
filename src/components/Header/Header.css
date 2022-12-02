@@ -133,6 +133,7 @@
     height: auto;
     padding: 15px;
     width: 100%;
+    font-family: 'Josefin Sans', sans-serif !important;
     /* font-size: 1.7rem; */
 }
 
@@ -192,6 +193,7 @@
 .profile-picture {
     max-height: 10rem;
     max-width: 10rem;
+    margin-bottom: 1rem;
 }
 
 .profile-picture > img {

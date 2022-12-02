@@ -55,7 +55,9 @@ const Menus = () => {
             setDesserts(res[2].data)
         }
         getDatas();
-    }, [starter, maincourse, dessert])
+        return () => console.log(starters);
+    }, [])
+    // remove starter, maincourse, dessert dependencies
 
 
     const addStarter = newStarter => {

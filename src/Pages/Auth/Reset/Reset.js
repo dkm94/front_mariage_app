@@ -23,7 +23,7 @@ const Reset = () => {
             const myInit = { method: 'GET',
                headers: myHeaders,
                mode: 'cors'};
-            await fetch(`https://backend-mywedding-app.herokuapp.com/api/admin/admin/`, myInit)
+            await fetch(`https://my-wedding-backend.onrender.com/api/admin/admin/`, myInit)
                 .then(res => res.json())
                 .then(data => {
                     setEmails(data)

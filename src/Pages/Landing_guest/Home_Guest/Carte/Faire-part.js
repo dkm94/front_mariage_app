@@ -56,7 +56,7 @@ const Card = ({ userInfos }) => {
                 <div className="fp container">
                     <div className="fp-photo">
                     {invitation.picture ? 
-                    <img alt="notre mariage" src={`http://backend-mywedding-app.herokuapp.com/api/admin/invitation/page/picture/${invitation.picture}`} />
+                    <img alt="notre mariage" src={`https://my-wedding-backend.onrender.com/api/admin/invitation/page/picture/${invitation.picture}`} />
                         :
                     // setTimeout(() => {
                     // }, 10000) :

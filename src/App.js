@@ -47,7 +47,7 @@ function App() {
     role = user.role
   }
 
-  axios.defaults.baseURL = 'https://backend-mywedding-app.herokuapp.com';
+  axios.defaults.baseURL = 'https://my-wedding-backend.onrender.com/';
   axios.defaults.withCredentials = true;
   // axios.defaults.baseURL = 'http://localhost:3050';
   axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
