@@ -16,7 +16,7 @@ import Homepage from './Pages/Homepage/Home';
 import NouvelUtilisateur from './Pages/Auth/Register/Register';
 import Connexion from './Pages/Auth/Login/Login';
 import Reset from "./Pages/Auth/Reset/Reset";
-import TableauDeBord from "../src/Pages/Dashboard/Dashboard";
+import TableauDeBord from "../src/Pages/Dashboard/Dashboard.jsx";
 import CompteUtilisateur from "../src/Pages/Mon_Compte/Mon_compte";
 import LesInvités from "../src/Pages/Invités/Invités";
 import LesTables from "../src/Pages/Tables/Tables";
