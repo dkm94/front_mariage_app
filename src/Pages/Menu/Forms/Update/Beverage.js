@@ -14,12 +14,12 @@ const UpdateBeverage = ({ edit, setEdit, editBeverage }) => {
         setInput(e.target.value)
     }
 
-    const handleSubmit = e => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if(input.trim() === ""){
             return
         } else {
-            axios.post(`/api/admin/menu/beverages/edit/${edit.id}`, {name: input})
+            await axios.post(`/api/admin/menu/beverages/edit/${edit.id}`, {name: input})
                 .then((res) => {
                     editBeverage(res.data)
                     setEdit('')

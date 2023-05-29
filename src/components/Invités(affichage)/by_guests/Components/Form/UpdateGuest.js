@@ -33,7 +33,7 @@ const UpdateGuest = ({ edit, setEdit, onSubmit, mariageID, guestFamily }) => {
         setInput(e.target.value)
     }
 
-    const handleSubmit = e => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         onSubmit({
             id: edit.id,
@@ -42,7 +42,7 @@ const UpdateGuest = ({ edit, setEdit, onSubmit, mariageID, guestFamily }) => {
         if(input.trim() === ""){
             return
         } else {
-            axios.post(`api/admin/guests/edit/${edit.id}`, {
+            await axios.post(`api/admin/guests/edit/${edit.id}`, {
                 _id: edit.id,
                 name: input,
                 family: radioValue

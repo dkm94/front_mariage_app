@@ -56,8 +56,8 @@ const Byguests = ({ userInfos }) => {
         setGuests(updatedGueslist);
     }
 
-    const deleteGuest = (id) => {
-        axios.delete(`/api/admin/guests/delete/${id}`)
+    const deleteGuest = async (id) => {
+        await axios.delete(`/api/admin/guests/delete/${id}`)
             .then(result => {
                 if(result.data != null) {
                     setGuests(guests.filter(guest => guest._id !== id))
@@ -71,10 +71,10 @@ const Byguests = ({ userInfos }) => {
         setFile(file)
     }
 
-    const uploadPicture = (id) => {
+    const uploadPicture = async (id) => {
         let formData = new FormData();
         formData.append('media', file)
-        axios.post(`/api/admin/guests/edit/${id}`, formData)
+        await axios.post(`/api/admin/guests/edit/${id}`, formData)
             .then(result => {
                 if(result.data != null) {
                     setFile(null)

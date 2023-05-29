@@ -14,12 +14,12 @@ const UpdateMaincourse = ({ edit, setEdit, editMaincourse }) => {
         setInput(e.target.value)
     }
 
-    const handleSubmit = e => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if(input.trim() === ""){
             return
         } else {
-            axios.post(`/api/admin/menu/maincourses/edit/${edit.id}`, {name: input})
+            await axios.post(`/api/admin/menu/maincourses/edit/${edit.id}`, {name: input})
                 .then((res) => {
                     editMaincourse(res.data)
                     setEdit('')

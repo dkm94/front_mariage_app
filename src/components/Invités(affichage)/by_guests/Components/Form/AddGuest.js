@@ -14,10 +14,10 @@ const AddGuestForm = ({ addGuest }) => {
         setInput(e.target.value)
     }
 
-    const handleSumbit = e => {
+    const handleSumbit = async (e) => {
         e.preventDefault();
         setLoading(true)
-        axios.post("/api/admin/guests/add", {
+        await axios.post("/api/admin/guests/add", {
             name: input
         })
         .then(res => {

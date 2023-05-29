@@ -39,7 +39,7 @@ const Select = ({ tables, table, guests, setTables }) => {
         }
     }
 
-    const addGuest = (selectedGuest, tableID) => {
+    const addGuest = async (selectedGuest, tableID) => {
         selectedGuest = selectedGuest.value
         const updatedTables = [...loadingList].map((table) => {
             if(table._id === tableID.id) {
@@ -47,7 +47,7 @@ const Select = ({ tables, table, guests, setTables }) => {
             }
             return table
         })
-        axios.put(`/api/admin/guests/addtable/${selectedGuest}`, {tableID: table._id})
+        await axios.put(`/api/admin/guests/addtable/${selectedGuest}`, {tableID: table._id})
             .then((res) => {
                 if(res.data != null) {
                     setTimeout(() => {

@@ -154,8 +154,8 @@ const Menus = () => {
         setBeverages(updatedBeverageList);
     }
 
-    const deleteStarter = (id) => {
-        axios.delete(`/api/admin/menu/starters/delete/${id}`)
+    const deleteStarter = async (id) => {
+        await axios.delete(`/api/admin/menu/starters/delete/${id}`)
             .then(res => {
                 if(res.data != null) {
                     setStarters(starters.filter(starter => starter._id !== id))
@@ -163,8 +163,8 @@ const Menus = () => {
             })
     }
 
-    const deleteMaincourse = (id) => {
-        axios.delete(`/api/admin/menu/maincourses/delete/${id}`)
+    const deleteMaincourse = async (id) => {
+        await axios.delete(`/api/admin/menu/maincourses/delete/${id}`)
             .then(res => {
                 if(res.data != null) {
                     setMaincourses(maincourses.filter(maincourse => maincourse._id !== id))
@@ -172,8 +172,8 @@ const Menus = () => {
             })
     }
 
-    const deleteDessert = (id) => {
-        axios.delete(`/api/admin/menu/desserts/delete/${id}`)
+    const deleteDessert = async (id) => {
+        await axios.delete(`/api/admin/menu/desserts/delete/${id}`)
             .then(res => {
                 if(res.data != null) {
                     setDesserts(desserts.filter(dessert => dessert._id !== id))
@@ -181,8 +181,8 @@ const Menus = () => {
             })
     }
 
-    const deleteApetizer = (id) => {
-        axios.delete(`/api/admin/menu/apetizers/delete/${id}`)
+    const deleteApetizer = async (id) => {
+        await axios.delete(`/api/admin/menu/apetizers/delete/${id}`)
             .then(res => {
                 if(res.data != null) {
                     setApetizers(apetizers.filter(apetizer => apetizer._id !== id))
@@ -190,8 +190,8 @@ const Menus = () => {
             })
     }
 
-    const deleteBeverage = (id) => {
-        axios.delete(`/api/admin/menu/beverages/delete/${id}`)
+    const deleteBeverage = async (id) => {
+        await axios.delete(`/api/admin/menu/beverages/delete/${id}`)
             .then(res => {
                 if(res.data != null) {
                     setBeverages(beverages.filter(beverage => beverage._id !== id))

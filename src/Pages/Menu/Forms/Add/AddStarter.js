@@ -12,10 +12,10 @@ const AddStarterForm = ({ addStarter, icon }) => {
         setInput(e.target.value)
     }
 
-    const handleSumbit = e => {
+    const handleSumbit = async (e) => {
         e.preventDefault();
         setLoading(true)
-        axios.post(`/api/admin/menu/starters/add`,{
+        await axios.post(`/api/admin/menu/starters/add`,{
             name: input
         })
         .then((res) => {

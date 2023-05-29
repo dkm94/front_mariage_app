@@ -13,10 +13,10 @@ const AddTableForm = ({ addTable }) => {
         setInput(e.target.value)
     }
 
-    const handleSumbit = e => {
+    const handleSumbit = async (e) => {
         e.preventDefault();
         setLoading(true)
-        axios.post("/api/admin/tables/add", {
+        await axios.post("/api/admin/tables/add", {
             name: input
         })
         .then(res => {

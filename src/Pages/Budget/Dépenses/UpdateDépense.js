@@ -3,7 +3,6 @@ import React, { useState, useEffect, useRef } from 'react';
 const UpdateExpense = ({ edit, setEdit, onSubmit }) => {
 
     const [input, setInput] = useState(edit ? edit.obj : '')
-    console.log(input)
     // const editedPrice = input.price/100;
     // const fixedPrice = editedPrice.toFixed(2);
 

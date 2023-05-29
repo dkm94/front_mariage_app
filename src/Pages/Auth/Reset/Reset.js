@@ -34,9 +34,8 @@ const Reset = () => {
         fetchData();
     }, [emails])
     
-    const onSubmit = ({email}) => {
-        console.log({email})
-        axios.post(`/api/auth/reset-password`,
+    const onSubmit = async ({email}) => {
+        await axios.post(`/api/auth/reset-password`,
         {
             email: email
         })

@@ -12,11 +12,11 @@ const AddDessertForm = ({ addDessert, icon }) => {
         setInput(e.target.value)
     }
 
-    const handleSumbit = e => {
+    const handleSumbit = async (e) => {
         e.preventDefault();
         setLoading(true)
-        axios.get("/api/admin/menu")
-        axios.post(`/api/admin/menu/desserts/add`,{
+        await axios.get("/api/admin/menu")
+        await axios.post(`/api/admin/menu/desserts/add`,{
             name: input
         })
         .then((res) => {

@@ -51,7 +51,7 @@ const Formulaire = ({ userInfos }) => {
         fetchData();
     }, [])
 
-    const editEvent = (updatedEvent) => {
+    const editEvent = async (updatedEvent) => {
         const updatedEvents = [...events].map((obj) => {
             if(obj._id === updatedEvent.id) {
                 obj.eventTitle = updatedEvent.event.eventTitle
@@ -61,7 +61,7 @@ const Formulaire = ({ userInfos }) => {
             }
             return obj
         })
-        axios.post(`/api/admin/invitation/events/edit/${updatedEvent.id}`, updatedEvent.event)
+        await axios.post(`/api/admin/invitation/events/edit/${updatedEvent.id}`, updatedEvent.event)
             .then((res) => {
                 if(res.data != null){
                     setTimeout(() => {
@@ -74,9 +74,8 @@ const Formulaire = ({ userInfos }) => {
             })
     }
 
-    const deleteEvent = (id) => {
-        console.log(id);
-        axios.delete(`/api/admin/invitation/events/delete/${id}`)
+    const deleteEvent = async (id) => {
+        await axios.delete(`/api/admin/invitation/events/delete/${id}`)
             .then(res => {
                 if(res.data != null) {
                     setEvents(events.filter(event => event._id !== id))
