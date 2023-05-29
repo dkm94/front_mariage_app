@@ -30,15 +30,14 @@ const Bygroups = () => {
         }))
     }
 
-    const handleSubmit = (name, mail) => {
+    const handleSubmit = async (name, mail) => {
         // alert("submitted!")
         const token = localStorage.getItem("token");
         const config = {
             headers: { Authorization: 'Bearer '+ token }
             };
-        axios.post("/api/admin/groups/add", {name: name, email: mail}, config)
+        await axios.post("/api/admin/groups/add", {name: name, email: mail}, config)
             .then((res) => {
-                console.log(res.data)
                 if(res.data != null){
                     const updatedGroupList = [newGroup, ...groups]
                     setGroups(updatedGroupList)
@@ -48,16 +47,13 @@ const Bygroups = () => {
                 console.log(err)})
     }
 
-    const deleteGroup = (id) => {
-        // alert("submitted !")
-        console.log(id)
+    const deleteGroup = async (id) => {
         const token = localStorage.getItem("token");
         const config = {
             headers: { Authorization: 'Bearer '+ token }
         };
-        axios.delete(`/api/admin/groups/delete/${id}`, config)
+        await axios.delete(`/api/admin/groups/delete/${id}`, config)
             .then(result => {
-                console.log(result.data)
                 if(result.data != null) {
                     // alert("Groupe supprimé.");
                     setGroups(groups.filter(group => group._id !== id))

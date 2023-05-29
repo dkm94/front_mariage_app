@@ -62,8 +62,8 @@ const Budget = () => {
     //     //     })
     // }
 
-    const deleteExpense = (id) => {
-        axios.delete(`/api/admin/budget/operations/delete/${id}`)
+    const deleteExpense = async (id) => {
+        await axios.delete(`/api/admin/budget/operations/delete/${id}`)
             .then(res => {
                 if(res.data != null) {
                     setOperations(operations.filter(operation => operation._id !== id))
@@ -91,7 +91,7 @@ const Budget = () => {
     const formik = useFormik({
         initialValues: newOperationValues,
         onSubmit: async (values) => {
-            axios.post(`/api/admin/budget/operations/add`,
+            await axios.post(`/api/admin/budget/operations/add`,
             {
                 category: values.category,
                 price: values.price,

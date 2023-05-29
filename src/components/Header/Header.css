@@ -42,9 +42,7 @@
     color: #F7F5F3;
     text-decoration: none;
 }
-.navbar__burger {
-    
-}
+
 .navbar__burger {
     width: 20px;
     height: 12px;
@@ -189,6 +187,7 @@
 .profile-picture {
     max-height: 10rem;
     max-width: 10rem;
+    margin-bottom: 1rem;
 }
 
 .profile-picture > img {

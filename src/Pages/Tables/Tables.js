@@ -57,7 +57,7 @@ const Tables = (props) => {
         setInput(tableName)
     }
 
-    const editTableName = (e) => {
+    const editTableName = async (e) => {
         e.preventDefault()
         const updatedTableList = [...tables].map((table) => {
             if(table._id === edit.id) {
@@ -65,7 +65,7 @@ const Tables = (props) => {
             }
             return table
         })
-        axios.post(`/api/admin/tables/edit/${edit.id}`, {name: input})
+        await axios.post(`/api/admin/tables/edit/${edit.id}`, {name: input})
             .then((res) => {
                 if(res.data != null){
                     setTimeout(() => {
@@ -79,8 +79,8 @@ const Tables = (props) => {
             })
     }
 
-    const deleteGuest = (guest, table) => {
-        axios.put(`/api/admin/guests/deletetable/${guest}`, {tableID: table})
+    const deleteGuest = async (guest, table) => {
+        await axios.put(`/api/admin/guests/deletetable/${guest}`, {tableID: table})
             .then((res) => {
                 if(res.data != null){
                     setGuests(guests.filter(table => table._id !== table))
@@ -91,9 +91,9 @@ const Tables = (props) => {
                 console.log(err)})
     }
 
-    const deleteTable = (e, tableId, guest) => {
+    const deleteTable = async (e, tableId, guest) => {
        e.preventDefault();
-        axios.delete(`/api/admin/tables/delete/${tableId}`)
+        await axios.delete(`/api/admin/tables/delete/${tableId}`)
             .then(res => {
                 if(res.data != null) {
                     // const updateList = tables.filter(table => table._id !== tableId)

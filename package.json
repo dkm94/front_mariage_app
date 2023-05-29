@@ -60,7 +60,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://backend-mywedding-app.herokuapp.com",
+  "proxy": "https://my-wedding-backend.onrender.com/",
   "resolutions": {
     "react-scripts/eslint-webpack-plugin": "2.4.1"
   }

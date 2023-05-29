@@ -6,10 +6,6 @@ import { Button } from '@material-ui/core';
 import { Col } from 'react-bootstrap';
 
 const Todos = ({ todos, setTodos, deleteTodo, searchValue, setSearchValue, obj, i }) => {
-    console.log(todos)
-
-    console.log(obj);
-
     const [edit, setEdit] = useState({
         id: null,
         obj: {
@@ -37,7 +33,7 @@ const Todos = ({ todos, setTodos, deleteTodo, searchValue, setSearchValue, obj, 
         })
     }
 
-    const editTodo = (e) => {
+    const editTodo = async (e) => {
         e.preventDefault()
         const updatedTodoList = [...todos].map((obj) => {
             if(obj._id === edit.id) {
@@ -45,7 +41,7 @@ const Todos = ({ todos, setTodos, deleteTodo, searchValue, setSearchValue, obj, 
             }
             return obj
         })
-        axios.post(`/api/admin/todolist/edit/${edit.id}`, input)
+        await axios.post(`/api/admin/todolist/edit/${edit.id}`, input)
             .then((res) => {
                 if(res.data != null){
                     setTimeout(() => {
@@ -60,14 +56,14 @@ const Todos = ({ todos, setTodos, deleteTodo, searchValue, setSearchValue, obj, 
             })
     }
     
-    const toggleCompleted = (task) => {  
+    const toggleCompleted = async (task) => {  
         const updatedList = [...todos].map((todo) => {
             if(todo._id === task._id){
                 todo.isCompleted = !task.isCompleted
             }
             return todo
         })
-        axios.post(`/api/admin/todolist/edit/${task._id}`, {
+        await axios.post(`/api/admin/todolist/edit/${task._id}`, {
             _id: task._id,
             isCompleted: task.isCompleted
         })

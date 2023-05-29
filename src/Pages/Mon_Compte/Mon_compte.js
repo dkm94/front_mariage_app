@@ -19,7 +19,6 @@ const MyAccount = ({ token }) => {
     const [deleteValidation, setdeleteValidation] = useState(false)
     const [newPassword, setNewPassword] = useState("")
     const [editSuccess, setEditSuccess] = useState("")
-    console.log("🚀 ~ file: Mon_compte.js ~ line 22 ~ MyAccount ~ editSuccess", editSuccess)
     // const [saving, setSaving] = useState(false);
     
     // Fetch data
@@ -143,9 +142,6 @@ const MyAccount = ({ token }) => {
                 if(res.data === 200){
                     setsuccessfulDeletionMessage(res.statusText)
                 }
-                console.log(res.data)
-                console.log(res.status)
-                console.log(res.statusText)
             })
             .then(() => {
                 if(token){

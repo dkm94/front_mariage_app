@@ -14,10 +14,10 @@ const Form = ({ addTodo }) => {
       setInput(e.target.value)
   }
 
-  const handleSumbit = e => {
+  const handleSumbit = async (e) => {
     e.preventDefault();
     setLoading(true)
-    axios.post(`/api/admin/todolist/add`, {
+    await axios.post(`/api/admin/todolist/add`, {
       text: input
     })
       .then((res) => {

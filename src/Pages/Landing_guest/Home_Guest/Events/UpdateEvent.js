@@ -3,7 +3,6 @@ import React, { useState, useEffect, useRef } from 'react';
 const UpdateEvent = ({ edit, setEdit, onSubmit }) => {
 
     const [input, setInput] = useState(edit ? edit.obj : '')
-    console.log(input)
 
     const inputRef = useRef(null);
 

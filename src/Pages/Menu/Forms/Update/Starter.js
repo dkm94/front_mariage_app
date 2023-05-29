@@ -14,12 +14,12 @@ const UpdateStarter = ({ edit, setEdit, editStarter }) => {
         setInput(e.target.value)
     }
 
-    const handleSubmit = e => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if(input.trim() === ""){
             return
         } else {
-            axios.post(`/api/admin/menu/starters/edit/${edit.id}`, {name: input})
+            await axios.post(`/api/admin/menu/starters/edit/${edit.id}`, {name: input})
                 .then((res) => {
                     editStarter(res.data)
                     setEdit('')
