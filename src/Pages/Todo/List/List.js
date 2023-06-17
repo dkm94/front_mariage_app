@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import UpdateForm from "../Update/Form";
 import "./List.css";
 import axios from "axios";
-import { Button } from '@material-ui/core';
+import { Button } from '@mui/material';
 import { Col } from 'react-bootstrap';
 
 const Todos = ({ todos, setTodos, deleteTodo, searchValue, setSearchValue, obj, i }) => {
