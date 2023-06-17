@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Modal from "../../../../Modals/Set_guest_picture";
 import Form from "../Form/UpdateGuest";
 import avatar from "../../../../../img/avatar.jpg";
-import { Button } from "@material-ui/core";
+import { Button, Box } from "@material-ui/core";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2"; // import { CSSTransition, TransitionGroup, Transition } from "react-transition-group";
 // import { Box, Fade, Grow } from '@material-ui/core';
 
@@ -61,51 +61,53 @@ const Guests = ({
           <span>Vos invités ici.</span>
         </div>
       ) : (
-        <Grid2 container gap={3} justifyContent={"center"}>
-          {guests
-            //searchbar filter
-            .filter((guest) => {
-              return (
-                guest.name.toLowerCase().indexOf(searchValue.toLowerCase()) >= 0
-              );
-            })
-            //select filter
-            .filter((guest) => {
-              if (selected === "1") {
-                return guest.family === "1";
-              } else if (selected === "2") {
-                return guest.family === "2";
-              } else {
-                return guest;
-              }
-            })
-            .sort((a, b) => {
-              return a.name > b.name ? 1 : -1;
-            })
-            .map((guest) => {
-              return (
-                <Grid2
-                  xs={12}
-                  sm={4}
-                  md={3}
-                  //   lg={6}
-                  //   xl={6}
-                  key={guest._id}
-                  className={`fade-in guest-card-style`}
-                >
-                  {edit.id === guest._id && (
-                    <div className="guest-card__delete-btn">
-                      <button
-                        onClick={() => {
-                          handleRemoveGuest(guest._id);
-                        }}
-                      >
-                        ✖
-                      </button>
-                    </div>
-                  )}
-                  {/* <li className={(isFadingOut && guest._id === deleteId) ? 'div-guest item-fadeout' :'div-guest'}> */}
-                  {/* <div className="custom-dropdown">
+        <Box sx={{ minHeight: "500px" }}>
+          <Grid2 container gap={3} justifyContent={"center"}>
+            {guests
+              //searchbar filter
+              .filter((guest) => {
+                return (
+                  guest.name.toLowerCase().indexOf(searchValue.toLowerCase()) >=
+                  0
+                );
+              })
+              //select filter
+              .filter((guest) => {
+                if (selected === "1") {
+                  return guest.family === "1";
+                } else if (selected === "2") {
+                  return guest.family === "2";
+                } else {
+                  return guest;
+                }
+              })
+              .sort((a, b) => {
+                return a.name > b.name ? 1 : -1;
+              })
+              .map((guest) => {
+                return (
+                  <Grid2
+                    xs={12}
+                    sm={4}
+                    md={3}
+                    //   lg={6}
+                    //   xl={6}
+                    key={guest._id}
+                    className={`fade-in guest-card-style`}
+                  >
+                    {edit.id === guest._id && (
+                      <div className="guest-card__delete-btn">
+                        <button
+                          onClick={() => {
+                            handleRemoveGuest(guest._id);
+                          }}
+                        >
+                          ✖
+                        </button>
+                      </div>
+                    )}
+                    {/* <li className={(isFadingOut && guest._id === deleteId) ? 'div-guest item-fadeout' :'div-guest'}> */}
+                    {/* <div className="custom-dropdown">
                                             <Dropdown>
                                                 <Dropdown.Toggle as={CustomToggle} />
                                                 <Dropdown.Menu size="sm" title="">
@@ -122,98 +124,99 @@ const Guests = ({
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                         </div> */}
-                  <div className="div-guest___container">
-                    <div className="guest-picture center-x">
-                      {guest.media === "" ? (
-                        <img alt="avatar" src={avatar} />
-                      ) : (
-                        <img
-                          alt="notre mariage"
-                          src={`https://my-wedding-backend.onrender.com/api/admin/guests/media/${guest.media}`}
-                        />
-                      )}
-                      {edit.id === guest._id ? (
-                        <div>
-                          <button
-                            onClick={() => {
-                              setisOpen(!isOpen);
-                              seteditPicture(guest._id);
-                            }}
-                          >
-                            <i className="fas fa-camera" />
-                          </button>
-                        </div>
-                      ) : null}
-                    </div>
-
-                    {edit.id === guest._id ? (
-                      <>
-                        <Form
-                          edit={edit}
-                          setEdit={setEdit}
-                          onSubmit={submitUpdate}
-                          mariageID={mariageID}
-                          guestId={guest._id}
-                          guestFamily={guest.family}
-                        />
-                      </>
-                    ) : (
-                      <div className="nameField">
-                        <span id="guest-name">{guest.name}</span>
-                        <div className="guest-card__namefield-container">
-                          Table -
-                          {guest.family === "1" ? (
-                            <span className="guest-family">{`Invité(e) de ${firstPerson}`}</span>
-                          ) : guest.family === "2" ? (
-                            <span className="guest-family">{`Invité(e) de ${secondPerson}`}</span>
-                          ) : null}
-                        </div>
-                        <div className="guest-card__button-container">
-                          <Button
-                            onClick={() =>
-                              setEdit({
-                                id: guest._id,
-                                name: guest.name,
-                              })
-                            }
-                            variant="outline"
-                          >
-                            Modifier
-                          </Button>
-                        </div>
+                    <div className="div-guest___container">
+                      <div className="guest-picture center-x">
+                        {guest.media === "" ? (
+                          <img alt="avatar" src={avatar} />
+                        ) : (
+                          <img
+                            alt="notre mariage"
+                            src={`https://my-wedding-backend.onrender.com/api/admin/guests/media/${guest.media}`}
+                          />
+                        )}
+                        {edit.id === guest._id ? (
+                          <div>
+                            <button
+                              onClick={() => {
+                                setisOpen(!isOpen);
+                                seteditPicture(guest._id);
+                              }}
+                            >
+                              <i className="fas fa-camera" />
+                            </button>
+                          </div>
+                        ) : null}
                       </div>
-                    )}
-                    <Modal
-                      open={isOpen}
-                      setOpen={setisOpen}
-                      guestId={editPicture}
-                      close={() => {
-                        setisOpen(false);
-                      }}
-                    >
-                      <form
-                        className="modal___picture"
-                        onSubmit={(e) => {
-                          upload(editPicture);
-                          e.preventDefault();
+
+                      {edit.id === guest._id ? (
+                        <>
+                          <Form
+                            edit={edit}
+                            setEdit={setEdit}
+                            onSubmit={submitUpdate}
+                            mariageID={mariageID}
+                            guestId={guest._id}
+                            guestFamily={guest.family}
+                          />
+                        </>
+                      ) : (
+                        <div className="nameField">
+                          <span id="guest-name">{guest.name}</span>
+                          <div className="guest-card__namefield-container">
+                            Table -
+                            {guest.family === "1" ? (
+                              <span className="guest-family">{`Invité(e) de ${firstPerson}`}</span>
+                            ) : guest.family === "2" ? (
+                              <span className="guest-family">{`Invité(e) de ${secondPerson}`}</span>
+                            ) : null}
+                          </div>
+                          <div className="guest-card__button-container">
+                            <Button
+                              onClick={() =>
+                                setEdit({
+                                  id: guest._id,
+                                  name: guest.name,
+                                })
+                              }
+                              variant="outline"
+                            >
+                              Modifier
+                            </Button>
+                          </div>
+                        </div>
+                      )}
+                      <Modal
+                        open={isOpen}
+                        setOpen={setisOpen}
+                        guestId={editPicture}
+                        close={() => {
+                          setisOpen(false);
                         }}
                       >
-                        <label>
-                          Télécharger une photo (format: JPG/JPEG ou PNG)
-                        </label>
-                        <input
-                          type="file"
-                          name="media"
-                          onChange={handleFileInput}
-                        />
-                        <button type="submit">Valider</button>
-                      </form>
-                    </Modal>
-                  </div>
-                </Grid2>
-              );
-            })}
-        </Grid2>
+                        <form
+                          className="modal___picture"
+                          onSubmit={(e) => {
+                            upload(editPicture);
+                            e.preventDefault();
+                          }}
+                        >
+                          <label>
+                            Télécharger une photo (format: JPG/JPEG ou PNG)
+                          </label>
+                          <input
+                            type="file"
+                            name="media"
+                            onChange={handleFileInput}
+                          />
+                          <button type="submit">Valider</button>
+                        </form>
+                      </Modal>
+                    </div>
+                  </Grid2>
+                );
+              })}
+          </Grid2>
+        </Box>
       )}
     </>
   );

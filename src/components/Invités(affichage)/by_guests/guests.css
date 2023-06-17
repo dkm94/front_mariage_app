@@ -123,6 +123,7 @@
     flex-direction: column;
     color: #737171;
     margin-bottom: 5rem;
+    word-break: break-word;
 }
 
 .nameField {
@@ -131,6 +132,7 @@
     margin: 10px 0px;
     display: flex;
     flex-direction: column;
+    word-break: break-word;
 }
 
 .nameField > #guest-name {
@@ -146,7 +148,7 @@
 }
 
 .guest-card__button-container {
-
+    word-break: break-word;
 }
 
 .guest-card__button-container > button {
