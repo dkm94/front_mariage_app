@@ -93,6 +93,17 @@ const Guests = ({
                   key={guest._id}
                   className={`fade-in guest-card-style`}
                 >
+                  {edit.id === guest._id && (
+                    <div className="guest-card__delete-btn">
+                      <button
+                        onClick={() => {
+                          handleRemoveGuest(guest._id);
+                        }}
+                      >
+                        ✖
+                      </button>
+                    </div>
+                  )}
                   {/* <li className={(isFadingOut && guest._id === deleteId) ? 'div-guest item-fadeout' :'div-guest'}> */}
                   {/* <div className="custom-dropdown">
                                             <Dropdown>

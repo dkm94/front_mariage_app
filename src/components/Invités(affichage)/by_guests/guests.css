@@ -47,6 +47,16 @@
     flex-direction: column;
 }
 
+.guest-card__delete-btn {
+    position: relative;
+}
+
+.guest-card__delete-btn > button {
+    font-size: 1.5em;
+    position: absolute;
+    right: 5px;
+    background: none;
+}
 
 
 .block {
