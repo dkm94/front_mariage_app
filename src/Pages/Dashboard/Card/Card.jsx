@@ -66,9 +66,9 @@ const Card = ({
     const getElement = array?.map((el) => (
       <li key={el?._id}>
         <span>{el?.name} </span>
-        <span style={{ fontWeight: "bold" }}>
+        {/* <span style={{ fontWeight: "bold" }}>
           ({el?.guestID?.length} pers.)
-        </span>
+        </span> */}
       </li>
     ));
     const getLast = getElement?.slice(-3);
