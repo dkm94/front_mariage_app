@@ -57,6 +57,21 @@
     text-align: center;
 }
 
+.dashbord-view-details > a{
+    text-transform: unset;
+    background-color: #BCBCAD;
+    color: #fff;
+    font-family: unset;
+    border-radius: 36px;
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+.dashbord-view-details > a:hover{
+    color: black;
+    background-color: #F7F5F3;
+}
+
 @media only screen and (max-width : 1218px) {
     #dashboard-cards {
         width: 15rem;
