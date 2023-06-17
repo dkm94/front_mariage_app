@@ -101,8 +101,12 @@ const UpdateGuest = ({ edit, setEdit, onSubmit, mariageID, guestFamily }) => {
                         <i className="fas fa-check"/>
                     </button> */}
           <div className="guest-card__form__button-container">
-            <Button variant="outline">Annuler</Button>
-            <Button variant="outline">Valider</Button>
+            <Button onClick={() => setEdit({ id: null })} variant="outline">
+              Annuler
+            </Button>
+            <Button onClick={handleSubmit} variant="outline">
+              Valider
+            </Button>
           </div>
         </form>
       </div>

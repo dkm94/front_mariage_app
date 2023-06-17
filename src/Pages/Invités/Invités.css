@@ -101,13 +101,12 @@
     border-color: #ccc;
     align-self: flex-end;
     margin-bottom: 3rem;
+    margin-right: 4rem;
 }
 
 
 @media (max-width: 1312px) {
-    .get-guestlist {
-        grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
-    }
+
 }
 @media (max-width: 1024px) {
     .guest-form > div, form {
@@ -123,10 +122,6 @@
         display: flex;
         justify-content: center;
     }
-    .guests___list {
-        padding: 5rem 0rem;
-        grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
-    }
 }
 
 @media (max-width: 913px) {
@@ -141,9 +136,7 @@
     .guests___list {
         padding: 5rem 0rem;
     }
-    .get-guestlist {
-        grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
-    }
+
     .guest-picture > img {
         width: 8rem;
         height: 8rem;
@@ -165,6 +158,14 @@
     }
 }
 
+
+
+@media (max-width: 600px) {
+    .byguests___block {
+        padding: 2rem 4rem;
+    }
+}
+
 @media (max-width: 540px) {
     .guest-form {
         display: flex;
@@ -180,9 +181,7 @@
 }
 
 @media (max-width: 459px) {
-    .get-guestlist {
-        grid-template-columns: 1fr;
-    }
+
     .div-guest___container {
         display: flex;
         width: 100%;

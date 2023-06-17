@@ -1,12 +1,4 @@
-.get-guestlist {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
-    row-gap: 2rem;
-    column-gap: 2rem;
-    padding: 1rem;
-    width: 100%;
-    box-sizing: border-box;
-}
+
 
 /* enter */
 .fade-enter {
@@ -53,7 +45,6 @@
     height: fit-content;
     display: flex;
     flex-direction: column;
-    padding: 2rem 4rem;
 }
 
 
@@ -172,6 +163,8 @@ padding-left: 30px;
 .guest-card__form__button-container {
     display: flex;
     flex-direction: row;
+    gap: 14px;
+    justify-content: center;
     }
 
 .guest-card__form__button-container > button {
@@ -180,14 +173,16 @@ padding-left: 30px;
     color: #fff;
     font-family: unset;
     border-radius: 36px;
-    padding-right: 30px;
-    padding-left: 30px;
+    padding-right: 20px;
+    padding-left: 20px;
+    width: 40%;
+    max-width: 130px;
     }
 
 .guest__updateForm > form > input {
     font-weight: 300;
     color: #7c7676;
-    padding: 0.6rem;
+    padding: 0.5rem;
     border-radius: 5px;
     width: 100%;
     border: 1px solid lightgrey;
@@ -361,15 +356,13 @@ padding-left: 30px;
     flex-direction: column;
     align-items: center;
     height: -moz-fit-content;
-    height: fit-content;
+    height: auto;
     justify-items: center;
     text-align: center;
 }
 
 @media only screen and (max-device-width : 1024px) {
-    .get-guestlist{
-        padding: 1rem 3rem;
-    }
+
     /* .guest__updateForm > form {
         width: 100%;
     }
@@ -378,9 +371,7 @@ padding-left: 30px;
     } */
 }
 @media (max-width: 786px) { 
-    .get-guestlist {
-        grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
-    }
+ 
 }
 
 @media (max-width: 460px) { 

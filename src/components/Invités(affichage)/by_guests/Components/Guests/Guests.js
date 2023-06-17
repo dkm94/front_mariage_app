@@ -3,8 +3,7 @@ import Modal from "../../../../Modals/Set_guest_picture";
 import Form from "../Form/UpdateGuest";
 import avatar from "../../../../../img/avatar.jpg";
 import { Button } from "@material-ui/core";
-import Grid from "@material-ui/core";
-// import { CSSTransition, TransitionGroup, Transition } from "react-transition-group";
+import Grid2 from "@mui/material/Unstable_Grid2/Grid2"; // import { CSSTransition, TransitionGroup, Transition } from "react-transition-group";
 // import { Box, Fade, Grow } from '@material-ui/core';
 
 const Guests = ({
@@ -62,7 +61,7 @@ const Guests = ({
           <span>Vos invités ici.</span>
         </div>
       ) : (
-        <Grid container spacing={6}>
+        <Grid2 container gap={3} justifyContent={"center"}>
           {guests
             //searchbar filter
             .filter((guest) => {
@@ -85,9 +84,12 @@ const Guests = ({
             })
             .map((guest) => {
               return (
-                <Grid
-                  md={4}
-                  item
+                <Grid2
+                  xs={12}
+                  sm={4}
+                  md={3}
+                  //   lg={6}
+                  //   xl={6}
                   key={guest._id}
                   className={`fade-in guest-card-style`}
                 >
@@ -197,10 +199,10 @@ const Guests = ({
                       </form>
                     </Modal>
                   </div>
-                </Grid>
+                </Grid2>
               );
             })}
-        </Grid>
+        </Grid2>
       )}
     </>
   );
