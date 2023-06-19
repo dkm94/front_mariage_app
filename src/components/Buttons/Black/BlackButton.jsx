@@ -22,9 +22,15 @@ const CustomButton = styled(Button)({
   },
 });
 
-const BlackButton = ({ size, variant, type, style, text }) => {
+const BlackButton = ({ size, variant, type, style, text, disabled }) => {
   return (
-    <CustomButton size={size} variant={variant} type={type} style={style}>
+    <CustomButton
+      size={size}
+      variant={variant}
+      type={type}
+      style={style}
+      disabled={disabled}
+    >
       {text}
     </CustomButton>
   );
