@@ -398,6 +398,8 @@ a:-webkit-any-link {
 
  .add-input, .search__container {
     width: 100%;
+    
+    max-width: 27rem;
     display: flex;
     border: lightgray 1px solid;
     border-radius: 10px;

@@ -1,0 +1,9 @@
+.black-btn {
+    text-transform: unset;
+    background-color: #262626;
+    color: #fff;
+    font-family: unset;
+    border-radius: 36px !important;
+    padding-right: 30px;
+    padding-left: 30px;
+}
