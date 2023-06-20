@@ -11,133 +11,146 @@ import "./Invités.css";
 import axios from "axios";
 
 const Byguests = ({ userInfos }) => {
+  const mariageID = userInfos.mariageID;
+  const firstPerson = userInfos.firstPerson;
+  const secondPerson = userInfos.secondPerson;
+  const scrollBtn = useContext(ScrollButtonContext);
 
-    const mariageID = userInfos.mariageID;
-    const firstPerson = userInfos.firstPerson;
-    const secondPerson = userInfos.secondPerson;
-    const scrollBtn = useContext(ScrollButtonContext)
+  const [guests, setGuests] = useState([]);
+  const [editPicture, seteditPicture] = useState(null);
+  const [file, setFile] = useState(null);
+  const [searchValue, setSearchValue] = useState("");
+  const [user, setUser] = useState({});
+  const [appear, setAppear] = useState(false);
 
-    const [guests, setGuests] = useState([]);
-    const [editPicture, seteditPicture] = useState(null)
-    const [file, setFile] = useState(null)
-    const [searchValue, setSearchValue] = useState("");
-    const [user, setUser] = useState({});
-    const [appear, setAppear] = useState(false);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            await axios.get("/api/admin/guests/")
-            .then(result => {
-                setAppear(true)
-                setGuests(result.data)
-            })
-            .catch(err => err.json("Failed to load the ressource"))
-        }
-        fetchData();
-    }, [user]) 
-
-    const handleSearch = (e) => {
-        setSearchValue(e.target.value)
-    }
-
-    const addGuest = newGuest => {
-        setUser(newGuest)
-        setGuests([...guests, newGuest])
-    }
-
-    const editGuest = (updatedGuest) => {
-        const updatedGueslist = [...guests].map((guest) => {
-            if(guest._id === updatedGuest.id) {
-                guest.name = updatedGuest.name
-            }
-            return guest
+  useEffect(() => {
+    const fetchData = async () => {
+      await axios
+        .get("/api/admin/guests/")
+        .then((result) => {
+          setAppear(true);
+          setGuests(result.data);
         })
-        setUser(updatedGuest)
-        setGuests(updatedGueslist);
-    }
+        .catch((err) => err.json("Failed to load the ressource"));
+    };
+    fetchData();
+  }, [user]);
 
-    const deleteGuest = async (id) => {
-        await axios.delete(`/api/admin/guests/delete/${id}`)
-            .then(result => {
-                if(result.data != null) {
-                    setGuests(guests.filter(guest => guest._id !== id))
-                }
-            })
-            .catch((err) => {
-                console.log(err)})
-    }
+  const handleSearch = (e) => {
+    setSearchValue(e.target.value);
+  };
 
-    const handleFile = file => {
-        setFile(file)
-    }
+  const addGuest = (newGuest) => {
+    setUser(newGuest);
+    setGuests([...guests, newGuest]);
+  };
 
-    const uploadPicture = async (id) => {
-        let formData = new FormData();
-        formData.append('media', file)
-        await axios.post(`/api/admin/guests/edit/${id}`, formData)
-            .then(result => {
-                if(result.data != null) {
-                    setFile(null)
-                    window.location.reload()
-                }
-            })
-            .catch((err) => {
-                console.log(err)})
-    }
-    
-    const button_wrapper_style = {
-        position: 'relative',
-        zIndex: 1
-    }
+  const editGuest = (updatedGuest) => {
+    const updatedGueslist = [...guests].map((guest) => {
+      if (guest._id === updatedGuest.id) {
+        guest.name = updatedGuest.name;
+      }
+      return guest;
+    });
+    setUser(updatedGuest);
+    setGuests(updatedGueslist);
+  };
 
-    return(
-        <div className="byguests page-component">
-            <div className="guest-container" style={button_wrapper_style}>
-            {scrollBtn}
-                <div className="page-location"><div><Link to={"/"} >Dashboard</Link>{'>'} Invités</div></div>
-                <div className="titles mb-3">
-                    <h2>Souhaitez-vous ajouter de nouveaux invités ?</h2>
-                </div>
-                <div className="guests___bgimage"><div className="component-title"><h1>Les invités</h1></div></div>
-                <Container style={{ padding: "2rem 4rem"}} fluid>
-                    <Row>
-                        <Col xs={12} sm={10} md={6} className="guest-form">
-                            <AddForm addGuest={addGuest} />
-                        </Col>
-                        <Col xs={12} sm={10} md={6} className="searchbar">
-                            <SearchBar 
-                            className="search__input"
-                            type="text"
-                            placeholder="Rechercher un invité"
-                            name="searchbar"
-                            value={searchValue}
-                            onChange={handleSearch}
-                            />
-                        </Col>
-                    </Row>
-                </Container>
-                <div className="guests___list">
-                    <div className="byguests___block">
-                        <GuestList 
-                        guests={guests}
-                        setGuests={setGuests}
-                        deleteGuest={deleteGuest}
-                        updateGuest={editGuest}
-                        editPicture={editPicture}
-                        seteditPicture={seteditPicture}
-                        upload={uploadPicture}
-                        handleFile={handleFile}
-                        searchValue={searchValue}
-                        mariageID={mariageID}
-                        appear={appear}
-                        firstPerson={firstPerson}
-                        secondPerson={secondPerson}
-                        />
-                    </div>
-                </div>
-            </div>
+  const deleteGuest = async (id) => {
+    await axios
+      .delete(`/api/admin/guests/delete/${id}`)
+      .then((result) => {
+        if (result.data != null) {
+          setGuests(guests.filter((guest) => guest._id !== id));
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleFile = (file) => {
+    setFile(file);
+  };
+
+  const uploadPicture = async (id) => {
+    let formData = new FormData();
+    formData.append("media", file);
+    await axios
+      .post(`/api/admin/guests/edit/${id}`, formData)
+      .then((result) => {
+        if (result.data != null) {
+          setFile(null);
+          window.location.reload();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const button_wrapper_style = {
+    position: "relative",
+    zIndex: 1,
+  };
+
+  return (
+    <div className="byguests page-component">
+      <div className="guest-container" style={button_wrapper_style}>
+        {scrollBtn}
+        <div className="page-location">
+          <div>
+            <Link to={"/"}>Dashboard</Link>
+            {">"} Invités
+          </div>
         </div>
-    )
-}
+        <div className="titles mb-3">
+          <h2>Souhaitez-vous ajouter de nouveaux invités ?</h2>
+        </div>
+        <div className="guests___bgimage">
+          <div className="component-title">
+            <h1>Les invités</h1>
+          </div>
+        </div>
+        <Container style={{ padding: "2rem 4rem" }} fluid>
+          <Row>
+            <Col xs={12} sm={10} md={6} className="guest-form">
+              <AddForm addGuest={addGuest} />
+            </Col>
+            <Col xs={12} sm={10} md={6} className="searchbar">
+              <SearchBar
+                className="search__input"
+                type="text"
+                placeholder="Rechercher un invité"
+                name="searchbar"
+                value={searchValue}
+                onChange={handleSearch}
+              />
+            </Col>
+          </Row>
+        </Container>
+        <div className="guests___list">
+          <div className="byguests___block">
+            <GuestList
+              guests={guests}
+              setGuests={setGuests}
+              deleteGuest={deleteGuest}
+              updateGuest={editGuest}
+              editPicture={editPicture}
+              seteditPicture={seteditPicture}
+              upload={uploadPicture}
+              handleFile={handleFile}
+              searchValue={searchValue}
+              mariageID={mariageID}
+              appear={appear}
+              firstPerson={firstPerson}
+              secondPerson={secondPerson}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default withRouter(Byguests);

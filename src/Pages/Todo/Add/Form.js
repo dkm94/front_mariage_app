@@ -1,9 +1,9 @@
 import React, { useState, useRef } from "react";
 import { Col } from "react-bootstrap";
-import BlackButton from "../../../components/Buttons/Black/BlackButton";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import "./Form.css";
 import axios from "axios";
+import GreyButton from "../../../components/Buttons/Grey/GreyButton";
 
 const Form = ({ addTodo }) => {
   const [input, setInput] = useState("");
@@ -33,10 +33,9 @@ const Form = ({ addTodo }) => {
 
   return (
     <Col xs={12} sm={10} md={6} className="add-task-form">
-      <form onSubmit={handleSumbit} className="todo__form-input mb-3">
+      <form onSubmit={handleSumbit} className="todo__form-input">
         <div className="add-input">
-          {/* <img src={addTask} alt="add todo icone" /> */}
-          <EditNoteIcon style={{ height: "auto" }} />
+          <EditNoteIcon style={{ height: "auto", color: "#b2a9a9" }} />
           <input
             type="text"
             name="text"
@@ -48,7 +47,7 @@ const Form = ({ addTodo }) => {
             required
           />
         </div>
-        <BlackButton
+        <GreyButton
           size="small"
           variant="contained"
           type="submit"

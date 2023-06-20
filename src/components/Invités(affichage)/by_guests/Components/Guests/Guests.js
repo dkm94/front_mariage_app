@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import Modal from "../../../../Modals/Set_guest_picture";
 import Form from "../Form/UpdateGuest";
 import avatar from "../../../../../img/avatar.jpg";
-import { Button, Box } from "@material-ui/core";
+import { Box } from "@material-ui/core";
+import BlackButton from "../../../../Buttons/Black/BlackButton";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2"; // import { CSSTransition, TransitionGroup, Transition } from "react-transition-group";
 // import { Box, Fade, Grow } from '@material-ui/core';
 
@@ -171,17 +172,16 @@ const Guests = ({
                             ) : null}
                           </div>
                           <div className="guest-card__button-container">
-                            <Button
+                            <BlackButton
                               onClick={() =>
                                 setEdit({
                                   id: guest._id,
                                   name: guest.name,
                                 })
                               }
-                              variant="outline"
-                            >
-                              Modifier
-                            </Button>
+                              variant="contained"
+                              text="Modifier"
+                            />
                           </div>
                         </div>
                       )}

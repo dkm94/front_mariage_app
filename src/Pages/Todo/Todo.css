@@ -67,6 +67,14 @@
      background: #2be;
   } */
 
+  .add-task-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 50%;
+    border-radius: 5px;
+  }
+
   .add-task-form > form > div > button {
     margin-left: 10px;
     border-style: none;

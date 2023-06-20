@@ -215,7 +215,7 @@ const Menus = () => {
                                 <img src={starterImg} alt="starter"/>
                             </div>
                             <div className="starter___div_form fade-in fade-in">
-                                {starters.length === 0 || starters.length === 1 ? <h3>Entrée</h3> : <h3>Entrées</h3>}
+                                {starters.length === 0 || starters.length === 1 ? <h3 className="menu__title" >Entrée</h3> : <h3 className="menu__title">Entrées</h3>}
                                 <div className="menu___forms">
                                     <AddStarterForm addStarter={addStarter} icon={addIcon} />
                                 </div>
@@ -249,7 +249,7 @@ const Menus = () => {
                         </div>
                         <div className="maincourse forms" id="forms_reverse">
                             <div className="maincourse___div_form fade-in fade-in">
-                            {maincourses.length === 0 || maincourses.length === 1 ? <h3>Plat</h3> : <h3>Plats</h3>}
+                            {maincourses.length === 0 || maincourses.length === 1 ? <h3 className="menu__title">Plat</h3> : <h3 className="menu__title">Plats</h3>}
                                 <div className="menu___forms">
                                     <AddMaincourseForm addMaincourse={addMaincourse} icon={addIcon} />
                                 </div>
@@ -289,7 +289,7 @@ const Menus = () => {
                                 <img src={dessertImg} alt="dessert" />
                             </div>
                             <div className="starter___div_form fade-in fade-in">
-                            {desserts.length === 0 || desserts.length === 1 ? <h3>Dessert</h3> : <h3>Desserts</h3>}
+                            {desserts.length === 0 || desserts.length === 1 ? <h3 className="menu__title">Dessert</h3> : <h3 className="menu__title">Desserts</h3>}
                                 <div className="menu___forms">
                                     <AddDessertForm addDessert={addDessert} icon={addIcon} />
                                 </div>
@@ -323,7 +323,7 @@ const Menus = () => {
                         </div>
                         <div className="maincourse forms" id="forms_reverse">
                             <div className="dessert___div_form fade-in">
-                            {apetizers.length === 0 || apetizers.length === 1 ? <h3>Apéritif</h3> : <h3>Apéritifs</h3>}
+                            {apetizers.length === 0 || apetizers.length === 1 ? <h3 className="menu__title">Apéritif</h3> : <h3 className="menu__title">Apéritifs</h3>}
                                 <div className="menu___forms">
                                     <AddApetizerForm addApetizer={addApetizer} icon={addIcon} />
                                 </div>
@@ -363,7 +363,7 @@ const Menus = () => {
                                 <img src={beverageImg} alt="boisson" />
                             </div>
                             <div className="dessert___div_form fade-in">
-                            {beverages.length === 0 || beverages.length === 1 ? <h3>Boisson</h3> : <h3>Boissons</h3>}
+                            {beverages.length === 0 || beverages.length === 1 ? <h3 className="menu__title">Boisson</h3> : <h3 className="menu__title">Boissons</h3>}
                                 <div className="menu___forms">
                                     <AddBeverageForm addBeverage={addBeverage} icon={addIcon} />
                                 </div>

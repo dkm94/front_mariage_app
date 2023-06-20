@@ -1,29 +1,35 @@
 import React from "react";
 import { Button, styled } from "@mui/material";
-import "./ClearButton.css";
 
 const CustomButton = styled(Button)({
   textTransform: "unset",
-  border: "1px solid #e0d9d9",
-  backgroundColor: "#f4f2f2",
-  color: "#000",
+  backgroundColor: "#b2a9a9",
+  color: "#fff",
   //   fontfamily: "unset",
   fontSize: "1rem",
-  //   borderRadius: "15px",
+  borderRadius: "36px",
   paddingRight: "30px",
   paddingLeft: "30px",
   fontWeight: "unset",
   fontFamily: "Playfair Display serif",
+  border: "none",
   width: "fit-content",
   ":hover": {
-    backgroundColor: "#eae8e8",
-    color: "#000",
+    background: "#a09898",
     animation: "none",
-    // border: "none",
+    border: "none",
   },
 });
 
-const ClearButton = ({ size, variant, type, style, text, ...rest }) => {
+const GreyButton = ({
+  size,
+  variant,
+  type,
+  style,
+  text,
+  disabled,
+  ...rest
+}) => {
   return (
     <CustomButton
       {...rest}
@@ -31,10 +37,11 @@ const ClearButton = ({ size, variant, type, style, text, ...rest }) => {
       variant={variant}
       type={type}
       style={style}
+      disabled={disabled}
     >
       {text}
     </CustomButton>
   );
 };
 
-export default ClearButton;
+export default GreyButton;

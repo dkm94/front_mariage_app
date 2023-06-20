@@ -76,8 +76,8 @@
 }
 
 .dashbord-view-details > a:hover{
-    color: black;
-    background-color: #F7F5F3;
+    color: #fff;
+    background-color: #afafa3;
 }
 
 @media only screen and (max-width : 1218px) {

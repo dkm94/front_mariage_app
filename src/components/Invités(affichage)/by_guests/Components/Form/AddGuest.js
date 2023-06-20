@@ -1,55 +1,60 @@
 import React, { useState, useRef } from "react";
-// import Button from '@mui/material/Button/Button';
-import axios from 'axios';
-import userIcon from "../../../../../img/user.png";
+import axios from "axios";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import "../../../../../Pages/Invités/Invités.css";
+import GreyButton from "../../../../Buttons/Grey/GreyButton";
 
 const AddGuestForm = ({ addGuest }) => {
+  const [loading, setLoading] = useState(false);
+  const [input, setInput] = useState("");
+  const inputRef = useRef(null);
 
-    const [loading, setLoading] = useState(false)
-    const [input, setInput] = useState("");
-    const inputRef = useRef(null);
+  const handleChange = (e) => {
+    setInput(e.target.value);
+  };
 
-    const handleChange = e => {
-        setInput(e.target.value)
-    }
+  const handleSumbit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    await axios
+      .post("/api/admin/guests/add", {
+        name: input,
+      })
+      .then((res) => {
+        addGuest(res.data);
+        setInput("");
+        setLoading(false);
+      })
+      .catch((err) => console.log("err", err));
+  };
 
-    const handleSumbit = async (e) => {
-        e.preventDefault();
-        setLoading(true)
-        await axios.post("/api/admin/guests/add", {
-            name: input
-        })
-        .then(res => {
-            addGuest(res.data);
-            setInput("");
-            setLoading(false)
-        })
-        .catch(err => console.log("err", err))       
-    }
-
-    return(
-        <form onSubmit={handleSumbit} className="input-group mb-3">
-           <div className="add-input">
-                <img src={userIcon} alt="user icon" />
-                <input
-                type="text"
-                className="form-control shadow-none"
-                name="name"
-                placeholder="Nouvel invité"
-                value={input} 
-                onChange={handleChange}
-                ref={inputRef}
-                required
-                />
-                <button 
-                type="submit"
-                className="btn shadow-none"
-                id="button-addon2"
-                >{loading ? "..." : "Ajouter"}</button>
-           </div>
-        </form>
-    )
-}
+  return (
+    <form
+      onSubmit={handleSumbit}
+      style={{ display: "flex", flexDirection: "row", alignItems: "center" }}
+    >
+      <div className="add-input">
+        {/* <img src={userIcon} alt="user icon" /> */}
+        <PersonAddIcon style={{ height: "auto", color: "#b2a9a9" }} />
+        <input
+          type="text"
+          className="form-control shadow-none"
+          name="name"
+          placeholder="Nouvel invité"
+          value={input}
+          onChange={handleChange}
+          ref={inputRef}
+          required
+        />
+      </div>
+      <GreyButton
+        variant={"contained"}
+        type="submit"
+        text={loading ? "..." : "Ajouter"}
+        style={{ marginLeft: "1rem" }}
+      />
+    </form>
+  );
+};
 
 export default AddGuestForm;

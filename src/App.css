@@ -398,13 +398,12 @@ a:-webkit-any-link {
 
  .add-input, .search__container {
     width: 100%;
-    
     max-width: 27rem;
     display: flex;
     border: lightgray 1px solid;
     border-radius: 10px;
     background: #FFFFFF;
-    padding: .375rem .375rem .375rem .75rem;
+    padding: .75rem .375rem .75rem .75rem;
     text-align: center;
  }
  .add-input > img {

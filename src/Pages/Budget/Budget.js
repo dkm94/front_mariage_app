@@ -11,6 +11,7 @@ import axios from "axios";
 import "./Budget.css";
 import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
 import BlackButton from "../../components/Buttons/Black/BlackButton";
+import GreyButton from "../../components/Buttons/Grey/GreyButton";
 
 const Budget = () => {
   const scrollBtn = useContext(ScrollButtonContext);
@@ -24,49 +25,64 @@ const Budget = () => {
   const [operations, setOperations] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [operation, setOperation] = useState({});
+  const [total, setTotal] = useState(null);
+
+  const [edit, setEdit] = useState(null);
+  console.log("🚀 ~ file: Budget.js:31 ~ Budget ~ edit:", edit);
 
   useEffect(() => {
     let operations = axios.get(`/api/admin/budget/operations/`);
     async function getDatas() {
       let res = await Promise.resolve(operations);
       setOperations(res.data);
+      calculateTotal(res.data);
     }
     getDatas();
-  }, [operation]);
+  }, []);
 
   const handleSearch = (e) => {
     setSearchValue(e.target.value);
   };
 
-  // const editExpense = (updatedExpense) => {
-  //     console.log(updatedExpense)
-  //     // const updatedExpenses = [...operations].map((obj) => {
-  //     //     if(obj._id === updatedExpense.id) {
-  //     //         obj.expenseTitle = updatedExpense.event.expenseTitle
-  //     //         obj.expensePrince = updatedExpense.event.expensePrice
-  //     //         obj.expenseDescription = updatedExpense.event.expenseDescription
-  //     //     }
-  //     //     return obj
-  //     // })
-  //     // axios.post(`/api/admin/invitation/events/edit/${updatedExpense.id}`, updatedExpense.event)
-  //     //     .then((res) => {
-  //     //         if(res.data != null){
-  //     //             setTimeout(() => {
-  //     //                 setEvents(updatedExpenses)
-  //     //             }, 1000);
-  //     //         }
-  //     //     })
-  //     //     .catch((err) => {
-  //     //         console.log(err)
-  //     //     })
-  // }
+  const editExpense = ({ expense }) => {
+    let { _id, category, description, price } = expense;
+    // console.log("🚀 ~ file: Budget.js:65 ~ editExpense ~ expense:", expense);
+    // price = price * 100;
+    // console.log("🚀 ~ file: Budget.js:65 ~ editExpense ~ expense:", expense);
+    const updatedExpenses = [...operations].map((obj) => {
+      if (obj._id === _id) {
+        obj.description = description;
+        obj.price = price;
+        obj.category = category;
+      }
+      return obj;
+    });
+    axios
+      .post(`/api/admin/budget/operations/edit/${_id}`, expense)
+      .then((res) => {
+        if (res.data != null) {
+          setTimeout(() => {
+            setOperations(updatedExpenses);
+            calculateTotal(updatedExpenses);
+            setEdit(null);
+          }, 1000);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const deleteExpense = async (id) => {
     await axios
       .delete(`/api/admin/budget/operations/delete/${id}`)
       .then((res) => {
         if (res.data != null) {
-          setOperations(operations.filter((operation) => operation._id !== id));
+          const updatedExpenses = operations.filter(
+            (operation) => operation._id !== id
+          );
+          setOperations(updatedExpenses);
+          calculateTotal(updatedExpenses);
         }
       })
       .catch((err) => {
@@ -97,7 +113,9 @@ const Budget = () => {
         })
         .then((res) => {
           setOperation(res.data);
+          const updatedExpenses = [...operations, res.data];
           setOperations([...operations, res.data]);
+          calculateTotal(updatedExpenses);
           formik.resetForm({});
         })
         .catch((err) => {
@@ -108,10 +126,17 @@ const Budget = () => {
     enableReinitialize: true,
   });
 
-  let sum = operations.reduce((a, b) => a + b.price, 0) / 100;
-  function total(sum) {
-    return Number(sum).toFixed(2);
+  function calculateTotal(operations) {
+    if (operations) {
+      const getSums = operations?.map((op) => Number(op.price));
+      const add = getSums.reduce((a, b) => a + b);
+      const p = add / 100;
+      const tot = p.toFixed(2);
+      setTotal(tot);
+    }
   }
+
+  console.log(setEdit);
 
   return (
     <div className="budget-container page-component">
@@ -153,7 +178,7 @@ const Budget = () => {
                       <h5 className="card-title">
                         Dépenses <small>(en €)</small>
                       </h5>
-                      <span>{total(sum)}</span>
+                      <span>{total}</span>
                     </div>
                   </div>
                 </div>
@@ -232,13 +257,7 @@ const Budget = () => {
                     border-radius="10px"
                   />
                   <div className="col-12 budget-form___submit">
-                    {/* <button
-                      type="submit"
-                      disabled={formik.isSubmitting}
-                    >
-                      Valider
-                    </button> */}
-                    <BlackButton
+                    <GreyButton
                       type="submit"
                       text={"Valider"}
                       variant={"contained"}
@@ -254,6 +273,10 @@ const Budget = () => {
               expenses={operations}
               deleteExpense={deleteExpense}
               searchValue={searchValue}
+              edit={edit}
+              setEdit={setEdit}
+              updateExpense={editExpense}
+              handleChange={formik?.handleChange}
             />
             <div
               className="col chart-component"

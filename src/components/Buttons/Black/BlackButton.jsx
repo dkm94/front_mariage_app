@@ -16,15 +16,24 @@ const CustomButton = styled(Button)({
   border: "none",
   width: "fit-content",
   ":hover": {
-    background: "#383636",
+    background: "#4c4a4a",
     animation: "none",
     border: "none",
   },
 });
 
-const BlackButton = ({ size, variant, type, style, text, disabled }) => {
+const BlackButton = ({
+  size,
+  variant,
+  type,
+  style,
+  text,
+  disabled,
+  ...rest
+}) => {
   return (
     <CustomButton
+      {...rest}
       size={size}
       variant={variant}
       type={type}

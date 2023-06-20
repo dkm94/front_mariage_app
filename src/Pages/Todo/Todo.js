@@ -65,7 +65,7 @@ const Todo = () => {
           </div>
         </div>
         <Container style={{ padding: "2rem 4rem" }} fluid>
-          <Row style={{ marginBottom: "2rem" }}>
+          <Row>
             <AddForm
               // todos={todos}
               // setTodos={setTodos}
@@ -85,7 +85,15 @@ const Todo = () => {
               />
             </Col>
           </Row>
-          <Row style={{ display: "content", flexDirection: "row" }}>
+        </Container>
+        <Container style={{ padding: "0 4rem" }} fluid>
+          <Row
+            style={{
+              display: "content",
+              flexDirection: "row",
+              marginLeft: "0",
+            }}
+          >
             <ClearButton
               text="Tout marquer comme terminé"
               type={"submit"}
@@ -107,6 +115,8 @@ const Todo = () => {
               style={{ marginRight: "20px", marginBottom: "5px" }}
             />
           </Row>
+        </Container>
+        <Container style={{ padding: "0 4rem" }} fluid>
           <Row
             style={{
               display: "flex",
@@ -135,67 +145,68 @@ const Todo = () => {
               </Select>
             </Col>
           </Row>
-          <Row>
-            <Container maxWidth="sm" style={{ maxWidth: "700px" }}>
-              <div className="tasks__list">
-                <Grid2
-                  container
-                  gap={1}
-                  display={"flex"}
-                  flexDirection={"column"}
-                  justifyContent={"center"}
-                  width={"100%"}
-                >
-                  <div
-                    style={{
-                      padding: "3rem",
-                      paddingBottom: "2rem",
-                      width: "100%",
-                    }}
-                  >
-                    <span style={{ fontSize: "2rem" }}>Liste des tâches</span>
-                  </div>
-                  <Divider
-                    style={{
-                      borderColor: "grey",
-                      marginLeft: "3rem",
-                      width: "85%",
-                    }}
-                  />
-                  {todos
-                    .filter((todo) => {
-                      return (
-                        todo.text
-                          .toLowerCase()
-                          .indexOf(searchValue.toLowerCase()) >= 0
-                      );
-                    })
-                    .reverse()
-                    .filter((task) => {
-                      if (selected === "done") {
-                        return task.isCompleted;
-                      } else if (selected === "incomplete") {
-                        return !task.isCompleted;
-                      } else {
-                        return task;
-                      }
-                    })
-                    .map((todo, i) => (
-                      <List
-                        todos={todos}
-                        obj={todo}
-                        i={i}
-                        setTodos={setTodos}
-                        deleteTodo={deleteTodo}
-                        searchValue={searchValue}
-                        setSearchValue={setSearchValue}
-                      />
-                    ))}
-                </Grid2>
-              </div>
-            </Container>
-          </Row>
         </Container>
+
+        <Row>
+          <Container maxWidth="sm" style={{ maxWidth: "700px" }}>
+            <div className="tasks__list">
+              <Grid2
+                container
+                gap={1}
+                display={"flex"}
+                flexDirection={"column"}
+                justifyContent={"center"}
+                width={"100%"}
+              >
+                <div
+                  style={{
+                    padding: "3rem",
+                    paddingBottom: "2rem",
+                    width: "100%",
+                  }}
+                >
+                  <span style={{ fontSize: "2rem" }}>Liste des tâches</span>
+                </div>
+                <Divider
+                  style={{
+                    borderColor: "grey",
+                    marginLeft: "3rem",
+                    width: "85%",
+                  }}
+                />
+                {todos
+                  .filter((todo) => {
+                    return (
+                      todo.text
+                        .toLowerCase()
+                        .indexOf(searchValue.toLowerCase()) >= 0
+                    );
+                  })
+                  .reverse()
+                  .filter((task) => {
+                    if (selected === "done") {
+                      return task.isCompleted;
+                    } else if (selected === "incomplete") {
+                      return !task.isCompleted;
+                    } else {
+                      return task;
+                    }
+                  })
+                  .map((todo, i) => (
+                    <List
+                      todos={todos}
+                      obj={todo}
+                      i={i}
+                      setTodos={setTodos}
+                      deleteTodo={deleteTodo}
+                      searchValue={searchValue}
+                      setSearchValue={setSearchValue}
+                    />
+                  ))}
+              </Grid2>
+            </div>
+          </Container>
+        </Row>
       </div>
     </div>
   );

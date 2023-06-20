@@ -1,7 +1,7 @@
 import React from "react";
-import { Button } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import "./Tables.css";
+import BlackButton from "../../components/Buttons/Black/BlackButton";
 
 const Table = ({ table, getUpdatedId, guests }) => {
   const filteredGuests = guests?.filter((guest) => guest.tableID === table._id);
@@ -31,9 +31,11 @@ const Table = ({ table, getUpdatedId, guests }) => {
             </Dropdown>
         </div> */}
       <div className="table-card__button-container">
-        <Button onClick={() => getUpdatedId(table._id, table.name)}>
-          Modifier
-        </Button>
+        <BlackButton
+          onClick={() => getUpdatedId(table._id, table.name)}
+          variant={"contained"}
+          text="Modifier"
+        />
       </div>
     </Grid2>
   );

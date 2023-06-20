@@ -44,4 +44,5 @@
   .todo__form-input {
     display: flex;
     flex-direction: row;
+    align-items: center;
   }

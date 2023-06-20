@@ -151,7 +151,7 @@
     word-break: break-word;
 }
 
-.guest-card__button-container > button {
+/* .guest-card__button-container > button {
 text-transform: unset;
 background-color: #262626;
 color: #fff;
@@ -165,7 +165,7 @@ padding-left: 30px;
     color: #000;
     background-color: #F7F5F3;
     }
-    
+     */
 
 .guest__updateForm > form {
     display: flex;

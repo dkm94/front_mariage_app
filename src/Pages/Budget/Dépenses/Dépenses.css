@@ -94,6 +94,20 @@
     color: #c1b8b8;
 }
 
+.expense-update-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0.5rem 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.expense-update-form > input {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
 @media (max-width: 768px) { 
     .budget-list > li {
         margin-left: 0;
