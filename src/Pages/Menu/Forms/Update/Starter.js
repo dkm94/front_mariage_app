@@ -24,8 +24,6 @@ const UpdateStarter = ({ edit, setEdit, editStarter }) => {
   };
 
   const handleSubmit = async (e) => {
-    console.log("🚀 ~ file: Starter.js:18 ~ handleSubmit ~ e:", e);
-    alert("ok");
     e.preventDefault();
     if (input.trim() === "") {
       return;
