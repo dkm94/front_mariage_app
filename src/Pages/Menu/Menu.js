@@ -258,6 +258,8 @@ const Menus = () => {
                         key={starter._id}
                         display={"flex"}
                         flexDirection={"row"}
+                        minHeight="36px"
+                        alignItems={"center"}
                       >
                         {edit.id === starter._id ? (
                           <UpdateStarter
@@ -295,20 +297,6 @@ const Menus = () => {
                               </IconWrapper>
                             </>
                           )}
-                          {/* <div className="custom-dropdown">
-                                                    <Dropdown>
-                                                        <Dropdown.Toggle as={CustomToggle} />
-                                                        <Dropdown.Menu size="sm" title="">
-                                                            {edit.id ? (<>
-                                                                <Dropdown.Item onClick={() => setEdit({id: null})}>Annuler</Dropdown.Item>
-                                                                <Dropdown.Item onClick={(e) => {editStarter(e)}}>Valider</Dropdown.Item>
-                                                            </>) : (<>
-                                                                <Dropdown.Item onClick={() => getUpdatedId(starter._id, starter.name)}>Modifier</Dropdown.Item>
-                                                                <Dropdown.Item onClick={() => {deleteStarter(starter._id)}}>Supprimer</Dropdown.Item>
-                                                            </>)}
-                                                        </Dropdown.Menu>
-                                                    </Dropdown>
-                                                </div> */}
                         </Grid2>
                       </Grid2>
                     ))}
@@ -334,9 +322,16 @@ const Menus = () => {
                     <span>Vos plats ici</span>
                   </div>
                 ) : (
-                  <ul>
+                  <Grid2 xs={12} component={"ul"} container>
                     {maincourses.map((maincourse) => (
-                      <li key={maincourse._id}>
+                      <Grid2
+                        xs={12}
+                        key={maincourse._id}
+                        display={"flex"}
+                        flexDirection={"row"}
+                        minHeight="36px"
+                        alignItems={"center"}
+                      >
                         {edit.id === maincourse._id ? (
                           <UpdateMaincourse
                             edit={edit}
@@ -344,10 +339,38 @@ const Menus = () => {
                             editMaincourse={editMaincourse}
                           />
                         ) : (
-                          <span>{maincourse.name}</span>
+                          <Grid2
+                            lg={8}
+                            md={8}
+                            xs={8}
+                            component={"span"}
+                            width={"100% !important"}
+                          >
+                            {maincourse.name}
+                          </Grid2>
                         )}
 
-                        <div className="menu___li-btns">
+                        <Grid2 lg={4} display={"flex"} flexDirection={"row"}>
+                          {!edit.id && (
+                            <>
+                              <IconWrapper
+                                onClick={() =>
+                                  getUpdatedId(maincourse._id, maincourse.name)
+                                }
+                              >
+                                <CreateIcon />
+                              </IconWrapper>
+                              <IconWrapper
+                                type="submit"
+                                onClick={() => deleteMaincourse(maincourse._id)}
+                              >
+                                <DeleteIcon />
+                              </IconWrapper>
+                            </>
+                          )}
+                        </Grid2>
+
+                        {/* <div className="menu___li-btns">
                           <div className="custom-dropdown">
                             <Dropdown>
                               <Dropdown.Toggle as={CustomToggle} />
@@ -391,10 +414,10 @@ const Menus = () => {
                               </Dropdown.Menu>
                             </Dropdown>
                           </div>
-                        </div>
-                      </li>
+                        </div> */}
+                      </Grid2>
                     ))}
-                  </ul>
+                  </Grid2>
                 )}
               </div>
               <div className="maincourse___div_img">
