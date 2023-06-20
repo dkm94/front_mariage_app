@@ -6,8 +6,6 @@ import dessertImg from "../../img/menus/dessert_img.jpg";
 import apetizerImg from "../../img/menus/apetizers.jpg";
 import beverageImg from "../../img/menus/beverages.jpg";
 import { ScrollButtonContext } from "../../../src/App";
-import CustomToggle from "../../components/Dots/Dots";
-import Dropdown from "react-bootstrap/Dropdown";
 import addIcon from "../../img/plus.png";
 import axios from "axios";
 import "./Menu.css";
@@ -256,6 +254,7 @@ const Menus = () => {
                       <Grid2
                         xs={12}
                         key={starter._id}
+                        component={"li"}
                         display={"flex"}
                         flexDirection={"row"}
                         minHeight="36px"
@@ -327,6 +326,7 @@ const Menus = () => {
                       <Grid2
                         xs={12}
                         key={maincourse._id}
+                        component={"li"}
                         display={"flex"}
                         flexDirection={"row"}
                         minHeight="36px"
@@ -401,6 +401,7 @@ const Menus = () => {
                       <Grid2
                         xs={12}
                         key={dessert._id}
+                        component={"li"}
                         display={"flex"}
                         flexDirection={"row"}
                         minHeight="36px"
@@ -468,6 +469,7 @@ const Menus = () => {
                       <Grid2
                         xs={12}
                         key={apetizer._id}
+                        component={"li"}
                         display={"flex"}
                         flexDirection={"row"}
                         minHeight="36px"
@@ -511,51 +513,6 @@ const Menus = () => {
                             </>
                           )}
                         </Grid2>
-                        {/* <div className="menu___li-btns">
-                          <div className="custom-dropdown">
-                            <Dropdown>
-                              <Dropdown.Toggle as={CustomToggle} />
-                              <Dropdown.Menu size="sm" title="">
-                                {edit.id ? (
-                                  <>
-                                    <Dropdown.Item
-                                      onClick={() => setEdit({ id: null })}
-                                    >
-                                      Annuler
-                                    </Dropdown.Item>
-                                    <Dropdown.Item
-                                      onClick={(e) => {
-                                        editApetizer(e);
-                                      }}
-                                    >
-                                      Valider
-                                    </Dropdown.Item>
-                                  </>
-                                ) : (
-                                  <>
-                                    <Dropdown.Item
-                                      onClick={() =>
-                                        getUpdatedId(
-                                          apetizer._id,
-                                          apetizer.name
-                                        )
-                                      }
-                                    >
-                                      Modifier
-                                    </Dropdown.Item>
-                                    <Dropdown.Item
-                                      onClick={() => {
-                                        deleteApetizer(apetizer._id);
-                                      }}
-                                    >
-                                      Supprimer
-                                    </Dropdown.Item>
-                                  </>
-                                )}
-                              </Dropdown.Menu>
-                            </Dropdown>
-                          </div>
-                        </div> */}
                       </Grid2>
                     ))}
                   </Grid2>
@@ -583,9 +540,17 @@ const Menus = () => {
                     <span>Vos boissons ici</span>
                   </div>
                 ) : (
-                  <ul>
+                  <Grid2 xs={12} component={"ul"} container>
                     {beverages.map((beverage) => (
-                      <li key={beverage._id}>
+                      <Grid2
+                        xs={12}
+                        key={beverage._id}
+                        component={"li"}
+                        display={"flex"}
+                        flexDirection={"row"}
+                        minHeight="36px"
+                        alignItems={"center"}
+                      >
                         {edit.id === beverage._id ? (
                           <UpdateBeverage
                             edit={edit}
@@ -593,10 +558,36 @@ const Menus = () => {
                             editBeverage={editBeverage}
                           />
                         ) : (
-                          <span>{beverage.name}</span>
+                          <Grid2
+                            lg={8}
+                            md={8}
+                            xs={8}
+                            component={"span"}
+                            width={"100% !important"}
+                          >
+                            {beverage.name}
+                          </Grid2>
                         )}
-
-                        <div className="menu___li-btns">
+                        <Grid2 lg={4} display={"flex"} flexDirection={"row"}>
+                          {!edit.id && (
+                            <>
+                              <IconWrapper
+                                onClick={() =>
+                                  getUpdatedId(beverage._id, beverage.name)
+                                }
+                              >
+                                <CreateIcon />
+                              </IconWrapper>
+                              <IconWrapper
+                                type="submit"
+                                onClick={() => deleteBeverage(beverage._id)}
+                              >
+                                <DeleteIcon />
+                              </IconWrapper>
+                            </>
+                          )}
+                        </Grid2>
+                        {/* <div className="menu___li-btns">
                           <div className="custom-dropdown">
                             <Dropdown>
                               <Dropdown.Toggle as={CustomToggle} />
@@ -640,10 +631,10 @@ const Menus = () => {
                               </Dropdown.Menu>
                             </Dropdown>
                           </div>
-                        </div>
-                      </li>
+                        </div> */}
+                      </Grid2>
                     ))}
-                  </ul>
+                  </Grid2>
                 )}
               </div>
             </div>

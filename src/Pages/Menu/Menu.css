@@ -12,7 +12,7 @@ ul {
     margin-bottom: 2rem;
 }
 .starter___div_form > ul > li > form, .maincourse___div_form > ul > li > form, .dessert___div_form > ul > li > form {
-    width: 70%;
+    /* width: 70%; */
 }
 .starter___div_form > ul > li > form > input, .maincourse___div_form > ul > li > form > input, .dessert___div_form > ul > li > form > input {
     width: 100%;
