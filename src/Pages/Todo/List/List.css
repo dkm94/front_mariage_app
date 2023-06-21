@@ -13,7 +13,8 @@
     padding-top: 1rem;
     padding-left: 3rem;
     padding-right: 3rem;
-    border: solid 3px rgb(151, 151, 151, 0.18);
+    border-bottom: solid 3px rgb(151, 151, 151, 0.18);
+    border-top: solid 3px rgb(151, 151, 151, 0.18);
     padding: 3rem 2rem;
     display: flex;
     flex-direction: row;

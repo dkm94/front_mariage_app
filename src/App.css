@@ -23,9 +23,6 @@ h1 {
 } */
 
 h2 {
-    font-size: 1.75rem !important;
-    font-weight: 700 !important;
-    color: #6b6565 !important;
 }
 
 .content {
@@ -50,7 +47,7 @@ h2 {
     /* position: fixed;
     width: 100%;
     z-index: 1000; */
-    box-shadow: 0px 5px 5px 0px rgba(173,164,173,0.5);
+    /* box-shadow: 0px 5px 5px 0px rgba(173,164,173,0.5); */
 }
 
 .nav-logo > img {
@@ -63,7 +60,8 @@ h2 {
     flex-direction: row;
     width: 100%;
     position: relative;
-    top: 9vh;
+    top: 64px;
+    
 }
 
 .body-content___home {
@@ -173,16 +171,21 @@ button:focus {
 }
 
 .titles {
-    text-shadow: 1px 1px 1px rgb(0 0 0 / 15%);
-    padding-bottom: 2rem;
-    padding-left: 1rem;
-    margin: 5rem 3rem 3rem 3rem;
-    font-family: 'Permanent Marker', cursive;
-    /* font-family: 'David Libre', serif !important; */
+    /* text-shadow: 1px 1px 1px rgba(238, 235, 235, 0.85); */
+    padding-left: 3rem;
+    background-color: #131414;
+    display: flex;
+    align-items: center;
+    height: 60px;
+    text-transform: uppercase;
+    font-family: 'Italiana', serif;
 }
 .titles > h2 {
-    font-size: 3rem !important;
-    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 300;
+    margin-bottom: 0;
+    color: #FFF;
+    letter-spacing: 1px;
 }
 
 .searchbar {
@@ -430,7 +433,7 @@ a:-webkit-any-link {
         display: block;
     }
     .navigation-layout > nav {
-        box-shadow: none;
+        /* box-shadow: none; */
     }
  }
 

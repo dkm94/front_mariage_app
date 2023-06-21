@@ -22,14 +22,13 @@
     justify-content: space-between;
     position: fixed;
     width: 100%;
-    min-height: 3rem;
+    height: 64px;
     padding: 0 2rem;
     background-color: white;
     color: darkgrey;
     z-index: 999;
 }
 .topNavbar > div {
-    height: 9vh;
     padding: 1rem;
 }
 .navbar__links {
@@ -120,45 +119,46 @@
 .sidebar {
     width: 20%;
     height: 91vh;
-    background-color: #F7F5F3;
+    background-color: #fcfaf7;
     position: fixed;
+    top: 64px;
+    height: 100%;
 }
 
 .sidebarList {
     height: auto;
     padding: 15px;
     width: 100%;
-    font-family: 'David Libre', serif !important;
-    /* font-size: 1.7rem; */
+    font-family: 'Italiana', serif;
+    padding-left: 65px;
+    font-size: 1.2rem;
+    margin-top: 1rem;
 }
 
 .sidebarList > .menu-row {
     width: 100%;
-    height: 3.5rem;
+    height: 2.5rem;
     list-style-type: none;
-    margin: 0;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     border-radius: 5px;
-    text-transform: uppercase;
+    color: #a4a4a5;
+    letter-spacing: 0.3px;
 }
 
 .sidebarList > .menu-row:hover {
     cursor: pointer;
-    background-color: #a0a09b;
+    /* background-color: #a0a09b; */
 }
 
 .sidebarList > #active {
-    /* background-color: #bcbcad; */
-    background-color: #e8dbd5;
-    border-radius: 5px;
-    /* background-color: #B4BC98; */
+    color: #000;
 }
 
 .menu-row > div {
-    text-align: center;
+    /* text-align: center; */
 }
 
 .menu-row #icon {
@@ -173,7 +173,7 @@
 .sidebar__greetings {
     display: flex;
     flex-direction: column;
-    padding-top: 3rem;
+    padding-top: 1rem;
     padding-right: 2rem;
     padding-left: 2rem;
     word-break: break-word;
@@ -193,6 +193,7 @@
 .profile-picture > img {
     border-radius: 50%;
     max-height: inherit;
+    border: 7px solid #D8BF99;
 }
 
 .greetings {
@@ -205,7 +206,7 @@
     text-shadow: 1px 1px 1px rgb(0 0 0 / 55%);
 }
 .bg-desktop {
-    background-color:  #d0b8ac;
+    background-color:  #fff;
 }
 
 #showNavLinks {
