@@ -108,9 +108,6 @@ const Byguests = ({ userInfos }) => {
           <h2>Souhaitez-vous ajouter de nouveaux invités ?</h2>
         </div>
         <div className="guests___bgimage">
-          <div className="component-title">
-            <h1>Les invités</h1>
-          </div>
         </div>
         <Container style={{ padding: "2rem 4rem" }} fluid>
           <Row>

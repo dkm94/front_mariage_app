@@ -152,9 +152,6 @@ const Budget = () => {
           <h2>Souhaitez-vous ajouter une nouvelle dépense ?</h2>
         </div>
         <div className="budget___bgimage">
-          <div className="component-title">
-            <h1>Les dépenses</h1>
-          </div>
         </div>
         <div className="budget-cols">
           <div className="budget___search">

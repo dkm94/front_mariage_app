@@ -117,12 +117,13 @@
 }
 
 .sidebar {
-    width: 20%;
     height: 91vh;
     background-color: #fcfaf7;
-    position: fixed;
+    position: sticky;
     top: 64px;
-    height: 100%;
+    height: 100vh;
+    width: 100%;
+    max-width: 330px;
 }
 
 .sidebarList {
@@ -237,7 +238,8 @@
 
 @media only screen and (max-width : 1150px) {
     .sidebar {
-        width: 25%;
+        width: fit-content;
+        max-width: unset;
     }
     }
 

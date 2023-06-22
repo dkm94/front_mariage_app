@@ -60,9 +60,6 @@ const Todo = () => {
           <h2>Souhaitez-vous ajouter de nouvelles tâches ?</h2>
         </div>
         <div className="todo___bgimage">
-          <div className="component-title">
-            <h1>Les tâches</h1>
-          </div>
         </div>
         <Container style={{ padding: "2rem 4rem" }} fluid>
           <Row>

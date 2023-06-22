@@ -124,9 +124,6 @@ const Tables = (props) => {
           <h2>Comment souhaitez-vous organiser votre plan de table ? </h2>
         </div>
         <div className="tables___bgimage">
-          <div className="component-title">
-            <h1>Les tables</h1>
-          </div>
         </div>
         <Container style={{ padding: "2rem 4rem" }} fluid>
           <Row>

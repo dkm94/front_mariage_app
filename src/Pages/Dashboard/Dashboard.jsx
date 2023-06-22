@@ -94,9 +94,6 @@ const Dashboard = (props) => {
         <h2>Que souhaitez-vous faire aujourd'hui ?</h2>
       </div>
       <div className="dashboard___bgimage">
-        {/* <div className="component-title">
-          <h1>Tableau de bord</h1>
-        </div> */}
       </div>
       <div className="dashboard-cards__style">
         <Container>
