@@ -141,10 +141,11 @@
     list-style-type: none;
     display: flex;
     flex-direction: row;
-    justify-content: center;
     align-items: center;
     border-radius: 5px;
     color: #a4a4a5;
+    font-weight: bold;
+    letter-spacing: 0.5px;
 }
 
 .sidebarList > .menu-row:hover {
@@ -152,13 +153,12 @@
     /* background-color: #a0a09b; */
 }
 
-.sidebarList > #active {
+.menu-row > #active {
     color: #000;
 }
 
-.menu-row > div {
-    font-weight: bold;
-    letter-spacing: 0.5px;
+.menu-row > a {
+    color: #a4a4a5;
 }
 
 .menu-row #icon {

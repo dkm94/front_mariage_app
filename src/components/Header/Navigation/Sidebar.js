@@ -39,13 +39,18 @@ const Login = (props) => {
             <li
               key={key}
               className="menu-row"
-              id={window.location.pathname === val.pathname ? "active" : ""}
+
               //   onClick={() => {
               //     window.location.pathname = val.pathname;
               //   }}
             >
-              {/* <div id="title">{val.title}</div> */}
-              <Link to={val?.pathname}>{val?.title}</Link>
+              {/* <div >{val.title}</div> */}
+              <Link
+                id={window.location.pathname === val.pathname ? "active" : ""}
+                to={val?.pathname}
+              >
+                {val?.title}
+              </Link>
             </li>
           );
         })}
