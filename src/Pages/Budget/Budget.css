@@ -13,10 +13,6 @@
     flex-direction: column;
 }
 
-.card-title {
-    font-family: 'Noto Sans JP', sans-serif;
-}
-
 .card-body > span {
     font-size: 3em;
     text-align: center;
@@ -135,7 +131,7 @@
     height: 15rem;
 }
 .card-expense-component > .card {
-    background: #f9f7f7;
+    background-color: #f9f9f9;
     box-shadow: 0 2px 10px 0 rgb(0 0 0 / 14%);
     padding: 1rem 1rem !important;
     flex-direction: column;

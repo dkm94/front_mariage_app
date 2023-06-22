@@ -8,7 +8,6 @@ import List from "./List/List";
 import { ScrollButtonContext } from "../../../src/App";
 import "./Todo.css";
 import axios from "axios";
-import ClearButton from "../../components/Buttons/Clear/ClearButton";
 import { Select, MenuItem, Container, Divider } from "@mui/material";
 
 const Todo = () => {

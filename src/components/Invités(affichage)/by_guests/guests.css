@@ -372,6 +372,7 @@ padding-left: 30px;
     height: auto;
     justify-items: center;
     text-align: center;
+    background-color: #f9f9f9;
 }
 
 @media only screen and (max-device-width : 1024px) {

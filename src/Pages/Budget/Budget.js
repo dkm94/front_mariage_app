@@ -7,10 +7,8 @@ import { ScrollButtonContext } from "../../../src/App";
 import Expenses from "./Dépenses/Dépenses";
 import * as Yup from "yup";
 import axios from "axios";
-
 import "./Budget.css";
 import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
-import BlackButton from "../../components/Buttons/Black/BlackButton";
 import GreyButton from "../../components/Buttons/Grey/GreyButton";
 
 const Budget = () => {
@@ -135,8 +133,6 @@ const Budget = () => {
       setTotal(tot);
     }
   }
-
-  console.log(setEdit);
 
   return (
     <div className="budget-container page-component">
