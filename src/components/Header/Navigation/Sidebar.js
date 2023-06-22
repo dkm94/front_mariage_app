@@ -34,17 +34,8 @@ const Login = (props) => {
       </div>
       <ul className="sidebarList">
         {NavigationData.map((val, key) => {
-          console.log(val.pathname);
           return (
-            <li
-              key={key}
-              className="menu-row"
-
-              //   onClick={() => {
-              //     window.location.pathname = val.pathname;
-              //   }}
-            >
-              {/* <div >{val.title}</div> */}
+            <li key={key} className="menu-row">
               <Link
                 id={window.location.pathname === val.pathname ? "active" : ""}
                 to={val?.pathname}

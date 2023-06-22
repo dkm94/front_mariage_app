@@ -4,6 +4,7 @@ import "./Dashboard.css";
 import axios from "axios";
 import Card from "./Card/Card.jsx";
 import { Container, Row } from "react-bootstrap";
+import ScreenLoader from "../../components/Loader/Screen/ScreenLoader";
 
 const Dashboard = (props) => {
   const scrollBtn = useContext(ScrollButtonContext);
@@ -21,6 +22,8 @@ const Dashboard = (props) => {
   const [beverages, setBeverages] = useState([]);
   const [wedding, setWeddding] = useState([]);
 
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     let guests = axios.get("/api/admin/guests/");
     let tables = axios.get("/api/admin/tables/");
@@ -34,6 +37,7 @@ const Dashboard = (props) => {
     let beverages = axios.get("/api/admin/menu/beverages/");
 
     async function getDatas() {
+      setLoading(true);
       let res = await Promise.all([
         guests,
         tables,
@@ -56,6 +60,8 @@ const Dashboard = (props) => {
       setWeddding(res[7].data);
       setApetizers(res[8].data);
       setBeverages(res[9].data);
+
+      setLoading(false);
     }
     getDatas();
   }, [id]);
@@ -83,78 +89,83 @@ const Dashboard = (props) => {
     beverages?.length;
 
   return (
-    <div className="dashboard page-component">
-      {scrollBtn}
-      <div className="page-location">
-        <div>
-          <span>Dashboard</span>
+    <>
+      {loading ? (
+        <ScreenLoader />
+      ) : (
+        <div className="dashboard page-component">
+          {scrollBtn}
+          <div className="page-location">
+            <div>
+              <span>Dashboard</span>
+            </div>
+          </div>
+          <div className="titles mb3" style={{ marginBottom: "1rem" }}>
+            <h2>Que souhaitez-vous faire aujourd'hui ?</h2>
+          </div>
+          <div className="dashboard___bgimage"></div>
+          <div className="dashboard-cards__style">
+            <Container>
+              <Row className="mid-device-width">
+                <Card
+                  title={"Invités"}
+                  content={guests?.length}
+                  array={guests}
+                  resume={"repartition"}
+                  extraProp={"name"}
+                  path={"menu/invites"}
+                  firstPerson={firstPerson}
+                  secondPerson={secondPerson}
+                  firstFamilyGuests={firstFamilyGuests}
+                  secondFamilyGuests={secondFamilyGuests}
+                />
+                <Card
+                  title={"Tables"}
+                  content={tables?.length}
+                  array={tables}
+                  resume={"tables"}
+                  extraProp={"tables"}
+                  path={"menu/tables"}
+                />
+                <Card
+                  title={"Réception"}
+                  content={meal}
+                  subArrayOne={starters?.length}
+                  subArrayTwo={maincourses?.length}
+                  subArrayThree={desserts?.length}
+                  subArrayFour={maincourses?.length}
+                  subArrayFive={desserts?.length}
+                  resume={"composition"}
+                  extraProp={"composition"}
+                  path={"menu/carte"}
+                />
+                <Card
+                  title={"Tâches"}
+                  content={tasks?.length}
+                  subArrayOne={isCompleted?.length}
+                  subArrayTwo={notCompleted?.length}
+                  array={tasks}
+                  elements={"text"}
+                  resume={"status"}
+                  extraProp={"tache"}
+                  path={"menu/taches"}
+                />
+                <Card
+                  title={"Dépenses (en €)"}
+                  content={` ${total(sum)}`}
+                  sumLength={sumLength}
+                  array={operations}
+                  elements={"description"}
+                  resume={"expenses"}
+                  extraProp={"description"}
+                  path={"menu/budget"}
+                />
+              </Row>
+            </Container>
+          </div>
         </div>
-      </div>
-      <div className="titles mb3" style={{ marginBottom: "1rem" }}>
-        <h2>Que souhaitez-vous faire aujourd'hui ?</h2>
-      </div>
-      <div className="dashboard___bgimage">
-      </div>
-      <div className="dashboard-cards__style">
-        <Container>
-          <Row className="mid-device-width">
-            <Card
-              title={"Invités"}
-              content={guests?.length}
-              array={guests}
-              resume={"repartition"}
-              extraProp={"name"}
-              path={"menu/invites"}
-              firstPerson={firstPerson}
-              secondPerson={secondPerson}
-              firstFamilyGuests={firstFamilyGuests}
-              secondFamilyGuests={secondFamilyGuests}
-            />
-            <Card
-              title={"Tables"}
-              content={tables?.length}
-              array={tables}
-              resume={"tables"}
-              extraProp={"tables"}
-              path={"menu/tables"}
-            />
-            <Card
-              title={"Réception"}
-              content={meal}
-              subArrayOne={starters?.length}
-              subArrayTwo={maincourses?.length}
-              subArrayThree={desserts?.length}
-              subArrayFour={maincourses?.length}
-              subArrayFive={desserts?.length}
-              resume={"composition"}
-              extraProp={"composition"}
-              path={"menu/carte"}
-            />
-            <Card
-              title={"Tâches"}
-              content={tasks?.length}
-              subArrayOne={isCompleted?.length}
-              subArrayTwo={notCompleted?.length}
-              array={tasks}
-              elements={"text"}
-              resume={"status"}
-              extraProp={"tache"}
-              path={"menu/taches"}
-            />
-            <Card
-              title={"Dépenses (en €)"}
-              content={` ${total(sum)}`}
-              sumLength={sumLength}
-              array={operations}
-              elements={"description"}
-              resume={"expenses"}
-              extraProp={"description"}
-              path={"menu/budget"}
-            />
-          </Row>
-        </Container>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 

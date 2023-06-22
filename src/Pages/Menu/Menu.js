@@ -24,6 +24,7 @@ import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CreateIcon from "@mui/icons-material/Create";
 import styled from "@emotion/styled";
+import ScreenLoader from "../../components/Loader/Screen/ScreenLoader";
 
 const IconWrapper = styled(IconButton)({
   "&:hover": {
@@ -56,6 +57,8 @@ const Menus = () => {
 
   const [input, setInput] = useState("");
 
+  const [loading, setLoading] = useState(false);
+
   const getUpdatedId = (objId, objName) => {
     setEdit({
       id: objId,
@@ -65,6 +68,8 @@ const Menus = () => {
   };
 
   useEffect(() => {
+    setLoading(true);
+
     let starterData = axios.get("/api/admin/menu/starters/");
     let maincourseData = axios.get("/api/admin/menu/maincourses/");
     let dessertData = axios.get("/api/admin/menu/desserts/");
@@ -83,6 +88,8 @@ const Menus = () => {
       setDesserts(res[2].data);
       setApetizers(res[3].data);
       setBeverages(res[4].data);
+
+      setLoading(false);
     }
     getDatas();
   }, [starter, maincourse, dessert, apetizer, beverage]);
@@ -212,433 +219,469 @@ const Menus = () => {
   };
 
   return (
-    <div className="menu-container page-component">
-      {scrollBtn}
-      <div className="menu">
-        <div className="page-location">
-          <div>
-            <Link to={"/"}>Dashboard</Link>
-            {">"} Carte
+    <>
+      {loading ? (
+        <ScreenLoader />
+      ) : (
+        <div className="menu-container page-component">
+          {scrollBtn}
+          <div className="menu">
+            <div className="page-location">
+              <div>
+                <Link to={"/"}>Dashboard</Link>
+                {">"} Carte
+              </div>
+            </div>
+            <div className="titles mb-3">
+              <h2>Avez-vous prévu une réception ?</h2>
+            </div>
+            <div className="menu___bgimage"></div>
+            <div className="menu__list__container">
+              <div className="menu___list">
+                <div className="starter forms">
+                  <div className="starter___div_img">
+                    <img src={starterImg} alt="starter" />
+                  </div>
+                  <div className="starter___div_form fade-in fade-in">
+                    {starters.length === 0 || starters.length === 1 ? (
+                      <h3 className="menu__title">Entrée</h3>
+                    ) : (
+                      <h3 className="menu__title">Entrées</h3>
+                    )}
+                    <div className="menu___forms">
+                      <AddStarterForm addStarter={addStarter} icon={addIcon} />
+                    </div>
+                    {starters.length === 0 ? (
+                      <div className="empty-div">
+                        <span>Vos entrées ici</span>
+                      </div>
+                    ) : (
+                      <Grid2 xs={12} component={"ul"} container>
+                        {starters.map((starter) => (
+                          <Grid2
+                            xs={12}
+                            key={starter._id}
+                            component={"li"}
+                            display={"flex"}
+                            flexDirection={"row"}
+                            minHeight="36px"
+                            alignItems={"center"}
+                          >
+                            {edit.id === starter._id ? (
+                              <UpdateStarter
+                                edit={edit}
+                                setEdit={setEdit}
+                                editStarter={editStarter}
+                              />
+                            ) : (
+                              <Grid2
+                                lg={8}
+                                md={8}
+                                xs={8}
+                                component={"span"}
+                                width={"100% !important"}
+                              >
+                                {starter.name}
+                              </Grid2>
+                            )}
+
+                            <Grid2
+                              lg={4}
+                              display={"flex"}
+                              flexDirection={"row"}
+                            >
+                              {!edit.id && (
+                                <>
+                                  <IconWrapper
+                                    onClick={() =>
+                                      getUpdatedId(starter._id, starter.name)
+                                    }
+                                  >
+                                    <CreateIcon />
+                                  </IconWrapper>
+                                  <IconWrapper
+                                    type="submit"
+                                    onClick={() => deleteStarter(starter._id)}
+                                  >
+                                    <DeleteIcon />
+                                  </IconWrapper>
+                                </>
+                              )}
+                            </Grid2>
+                          </Grid2>
+                        ))}
+                      </Grid2>
+                    )}
+                  </div>
+                </div>
+                <div className="maincourse forms" id="forms_reverse">
+                  <div className="maincourse___div_form fade-in fade-in">
+                    {maincourses.length === 0 || maincourses.length === 1 ? (
+                      <h3 className="menu__title">Plat</h3>
+                    ) : (
+                      <h3 className="menu__title">Plats</h3>
+                    )}
+                    <div className="menu___forms">
+                      <AddMaincourseForm
+                        addMaincourse={addMaincourse}
+                        icon={addIcon}
+                      />
+                    </div>
+                    {maincourses.length === 0 ? (
+                      <div className="empty-div">
+                        <span>Vos plats ici</span>
+                      </div>
+                    ) : (
+                      <Grid2 xs={12} component={"ul"} container>
+                        {maincourses.map((maincourse) => (
+                          <Grid2
+                            xs={12}
+                            key={maincourse._id}
+                            component={"li"}
+                            display={"flex"}
+                            flexDirection={"row"}
+                            minHeight="36px"
+                            alignItems={"center"}
+                          >
+                            {edit.id === maincourse._id ? (
+                              <UpdateMaincourse
+                                edit={edit}
+                                setEdit={setEdit}
+                                editMaincourse={editMaincourse}
+                              />
+                            ) : (
+                              <Grid2
+                                lg={8}
+                                md={8}
+                                xs={8}
+                                component={"span"}
+                                width={"100% !important"}
+                              >
+                                {maincourse.name}
+                              </Grid2>
+                            )}
+
+                            <Grid2
+                              lg={4}
+                              display={"flex"}
+                              flexDirection={"row"}
+                            >
+                              {!edit.id && (
+                                <>
+                                  <IconWrapper
+                                    onClick={() =>
+                                      getUpdatedId(
+                                        maincourse._id,
+                                        maincourse.name
+                                      )
+                                    }
+                                  >
+                                    <CreateIcon />
+                                  </IconWrapper>
+                                  <IconWrapper
+                                    type="submit"
+                                    onClick={() =>
+                                      deleteMaincourse(maincourse._id)
+                                    }
+                                  >
+                                    <DeleteIcon />
+                                  </IconWrapper>
+                                </>
+                              )}
+                            </Grid2>
+                          </Grid2>
+                        ))}
+                      </Grid2>
+                    )}
+                  </div>
+                  <div className="maincourse___div_img">
+                    <img src={maincourseImg} alt="main couse" />
+                  </div>
+                </div>
+                <div className="starter forms">
+                  <div className="dessert___div_img">
+                    <img src={dessertImg} alt="dessert" />
+                  </div>
+                  <div className="starter___div_form fade-in fade-in">
+                    {desserts.length === 0 || desserts.length === 1 ? (
+                      <h3 className="menu__title">Dessert</h3>
+                    ) : (
+                      <h3 className="menu__title">Desserts</h3>
+                    )}
+                    <div className="menu___forms">
+                      <AddDessertForm addDessert={addDessert} icon={addIcon} />
+                    </div>
+                    {desserts.length === 0 ? (
+                      <div className="empty-div">
+                        <span>Vos desserts ici</span>
+                      </div>
+                    ) : (
+                      <Grid2 xs={12} component={"ul"} container>
+                        {desserts.map((dessert) => (
+                          <Grid2
+                            xs={12}
+                            key={dessert._id}
+                            component={"li"}
+                            display={"flex"}
+                            flexDirection={"row"}
+                            minHeight="36px"
+                            alignItems={"center"}
+                          >
+                            {edit.id === dessert._id ? (
+                              <UpdateDessert
+                                edit={edit}
+                                setEdit={setEdit}
+                                editDessert={editDessert}
+                              />
+                            ) : (
+                              <Grid2
+                                lg={8}
+                                md={8}
+                                xs={8}
+                                component={"span"}
+                                width={"100% !important"}
+                              >
+                                {dessert.name}
+                              </Grid2>
+                            )}
+                            <Grid2
+                              lg={4}
+                              display={"flex"}
+                              flexDirection={"row"}
+                            >
+                              {!edit.id && (
+                                <>
+                                  <IconWrapper
+                                    onClick={() =>
+                                      getUpdatedId(dessert._id, dessert.name)
+                                    }
+                                  >
+                                    <CreateIcon />
+                                  </IconWrapper>
+                                  <IconWrapper
+                                    type="submit"
+                                    onClick={() => deleteDessert(dessert._id)}
+                                  >
+                                    <DeleteIcon />
+                                  </IconWrapper>
+                                </>
+                              )}
+                            </Grid2>
+                          </Grid2>
+                        ))}
+                      </Grid2>
+                    )}
+                  </div>
+                </div>
+                <div className="maincourse forms" id="forms_reverse">
+                  <div className="dessert___div_form fade-in">
+                    {apetizers.length === 0 || apetizers.length === 1 ? (
+                      <h3 className="menu__title">Apéritif</h3>
+                    ) : (
+                      <h3 className="menu__title">Apéritifs</h3>
+                    )}
+                    <div className="menu___forms">
+                      <AddApetizerForm
+                        addApetizer={addApetizer}
+                        icon={addIcon}
+                      />
+                    </div>
+                    {apetizers.length === 0 ? (
+                      <div className="empty-div">
+                        <span>Vos apéritifs ici</span>
+                      </div>
+                    ) : (
+                      <Grid2 xs={12} component={"ul"} container>
+                        {apetizers.map((apetizer) => (
+                          <Grid2
+                            xs={12}
+                            key={apetizer._id}
+                            component={"li"}
+                            display={"flex"}
+                            flexDirection={"row"}
+                            minHeight="36px"
+                            alignItems={"center"}
+                          >
+                            {edit.id === apetizer._id ? (
+                              <UpdateApetizer
+                                edit={edit}
+                                setEdit={setEdit}
+                                editApetizer={editApetizer}
+                              />
+                            ) : (
+                              <Grid2
+                                lg={8}
+                                md={8}
+                                xs={8}
+                                component={"span"}
+                                width={"100% !important"}
+                              >
+                                {apetizer.name}
+                              </Grid2>
+                            )}
+                            <Grid2
+                              lg={4}
+                              display={"flex"}
+                              flexDirection={"row"}
+                            >
+                              {!edit.id && (
+                                <>
+                                  <IconWrapper
+                                    onClick={() =>
+                                      getUpdatedId(apetizer._id, apetizer.name)
+                                    }
+                                  >
+                                    <CreateIcon />
+                                  </IconWrapper>
+                                  <IconWrapper
+                                    type="submit"
+                                    onClick={() => {
+                                      deleteApetizer(apetizer._id);
+                                    }}
+                                  >
+                                    <DeleteIcon />
+                                  </IconWrapper>
+                                </>
+                              )}
+                            </Grid2>
+                          </Grid2>
+                        ))}
+                      </Grid2>
+                    )}
+                  </div>
+                  <div className="dessert___div_img">
+                    <img src={apetizerImg} alt="apéritif" />
+                  </div>
+                </div>
+                <div className="dessert forms">
+                  <div className="dessert___div_img">
+                    <img src={beverageImg} alt="boisson" />
+                  </div>
+                  <div className="dessert___div_form fade-in">
+                    {beverages.length === 0 || beverages.length === 1 ? (
+                      <h3 className="menu__title">Boisson</h3>
+                    ) : (
+                      <h3 className="menu__title">Boissons</h3>
+                    )}
+                    <div className="menu___forms">
+                      <AddBeverageForm
+                        addBeverage={addBeverage}
+                        icon={addIcon}
+                      />
+                    </div>
+                    {beverages.length === 0 ? (
+                      <div className="empty-div">
+                        <span>Vos boissons ici</span>
+                      </div>
+                    ) : (
+                      <Grid2 xs={12} component={"ul"} container>
+                        {beverages.map((beverage) => (
+                          <Grid2
+                            xs={12}
+                            key={beverage._id}
+                            component={"li"}
+                            display={"flex"}
+                            flexDirection={"row"}
+                            minHeight="36px"
+                            alignItems={"center"}
+                          >
+                            {edit.id === beverage._id ? (
+                              <UpdateBeverage
+                                edit={edit}
+                                setEdit={setEdit}
+                                editBeverage={editBeverage}
+                              />
+                            ) : (
+                              <Grid2
+                                lg={8}
+                                md={8}
+                                xs={8}
+                                component={"span"}
+                                width={"100% !important"}
+                              >
+                                {beverage.name}
+                              </Grid2>
+                            )}
+                            <Grid2
+                              lg={4}
+                              display={"flex"}
+                              flexDirection={"row"}
+                            >
+                              {!edit.id && (
+                                <>
+                                  <IconWrapper
+                                    onClick={() =>
+                                      getUpdatedId(beverage._id, beverage.name)
+                                    }
+                                  >
+                                    <CreateIcon />
+                                  </IconWrapper>
+                                  <IconWrapper
+                                    type="submit"
+                                    onClick={() => deleteBeverage(beverage._id)}
+                                  >
+                                    <DeleteIcon />
+                                  </IconWrapper>
+                                </>
+                              )}
+                            </Grid2>
+                            {/* <div className="menu___li-btns">
+                        <div className="custom-dropdown">
+                          <Dropdown>
+                            <Dropdown.Toggle as={CustomToggle} />
+                            <Dropdown.Menu size="sm" title="">
+                              {edit.id ? (
+                                <>
+                                  <Dropdown.Item
+                                    onClick={() => setEdit({ id: null })}
+                                  >
+                                    Annuler
+                                  </Dropdown.Item>
+                                  <Dropdown.Item
+                                    onClick={(e) => {
+                                      editBeverage(e);
+                                    }}
+                                  >
+                                    Valider
+                                  </Dropdown.Item>
+                                </>
+                              ) : (
+                                <>
+                                  <Dropdown.Item
+                                    onClick={() =>
+                                      getUpdatedId(
+                                        beverage._id,
+                                        beverage.name
+                                      )
+                                    }
+                                  >
+                                    Modifier
+                                  </Dropdown.Item>
+                                  <Dropdown.Item
+                                    onClick={() => {
+                                      deleteBeverage(beverage._id);
+                                    }}
+                                  >
+                                    Supprimer
+                                  </Dropdown.Item>
+                                </>
+                              )}
+                            </Dropdown.Menu>
+                          </Dropdown>
+                        </div>
+                      </div> */}
+                          </Grid2>
+                        ))}
+                      </Grid2>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="titles mb-3">
-          <h2>Avez-vous prévu une réception ?</h2>
-        </div>
-        <div className="menu___bgimage">
-        </div>
-        <div className="menu__list__container">
-          <div className="menu___list">
-            <div className="starter forms">
-              <div className="starter___div_img">
-                <img src={starterImg} alt="starter" />
-              </div>
-              <div className="starter___div_form fade-in fade-in">
-                {starters.length === 0 || starters.length === 1 ? (
-                  <h3 className="menu__title">Entrée</h3>
-                ) : (
-                  <h3 className="menu__title">Entrées</h3>
-                )}
-                <div className="menu___forms">
-                  <AddStarterForm addStarter={addStarter} icon={addIcon} />
-                </div>
-                {starters.length === 0 ? (
-                  <div className="empty-div">
-                    <span>Vos entrées ici</span>
-                  </div>
-                ) : (
-                  <Grid2 xs={12} component={"ul"} container>
-                    {starters.map((starter) => (
-                      <Grid2
-                        xs={12}
-                        key={starter._id}
-                        component={"li"}
-                        display={"flex"}
-                        flexDirection={"row"}
-                        minHeight="36px"
-                        alignItems={"center"}
-                      >
-                        {edit.id === starter._id ? (
-                          <UpdateStarter
-                            edit={edit}
-                            setEdit={setEdit}
-                            editStarter={editStarter}
-                          />
-                        ) : (
-                          <Grid2
-                            lg={8}
-                            md={8}
-                            xs={8}
-                            component={"span"}
-                            width={"100% !important"}
-                          >
-                            {starter.name}
-                          </Grid2>
-                        )}
-
-                        <Grid2 lg={4} display={"flex"} flexDirection={"row"}>
-                          {!edit.id && (
-                            <>
-                              <IconWrapper
-                                onClick={() =>
-                                  getUpdatedId(starter._id, starter.name)
-                                }
-                              >
-                                <CreateIcon />
-                              </IconWrapper>
-                              <IconWrapper
-                                type="submit"
-                                onClick={() => deleteStarter(starter._id)}
-                              >
-                                <DeleteIcon />
-                              </IconWrapper>
-                            </>
-                          )}
-                        </Grid2>
-                      </Grid2>
-                    ))}
-                  </Grid2>
-                )}
-              </div>
-            </div>
-            <div className="maincourse forms" id="forms_reverse">
-              <div className="maincourse___div_form fade-in fade-in">
-                {maincourses.length === 0 || maincourses.length === 1 ? (
-                  <h3 className="menu__title">Plat</h3>
-                ) : (
-                  <h3 className="menu__title">Plats</h3>
-                )}
-                <div className="menu___forms">
-                  <AddMaincourseForm
-                    addMaincourse={addMaincourse}
-                    icon={addIcon}
-                  />
-                </div>
-                {maincourses.length === 0 ? (
-                  <div className="empty-div">
-                    <span>Vos plats ici</span>
-                  </div>
-                ) : (
-                  <Grid2 xs={12} component={"ul"} container>
-                    {maincourses.map((maincourse) => (
-                      <Grid2
-                        xs={12}
-                        key={maincourse._id}
-                        component={"li"}
-                        display={"flex"}
-                        flexDirection={"row"}
-                        minHeight="36px"
-                        alignItems={"center"}
-                      >
-                        {edit.id === maincourse._id ? (
-                          <UpdateMaincourse
-                            edit={edit}
-                            setEdit={setEdit}
-                            editMaincourse={editMaincourse}
-                          />
-                        ) : (
-                          <Grid2
-                            lg={8}
-                            md={8}
-                            xs={8}
-                            component={"span"}
-                            width={"100% !important"}
-                          >
-                            {maincourse.name}
-                          </Grid2>
-                        )}
-
-                        <Grid2 lg={4} display={"flex"} flexDirection={"row"}>
-                          {!edit.id && (
-                            <>
-                              <IconWrapper
-                                onClick={() =>
-                                  getUpdatedId(maincourse._id, maincourse.name)
-                                }
-                              >
-                                <CreateIcon />
-                              </IconWrapper>
-                              <IconWrapper
-                                type="submit"
-                                onClick={() => deleteMaincourse(maincourse._id)}
-                              >
-                                <DeleteIcon />
-                              </IconWrapper>
-                            </>
-                          )}
-                        </Grid2>
-                      </Grid2>
-                    ))}
-                  </Grid2>
-                )}
-              </div>
-              <div className="maincourse___div_img">
-                <img src={maincourseImg} alt="main couse" />
-              </div>
-            </div>
-            <div className="starter forms">
-              <div className="dessert___div_img">
-                <img src={dessertImg} alt="dessert" />
-              </div>
-              <div className="starter___div_form fade-in fade-in">
-                {desserts.length === 0 || desserts.length === 1 ? (
-                  <h3 className="menu__title">Dessert</h3>
-                ) : (
-                  <h3 className="menu__title">Desserts</h3>
-                )}
-                <div className="menu___forms">
-                  <AddDessertForm addDessert={addDessert} icon={addIcon} />
-                </div>
-                {desserts.length === 0 ? (
-                  <div className="empty-div">
-                    <span>Vos desserts ici</span>
-                  </div>
-                ) : (
-                  <Grid2 xs={12} component={"ul"} container>
-                    {desserts.map((dessert) => (
-                      <Grid2
-                        xs={12}
-                        key={dessert._id}
-                        component={"li"}
-                        display={"flex"}
-                        flexDirection={"row"}
-                        minHeight="36px"
-                        alignItems={"center"}
-                      >
-                        {edit.id === dessert._id ? (
-                          <UpdateDessert
-                            edit={edit}
-                            setEdit={setEdit}
-                            editDessert={editDessert}
-                          />
-                        ) : (
-                          <Grid2
-                            lg={8}
-                            md={8}
-                            xs={8}
-                            component={"span"}
-                            width={"100% !important"}
-                          >
-                            {dessert.name}
-                          </Grid2>
-                        )}
-                        <Grid2 lg={4} display={"flex"} flexDirection={"row"}>
-                          {!edit.id && (
-                            <>
-                              <IconWrapper
-                                onClick={() =>
-                                  getUpdatedId(dessert._id, dessert.name)
-                                }
-                              >
-                                <CreateIcon />
-                              </IconWrapper>
-                              <IconWrapper
-                                type="submit"
-                                onClick={() => deleteDessert(dessert._id)}
-                              >
-                                <DeleteIcon />
-                              </IconWrapper>
-                            </>
-                          )}
-                        </Grid2>
-                      </Grid2>
-                    ))}
-                  </Grid2>
-                )}
-              </div>
-            </div>
-            <div className="maincourse forms" id="forms_reverse">
-              <div className="dessert___div_form fade-in">
-                {apetizers.length === 0 || apetizers.length === 1 ? (
-                  <h3 className="menu__title">Apéritif</h3>
-                ) : (
-                  <h3 className="menu__title">Apéritifs</h3>
-                )}
-                <div className="menu___forms">
-                  <AddApetizerForm addApetizer={addApetizer} icon={addIcon} />
-                </div>
-                {apetizers.length === 0 ? (
-                  <div className="empty-div">
-                    <span>Vos apéritifs ici</span>
-                  </div>
-                ) : (
-                  <Grid2 xs={12} component={"ul"} container>
-                    {apetizers.map((apetizer) => (
-                      <Grid2
-                        xs={12}
-                        key={apetizer._id}
-                        component={"li"}
-                        display={"flex"}
-                        flexDirection={"row"}
-                        minHeight="36px"
-                        alignItems={"center"}
-                      >
-                        {edit.id === apetizer._id ? (
-                          <UpdateApetizer
-                            edit={edit}
-                            setEdit={setEdit}
-                            editApetizer={editApetizer}
-                          />
-                        ) : (
-                          <Grid2
-                            lg={8}
-                            md={8}
-                            xs={8}
-                            component={"span"}
-                            width={"100% !important"}
-                          >
-                            {apetizer.name}
-                          </Grid2>
-                        )}
-                        <Grid2 lg={4} display={"flex"} flexDirection={"row"}>
-                          {!edit.id && (
-                            <>
-                              <IconWrapper
-                                onClick={() =>
-                                  getUpdatedId(apetizer._id, apetizer.name)
-                                }
-                              >
-                                <CreateIcon />
-                              </IconWrapper>
-                              <IconWrapper
-                                type="submit"
-                                onClick={() => {
-                                  deleteApetizer(apetizer._id);
-                                }}
-                              >
-                                <DeleteIcon />
-                              </IconWrapper>
-                            </>
-                          )}
-                        </Grid2>
-                      </Grid2>
-                    ))}
-                  </Grid2>
-                )}
-              </div>
-              <div className="dessert___div_img">
-                <img src={apetizerImg} alt="apéritif" />
-              </div>
-            </div>
-            <div className="dessert forms">
-              <div className="dessert___div_img">
-                <img src={beverageImg} alt="boisson" />
-              </div>
-              <div className="dessert___div_form fade-in">
-                {beverages.length === 0 || beverages.length === 1 ? (
-                  <h3 className="menu__title">Boisson</h3>
-                ) : (
-                  <h3 className="menu__title">Boissons</h3>
-                )}
-                <div className="menu___forms">
-                  <AddBeverageForm addBeverage={addBeverage} icon={addIcon} />
-                </div>
-                {beverages.length === 0 ? (
-                  <div className="empty-div">
-                    <span>Vos boissons ici</span>
-                  </div>
-                ) : (
-                  <Grid2 xs={12} component={"ul"} container>
-                    {beverages.map((beverage) => (
-                      <Grid2
-                        xs={12}
-                        key={beverage._id}
-                        component={"li"}
-                        display={"flex"}
-                        flexDirection={"row"}
-                        minHeight="36px"
-                        alignItems={"center"}
-                      >
-                        {edit.id === beverage._id ? (
-                          <UpdateBeverage
-                            edit={edit}
-                            setEdit={setEdit}
-                            editBeverage={editBeverage}
-                          />
-                        ) : (
-                          <Grid2
-                            lg={8}
-                            md={8}
-                            xs={8}
-                            component={"span"}
-                            width={"100% !important"}
-                          >
-                            {beverage.name}
-                          </Grid2>
-                        )}
-                        <Grid2 lg={4} display={"flex"} flexDirection={"row"}>
-                          {!edit.id && (
-                            <>
-                              <IconWrapper
-                                onClick={() =>
-                                  getUpdatedId(beverage._id, beverage.name)
-                                }
-                              >
-                                <CreateIcon />
-                              </IconWrapper>
-                              <IconWrapper
-                                type="submit"
-                                onClick={() => deleteBeverage(beverage._id)}
-                              >
-                                <DeleteIcon />
-                              </IconWrapper>
-                            </>
-                          )}
-                        </Grid2>
-                        {/* <div className="menu___li-btns">
-                          <div className="custom-dropdown">
-                            <Dropdown>
-                              <Dropdown.Toggle as={CustomToggle} />
-                              <Dropdown.Menu size="sm" title="">
-                                {edit.id ? (
-                                  <>
-                                    <Dropdown.Item
-                                      onClick={() => setEdit({ id: null })}
-                                    >
-                                      Annuler
-                                    </Dropdown.Item>
-                                    <Dropdown.Item
-                                      onClick={(e) => {
-                                        editBeverage(e);
-                                      }}
-                                    >
-                                      Valider
-                                    </Dropdown.Item>
-                                  </>
-                                ) : (
-                                  <>
-                                    <Dropdown.Item
-                                      onClick={() =>
-                                        getUpdatedId(
-                                          beverage._id,
-                                          beverage.name
-                                        )
-                                      }
-                                    >
-                                      Modifier
-                                    </Dropdown.Item>
-                                    <Dropdown.Item
-                                      onClick={() => {
-                                        deleteBeverage(beverage._id);
-                                      }}
-                                    >
-                                      Supprimer
-                                    </Dropdown.Item>
-                                  </>
-                                )}
-                              </Dropdown.Menu>
-                            </Dropdown>
-                          </div>
-                        </div> */}
-                      </Grid2>
-                    ))}
-                  </Grid2>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 

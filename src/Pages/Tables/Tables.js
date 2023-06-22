@@ -10,6 +10,7 @@ import axios from "axios";
 import "./Tables.css";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { Box } from "@mui/material";
+import ScreenLoader from "../../components/Loader/Screen/ScreenLoader";
 
 const Tables = (props) => {
   const scrollBtn = useContext(ScrollButtonContext);
@@ -24,6 +25,8 @@ const Tables = (props) => {
   });
   const [input, setInput] = useState("");
 
+  const [loading, setLoading] = useState(false);
+
   const handleUpdatedTable = (e) => {
     setInput(e.target.value);
   };
@@ -33,6 +36,8 @@ const Tables = (props) => {
   const [guests, setGuests] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
+
     let guests = axios.get("/api/admin/guests/");
     let tables = axios.get("/api/admin/tables/");
 
@@ -40,6 +45,8 @@ const Tables = (props) => {
       let res = await Promise.all([guests, tables]);
       setGuests(res[0].data);
       setTables(res[1].data);
+
+      setLoading(false);
     }
     getDatas();
   }, [table]);
@@ -111,85 +118,93 @@ const Tables = (props) => {
   };
 
   return (
-    <div className="tables page-component">
-      {scrollBtn}
-      <div className="page-location">
-        <div>
-          <Link to={"/"}>Dashboard</Link>
-          {">"} Tables
-        </div>
-      </div>
-      <div className="tables-container">
-        <div className="titles mb-3">
-          <h2>Comment souhaitez-vous organiser votre plan de table ? </h2>
-        </div>
-        <div className="tables___bgimage">
-        </div>
-        <Container style={{ padding: "2rem 4rem" }} fluid>
-          <Row>
-            <Col xs={12} sm={10} md={6} className="table-form">
-              <AddTableForm addTable={addTable} />
-            </Col>
-            <Col xs={12} sm={10} md={6} className="searchbar">
-              <SearchBar
-                className="search__input"
-                type="text"
-                placeholder="Rechercher une table"
-                name="searchbar"
-                value={searchValue}
-                onChange={handleSearch}
-              />
-            </Col>
-          </Row>
-        </Container>
-        <Box
-          sx={{
-            minHeight: "500px",
-          }}
-          className="tables-grid"
-        >
-          {tables?.length === 0 || null ? (
-            <div className="block" style={tables ? { display: "none" } : null}>
-              <span>Vos tables ici.</span>
+    <>
+      {loading ? (
+        <ScreenLoader />
+      ) : (
+        <div className="tables page-component">
+          {scrollBtn}
+          <div className="page-location">
+            <div>
+              <Link to={"/"}>Dashboard</Link>
+              {">"} Tables
             </div>
-          ) : (
-            // loading === true ? loader :
-            <Grid2 container gap={3} justifyContent={"center"}>
-              {tables
-                .sort((a, b) => {
-                  return a.name > b.name ? 1 : -1;
-                })
-                .filter((table) => {
-                  return (
-                    table.name
-                      .toLowerCase()
-                      .indexOf(searchValue.toLowerCase()) >= 0
-                  );
-                })
-                .map((table) => (
-                  <Table
-                    tables={tables}
-                    table={table}
-                    id={table._id}
-                    key={table._id}
-                    edit={edit}
-                    editTableName={editTableName}
-                    handleUpdatedTable={handleUpdatedTable}
-                    input={input}
-                    setTables={setTables}
-                    guests={guests}
-                    deleteGuest={deleteGuest}
-                    setEdit={setEdit}
-                    getUpdatedId={getUpdatedId}
-                    deleteTable={deleteTable}
-                    addTable={addTable}
+          </div>
+          <div className="tables-container">
+            <div className="titles mb-3">
+              <h2>Comment souhaitez-vous organiser votre plan de table ? </h2>
+            </div>
+            <div className="tables___bgimage"></div>
+            <Container style={{ padding: "2rem 4rem" }} fluid>
+              <Row>
+                <Col xs={12} sm={10} md={6} className="table-form">
+                  <AddTableForm addTable={addTable} />
+                </Col>
+                <Col xs={12} sm={10} md={6} className="searchbar">
+                  <SearchBar
+                    className="search__input"
+                    type="text"
+                    placeholder="Rechercher une table"
+                    name="searchbar"
+                    value={searchValue}
+                    onChange={handleSearch}
                   />
-                ))}
-            </Grid2>
-          )}
-        </Box>
-      </div>
-    </div>
+                </Col>
+              </Row>
+            </Container>
+            <Box
+              sx={{
+                minHeight: "500px",
+              }}
+              className="tables-grid"
+            >
+              {tables?.length === 0 || null ? (
+                <div
+                  className="block"
+                  style={tables ? { display: "none" } : null}
+                >
+                  <span>Vos tables ici.</span>
+                </div>
+              ) : (
+                // loading === true ? loader :
+                <Grid2 container gap={3} justifyContent={"center"}>
+                  {tables
+                    .sort((a, b) => {
+                      return a.name > b.name ? 1 : -1;
+                    })
+                    .filter((table) => {
+                      return (
+                        table.name
+                          .toLowerCase()
+                          .indexOf(searchValue.toLowerCase()) >= 0
+                      );
+                    })
+                    .map((table) => (
+                      <Table
+                        tables={tables}
+                        table={table}
+                        id={table._id}
+                        key={table._id}
+                        edit={edit}
+                        editTableName={editTableName}
+                        handleUpdatedTable={handleUpdatedTable}
+                        input={input}
+                        setTables={setTables}
+                        guests={guests}
+                        deleteGuest={deleteGuest}
+                        setEdit={setEdit}
+                        getUpdatedId={getUpdatedId}
+                        deleteTable={deleteTable}
+                        addTable={addTable}
+                      />
+                    ))}
+                </Grid2>
+              )}
+            </Box>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
