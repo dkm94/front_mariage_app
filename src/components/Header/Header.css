@@ -145,7 +145,6 @@
     align-items: center;
     border-radius: 5px;
     color: #a4a4a5;
-    letter-spacing: 0.3px;
 }
 
 .sidebarList > .menu-row:hover {
@@ -158,7 +157,8 @@
 }
 
 .menu-row > div {
-    /* text-align: center; */
+    font-weight: bold;
+    letter-spacing: 0.5px;
 }
 
 .menu-row #icon {

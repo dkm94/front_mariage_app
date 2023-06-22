@@ -86,7 +86,7 @@ const Todo = () => {
             </Col>
           </Row>
         </Container>
-        <Container style={{ padding: "0 4rem" }} fluid>
+        {/* <Container style={{ padding: "0 4rem" }} fluid>
           <Row
             style={{
               display: "content",
@@ -115,7 +115,7 @@ const Todo = () => {
               style={{ marginRight: "20px", marginBottom: "5px" }}
             />
           </Row>
-        </Container>
+        </Container> */}
         <Container style={{ padding: "0 4rem" }} fluid>
           <Row
             style={{

@@ -173,7 +173,7 @@ button:focus {
 .titles {
     /* text-shadow: 1px 1px 1px rgba(238, 235, 235, 0.85); */
     padding-left: 3rem;
-    background-color: #131414;
+    background-color: #323535;
     display: flex;
     align-items: center;
     height: 60px;
@@ -182,7 +182,7 @@ button:focus {
 }
 .titles > h2 {
     font-size: 1.2rem;
-    font-weight: 300;
+    font-weight: bold;
     margin-bottom: 0;
     color: #FFF;
     letter-spacing: 1px;
@@ -369,7 +369,7 @@ a:-webkit-any-link {
         padding-bottom: 0;
     }
     .titles > h2 {
-        font-size: 2rem !important;
+        /* font-size: 2rem !important; */
     }
 }
 
@@ -385,17 +385,9 @@ a:-webkit-any-link {
         width: 100%;
         min-height: 92vh;
     }
-    .page-location {
-        display: block;
-    }
+
     #component-dashboard {
         display: block;
-    }
-    /* .titles > h2 {
-        margin: 2rem 3rem 0rem;
-    } */
-    .titles {
-        display: none;
     }
  }
 
@@ -426,9 +418,6 @@ a:-webkit-any-link {
  }
 
  @media (max-width: 576px) {
-    .page-location {
-        display: none;
-    }
     .component-title {
         display: block;
     }
