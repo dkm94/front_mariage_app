@@ -40,3 +40,9 @@
     border-radius: 10px;
     background-color: #B4BC98;
   }
+
+  .todo__form-input {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }

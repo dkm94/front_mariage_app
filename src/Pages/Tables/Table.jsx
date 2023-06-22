@@ -1,22 +1,25 @@
-import React from 'react';
-import { Button } from '@material-ui/core';
+import React from "react";
+import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import "./Tables.css";
-
+import BlackButton from "../../components/Buttons/Black/BlackButton";
 
 const Table = ({ table, getUpdatedId, guests }) => {
-  
- const filteredGuests = guests?.filter(guest => guest.tableID === table._id);
+  const filteredGuests = guests?.filter((guest) => guest.tableID === table._id);
 
   return (
-    <div className='home-cards render-tables'>
-        
-        <div className='div-table-name-span'>
-            <span className='table-name-span'>{table.name}</span>
-        </div>
-        <div style={{ marginBottom: "60px"}}>
-        {filteredGuests?.map(guest => <><span style={{ color: "#7c7676"}}>{guest.name}</span><br/></>)}
-        </div>
-        {/* <div className="custom-dropdown dots-menu">
+    <Grid2 xs={12} sm={4} md={3} className="home-cards render-tables">
+      <div className="div-table-name-span">
+        <span className="table-name-span">{table.name}</span>
+      </div>
+      <div style={{ marginBottom: "60px" }}>
+        {filteredGuests?.map((guest) => (
+          <>
+            <span style={{ color: "#7c7676" }}>{guest.name}</span>
+            <br />
+          </>
+        ))}
+      </div>
+      {/* <div className="custom-dropdown dots-menu">
             <Dropdown>
                 <Dropdown.Toggle as={CustomToggle} />
                 <Dropdown.Menu size="sm" title="">
@@ -27,11 +30,15 @@ const Table = ({ table, getUpdatedId, guests }) => {
                 </Dropdown.Menu>
             </Dropdown>
         </div> */}
-        <div className='dashbord-view-details' >
-            <Button onClick={() => getUpdatedId(table._id, table.name)} style={{ backgroundColor: "#efebe9" }} >Modifier</Button>
+      <div className="table-card__button-container">
+        <BlackButton
+          onClick={() => getUpdatedId(table._id, table.name)}
+          variant={"contained"}
+          text="Modifier"
+        />
       </div>
-    </div>
-  )
-}
+    </Grid2>
+  );
+};
 
-export default Table
+export default Table;

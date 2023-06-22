@@ -5,7 +5,7 @@
 //     Restaurant as RestaurantIcon,
 //     Euro as EuroIcon,
 //     FormatListBulleted as FormatListBulletedIcon
-// } from '@material-ui/icons/';
+// } from '@mui/icons-material/';
 import dashboardIcon from "../../../img/SidebareIcons/dashboard.png" 
 import guestsIcon from "../../../img/SidebareIcons/guests.png" 
 import tablesIcon from "../../../img/SidebareIcons/tables.png" 
@@ -20,28 +20,28 @@ export const NavigationData = [
         pathname: "/tableau-de-bord"
     },
     {
-        title: "invités",
+        title: "Invités",
         // icon: <PeopleAltIcon />,
         icon: guestsIcon,
         pathname: "/menu/invites"
     },
     {
-        title: "plan de table",
+        title: "Plan de table",
         icon: tablesIcon,
         pathname: "/menu/tables"
     },
     {
-        title: "tâches",
+        title: "Tâches",
         icon: todoIcon,
         pathname: "/menu/taches"
     },
     {
-        title: "réception",
+        title: "Réception",
         icon: menuIcon,
         pathname: "/menu/carte"
     },
     {
-        title: "dépenses",
+        title: "Dépenses",
         icon: expensesIcon,
         pathname: "/menu/budget"
     }

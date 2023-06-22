@@ -8,166 +8,192 @@ import { ScrollButtonContext } from "../../../src/App";
 import axios from "axios";
 
 import "./Tables.css";
+import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
+import { Box } from "@mui/material";
 
 const Tables = (props) => {
-   
-    const scrollBtn = useContext(ScrollButtonContext);
-    // const loader = useContext(LoaderContext);
+  const scrollBtn = useContext(ScrollButtonContext);
+  // const loader = useContext(LoaderContext);
 
-    const [searchValue, setSearchValue] = useState("");
-    const [tables, setTables] = useState([]);
-    const [table, setTable] = useState({})
-    const [edit, setEdit] = useState({
-        id: null,
-        name: ''
-    })
-    const [input, setInput] = useState('')
+  const [searchValue, setSearchValue] = useState("");
+  const [tables, setTables] = useState([]);
+  const [table, setTable] = useState({});
+  const [edit, setEdit] = useState({
+    id: null,
+    name: "",
+  });
+  const [input, setInput] = useState("");
 
-    const handleUpdatedTable = (e) => {
-        setInput(e.target.value)
+  const handleUpdatedTable = (e) => {
+    setInput(e.target.value);
+  };
+  const handleSearch = (e) => {
+    setSearchValue(e.target.value);
+  };
+  const [guests, setGuests] = useState([]);
+
+  useEffect(() => {
+    let guests = axios.get("/api/admin/guests/");
+    let tables = axios.get("/api/admin/tables/");
+
+    async function getDatas() {
+      let res = await Promise.all([guests, tables]);
+      setGuests(res[0].data);
+      setTables(res[1].data);
     }
-    const handleSearch = (e) => {
-        setSearchValue(e.target.value)
-    }
-    const [guests, setGuests] = useState([])
-   
-    useEffect(() => {
-        let guests = axios.get("/api/admin/guests/");
-        let tables = axios.get("/api/admin/tables/");
+    getDatas();
+  }, [table]);
 
-        async function getDatas(){
-            let res = await Promise.all([guests, tables])
-            setGuests(res[0].data)
-            setTables(res[1].data)
+  const addTable = (newTable) => {
+    setTable(newTable);
+    setTables([...tables, newTable]);
+  };
+
+  const getUpdatedId = (tableId, tableName) => {
+    setEdit({
+      id: tableId,
+      name: tableName,
+    });
+    setInput(tableName);
+  };
+
+  const editTableName = async (e) => {
+    e.preventDefault();
+    const updatedTableList = [...tables].map((table) => {
+      if (table._id === edit.id) {
+        table.name = input;
+      }
+      return table;
+    });
+    await axios
+      .post(`/api/admin/tables/edit/${edit.id}`, { name: input })
+      .then((res) => {
+        if (res.data != null) {
+          setTimeout(() => {
+            setTables(updatedTableList);
+            setEdit("");
+          }, 1500);
         }
-        getDatas();
-    }, [table])
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
+  const deleteGuest = async (guest, table) => {
+    await axios
+      .put(`/api/admin/guests/deletetable/${guest}`, { tableID: table })
+      .then((res) => {
+        if (res.data != null) {
+          setGuests(guests.filter((table) => table._id !== table));
+          window.location.reload(false);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-    const addTable = newTable => {
-        setTable(newTable)
-        setTables([...tables, newTable])
-    }
+  const deleteTable = async (e, tableId, guest) => {
+    e.preventDefault();
+    await axios
+      .delete(`/api/admin/tables/delete/${tableId}`)
+      .then((res) => {
+        if (res.data != null) {
+          // const updateList = tables.filter(table => table._id !== tableId)
+          // setTables(updateList)
+          window.location.reload();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-    const getUpdatedId = (tableId, tableName) => {
-        setEdit({
-            id: tableId,
-            name: tableName
-        })
-        setInput(tableName)
-    }
-
-    const editTableName = async (e) => {
-        e.preventDefault()
-        const updatedTableList = [...tables].map((table) => {
-            if(table._id === edit.id) {
-                table.name = input
-            }
-            return table
-        })
-        await axios.post(`/api/admin/tables/edit/${edit.id}`, {name: input})
-            .then((res) => {
-                if(res.data != null){
-                    setTimeout(() => {
-                        setTables(updatedTableList)
-                        setEdit('')
-                    }, 1500);
-                }
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }
-
-    const deleteGuest = async (guest, table) => {
-        await axios.put(`/api/admin/guests/deletetable/${guest}`, {tableID: table})
-            .then((res) => {
-                if(res.data != null){
-                    setGuests(guests.filter(table => table._id !== table))
-                    window.location.reload(false);
-                }
-            })
-            .catch((err) => {
-                console.log(err)})
-    }
-
-    const deleteTable = async (e, tableId, guest) => {
-       e.preventDefault();
-        await axios.delete(`/api/admin/tables/delete/${tableId}`)
-            .then(res => {
-                if(res.data != null) {
-                    // const updateList = tables.filter(table => table._id !== tableId)
-                    // setTables(updateList)
-                    window.location.reload();
-                }
-            })
-            .catch((err) => {
-                console.log(err)})
-    }
-
-    return(
-        <div className="tables page-component">
-            {scrollBtn}
-            <div className="page-location"><div><Link to={"/"} >Dashboard</Link>{'>'} Tables</div></div>
-            <div className="tables-container">
-                <div className="titles mb-3">
-                    <h2>Comment souhaitez-vous organiser votre plan de table ? </h2>
-                </div>
-            <div className="tables___bgimage"><div className="component-title"><h1>Les tables</h1></div></div>
-                <Container style={{ padding: "2rem 4rem"}} fluid>
-                    <Row>
-                        <Col xs={12} sm={10} md={6} className="table-form">
-                            <AddTableForm addTable={addTable} />
-                        </Col>
-                        <Col xs={12} sm={10} md={6} className="searchbar">
-                            <SearchBar 
-                            className="search__input"
-                            type="text"
-                            placeholder="Rechercher une table"
-                            name="searchbar"
-                            value={searchValue}
-                            onChange={handleSearch}
-                            />
-                        </Col>
-                    </Row>
-                </Container>
-                <div className="tables___list">
-                    {tables?.length === 0 || null ? 
-                        (<div className="block" style={tables ? {display: "none"} : null}><span>Vos tables ici.</span></div>) : 
-                        // loading === true ? loader :
-                        (<div className="tables__block">
-                            <ul className="get-tables">
-                                {tables
-                                .sort((a,b)=>{ return a.name > b.name ? 1 : - 1 })
-                                .filter((table) => {
-                                    return table.name.toLowerCase().indexOf(searchValue.toLowerCase()) >= 0;
-                                })
-                                .map((table) =>
-                                    <Table 
-                                    tables={tables}
-                                    table={table}
-                                    id={table._id}
-                                    key={table._id}
-                                    edit={edit}
-                                    editTableName={editTableName}
-                                    handleUpdatedTable={handleUpdatedTable}
-                                    input={input}
-                                    setTables={setTables}
-                                    guests={guests}
-                                    deleteGuest={deleteGuest}
-                                    setEdit={setEdit}
-                                    getUpdatedId={getUpdatedId}
-                                    deleteTable={deleteTable}
-                                    addTable={addTable}
-                                    />
-                                )}
-                            </ul>
-                        </div>)
-                    }
-                </div>
-            </div>
+  return (
+    <div className="tables page-component">
+      {scrollBtn}
+      <div className="page-location">
+        <div>
+          <Link to={"/"}>Dashboard</Link>
+          {">"} Tables
         </div>
-    )
-}
+      </div>
+      <div className="tables-container">
+        <div className="titles mb-3">
+          <h2>Comment souhaitez-vous organiser votre plan de table ? </h2>
+        </div>
+        <div className="tables___bgimage">
+          <div className="component-title">
+            <h1>Les tables</h1>
+          </div>
+        </div>
+        <Container style={{ padding: "2rem 4rem" }} fluid>
+          <Row>
+            <Col xs={12} sm={10} md={6} className="table-form">
+              <AddTableForm addTable={addTable} />
+            </Col>
+            <Col xs={12} sm={10} md={6} className="searchbar">
+              <SearchBar
+                className="search__input"
+                type="text"
+                placeholder="Rechercher une table"
+                name="searchbar"
+                value={searchValue}
+                onChange={handleSearch}
+              />
+            </Col>
+          </Row>
+        </Container>
+        <Box
+          sx={{
+            minHeight: "500px",
+          }}
+          className="tables-grid"
+        >
+          {tables?.length === 0 || null ? (
+            <div className="block" style={tables ? { display: "none" } : null}>
+              <span>Vos tables ici.</span>
+            </div>
+          ) : (
+            // loading === true ? loader :
+            <Grid2 container gap={3} justifyContent={"center"}>
+              {tables
+                .sort((a, b) => {
+                  return a.name > b.name ? 1 : -1;
+                })
+                .filter((table) => {
+                  return (
+                    table.name
+                      .toLowerCase()
+                      .indexOf(searchValue.toLowerCase()) >= 0
+                  );
+                })
+                .map((table) => (
+                  <Table
+                    tables={tables}
+                    table={table}
+                    id={table._id}
+                    key={table._id}
+                    edit={edit}
+                    editTableName={editTableName}
+                    handleUpdatedTable={handleUpdatedTable}
+                    input={input}
+                    setTables={setTables}
+                    guests={guests}
+                    deleteGuest={deleteGuest}
+                    setEdit={setEdit}
+                    getUpdatedId={getUpdatedId}
+                    deleteTable={deleteTable}
+                    addTable={addTable}
+                  />
+                ))}
+            </Grid2>
+          )}
+        </Box>
+      </div>
+    </div>
+  );
+};
 
 export default withRouter(Tables);

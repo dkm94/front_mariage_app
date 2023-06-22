@@ -2,6 +2,9 @@
 .tables-container {
     /* padding-bottom: 100px; */
 }
+.tables {
+    padding-bottom: 100px;
+}
 
 .tables___bgimage {
     height: 20rem;
@@ -11,15 +14,6 @@
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
-    border-radius: 7px;
-    margin: 3rem;
-}
-
-.tables___list {
-    width: 100%;
-    padding-top: 5rem;
-    min-height: 500px;
-    padding: 2rem 4rem;
 }
 
 .tables-form > form > label {
@@ -42,18 +36,6 @@
 
 .tables-form > form > input {
     border: 1px solid lightgray;
-}
-
-.get-tables {
-    display: grid;
-    justify-content: center;
-    /* grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr)); */
-    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-    grid-gap: 2rem;
-    padding: 1rem;
-    list-style: none;
-    width: 100%;
-    box-sizing: border-box;
 }
 
 .tables___block {
@@ -286,20 +268,22 @@
 .render-tables {
     position: relative;
     padding: 3rem 1rem !important;
-    min-height: 100px !important;
+    height: auto !important;
+    min-height: 25rem;
 }
 
 .table-name-span {
-    font-size: 1.5rem;
+    font-size: 3rem;
     text-align: center;
     line-height: 23px;
     margin-bottom: 2rem;
-    text-transform: uppercase;
+    font-family: 'Corinthia', cursive;
 }
 
 .div-table-name-span {
     min-height: 80px;
     text-align: center;
+    word-break: break-word;
 }
 
 #table-form-style {
@@ -317,16 +301,28 @@
 }
 
 
+
+.table-card__button-container {
+    position: absolute;
+    bottom: 30px;
+}
+
+.table-card__button-container > button {
+    text-transform: unset;
+    background-color: #262626;
+    color: #fff;
+    font-family: unset;
+    border-radius: 36px;
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
 @media (max-width: 1299px) {
-    .get-tables {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    }
+
 }
 
 @media (max-width: 1099px) {
-    .tables___list {
-        padding: 5rem 2rem;
-    }
+ 
 }
 
 @media (max-width: 1024px) {
@@ -353,19 +349,14 @@
  }
 
  @media (max-width: 576px) { 
-    .get-tables {
-        
+    .tables-grid {
+        padding-left: 2rem;
+        padding-right: 2rem;
     }
  }
 
  @media (max-width: 414px) { 
-    .get-tables {
-        padding: 50px;
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .tables___list {
-        padding: 0rem 2rem;
-    }
+
  }
 
  

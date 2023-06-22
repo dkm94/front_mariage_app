@@ -1,6 +1,6 @@
 import React from "react";
-import Alert from '@material-ui/lab/Alert';
-import AlertTitle from '@material-ui/lab/AlertTitle';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 import "./Error.css";
 
 const ErrorAlert = ({ showError, title, description }) => {

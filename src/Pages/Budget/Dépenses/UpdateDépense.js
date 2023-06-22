@@ -1,74 +1,127 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { TextField } from "@mui/material";
+import React, { useState, useEffect, useRef } from "react";
+import ClearButton from "../../../components/Buttons/Clear/ClearButton";
+import BlackButton from "../../../components/Buttons/Black/BlackButton";
 
 const UpdateExpense = ({ edit, setEdit, onSubmit }) => {
+  const [input, setInput] = useState(edit ? edit : "");
 
-    const [input, setInput] = useState(edit ? edit.obj : '')
-    // const editedPrice = input.price/100;
-    // const fixedPrice = editedPrice.toFixed(2);
+  const inputRef = useRef(null);
 
-    const inputRef = useRef(null);
+  useEffect(() => {
+    inputRef?.current?.focus();
+  });
 
-    useEffect(() => {
-        inputRef.current.focus();
-    });
-
-    const handleChange = (e) => {
-        const {value, name} = e.target;
-        setInput(prevState => ({
-            ...prevState,
-            [name]: value
-        }))
+  const handleChange = (e) => {
+    const { value, name } = e.target;
+    if (name === "price") {
+      setInput((prevState) => ({
+        ...prevState,
+        [name]: parseFloat(value),
+      }));
+    } else {
+      setInput((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
     }
+  };
 
-    const handleSubmit = e => {
-        e.preventDefault();
-        onSubmit({
-            id: edit.id,
-            expense: input
-        });
-        setInput({
-            title: '',
-            description: '',
-            price: ''
-        });
-    };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit({
+      id: edit.id,
+      expense: input,
+    });
+    setInput({
+      description: "",
+      price: "",
+    });
+  };
 
-    return (
-        <div className="events-list___inputs">
-            <form onSubmit={handleSubmit} className='todo-form'>
-                {edit ?
-                    <>
-                        <input 
-                        type="text"
-                        name="title"
-                        onChange={handleChange}  
-                        value={input.title}
-                        ref={inputRef} />
+  console.log(setEdit);
 
-                        <input 
-                        type="text" 
-                        name="description"
-                        onChange={handleChange} 
-                        value={input.description}
-                        ref={inputRef} />
+  return (
+    <div className="events-list___inputs">
+      <form onSubmit={handleSubmit} className="expense-update-form">
+        {edit ? (
+          <>
+            <div className="budget___select">
+              <select
+                name="category"
+                value={input.category}
+                onChange={handleChange}
+              >
+                <option value="" label="Sélectionnez une catégorie"></option>
+                <option value="Locations" label="Locations"></option>
+                <option
+                  value="Habillement/Beauté"
+                  label="Habillement/Beauté"
+                ></option>
+                <option
+                  value="Décoration/Fleurs"
+                  label="Décoration/Fleurs"
+                ></option>
+                <option
+                  value="Alliances/Bijoux"
+                  label="Alliances/Bijoux"
+                ></option>
+                <option
+                  value="Animation"
+                  label="Animation (DJ, Photographe...)"
+                ></option>
+                <option value="Traiteur" label="Traiteur"></option>
+                <option value="Faire-part" label="Faire-part"></option>
+                <option value="Autres" label="Autres"></option>
+              </select>
+            </div>
+            <TextField
+              size="small"
+              type="text"
+              name="description"
+              onChange={handleChange}
+              value={input.description}
+              ref={inputRef}
+              style={{ background: "#fff" }}
+            />
 
-                        <input 
-                        type="text"
-                        name="price"
-                        onChange={handleChange} 
-                        value={input.price}
-                        ref={inputRef}
-                         />
+            <TextField
+              size="small"
+              name="price"
+              type="number"
+              onChange={handleChange}
+              value={input.price}
+              ref={inputRef}
+              style={{ background: "#fff" }}
+            />
 
-                        <button onClick={handleSubmit}>
-                            <i className="fas fa-check"/>
-                        </button>
-                        <button onClick={() => setEdit({id: null})}><i className="fas fa-undo"></i></button>
-                    </>
-                : null }
-            </form>
-        </div>
-    )
-}
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                padding: " 0.5rem 1.5rem",
+                marginTop: "1rem",
+                marginBottom: "0.5rem",
+              }}
+            >
+              <ClearButton
+                text={"Annuler"}
+                variant={"contained"}
+                style={{ borderRadius: "36px" }}
+                onClick={() => setEdit({ id: null })}
+              />
+              <BlackButton
+                text={"Valider"}
+                variant={"contained"}
+                onClick={handleSubmit}
+              />
+            </div>
+          </>
+        ) : null}
+      </form>
+    </div>
+  );
+};
 
 export default UpdateExpense;
