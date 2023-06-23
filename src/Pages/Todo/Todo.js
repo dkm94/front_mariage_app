@@ -155,7 +155,7 @@ const Todo = () => {
               </Row>
             </Container>
 
-            <Row>
+            <Row style={{ marginRight: 0 }}>
               <Container maxWidth="sm" style={{ maxWidth: "700px" }}>
                 <div className="tasks__list">
                   <Grid2
