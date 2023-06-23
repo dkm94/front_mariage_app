@@ -5,32 +5,32 @@ import { BrowserRouter as Router } from "react-router-dom";
 import TopNav from "../src/components/Header/Top-Navbar";
 import LoggedOutNavigation from "../src/components/Header/Navigation/Log_out";
 import Sidebar from "./components/Header/Navigation/Sidebar";
+import VerticalNavbar from "./components/Header/Navigation/Responsive/VerticalNavbar/VerticalNavbar";
 
 const Layout = ({ children }) => {
+  const token = localStorage.getItem("token");
 
-    const token = localStorage.getItem("token");
+  let user;
+  if (token) {
+    user = decode(token);
+  }
 
-    let user;
-    if(token){
-        user = decode(token)
-    }
+  axios.defaults.baseURL = "https://my-wedding-backend.onrender.com/";
+  // axios.defaults.baseURL = 'http://localhost:3050';
+  axios.defaults.headers.common["Authorization"] = "Bearer " + token;
 
-    axios.defaults.baseURL = 'https://my-wedding-backend.onrender.com/';
-    // axios.defaults.baseURL = 'http://localhost:3050';
-    axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
-    
-        return(
-        <Router>
-            <div className="navigation-layout">
-                {token ? <TopNav userInfos={user}/> : <LoggedOutNavigation />}
-                <div className={token ? "body-content" : "body-content___home"}>
-                    {token ? <Sidebar userInfos={user}/> : null}
-                    {children}
-                </div>
-            </div>
-        </Router>
-    )
-}
-
+  return (
+    <Router>
+      <div className="navigation-layout">
+        {token ? <TopNav userInfos={user} /> : <LoggedOutNavigation />}
+        <div className={token ? "body-content" : "body-content___home"}>
+          {token && <Sidebar userInfos={user} />}
+          {token && <VerticalNavbar userInfos={user} />}
+          {children}
+        </div>
+      </div>
+    </Router>
+  );
+};
 
 export default Layout;

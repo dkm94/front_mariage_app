@@ -62,7 +62,14 @@ const Guests = ({
           <span>Vos invités ici.</span>
         </div>
       ) : (
-        <Box sx={{ minHeight: "500px" }}>
+        <Box
+          className="guest-container"
+          sx={{
+            minHeight: "500px",
+            paddingLeft: "50px",
+            paddingRight: "50px",
+          }}
+        >
           <Grid2 container gap={3} justifyContent={"center"}>
             {guests
               //searchbar filter
@@ -88,12 +95,12 @@ const Guests = ({
               .map((guest) => {
                 return (
                   <Grid2
-                    xs={12}
-                    sm={4}
-                    md={3}
-                    //   lg={6}
-                    //   xl={6}
+                    // xs={12}
+                    // sm={4}
+                    // md={3}
                     key={guest._id}
+                    maxWidth={"300px"}
+                    minWidth={"250px"}
                     className={`fade-in guest-card-style`}
                   >
                     {edit.id === guest._id && (

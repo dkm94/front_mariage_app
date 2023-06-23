@@ -130,14 +130,18 @@
         display: flex;
         justify-content: center;
     }
-    .guests___list {
-        padding: 5rem 0rem;
-    }
 
     .guest-picture > img {
         width: 8rem;
         height: 8rem;
     }    
+}
+
+@media (max-width: 788px) {
+.guest-container {
+    
+}
+      
 }
 
 @media (max-width: 768px) {

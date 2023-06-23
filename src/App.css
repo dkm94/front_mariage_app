@@ -338,10 +338,7 @@ a:-webkit-any-link {
 }
 
 @media only screen and (max-width : 1150px) {
-    .App-home {
-        width: 75%;
-        left: 25%;
-    }
+
     }
 
 @media only screen and (max-device-width : 1024px) {
@@ -357,13 +354,20 @@ a:-webkit-any-link {
     }
 }
 
+@media (max-width: 905px) { 
+    .body-content > .sidebar {
+        display: none;
+    }
+    
+}
+
 @media (max-width: 768px) { 
     h2 {
         font-size: 2rem;
     }
-    .body-content > .sidebar {
+    /* .body-content > .sidebar {
         display: none;
-    }
+    } */
     .App-home {
         position: unset;
         width: 100%;

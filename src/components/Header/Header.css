@@ -232,13 +232,9 @@
     display: block;
 }
 
-#mobile-logo {
-    display: none;
-}
-
 @media only screen and (max-width : 1150px) {
     .sidebar {
-        width: fit-content;
+        /* width: fit-content; */
         max-width: unset;
     }
     }
@@ -394,13 +390,6 @@
         width: 100vw;
     }
     .mywedding-nav > span {
-        display: none;
-    }
-    #mobile-logo {
-        display: block;
-        height: 100%;
-    }
-    #logo {
         display: none;
     }
 }
