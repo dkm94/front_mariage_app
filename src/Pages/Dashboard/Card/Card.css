@@ -5,7 +5,8 @@
 }
 
 #dashboard-cards {
-    width: 20rem;
+    width: auto;
+    max-width: 300px;
     position: relative;
     padding-right: 2rem;
     padding-left: 2rem;
@@ -82,16 +83,13 @@
 }
 
 @media only screen and (max-width : 1218px) {
-    #dashboard-cards {
-        width: 15rem;
-    }
     .dashboard-cards {
         padding: 3rem 2rem !important;
     }
 }
 
 @media (max-width: 991.98px) { 
-    #dashboard-cards {
+    /* #dashboard-cards {
         width: 100%;
-    }
+    } */
 }

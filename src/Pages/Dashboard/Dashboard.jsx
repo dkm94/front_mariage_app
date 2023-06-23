@@ -113,7 +113,7 @@ const Dashboard = (props) => {
           <Grow in={!loading} timeout={2000}>
             <div className="dashboard-cards__style">
               <Container>
-                <Row className="mid-device-width">
+                <Row>
                   <Card
                     title={"Invités"}
                     content={guests?.length}
