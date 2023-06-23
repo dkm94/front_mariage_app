@@ -166,27 +166,29 @@ const Budget = () => {
               <div className="budget___bgimage"></div>
             </Grow>
 
-            <Container style={{ padding: "2rem 4rem" }} fluid>
-              <Row>
-                <Col xs={12} sm={10} md={6} />
-                <Col xs={12} sm={10} md={6}>
-                  <div className="budget___search">
-                    <div style={{ width: "100%" }}>
-                      <SearchBar
-                        className="search__input"
-                        type="text"
-                        placeholder="Rechercher une dépense"
-                        name="searchbar"
-                        value={searchValue}
-                        onChange={handleSearch}
-                      />
-                    </div>
-                  </div>
-                </Col>
-              </Row>
-            </Container>
-
             <Grow in={!loading} timeout={2000}>
+              <Container style={{ padding: "2rem 4rem" }} fluid>
+                <Row>
+                  <Col xs={12} sm={10} md={6} />
+                  <Col xs={12} sm={10} md={6}>
+                    <div className="budget___search">
+                      <div style={{ width: "100%" }}>
+                        <SearchBar
+                          className="search__input"
+                          type="text"
+                          placeholder="Rechercher une dépense"
+                          name="searchbar"
+                          value={searchValue}
+                          onChange={handleSearch}
+                        />
+                      </div>
+                    </div>
+                  </Col>
+                </Row>
+              </Container>
+            </Grow>
+
+            <Grow in={!loading} timeout={3000}>
               <div className="budget-cols">
                 <div className="budget___col-1">
                   <div className="col card-expense-component">

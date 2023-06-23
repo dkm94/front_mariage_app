@@ -49,7 +49,8 @@
 
 .budget-cols {
     width: 100%;
-    padding: 3rem 10rem;
+    padding-left: 10rem;
+    padding-right: 10rem;
     min-height: 500px;
 }
 
@@ -118,7 +119,6 @@
 .budget___col-1 {
     display: flex;
     flex-direction: row;
-    margin-top: 4rem;
 }
 
 .budget___col-1 > .chart-component{
