@@ -50,7 +50,7 @@ const AddGuestForm = ({ addGuest }) => {
       <GreyButton
         variant={"contained"}
         type="submit"
-        text={loading ? "..." : "Ajouter"}
+        text={loading ? "..." : "Créer"}
         style={{ marginLeft: "1rem" }}
       />
     </form>

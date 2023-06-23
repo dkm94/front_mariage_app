@@ -10,6 +10,7 @@ import "./Todo.css";
 import axios from "axios";
 import { Select, MenuItem, Container, Divider } from "@mui/material";
 import ScreenLoader from "../../components/Loader/Screen/ScreenLoader";
+import Grow from "@mui/material/Grow";
 
 const Todo = () => {
   const scrollBtn = useContext(ScrollButtonContext);
@@ -65,32 +66,41 @@ const Todo = () => {
                 {">"} Tâches
               </div>
             </div>
-            <div className="titles mb-3">
-              <h2>Souhaitez-vous ajouter de nouvelles tâches ?</h2>
-            </div>
-            <div className="todo___bgimage"></div>
-            <Container style={{ padding: "2rem 4rem" }} fluid>
-              <Row>
-                <AddForm
-                  // todos={todos}
-                  // setTodos={setTodos}
-                  // todo={todo}
-                  // setTodo={setTodo}
-                  addTodo={addTodo}
-                  // handleInput={handleInput}
-                />
-                <Col xs={12} sm={10} md={6} className="searchbar">
-                  <SearchBar
-                    className="search__input"
-                    type="text"
-                    placeholder="Rechercher une tâche"
-                    name="searchbar"
-                    value={searchValue}
-                    onChange={handleSearch}
+
+            <Grow in={!loading}>
+              <div className="titles mb-3">
+                <h2>Souhaitez-vous ajouter de nouvelles tâches ?</h2>
+              </div>
+            </Grow>
+
+            <Grow in={!loading} timeout={1000}>
+              <div className="todo___bgimage"></div>
+            </Grow>
+
+            <Grow in={!loading} timeout={2000}>
+              <Container style={{ padding: "2rem 4rem" }} fluid>
+                <Row>
+                  <AddForm
+                    // todos={todos}
+                    // setTodos={setTodos}
+                    // todo={todo}
+                    // setTodo={setTodo}
+                    addTodo={addTodo}
+                    // handleInput={handleInput}
                   />
-                </Col>
-              </Row>
-            </Container>
+                  <Col xs={12} sm={10} md={6} className="searchbar">
+                    <SearchBar
+                      className="search__input"
+                      type="text"
+                      placeholder="Rechercher une tâche"
+                      name="searchbar"
+                      value={searchValue}
+                      onChange={handleSearch}
+                    />
+                  </Col>
+                </Row>
+              </Container>
+            </Grow>
             {/* <Container style={{ padding: "0 4rem" }} fluid>
           <Row
             style={{
@@ -121,100 +131,106 @@ const Todo = () => {
             />
           </Row>
         </Container> */}
-            <Container style={{ padding: "0 4rem" }} fluid>
-              <Row
-                style={{
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  marginTop: "2rem",
-                }}
-              >
-                {todos && (
-                  <Col md={6}>
-                    <span style={{ fontSize: "1.3rem" }}>
-                      Tâches complétées {completedTasks}/{todos?.length}
-                    </span>
-                  </Col>
-                )}
-                <Col
-                  md={6}
-                  style={{ display: "flex", justifyContent: "flex-end" }}
+            <Grow in={!loading} timeout={3000}>
+              <Container style={{ padding: "0 4rem" }} fluid>
+                <Row
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    marginTop: "2rem",
+                  }}
                 >
-                  <Select
-                    size="small"
-                    defaultValue={10}
-                    className="select-tasks"
-                    value={selected}
-                    onChange={(e) => setSelected(e.target.value)}
+                  {todos && (
+                    <Col md={6}>
+                      <span style={{ fontSize: "1.3rem" }}>
+                        Tâches complétées {completedTasks}/{todos?.length}
+                      </span>
+                    </Col>
+                  )}
+                  <Col
+                    md={6}
+                    style={{ display: "flex", justifyContent: "flex-end" }}
                   >
-                    <MenuItem value={"all"}>Tout afficher</MenuItem>
-                    <MenuItem value={"done"}>Tâches terminées</MenuItem>
-                    <MenuItem value={"incomplete"}>Tâches à faire</MenuItem>
-                  </Select>
-                </Col>
-              </Row>
-            </Container>
-
-            <Row style={{ marginRight: 0 }}>
-              <Container maxWidth="sm" style={{ maxWidth: "700px" }}>
-                <div className="tasks__list">
-                  <Grid2
-                    container
-                    gap={1}
-                    display={"flex"}
-                    flexDirection={"column"}
-                    justifyContent={"center"}
-                    width={"100%"}
-                  >
-                    <div
-                      style={{
-                        padding: "3rem",
-                        paddingBottom: "2rem",
-                        width: "100%",
-                      }}
+                    <Select
+                      size="small"
+                      defaultValue={10}
+                      className="select-tasks"
+                      value={selected}
+                      onChange={(e) => setSelected(e.target.value)}
                     >
-                      <span style={{ fontSize: "2rem" }}>Liste des tâches</span>
-                    </div>
-                    <Divider
-                      style={{
-                        borderColor: "grey",
-                        marginLeft: "3rem",
-                        width: "85%",
-                      }}
-                    />
-                    {todos
-                      .filter((todo) => {
-                        return (
-                          todo.text
-                            .toLowerCase()
-                            .indexOf(searchValue.toLowerCase()) >= 0
-                        );
-                      })
-                      .reverse()
-                      .filter((task) => {
-                        if (selected === "done") {
-                          return task.isCompleted;
-                        } else if (selected === "incomplete") {
-                          return !task.isCompleted;
-                        } else {
-                          return task;
-                        }
-                      })
-                      .map((todo, i) => (
-                        <List
-                          todos={todos}
-                          obj={todo}
-                          i={i}
-                          setTodos={setTodos}
-                          deleteTodo={deleteTodo}
-                          searchValue={searchValue}
-                          setSearchValue={setSearchValue}
-                        />
-                      ))}
-                  </Grid2>
-                </div>
+                      <MenuItem value={"all"}>Tout afficher</MenuItem>
+                      <MenuItem value={"done"}>Tâches terminées</MenuItem>
+                      <MenuItem value={"incomplete"}>Tâches à faire</MenuItem>
+                    </Select>
+                  </Col>
+                </Row>
               </Container>
-            </Row>
+            </Grow>
+
+            <Grow in={!loading} timeout={4000}>
+              <Row style={{ marginRight: 0 }}>
+                <Container maxWidth="sm" style={{ maxWidth: "700px" }}>
+                  <div className="tasks__list">
+                    <Grid2
+                      container
+                      gap={1}
+                      display={"flex"}
+                      flexDirection={"column"}
+                      justifyContent={"center"}
+                      width={"100%"}
+                    >
+                      <div
+                        style={{
+                          padding: "3rem",
+                          paddingBottom: "2rem",
+                          width: "100%",
+                        }}
+                      >
+                        <span style={{ fontSize: "2rem" }}>
+                          Liste des tâches
+                        </span>
+                      </div>
+                      <Divider
+                        style={{
+                          borderColor: "grey",
+                          marginLeft: "3rem",
+                          width: "85%",
+                        }}
+                      />
+                      {todos
+                        .filter((todo) => {
+                          return (
+                            todo.text
+                              .toLowerCase()
+                              .indexOf(searchValue.toLowerCase()) >= 0
+                          );
+                        })
+                        .reverse()
+                        .filter((task) => {
+                          if (selected === "done") {
+                            return task.isCompleted;
+                          } else if (selected === "incomplete") {
+                            return !task.isCompleted;
+                          } else {
+                            return task;
+                          }
+                        })
+                        .map((todo, i) => (
+                          <List
+                            todos={todos}
+                            obj={todo}
+                            i={i}
+                            setTodos={setTodos}
+                            deleteTodo={deleteTodo}
+                            searchValue={searchValue}
+                            setSearchValue={setSearchValue}
+                          />
+                        ))}
+                    </Grid2>
+                  </div>
+                </Container>
+              </Row>
+            </Grow>
           </div>
         </div>
       )}

@@ -58,9 +58,7 @@
     display: flex;
     justify-content: flex-end;
 }
-.budget___search > div {
-    width: 50%;
-}
+
 .budget___col-2 {
     display: flex;
 }
