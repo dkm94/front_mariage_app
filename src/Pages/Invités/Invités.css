@@ -27,7 +27,7 @@
 .guest-form > form > div {
     display: flex;
     border: 1px solid lightgrey;
-    border-radius: 10px !important;
+    border-radius: 5px !important;
 }
 
 /* 

@@ -152,13 +152,23 @@ const Todo = () => {
                     style={{ display: "flex", justifyContent: "flex-end" }}
                   >
                     <Select
+                      style={{
+                        fontFamily: "Playfair Display, serif !important",
+                      }}
                       size="small"
                       defaultValue={10}
                       className="select-tasks"
                       value={selected}
                       onChange={(e) => setSelected(e.target.value)}
                     >
-                      <MenuItem value={"all"}>Tout afficher</MenuItem>
+                      <MenuItem
+                        style={{
+                          fontFamily: "Playfair Display, serif !important",
+                        }}
+                        value={"all"}
+                      >
+                        Tout afficher
+                      </MenuItem>
                       <MenuItem value={"done"}>Tâches terminées</MenuItem>
                       <MenuItem value={"incomplete"}>Tâches à faire</MenuItem>
                     </Select>

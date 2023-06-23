@@ -103,6 +103,11 @@
 .select-tasks {
   padding-left: 15px;
   padding-right: 15px;
+  font-family: Playfair Display, serif !important;
+}
+
+.MuiButtonBase-root {
+  font-family: Playfair Display, serif !important;
 }
 
 .tasks__list {
