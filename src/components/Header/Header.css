@@ -235,11 +235,11 @@
 @media only screen and (max-width : 1150px) {
     .sidebar {
         /* width: fit-content; */
-        max-width: unset;
+        /* max-width: unset; */
     }
     }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 600px) {
     .hidden-links {
         display: block;
     }

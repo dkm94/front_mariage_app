@@ -157,6 +157,7 @@ button:focus {
 .titles {
     /* text-shadow: 1px 1px 1px rgba(238, 235, 235, 0.85); */
     padding-left: 3rem;
+    padding-right: 3rem;
     background-color: #323535;
     display: flex;
     align-items: center;
@@ -342,10 +343,10 @@ a:-webkit-any-link {
     }
 
 @media only screen and (max-device-width : 1024px) {
-    .App-home > .content {
+    /* .App-home > .content {
         padding: 0;
-        margin-bottom: 16rem;
-    }
+        margin-bottom: 5rem;
+    } */
     .byguests, .budget, .dashboard, .dashboard___elements, .menu-container > .menu {
         padding-bottom: 0;
     }
@@ -354,8 +355,8 @@ a:-webkit-any-link {
     }
 }
 
-@media (max-width: 905px) { 
-    .body-content > .sidebar {
+@media (max-width: 954px) { 
+    .sidebar {
         display: none;
     }
     
@@ -363,19 +364,8 @@ a:-webkit-any-link {
 
 @media (max-width: 768px) { 
     h2 {
-        font-size: 2rem;
-    }
-    /* .body-content > .sidebar {
-        display: none;
-    } */
-    .App-home {
-        position: unset;
-        width: 100%;
-        min-height: 92vh;
-    }
-
-    #component-dashboard {
-        display: block;
+        /* font-size: 2rem; */
+        text-wrap: balance;
     }
  }
 
@@ -408,9 +398,6 @@ a:-webkit-any-link {
  @media (max-width: 576px) {
     .component-title {
         display: block;
-    }
-    .navigation-layout > nav {
-        /* box-shadow: none; */
     }
  }
 

@@ -30,7 +30,7 @@ const VerticalNavbar = (props) => {
   }, [id]);
 
   return (
-    <div
+    <nav
       className={
         isExpanded
           ? "side-nav-container"
@@ -84,7 +84,7 @@ const VerticalNavbar = (props) => {
           ))}
         </div>
       </div>
-    </div>
+    </nav>
   );
 };
 
