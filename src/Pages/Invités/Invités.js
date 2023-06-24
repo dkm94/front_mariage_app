@@ -87,7 +87,7 @@ const Byguests = ({ userInfos }) => {
       .then((result) => {
         if (result.data != null) {
           setFile(null);
-          window.location.reload();
+          // window.location.reload();
         }
       })
       .catch((err) => {

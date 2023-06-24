@@ -1,8 +1,22 @@
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import { Button } from "@mui/material";
+import BlackButton from "../../../../Buttons/Black/BlackButton";
+import checkIcon from "../../../../../img/green-check.png";
 
-const UpdateGuest = ({ edit, setEdit, onSubmit, mariageID, guestFamily }) => {
+const UpdateGuest = ({
+  edit,
+  setEdit,
+  onSubmit,
+  mariageID,
+  guestFamily,
+  uploadImg,
+  handleFileInput,
+  seteditPicture,
+  guestId,
+  upload,
+  uploadedFile,
+}) => {
   const [family, setFamily] = useState({
     firstPerson: "",
     secondPerson: "",
@@ -51,6 +65,7 @@ const UpdateGuest = ({ edit, setEdit, onSubmit, mariageID, guestFamily }) => {
           family: radioValue,
         })
         .then((res) => {
+          upload(guestId);
           onSubmit(res.data);
         })
         .catch((err) => {
@@ -65,6 +80,40 @@ const UpdateGuest = ({ edit, setEdit, onSubmit, mariageID, guestFamily }) => {
     <>
       <div className="nameField guest__updateForm" id="input___nameField">
         <form onSubmit={handleSubmit} id="update-form">
+          <div id="upload-avatar">
+            {uploadedFile ? (
+              <img
+                alt="icone vérification"
+                src={checkIcon}
+                style={{ height: "4rem", width: "fit-content" }}
+              />
+            ) : (
+              <label
+                for="file-input"
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  cursor: "pointer",
+                }}
+              >
+                <img
+                  alt="telecharger avatar"
+                  src={uploadImg}
+                  style={{ height: "4rem", width: "fit-content" }}
+                />
+                <span>Télécharger une photo</span>
+              </label>
+            )}
+            <input
+              id="file-input"
+              type="file"
+              name="media"
+              onChange={handleFileInput}
+              style={{ display: "none" }}
+              onClick={() => seteditPicture(guestId)}
+            />
+          </div>
           <input
             type="text"
             name="name"
@@ -101,11 +150,14 @@ const UpdateGuest = ({ edit, setEdit, onSubmit, mariageID, guestFamily }) => {
                         <i className="fas fa-check"/>
                     </button> */}
           <div className="guest-card__form__button-container">
+            <BlackButton
+              text={"Valider"}
+              onClick={handleSubmit}
+              variant="contained"
+            />
+
             <Button onClick={() => setEdit({ id: null })} variant="outline">
               Annuler
-            </Button>
-            <Button onClick={handleSubmit} variant="outline">
-              Valider
             </Button>
           </div>
         </form>
