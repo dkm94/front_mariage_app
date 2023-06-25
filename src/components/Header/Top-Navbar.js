@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../img/logo-2023-no-shadow.png";
-import MobileLogo from "../../img/mobile-logo.png";
+// import MobileLogo from "../../img/mobile-logo.png";
 
 const TopNav = () => {
   const LogOut = async () => {
@@ -25,7 +25,6 @@ const TopNav = () => {
         }}
       >
         <img alt="logo" src={Logo} id="logo" />
-        <img alt="mobile-logo" src={MobileLogo} id="mobile-logo" />
       </div>
       <ul className="navbar__links">
         <li className="navbar__item hidden-links slideDown-1">

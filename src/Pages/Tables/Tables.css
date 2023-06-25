@@ -82,7 +82,7 @@
     width: 100%;
     display: flex;
     padding: 0 0.5rem;
-    border-radius: 10px;
+    border-radius: 5px;
     background: #FFFFFF;
     padding: .375rem .375rem .375rem .75rem;
     justify-content: space-around;
@@ -270,6 +270,7 @@
     padding: 3rem 1rem !important;
     height: auto !important;
     min-height: 25rem;
+    background-color: #f9f9f9;
 }
 
 .table-name-span {

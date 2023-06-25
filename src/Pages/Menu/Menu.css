@@ -81,11 +81,12 @@ ul {
 }
 
 .starter, .maincourse, .dessert {
-    background-color: #FAF8F4;
+    background-color: #f9f9f9;
 }
 
 .menu___forms input {
     width: 100%;
+    padding: 0.3rem 0.7rem;
 }
 
 .menu___forms > form > div > button {

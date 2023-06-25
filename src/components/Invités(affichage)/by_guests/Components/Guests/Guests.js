@@ -5,6 +5,8 @@ import avatar from "../../../../../img/avatar.jpg";
 import { Box } from "@material-ui/core";
 import BlackButton from "../../../../Buttons/Black/BlackButton";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2"; // import { CSSTransition, TransitionGroup, Transition } from "react-transition-group";
+import SmallGuestCard from "../Cards/Small/SmallGuestCard";
+import uploadImg from "../../../../../img/upload-icon-20624.png";
 // import { Box, Fade, Grow } from '@material-ui/core';
 
 const Guests = ({
@@ -27,6 +29,7 @@ const Guests = ({
     id: null,
     name: "",
   });
+  const [uploadedFile, setUploadedFile] = useState(null);
 
   const [selected, setSelected] = useState("tous");
   // const [deleteId, setDeleteId] = useState("")
@@ -34,6 +37,7 @@ const Guests = ({
 
   const handleFileInput = (e) => {
     const fileValue = e.target.files[0];
+    setUploadedFile(fileValue);
     handleFile(fileValue);
   };
 
@@ -62,7 +66,14 @@ const Guests = ({
           <span>Vos invités ici.</span>
         </div>
       ) : (
-        <Box sx={{ minHeight: "500px" }}>
+        <Box
+          className="guest-container"
+          sx={{
+            minHeight: "500px",
+            paddingLeft: "50px",
+            paddingRight: "50px",
+          }}
+        >
           <Grid2 container gap={3} justifyContent={"center"}>
             {guests
               //searchbar filter
@@ -91,9 +102,10 @@ const Guests = ({
                     xs={12}
                     sm={4}
                     md={3}
-                    //   lg={6}
-                    //   xl={6}
                     key={guest._id}
+                    maxWidth={"300px"}
+                    // width={"20rem"}
+                    minWidth={"250px"}
                     className={`fade-in guest-card-style`}
                   >
                     {edit.id === guest._id && (
@@ -127,26 +139,18 @@ const Guests = ({
                                         </div> */}
                     <div className="div-guest___container">
                       <div className="guest-picture center-x">
-                        {guest.media === "" ? (
-                          <img alt="avatar" src={avatar} />
-                        ) : (
-                          <img
-                            alt="notre mariage"
-                            src={`https://my-wedding-backend.onrender.com/api/admin/guests/media/${guest.media}`}
-                          />
+                        {edit.id === guest._id ? null : (
+                          <>
+                            {guest.media === "" ? (
+                              <img alt="avatar" src={avatar} />
+                            ) : (
+                              <img
+                                alt="notre mariage"
+                                src={`https://my-wedding-backend.onrender.com/api/admin/guests/media/${guest.media}`}
+                              />
+                            )}
+                          </>
                         )}
-                        {edit.id === guest._id ? (
-                          <div>
-                            <button
-                              onClick={() => {
-                                setisOpen(!isOpen);
-                                seteditPicture(guest._id);
-                              }}
-                            >
-                              <i className="fas fa-camera" />
-                            </button>
-                          </div>
-                        ) : null}
                       </div>
 
                       {edit.id === guest._id ? (
@@ -158,18 +162,31 @@ const Guests = ({
                             mariageID={mariageID}
                             guestId={guest._id}
                             guestFamily={guest.family}
+                            uploadImg={uploadImg}
+                            handleFileInput={handleFileInput}
+                            seteditPicture={seteditPicture}
+                            upload={upload}
+                            uploadedFile={uploadedFile}
                           />
                         </>
                       ) : (
-                        <div className="nameField">
-                          <span id="guest-name">{guest.name}</span>
-                          <div className="guest-card__namefield-container">
-                            Table -
-                            {guest.family === "1" ? (
-                              <span className="guest-family">{`Invité(e) de ${firstPerson}`}</span>
-                            ) : guest.family === "2" ? (
-                              <span className="guest-family">{`Invité(e) de ${secondPerson}`}</span>
-                            ) : null}
+                        <>
+                          <div className="nameField">
+                            <Box
+                              style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                lineHeight: "25px",
+                                marginTop: "12px",
+                              }}
+                            >
+                              <span id="guest-name">{guest.name}</span>
+                              {guest.family === "1" ? (
+                                <span className="guest-family">{`Invité(e) de ${firstPerson}`}</span>
+                              ) : guest.family === "2" ? (
+                                <span className="guest-family">{`Invité(e) de ${secondPerson}`}</span>
+                              ) : null}
+                            </Box>
                           </div>
                           <div className="guest-card__button-container">
                             <BlackButton
@@ -183,7 +200,7 @@ const Guests = ({
                               text="Modifier"
                             />
                           </div>
-                        </div>
+                        </>
                       )}
                       <Modal
                         open={isOpen}
@@ -212,6 +229,7 @@ const Guests = ({
                         </form>
                       </Modal>
                     </div>
+                    <SmallGuestCard guest={guest} />
                   </Grid2>
                 );
               })}

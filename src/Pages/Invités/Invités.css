@@ -27,7 +27,7 @@
 .guest-form > form > div {
     display: flex;
     border: 1px solid lightgrey;
-    border-radius: 10px !important;
+    border-radius: 5px !important;
 }
 
 /* 
@@ -130,14 +130,18 @@
         display: flex;
         justify-content: center;
     }
-    .guests___list {
-        padding: 5rem 0rem;
-    }
 
     .guest-picture > img {
         width: 8rem;
         height: 8rem;
     }    
+}
+
+@media (max-width: 788px) {
+.guest-container {
+    
+}
+      
 }
 
 @media (max-width: 768px) {

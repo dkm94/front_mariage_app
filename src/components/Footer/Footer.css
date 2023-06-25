@@ -2,12 +2,7 @@
     background-color: #101213;
     color: beige;
     padding: 20px;
-    /* width: 100vw; */
     width: 100%;
-    /* position: absolute;
-    right: 0;
-    bottom: 0;
-    bottom: -40px; */
     z-index: 1000;
 }
 

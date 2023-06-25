@@ -117,12 +117,13 @@
 }
 
 .sidebar {
-    width: 20%;
     height: 91vh;
     background-color: #fcfaf7;
-    position: fixed;
+    position: sticky;
     top: 64px;
-    height: 100%;
+    height: 100vh;
+    width: 100%;
+    max-width: 330px;
 }
 
 .sidebarList {
@@ -141,10 +142,11 @@
     list-style-type: none;
     display: flex;
     flex-direction: row;
-    justify-content: center;
     align-items: center;
     border-radius: 5px;
     color: #a4a4a5;
+    font-weight: bold;
+    letter-spacing: 0.5px;
 }
 
 .sidebarList > .menu-row:hover {
@@ -152,13 +154,12 @@
     /* background-color: #a0a09b; */
 }
 
-.sidebarList > #active {
+.menu-row > #active {
     color: #000;
 }
 
-.menu-row > div {
-    font-weight: bold;
-    letter-spacing: 0.5px;
+.menu-row > a {
+    color: #a4a4a5;
 }
 
 .menu-row #icon {
@@ -231,17 +232,14 @@
     display: block;
 }
 
-#mobile-logo {
-    display: none;
-}
-
 @media only screen and (max-width : 1150px) {
     .sidebar {
-        width: 25%;
+        /* width: fit-content; */
+        /* max-width: unset; */
     }
     }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 600px) {
     .hidden-links {
         display: block;
     }
@@ -392,13 +390,6 @@
         width: 100vw;
     }
     .mywedding-nav > span {
-        display: none;
-    }
-    #mobile-logo {
-        display: block;
-        height: 100%;
-    }
-    #logo {
         display: none;
     }
 }

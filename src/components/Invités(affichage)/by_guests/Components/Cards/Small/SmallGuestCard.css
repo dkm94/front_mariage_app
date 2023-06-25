@@ -1,0 +1,9 @@
+.guest__sm {
+    display: none !important;
+}
+
+@media screen and (max-width: 600px) {
+    .guest__sm {
+        display: block !important;
+    }
+}
