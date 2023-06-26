@@ -137,12 +137,14 @@ const Todo = () => {
                   style={{
                     display: "flex",
                     justifyContent: "flex-end",
-                    marginTop: "2rem",
                   }}
                 >
                   {todos && (
-                    <Col md={6}>
-                      <span style={{ fontSize: "1.3rem" }}>
+                    <Col md={6} style={{ marginBottom: "1rem" }}>
+                      <span
+                        className="tasks-title"
+                        style={{ fontSize: "1.3rem", marginBottom: "1rem" }}
+                      >
                         Tâches complétées {completedTasks}/{todos?.length}
                       </span>
                     </Col>
@@ -178,7 +180,13 @@ const Todo = () => {
             </Grow>
 
             <Grow in={!loading} timeout={4000}>
-              <Row style={{ marginRight: 0 }}>
+              <Row
+                style={{
+                  marginRight: 0,
+                  paddingLeft: "50px",
+                  paddingRight: "50px",
+                }}
+              >
                 <Container maxWidth="sm" style={{ maxWidth: "700px" }}>
                   <div className="tasks__list">
                     <Grid2
@@ -196,8 +204,17 @@ const Todo = () => {
                           width: "100%",
                         }}
                       >
-                        <span style={{ fontSize: "2rem" }}>
+                        <span
+                          className="tasks-title"
+                          style={{ fontSize: "2rem" }}
+                        >
                           Liste des tâches
+                        </span>
+                        <span
+                          className="tasks-count"
+                          style={{ fontSize: "2rem" }}
+                        >
+                          Liste des tâches ({completedTasks}/{todos?.length})
                         </span>
                       </div>
                       <Divider
