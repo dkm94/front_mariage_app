@@ -143,7 +143,7 @@ const Tables = (props) => {
             </Grow>
 
             <Grow in={!loading} timeout={2000}>
-              <Container style={{ padding: "2rem 4rem" }} fluid>
+              <Container style={{ padding: "2rem 50px" }} fluid>
                 <Row>
                   <Col xs={12} sm={10} md={6} className="table-form">
                     <AddTableForm addTable={addTable} />
@@ -168,6 +168,8 @@ const Tables = (props) => {
                   minHeight: "500px",
                 }}
                 className="tables-grid"
+                pl={"50px"}
+                pr={"50px"}
               >
                 {tables?.length === 0 || null ? (
                   <div

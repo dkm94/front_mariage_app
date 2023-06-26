@@ -156,12 +156,15 @@ button:focus {
 
 .titles {
     /* text-shadow: 1px 1px 1px rgba(238, 235, 235, 0.85); */
+    padding-top: 15px;
+    padding-bottom: 15px;
     padding-left: 3rem;
     padding-right: 3rem;
     background-color: #323535;
     display: flex;
     align-items: center;
-    height: 60px;
+    min-height: 60px;
+    height: fit-content;
     text-transform: uppercase;
     font-family: 'Italiana', serif;
 }
