@@ -154,7 +154,7 @@ ul {
 
 .menu__list__container {
     width: 100%;
-    padding: 5rem 10rem;
+    padding: 5rem 100px;
     min-height: 500px;
 }
 
@@ -167,10 +167,11 @@ ul {
 }
 
 .menu__title {
-    font-size: 1.5rem;
+    font-size: 3rem;
+    font-family: 'Corinthia', cursive;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1145px) {
     .menu > .menu__list {
         padding: 5rem 5rem;
         display: flex;
@@ -188,7 +189,7 @@ ul {
         height: 6rem;
     }
     .starter___div_form, .maincourse___div_form, .dessert___div_form {
-        padding-top: 0;
+        padding: 20px 30px;
     }
 }
 @media (max-width: 768px) {
@@ -206,5 +207,11 @@ ul {
     .menu___bgimage {
         border-radius: 0;
         margin: 0;
+    }
+}
+
+@media (max-width: 600px) {
+    .menu___bgimage {
+        height: 10rem;
     }
 }
