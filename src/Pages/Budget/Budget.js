@@ -170,19 +170,20 @@ const Budget = () => {
               <Container style={{ padding: "2rem 4rem" }} fluid>
                 <Row>
                   <Col xs={12} sm={10} md={6} />
-                  <Col xs={12} sm={10} md={6}>
-                    <div className="budget___search">
-                      <div style={{ width: "100%" }}>
-                        <SearchBar
-                          className="search__input"
-                          type="text"
-                          placeholder="Rechercher une dépense"
-                          name="searchbar"
-                          value={searchValue}
-                          onChange={handleSearch}
-                        />
-                      </div>
-                    </div>
+                  <Col
+                    xs={12}
+                    sm={10}
+                    md={6}
+                    style={{ display: "flex", justifyContent: "end" }}
+                  >
+                    <SearchBar
+                      className="search__input"
+                      type="text"
+                      placeholder="Rechercher une dépense"
+                      name="searchbar"
+                      value={searchValue}
+                      onChange={handleSearch}
+                    />
                   </Col>
                 </Row>
               </Container>
@@ -296,6 +297,12 @@ const Budget = () => {
                     </div>
                   </Formik>
                 </div>
+                <div
+                  className="col chart-component"
+                  // style={{ width: "40%", height: 200 }}
+                >
+                  <PieChart operations={operations} />
+                </div>
                 <div className="budget___col-2">
                   <Expenses
                     expenses={operations}
@@ -306,12 +313,6 @@ const Budget = () => {
                     updateExpense={editExpense}
                     handleChange={formik?.handleChange}
                   />
-                  <div
-                    className="col chart-component"
-                    style={{ width: "40%", height: 200 }}
-                  >
-                    <PieChart operations={operations} />
-                  </div>
                 </div>
               </div>
             </Grow>

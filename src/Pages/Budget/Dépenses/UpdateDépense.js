@@ -1,4 +1,4 @@
-import { TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import React, { useState, useEffect, useRef } from "react";
 import ClearButton from "../../../components/Buttons/Clear/ClearButton";
 import BlackButton from "../../../components/Buttons/Black/BlackButton";
@@ -99,18 +99,23 @@ const UpdateExpense = ({ edit, setEdit, onSubmit }) => {
               style={{
                 display: "flex",
                 flexDirection: "row",
-                justifyContent: "space-between",
+                justifyContent: "space-evenly",
                 padding: " 0.5rem 1.5rem",
                 marginTop: "1rem",
                 marginBottom: "0.5rem",
               }}
             >
-              <ClearButton
-                text={"Annuler"}
-                variant={"contained"}
-                style={{ borderRadius: "36px" }}
+              <Button
+                style={{
+                  background: "none",
+                  color: "#000",
+                  textTransform: "unset",
+                  fontSize: "1rem",
+                }}
                 onClick={() => setEdit({ id: null })}
-              />
+              >
+                Annuler
+              </Button>
               <BlackButton
                 text={"Valider"}
                 variant={"contained"}

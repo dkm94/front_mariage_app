@@ -9,7 +9,7 @@ ul {
 .starter___div_form > ul > li, .maincourse___div_form > ul > li, .dessert___div_form > ul > li {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 .starter___div_form > ul > li > form, .maincourse___div_form > ul > li > form, .dessert___div_form > ul > li > form {
     /* width: 70%; */

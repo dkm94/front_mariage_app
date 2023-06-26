@@ -1,14 +1,24 @@
 .pie {
-    height: 15rem;
+    /* height: 15rem; */
+    margin-top: 2rem;
+}
+
+.MuiCollapse-wrapper {
+    justify-content: end;
+}
+
+.MuiCollapse-wrapperInner {
+    width: 40% !important;
+    margin-top: 50px;
+}
+
+.MuiCollapse-wrapperInner > canvas {
+    height: 15rem !important;
+    width: auto !important;
 }
 
 @media (max-width: 1200px) { 
-    .pie {
-        height: 35rem;
-    }
-    /* .budget___col-1 > .card-component {
-        width: 60%;
-    } */
+ 
  }
 
 
@@ -18,16 +28,16 @@
         align-items: center;
     }
     .budget___col-2 > .chart-component {
-        width: 100%;
+        width: 100% !important;
         margin-bottom: 2rem;
         padding: 0;
     }
     .budget___col-2 > div {
         padding: 0;
     }
-    .pie {
+    /* .pie {
         height: 14rem;
-    }
+    } */
  }
 /* @media (max-width: 575.98px) { 
     .pie {

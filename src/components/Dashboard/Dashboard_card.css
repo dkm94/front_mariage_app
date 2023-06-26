@@ -11,6 +11,7 @@
 .card-body > span {
     font-size: 3em;
     text-align: center;
+    font-family: none;
 }
 
 .card-body > a {
