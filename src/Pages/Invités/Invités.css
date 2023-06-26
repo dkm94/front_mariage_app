@@ -92,13 +92,13 @@
 
 
 .select-family {
-    width: 20rem;
+    width: 15rem;
     border-radius: 5px;
     padding: 0.7rem;
     border-color: #ccc;
     align-self: flex-end;
     margin-bottom: 3rem;
-    margin-right: 4rem;
+    /* margin-right: 4rem; */
 }
 
 
@@ -109,9 +109,7 @@
     .guest-form > div, form {
         width: 100%;
     }
-    .select-family {
-        margin-right: 3rem;
-    }
+
     .guest-form > form > label {
         font-size: 1rem;
     }
@@ -165,6 +163,10 @@
     .byguests___block {
         padding: 2rem 4rem;
     }
+
+    .guest-container {
+        padding: 0 !important;
+    }
 }
 
 @media (max-width: 540px) {
@@ -201,14 +203,5 @@
     .div-guest___container > .nameField {
         position: relative;
     }
-    /* .div-guest___container > .nameField > span {
-        position: absolute;
-        left: 39px;
-        top: -8px;
-        font-size: 1.5em;
-    } */
-    /* .guest__updateForm > form {
-        position: absolute;
-        top: 50%;
-    } */
+
 }

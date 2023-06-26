@@ -140,7 +140,7 @@ const Byguests = ({ userInfos }) => {
             </Grow>
 
             <Grow in={!loading} timeout={2000}>
-              <Container style={{ padding: "2rem 4rem" }} fluid>
+              <Container style={{ padding: "2rem 50px" }} fluid>
                 <Row>
                   <Col xs={12} sm={10} md={6} className="guest-form">
                     <AddForm addGuest={addGuest} />

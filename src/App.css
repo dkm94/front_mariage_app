@@ -367,6 +367,10 @@ a:-webkit-any-link {
         /* font-size: 2rem; */
         text-wrap: balance;
     }
+
+    .searchbar, .guest-form  {
+        width: 100% !important;
+    }
  }
 
  .add-input, .search__container {
@@ -395,9 +399,9 @@ a:-webkit-any-link {
     transform: translate(-50%, -50%);
  }
 
- @media (max-width: 576px) {
-    .component-title {
-        display: block;
+ @media (max-width: 600px) {
+    .byguests___block {
+        padding-top: 0;
     }
  }
 

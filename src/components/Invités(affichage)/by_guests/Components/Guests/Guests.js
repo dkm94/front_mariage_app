@@ -52,15 +52,24 @@ const Guests = ({
 
   return (
     <>
-      <select
-        value={selected}
-        onChange={(e) => setSelected(e.target.value)}
-        className="select-family"
+      <div
+        style={{
+          // paddingRight: "50px",
+          // paddingLeft: "50px",
+          display: "flex",
+          justifyContent: "end",
+        }}
       >
-        <option value="tous">Tous les invités</option>
-        <option value="1">{`Invités de ${firstPerson}`}</option>
-        <option value="2">{`Invités de ${secondPerson}`}</option>
-      </select>
+        <select
+          value={selected}
+          onChange={(e) => setSelected(e.target.value)}
+          className="select-family"
+        >
+          <option value="tous">Tous les invités</option>
+          <option value="1">{`Invités de ${firstPerson}`}</option>
+          <option value="2">{`Invités de ${secondPerson}`}</option>
+        </select>
+      </div>
       {guests.length === 0 || null ? (
         <div className="block">
           <span>Vos invités ici.</span>
@@ -70,8 +79,6 @@ const Guests = ({
           className="guest-container"
           sx={{
             minHeight: "500px",
-            paddingLeft: "50px",
-            paddingRight: "50px",
           }}
         >
           <Grid2 container gap={3} justifyContent={"center"}>
@@ -229,7 +236,11 @@ const Guests = ({
                         </form>
                       </Modal>
                     </div>
-                    <SmallGuestCard guest={guest} />
+                    <SmallGuestCard
+                      guest={guest}
+                      firstPerson={firstPerson}
+                      secondPerson={secondPerson}
+                    />
                   </Grid2>
                 );
               })}

@@ -1,17 +1,18 @@
 import React from "react";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
-import { Container } from "@mui/material";
+import CreateIcon from "@mui/icons-material/Create";
+import { IconButton } from "@mui/material";
 import BlackButton from "../../../../../Buttons/Black/BlackButton";
 import avatar from "../../../../../../img/avatar.jpg";
 import "./SmallGuestCard.css";
 
 const SmallGuestCard = (props) => {
-  const { guest } = props;
+  const { guest, firstPerson, secondPerson } = props;
 
   return (
     // <Container >
-    <Grid2 className="guest__sm" display={"flex"} flexDirection={"row"} md={6}>
-      <Grid2 md={4}>
+    <Grid2 className="guest__sm" display={"flex"} flexDirection={"row"}>
+      <Grid2 width={"100%"}>
         {guest?.media === "" ? (
           <img alt="avatar" src={avatar} width={"100%"} />
         ) : (
@@ -22,13 +23,36 @@ const SmallGuestCard = (props) => {
           />
         )}
       </Grid2>
-      <Grid2 display={"flex"} flexDirection={"column"} md={6}>
-        <span>{guest?.name}</span>
-        <span>{guest?.family}</span>
-        <span>Table -</span>
-      </Grid2>
-      <Grid2 md={2}>
-        <BlackButton text={"Modifier"} />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          width: "100%",
+          paddingLeft: "15px",
+          paddingRight: "15px",
+          justifyContent: "center"
+        }}
+      >
+        <span style={{ lineHeight: "0.8" }} id="guest-name">
+          {guest?.name}
+        </span>
+        <span style={{ lineHeight: "2" }} className="guest-family">
+          {guest?.family === "1" ? (
+            <>{`Invité(e) de ${firstPerson}`}</>
+          ) : guest?.family === "2" ? (
+            <>{`Invité(e) de ${secondPerson}`}</>
+          ) : null}
+        </span>
+      </div>
+      <Grid2
+        height={"100%"}
+        display={"flex"}
+        justifyContent={"end"}
+        alignItems={"end"}
+      >
+        <IconButton>
+          <CreateIcon />
+        </IconButton>
       </Grid2>
     </Grid2>
     // </Container>
