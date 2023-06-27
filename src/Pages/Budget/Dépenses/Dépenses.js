@@ -92,11 +92,10 @@ const Expenses = ({
           return (
             <li
               key={obj._id}
-              style={
-                {
-                  // backgroundColor: alpha(renderSwitchColors(obj.category), 0.2),
-                }
-              }
+              style={{
+                // backgroundColor: alpha(renderSwitchColors(obj.category), 0.2),
+                backgroundColor: edit?._id === obj?._id && "#FFF",
+              }}
               className="mb-3 expenses-container fade-in"
             >
               <div className="expense-li">
@@ -133,6 +132,8 @@ const Expenses = ({
                                 textTransform: "uppercase",
                                 fontSize: "0.9rem",
                                 placeSelf: "center",
+                                color: "grey",
+                                fontFamily: "none",
                               }}
                             >
                               {obj.category}

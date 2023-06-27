@@ -57,7 +57,8 @@
 
 .guest-card__delete-btn > button {
     background: none;
-    font-size: 2rem;
+    font-size: 1.5rem;
+    color: grey;
 }
 
 
@@ -192,7 +193,7 @@ padding-left: 30px;
 .guest-card__form__button-container {
     display: flex;
     flex-direction: column;
-    /* gap: 14px; */
+    gap: 7px;
     justify-content: center;
     align-items: center;
     }

@@ -297,10 +297,7 @@ const Budget = () => {
                     </div>
                   </Formik>
                 </div>
-                <div
-                  className="col chart-component"
-                  // style={{ width: "40%", height: 200 }}
-                >
+                <div className="col chart-component">
                   <PieChart operations={operations} />
                 </div>
                 <div className="budget___col-2">

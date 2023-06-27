@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDom from "react-dom";
+import CloseIcon from "@mui/icons-material/Close";
 import "../Expenses/Graph/PieChart.css";
+import { IconButton } from "@mui/material";
 
 const modalStyle = {
   position: "fixed",
@@ -8,17 +10,13 @@ const modalStyle = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   backgroundColor: "#FFF",
-  padding: "10px 50px 58px 50px",
+  paddingTop: "10px",
+  paddingBottom: "58px",
   zIndex: 1000,
   display: "flex",
   flexDirection: "column",
   borderRadius: "10px",
   height: "50%",
-};
-
-const buttonStyle = {
-  alignSelf: "flex-end",
-  marginTop: "1rem",
 };
 
 const overlayStyle = {
@@ -50,9 +48,17 @@ export default function ModalPieChart({
       {pictureStatus ? xxx() : null}
       <div style={overlayStyle} onClick={close} />
       <div style={modalStyle}>
-        <button style={buttonStyle} onClick={close}>
-          ×
-        </button>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "end",
+            paddingRight: "5px",
+          }}
+        >
+          <IconButton onClick={close}>
+            <CloseIcon />
+          </IconButton>
+        </div>
         {children}
       </div>
     </>,

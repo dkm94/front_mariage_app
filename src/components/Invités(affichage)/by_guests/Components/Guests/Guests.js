@@ -7,7 +7,8 @@ import BlackButton from "../../../../Buttons/Black/BlackButton";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2"; // import { CSSTransition, TransitionGroup, Transition } from "react-transition-group";
 import SmallGuestCard from "../Cards/Small/SmallGuestCard";
 import uploadImg from "../../../../../img/upload-icon-20624.png";
-// import { Box, Fade, Grow } from '@material-ui/core';
+import CloseIcon from "@mui/icons-material/Close";
+import { IconButton } from "@mui/material";
 
 const Guests = ({
   guests,
@@ -114,16 +115,17 @@ const Guests = ({
                     // width={"20rem"}
                     minWidth={"250px"}
                     className={`fade-in guest-card-style`}
+                    bgcolor={edit.id === guest._id && "#FFF"}
                   >
                     {edit.id === guest._id && (
                       <div className="guest-card__delete-btn">
-                        <button
+                        <IconButton
                           onClick={() => {
                             handleRemoveGuest(guest._id);
                           }}
                         >
-                          ✖
-                        </button>
+                          <CloseIcon />
+                        </IconButton>
                       </div>
                     )}
                     {/* <li className={(isFadingOut && guest._id === deleteId) ? 'div-guest item-fadeout' :'div-guest'}> */}
