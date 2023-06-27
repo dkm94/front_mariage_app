@@ -19,7 +19,7 @@ const UpdateGuest = ({
   upload,
   uploadedFile,
   setisOpen,
-  guest,
+  deleteGuest,
 }) => {
   const [family, setFamily] = useState({
     firstPerson: "",
@@ -179,22 +179,35 @@ const UpdateGuest = ({
           </div>
           <div className="guest-card__form__button-container">
             <Button
-              onClick={() => {
-                setEdit({ id: null });
-                setisOpen(false);
-              }}
-              variant="outline"
-              style={{ color: "grey" }}
+              onClick={() => deleteGuest(edit.id)}
+              color="error"
+              variant="outlined"
             >
-              Annuler
+              Supprimer
             </Button>
-            <BlackButton
-              text={"Valider"}
-              // onClick={handleSubmit}
-              type={"submit"}
-              variant="contained"
-              style={{ borderRadius: "5px" }}
-            />
+            <div>
+              <Button
+                onClick={() => {
+                  setEdit({ id: null });
+                  setisOpen(false);
+                }}
+                variant="outline"
+                style={{
+                  color: "grey",
+                  textTransform: "unset",
+                  fontSize: "1rem",
+                }}
+              >
+                Annuler
+              </Button>
+              <BlackButton
+                text={"Valider"}
+                // onClick={handleSubmit}
+                type={"submit"}
+                variant="contained"
+                style={{ borderRadius: "5px" }}
+              />
+            </div>
           </div>
         </form>
       </div>

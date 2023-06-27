@@ -25,8 +25,9 @@ const Guests = ({
   appear,
   firstPerson,
   secondPerson,
+  isOpen,
+  setisOpen,
 }) => {
-  const [isOpen, setisOpen] = useState(false);
   const [edit, setEdit] = useState({
     id: null,
     name: "",
@@ -208,7 +209,7 @@ const Guests = ({
                           upload={upload}
                           uploadedFile={uploadedFile}
                           setisOpen={setisOpen}
-                          guest={guest}
+                          deleteGuest={deleteGuest}
                         />
                       </DefaultModal>
                       {/* <Modal

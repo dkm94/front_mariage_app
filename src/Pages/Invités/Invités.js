@@ -24,6 +24,7 @@ const Byguests = ({ userInfos }) => {
   const [searchValue, setSearchValue] = useState("");
   const [user, setUser] = useState({});
   const [appear, setAppear] = useState(false);
+  const [isOpen, setisOpen] = useState(false);
 
   const [loading, setLoading] = useState(false);
 
@@ -68,6 +69,7 @@ const Byguests = ({ userInfos }) => {
       .then((result) => {
         if (result.data != null) {
           setGuests(guests.filter((guest) => guest._id !== id));
+          setisOpen(false);
         }
       })
       .catch((err) => {
@@ -176,6 +178,8 @@ const Byguests = ({ userInfos }) => {
                     appear={appear}
                     firstPerson={firstPerson}
                     secondPerson={secondPerson}
+                    isOpen={isOpen}
+                    setisOpen={setisOpen}
                   />
                 </div>
               </div>
