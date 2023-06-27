@@ -160,7 +160,7 @@
     align-items: center;
     height: fit-content;
     padding-bottom: 20px;
-    margin-top: 2rem;
+    width: 100%;
 }
 
 .tbName > button {
@@ -187,14 +187,15 @@
 .tbName > form {
     display: flex;
     flex-direction: row;
-    margin: 0 2rem;
+    width: 100%;
 }
 
 .tbName > form > input {
     background-color: white;
     text-align: center;
-    padding: 0.7rem;
+    padding: 0.5rem;
     border-radius: 5px;
+    width: 100%;
 }
 
 .select-style {
@@ -226,6 +227,7 @@
     justify-content: space-between;
     margin-bottom: 5px;
     margin-left: 1rem;
+    align-items: center;
 }
 
 .guest-del > button {
@@ -273,7 +275,7 @@
     align-items: center;
     position: relative;
     padding: 3rem 1rem !important;
-    height: auto !important;
+    /* height: auto !important; */
     min-height: 25rem;
     background-color: #f9f9f9;
     max-width: 300px !important;
