@@ -45,6 +45,9 @@
     height: fit-content;
     display: flex;
     flex-direction: column;
+    padding-left: 50px;
+    padding-right: 50px;
+
 }
 
 .guest-card__delete-btn {
@@ -54,7 +57,8 @@
 
 .guest-card__delete-btn > button {
     background: none;
-    font-size: 2rem;
+    font-size: 1.5rem;
+    color: grey;
 }
 
 
@@ -161,6 +165,7 @@
     align-items: end;
     justify-content: center;
     margin-bottom: 20px;
+    height: 100%;
 }
 
 /* .guest-card__button-container > button {
@@ -188,7 +193,7 @@ padding-left: 30px;
 .guest-card__form__button-container {
     display: flex;
     flex-direction: column;
-    /* gap: 14px; */
+    gap: 7px;
     justify-content: center;
     align-items: center;
     }
@@ -415,10 +420,25 @@ padding-left: 30px;
  .div-guest___container {
     display: none;
  }
+
+ .guest-card-style {
+    min-width: unset !important;
+    width: 100% !important;
+    max-width: unset !important;
+ }
 }
 
-@media (max-width: 460px) { 
+@media (max-width: 480px) { 
     .guest__updateForm > form {
         width: 100%;
+    }
+
+    #guest-name {
+        font-size: 2rem;
+    }
+
+    .guest-family {
+        font-size: 0.9rem;
+        line-height: unset !important;
     }
 }

@@ -123,10 +123,47 @@
   margin-top: 4rem;
 }
 
+.tasks-title {
+  display: flex;
+}
+
+.tasks-count {
+  display: none;
+}
+
 @media (max-width: 786px) {
     .todo___bgimage {
       border-radius: 0;
       margin: 0;
+  }
+
+  .tasks-title {
+    display: none;
+  }
+
+  .tasks-count {
+    display: flex;
+  }
+
+  .add-task-form {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .todo___bgimage {
+    height: 10rem;
+  }
+  .tasks-count {
+    font-size: 1.3rem !important;
+  }
+
+  .tasks__list {
+    padding-top: 0;
+  }
+
+  .tasks__list > div > div {
+    text-wrap: balance;
   }
 }
 

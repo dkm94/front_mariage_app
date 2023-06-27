@@ -1,7 +1,7 @@
-import { TextField } from "@mui/material";
+import { Button, IconButton, TextField } from "@mui/material";
 import React, { useState, useEffect, useRef } from "react";
-import ClearButton from "../../../components/Buttons/Clear/ClearButton";
 import BlackButton from "../../../components/Buttons/Black/BlackButton";
+import CloseIcon from "@mui/icons-material/Close";
 
 const UpdateExpense = ({ edit, setEdit, onSubmit }) => {
   const [input, setInput] = useState(edit ? edit : "");
@@ -43,6 +43,11 @@ const UpdateExpense = ({ edit, setEdit, onSubmit }) => {
 
   return (
     <div className="events-list___inputs">
+      <div style={{ display: "flex", justifyContent: "end" }}>
+        <IconButton>
+          <CloseIcon />
+        </IconButton>
+      </div>
       <form onSubmit={handleSubmit} className="expense-update-form">
         {edit ? (
           <>
@@ -98,24 +103,29 @@ const UpdateExpense = ({ edit, setEdit, onSubmit }) => {
             <div
               style={{
                 display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                padding: " 0.5rem 1.5rem",
-                marginTop: "1rem",
+                flexDirection: "column",
+                alignItems: "center",
+                marginTop: "2rem",
                 marginBottom: "0.5rem",
+                gap: "7px",
               }}
             >
-              <ClearButton
-                text={"Annuler"}
-                variant={"contained"}
-                style={{ borderRadius: "36px" }}
-                onClick={() => setEdit({ id: null })}
-              />
               <BlackButton
                 text={"Valider"}
                 variant={"contained"}
                 onClick={handleSubmit}
               />
+              <Button
+                style={{
+                  background: "none",
+                  color: "#000",
+                  textTransform: "unset",
+                  fontSize: "1rem",
+                }}
+                onClick={() => setEdit({ id: null })}
+              >
+                Annuler
+              </Button>
             </div>
           </>
         ) : null}

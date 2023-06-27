@@ -109,12 +109,19 @@ text-decoration: line-through;
    
 }
 
-@media ( max-width : 768px ) {
-    /* .tasks-list {
-        width: 90%;
-    } */
-    /* .todo > .container-fluid > .row {
-        display: flex;
-        justify-content: center;
-    } */
+@media ( max-width : 500px ) {
+    .tasks-list__li > div, .tasks-list__li__done > div {
+        flex-direction: column;
+    }
+
+    .todolist___checkbox_span  {
+        justify-content: unset;
+        align-self: end;
+    }
+}
+
+@media ( max-width : 414px ) {
+    .tasks-list__li > div, .tasks-list__li__done > div {
+        padding: 1rem !important;
+      }
 }

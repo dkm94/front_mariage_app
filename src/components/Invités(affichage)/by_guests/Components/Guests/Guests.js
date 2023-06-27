@@ -7,7 +7,8 @@ import BlackButton from "../../../../Buttons/Black/BlackButton";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2"; // import { CSSTransition, TransitionGroup, Transition } from "react-transition-group";
 import SmallGuestCard from "../Cards/Small/SmallGuestCard";
 import uploadImg from "../../../../../img/upload-icon-20624.png";
-// import { Box, Fade, Grow } from '@material-ui/core';
+import CloseIcon from "@mui/icons-material/Close";
+import { IconButton } from "@mui/material";
 
 const Guests = ({
   guests,
@@ -52,15 +53,24 @@ const Guests = ({
 
   return (
     <>
-      <select
-        value={selected}
-        onChange={(e) => setSelected(e.target.value)}
-        className="select-family"
+      <div
+        style={{
+          // paddingRight: "50px",
+          // paddingLeft: "50px",
+          display: "flex",
+          justifyContent: "end",
+        }}
       >
-        <option value="tous">Tous les invités</option>
-        <option value="1">{`Invités de ${firstPerson}`}</option>
-        <option value="2">{`Invités de ${secondPerson}`}</option>
-      </select>
+        <select
+          value={selected}
+          onChange={(e) => setSelected(e.target.value)}
+          className="select-family"
+        >
+          <option value="tous">Tous les invités</option>
+          <option value="1">{`Invités de ${firstPerson}`}</option>
+          <option value="2">{`Invités de ${secondPerson}`}</option>
+        </select>
+      </div>
       {guests.length === 0 || null ? (
         <div className="block">
           <span>Vos invités ici.</span>
@@ -70,8 +80,6 @@ const Guests = ({
           className="guest-container"
           sx={{
             minHeight: "500px",
-            paddingLeft: "50px",
-            paddingRight: "50px",
           }}
         >
           <Grid2 container gap={3} justifyContent={"center"}>
@@ -107,16 +115,17 @@ const Guests = ({
                     // width={"20rem"}
                     minWidth={"250px"}
                     className={`fade-in guest-card-style`}
+                    bgcolor={edit.id === guest._id && "#FFF"}
                   >
                     {edit.id === guest._id && (
                       <div className="guest-card__delete-btn">
-                        <button
+                        <IconButton
                           onClick={() => {
                             handleRemoveGuest(guest._id);
                           }}
                         >
-                          ✖
-                        </button>
+                          <CloseIcon />
+                        </IconButton>
                       </div>
                     )}
                     {/* <li className={(isFadingOut && guest._id === deleteId) ? 'div-guest item-fadeout' :'div-guest'}> */}
@@ -229,7 +238,11 @@ const Guests = ({
                         </form>
                       </Modal>
                     </div>
-                    <SmallGuestCard guest={guest} />
+                    <SmallGuestCard
+                      guest={guest}
+                      firstPerson={firstPerson}
+                      secondPerson={secondPerson}
+                    />
                   </Grid2>
                 );
               })}

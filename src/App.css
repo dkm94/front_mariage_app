@@ -156,12 +156,15 @@ button:focus {
 
 .titles {
     /* text-shadow: 1px 1px 1px rgba(238, 235, 235, 0.85); */
+    padding-top: 15px;
+    padding-bottom: 15px;
     padding-left: 3rem;
     padding-right: 3rem;
     background-color: #323535;
     display: flex;
     align-items: center;
-    height: 60px;
+    min-height: 60px;
+    height: fit-content;
     text-transform: uppercase;
     font-family: 'Italiana', serif;
 }
@@ -367,6 +370,10 @@ a:-webkit-any-link {
         /* font-size: 2rem; */
         text-wrap: balance;
     }
+
+    .searchbar, .guest-form  {
+        width: 100% !important;
+    }
  }
 
  .add-input, .search__container {
@@ -395,9 +402,9 @@ a:-webkit-any-link {
     transform: translate(-50%, -50%);
  }
 
- @media (max-width: 576px) {
-    .component-title {
-        display: block;
+ @media (max-width: 600px) {
+    .byguests___block {
+        padding-top: 0;
     }
  }
 

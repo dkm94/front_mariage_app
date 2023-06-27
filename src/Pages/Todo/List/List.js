@@ -122,11 +122,12 @@ const Todos = ({
           flexDirection={"row"}
           p={"1rem 3rem"}
           width={"100%"}
+          flexWrap={"inherit"}
         >
-          <Grid2 xs={10} display={"flex"} alignItems={"center"}>
+          <Grid2 display={"flex"} alignItems={"center"} width={"100%"}>
             <span>{obj.text}</span>
           </Grid2>
-          <Grid2 xs={2} className="todolist___checkbox_span">
+          <Grid2 className="todolist___checkbox_span">
             {obj.isCompleted ? (
               <IconButton onClick={() => toggleCompleted(obj)}>
                 <CheckCircleIcon />

@@ -11,7 +11,7 @@ import CreateIcon from "@mui/icons-material/Create";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { IconButton } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import BlackButton from "../../../components/Buttons/Black/BlackButton.jsx";
 import { alpha } from "@material-ui/core";
 import UpdateForm from "./UpdateDépense";
@@ -74,7 +74,7 @@ const Expenses = ({
   };
 
   return (
-    <ul className="col budget-list">
+    <ul className="budget-list">
       {expenses
         .filter((expense) => {
           return (
@@ -93,20 +93,12 @@ const Expenses = ({
             <li
               key={obj._id}
               style={{
-                backgroundColor: alpha(renderSwitchColors(obj.category), 0.2),
-                border: `3px solid #f4f4f4`,
+                // backgroundColor: alpha(renderSwitchColors(obj.category), 0.2),
+                backgroundColor: edit?._id === obj?._id && "#FFF",
               }}
               className="mb-3 expenses-container fade-in"
             >
               <div className="expense-li">
-                {/* <div className="expense-li___btn">
-                  <IconButton>
-                    <CreateIcon />
-                  </IconButton>
-                  <IconButton>
-                    <DeleteIcon />
-                  </IconButton>
-                </div> */}
                 {edit?._id === obj?._id ? (
                   <UpdateForm
                     edit={edit}
@@ -118,38 +110,91 @@ const Expenses = ({
                   <>
                     <div>
                       <div className="expense__li__style">
-                        <div>
-                          <span>{obj.description}</span>
-                          <span>{obj.category}</span>
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "space-between",
+                          }}
+                        >
+                          <div
+                            style={{
+                              backgroundColor: renderSwitchColors(obj.category),
+                              paddingRight: "10px",
+                              paddingLeft: "10px",
+                              borderRadius: "15px",
+                              display: "flex",
+                              alignContent: "center",
+                            }}
+                          >
+                            <span
+                              style={{
+                                textTransform: "uppercase",
+                                fontSize: "0.9rem",
+                                placeSelf: "center",
+                                color: "grey",
+                                fontFamily: "none",
+                              }}
+                            >
+                              {obj.category}
+                            </span>
+                          </div>
+                          <span
+                            style={{
+                              fontFamily: "none",
+                              fontSize: "1.2rem",
+                              fontWeight: "bold",
+                              color: "#4f4e4e",
+                            }}
+                          >
+                            {" "}
+                            {financial(prix)} €
+                          </span>
                         </div>
-                        <div>
-                          <span>{financial(prix)} €</span>
-                          <span>{obj.date}</span>
+                        <div style={{ textAlign: "end" }}>
+                          <span
+                            style={{
+                              fontFamily: "none",
+                              paddingLeft: "10px",
+                              color: "grey",
+                            }}
+                          >
+                            {obj.date}
+                          </span>
+                        </div>
+                        <div style={{ marginTop: "20px" }}>
+                          <span style={{ fontSize: "1.2rem" }}>
+                            {obj.description}
+                          </span>
                         </div>
                       </div>
 
                       <div
                         style={{
-                          marginTop: "1rem",
-                          marginBottom: "0.5rem",
+                          marginTop: "2rem",
                           display: "flex",
-                          justifyContent: "space-between",
-                          padding: "0.5rem 1.5rem",
+                          justifyContent: "end",
                         }}
+                        className="edit-todo"
                       >
-                        <ClearButton
-                          style={{ borderRadius: "36px" }}
-                          onClick={() => setEdit(obj)}
-                          variant="contained"
-                          text="Modifier"
-                        />
                         <BlackButton
+                          onClick={() => setEdit(obj)}
+                          variant={"outlined"}
+                          text={"Modifier"}
+                          style={{
+                            backgroundColor: "unset",
+                            color: "unset",
+                            border: "1px solid #000",
+                          }}
+                        />
+
+                        {/* <BlackButton
                           onClick={() => {
                             deleteExpense(obj._id);
                           }}
                           variant="contained"
                           text="Supprimer"
-                        />
+                        /> */}
                       </div>
                     </div>
                   </>

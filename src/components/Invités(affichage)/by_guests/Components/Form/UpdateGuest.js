@@ -89,7 +89,7 @@ const UpdateGuest = ({
               />
             ) : (
               <label
-                for="file-input"
+                htmlFor="file-input"
                 style={{
                   display: "flex",
                   flexDirection: "column",

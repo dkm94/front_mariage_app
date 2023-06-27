@@ -80,6 +80,8 @@ const Byguests = ({ userInfos }) => {
   };
 
   const uploadPicture = async (id) => {
+    let newUser;
+    if (file == null) return;
     let formData = new FormData();
     formData.append("media", file);
     await axios
@@ -87,7 +89,19 @@ const Byguests = ({ userInfos }) => {
       .then((result) => {
         if (result.data != null) {
           setFile(null);
-          // window.location.reload();
+          const updatedGueslist = [...guests].map((guest) => {
+            if (guest._id === id) {
+              newUser = {
+                _id: result.data._id,
+                name: result.data.name,
+                family: result.data.family,
+                media: result.data.media,
+              };
+            }
+            return guest;
+          });
+          setUser(newUser);
+          setGuests(updatedGueslist);
         }
       })
       .catch((err) => {
@@ -126,7 +140,7 @@ const Byguests = ({ userInfos }) => {
             </Grow>
 
             <Grow in={!loading} timeout={2000}>
-              <Container style={{ padding: "2rem 4rem" }} fluid>
+              <Container style={{ padding: "2rem 50px" }} fluid>
                 <Row>
                   <Col xs={12} sm={10} md={6} className="guest-form">
                     <AddForm addGuest={addGuest} />

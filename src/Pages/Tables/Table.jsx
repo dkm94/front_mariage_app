@@ -7,7 +7,7 @@ const Table = ({ table, getUpdatedId, guests }) => {
   const filteredGuests = guests?.filter((guest) => guest.tableID === table._id);
 
   return (
-    <Grid2 xs={12} sm={4} md={3} className="home-cards render-tables">
+    <Grid2 xs={12} sm={4} md={3} className="render-tables">
       <div className="div-table-name-span">
         <span className="table-name-span">{table.name}</span>
       </div>

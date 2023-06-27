@@ -49,8 +49,8 @@
 
 .budget-cols {
     width: 100%;
-    padding-left: 10rem;
-    padding-right: 10rem;
+    padding-left: 50px;
+    padding-right: 50px;
     min-height: 500px;
 }
 
@@ -78,6 +78,7 @@
 
 .budget-form > form {
     width: 100%;
+    max-width: 27rem;
 }
 
 .budget-form > form > div > input {
@@ -113,7 +114,7 @@
 }
 .budget___select > select {
     border-radius: 5px;
-    padding: 0.7rem;
+    padding: 0.6rem;
     border-color: #ccc;
 }
 .budget___col-1 {
@@ -154,25 +155,19 @@
     .card-body > span {
         font-size: 2.5rem;
     }
-    .budget-cols {
-        padding: 5rem 5rem;
-    }
+
 }
 
 @media (max-width: 768px) { 
     .card-body > span {
         font-size: 2rem;
     }
-    .budget-cols {
-        padding: 5rem 5rem;
-    }
     .budget___bgimage {
-        border-radius: 0;
-        margin: 0;
+        height: 20rem;
     }
 }
 
-@media (max-width: 575.98px) { 
+@media (max-width: 600px) { 
     .budget___col-1 {
         display: flex;
         flex-direction: column;
