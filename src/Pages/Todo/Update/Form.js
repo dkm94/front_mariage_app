@@ -57,7 +57,7 @@ const UpdateTask = ({
               color: "#fff",
             }}
           >
-            <CheckIcon />
+            <CheckIcon fontSize="small" />
           </IconButton>
           <IconButton
             onClick={() => {
@@ -71,7 +71,7 @@ const UpdateTask = ({
               color: "#262626",
             }}
           >
-            <ReplayIcon />
+            <ReplayIcon fontSize="small" />
           </IconButton>
         </Grid2>
       </form>

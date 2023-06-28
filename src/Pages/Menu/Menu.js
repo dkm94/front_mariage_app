@@ -315,7 +315,7 @@ const Menus = () => {
                                         color: "#262626",
                                       }}
                                     >
-                                      <CreateIcon />
+                                      <CreateIcon fontSize="small" />
                                     </IconWrapper>
                                     <IconWrapper
                                       type="submit"
@@ -406,7 +406,7 @@ const Menus = () => {
                                         color: "#262626",
                                       }}
                                     >
-                                      <CreateIcon />
+                                      <CreateIcon fontSize="small" />
                                     </IconWrapper>
                                     <IconWrapper
                                       type="submit"
@@ -501,7 +501,7 @@ const Menus = () => {
                                         color: "#262626",
                                       }}
                                     >
-                                      <CreateIcon />
+                                      <CreateIcon fontSize="small" />
                                     </IconWrapper>
                                     <IconWrapper
                                       type="submit"
@@ -591,7 +591,7 @@ const Menus = () => {
                                         color: "#262626",
                                       }}
                                     >
-                                      <CreateIcon />
+                                      <CreateIcon fontSize="small" />
                                     </IconWrapper>
                                     <IconWrapper
                                       type="submit"
@@ -689,7 +689,7 @@ const Menus = () => {
                                         color: "#262626",
                                       }}
                                     >
-                                      <CreateIcon />
+                                      <CreateIcon fontSize="small" />
                                     </IconWrapper>
                                     <IconWrapper
                                       type="submit"

@@ -123,7 +123,7 @@ const Todos = ({
           <Grid2 display={"flex"} alignItems={"center"} width={"100%"}>
             {obj.isCompleted ? (
               <IconButton onClick={() => toggleCompleted(obj)}>
-                <CheckCircleIcon />
+                <CheckCircleIcon fontSize="small" />
               </IconButton>
             ) : (
               <IconButton onClick={() => toggleCompleted(obj)}>

@@ -190,7 +190,7 @@ const Expenses = ({
                         setisOpen(true);
                       }}
                     >
-                      <CreateIcon />
+                      <CreateIcon fontSize="small" />
                     </IconButton>
 
                     {/* <BlackButton

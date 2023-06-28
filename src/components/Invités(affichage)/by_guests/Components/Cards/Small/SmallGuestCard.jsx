@@ -30,7 +30,7 @@ const SmallGuestCard = (props) => {
           width: "100%",
           paddingLeft: "15px",
           paddingRight: "15px",
-          justifyContent: "center"
+          justifyContent: "center",
         }}
       >
         <span style={{ lineHeight: "0.8" }} id="guest-name">
@@ -51,7 +51,7 @@ const SmallGuestCard = (props) => {
         alignItems={"end"}
       >
         <IconButton>
-          <CreateIcon />
+          <CreateIcon fontSize="small" />
         </IconButton>
       </Grid2>
     </Grid2>
