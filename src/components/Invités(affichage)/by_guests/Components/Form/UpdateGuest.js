@@ -59,7 +59,6 @@ const UpdateGuest = ({
       id: edit.id,
       name: input,
     });
-    console.log(guestId);
     if (input.trim() === "") {
       return;
     } else {

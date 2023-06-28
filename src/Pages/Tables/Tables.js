@@ -59,7 +59,6 @@ const Tables = (props) => {
   };
 
   const getUpdatedId = (tableId, tableName) => {
-    console.log("🚀 ~ file: Tables.js:62 ~ getUpdatedId ~ tableId:", tableId);
     setEdit({
       id: tableId,
       name: tableName,

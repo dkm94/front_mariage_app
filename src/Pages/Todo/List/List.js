@@ -8,6 +8,7 @@ import CreateIcon from "@mui/icons-material/Create";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import DeleteIcon from "@mui/icons-material/Delete";
+import DefaultModal from "../../../components/Modals/DefaultModal";
 
 const Todos = ({
   todos,
@@ -17,15 +18,11 @@ const Todos = ({
   setSearchValue,
   obj,
   i,
+  isOpen,
+  setisOpen,
 }) => {
-  const [edit, setEdit] = useState({
-    id: null,
-    obj: {
-      text: "",
-      color: "",
-    },
-  });
-  const [input, setInput] = useState(edit ? edit.obj : "");
+  const [edit, setEdit] = useState(null);
+  const [input, setInput] = useState("");
   const inputRef = useRef(null);
 
   const handleChange = (e) => {
@@ -48,13 +45,13 @@ const Todos = ({
   const editTodo = async (e) => {
     e.preventDefault();
     const updatedTodoList = [...todos].map((obj) => {
-      if (obj._id === edit.id) {
+      if (obj._id === edit) {
         obj.text = input.text;
       }
       return obj;
     });
     await axios
-      .post(`/api/admin/todolist/edit/${edit.id}`, input)
+      .post(`/api/admin/todolist/edit/${edit}`, input)
       .then((res) => {
         if (res.data != null) {
           setTimeout(() => {
@@ -96,16 +93,15 @@ const Todos = ({
   return (
     <Grid2
       xs={12}
-      key={i}
-      data-id={obj._id}
+      key={obj._id}
       className={
         obj.isCompleted
           ? "tasks-list__li__done fade-in"
           : "tasks-list__li fade-in"
       }
-      style={edit.id === obj._id ? { backgroundColor: `#F5F5F5` } : null}
+      style={edit === obj._id ? { backgroundColor: `#F5F5F5` } : null}
     >
-      {edit.id === obj._id ? (
+      {edit?.id === obj._id ? (
         <UpdateForm
           edit={edit}
           setEdit={setEdit}
@@ -125,9 +121,6 @@ const Todos = ({
           flexWrap={"inherit"}
         >
           <Grid2 display={"flex"} alignItems={"center"} width={"100%"}>
-            <span>{obj.text}</span>
-          </Grid2>
-          <Grid2 className="todolist___checkbox_span">
             {obj.isCompleted ? (
               <IconButton onClick={() => toggleCompleted(obj)}>
                 <CheckCircleIcon />
@@ -137,30 +130,30 @@ const Todos = ({
                 <RadioButtonUncheckedIcon />
               </IconButton>
             )}
-            {edit.id ? (
-              <Button
-                onClick={(e) => {
-                  editTodo(e);
-                }}
-                style={{ backgroundColor: "#efebe9" }}
-              >
-                Valider
-              </Button>
-            ) : (
-              <IconButton
-                disabled={obj.isCompleted && true}
-                onClick={() => getUpdatedId(obj._id, obj.text)}
-              >
-                <CreateIcon />
-              </IconButton>
-              // <BlackButton
-              //
-              //   style={obj.isCompleted ? { backgroundColor: "#efebe9" } : null}
-              //   text={"Modifier"}
-              // />
-            )}
-            <IconButton>
+            <span>{obj.text}</span>
+          </Grid2>
+          <Grid2 className="todolist___checkbox_span">
+            <IconButton
+              disabled={obj.isCompleted && true}
+              onClick={() => getUpdatedId(obj._id, obj.text)}
+              style={{
+                backgroundColor: obj.isCompleted ? "lightgrey" : "#fff",
+                border: "1px solid lightgray",
+                borderRadius: "5px",
+                color: obj.isCompleted ? "grey" : "#262626",
+              }}
+            >
+              <CreateIcon fontSize="small" />
+            </IconButton>
+            <IconButton
+              style={{
+                backgroundColor: "#bf1e1e",
+                borderRadius: "5px",
+                color: "#fff",
+              }}
+            >
               <DeleteIcon
+                fontSize="small"
                 onClick={() => {
                   deleteTodo(obj._id);
                 }}
@@ -173,7 +166,7 @@ const Todos = ({
                 <Dropdown>
                     <Dropdown.Toggle as={CustomToggle} />
                     <Dropdown.Menu size="sm" title="">
-                        {edit.id ? (<>
+                        {edit ? (<>
                             <Dropdown.Item onClick={() => setEdit({id: null})}>Annuler</Dropdown.Item>
                             <Dropdown.Item onClick={(e) => {editTodo(e)}}>Valider</Dropdown.Item>
                         </>) : (<>

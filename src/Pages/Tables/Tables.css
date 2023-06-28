@@ -230,7 +230,7 @@
 }
 
 .guest-del > button {
-    background-color: red;
+    background-color: #d30606;
     color: #fff;
     border-radius: 5px;
 }
