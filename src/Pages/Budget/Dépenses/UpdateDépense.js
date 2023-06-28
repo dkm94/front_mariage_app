@@ -38,8 +38,6 @@ const UpdateExpense = ({ edit, setEdit, onSubmit, deleteExpense }) => {
     });
   };
 
-  console.log(setEdit);
-
   return (
     <div className="events-list___inputs">
       <div

@@ -40,7 +40,6 @@ const Reset = () => {
             email: email
         })
             .then((res) => {
-                console.log("🚀 ~ file: Reset.js ~ line 44 ~ .then ~ res", res)
                 // setTimeout(() => {
                 //     window.location = "/login" ;
                 //     history.push("/login");

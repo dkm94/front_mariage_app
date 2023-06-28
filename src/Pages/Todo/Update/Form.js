@@ -14,7 +14,6 @@ const UpdateTask = ({
   setisOpen,
   todo,
 }) => {
-  console.log("🚀 ~ file: Form.js:17 ~ input:", input);
   const inputRef = useRef(null);
   useEffect(() => {
     inputRef.current.focus();

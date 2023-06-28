@@ -37,7 +37,6 @@ const Select = ({ tables, table, guests, setTables, tableId }) => {
   };
 
   const addGuest = async (selectedGuest, tableID) => {
-    console.log("🚀 ~ file: AsyncSelect.js:40 ~ addGuest ~ tableID:", tableID);
     selectedGuest = selectedGuest.value;
     const updatedTables = [...loadingList].map((table) => {
       if (table._id === tableID.id) {
