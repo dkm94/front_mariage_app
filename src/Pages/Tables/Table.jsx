@@ -2,8 +2,29 @@ import React from "react";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import "./Tables.css";
 import BlackButton from "../../components/Buttons/Black/BlackButton";
+import DefaultModal from "../../components/Modals/DefaultModal";
+import EditForm from "./Forms/Edit";
 
-const Table = ({ table, getUpdatedId, guests }) => {
+const Table = ({
+  tables,
+  table,
+  id,
+  key,
+  edit,
+  editTableName,
+  handleUpdatedTable,
+  input,
+  setTables,
+  guests,
+  deleteGuest,
+  setEdit,
+  getUpdatedId,
+  deleteTable,
+  addTable,
+  isOpen,
+  setisOpen,
+}) => {
+  
   const filteredGuests = guests?.filter((guest) => guest.tableID === table._id);
 
   return (
@@ -32,11 +53,42 @@ const Table = ({ table, getUpdatedId, guests }) => {
         </div> */}
       <div className="table-card__button-container">
         <BlackButton
-          onClick={() => getUpdatedId(table._id, table.name)}
+          onClick={() => {
+            getUpdatedId(table._id, table.name);
+            setisOpen(true);
+          }}
           variant={"contained"}
           text="Modifier"
         />
       </div>
+      <DefaultModal
+        open={isOpen}
+        setOpen={setisOpen}
+        close={() => {
+          setisOpen(false);
+        }}
+      >
+        <EditForm
+          tables={tables}
+          table={table}
+          id={table._id}
+          key={table._id}
+          edit={edit}
+          editTableName={editTableName}
+          handleUpdatedTable={handleUpdatedTable}
+          input={input}
+          setTables={setTables}
+          guests={guests}
+          deleteGuest={deleteGuest}
+          setEdit={setEdit}
+          getUpdatedId={getUpdatedId}
+          deleteTable={deleteTable}
+          addTable={addTable}
+          isOpen={isOpen}
+          setisOpen={setisOpen}
+          filteredGuests={filteredGuests}
+        />
+      </DefaultModal>
     </Grid2>
   );
 };

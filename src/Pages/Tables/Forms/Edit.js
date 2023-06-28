@@ -2,140 +2,142 @@ import React from "react";
 import Select from "../../../components/AsyncSelect/AsyncSelect";
 import "../../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Button, IconButton } from "@mui/material";
+import { Button, IconButton, TextField } from "@mui/material";
 import "../Tables.css";
 import Table from "../Table";
 import BlackButton from "../../../components/Buttons/Black/BlackButton";
 
-const TableId = (props) => {
+const EditTableForm = (props) => {
   const {
     tables,
     table,
     id,
+    key,
     edit,
     editTableName,
     handleUpdatedTable,
     input,
     setTables,
+    guests,
     deleteGuest,
     setEdit,
     getUpdatedId,
     deleteTable,
-    guests,
-    // handleSubmit
+    addTable,
+    isOpen,
+    setisOpen,
+    filteredGuests,
   } = props;
 
-  const filteredGuests = guests?.filter((guest) => guest.tableID === table._id);
+  const tableGuests = guests.filter((guest) => guest.tableID === edit.id);
 
   return (
-    <>
-      {edit.id === table._id ? (
-        <li
-          key={id}
-          className="home-cards fade-in render-tables"
-          id="table-form-style table-card"
-          style={
-            props.edit.id === props.table._id && { backgroundColor: `#FFF` }
-          }
+    <li key={id} style={{ listStyle: "none" }}>
+      <div
+        style={{
+          marginBottom: "2rem",
+          paddingRight: "1rem",
+          paddingBottom: "1rem",
+        }}
+      >
+        <h1
+          style={{
+            textAlign: "start",
+            fontSize: "1.5rem",
+            paddingLeft: "30px",
+          }}
         >
-          <div className="tbName">
-            <form onSubmit={editTableName}>
-              <input
-                // ref={ref}
-                type="text"
-                className="shadow-none"
-                name="name"
-                onChange={handleUpdatedTable}
-                value={input}
-                style={{ background: "#fff", border: "1px solid lightgrey" }}
-              />
-            </form>
-          </div>
+          Gérer les invités / gérer la table
+        </h1>
+      </div>
 
-          <Select
-            table={table}
-            tables={tables}
-            setTables={setTables}
-            guests={table.guestID}
-          />
+      <div style={{ padding: "5px 30px" }}>
+        <div className="tbName">
+          <form onSubmit={editTableName}>
+            <TextField
+              label="Table"
+              size="small"
+              // ref={ref}
+              type="text"
+              name="name"
+              onChange={handleUpdatedTable}
+              value={input}
+              style={{
+                width: "100%",
+              }}
+            />
+          </form>
+        </div>
 
-          <div
-            style={{ marginBottom: "20px", marginTop: "20px", width: "100%" }}
-          >
-            {guests &&
-              filteredGuests.map((guest) => {
-                return (
-                  <div key={guest._id} className="guest-del">
-                    <span>{guest.name}</span>
-                    <IconButton
-                      onClick={() => {
-                        deleteGuest(guest._id, table._id);
-                      }}
-                    >
-                      <DeleteIcon />
-                    </IconButton>
-                  </div>
-                );
-              })}
-          </div>
-          {/* <div className="custom-dropdown dots-menu-edit">
-                    <Dropdown>
-                        <Dropdown.Toggle as={CustomToggle} />
-                        <Dropdown.Menu size="sm" title="">
-                            {edit.id ? (<>
-                                <Dropdown.Item onClick={() => setEdit({id: null})}>Annuler</Dropdown.Item>
-                                <Dropdown.Item onClick={(e) => {editTableName(e)}}>Valider</Dropdown.Item>
-                            </>) : (<>
-                                <Dropdown.Item onClick={() => getUpdatedId(table._id, table.name)}>Modifier</Dropdown.Item>
-                                <Dropdown.Item onClick={(e) => {
-                                    deleteTable(e, table._id, table.guestID)}}>
-                                    Supprimer</Dropdown.Item>
-                            </>)}
-                        </Dropdown.Menu>
-                    </Dropdown>
-                </div> */}
-          <div
+        <Select
+          table={table}
+          tables={tables}
+          setTables={setTables}
+          guests={table.guestID}
+          tableId={edit.id}
+        />
+
+        <div
+          style={{
+            marginBottom: "40px",
+            marginTop: "40px",
+            width: "100%",
+          }}
+        >
+          {guests &&
+            tableGuests.map((guest) => {
+              return (
+                <div key={guest._id} className="guest-del">
+                  <span>{guest.name}</span>
+                  <IconButton
+                    onClick={() => {
+                      deleteGuest(guest._id, table._id);
+                    }}
+                  >
+                    <DeleteIcon fontSize="small" />
+                  </IconButton>
+                </div>
+              );
+            })}
+        </div>
+      </div>
+      <div className="guest-card__form__button-container">
+        <Button
+          color="error"
+          variant="outlined"
+          onClick={(e) => deleteTable(e, edit.id)}
+        >
+          Supprimer
+        </Button>
+
+        <div>
+          <Button
+            onClick={() => {
+              setEdit({ id: null });
+              setisOpen(false);
+            }}
+            variant="outline"
             style={{
-              display: "flex",
-              flexDirection: "column",
-              width: "100%",
-              alignItems: "center",
-              gap: "7px",
+              color: "grey",
+              textTransform: "unset",
+              fontSize: "1rem",
             }}
           >
-            <BlackButton
-              onClick={(e) => {
-                editTableName(e);
-              }}
-              text={"Enregistrer"}
-            />
-            <Button
-              onClick={() => setEdit({ id: null })}
-              style={{
-                backgroundColor: "none",
-                boxShadow: "none",
-                border: "none",
-                color: "#000",
-                textTransform: "unset",
-                fontSize: "1rem",
-              }}
-            >
-              Annuler
-            </Button>
-          </div>
-        </li>
-      ) : (
-        <Table
-          table={table}
-          edit={edit}
-          setEdit={setEdit}
-          getUpdatedId={getUpdatedId}
-          deleteTable={deleteTable}
-          guests={guests}
-        />
-      )}
-    </>
+            Annuler
+          </Button>
+          <BlackButton
+            onClick={(e) => {
+              editTableName(e);
+            }}
+            // type={"submit"}
+            text={"Enregistrer"}
+            variant="contained"
+            style={{ borderRadius: "5px" }}
+          />
+        </div>
+      </div>
+    </li>
   );
 };
 
-export default TableId;
+export default EditTableForm;

@@ -202,7 +202,6 @@ const UpdateGuest = ({
               </Button>
               <BlackButton
                 text={"Valider"}
-                // onClick={handleSubmit}
                 type={"submit"}
                 variant="contained"
                 style={{ borderRadius: "5px" }}

@@ -5,7 +5,7 @@
     padding: 5px 10px;
     font-size: 12px;
     letter-spacing: 1px; */
-    margin-top: 10px;
+    /* margin-top: 10px; */
 }
 
 .add-btn:focus {
@@ -13,7 +13,11 @@
 }
 
 .select-style {
-    text-align: center;
+    display: flex;
+    flex-direction: row;
+    /* max-width: 25rem; */
+    gap: 7px;
+    width: 100% !important;
 }
 
 .select-style {
