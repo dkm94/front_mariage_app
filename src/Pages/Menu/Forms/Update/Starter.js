@@ -3,7 +3,7 @@ import axios from "axios";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import CheckIcon from "@mui/icons-material/Check";
 import ReplayIcon from "@mui/icons-material/Replay";
-import { IconButton, styled } from "@mui/material";
+import { IconButton, TextField, styled } from "@mui/material";
 
 const IconWrapper = styled(IconButton)({
   "&:hover": {
@@ -49,11 +49,10 @@ const UpdateStarter = ({ edit, setEdit, editStarter }) => {
       onSubmit={handleSubmit}
       display={"flex"}
       flexDirection={"row"}
+      gap={"23px"}
     >
-      <Grid2
-        component={"input"}
-        xs={8}
-        width={"100% !important"}
+      <TextField
+        size="small"
         type="text"
         name="name"
         onChange={handleChange}
@@ -61,20 +60,42 @@ const UpdateStarter = ({ edit, setEdit, editStarter }) => {
         ref={inputRef}
         pl={2}
         pr={3}
-        className="add-input"
-        textAlign={"unset"}
+        fullWidth
+        style={{ backgroundColor: "#fff" }}
       />
-      <Grid2 xs={4}>
+
+      <Grid2
+        display={"flex"}
+        flexDirection={"row"}
+        justifyContent={"end"}
+        width={"fit-content"}
+        xs={4}
+        gap={"7px"}
+      >
         <IconWrapper
           onClick={(e) => {
             editStarter(e);
           }}
           type="submit"
+          style={{
+            backgroundColor: "#262626",
+            border: "1px solid lightgray",
+            borderRadius: "5px",
+            color: "#fff",
+          }}
         >
-          <CheckIcon />
+          <CheckIcon fontSize="small" />
         </IconWrapper>
-        <IconWrapper onClick={() => setEdit({ id: null })}>
-          <ReplayIcon />
+        <IconWrapper
+          style={{
+            backgroundColor: "#fff",
+            border: "1px solid lightgray",
+            borderRadius: "5px",
+            color: "#262626",
+          }}
+          onClick={() => setEdit({ id: null })}
+        >
+          <ReplayIcon fontSize="small" />
         </IconWrapper>
       </Grid2>
     </Grid2>

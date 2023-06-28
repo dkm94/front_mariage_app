@@ -162,23 +162,6 @@ const Todos = ({
           </Grid2>
         </Grid2>
       )}
-      {/* <div className="custom-dropdown">
-                <Dropdown>
-                    <Dropdown.Toggle as={CustomToggle} />
-                    <Dropdown.Menu size="sm" title="">
-                        {edit ? (<>
-                            <Dropdown.Item onClick={() => setEdit({id: null})}>Annuler</Dropdown.Item>
-                            <Dropdown.Item onClick={(e) => {editTodo(e)}}>Valider</Dropdown.Item>
-                        </>) : (<>
-                            {!obj.isCompleted ? 
-                            <Dropdown.Item onClick={() => getUpdatedId(obj._id, obj.text)}>Modifier</Dropdown.Item> :
-                            null
-                            }
-                            <Dropdown.Item onClick={() => {deleteTodo(obj._id)}}>Supprimer</Dropdown.Item>
-                        </>)}
-                    </Dropdown.Menu>
-                </Dropdown>
-            </div> */}
     </Grid2>
   );
 };

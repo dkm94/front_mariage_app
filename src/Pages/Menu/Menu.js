@@ -290,7 +290,7 @@ const Menus = () => {
                                   md={8}
                                   xs={8}
                                   component={"span"}
-                                  width={"100% !important"}
+                                  width={"100%"}
                                 >
                                   {starter.name}
                                 </Grid2>
@@ -300,6 +300,7 @@ const Menus = () => {
                                 lg={4}
                                 display={"flex"}
                                 flexDirection={"row"}
+                                gap={"7px"}
                               >
                                 {!edit.id && (
                                   <>
@@ -307,14 +308,25 @@ const Menus = () => {
                                       onClick={() =>
                                         getUpdatedId(starter._id, starter.name)
                                       }
+                                      style={{
+                                        backgroundColor: "#fff",
+                                        border: "1px solid lightgray",
+                                        borderRadius: "5px",
+                                        color: "#262626",
+                                      }}
                                     >
                                       <CreateIcon />
                                     </IconWrapper>
                                     <IconWrapper
                                       type="submit"
                                       onClick={() => deleteStarter(starter._id)}
+                                      style={{
+                                        backgroundColor: "#bf1e1e",
+                                        borderRadius: "5px",
+                                        color: "#fff",
+                                      }}
                                     >
-                                      <DeleteIcon />
+                                      <DeleteIcon fontSize="small" />
                                     </IconWrapper>
                                   </>
                                 )}
@@ -366,7 +378,7 @@ const Menus = () => {
                                   md={8}
                                   xs={8}
                                   component={"span"}
-                                  width={"100% !important"}
+                                  width={"100%"}
                                 >
                                   {maincourse.name}
                                 </Grid2>
@@ -376,6 +388,7 @@ const Menus = () => {
                                 lg={4}
                                 display={"flex"}
                                 flexDirection={"row"}
+                                gap={"7px"}
                               >
                                 {!edit.id && (
                                   <>
@@ -386,6 +399,12 @@ const Menus = () => {
                                           maincourse.name
                                         )
                                       }
+                                      style={{
+                                        backgroundColor: "#fff",
+                                        border: "1px solid lightgray",
+                                        borderRadius: "5px",
+                                        color: "#262626",
+                                      }}
                                     >
                                       <CreateIcon />
                                     </IconWrapper>
@@ -394,8 +413,13 @@ const Menus = () => {
                                       onClick={() =>
                                         deleteMaincourse(maincourse._id)
                                       }
+                                      style={{
+                                        backgroundColor: "#bf1e1e",
+                                        borderRadius: "5px",
+                                        color: "#fff",
+                                      }}
                                     >
-                                      <DeleteIcon />
+                                      <DeleteIcon fontSize="small" />
                                     </IconWrapper>
                                   </>
                                 )}
@@ -453,7 +477,7 @@ const Menus = () => {
                                   md={8}
                                   xs={8}
                                   component={"span"}
-                                  width={"100% !important"}
+                                  width={"100%"}
                                 >
                                   {dessert.name}
                                 </Grid2>
@@ -462,6 +486,7 @@ const Menus = () => {
                                 lg={4}
                                 display={"flex"}
                                 flexDirection={"row"}
+                                gap={"7px"}
                               >
                                 {!edit.id && (
                                   <>
@@ -469,14 +494,25 @@ const Menus = () => {
                                       onClick={() =>
                                         getUpdatedId(dessert._id, dessert.name)
                                       }
+                                      style={{
+                                        backgroundColor: "#fff",
+                                        border: "1px solid lightgray",
+                                        borderRadius: "5px",
+                                        color: "#262626",
+                                      }}
                                     >
                                       <CreateIcon />
                                     </IconWrapper>
                                     <IconWrapper
                                       type="submit"
                                       onClick={() => deleteDessert(dessert._id)}
+                                      style={{
+                                        backgroundColor: "#bf1e1e",
+                                        borderRadius: "5px",
+                                        color: "#fff",
+                                      }}
                                     >
-                                      <DeleteIcon />
+                                      <DeleteIcon fontSize="small" />
                                     </IconWrapper>
                                   </>
                                 )}
@@ -528,7 +564,7 @@ const Menus = () => {
                                   md={8}
                                   xs={8}
                                   component={"span"}
-                                  width={"100% !important"}
+                                  width={"100%"}
                                 >
                                   {apetizer.name}
                                 </Grid2>
@@ -537,6 +573,7 @@ const Menus = () => {
                                 lg={4}
                                 display={"flex"}
                                 flexDirection={"row"}
+                                gap={"7px"}
                               >
                                 {!edit.id && (
                                   <>
@@ -547,6 +584,12 @@ const Menus = () => {
                                           apetizer.name
                                         )
                                       }
+                                      style={{
+                                        backgroundColor: "#fff",
+                                        border: "1px solid lightgray",
+                                        borderRadius: "5px",
+                                        color: "#262626",
+                                      }}
                                     >
                                       <CreateIcon />
                                     </IconWrapper>
@@ -555,8 +598,13 @@ const Menus = () => {
                                       onClick={() => {
                                         deleteApetizer(apetizer._id);
                                       }}
+                                      style={{
+                                        backgroundColor: "#bf1e1e",
+                                        borderRadius: "5px",
+                                        color: "#fff",
+                                      }}
                                     >
-                                      <DeleteIcon />
+                                      <DeleteIcon fontSize="small" />
                                     </IconWrapper>
                                   </>
                                 )}
@@ -614,7 +662,7 @@ const Menus = () => {
                                   md={8}
                                   xs={8}
                                   component={"span"}
-                                  width={"100% !important"}
+                                  width={"100%"}
                                 >
                                   {beverage.name}
                                 </Grid2>
@@ -623,6 +671,7 @@ const Menus = () => {
                                 lg={4}
                                 display={"flex"}
                                 flexDirection={"row"}
+                                gap={"7px"}
                               >
                                 {!edit.id && (
                                   <>
@@ -633,6 +682,12 @@ const Menus = () => {
                                           beverage.name
                                         )
                                       }
+                                      style={{
+                                        backgroundColor: "#fff",
+                                        border: "1px solid lightgray",
+                                        borderRadius: "5px",
+                                        color: "#262626",
+                                      }}
                                     >
                                       <CreateIcon />
                                     </IconWrapper>
@@ -641,8 +696,13 @@ const Menus = () => {
                                       onClick={() =>
                                         deleteBeverage(beverage._id)
                                       }
+                                      style={{
+                                        backgroundColor: "#bf1e1e",
+                                        borderRadius: "5px",
+                                        color: "#fff",
+                                      }}
                                     >
-                                      <DeleteIcon />
+                                      <DeleteIcon fontSize="small" />
                                     </IconWrapper>
                                   </>
                                 )}
