@@ -214,4 +214,12 @@ ul {
     .menu___bgimage {
         height: 10rem;
     }
+
+    .menu___list {
+        grid-template-columns: repeat(1, 97%);
+    }
+
+    .forms {
+        box-shadow: none;
+    }
 }

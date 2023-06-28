@@ -108,15 +108,26 @@
 @media (max-width: 768px) { 
     .budget-list > li {
         margin-left: 0;
+        width: 100%;
     }
 }
-@media (max-width: 575.98px) { 
+@media (max-width: 600px) { 
     .expenses-container {
         display: flex;
         flex-direction: column;
+        box-shadow: none;
+        margin: 0 !important;
+        border-bottom: 1px solid #e5e5e5;
+        min-width: unset;
     }
     .icon___container {
         display: none;
+    }
+    .budget-list {
+        gap: 0;
+    }
+    .edit-todo {
+        margin-top: 0 !important;
     }
  }
 

@@ -381,11 +381,6 @@
     background-color: #f9f9f9;
 }
 
-/* .update-form > div:not(:last-child){
-    padding-left: 20px;
-    padding-right: 20px;
-} */
-
 @media only screen and (max-device-width : 1024px) {
 
     /* .guest__updateForm > form {
@@ -414,6 +409,21 @@
     width: 100% !important;
     max-width: unset !important;
  }
+
+ .guests-container {
+    gap: 0 !important;
+ }
+
+ .guests-container > div {
+    box-shadow: none !important;
+    border-bottom: 1px solid #e5e5e5;
+ }
+ 
+ .select-guest {
+    padding-right: 50px;
+    padding-left: 50px;
+ }
+ 
 }
 
 @media (max-width: 480px) { 

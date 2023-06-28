@@ -86,18 +86,12 @@ const TopNav = () => {
             className="navbar__link"
             to={"/menu/mon-compte"}
             onClick={() => setShowLinks(!showLinks)}
-            style={{ color: "#000" }}
           >
             Votre compte
           </Link>
         </li>
-        <li className="navbar__item hidden-links slideDown-8" id="showNavLinks">
-          <button
-            className="navbar__link"
-            type="submit"
-            onClick={LogOut}
-            style={{ color: "#000" }}
-          >
+        <li className="navbar__item hidden-links slideDown-8"  id="showNavLinks">
+          <button className="navbar__link" type="submit" onClick={LogOut}>
             Déconnexion
           </button>
         </li>

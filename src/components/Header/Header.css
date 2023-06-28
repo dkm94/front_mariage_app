@@ -225,7 +225,7 @@
 }
 
 .mywedding-nav > span {
-    color: #F7F5F3;
+    color: #383535;
 }
 
 #logo {
@@ -255,20 +255,20 @@
         width: 0;
         height: 100vh;
         padding: 2rem;
-        background: black;
+        background: #BCBCAD;
         /* slide in and out nav */
         transition: all .8s ease-out;
     }
     .show_nav .navbar__links {
         right: 0;
-        width: 70vw;
+        width: 100vw;
         visibility: visible;
-        /* opacity: 0.85; */
+        opacity: 0.9;
     }
     
     .navbar__link {
         display: block;
-        padding: 2rem !important;
+        padding: 1rem !important;
         font-size: 5vw;
         background: inherit;
     }
@@ -349,7 +349,7 @@
     }
 
     #showNavLinks > button {
-        color: darkgrey;
+        /* color: darkgrey; */
     }
 
     /* animation li */
@@ -386,9 +386,6 @@
 }
 
 @media (max-width: 576px) {
-    .show_nav .navbar__links {
-        width: 100vw;
-    }
     .mywedding-nav > span {
         display: none;
     }
