@@ -57,6 +57,7 @@ const Guests = ({
           display: "flex",
           justifyContent: "end",
         }}
+        className="select-guest"
       >
         <select
           value={selected}
@@ -79,7 +80,12 @@ const Guests = ({
             minHeight: "500px",
           }}
         >
-          <Grid2 container gap={3} justifyContent={"center"}>
+          <Grid2
+            container
+            gap={3}
+            justifyContent={"center"}
+            className="guests-container"
+          >
             {guests
               //searchbar filter
               .filter((guest) => {
