@@ -2,7 +2,6 @@ import React from "react";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import CreateIcon from "@mui/icons-material/Create";
 import { IconButton } from "@mui/material";
-import BlackButton from "../../../../../Buttons/Black/BlackButton";
 import avatar from "../../../../../../img/avatar.jpg";
 import "./SmallGuestCard.css";
 
@@ -10,7 +9,6 @@ const SmallGuestCard = (props) => {
   const { guest, firstPerson, secondPerson } = props;
 
   return (
-    // <Container >
     <Grid2 className="guest__sm" display={"flex"} flexDirection={"row"}>
       <Grid2 width={"100%"}>
         {guest?.media === "" ? (

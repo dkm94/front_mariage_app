@@ -2,13 +2,12 @@ import React, { useState, useRef } from "react";
 import UpdateForm from "../Update/Form";
 import "./List.css";
 import axios from "axios";
-import { Button, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import CreateIcon from "@mui/icons-material/Create";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import DeleteIcon from "@mui/icons-material/Delete";
-import DefaultModal from "../../../components/Modals/DefaultModal";
 
 const Todos = ({
   todos,

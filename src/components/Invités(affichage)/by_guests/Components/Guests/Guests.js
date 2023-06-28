@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Modal from "../../../../Modals/Set_guest_picture";
 import Form from "../Form/UpdateGuest";
 import avatar from "../../../../../img/avatar.jpg";
 import { Box } from "@material-ui/core";
@@ -7,8 +6,6 @@ import BlackButton from "../../../../Buttons/Black/BlackButton";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2"; // import { CSSTransition, TransitionGroup, Transition } from "react-transition-group";
 import SmallGuestCard from "../Cards/Small/SmallGuestCard";
 import uploadImg from "../../../../../img/upload-icon-20624.png";
-import CloseIcon from "@mui/icons-material/Close";
-import { IconButton } from "@mui/material";
 import DefaultModal from "../../../../Modals/DefaultModal";
 
 const Guests = ({
@@ -48,17 +45,15 @@ const Guests = ({
     updateGuest(props);
   };
 
-  const handleRemoveGuest = (props) => {
-    // setIsFadingOut(false)
-    deleteGuest(props);
-  };
+  // const handleRemoveGuest = (props) => {
+  //   // setIsFadingOut(false)
+  //   deleteGuest(props);
+  // };
 
   return (
     <>
       <div
         style={{
-          // paddingRight: "50px",
-          // paddingLeft: "50px",
           display: "flex",
           justifyContent: "end",
         }}

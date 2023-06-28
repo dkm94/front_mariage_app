@@ -46,7 +46,7 @@ const Budget = () => {
       setLoading(false);
     }
     getDatas();
-  }, []);
+  }, [operation]);
 
   const handleSearch = (e) => {
     setSearchValue(e.target.value);

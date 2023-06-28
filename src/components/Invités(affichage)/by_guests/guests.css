@@ -52,7 +52,7 @@
 
 .guest-card__delete-btn {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .guest-card__delete-btn > button {
@@ -150,7 +150,7 @@
     margin-top: 30px;
     width: 100%;
     display: flex;
-    align-items: end;
+    align-items: flex-end;
     justify-content: center;
     margin-bottom: 20px;
     height: 100%;

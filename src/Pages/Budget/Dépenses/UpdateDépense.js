@@ -1,10 +1,8 @@
-import { Button, IconButton, TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import React, { useState, useEffect, useRef } from "react";
 import BlackButton from "../../../components/Buttons/Black/BlackButton";
-import CloseIcon from "@mui/icons-material/Close";
 
 const UpdateExpense = ({ edit, setEdit, onSubmit, deleteExpense }) => {
-  console.log("🚀 ~ file: UpdateDépense.js:7 ~ UpdateExpense ~ edit:", edit);
   const [input, setInput] = useState(edit ? edit : "");
 
   const inputRef = useRef(null);

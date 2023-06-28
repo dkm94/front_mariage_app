@@ -4,7 +4,6 @@ import "../../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Button, IconButton, TextField } from "@mui/material";
 import "../Tables.css";
-import Table from "../Table";
 import BlackButton from "../../../components/Buttons/Black/BlackButton";
 
 const EditTableForm = (props) => {
@@ -12,7 +11,6 @@ const EditTableForm = (props) => {
     tables,
     table,
     id,
-    key,
     edit,
     editTableName,
     handleUpdatedTable,
@@ -21,12 +19,8 @@ const EditTableForm = (props) => {
     guests,
     deleteGuest,
     setEdit,
-    getUpdatedId,
     deleteTable,
-    addTable,
-    isOpen,
     setisOpen,
-    filteredGuests,
   } = props;
 
   const tableGuests = guests.filter((guest) => guest.tableID === edit.id);

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Pie } from "react-chartjs-2";
 import "chart.js/auto";
 import "./PieChart.css";
-import { Button, Collapse } from "@mui/material";
 import BlackButton from "../../Buttons/Black/BlackButton";
 import Modal from "../../Modals/PieChart.jsx";
 
