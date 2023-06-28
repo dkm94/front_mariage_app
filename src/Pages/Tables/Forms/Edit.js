@@ -57,6 +57,7 @@ const EditTableForm = (props) => {
             <TextField
               label="Table"
               size="small"
+              required
               // ref={ref}
               type="text"
               name="name"
@@ -104,7 +105,7 @@ const EditTableForm = (props) => {
       <div className="guest-card__form__button-container">
         <Button
           color="error"
-          variant="outlined"
+          variant="contained"
           onClick={(e) => deleteTable(e, edit.id)}
         >
           Supprimer

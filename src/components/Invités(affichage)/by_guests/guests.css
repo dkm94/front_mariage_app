@@ -164,7 +164,7 @@
 }
 
 .guest__updateForm > form > div:not(:last-child) {
-    padding: 5px 30px !important; 
+    /* padding: 5px 30px !important;  */
 }
 
 .guest-card__form__button-container {
@@ -349,7 +349,8 @@
     content: '';
     width: 12px;
     height: 12px;
-    background: #fae1dd;
+    /* background: #fae1dd; */
+    background: grey;
     position: absolute;
     top: 3px;
     left: 3px;

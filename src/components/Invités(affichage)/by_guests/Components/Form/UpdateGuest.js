@@ -101,7 +101,7 @@ const UpdateGuest = ({
           </h1>
         </div>
         <form onSubmit={handleSubmit} id="update-form">
-          <Grid>
+          <Grid padding={"5px 30px"}>
             <div id="upload-avatar">
               {uploadedFile ? (
                 <img
@@ -137,9 +137,10 @@ const UpdateGuest = ({
               />
             </div>
           </Grid>
-          <Grid container mt={4}>
+          <Grid container mt={4} padding={"5px 30px"}>
             <Grid item xs={12}>
               <TextField
+                size="small"
                 label="Nom"
                 type="text"
                 name="name"
@@ -152,7 +153,7 @@ const UpdateGuest = ({
             </Grid>
           </Grid>
 
-          <div className="chose-family">
+          <div className="chose-family" style={{ padding: "5px 30px" }}>
             <p>
               <input
                 type="radio"
@@ -180,7 +181,7 @@ const UpdateGuest = ({
             <Button
               onClick={() => deleteGuest(edit.id)}
               color="error"
-              variant="outlined"
+              variant="contained"
             >
               Supprimer
             </Button>
