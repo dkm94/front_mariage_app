@@ -187,8 +187,9 @@ const Todo = () => {
                   paddingLeft: "50px",
                   paddingRight: "50px",
                 }}
+                className="task-container"
               >
-                <Container maxWidth="sm" style={{ maxWidth: "700px" }}>
+                <Container maxWidth="sm" style={{ maxWidth: "700px" }} className="task-container__">
                   <div className="tasks__list">
                     <Grid2
                       container

@@ -161,10 +161,24 @@
 
   .tasks__list {
     padding-top: 0;
+    box-shadow: none;
+  }
+
+  .tasks__list > div {
+    gap: 0;
   }
 
   .tasks__list > div > div {
     text-wrap: balance;
+  }
+
+  .task-container {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .task-container__ {
+    padding: 0 !important;
   }
 }
 
