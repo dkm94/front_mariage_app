@@ -261,7 +261,7 @@
     }
     .show_nav .navbar__links {
         right: 0;
-        width: 70vw;
+        width: 100vw;
         visibility: visible;
         opacity: 0.9;
     }
@@ -386,9 +386,6 @@
 }
 
 @media (max-width: 576px) {
-    .show_nav .navbar__links {
-        width: 100vw;
-    }
     .mywedding-nav > span {
         display: none;
     }

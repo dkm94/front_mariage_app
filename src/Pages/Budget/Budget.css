@@ -197,7 +197,7 @@
         height: 20rem;
     }
     .budget___col-2 > ul {
-        padding: 0px 3rem;
+        padding: 0;
     }
     .budget___col-2 > .budget-form {
         padding: 0 5rem;
@@ -213,6 +213,14 @@
     }
     .budget___col-1 > .budget-form {
         margin-top: 4rem;
+    }
+    .budget-cols {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .budget___col-1, .pie {
+        padding-left: 20px;
+        padding-right: 20px;
     }
  }
 
