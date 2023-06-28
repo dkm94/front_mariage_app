@@ -19,6 +19,7 @@ const Todo = () => {
   const [todo, setTodo] = useState({});
   const [searchValue, setSearchValue] = useState("");
   const [selected, setSelected] = useState("all");
+  const [isOpen, setisOpen] = useState(false);
 
   const [loading, setLoading] = useState(false);
 
@@ -242,15 +243,17 @@ const Todo = () => {
                             return task;
                           }
                         })
-                        .map((todo, i) => (
+                        .map((todo) => (
                           <List
                             todos={todos}
                             obj={todo}
-                            i={i}
+                            key={todo.id}
                             setTodos={setTodos}
                             deleteTodo={deleteTodo}
                             searchValue={searchValue}
                             setSearchValue={setSearchValue}
+                            isOpen={isOpen}
+                            setisOpen={setisOpen}
                           />
                         ))}
                     </Grid2>

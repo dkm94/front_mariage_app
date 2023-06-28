@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { withRouter, Link } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
-import Table from "./Forms/Edit";
+import Table from "./Table";
 import AddTableForm from "./Forms/Add";
 import { ScrollButtonContext } from "../../../src/App";
 import axios from "axios";
@@ -27,6 +27,7 @@ const Tables = (props) => {
   const [input, setInput] = useState("");
 
   const [loading, setLoading] = useState(false);
+  const [isOpen, setisOpen] = useState(false);
 
   const handleUpdatedTable = (e) => {
     setInput(e.target.value);
@@ -209,6 +210,8 @@ const Tables = (props) => {
                           getUpdatedId={getUpdatedId}
                           deleteTable={deleteTable}
                           addTable={addTable}
+                          isOpen={isOpen}
+                          setisOpen={setisOpen}
                         />
                       ))}
                   </Grid2>

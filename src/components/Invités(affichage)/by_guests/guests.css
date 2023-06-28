@@ -52,7 +52,7 @@
 
 .guest-card__delete-btn {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .guest-card__delete-btn > button {
@@ -74,18 +74,6 @@
     top: 50%;
     transform: translate(-50%, -50%);
 }
-
-/* .div-guest {
-    display: flex;
-    flex-direction: column;
-    height: fit-content;
-    background-color: whitesmoke;
-    position: relative;
-    align-items: center;
-    padding: 2rem 1rem;
-    border-bottom: 3px #dfdbd7 solid;
-    border-radius: 7px;
-} */
 
 .div-guest > button {
     position: absolute;
@@ -131,7 +119,7 @@
 .nameField {
     width: 100%;
     text-align: center;
-    margin: 10px 0px;
+    margin-top: 10px;
     display: flex;
     flex-direction: column;
     word-break: break-word;
@@ -162,40 +150,31 @@
     margin-top: 30px;
     width: 100%;
     display: flex;
-    align-items: end;
+    align-items: flex-end;
     justify-content: center;
     margin-bottom: 20px;
     height: 100%;
 }
 
-/* .guest-card__button-container > button {
-text-transform: unset;
-background-color: #262626;
-color: #fff;
-font-family: unset;
-border-radius: 36px;
-padding-right: 30px;
-padding-left: 30px;
-}
-
-.guest-card__button-container > button:hover {
-    color: #000;
-    background-color: #F7F5F3;
-    }
-     */
-
 .guest__updateForm > form {
     display: flex;
     flex-direction: column;
-    padding: 5px 20px;
+    /* padding: 5px 20px; */
+    padding-bottom: 0;
+}
+
+.guest__updateForm > form > div:not(:last-child) {
+    /* padding: 5px 30px !important;  */
 }
 
 .guest-card__form__button-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 7px;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
+    background-color: #f2f2f2;
+    padding: 1rem;
+    border-radius: 0 0 10px 10px;
     }
 
 .guest-card__form__button-container > button {
@@ -322,9 +301,12 @@ padding-left: 30px;
     text-decoration-line: none;
 }
 .chose-family {
-    margin-top: 20px;
+    margin-top: 3rem;
     align-self: flex-start;
     margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
 }
 
 .chose-family > p {
@@ -367,7 +349,8 @@ padding-left: 30px;
     content: '';
     width: 12px;
     height: 12px;
-    background: #fae1dd;
+    /* background: #fae1dd; */
+    background: grey;
     position: absolute;
     top: 3px;
     left: 3px;
@@ -397,6 +380,11 @@ padding-left: 30px;
     text-align: center;
     background-color: #f9f9f9;
 }
+
+/* .update-form > div:not(:last-child){
+    padding-left: 20px;
+    padding-right: 20px;
+} */
 
 @media only screen and (max-device-width : 1024px) {
 

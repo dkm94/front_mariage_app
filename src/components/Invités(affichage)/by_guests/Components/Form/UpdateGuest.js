@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
-import { Button } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import BlackButton from "../../../../Buttons/Black/BlackButton";
 import checkIcon from "../../../../../img/green-check.png";
+import TextField from "@mui/material/TextField";
+import "../../guests.css";
 
 const UpdateGuest = ({
   edit,
@@ -16,6 +18,8 @@ const UpdateGuest = ({
   guestId,
   upload,
   uploadedFile,
+  setisOpen,
+  deleteGuest,
 }) => {
   const [family, setFamily] = useState({
     firstPerson: "",
@@ -65,7 +69,7 @@ const UpdateGuest = ({
           family: radioValue,
         })
         .then((res) => {
-          upload(guestId);
+          upload(edit.id);
           onSubmit(res.data);
         })
         .catch((err) => {
@@ -79,50 +83,77 @@ const UpdateGuest = ({
   return (
     <>
       <div className="nameField guest__updateForm" id="input___nameField">
+        <div
+          style={{
+            marginBottom: "2rem",
+            paddingRight: "1rem",
+            paddingBottom: "1rem",
+          }}
+        >
+          <h1
+            style={{
+              textAlign: "start",
+              fontSize: "1.5rem",
+              paddingLeft: "30px",
+            }}
+          >
+            Modifier l'invité
+          </h1>
+        </div>
         <form onSubmit={handleSubmit} id="update-form">
-          <div id="upload-avatar">
-            {uploadedFile ? (
-              <img
-                alt="icone vérification"
-                src={checkIcon}
-                style={{ height: "4rem", width: "fit-content" }}
-              />
-            ) : (
-              <label
-                htmlFor="file-input"
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  cursor: "pointer",
-                }}
-              >
+          <Grid padding={"5px 30px"}>
+            <div id="upload-avatar">
+              {uploadedFile ? (
                 <img
-                  alt="telecharger avatar"
-                  src={uploadImg}
+                  alt="icone vérification"
+                  src={checkIcon}
                   style={{ height: "4rem", width: "fit-content" }}
                 />
-                <span>Télécharger une photo</span>
-              </label>
-            )}
-            <input
-              id="file-input"
-              type="file"
-              name="media"
-              onChange={handleFileInput}
-              style={{ display: "none" }}
-              onClick={() => seteditPicture(guestId)}
-            />
-          </div>
-          <input
-            type="text"
-            name="name"
-            onChange={handleChange}
-            value={input}
-            ref={inputRef}
-            required
-          />
-          <div className="chose-family">
+              ) : (
+                <label
+                  htmlFor="file-input"
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    cursor: "pointer",
+                  }}
+                >
+                  <img
+                    alt="telecharger avatar"
+                    src={uploadImg}
+                    style={{ height: "4rem", width: "fit-content" }}
+                  />
+                  <span>Télécharger une photo</span>
+                </label>
+              )}
+              <input
+                id="file-input"
+                type="file"
+                name="media"
+                onChange={handleFileInput}
+                style={{ display: "none" }}
+                onClick={() => seteditPicture(guestId)}
+              />
+            </div>
+          </Grid>
+          <Grid container mt={4} padding={"5px 30px"}>
+            <Grid item xs={12}>
+              <TextField
+                size="small"
+                label="Nom"
+                type="text"
+                name="name"
+                onChange={handleChange}
+                value={input}
+                ref={inputRef}
+                style={{ width: "100%" }}
+                required
+              />
+            </Grid>
+          </Grid>
+
+          <div className="chose-family" style={{ padding: "5px 30px" }}>
             <p>
               <input
                 type="radio"
@@ -146,19 +177,36 @@ const UpdateGuest = ({
               <label htmlFor="test2">Famille de {family.secondPerson} </label>
             </p>
           </div>
-          {/* <button style={{ width: "fit-content", padding: "7px 30px", alignSelf: "center", borderRadius: "7px"}} >
-                        <i className="fas fa-check"/>
-                    </button> */}
           <div className="guest-card__form__button-container">
-            <BlackButton
-              text={"Valider"}
-              onClick={handleSubmit}
+            <Button
+              onClick={() => deleteGuest(edit.id)}
+              color="error"
               variant="contained"
-            />
-
-            <Button onClick={() => setEdit({ id: null })} variant="outline">
-              Annuler
+            >
+              Supprimer
             </Button>
+            <div>
+              <Button
+                onClick={() => {
+                  setEdit({ id: null });
+                  setisOpen(false);
+                }}
+                variant="outline"
+                style={{
+                  color: "grey",
+                  textTransform: "unset",
+                  fontSize: "1rem",
+                }}
+              >
+                Annuler
+              </Button>
+              <BlackButton
+                text={"Valider"}
+                type={"submit"}
+                variant="contained"
+                style={{ borderRadius: "5px" }}
+              />
+            </div>
           </div>
         </form>
       </div>

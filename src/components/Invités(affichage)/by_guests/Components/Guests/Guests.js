@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Modal from "../../../../Modals/Set_guest_picture";
 import Form from "../Form/UpdateGuest";
 import avatar from "../../../../../img/avatar.jpg";
 import { Box } from "@material-ui/core";
@@ -7,8 +6,7 @@ import BlackButton from "../../../../Buttons/Black/BlackButton";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2"; // import { CSSTransition, TransitionGroup, Transition } from "react-transition-group";
 import SmallGuestCard from "../Cards/Small/SmallGuestCard";
 import uploadImg from "../../../../../img/upload-icon-20624.png";
-import CloseIcon from "@mui/icons-material/Close";
-import { IconButton } from "@mui/material";
+import DefaultModal from "../../../../Modals/DefaultModal";
 
 const Guests = ({
   guests,
@@ -24,8 +22,9 @@ const Guests = ({
   appear,
   firstPerson,
   secondPerson,
+  isOpen,
+  setisOpen,
 }) => {
-  const [isOpen, setisOpen] = useState(false);
   const [edit, setEdit] = useState({
     id: null,
     name: "",
@@ -46,17 +45,15 @@ const Guests = ({
     updateGuest(props);
   };
 
-  const handleRemoveGuest = (props) => {
-    // setIsFadingOut(false)
-    deleteGuest(props);
-  };
+  // const handleRemoveGuest = (props) => {
+  //   // setIsFadingOut(false)
+  //   deleteGuest(props);
+  // };
 
   return (
     <>
       <div
         style={{
-          // paddingRight: "50px",
-          // paddingLeft: "50px",
           display: "flex",
           justifyContent: "end",
         }}
@@ -115,9 +112,8 @@ const Guests = ({
                     // width={"20rem"}
                     minWidth={"250px"}
                     className={`fade-in guest-card-style`}
-                    bgcolor={edit.id === guest._id && "#FFF"}
                   >
-                    {edit.id === guest._id && (
+                    {/* {edit.id === guest._id && (
                       <div className="guest-card__delete-btn">
                         <IconButton
                           onClick={() => {
@@ -127,7 +123,7 @@ const Guests = ({
                           <CloseIcon />
                         </IconButton>
                       </div>
-                    )}
+                    )} */}
                     {/* <li className={(isFadingOut && guest._id === deleteId) ? 'div-guest item-fadeout' :'div-guest'}> */}
                     {/* <div className="custom-dropdown">
                                             <Dropdown>
@@ -148,70 +144,70 @@ const Guests = ({
                                         </div> */}
                     <div className="div-guest___container">
                       <div className="guest-picture center-x">
-                        {edit.id === guest._id ? null : (
-                          <>
-                            {guest.media === "" ? (
-                              <img alt="avatar" src={avatar} />
-                            ) : (
-                              <img
-                                alt="notre mariage"
-                                src={`https://my-wedding-backend.onrender.com/api/admin/guests/media/${guest.media}`}
-                              />
-                            )}
-                          </>
+                        {guest.media === "" ? (
+                          <img alt="avatar" src={avatar} />
+                        ) : (
+                          <img
+                            alt="notre mariage"
+                            src={`https://my-wedding-backend.onrender.com/api/admin/guests/media/${guest.media}`}
+                          />
                         )}
                       </div>
-
-                      {edit.id === guest._id ? (
-                        <>
-                          <Form
-                            edit={edit}
-                            setEdit={setEdit}
-                            onSubmit={submitUpdate}
-                            mariageID={mariageID}
-                            guestId={guest._id}
-                            guestFamily={guest.family}
-                            uploadImg={uploadImg}
-                            handleFileInput={handleFileInput}
-                            seteditPicture={seteditPicture}
-                            upload={upload}
-                            uploadedFile={uploadedFile}
-                          />
-                        </>
-                      ) : (
-                        <>
-                          <div className="nameField">
-                            <Box
-                              style={{
-                                display: "flex",
-                                flexDirection: "column",
-                                lineHeight: "25px",
-                                marginTop: "12px",
-                              }}
-                            >
-                              <span id="guest-name">{guest.name}</span>
-                              {guest.family === "1" ? (
-                                <span className="guest-family">{`Invité(e) de ${firstPerson}`}</span>
-                              ) : guest.family === "2" ? (
-                                <span className="guest-family">{`Invité(e) de ${secondPerson}`}</span>
-                              ) : null}
-                            </Box>
-                          </div>
-                          <div className="guest-card__button-container">
-                            <BlackButton
-                              onClick={() =>
-                                setEdit({
-                                  id: guest._id,
-                                  name: guest.name,
-                                })
-                              }
-                              variant="contained"
-                              text="Modifier"
-                            />
-                          </div>
-                        </>
-                      )}
-                      <Modal
+                      <div className="nameField">
+                        <Box
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            lineHeight: "25px",
+                            marginTop: "12px",
+                          }}
+                        >
+                          <span id="guest-name">{guest.name}</span>
+                          {guest.family === "1" ? (
+                            <span className="guest-family">{`Invité(e) de ${firstPerson}`}</span>
+                          ) : guest.family === "2" ? (
+                            <span className="guest-family">{`Invité(e) de ${secondPerson}`}</span>
+                          ) : null}
+                        </Box>
+                      </div>
+                      <div className="guest-card__button-container">
+                        <BlackButton
+                          onClick={() => {
+                            setEdit({
+                              id: guest._id,
+                              name: guest.name,
+                            });
+                            setisOpen(true);
+                          }}
+                          variant="contained"
+                          text="Modifier"
+                        />
+                      </div>
+                      <DefaultModal
+                        open={isOpen}
+                        setOpen={setisOpen}
+                        guestId={editPicture}
+                        close={() => {
+                          setisOpen(false);
+                        }}
+                      >
+                        <Form
+                          edit={edit}
+                          setEdit={setEdit}
+                          onSubmit={submitUpdate}
+                          mariageID={mariageID}
+                          guestId={guest._id}
+                          guestFamily={guest.family}
+                          uploadImg={uploadImg}
+                          handleFileInput={handleFileInput}
+                          seteditPicture={seteditPicture}
+                          upload={upload}
+                          uploadedFile={uploadedFile}
+                          setisOpen={setisOpen}
+                          deleteGuest={deleteGuest}
+                        />
+                      </DefaultModal>
+                      {/* <Modal
                         open={isOpen}
                         setOpen={setisOpen}
                         guestId={editPicture}
@@ -236,7 +232,7 @@ const Guests = ({
                           />
                           <button type="submit">Valider</button>
                         </form>
-                      </Modal>
+                      </Modal> */}
                     </div>
                     <SmallGuestCard
                       guest={guest}

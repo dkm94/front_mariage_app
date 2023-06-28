@@ -226,13 +226,13 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 5px;
-    margin-left: 1rem;
     align-items: center;
 }
 
 .guest-del > button {
-    background-color: inherit;
-    color: #A9A9A9;
+    background-color: #d30606;
+    color: #fff;
+    border-radius: 5px;
 }
 
 .guest-del > button:focus {
@@ -329,6 +329,10 @@
     border-radius: 36px;
     padding-right: 30px;
     padding-left: 30px;
+}
+
+.MuiInputBase-input {
+    font-family: 'Playfair Display', serif !important;
 }
 
 @media (max-width: 1299px) {

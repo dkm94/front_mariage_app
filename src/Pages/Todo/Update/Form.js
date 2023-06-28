@@ -1,24 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import "./Form.css";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import CheckIcon from "@mui/icons-material/Check";
 import ReplayIcon from "@mui/icons-material/Replay";
-import { IconButton } from "@mui/material";
+import { IconButton, TextField } from "@mui/material";
 
 const UpdateTask = ({
   edit,
   input,
-  handleChange,
-  inputRef,
   editTodo,
   setEdit,
+  setInput,
+  setisOpen,
+  todo,
 }) => {
+  console.log("🚀 ~ file: Form.js:17 ~ input:", input);
+  const inputRef = useRef(null);
   useEffect(() => {
     inputRef.current.focus();
   });
 
-  const handleValue = (content) => {
-    handleChange(content);
+  const handleChange = (e) => {
+    setInput(e.target.value);
   };
 
   return (
@@ -30,31 +33,45 @@ const UpdateTask = ({
       width={"100%"}
     >
       <form onSubmit={editTodo} className="todo-form">
-        <Grid2 xs={10} display={"flex"} alignItems={"center"}>
-          {edit && (
-            <>
-              <input
-                style={{
-                  width: "100%",
-                  padding: "0.5rem",
-                  borderRadius: "5px",
-                  border: "1px solid lightgrey",
-                }}
-                type="text"
-                name="text"
-                onChange={handleValue}
-                value={input.text}
-                ref={inputRef}
-              />
-            </>
-          )}
+        <Grid2 width={"100%"}>
+          <TextField
+            size="small"
+            style={{
+              width: "100%",
+              backgroundColor: "#fff",
+            }}
+            type="text"
+            name="text"
+            onChange={(e) => handleChange(e)}
+            value={input.text}
+            ref={inputRef}
+          />
         </Grid2>
-        <Grid2 xs={2} display={"flex"} justifyContent={"flex-start"}>
-          <IconButton type="submit">
-            <CheckIcon />
+        <Grid2 display={"flex"} gap={"7px"}>
+          <IconButton
+            type="submit"
+            style={{
+              backgroundColor: "#262626",
+              border: "1px solid lightgray",
+              borderRadius: "5px",
+              color: "#fff",
+            }}
+          >
+            <CheckIcon fontSize="small" />
           </IconButton>
-          <IconButton onClick={() => setEdit({ id: null })}>
-            <ReplayIcon />
+          <IconButton
+            onClick={() => {
+              setEdit(null);
+              setInput("");
+            }}
+            style={{
+              backgroundColor: "#fff",
+              border: "1px solid lightgray",
+              borderRadius: "5px",
+              color: "#262626",
+            }}
+          >
+            <ReplayIcon fontSize="small" />
           </IconButton>
         </Grid2>
       </form>

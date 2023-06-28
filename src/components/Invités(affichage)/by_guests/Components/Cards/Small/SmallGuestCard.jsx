@@ -2,7 +2,6 @@ import React from "react";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import CreateIcon from "@mui/icons-material/Create";
 import { IconButton } from "@mui/material";
-import BlackButton from "../../../../../Buttons/Black/BlackButton";
 import avatar from "../../../../../../img/avatar.jpg";
 import "./SmallGuestCard.css";
 
@@ -10,7 +9,6 @@ const SmallGuestCard = (props) => {
   const { guest, firstPerson, secondPerson } = props;
 
   return (
-    // <Container >
     <Grid2 className="guest__sm" display={"flex"} flexDirection={"row"}>
       <Grid2 width={"100%"}>
         {guest?.media === "" ? (
@@ -30,7 +28,7 @@ const SmallGuestCard = (props) => {
           width: "100%",
           paddingLeft: "15px",
           paddingRight: "15px",
-          justifyContent: "center"
+          justifyContent: "center",
         }}
       >
         <span style={{ lineHeight: "0.8" }} id="guest-name">
@@ -51,7 +49,7 @@ const SmallGuestCard = (props) => {
         alignItems={"end"}
       >
         <IconButton>
-          <CreateIcon />
+          <CreateIcon fontSize="small" />
         </IconButton>
       </Grid2>
     </Grid2>

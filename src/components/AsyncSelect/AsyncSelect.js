@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import AsyncSelect from "react-select/async";
 import axios from "axios";
+import AddIcon from "@mui/icons-material/Add";
+import { IconButton } from "@mui/material";
 import "./AsyncSelect.css";
 
-const Select = ({ tables, table, guests, setTables }) => {
+const Select = ({ tables, table, guests, setTables, tableId }) => {
   const [loadingList, setloadingList] = useState(tables);
 
   const disableBtn = {
     boxShadow: "none",
     backgroundColor: "#d6d6d6",
     color: "#878787",
-    padding: "6px 19px",
     borderRadius: "7px",
     transition: "0.2s all ease-in-out",
     // fontSize: ".75rem"
@@ -18,14 +19,12 @@ const Select = ({ tables, table, guests, setTables }) => {
 
   const enableBtn = {
     boxShadow: "0 1px 3px 0 rgb(0 0 0 / 26%)",
-    backgroundColor: "darkgrey",
+    backgroundColor: "#262626",
     borderColor: "#caa5c1",
     color: "#FFFFFF",
     borderRadius: "5px",
-    padding: "6px 19px",
     fontWeight: "400",
     width: "fit-content",
-    marginTop: "10px",
   };
 
   const [selectedGuest, setSelectedGuest] = useState(null);
@@ -38,6 +37,7 @@ const Select = ({ tables, table, guests, setTables }) => {
   };
 
   const addGuest = async (selectedGuest, tableID) => {
+    console.log("🚀 ~ file: AsyncSelect.js:40 ~ addGuest ~ tableID:", tableID);
     selectedGuest = selectedGuest.value;
     const updatedTables = [...loadingList].map((table) => {
       if (table._id === tableID.id) {
@@ -47,7 +47,7 @@ const Select = ({ tables, table, guests, setTables }) => {
     });
     await axios
       .put(`/api/admin/guests/addtable/${selectedGuest}`, {
-        tableID: table._id,
+        tableID: tableId,
       })
       .then((res) => {
         if (res.data != null) {
@@ -119,16 +119,15 @@ const Select = ({ tables, table, guests, setTables }) => {
         // inputValue={true}
         isOptionDisabled={(option) => option.tableID != null}
       />
-      <button
-        className="add-btn"
+      <IconButton
         disabled={!selectedGuest}
         style={!selectedGuest ? disableBtn : enableBtn}
         onClick={() => {
           addGuest(selectedGuest, table);
         }}
       >
-        Ajouter
-      </button>
+        <AddIcon />
+      </IconButton>
     </div>
   );
 };

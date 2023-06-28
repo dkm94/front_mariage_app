@@ -104,6 +104,7 @@
   padding-left: 15px;
   padding-right: 15px;
   font-family: Playfair Display, serif !important;
+  height: fit-content;
 }
 
 .MuiButtonBase-root {
