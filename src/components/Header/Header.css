@@ -6,6 +6,7 @@
 }
 
 .navigation {
+    background-color: #fff;
     height: 100%;
     width: 100%;
     /* clear: both; */
@@ -38,8 +39,10 @@
 
 .navbar__item > a {
     padding: 0 .3rem;
-    color: #F7F5F3;
+    color: #000;
     text-decoration: none;
+    /* color: #F7F5F3; */
+
 }
 
 .navbar__burger {
@@ -221,7 +224,7 @@
     padding: 0.7rem 1rem;
     background: transparent;
     border-radius: 3px;
-    color: whitesmoke;
+    /* color: whitesmoke; */
 }
 
 .mywedding-nav > span {
@@ -271,6 +274,7 @@
         padding: 1rem !important;
         font-size: 5vw;
         background: inherit;
+        color: #F7F5F3 !important;
     }
     .navbar__burger {
         display: block;
@@ -349,7 +353,7 @@
     }
 
     #showNavLinks > button {
-        /* color: darkgrey; */
+        color: #000;
     }
 
     /* animation li */
@@ -382,6 +386,11 @@
     }
     .show_nav .slideDown-8 {
         transition: all 1.7s ease-out;
+    }
+
+    .navbar__item > a {
+        color: #F7F5F3;
+    
     }
 }
 

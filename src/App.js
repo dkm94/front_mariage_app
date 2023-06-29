@@ -13,8 +13,8 @@ import Loader from "../src/components/Loader/Loader";
 
 // <------- Pages ---------->
 import Homepage from "./Pages/Homepage/Home";
-import NouvelUtilisateur from "./Pages/Auth/Register/Register";
-import Connexion from "./Pages/Auth/Login/Login";
+// import NouvelUtilisateur from "./Pages/Auth/Register/Register";
+// import Connexion from "./Pages/Auth/Login/Login";
 import Reset from "./Pages/Auth/Reset/Reset";
 import TableauDeBord from "../src/Pages/Dashboard/Dashboard.jsx";
 import CompteUtilisateur from "../src/Pages/Mon_Compte/Mon_compte";
@@ -76,13 +76,13 @@ function App() {
     return <Page title="Accueil" component={Homepage} token={token} />;
   }
 
-  function Login() {
-    return <Page title="Connexion" component={Connexion} />;
-  }
+  // function Login() {
+  //   return <Page title="Connexion" component={Connexion} />;
+  // }
 
-  function Register() {
-    return <Page title="Créer un compte" component={NouvelUtilisateur} />;
-  }
+  // function Register() {
+  //   return <Page title="Créer un compte" component={NouvelUtilisateur} />;
+  // }
 
   function ResetPassword() {
     return <Page title="Réinitialiser le mot de passe" component={Reset} />;
@@ -172,12 +172,12 @@ function App() {
                   <Route exact path="/">
                     {token ? <Redirect to="/tableau-de-bord" /> : Home}
                   </Route>
-                  <Route path="/login">
+                  {/* <Route path="/login">
                     {token ? <Redirect to="/menu/mon-compte" /> : Login}
                   </Route>
                   <Route path="/register">
                     {token ? <Redirect to="/menu/mon-compte" /> : Register}
-                  </Route>
+                  </Route> */}
                   <Route path="/reset-password">
                     {token ? <Redirect to="/menu/mon-compte" /> : ResetPassword}
                   </Route>

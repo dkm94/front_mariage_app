@@ -2,12 +2,16 @@
     width: 100%;
 }
 .section-1 {
-    min-height: 92vh;
     width: 100%;
     display: flex;
     margin-top: 8vh;  
-    padding: 0 0 5rem 10rem;
-    background-color: #e8e8e4;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+    padding-left: 6rem;
+    padding-right: 6rem;
+    background-repeat: no-repeat,repeat !important;
+    background-size: 600px,auto !important;
+    background-position: calc(50% + 250px) 50px,100% !important;
  }
 
 /* .home___position {
@@ -17,7 +21,7 @@
 } */
 
 .home___position {
-    width: 100%;
+    width: 50%;
 }
 
 .home___position-style {
@@ -32,7 +36,6 @@
 
 .home__picture > img {
     width: inherit;
-    margin-top: 10%;
     width: 100%;
 }
 
@@ -46,25 +49,26 @@
 
 .home-desc {
     color: black;
-    /* background: rgba(255,255,255,0.7); */
     padding: 2rem;
-    margin-bottom: 2em;
     border-radius: 5px;
 }
 
 .home-desc > h1 {
-    font-size: 5rem;
+    font-size: 3rem;
     margin-bottom: 2rem;
     text-shadow: 1px 1px 1px rgb(0 0 0 / 15%);
+    line-height: 1em;
 }
 
 .home-desc > p {
     /* margin-right: 150px; */
-    line-height: 2.4rem;
+    line-height: 2em;
 }
 
 .home-desc > p > span {
     display: block;
+    font-size: 1.3rem;
+    text-wrap: balance;
 }
 
 .home-btn {
@@ -76,16 +80,36 @@
 
 .home___register-btn {
     width: 100%;
-    text-align: center;
+    padding-left: 2rem;
+    padding-right: 2rem;
 }
+
+.home___register-btn> button > a:hover {
+    background-color: black !important;
+    color: white !important;
+}
+
+.home___register-btn > button{
+    background-color: black;
+    color: white !important;
+    border-radius: 25px;
+    padding: 10px;
+    text-transform: unset;
+    width: 20rem;
+}
+
+.home___register-btn > button:hover{
+    background-color: black;
+}
+
 
 .home-link {
     border-radius: 20px;
     font-size: 1rem;
+    color: whitesmoke;
 }
 
 .home-link > a {
-    color: whitesmoke;
     text-decoration: none;
 }
 
@@ -94,7 +118,7 @@ a:hover {
 }
 
 .home > .section-2 {
-    padding: 10rem 15rem;
+    padding: 6rem 15rem;
 }
 
 .section-2___titre {
@@ -103,16 +127,16 @@ a:hover {
 }
 
 .section-2___titre > h2 {
-    font-size: 1.5rem !important;
+    font-size: 1rem !important;
 }
 
 .section-2___sous-titre {
     text-align: center;
     margin-top: 2rem;
-    margin-bottom: 8rem;
+    margin-bottom: 4rem;
 }
 .section-2___sous-titre > span {
-    font-size: 3rem;
+    font-size: 2rem;
 }
 
 .home-cards {
@@ -143,8 +167,12 @@ a:hover {
 }
 
 .home-cards__title > h3 {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     text-transform: uppercase;
+}
+
+#intro-card{
+    padding: 3rem 2rem !important;
 }
 
 @media (max-width: 1199.98px) { 
@@ -152,7 +180,7 @@ a:hover {
         margin-top: 20%;
     }
     .home-desc > h1 {
-        font-size: 4rem;
+        font-size: 3rem;
     }
  }
 
@@ -183,42 +211,58 @@ a:hover {
       height: 325px;
       width: auto;
   }
-  .home-desc > h1 {
-      /* padding: 0 3rem; */
-      font-size: 5rem;
-      width: 75%;
-  }
+  .home-desc > p > span {
+    font-size: 1rem;
+    line-height: 1.5em;
+}
   .home-desc > p {
       margin-right: 0;
-  }
-  .section-1 {
-      padding-bottom: 10rem
   }
   .section-2___sous-titre > span {
     font-size: 2rem;
     }
+    .section-1 {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+        padding-left: 3rem;
+        padding-right: 3rem;
+    }
   }
 
   @media (max-width: 767.98px) { 
-    .home-desc > h1 {
-        font-size: 3.5rem;
+    .home-desc {
+        padding: 1rem;
+    }
+    .home___register-btn > button {
+        width: 14rem;
+        padding: 7px
     }
     .section-1 {
-        padding-left: 5rem;
+        padding-bottom: 22rem;
+        background-position: calc(50% + 0px) calc(100% + 0px),top center !important;
+        background-size: 336px,auto !important;
+    }
+    .home___position {
+        width: 100%;
+    }
+    .home___position-style {
+        text-align: center;
+    }
+    .home-desc > h1 {
+        width: 100%;
+        font-size: 2.5rem;
     }
    }
 
    @media (max-width: 576px) { 
     .home-desc > h1 {
-        font-size: 3rem;
+        /* font-size: 2.5rem; */
     }
     .home__picture > img {
-        height: 20rem
+        height: auto;
+        width: inherit;
     }
-    .section-1 {
-        padding-top: 0;
-        padding-left: 1rem;
-    }
+
     .section-2___sous-titre > span {
         font-size: 1.5rem;
     }
