@@ -1,8 +1,4 @@
-.login-page {
-    height: 92vh;
-	width: 100%;
-	margin-top: 8vh
-}
+
 
 form > .form-group > span {
 	font-size: 80%;
@@ -37,21 +33,13 @@ input, button {
 	height: 100%;
 }
 
-.login-grid > .grid-item-1 {
-	width: 50%;
-}
-
-.login-grid > .grid-item-1 > img {
-	object-fit: cover;
-    width: 100%;
-    height: 100%;
-}
-
 .login-grid > .grid-item-2 {
-	height: 100%;
+	height: fit-content;
 	padding: 0 1rem;
-	width: 50%;
+	width: 100%;
 	background-color: #FFF;
+	margin-bottom: 3rem;
+	margin-top: 1rem;
 }
 
 .demo {
@@ -69,15 +57,16 @@ input, button {
 .login {
 	display: flex;
     flex-direction: column;
-	width: 100%;
-	padding: 40px 100px;
+	width: fit-content;
+	margin: 0 auto;
+	gap: 20px;
 }
 
 .navbar-menu > button {
 	text-transform: unset;
 	border-radius: 0;
 	border-color: #000000;
-	font-size: 1.1rem;
+	/* font-size: 1.1rem; */
 }
 
 .navbar-menu > button:hover {
@@ -92,6 +81,12 @@ input, button {
 .login.inactive {
 	opacity: 0;
 	transform: scale(1.1);
+}
+
+.login__form > form {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
 }
 
 
@@ -206,15 +201,9 @@ input, button {
 }
 
 @media (max-width: 767px) {
-	.login-grid > .grid-item-1 {
-		display: none;
-	}
 	.login-grid > .grid-item-2 {
 		width: 100%;
 		display: initial;
-	}
-	.login-page {
-		min-height: 92vh;
 	}
 }
 

@@ -1,14 +1,35 @@
 import React, { useState } from "react";
-import { Link, withRouter, useHistory } from "react-router-dom";
+import { withRouter, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import ErrorAlert from "../../../components/Alert/Error/Error";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import axios from "axios";
-import cake from "../../../img/login-register/cake.jpeg";
 import "./Login.css";
+import { TextField } from "@mui/material";
+import { Button, styled } from "@material-ui/core";
 
-const Login = () => {
+const CustomButton = styled(Button)({
+  textTransform: "unset",
+  backgroundColor: "#262626",
+  color: "#fff",
+  //   fontfamily: "unset",
+  fontSize: "1rem",
+  borderRadius: "36px",
+  paddingRight: "30px",
+  paddingLeft: "30px",
+  fontWeight: "unset",
+  fontFamily: "Playfair Display serif",
+  border: "none",
+  width: "fit-content",
+  ":hover": {
+    background: "#4c4a4a",
+    animation: "none",
+    border: "none",
+  },
+});
+
+const Login = ({ setShowForm }) => {
   const [showError, setShowError] = useState(false);
   const [loadingButton, setLoadingButton] = useState(false);
   const history = useHistory();
@@ -58,19 +79,18 @@ const Login = () => {
         description="Veuillez réessayer plus tard"
       />
       <div className="login-grid">
-        <div className="grid-item-1">
-          <img alt="login img" src={cake} />
-        </div>
-        <div className="grid-item-2 center-x">
+        <div className="grid-item-2">
           <div className="login">
             <div className="form-group">
-              <h1>Connectez-vous</h1>
+              <h1 style={{ fontSize: "1.5rem" }}>Connectez-vous</h1>
             </div>
             <div className="login__form">
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="form-group">
-                  <label>Email</label>
-                  <input
+                  {/* <label>Email</label> */}
+                  <TextField
+                    size="small"
+                    label="Email"
                     {...register("email", { required: true })}
                     id="email"
                     name="email"
@@ -81,8 +101,10 @@ const Login = () => {
                   <div>{errors.email?.message}</div>
                 </div>
                 <div className="form-group">
-                  <label>Mot de passe</label>
-                  <input
+                  {/* <label>Mot de passe</label> */}
+                  <TextField
+                    size="small"
+                    label="Mot de passe"
                     {...register("password", { required: true })}
                     id="password"
                     name="password"
@@ -92,19 +114,38 @@ const Login = () => {
                   />
                   <div>{errors.password?.message}</div>
                 </div>
-                <div className="login__submit">
-                  <input
+                <div style={{ marginTop: "2rem" }}>
+                  <CustomButton
                     type="submit"
-                    value={
-                      loadingButton ? "Veuillez patienter..." : "Se connecter"
-                    }
-                  />
+                    variant="contained"
+                    style={{ width: "100%", textTransform: "unset" }}
+                    fullWidth
+                  >
+                    {loadingButton ? "Veuillez patienter..." : "Se connecter"}
+                  </CustomButton>
                 </div>
-                <div className="login__signup">
-                  <p>
-                    Pas encore membre? &nbsp;
-                    <Link to={"/register"}>Inscrivez-vous</Link>
-                  </p>
+                <div
+                  className="login__signup"
+                  style={{
+                    marginTop: "2rem",
+                    display: "flex",
+                    flexDirection: "row",
+                    gap: "4px",
+                  }}
+                >
+                  <span>Vous n'avez pas encore de compte ?</span>
+                  <Button
+                    style={{
+                      background: "none",
+                      textTransform: "unset",
+                      padding: 0,
+                      fontSize: "unset",
+                      marginTop: "-2px",
+                    }}
+                    onClick={() => setShowForm("register")}
+                  >
+                    <span>Inscrivez-vous</span>
+                  </Button>
                   {/* <p className="forgotten-password"><Link to={"/reset-password"}>Mot de passe oublié ?</Link></p> */}
                 </div>
               </form>

@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import "../Header.css";
 import Logo from "../../../img/logo-2023-no-shadow.png";
 import { Button } from "@mui/material";
+import Login from "../../../Pages/Auth/Login/Login";
+import Register from "../../../Pages/Auth/Register/Register";
+import AuthModal from "../../Modals/AuthModal";
 
 const Logout = () => {
   const path = window.location.pathname;
+
+  const [isOpen, setisOpen] = useState(false);
+  const [showForm, setShowForm] = useState("");
 
   return (
     <div
@@ -23,13 +29,29 @@ const Logout = () => {
           </Link>
         </div>
         <ul className="navbar-menu">
-          <Button variant="outlined" className="li-style" id="login">
-            <Link style={{ fontFamily: "none" }} to={"/login"}>
-              Connexion
-            </Link>
+          <Button
+            variant="outlined"
+            className="li-style"
+            id="login"
+            style={{ fontFamily: "none" }}
+            onClick={() => {
+              setisOpen(true);
+              setShowForm("login");
+            }}
+          >
+            Connexion
           </Button>
         </ul>
       </div>
+
+      <AuthModal
+        open={isOpen}
+        setOpen={setisOpen}
+        close={() => setisOpen(false)}
+      >
+        {showForm === "login" && <Login setShowForm={setShowForm} />}
+        {showForm === "register" && <Register setShowForm={setShowForm} />}
+      </AuthModal>
     </div>
   );
 };
