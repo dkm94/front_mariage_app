@@ -2,12 +2,13 @@
     width: 100%;
 }
 .section-1 {
-    min-height: 92vh;
     width: 100%;
     display: flex;
     margin-top: 8vh;  
     padding: 0 0 5rem 10rem;
     background-color: #e8e8e4;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
  }
 
 /* .home___position {
@@ -46,25 +47,26 @@
 
 .home-desc {
     color: black;
-    /* background: rgba(255,255,255,0.7); */
     padding: 2rem;
-    margin-bottom: 2em;
     border-radius: 5px;
 }
 
 .home-desc > h1 {
-    font-size: 5rem;
+    font-size: 4rem;
     margin-bottom: 2rem;
     text-shadow: 1px 1px 1px rgb(0 0 0 / 15%);
+    line-height: 1em;
 }
 
 .home-desc > p {
     /* margin-right: 150px; */
-    line-height: 2.4rem;
+    line-height: 2em;
 }
 
 .home-desc > p > span {
     display: block;
+    font-size: 1.3rem;
+    text-wrap: balance;
 }
 
 .home-btn {
@@ -76,16 +78,36 @@
 
 .home___register-btn {
     width: 100%;
-    text-align: center;
+    padding-left: 2rem;
+    padding-right: 2rem;
 }
+
+.home___register-btn> button > a:hover {
+    background-color: black !important;
+    color: white !important;
+}
+
+.home___register-btn > button{
+    background-color: black;
+    color: white !important;
+    border-radius: 25px;
+    padding: 15px;
+    text-transform: unset;
+    width: 20rem;
+}
+
+.home___register-btn > button:hover{
+    background-color: black;
+}
+
 
 .home-link {
     border-radius: 20px;
     font-size: 1rem;
+    color: whitesmoke;
 }
 
 .home-link > a {
-    color: whitesmoke;
     text-decoration: none;
 }
 
@@ -213,7 +235,8 @@ a:hover {
         font-size: 3rem;
     }
     .home__picture > img {
-        height: 20rem
+        height: auto;
+        width: inherit;
     }
     .section-1 {
         padding-top: 0;
