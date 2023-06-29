@@ -57,9 +57,10 @@ input, button {
 .login {
 	display: flex;
     flex-direction: column;
-	width: fit-content;
+	width: 100%;
 	margin: 0 auto;
 	gap: 20px;
+	max-width: 23rem;
 }
 
 .navbar-menu > button {

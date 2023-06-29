@@ -1,8 +1,4 @@
-.register-page {
-    min-height: 100vh;
-	width: 100%;
-	margin-top: 8vh;
-}
+
 
 form > .form-group > span {
 	font-size: 80%;
@@ -41,10 +37,7 @@ input, button {
 
 .register-grid {
 	display: flex;
-    /* grid-template-columns: 1fr 1fr; */
     height: 100%;
-    position: relative;
-    flex-direction: row;
 }
 
 .register-grid > .grid-item-1 {
@@ -61,18 +54,27 @@ input, button {
 }
 
 .register-grid > .grid-item-2 {
-	height: 100%;
-    padding: 40px 100px;
-    width: 50%;
-    position: absolute;
-    right: 0;
-	background-color: #FFF;
+	height: fit-content;
+    padding: 0 1rem;
+    width: 100%;
+    background-color: #FFF;
+    margin-bottom: 3rem;
+    margin-top: 1rem;
 }
 
 .register {
 	display: flex;
     flex-direction: column;
     width: 100%;
+    margin: 0 auto;
+    gap: 20px;
+	max-width: 23rem;
+}
+
+.register__form > form {
+    display: flex;
+    flex-direction: column;
+    /* gap: 15px; */
 }
 
 .register__form > form > div {
@@ -252,9 +254,6 @@ input, button {
 	}
 	.register-grid > .grid-item-2 {
 		width: 100%;
-	}
-	.register-page {
-		min-height: 92vh;
 	}
 }
 

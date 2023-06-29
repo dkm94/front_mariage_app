@@ -1,13 +1,33 @@
 import React, { useEffect, useState } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import ErrorAlert from "../../../components/Alert/Error/Error";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
 import "./Register.css";
-import flowers from "../../../img/login-register/flowers.jpeg";
 import SuccessAlert from "../../../components/Alert/Sucess/Success";
+import { TextField, styled, Button } from "@mui/material";
+
+const CustomButton = styled(Button)({
+  textTransform: "unset !important",
+  backgroundColor: "#262626 !important",
+  color: "#fff",
+  //   fontfamily: "unset",
+  fontSize: "1rem !important",
+  borderRadius: "36px !important",
+  paddingRight: "30px",
+  paddingLeft: "30px",
+  fontWeight: "unset",
+  fontFamily: "Playfair Display serif",
+  border: "none",
+  width: "100% !important",
+  ":hover": {
+    background: "#4c4a4a",
+    animation: "none",
+    border: "none",
+  },
+});
 
 const Register = ({ setShowForm }) => {
   let tempArr = [];
@@ -118,19 +138,17 @@ const Register = ({ setShowForm }) => {
         description="Redirection vers la page de connexion..."
       />
       <div className="register-grid">
-        <div className="grid-item-1">
-          <img alt="couple img" src={flowers} />
-        </div>
         <div className="grid-item-2">
           <div className="register">
             <div className="form-group">
-              <h1>Inscrivez-vous</h1>
+              <h1 style={{ fontSize: "1.5rem" }}>Inscrivez-vous</h1>
             </div>
             <div className="register__form">
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="form-group">
-                  <label>Prénom 1</label>
-                  <input
+                  <TextField
+                    label="Prénom 1"
+                    size="small"
                     {...register("firstPerson", { required: true })}
                     id="firstPerson"
                     name="firstPerson"
@@ -141,8 +159,9 @@ const Register = ({ setShowForm }) => {
                   <span>{errors.firstPerson?.message}</span>
                 </div>
                 <div className="form-group">
-                  <label>Prénom 2</label>
-                  <input
+                  <TextField
+                    label="Prénom 2"
+                    size="small"
                     {...register("secondPerson", { required: true })}
                     id="secondPerson"
                     name="secondPerson"
@@ -153,8 +172,9 @@ const Register = ({ setShowForm }) => {
                   <span>{errors.secondPerson?.message}</span>
                 </div>
                 <div className="form-group">
-                  <label>Email</label>
-                  <input
+                  <TextField
+                    label="Email"
+                    size="small"
                     {...register("email", { required: true })}
                     id="email"
                     name="email"
@@ -165,8 +185,9 @@ const Register = ({ setShowForm }) => {
                   <span>{errors.email?.message}</span>
                 </div>
                 <div className="form-group">
-                  <label>Mot de passe</label>
-                  <input
+                  <TextField
+                    label="Mot de passe"
+                    size="small"
                     {...register("password", { required: true })}
                     id="password"
                     name="password"
@@ -177,8 +198,9 @@ const Register = ({ setShowForm }) => {
                   <span>{errors.password?.message}</span>
                 </div>
                 <div className="form-group">
-                  <label>Confirmer le mot de passe</label>
-                  <input
+                  <TextField
+                    label="Confirmer le mot de passe"
+                    size="small"
                     {...register("confirmPassword", { required: true })}
                     id="password"
                     name="confirmPassword"
@@ -189,19 +211,26 @@ const Register = ({ setShowForm }) => {
                   <span>{errors.confirmPassword?.message}</span>
                 </div>
                 <div className="form-group">
-                  <input
-                    type="submit"
-                    value={
-                      loadingButton
-                        ? "Veuillez patienter..."
-                        : "Créer mon compte"
-                    }
-                  />
+                  <CustomButton type="submit" variant="contained">
+                    {loadingButton
+                      ? "Veuillez patienter..."
+                      : "Créer mon compte"}
+                  </CustomButton>
                 </div>
                 <div className="register__signup">
                   <p>
                     Déjà inscrit ? &nbsp;
-                    <Link to={"/login"}>Connectez-vous</Link>
+                    <Button
+                      style={{
+                        textTransform: "unset",
+                        fontSize: "unset",
+                        marginTop: "-2px",
+                        color: "#000",
+                      }}
+                      onClick={() => setShowForm("login")}
+                    >
+                      Connectez-vous
+                    </Button>
                   </p>
                 </div>
               </form>

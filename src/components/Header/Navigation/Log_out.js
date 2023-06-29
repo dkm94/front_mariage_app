@@ -33,7 +33,7 @@ const Logout = () => {
             variant="outlined"
             className="li-style"
             id="login"
-            style={{ fontFamily: "none" }}
+            style={{ fontFamily: "none", color: "#000" }}
             onClick={() => {
               setisOpen(true);
               setShowForm("login");
