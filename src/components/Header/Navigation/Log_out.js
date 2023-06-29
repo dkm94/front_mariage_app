@@ -24,7 +24,9 @@ const Logout = () => {
         </div>
         <ul className="navbar-menu">
           <Button variant="outlined" className="li-style" id="login">
-            <Link to={"/login"}>Connexion</Link>
+            <Link style={{ fontFamily: "none" }} to={"/login"}>
+              Connexion
+            </Link>
           </Button>
         </ul>
       </div>
