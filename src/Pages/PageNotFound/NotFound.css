@@ -34,3 +34,10 @@
     color: inherit;
     border: 1px solid grey;
 }
+
+@media (max-width: 600px) {
+    .not-found > div > h1 {
+        font-size: 10rem;
+    }
+    
+}
