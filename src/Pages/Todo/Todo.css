@@ -105,6 +105,7 @@
   padding-right: 15px;
   font-family: Playfair Display, serif !important;
   height: fit-content;
+  background-color: #FFF;
 }
 
 .MuiButtonBase-root {
@@ -114,6 +115,7 @@
 .tasks__list {
   box-shadow: 0 2px 10px 0 rgb(0 0 0 / 14%);
   border: solid 1px rgb(151, 151, 151, 0.18);
+  background-color: #FFF;
   padding-top: 3rem;
   padding-bottom: 3rem;
   display: flex;
@@ -128,10 +130,6 @@
   display: flex;
 }
 
-.tasks-count {
-  display: none;
-}
-
 @media (max-width: 786px) {
     .todo___bgimage {
       border-radius: 0;
@@ -140,10 +138,6 @@
 
   .tasks-title {
     display: none;
-  }
-
-  .tasks-count {
-    display: flex;
   }
 
   .add-task-form {

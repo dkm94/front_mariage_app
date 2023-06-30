@@ -3,7 +3,7 @@
     left: 50%;
     width: 161px;
     height: 40px;
-    background: #fff;
+    background: inherit;
     filter: contrast(20);
     align-self: center;
   }

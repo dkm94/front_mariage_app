@@ -1,8 +1,15 @@
-import { Button, TextField } from "@mui/material";
+import { Button, TextField, IconButton } from "@mui/material";
 import React, { useState, useEffect, useRef } from "react";
 import BlackButton from "../../../components/Buttons/Black/BlackButton";
+import DeleteIcon from "@mui/icons-material/Delete";
 
-const UpdateExpense = ({ edit, setEdit, onSubmit, deleteExpense }) => {
+const UpdateExpense = ({
+  edit,
+  setEdit,
+  onSubmit,
+  deleteExpense,
+  setisOpen,
+}) => {
   const [input, setInput] = useState(edit ? edit : "");
 
   const inputRef = useRef(null);
@@ -116,14 +123,25 @@ const UpdateExpense = ({ edit, setEdit, onSubmit, deleteExpense }) => {
         />
       </form>
       <div className="expense__edit-form">
-        <Button
+        {/* <Button
           onClick={() => deleteExpense(edit._id)}
           color="error"
           variant="contained"
           style={{ textTransform: "unset" }}
         >
           Supprimer
-        </Button>
+        </Button> */}
+        <IconButton
+          style={{
+            backgroundColor: "darkred",
+            borderRadius: "5px",
+            fontSize: "unset",
+          }}
+          onClick={() => deleteExpense(edit._id)}
+        >
+          <DeleteIcon style={{ color: "#F4F4F4" }} />
+          <span style={{ color: "#F4F4F4" }}>Supprimer</span>
+        </IconButton>
         <div>
           <Button
             style={{
@@ -132,7 +150,10 @@ const UpdateExpense = ({ edit, setEdit, onSubmit, deleteExpense }) => {
               textTransform: "unset",
               fontSize: "1rem",
             }}
-            onClick={() => setEdit({ id: null })}
+            onClick={() => {
+              setEdit({ id: null });
+              setisOpen(false);
+            }}
             variant="outline"
           >
             Annuler
@@ -141,7 +162,7 @@ const UpdateExpense = ({ edit, setEdit, onSubmit, deleteExpense }) => {
             text={"Valider"}
             variant={"contained"}
             onClick={handleSubmit}
-            style={{ borderRadius: "5px" }}
+            style={{ borderRadius: "5px", padding: "6px 16px" }}
           />
         </div>
       </div>

@@ -6,7 +6,7 @@ import avatar from "../../../../../../img/avatar.jpg";
 import "./SmallGuestCard.css";
 
 const SmallGuestCard = (props) => {
-  const { guest, firstPerson, secondPerson } = props;
+  const { guest, firstPerson, secondPerson, setEdit, setisOpen } = props;
 
   return (
     <Grid2 className="guest__sm" display={"flex"} flexDirection={"row"}>
@@ -48,7 +48,15 @@ const SmallGuestCard = (props) => {
         justifyContent={"end"}
         alignItems={"end"}
       >
-        <IconButton>
+        <IconButton
+          onClick={() => {
+            setEdit({
+              id: guest._id,
+              name: guest.name,
+            });
+            setisOpen(true);
+          }}
+        >
           <CreateIcon fontSize="small" />
         </IconButton>
       </Grid2>

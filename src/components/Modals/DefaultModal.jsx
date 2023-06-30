@@ -28,7 +28,7 @@ const overlayStyle = {
   left: 0,
   right: 0,
   bottom: 0,
-  backgroundColor: "rgba(211, 211, 211, 0.1)",
+  backgroundColor: "rgba(211, 211, 211, 0.4)",
   zIndex: 1000,
 };
 

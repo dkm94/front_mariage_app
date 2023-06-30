@@ -85,6 +85,11 @@ const EditTableForm = (props) => {
                 <div key={guest._id} className="guest-del">
                   <span>{guest.name}</span>
                   <IconButton
+                    style={{
+                      backgroundColor: "darkred",
+                      borderRadius: "5px",
+                      color: "#fff",
+                    }}
                     onClick={() => {
                       deleteGuest(guest._id, table._id);
                     }}
@@ -97,13 +102,21 @@ const EditTableForm = (props) => {
         </div>
       </div>
       <div className="guest-card__form__button-container">
-        <Button
+        {/* <Button
           color="error"
           variant="contained"
           onClick={(e) => deleteTable(e, edit.id)}
         >
           Supprimer
-        </Button>
+        </Button> */}
+
+        <IconButton
+          onClick={(e) => deleteTable(e, edit.id)}
+          style={{ backgroundColor: "darkred", borderRadius: "5px" }}
+        >
+          <DeleteIcon style={{ color: "#F4F4F4" }} />
+          <span style={{ color: "#F4F4F4" }}>Supprimer</span>
+        </IconButton>
 
         <div>
           <Button
@@ -127,7 +140,7 @@ const EditTableForm = (props) => {
             // type={"submit"}
             text={"Enregistrer"}
             variant="contained"
-            style={{ borderRadius: "5px" }}
+            style={{ borderRadius: "5px", padding: "6px 16px" }}
           />
         </div>
       </div>
