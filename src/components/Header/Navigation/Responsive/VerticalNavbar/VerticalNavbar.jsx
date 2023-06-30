@@ -16,15 +16,18 @@ const VerticalNavbar = (props) => {
   const secondPerson = weddingId["secondPerson"];
 
   const [isExpanded, setExpendState] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       await axios
         .get(`/api/admin/wedding/${id}`, { withCredentials: true })
         .then((res) => {
           setWeddingId(res.data);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log(err))
+        .finally(() => setLoading(false));
     };
     fetchData();
   }, [id]);
@@ -36,6 +39,7 @@ const VerticalNavbar = (props) => {
           ? "side-nav-container"
           : "side-nav-container side-nav-container-NX"
       }
+      style={{ animation: "fadeIn 2s", opacity: 1 }}
     >
       <div className="nav-upper">
         <div className="nav-heading">
@@ -56,7 +60,9 @@ const VerticalNavbar = (props) => {
                   fontWeight: 500,
                   fontSize: "1.2rem",
                 }}
-              >{`${firstPerson} & ${secondPerson}`}</span>
+              >
+                {loading ? "" : `${firstPerson} & ${secondPerson}`}
+              </span>
             </div>
           )}
           {isExpanded ? (
