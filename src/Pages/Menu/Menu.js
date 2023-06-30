@@ -321,7 +321,7 @@ const Menus = () => {
                                       type="submit"
                                       onClick={() => deleteStarter(starter._id)}
                                       style={{
-                                        backgroundColor: "#bf1e1e",
+                                        backgroundColor: "darkred",
                                         borderRadius: "5px",
                                         color: "#fff",
                                       }}
@@ -414,7 +414,7 @@ const Menus = () => {
                                         deleteMaincourse(maincourse._id)
                                       }
                                       style={{
-                                        backgroundColor: "#bf1e1e",
+                                        backgroundColor: "darkred",
                                         borderRadius: "5px",
                                         color: "#fff",
                                       }}
@@ -507,7 +507,7 @@ const Menus = () => {
                                       type="submit"
                                       onClick={() => deleteDessert(dessert._id)}
                                       style={{
-                                        backgroundColor: "#bf1e1e",
+                                        backgroundColor: "darkred",
                                         borderRadius: "5px",
                                         color: "#fff",
                                       }}
@@ -599,7 +599,7 @@ const Menus = () => {
                                         deleteApetizer(apetizer._id);
                                       }}
                                       style={{
-                                        backgroundColor: "#bf1e1e",
+                                        backgroundColor: "darkred",
                                         borderRadius: "5px",
                                         color: "#fff",
                                       }}
@@ -697,7 +697,7 @@ const Menus = () => {
                                         deleteBeverage(beverage._id)
                                       }
                                       style={{
-                                        backgroundColor: "#bf1e1e",
+                                        backgroundColor: "darkred",
                                         borderRadius: "5px",
                                         color: "#fff",
                                       }}

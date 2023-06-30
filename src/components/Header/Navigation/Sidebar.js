@@ -9,14 +9,18 @@ const Login = (props) => {
   const id = props.userInfos.mariageID;
   const [weddingId, setWeddingId] = useState({});
 
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       await axios
         .get(`/api/admin/wedding/${id}`, { withCredentials: true })
         .then((res) => {
           setWeddingId(res.data);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log(err))
+        .finally(() => setLoading(false));
     };
     fetchData();
   }, [id]);
@@ -25,12 +29,14 @@ const Login = (props) => {
   const secondPerson = weddingId["secondPerson"];
 
   return (
-    <nav className="sidebar">
+    <nav className="sidebar" style={{ animation: "fadeIn 2s", opacity: 1 }}>
       <div className="sidebar__greetings">
         <div className="profile-picture">
           <img alt="profile" src={profilePicture} />
         </div>
-        <p className="names">{`${firstPerson} & ${secondPerson}`}</p>
+        <p className="names">
+          {loading ? "" : `${firstPerson} & ${secondPerson}`}
+        </p>
       </div>
       <ul className="sidebarList">
         {NavigationData.map((val, key) => {

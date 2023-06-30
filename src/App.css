@@ -9,6 +9,7 @@ html, body {
     font-weight: 400 !important;
     font-size: 0.9rem;
     font-family: 'Playfair Display', serif !important;
+    background-color: #f9f9f9 !important;
 }
 
 body {
@@ -82,7 +83,7 @@ h1 {
     height: fit-content;
     /* position: absolute; */
     /* left: 20%; */
-    background-color: #FFF;
+    /* background-color: #FFF; */
 }
 
 .App {

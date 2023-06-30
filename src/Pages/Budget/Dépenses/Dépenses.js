@@ -201,6 +201,7 @@ const Expenses = ({
                       onSubmit={submitUpdate}
                       handleChange={handleChange}
                       deleteExpense={deleteExpense}
+                      setisOpen={setisOpen}
                     />
                   </DefaultModal>
                 </div>

@@ -244,6 +244,8 @@ const Guests = ({
                       guest={guest}
                       firstPerson={firstPerson}
                       secondPerson={secondPerson}
+                      setEdit={setEdit}
+                      setisOpen={setisOpen}
                     />
                   </Grid2>
                 );

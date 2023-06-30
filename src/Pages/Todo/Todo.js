@@ -189,7 +189,11 @@ const Todo = () => {
                 }}
                 className="task-container"
               >
-                <Container maxWidth="sm" style={{ maxWidth: "700px" }} className="task-container__">
+                <Container
+                  maxWidth="sm"
+                  style={{ maxWidth: "700px" }}
+                  className="task-container__"
+                >
                   <div className="tasks__list">
                     <Grid2
                       container
@@ -199,26 +203,6 @@ const Todo = () => {
                       justifyContent={"center"}
                       width={"100%"}
                     >
-                      <div
-                        style={{
-                          padding: "3rem",
-                          paddingBottom: "2rem",
-                          width: "100%",
-                        }}
-                      >
-                        <span
-                          className="tasks-title"
-                          style={{ fontSize: "2rem" }}
-                        >
-                          Liste des tâches
-                        </span>
-                        <span
-                          className="tasks-count"
-                          style={{ fontSize: "2rem" }}
-                        >
-                          Liste des tâches ({completedTasks}/{todos?.length})
-                        </span>
-                      </div>
                       <Divider
                         style={{
                           borderColor: "grey",
@@ -226,6 +210,17 @@ const Todo = () => {
                           width: "85%",
                         }}
                       />
+                      {todos?.length === 0 && (
+                        <span
+                          style={{
+                            alignSelf: "center",
+                            marginTop: "5rem",
+                            fontSize: "1.3rem",
+                          }}
+                        >
+                          Vos tâches ici
+                        </span>
+                      )}
                       {todos
                         .filter((todo) => {
                           return (

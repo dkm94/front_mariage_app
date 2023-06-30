@@ -197,14 +197,26 @@ const Budget = () => {
               <div className="budget-cols">
                 <div className="budget___col-1">
                   <div className="col card-expense-component">
-                    <div className="card">
+                    <div className="card" style={{ backgroundColor: "#fff" }}>
                       <div className="g-0">
                         <div className="card-pd">
                           <div className="card-body">
-                            <h5 className="card-title">
-                              Dépenses <small>(en €)</small>
+                            <h5
+                              style={{
+                                fontFamily: "'Corinthia', cursive",
+                                fontSize: "3rem",
+                              }}
+                              className="card-title"
+                            >
+                              Dépenses
                             </h5>
-                            <span>{total}</span>
+                            <span
+                              style={{
+                                fontFamily: "none",
+                              }}
+                            >
+                              {total} €
+                            </span>
                           </div>
                         </div>
                       </div>

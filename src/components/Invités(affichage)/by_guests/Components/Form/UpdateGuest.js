@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
-import { Button, Grid } from "@mui/material";
+import { Button, Grid, IconButton } from "@mui/material";
 import BlackButton from "../../../../Buttons/Black/BlackButton";
 import checkIcon from "../../../../../img/green-check.png";
 import TextField from "@mui/material/TextField";
+import DeleteIcon from "@mui/icons-material/Delete";
 import "../../guests.css";
 
 const UpdateGuest = ({
@@ -178,13 +179,13 @@ const UpdateGuest = ({
             </p>
           </div>
           <div className="guest-card__form__button-container">
-            <Button
+            <IconButton
+              style={{ backgroundColor: "darkred", borderRadius: "5px" }}
               onClick={() => deleteGuest(edit.id)}
-              color="error"
-              variant="contained"
             >
-              Supprimer
-            </Button>
+              <DeleteIcon style={{ color: "#F4F4F4" }} />
+              <span style={{ color: "#F4F4F4" }}>Supprimer</span>
+            </IconButton>
             <div>
               <Button
                 onClick={() => {
@@ -204,7 +205,7 @@ const UpdateGuest = ({
                 text={"Valider"}
                 type={"submit"}
                 variant="contained"
-                style={{ borderRadius: "5px" }}
+                style={{ borderRadius: "5px", padding: "6px 16px" }}
               />
             </div>
           </div>
