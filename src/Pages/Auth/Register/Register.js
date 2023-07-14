@@ -113,7 +113,7 @@ const Register = ({ setShowForm }) => {
         tempArr = [];
         setTimeout(() => {
           setShowAlert(false);
-          window.location = "/login";
+          setShowForm("login")
         }, 4500);
       })
       .catch((err) => {
