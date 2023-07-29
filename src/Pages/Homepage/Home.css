@@ -7,7 +7,7 @@
     background-size: cover;
     background-position: center;
     /* background-position: calc(50% + 250px) 50px,100% !important; */
-    background-position-y: -247px;
+    /* background-position-y: -247px; */
     position: relative;
  }
 
@@ -241,11 +241,26 @@ a:hover {
         padding-left: 3rem;
         padding-right: 3rem;
     }
+    #intro-card {
+        max-width: 240px;
+    }
+    .presentation-section > .container > .cards-container {
+        padding-left: 100px;
+    }
   }
 
   @media (max-width: 767.98px) { 
-    .intro {
-        padding: 1rem;
+    .content-home > .banner-section {
+        height: 450px;
+    }
+    .content-home > .banner-section > .banner-text {
+        line-height: 45px;
+    }
+    .content-home > .banner-section > .banner-text > span:nth-child(1) {
+        font-size: 1.6rem;
+    }
+    .content-home > .banner-section > .banner-text > span:nth-child(3) {
+        font-size: 4rem;
     }
     .home___register-btn > button {
         width: 14rem;
@@ -254,11 +269,85 @@ a:hover {
 
     .intro > h1 {
         width: 100%;
-        font-size: 2.5rem;
+        font-size: 1.4rem !important;
+    }
+    #intro-card {
+        max-width: unset;
+        width: 100%;
+        padding: 1rem !important;
+    }
+    .csctn  {
+        flex-direction: column;
+    }
+
+    .intro-section {
+        height: fit-content;
+        max-height: unset;
+        padding-top: 100px;
+        padding-bottom: 100px;
+    }
+
+    .intro-section > .container > .intro {
+        width: 100% !important;
+        padding: 1rem;
+    }
+
+    .intro-section > .container > .intro > p > span {
+        font-size: 1.2rem;
+        text-wrap: unset;
+    }
+
+    .intro > .register-btn {
+        display: flex;
+        justify-content: center;
+    }
+
+    .intro-section > .container > .intro-img {
+        width: 100% !important;
+        justify-content: center;
+    }
+
+    .intro-img > img {
+        height: 350px;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .presentation-section > .container > .cards-container {
+        padding-left: 0;
+    }
+    .home-cards__title > h3 {
+        font-size: 1rem;
+    }
+    .home-cards__img > img {
+        height: 40%;
+    }
+    .home-cards__img {
+        height: 4rem;
+        width: 4rem;
+    }
+    .section-2___titre > h2 {
+        font-size: 1.4rem !important;
+    }
+    .section-2___sous-titre > span {
+        font-size: 1.2rem;
     }
    }
 
-   @media (max-width: 576px) { 
+   @media (max-width: 576px) {
+    .content-home > .banner-section {
+        height: 350px;
+    }
+    .content-home > .banner-section > .banner-text {
+        line-height: 35px;
+        top: 37%;
+    }
+    .content-home > .banner-section > .banner-text > span:nth-child(1) {
+        font-size: 1rem;
+    }
+    .content-home > .banner-section > .banner-text > span:nth-child(3) {
+        font-size: 2.4rem;
+    }
     .intro > h1 {
         /* font-size: 2.5rem; */
     }
@@ -267,7 +356,5 @@ a:hover {
         width: inherit;
     }
 
-    .section-2___sous-titre > span {
-        font-size: 1.5rem;
-    }
+   
     }
