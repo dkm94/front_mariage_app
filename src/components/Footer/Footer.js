@@ -23,7 +23,7 @@ const Footer = ({token}) => {
         <div className="footer">
             <div className="footer-dims">
                 <div className="footer-dims___span">
-                    <span>© Copyright 2022 - Tous droits réservés</span>
+                    <span>© Copyright 2023 - Tous droits réservés</span>
                 </div>
             </div>
         </div>
