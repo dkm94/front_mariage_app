@@ -1,74 +1,96 @@
-.home {
-    width: 100%;
-}
-.section-1 {
+.content-home > .banner-section {
     width: 100%;
     display: flex;
-    margin-top: 8vh;  
-    padding-top: 6rem;
-    padding-bottom: 6rem;
-    padding-left: 6rem;
-    padding-right: 6rem;
-    background-repeat: no-repeat,repeat !important;
-    background-size: 600px,auto !important;
-    background-position: calc(50% + 250px) 50px,100% !important;
+    height: 650px;
+    background-image: url("../../img//homepage-banner.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    /* background-position: calc(50% + 250px) 50px,100% !important; */
+    background-position-y: -247px;
+    position: relative;
  }
 
-/* .home___position {
+ .content-home > .banner-section > .banner-text {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-} */
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    line-height: 68px;
+ }
 
-.home___position {
-    width: 50%;
-}
+ .content-home > .banner-section > .banner-text > span:nth-child(1) {
+    font-size: 2.5rem;
+    color: #FFF;
+    text-transform: uppercase;
+ }
 
-.home___position-style {
+ .content-home > .banner-section > .banner-text > span:nth-child(3) {
+    font-size: 6rem;
+    color: #FFF;
+    text-transform: uppercase;
+ }
+
+ .intro-section {
+    max-width: 1200px;
     width: 100%;
-    height: 100%;
-}
+    margin-left: auto;
+    box-sizing: border-box;
+    margin-right: auto;
+    display: block;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    max-height: 700px;
+ }
 
-.home__picture {
-    width: 100%;
-    height: inherit;
-}
+ .intro-section > .container > {
+    display: flex !important;
+    flex-direction: row !important;
+ }
 
-.home__picture > img {
-    width: inherit;
-    width: 100%;
-}
+ .csctn {
+   display: flex !important;
+   flex-direction: row;
+   height: 100%;
+ }
 
-#hidden-picture {
-    display: none;
-}
-
-#show-home-picture {
-    display: initial;
-}
-
-.home-desc {
+ .intro-section > .container > .intro {
     color: black;
     padding: 2rem;
-    border-radius: 5px;
-}
+    width: 50% !important;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    justify-content: center;
+ }
 
-.home-desc > h1 {
-    font-size: 3rem;
-    margin-bottom: 2rem;
-    text-shadow: 1px 1px 1px rgb(0 0 0 / 15%);
+ .intro-section > .container > .intro > h1 {
+    font-size: 2.5rem;
+    /* text-shadow: 1px 1px 1px rgb(0 0 0 / 15%); */
     line-height: 1em;
 }
 
-.home-desc > p {
-    /* margin-right: 150px; */
+ .intro-section > .container > .intro > p {
     line-height: 2em;
 }
 
-.home-desc > p > span {
+ .intro-section > .container > .intro > p > span {
     display: block;
     font-size: 1.3rem;
     text-wrap: balance;
+}
+
+.intro-section > .container > .intro-img  {
+    padding: 2rem;
+    width: 50% !important;
+    display: flex;
+    justify-content: flex-end;
+ }
+
+.intro-img > img {
+    width: auto;
+    height: 100%;
 }
 
 .home-btn {
@@ -78,18 +100,16 @@
     color: black;
 }
 
-.home___register-btn {
+.intro > .register-btn {
     width: 100%;
-    padding-left: 2rem;
-    padding-right: 2rem;
 }
 
-.home___register-btn> button > a:hover {
+.intro > .register-btn > button > a:hover {
     background-color: black !important;
     color: white !important;
 }
 
-.home___register-btn > button{
+.intro > .register-btn > button{
     background-color: black;
     color: white !important;
     border-radius: 25px;
@@ -98,8 +118,14 @@
     width: 20rem;
 }
 
-.home___register-btn > button:hover{
+.intro > .register-btn > button:hover{
     background-color: black;
+}
+
+.presentation-section {
+    background-color: #F0EEEC;
+    padding-top: 100px;
+    padding-bottom: 100px;
 }
 
 
@@ -117,17 +143,12 @@ a:hover {
     color: black;
 }
 
-.home > .section-2 {
-    padding: 6rem 15rem;
-}
-
 .section-2___titre {
     text-align: center;
-    text-transform: uppercase;
 }
 
 .section-2___titre > h2 {
-    font-size: 1rem !important;
+    font-size: 2.5rem !important;
 }
 
 .section-2___sous-titre {
@@ -156,7 +177,7 @@ a:hover {
     height: 7rem;
     width: 7rem;
     border-radius: 50%;
-    background: #f0efeb;
+    background: #f7f6f4;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -173,55 +194,48 @@ a:hover {
 
 #intro-card{
     padding: 3rem 2rem !important;
+    background-color: #FFF;
+    gap: 7px;
+    margin-top: 2rem;
+    width: -webkit-fill-available;
+    height: auto;
+    max-width: 300px;
+}
+
+.presentation-section > .container > .cards-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding-left: 150px;
 }
 
 @media (max-width: 1199.98px) { 
     .home__picture > img {
         margin-top: 20%;
     }
-    .home-desc > h1 {
+    .intro > h1 {
         font-size: 3rem;
     }
  }
 
  @media (max-width: 991.98px) { 
-    .home > .section-2 {
-        padding: 4rem 4rem;
-    }
-    #show-home-picture {
-        display: none;
-    }
-    #hidden-picture {
-      display: flex;
-      justify-content: center;
-
-    }
-    #hidden-picture > img {
-      margin-bottom: 50px;
-  }
-    .home___position-style {
-      position: unset;
-      top: unset;
-      left: unset;
-      transform: unset;
-      width: 100%;
-    }
     .home__picture > img {
       margin-top: unset;
       height: 325px;
       width: auto;
   }
-  .home-desc > p > span {
+  .intro > p > span {
     font-size: 1rem;
     line-height: 1.5em;
 }
-  .home-desc > p {
+  .intro > p {
       margin-right: 0;
   }
   .section-2___sous-titre > span {
     font-size: 2rem;
     }
-    .section-1 {
+    .banner-section {
         padding-top: 3rem;
         padding-bottom: 3rem;
         padding-left: 3rem;
@@ -230,32 +244,22 @@ a:hover {
   }
 
   @media (max-width: 767.98px) { 
-    .home-desc {
+    .intro {
         padding: 1rem;
     }
     .home___register-btn > button {
         width: 14rem;
         padding: 7px
     }
-    .section-1 {
-        padding-bottom: 22rem;
-        background-position: calc(50% + 0px) calc(100% + 0px),top center !important;
-        background-size: 336px,auto !important;
-    }
-    .home___position {
-        width: 100%;
-    }
-    .home___position-style {
-        text-align: center;
-    }
-    .home-desc > h1 {
+
+    .intro > h1 {
         width: 100%;
         font-size: 2.5rem;
     }
    }
 
    @media (max-width: 576px) { 
-    .home-desc > h1 {
+    .intro > h1 {
         /* font-size: 2.5rem; */
     }
     .home__picture > img {
