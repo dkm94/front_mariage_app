@@ -5,14 +5,12 @@ import App from "./App";
 import "../src/App.css";
 import "../src/index.css";
 import Layout from "./Layout";
-// import Footer from "../src/components/Footer/Footer";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Layout>
         <App />
-        {/* <Footer className="footer-component"/> */}
       </Layout>
     </BrowserRouter>
   </React.StrictMode>,
