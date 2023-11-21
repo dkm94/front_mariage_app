@@ -65,5 +65,12 @@
   "proxy": "https://my-wedding-backend.onrender.com/",
   "resolutions": {
     "react-scripts/eslint-webpack-plugin": "2.4.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.9",
+    "@types/node": "^20.9.3",
+    "@types/react": "^18.2.38",
+    "@types/react-dom": "^18.2.16",
+    "typescript": "^5.3.2"
   }
 }
