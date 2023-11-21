@@ -1,14 +1,16 @@
-import React, { useState } from "react";
-import { withRouter, Link } from "react-router-dom";
 import "./Home.css";
 import "../../components/LargeButton/LargeButton.css";
+
+import React, { useState } from "react";
+import { withRouter } from "react-router-dom";
+import { Button, Container } from "@mui/material";
+
 import Card from "./Card";
 import dashboardCards from "./data";
-import { Button, Container } from "@mui/material";
-import introImg from "../../img/section-2-img.jpg";
 import Register from '../Auth/Register/Register';
 import Login from '../Auth/Login/Login';
 import AuthModal from '../../components/Modals/AuthModal';
+import introImg from "../../img/section-2-img.jpg";
 
 const Home = () => {
   const [isOpen, setisOpen] = useState(false);
