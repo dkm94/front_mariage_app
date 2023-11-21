@@ -1,11 +1,13 @@
+import "../Header.css";
+
 import React, { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
-import "../Header.css";
-import Logo from "../../../img/logo-2023-no-shadow.png";
 import { Button } from "@mui/material";
+
 import Login from "../../../Pages/Auth/Login/Login";
 import Register from "../../../Pages/Auth/Register/Register";
 import AuthModal from "../../Modals/AuthModal";
+import Logo from "../../../img/logo-2023-no-shadow.png";
 
 const Logout = () => {
   const path = window.location.pathname;
