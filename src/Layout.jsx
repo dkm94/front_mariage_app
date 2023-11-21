@@ -2,8 +2,9 @@ import React from "react";
 import axios from "axios";
 import decode from "jwt-decode";
 import { BrowserRouter as Router } from "react-router-dom";
-import TopNav from "../src/components/Header/Top-Navbar";
-import LoggedOutNavigation from "../src/components/Header/Navigation/Log_out";
+
+import TopNav from "./components/Header/Top-Navbar";
+import LoggedOutNavigation from "./components/Header/Navigation/Log_out";
 import Sidebar from "./components/Header/Navigation/Sidebar";
 import VerticalNavbar from "./components/Header/Navigation/Responsive/VerticalNavbar/VerticalNavbar";
 
