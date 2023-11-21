@@ -1,20 +1,20 @@
-import React from "react";
 import "./App.css";
-import { Switch, Route, Redirect } from "react-router-dom";
 
-// <------- Setup App ---------->
-import ProtectedRoute from "./ProtectedRoutes/Admin.js";
-import useDocumentTitle from "./setupTitle.js";
+import React, { createContext } from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
+import axios from "axios";
+import decode from "jwt-decode";
 
 // <------- Components ---------->
+import ProtectedRoute from "./ProtectedRoutes/ProtectedRoute.tsx";
 import Footer from "./components/Footer/Footer.js";
 import ScrollButton from "./components/ScrollToTop/ScrollToTop.js";
 import Loader from "./components/Loader/Loader.js";
+import ScrollToTop from "./helpers/ScrollToTop.jsx";
+import Page from "./components/Page/Page.tsx";
 
 // <------- Pages ---------->
 import Homepage from "./Pages/Homepage/Home.jsx";
-// import NouvelUtilisateur from "./Pages/Auth/Register/Register";
-// import Connexion from "./Pages/Auth/Login/Login";
 import Reset from "./Pages/Auth/Reset/Reset.js";
 import TableauDeBord from "./Pages/Dashboard/Dashboard.jsx";
 import CompteUtilisateur from "./Pages/Mon_Compte/Mon_compte.js";
@@ -25,25 +25,23 @@ import LesDépenses from "./Pages/Budget/Budget.js";
 import Todo from "./Pages/Todo/Todo.js";
 import NotFound from "./Pages/PageNotFound/NotFound.js";
 
-// <------- Packages ---------->
-import axios from "axios";
-import decode from "jwt-decode";
-import ScrollToTop from "./helpers/ScrollToTop.jsx";
+// <------- Types ---------->
+import { UserType, RoleType, ScrollButtonType, LoaderType } from "../types/index.js";
 
-// <------- Props ---------->
-export const UserContext = React.createContext();
-export const AuthenticationContext = React.createContext();
-export const ScrollButtonContext = React.createContext();
-export const LoaderContext = React.createContext();
+// <------- Ctx ---------->
+export const UserContext = createContext<UserType>(undefined);
+export const AuthenticationContext = createContext<RoleType>(undefined);
+export const ScrollButtonContext = createContext<ScrollButtonType>({} as ScrollButtonType);
+export const LoaderContext = createContext<LoaderType>({} as LoaderType);
 
 function App() {
-  const token = localStorage.getItem("token");
+  const token: string | null = localStorage.getItem("token");
 
-  let user;
-  let role;
+  let user: UserType;
+  let role: RoleType;
   if (token) {
     user = decode(token);
-    role = user.role;
+    role = user?.role;
   }
 
   axios.defaults.baseURL = "https://my-wedding-backend.onrender.com/";
@@ -51,38 +49,12 @@ function App() {
   // axios.defaults.baseURL = 'http://localhost:3050';
   axios.defaults.headers.common["Authorization"] = "Bearer " + token;
 
-  let scrollButton = <ScrollButton />;
-  let loader = <Loader />;
-
-  function Page({
-    title: titre,
-    component: Component,
-    auth: userRole,
-    userInfos: infos,
-  }) {
-    const titlePrefix = "My Wedding | ";
-    useDocumentTitle(`${titlePrefix}${titre}`);
-    return (
-      <Component
-        page={titre}
-        userInfos={infos}
-        userRole={userRole}
-        token={token}
-      />
-    );
-  }
+  let scrollButton: ScrollButtonType = <ScrollButton />;
+  let loader: LoaderType = <Loader />;
 
   function Home() {
     return <Page title="Accueil" component={Homepage} token={token} />;
   }
-
-  // function Login() {
-  //   return <Page title="Connexion" component={Connexion} />;
-  // }
-
-  // function Register() {
-  //   return <Page title="Créer un compte" component={NouvelUtilisateur} />;
-  // }
 
   function ResetPassword() {
     return <Page title="Réinitialiser le mot de passe" component={Reset} />;
@@ -172,12 +144,6 @@ function App() {
                   <Route exact path="/">
                     {token ? <Redirect to="/tableau-de-bord" /> : Home}
                   </Route>
-                  {/* <Route path="/login">
-                    {token ? <Redirect to="/menu/mon-compte" /> : Login}
-                  </Route>
-                  <Route path="/register">
-                    {token ? <Redirect to="/menu/mon-compte" /> : Register}
-                  </Route> */}
                   <Route path="/reset-password">
                     {token ? <Redirect to="/menu/mon-compte" /> : ResetPassword}
                   </Route>
