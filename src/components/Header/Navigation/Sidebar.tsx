@@ -1,9 +1,11 @@
+import "../Header.css";
+
 import React, { useEffect, useState } from "react";
 import { withRouter, Link } from "react-router-dom";
-import "../Header.css";
-import { NavigationData } from "./NavigationData";
-import profilePicture from "../../../img/couple-img.jpg";
 import axios from "axios";
+
+import { NavigationData } from "./NavigationData.ts";
+import profilePicture from "../../../img/couple-img.jpg";
 
 const Login = (props) => {
   const id = props.userInfos.mariageID;

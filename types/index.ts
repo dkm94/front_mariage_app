@@ -30,3 +30,14 @@ export interface ProtectedRouteProps {
     infos?: UserType | undefined;
     token?: string | null;
 }
+
+export interface VerticalNavbarProps {
+    userInfos?: UserType | undefined;
+}
+
+export type NavigationDataType = {
+    idx: number;
+    title: string;
+    icon: ElementType;
+    pathname: string;
+}[]

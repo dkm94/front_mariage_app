@@ -1,22 +1,26 @@
-import React, { useState, useEffect } from "react";
-import { NavigationData } from "../../NavigationData";
 import "./VerticalNavbar.css";
+
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { IconButton } from "@mui/material";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
-import { Link } from "react-router-dom";
-import { IconButton } from "@mui/material";
+
+import { VerticalNavbarProps } from '../../../../../../types';
+import { NavigationData } from "../../NavigationData.ts";
 import profilePicture from "../../../../../img/couple-img.jpg";
-import axios from "axios";
 
-const VerticalNavbar = (props) => {
-  const id = props.userInfos.mariageID;
-  const [weddingId, setWeddingId] = useState({});
+const VerticalNavbar = ({ userInfos }: VerticalNavbarProps) => {
 
-  const firstPerson = weddingId["firstPerson"];
-  const secondPerson = weddingId["secondPerson"];
+  const id: string | undefined = userInfos?.mariageID;
+  const [weddingId, setWeddingId] = useState<string>("");
 
-  const [isExpanded, setExpendState] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const firstPerson: string = weddingId["firstPerson"];
+  const secondPerson: string = weddingId["secondPerson"];
+
+  const [isExpanded, setExpendState] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,7 +49,7 @@ const VerticalNavbar = (props) => {
         <div className="nav-heading">
           {weddingId && (
             <div
-              style={{ display: !isExpanded && "none" }}
+              style={{ display: !isExpanded ? "none" : "" }}
               className="nav-brand"
             >
               <div className="picture">
@@ -79,12 +83,13 @@ const VerticalNavbar = (props) => {
           )}
         </div>
         <div className="nav-menu">
-          {NavigationData.map(({ title, icon, pathname }) => (
+          {NavigationData?.map(({ title, icon: Icon, pathname }) => (
             <Link
-              className={isExpanded ? "menu-item" : "menu-item menu-item-NX"}
+              className={"menu-item"}
               to={pathname}
+              key={title}
             >
-              {icon}
+              {<Icon />}
               {isExpanded && <p>{title}</p>}
             </Link>
           ))}

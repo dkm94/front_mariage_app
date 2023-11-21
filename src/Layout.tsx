@@ -1,17 +1,18 @@
 import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
 import axios from "axios";
 import decode from "jwt-decode";
-import { BrowserRouter as Router } from "react-router-dom";
 
-import TopNav from "./components/Header/Top-Navbar";
-import LoggedOutNavigation from "./components/Header/Navigation/Log_out";
-import Sidebar from "./components/Header/Navigation/Sidebar";
-import VerticalNavbar from "./components/Header/Navigation/Responsive/VerticalNavbar/VerticalNavbar";
+import TopNav from "./components/Header/Top-Navbar.js";
+import LoggedOutNavigation from "./components/Header/Navigation/Log_out.jsx";
+import Sidebar from "./components/Header/Navigation/Sidebar.tsx";
+import VerticalNavbar from "./components/Header/Navigation/Responsive/VerticalNavbar/VerticalNavbar.tsx";
+import { UserType } from "../types/index.ts";
 
 const Layout = ({ children }) => {
-  const token = localStorage.getItem("token");
+  const token: string | null = localStorage.getItem("token");
 
-  let user;
+  let user: UserType;
   if (token) {
     user = decode(token);
   }
@@ -23,7 +24,7 @@ const Layout = ({ children }) => {
   return (
     <Router>
       <div className="navigation-layout">
-        {token ? <TopNav userInfos={user} /> : <LoggedOutNavigation />}
+        {token ? <TopNav /> : <LoggedOutNavigation />}
         <div className={token ? "body-content" : "body-content___home"}>
           {token && <Sidebar userInfos={user} />}
           {token && <VerticalNavbar userInfos={user} />}

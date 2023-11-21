@@ -4,42 +4,44 @@ import ChairAltIcon from "@mui/icons-material/ChairAlt";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import WineBarIcon from "@mui/icons-material/WineBar";
 import EuroIcon from "@mui/icons-material/Euro";
-// import dashboardIcon from "../../../img/SidebareIcons/dashboard.png";
-// import guestsIcon from "../../../img/SidebareIcons/guests.png";
-// import tablesIcon from "../../../img/SidebareIcons/tables.png";
-// import todoIcon from "../../../img/SidebareIcons/todo.png";
-// import menuIcon from "../../../img/SidebareIcons/menu.png";
-// import expensesIcon from "../../../img/SidebareIcons/money.png";
 
-export const NavigationData = [
+import { NavigationDataType } from '../../../../types';
+
+export const NavigationData: NavigationDataType = [
   {
+    idx: 0,
     title: "Tableau de bord",
-    icon: <DashboardIcon />,
+    icon: DashboardIcon,
     pathname: "/tableau-de-bord",
   },
   {
+    idx: 1,
     title: "Invités",
-    icon: <PeopleIcon />,
+    icon: PeopleIcon,
     pathname: "/menu/invites",
   },
   {
+    idx: 2,
     title: "Plan de table",
-    icon: <ChairAltIcon />,
+    icon: ChairAltIcon,
     pathname: "/menu/tables",
   },
   {
+    idx: 3,
     title: "Tâches",
-    icon: <ListAltIcon />,
+    icon: ListAltIcon,
     pathname: "/menu/taches",
   },
   {
+    idx: 4,
     title: "Réception",
-    icon: <WineBarIcon />,
+    icon: WineBarIcon,
     pathname: "/menu/carte",
   },
   {
+    idx: 5,
     title: "Dépenses",
-    icon: <EuroIcon />,
+    icon: EuroIcon,
     pathname: "/menu/budget",
   },
 ];
