@@ -5,7 +5,7 @@ import maincourseImg from "../../img/menus/maincourse_img.jpg";
 import dessertImg from "../../img/menus/dessert_img.jpg";
 import apetizerImg from "../../img/menus/apetizers.jpg";
 import beverageImg from "../../img/menus/beverages.jpg";
-import { ScrollButtonContext } from "../../../src/App";
+import { ScrollButtonContext } from "../../App.tsx";
 import addIcon from "../../img/plus.png";
 import axios from "axios";
 import "./Menu.css";

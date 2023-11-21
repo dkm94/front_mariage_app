@@ -3,32 +3,32 @@ import "./App.css";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 // <------- Setup App ---------->
-import ProtectedRoute from "../src/ProtectedRoutes/Admin";
-import useDocumentTitle from "./setupTitle";
+import ProtectedRoute from "./ProtectedRoutes/Admin.js";
+import useDocumentTitle from "./setupTitle.js";
 
 // <------- Components ---------->
-import Footer from "./components/Footer/Footer";
-import ScrollButton from "../src/components/ScrollToTop/ScrollToTop";
-import Loader from "../src/components/Loader/Loader";
+import Footer from "./components/Footer/Footer.js";
+import ScrollButton from "./components/ScrollToTop/ScrollToTop.js";
+import Loader from "./components/Loader/Loader.js";
 
 // <------- Pages ---------->
-import Homepage from "./Pages/Homepage/Home";
+import Homepage from "./Pages/Homepage/Home.jsx";
 // import NouvelUtilisateur from "./Pages/Auth/Register/Register";
 // import Connexion from "./Pages/Auth/Login/Login";
-import Reset from "./Pages/Auth/Reset/Reset";
-import TableauDeBord from "../src/Pages/Dashboard/Dashboard.jsx";
-import CompteUtilisateur from "../src/Pages/Mon_Compte/Mon_compte";
-import LesInvités from "../src/Pages/Invités/Invités";
-import LesTables from "../src/Pages/Tables/Tables";
-import LaCarte from "../src/Pages/Menu/Menu";
-import LesDépenses from "../src/Pages/Budget/Budget.js";
-import Todo from "../src/Pages/Todo/Todo";
-import NotFound from "./Pages/PageNotFound/NotFound";
+import Reset from "./Pages/Auth/Reset/Reset.js";
+import TableauDeBord from "./Pages/Dashboard/Dashboard.jsx";
+import CompteUtilisateur from "./Pages/Mon_Compte/Mon_compte.js";
+import LesInvités from "./Pages/Invités/Invités.js";
+import LesTables from "./Pages/Tables/Tables.js";
+import LaCarte from "./Pages/Menu/Menu.js";
+import LesDépenses from "./Pages/Budget/Budget.js";
+import Todo from "./Pages/Todo/Todo.js";
+import NotFound from "./Pages/PageNotFound/NotFound.js";
 
 // <------- Packages ---------->
 import axios from "axios";
 import decode from "jwt-decode";
-import ScrollToTop from "./helpers/ScrollToTop";
+import ScrollToTop from "./helpers/ScrollToTop.jsx";
 
 // <------- Props ---------->
 export const UserContext = React.createContext();

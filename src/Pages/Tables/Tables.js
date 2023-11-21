@@ -4,7 +4,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
 import Table from "./Table";
 import AddTableForm from "./Forms/Add";
-import { ScrollButtonContext } from "../../../src/App";
+import { ScrollButtonContext } from "../../App.tsx";
 import axios from "axios";
 
 import "./Tables.css";

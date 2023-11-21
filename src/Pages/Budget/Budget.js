@@ -3,7 +3,7 @@ import { Formik, Form, useFormik } from "formik";
 import { Link } from "react-router-dom";
 import PieChart from "../../components/Expenses/Graph/PieChart";
 import TextField from "../../components/Formik/TextField-operations";
-import { ScrollButtonContext } from "../../../src/App";
+import { ScrollButtonContext } from "../../App.tsx";
 import { Container, Row, Col } from "react-bootstrap";
 import Expenses from "./Dépenses/Dépenses";
 import * as Yup from "yup";

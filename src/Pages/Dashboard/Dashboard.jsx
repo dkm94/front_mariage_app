@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { ScrollButtonContext } from "../../App";
+import { ScrollButtonContext } from "../../App.tsx";
 import "./Dashboard.css";
 import axios from "axios";
 import Card from "./Card/Card.jsx";
