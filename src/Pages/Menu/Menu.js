@@ -624,9 +624,9 @@ const Menus = () => {
                     </div>
                     <div className="dessert___div_form fade-in">
                       {beverages.length === 0 || beverages.length === 1 ? (
-                        <h3 className="menu__title">Boisson</h3>
+                        <h3 className="menu__title" style={{ textAlign: "end"}}>Boisson</h3>
                       ) : (
-                        <h3 className="menu__title">Boissons</h3>
+                        <h3 className="menu__title" style={{ textAlign: "end"}}>Boissons</h3>
                       )}
                       <div className="menu___forms">
                         <AddBeverageForm

@@ -203,8 +203,7 @@ const Budget = () => {
                           <div className="card-body">
                             <h5
                               style={{
-                                fontFamily: "'Corinthia', cursive",
-                                fontSize: "3rem",
+                                textTransform: "uppercase",
                               }}
                               className="card-title"
                             >
