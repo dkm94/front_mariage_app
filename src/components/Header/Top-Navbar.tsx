@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+
 import Logo from "../../img/logo-2023-no-shadow.png";
-// import MobileLogo from "../../img/mobile-logo.png";
+
+const win: Window = window;
 
 const TopNav = () => {
-  const LogOut = async () => {
-    console.log("déconnexion...");
-    await localStorage.removeItem("token");
-    window.location = "/";
-  };
 
   const [showLinks, setShowLinks] = useState(false);
 
-  const handleShowLinks = () => {
-    setShowLinks(!showLinks);
+  const LogOut = () => {
+    console.log("déconnexion...");
+    localStorage.removeItem("token");
+    win.location = "/";
   };
+
+  const handleShowLinks = () => setShowLinks(!showLinks);
 
   return (
     <nav className={`topNavbar ${showLinks ? "show_nav" : "bg-desktop"}`}>
