@@ -5,7 +5,7 @@ import Logo from "../../img/logo-2023-no-shadow.png";
 
 const win: Window = window;
 
-const TopNav = () => {
+const NavbarWithUser = () => {
 
   const [showLinks, setShowLinks] = useState<boolean>(false);
 
@@ -104,4 +104,4 @@ const TopNav = () => {
   );
 };
 
-export default TopNav;
+export default NavbarWithUser;
