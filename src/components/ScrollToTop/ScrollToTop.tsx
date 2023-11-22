@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useWindowScroll } from "react-use";
 import "./ScrollToTop.css";
 
-const ScrollToTop = () => {
+import React, { FC, useEffect, useState } from "react";
+import { useWindowScroll } from "react-use";
+
+const ScrollToTop: FC = () => {
+
     const { y: pageYOffset } = useWindowScroll();
-    const [visible, setVisibility] = useState(false);
+    const [visible, setVisibility] = useState<boolean>(false);
 
     useEffect(() => {
         if(pageYOffset > 400){
@@ -18,7 +20,7 @@ const ScrollToTop = () => {
         return false
     }
 
-    const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth"})
+    const scrollToTop = (): void => window.scrollTo({ top: 0, behavior: "smooth"})
     
     return(
         <div className="scroll-to-top" onClick={scrollToTop}>

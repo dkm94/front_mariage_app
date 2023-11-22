@@ -8,7 +8,7 @@ import decode from "jwt-decode";
 // <------- Components ---------->
 import ProtectedRoute from "./ProtectedRoutes/ProtectedRoute.tsx";
 import Footer from "./components/Footer/Footer.js";
-import ScrollButton from "./components/ScrollToTop/ScrollToTop.js";
+import ScrollButton from "./components/ScrollToTop/ScrollToTop.tsx";
 import Loader from "./components/Loader/Loader.js";
 import ScrollToTop from "./helpers/ScrollToTop.jsx";
 import Page from "./components/Page/Page.tsx";
