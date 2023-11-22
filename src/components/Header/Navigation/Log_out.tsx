@@ -4,9 +4,9 @@ import React, { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { Button } from "@mui/material";
 
-import Login from "../../../Pages/Auth/Login/Login";
-import Register from "../../../Pages/Auth/Register/Register";
-import AuthModal from "../../Modals/AuthModal";
+import Login from "../../../Pages/Auth/Login/Login.tsx";
+import Register from "../../../Pages/Auth/Register/Register.js";
+import AuthModal from "../../Modals/AuthModal.jsx";
 import Logo from "../../../img/logo-2023-no-shadow.png";
 
 const Logout = () => {

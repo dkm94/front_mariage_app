@@ -8,7 +8,7 @@ import { Button, Container } from "@mui/material";
 import Card from "./Card";
 import dashboardCards from "./data";
 import Register from '../Auth/Register/Register';
-import Login from '../Auth/Login/Login';
+import Login from '../Auth/Login/Login.tsx';
 import AuthModal from '../../components/Modals/AuthModal';
 import introImg from "../../img/section-2-img.jpg";
 

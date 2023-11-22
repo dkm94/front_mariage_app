@@ -41,3 +41,7 @@ export type NavigationDataType = {
     icon: ElementType;
     pathname: string;
 }[]
+
+export interface ILoginProps {
+    setShowForm: React.Dispatch<React.SetStateAction<string>>
+}

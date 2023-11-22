@@ -1,13 +1,17 @@
-import React, { useState } from "react";
-import { withRouter, useHistory } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import ErrorAlert from "../../../components/Alert/Error/Error";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as Yup from "yup";
-import axios from "axios";
 import "./Login.css";
+
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import { History } from 'history';
+import * as Yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { TextField } from "@mui/material";
 import { Button, styled } from "@material-ui/core";
+
+import { ILoginProps } from "../../../../types";
+import ErrorAlert from "../../../components/Alert/Error/Error";
 
 const CustomButton = styled(Button)({
   textTransform: "unset",
@@ -29,14 +33,20 @@ const CustomButton = styled(Button)({
   },
 });
 
-const Login = ({ setShowForm }) => {
-  const [showError, setShowError] = useState(false);
-  const [loadingButton, setLoadingButton] = useState(false);
-  const history = useHistory();
-  const validationSchema = Yup.object().shape({
-    email: Yup.string().required("Veuillez compléter ce champ."),
-    password: Yup.string().required("Veuillez compléter ce champ."),
-  });
+const validationSchema = Yup.object().shape({
+  email: Yup.string().required("Veuillez compléter ce champ."),
+  password: Yup.string().required("Veuillez compléter ce champ."),
+});
+
+// type LoginForm = Yup.InferType<typeof validationSchema>;
+
+const Login = ({ setShowForm }: ILoginProps) => {
+
+  const history: History = useHistory();
+
+  const [showError, setShowError] = useState<boolean>(false);
+  const [loadingButton, setLoadingButton] = useState<boolean>(false);
+
   const {
     register,
     handleSubmit,
@@ -44,6 +54,11 @@ const Login = ({ setShowForm }) => {
   } = useForm({
     resolver: yupResolver(validationSchema),
   });
+
+  //todo: handle errors front or back side
+  //todo: use formik Form instead of html form
+  //todo: handle yup schema
+  
 
   const onSubmit = async (form) => {
     setLoadingButton(true);
@@ -70,6 +85,7 @@ const Login = ({ setShowForm }) => {
         }, 5000);
       });
   };
+
 
   return (
     <div className="login-page">
@@ -157,4 +173,4 @@ const Login = ({ setShowForm }) => {
   );
 };
 
-export default withRouter(Login);
+export default Login;

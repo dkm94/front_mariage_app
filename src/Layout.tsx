@@ -4,7 +4,7 @@ import axios from "axios";
 import decode from "jwt-decode";
 
 import TopNav from "./components/Header/Top-Navbar.js";
-import LoggedOutNavigation from "./components/Header/Navigation/Log_out.jsx";
+import LoggedOutNavigation from "./components/Header/Navigation/Log_out.tsx";
 import Sidebar from "./components/Header/Navigation/Sidebar.tsx";
 import VerticalNavbar from "./components/Header/Navigation/Responsive/VerticalNavbar/VerticalNavbar.tsx";
 import { UserType } from "../types/index.ts";
