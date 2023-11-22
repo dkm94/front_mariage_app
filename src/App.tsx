@@ -9,7 +9,7 @@ import decode from "jwt-decode";
 import ProtectedRoute from "./ProtectedRoutes/ProtectedRoute.tsx";
 import Footer from "./components/Footer/Footer.js";
 import ScrollButton from "./components/Buttons/ScrollToTop/ScrollToTop.tsx";
-import Loader from "./components/Loader/Loader.tsx";
+import { Loader } from "./components/Loader/Loader.tsx";
 import ScrollToTop from "./helpers/ScrollToTop.tsx";
 import Page from "./components/Page/Page.tsx";
 
