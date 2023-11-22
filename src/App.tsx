@@ -14,7 +14,7 @@ import ScrollToTop from "./helpers/ScrollToTop.jsx";
 import Page from "./components/Page/Page.tsx";
 
 // <------- Pages ---------->
-import Homepage from "./Pages/Homepage/Home.jsx";
+import Homepage from "./Pages/Homepage/Home.tsx";
 import Reset from "./Pages/Auth/Reset/Reset.js";
 import TableauDeBord from "./Pages/Dashboard/Dashboard.jsx";
 import CompteUtilisateur from "./Pages/Mon_Compte/Mon_compte.js";

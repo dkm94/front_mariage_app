@@ -5,16 +5,16 @@ import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import { Button, Container } from "@mui/material";
 
-import Card from "./Card";
-import dashboardCards from "./data";
-import Register from '../Auth/Register/Register';
+import Card from "./Card.jsx";
+import dashboardCards from "./data.js";
+import Register from '../Auth/Register/Register.js';
 import Login from '../Auth/Login/Login.tsx';
-import AuthModal from '../../components/Modals/AuthModal';
+import AuthModal from '../../components/Modals/AuthModal.jsx';
 import introImg from "../../img/section-2-img.jpg";
 
 const Home = () => {
-  const [isOpen, setisOpen] = useState(false);
-  const [showForm, setShowForm] = useState("");
+  const [isOpen, setisOpen] = useState<boolean>(false);
+  const [showForm, setShowForm] = useState<string>("");
 
   return (
     <>
