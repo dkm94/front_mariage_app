@@ -60,3 +60,20 @@ export interface IAuthModalProps {
     close: boolean;
     children: React.ReactNode;
 }
+
+export interface ISidebarProps {
+    userInfos?: UserType | undefined;
+}
+
+export type WeddingProps = {
+    _id: string;
+    guestID: string[];
+    tableID: string[];
+    todoListID: string[];
+    firstPerson: string,
+    secondPerson: string,
+    adminID: string,
+    budgetID: string,
+    invitationID: string,
+    menuID: string
+} | undefined

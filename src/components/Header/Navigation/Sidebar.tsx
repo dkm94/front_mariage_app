@@ -4,14 +4,16 @@ import React, { useEffect, useState } from "react";
 import { withRouter, Link } from "react-router-dom";
 import axios from "axios";
 
+import { ISidebarProps, WeddingProps } from "../../../../types/index.ts";
 import { NavigationData } from "./NavigationData.ts";
 import profilePicture from "../../../img/couple-img.jpg";
 
-const Login = (props) => {
-  const id = props.userInfos.mariageID;
-  const [weddingId, setWeddingId] = useState({});
+const Sidebar = ({ userInfos }: ISidebarProps) => {
 
-  const [loading, setLoading] = useState(false);
+  const id: string | undefined = userInfos?.mariageID;
+  const [wedding, setWedding] = useState<WeddingProps>(undefined);
+
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,7 +21,7 @@ const Login = (props) => {
       await axios
         .get(`/api/admin/wedding/${id}`, { withCredentials: true })
         .then((res) => {
-          setWeddingId(res.data);
+          setWedding(res.data);
         })
         .catch((err) => console.log(err))
         .finally(() => setLoading(false));
@@ -27,8 +29,8 @@ const Login = (props) => {
     fetchData();
   }, [id]);
 
-  const firstPerson = weddingId["firstPerson"];
-  const secondPerson = weddingId["secondPerson"];
+  const firstPerson = wedding?.["firstPerson"];
+  const secondPerson = wedding?.["secondPerson"];
 
   return (
     <nav className="sidebar" style={{ animation: "fadeIn 2s", opacity: 1 }}>
@@ -57,4 +59,4 @@ const Login = (props) => {
     </nav>
   );
 };
-export default withRouter(Login);
+export default withRouter(Sidebar);
