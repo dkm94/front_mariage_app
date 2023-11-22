@@ -45,3 +45,11 @@ export type NavigationDataType = {
 export interface ILoginProps {
     setShowForm: React.Dispatch<React.SetStateAction<string>>
 }
+
+export interface IRegisterProps extends ILoginProps {}
+
+export type DashboardCardDataType = {
+    icon: string;
+    title: string;
+    description: string;
+}[]

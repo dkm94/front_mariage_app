@@ -5,15 +5,15 @@ import { Link, withRouter } from "react-router-dom";
 import { Button } from "@mui/material";
 
 import Login from "../../../Pages/Auth/Login/Login.tsx";
-import Register from "../../../Pages/Auth/Register/Register.js";
+import Register from "../../../Pages/Auth/Register/Register.tsx";
 import AuthModal from "../../Modals/AuthModal.jsx";
 import Logo from "../../../img/logo-2023-no-shadow.png";
 
 const Logout = () => {
-  const path = window.location.pathname;
+  const path: string = window.location.pathname;
 
-  const [isOpen, setisOpen] = useState(false);
-  const [showForm, setShowForm] = useState("");
+  const [isOpen, setisOpen] = useState<boolean>(false);
+  const [showForm, setShowForm] = useState<string>("");
 
   return (
     <div

@@ -1,13 +1,15 @@
+import "./Register.css";
+
 import React, { useEffect, useState } from "react";
-import { withRouter } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import ErrorAlert from "../../../components/Alert/Error/Error";
+import axios from "axios";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import axios from "axios";
-import "./Register.css";
-import SuccessAlert from "../../../components/Alert/Sucess/Success";
 import { TextField, styled, Button } from "@mui/material";
+
+import { IRegisterProps } from "../../../../types";
+import ErrorAlert from "../../../components/Alert/Error/Error";
+import SuccessAlert from "../../../components/Alert/Sucess/Success";
 
 const CustomButton = styled(Button)({
   textTransform: "unset !important",
@@ -29,7 +31,7 @@ const CustomButton = styled(Button)({
   },
 });
 
-const Register = ({ setShowForm }) => {
+const Register = ({ setShowForm }: IRegisterProps) => {
   let tempArr = [];
 
   const [showAlert, setShowAlert] = useState(false);
@@ -81,7 +83,7 @@ const Register = ({ setShowForm }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const myHeaders = new Headers();
+      const myHeaders: Headers = new Headers();
       const myInit = { method: "GET", headers: myHeaders, mode: "cors" };
       await fetch(
         `https://my-wedding-backend.onrender.com/api/admin/admin/`,
@@ -93,7 +95,10 @@ const Register = ({ setShowForm }) => {
             tempArr.push(email.email);
           });
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          //do something, show error
+          console.log(err)
+        });
     };
     fetchData();
   });
@@ -242,4 +247,4 @@ const Register = ({ setShowForm }) => {
   );
 };
 
-export default withRouter(Register);
+export default Register;

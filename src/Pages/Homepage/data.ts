@@ -1,10 +1,13 @@
+import { DashboardCardDataType } from "../../../types";
+
 import groupIcon from "../../img/dashboardIcons/groupe.png";
 import tableIcon from "../../img/dashboardIcons/dinner-table.png";
 import menuIcon from "../../img/dashboardIcons/plate.png";
 import todoIcon from "../../img/dashboardIcons/todo.png";
 import calculatorIcon from "../../img/dashboardIcons/calculator.png";
 
-const dashboardCards = [
+
+const dashboardCards: DashboardCardDataType = [
     {
         icon: groupIcon,
         title: "Les invités",
