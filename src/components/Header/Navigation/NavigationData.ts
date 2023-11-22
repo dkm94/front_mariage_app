@@ -7,7 +7,7 @@ import EuroIcon from "@mui/icons-material/Euro";
 
 import { NavigationDataType } from '../../../../types';
 
-export const NavigationData: NavigationDataType = [
+export const NavigationData: NavigationDataType[] = [
   {
     idx: 0,
     title: "Tableau de bord",

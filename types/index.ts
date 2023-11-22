@@ -40,7 +40,7 @@ export type NavigationDataType = {
     title: string;
     icon: ElementType;
     pathname: string;
-}[]
+}
 
 export interface ILoginProps {
     setShowForm: React.Dispatch<React.SetStateAction<string>>
@@ -76,4 +76,11 @@ export type WeddingProps = {
     budgetID: string,
     invitationID: string,
     menuID: string
-} | undefined
+} | undefined;
+
+export interface INavbarLinksProps {
+    idx: number;
+    title: string;
+    path: string;
+    handleClick: () => void;
+}
