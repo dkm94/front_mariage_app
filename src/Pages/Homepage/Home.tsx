@@ -9,7 +9,7 @@ import Card from "./Card.jsx";
 import dashboardCards from "./data.ts";
 import Register from '../Auth/Register/Register.tsx';
 import Login from '../Auth/Login/Login.tsx';
-import AuthModal from '../../components/Modals/AuthModal.jsx';
+import AuthModal from '../../components/Modals/Auth/AuthModal.tsx';
 import introImg from "../../img/section-2-img.jpg";
 
 const Home = () => {

@@ -6,7 +6,7 @@ import { Button } from "@mui/material";
 
 import Login from "../../../Pages/Auth/Login/Login.tsx";
 import Register from "../../../Pages/Auth/Register/Register.tsx";
-import AuthModal from "../../Modals/AuthModal.jsx";
+import AuthModal from "../../Modals/Auth/AuthModal.tsx";
 import Logo from "../../../img/logo-2023-no-shadow.png";
 
 const Logout = () => {
