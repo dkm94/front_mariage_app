@@ -6,6 +6,7 @@ import axios from "axios";
 import decode from "jwt-decode";
 
 // <------- Components ---------->
+// todo: create index file for components
 import ProtectedRoute from "./ProtectedRoutes/ProtectedRoute.tsx";
 import Footer from "./components/Footer/Footer.js";
 import ScrollButton from "./components/Buttons/ScrollToTop/ScrollToTop.tsx";
@@ -14,6 +15,7 @@ import ScrollToTop from "./helpers/ScrollToTop.tsx";
 import Page from "./components/Page/Page.tsx";
 
 // <------- Pages ---------->
+// todo: create index file for pages
 import Homepage from "./Pages/Homepage/Home.tsx";
 import Reset from "./Pages/Auth/Reset/Reset.js";
 import TableauDeBord from "./Pages/Dashboard/Dashboard.jsx";
@@ -147,6 +149,7 @@ function App() {
                   <Route path="/reset-password">
                     {token ? <Redirect to="/menu/mon-compte" /> : ResetPassword}
                   </Route>
+                  {/* todo: create dynamic protected routes, update navigation data file */}
                   <ProtectedRoute
                     exact
                     path="/tableau-de-bord"
