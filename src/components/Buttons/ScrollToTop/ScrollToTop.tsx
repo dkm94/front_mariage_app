@@ -3,7 +3,7 @@ import "./ScrollToTop.css";
 import React, { FC, useEffect, useState } from "react";
 import { useWindowScroll } from "react-use";
 
-const ScrollToTop: FC = () => {
+const ScrollToTopButton: FC = () => {
 
     const { y: pageYOffset } = useWindowScroll();
     const [visible, setVisibility] = useState<boolean>(false);
@@ -29,4 +29,4 @@ const ScrollToTop: FC = () => {
     )
 }
 
-export default ScrollToTop;
+export default ScrollToTopButton;
