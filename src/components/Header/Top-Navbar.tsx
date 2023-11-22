@@ -7,15 +7,15 @@ const win: Window = window;
 
 const TopNav = () => {
 
-  const [showLinks, setShowLinks] = useState(false);
+  const [showLinks, setShowLinks] = useState<boolean>(false);
 
-  const LogOut = () => {
+  const LogOut = (): void => {
     console.log("déconnexion...");
     localStorage.removeItem("token");
     win.location = "/";
   };
 
-  const handleShowLinks = () => setShowLinks(!showLinks);
+  const handleShowLinks = (): void => setShowLinks(!showLinks);
 
   return (
     <nav className={`topNavbar ${showLinks ? "show_nav" : "bg-desktop"}`}>
