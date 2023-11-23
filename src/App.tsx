@@ -23,7 +23,7 @@ import CompteUtilisateur from "./Pages/Mon_Compte/Mon_compte.js";
 import LesInvités from "./Pages/Invités/Invités.js";
 import LesTables from "./Pages/Tables/Tables.js";
 import LaCarte from "./Pages/Menu/Menu.js";
-import LesDépenses from "./Pages/Budget/Budget.js";
+import LesDépenses from "./Pages/Budget/Budget.tsx";
 import Todo from "./Pages/Todo/Todo.js";
 import NotFound from "./Pages/PageNotFound/NotFound.js";
 

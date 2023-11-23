@@ -1,63 +1,66 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Formik, Form, useFormik } from "formik";
-import { Link } from "react-router-dom";
-import PieChart from "../../components/Expenses/Graph/PieChart";
-import TextField from "../../components/Formik/TextField-operations";
-import { ScrollButtonContext } from "../../App.tsx";
-import { Container, Row, Col } from "react-bootstrap";
-import Expenses from "./Dépenses/Dépenses";
-import * as Yup from "yup";
-import axios from "axios";
 import "./Budget.css";
-import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
-import GreyButton from "../../components/Buttons/Grey/GreyButton";
-import ScreenLoader from "../../components/Loader/Screen/ScreenLoader";
+
+import React, { useState, useEffect, useContext, ReactNode, ChangeEvent } from "react";
+import { Link } from "react-router-dom";
+import axios, { AxiosResponse } from "axios";
+import { Container, Row, Col } from "react-bootstrap";
+import { Formik, Form, useFormik } from "formik";
+import * as Yup from "yup";
 import Grow from "@mui/material/Grow";
 
-const Budget = () => {
-  const scrollBtn = useContext(ScrollButtonContext);
+import { OperationType } from "../../../types/index.ts";
+import { ScrollButtonContext } from "../../App.tsx";
+import PieChart from "../../components/Expenses/Graph/PieChart";
+import TextField from "../../components/Formik/TextField-Operations.tsx";
+import Expenses from "./Dépenses/Dépenses";
+import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
+import GreyButton from "../../components/Buttons/Grey/GreyButton.tsx";
+import ScreenLoader from "../../components/Loader/Screen/ScreenLoader";
 
-  const newOperationValues = {
+const Budget = () => {
+
+  const scrollBtn = useContext<ReactNode>(ScrollButtonContext);
+
+  const newOperationValues: OperationType = {
     category: "",
     price: "",
     description: "",
   };
 
-  const [operations, setOperations] = useState([]);
-  const [searchValue, setSearchValue] = useState("");
-  const [operation, setOperation] = useState({});
-  const [total, setTotal] = useState(null);
+  const [operations, setOperations] = useState<OperationType[] | []>([]);
+  const [operation, setOperation] = useState<OperationType | {}>({});
+  const [searchValue, setSearchValue] = useState<string>("");
+  const [total, setTotal] = useState<string>("");
 
-  const [edit, setEdit] = useState(null);
+  const [edit, setEdit] = useState<OperationType | null>(null);
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [isOpen, setisOpen] = useState<boolean>(false);
 
-  const [isOpen, setisOpen] = useState(false);
+  //TODO: bug prix au moment de la modification d'une dépense 
 
   useEffect(() => {
     setLoading(true);
 
-    let operations = axios.get(`/api/admin/budget/operations/`);
-    async function getDatas() {
-      let res = await Promise.resolve(operations);
-      setOperations(res.data);
-      calculateTotal(res.data);
-
+    let operations: Promise<AxiosResponse> = axios.get<OperationType[]>(`/api/admin/budget/operations/`);
+    const getDatas = async (): Promise<void> => {
+      let res: AxiosResponse = await Promise.resolve(operations);
+      const data: OperationType[] = res.data;
+      setOperations(data);
+      calculateTotal(data);
       setLoading(false);
     }
     getDatas();
   }, [operation]);
 
-  const handleSearch = (e) => {
+  const handleSearch = (e: ChangeEvent<HTMLInputElement>): void => {
     setSearchValue(e.target.value);
   };
 
-  const editExpense = ({ expense }) => {
+  const editExpense = async ({ expense }: { expense: OperationType}): Promise<void> => {
     let { _id, category, description, price } = expense;
-    // console.log("🚀 ~ file: Budget.js:65 ~ editExpense ~ expense:", expense);
-    // price = price * 100;
-    // console.log("🚀 ~ file: Budget.js:65 ~ editExpense ~ expense:", expense);
-    const updatedExpenses = [...operations].map((obj) => {
+
+    const updatedExpenses: OperationType[] = [...operations].map((obj) => {
       if (obj._id === _id) {
         obj.description = description;
         obj.price = price;
@@ -65,9 +68,11 @@ const Budget = () => {
       }
       return obj;
     });
-    axios
-      .post(`/api/admin/budget/operations/edit/${_id}`, expense)
+
+    await axios
+      .post<OperationType>(`/api/admin/budget/operations/edit/${_id}`, expense)
       .then((res) => {
+        //todo: handle success message from the backend **TOAST**
         if (res.data != null) {
           setTimeout(() => {
             setOperations(updatedExpenses);
@@ -78,24 +83,29 @@ const Budget = () => {
         }
       })
       .catch((err) => {
+        //todo: handle error message from the backend **TOAST**
         console.log(err);
       });
   };
 
-  const deleteExpense = async (id) => {
+  const deleteExpense = async (id: string): Promise<void> => {
     await axios
       .delete(`/api/admin/budget/operations/delete/${id}`)
       .then((res) => {
         if (res.data != null) {
-          const updatedExpenses = operations.filter(
+          const updatedExpenses: OperationType[] | [] = operations.filter(
             (operation) => operation._id !== id
           );
           setOperations(updatedExpenses);
           calculateTotal(updatedExpenses);
           setisOpen(false);
+          //todo: handle success message from the backend **TOAST**
+
         }
       })
       .catch((err) => {
+        //todo: handle error message from the backend **TOAST**
+
         console.log(err);
       });
   };
@@ -103,9 +113,13 @@ const Budget = () => {
   const operationValidationSchema = Yup.object().shape({
     category: Yup.string().required("Veuillez choisir une catégorie."),
     price: Yup.number()
-      .test("maxDigitsAfterDecimal", "Format invalide.", (number) =>
-        /^\d+(\.\d{1,2})?$/.test(number)
-      )
+      .test("maxDigitsAfterDecimal", "Format invalide.", (value) => {
+        if (value !== undefined) {
+          const regex = /^\d+(\.\d{1,2})?$/;
+          return regex.test(value.toString());
+        }
+        return true;
+      })
       .required("Veuillez compléter ce champ."),
     description: Yup.string()
       .max(300, "La description ne peut dépasser 300 caractères.")
@@ -136,7 +150,7 @@ const Budget = () => {
     enableReinitialize: true,
   });
 
-  function calculateTotal(operations) {
+  function calculateTotal(operations: OperationType[]): void {
     if (operations) {
       const getSums = operations?.map((op) => Number(op.price));
       const add = getSums.reduce((a, b) => a + b);
@@ -281,7 +295,7 @@ const Budget = () => {
                           value={formik.values.description}
                           onChange={formik.handleChange}
                           onBlur={formik.handleBlur}
-                          className="form-control"
+                          class="form-control"
                           errors={formik.errors}
                           touched={formik.touched}
                           placeholder="Description"
@@ -294,7 +308,7 @@ const Budget = () => {
                           value={formik.values.price}
                           onChange={formik.handleChange}
                           onBlur={formik.handleBlur}
-                          className="form-control"
+                          class="form-control"
                           errors={formik.errors}
                           touched={formik.touched}
                           placeholder="Montant"

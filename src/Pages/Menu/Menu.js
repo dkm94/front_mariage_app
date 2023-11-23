@@ -1,15 +1,25 @@
+import "./Menu.css";
+
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import Grow from "@mui/material/Grow";
+import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
+import { IconButton } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import CreateIcon from "@mui/icons-material/Create";
+import styled from "@emotion/styled";
+
+import { ScrollButtonContext } from "../../App.tsx";
+
 import starterImg from "../../img/menus/starter_img.jpg";
 import maincourseImg from "../../img/menus/maincourse_img.jpg";
 import dessertImg from "../../img/menus/dessert_img.jpg";
 import apetizerImg from "../../img/menus/apetizers.jpg";
 import beverageImg from "../../img/menus/beverages.jpg";
-import { ScrollButtonContext } from "../../App.tsx";
 import addIcon from "../../img/plus.png";
-import axios from "axios";
-import "./Menu.css";
-import AddStarterForm from "./Forms/Add/AddStarter";
+
+import AddStarterForm from "./Forms/Add/AddStarter.tsx";
 import AddMaincourseForm from "./Forms/Add/AddMaincourse";
 import AddDessertForm from "./Forms/Add/AddDessert";
 import AddApetizerForm from "./Forms/Add/AddApetizer";
@@ -19,13 +29,7 @@ import UpdateMaincourse from "./Forms/Update/Maincourse";
 import UpdateDessert from "./Forms/Update/Dessert";
 import UpdateApetizer from "./Forms/Update/Apetizer";
 import UpdateBeverage from "./Forms/Update/Beverage";
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
-import { IconButton } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import CreateIcon from "@mui/icons-material/Create";
-import styled from "@emotion/styled";
 import ScreenLoader from "../../components/Loader/Screen/ScreenLoader";
-import Grow from "@mui/material/Grow";
 
 const IconWrapper = styled(IconButton)({
   "&:hover": {

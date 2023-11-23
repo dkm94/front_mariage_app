@@ -1,13 +1,15 @@
+import { ChangeEvent } from "react";
 import { ElementType, ReactNode } from "react";
+import { FormikErrors } from "formik";
 
 export type RoleType = "admin" | undefined;
 
 export type UserType = {
-    id: string,
-    mariageID: string,
-    role: RoleType,
-    firstPerson: string,
-    secondPerson: string,
+    id: string;
+    mariageID: string;
+    role: RoleType;
+    firstPerson: string;
+    secondPerson: string;
 } | undefined;
 
 export type ScrollButtonType = ReactNode;
@@ -70,12 +72,12 @@ export type WeddingProps = {
     guestID: string[];
     tableID: string[];
     todoListID: string[];
-    firstPerson: string,
-    secondPerson: string,
-    adminID: string,
-    budgetID: string,
-    invitationID: string,
-    menuID: string
+    firstPerson: string;
+    secondPerson: string;
+    adminID: string;
+    budgetID: string;
+    invitationID: string;
+    menuID: string;
 } | undefined;
 
 export interface INavbarLinksProps {
@@ -83,4 +85,35 @@ export interface INavbarLinksProps {
     title: string;
     path: string;
     handleClick: () => void;
+}
+
+export type OperationType = {
+    _id?: string;
+    category: string;
+    date?: string;
+    price: number | string;
+    description: string;
+    mariageID?: string;
+}
+
+// export type BudgetProps = {
+//     _id: string;
+//     mariageID: string;
+//     operations: OperationType[];
+// } | undefined;
+
+export interface ITextfieldOperations {
+    size?: string;
+    label?: string;
+    name: string;
+    type: string;
+    value: string | number;
+    onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    onBlur: (e: ChangeEvent<HTMLInputElement>) => void;
+    class?: string;
+    errors?: FormikErrors<OperationType>;
+    touched?: Record<string, boolean>;
+    placeholder?: string;
+    width?: string;
+    autocomplete?: string;
 }

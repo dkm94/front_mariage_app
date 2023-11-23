@@ -1,7 +1,9 @@
+import "../../Menu.css";
+
 import React, { useState, useRef } from "react";
 import axios from "axios";
-import GreyButton from "../../../../components/Buttons/Grey/GreyButton";
-import "../../Menu.css";
+
+import GreyButton from "../../../../components/Buttons/Grey/GreyButton.tsx";
 
 const AddDessertForm = ({ addDessert, icon }) => {
   const [input, setInput] = useState("");

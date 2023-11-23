@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import axios from "axios";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import "../../../../../Pages/Invités/Invités.css";
-import GreyButton from "../../../../Buttons/Grey/GreyButton";
+import GreyButton from "../../../../Buttons/Grey/GreyButton.tsx";
 
 const AddGuestForm = ({ addGuest }) => {
   const [loading, setLoading] = useState(false);

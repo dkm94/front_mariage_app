@@ -1,7 +1,9 @@
+import "../../Menu.css";
+
 import React, { useState, useRef } from "react";
 import axios from "axios";
-import "../../Menu.css";
-import GreyButton from "../../../../components/Buttons/Grey/GreyButton";
+
+import GreyButton from "../../../../components/Buttons/Grey/GreyButton.tsx";
 
 const AddStarterForm = ({ addStarter, icon }) => {
   const [input, setInput] = useState("");

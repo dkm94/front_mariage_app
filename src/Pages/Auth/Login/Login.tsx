@@ -111,7 +111,7 @@ const Login = ({ setShowForm }: ILoginProps) => {
                     id="email"
                     name="email"
                     type="email"
-                    className="form-control shadow-none"
+                    class="form-control shadow-none"
                     style={{ borderColor: "#D1D4D5" }}
                   />
                   <div>{errors.email?.message}</div>
@@ -125,7 +125,7 @@ const Login = ({ setShowForm }: ILoginProps) => {
                     id="password"
                     name="password"
                     type="password"
-                    className="form-control shadow-none"
+                    class="form-control shadow-none"
                     style={{ borderColor: "#D1D4D5" }}
                   />
                   <div>{errors.password?.message}</div>

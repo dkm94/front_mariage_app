@@ -151,7 +151,7 @@ const UpdateExpense = ({
               fontSize: "1rem",
             }}
             onClick={() => {
-              setEdit({ id: null });
+              setEdit(null);
               setisOpen(false);
             }}
             variant="outline"

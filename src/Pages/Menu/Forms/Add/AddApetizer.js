@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
-import GreyButton from "../../../../components/Buttons/Grey/GreyButton";
+import GreyButton from "../../../../components/Buttons/Grey/GreyButton.tsx";
 import "../../Menu.css";
 
 const AddApetizerForm = ({ addApetizer, icon }) => {

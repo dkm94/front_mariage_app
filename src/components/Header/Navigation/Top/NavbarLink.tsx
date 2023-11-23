@@ -3,7 +3,12 @@ import { Link } from 'react-router-dom';
 
 import { INavbarLinksProps } from '../../../../../types';
 
-const NavbarLink = ({ idx, path, title, handleClick }: INavbarLinksProps) => {
+const NavbarLink = ({ 
+  idx, 
+  path, 
+  title, 
+  handleClick 
+}: INavbarLinksProps) => {
 
   return (
     <li key={idx} className={`navbar__item hidden-links slideDown-${idx+1}`}>

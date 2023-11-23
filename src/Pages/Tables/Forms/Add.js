@@ -1,8 +1,10 @@
+import "../Tables.css";
+
 import React, { useState, useRef } from "react";
 import axios from "axios";
+
+import GreyButton from "../../../components/Buttons/Grey/GreyButton.tsx";
 import addIcon from "../../../img/add-group.png";
-import "../Tables.css";
-import GreyButton from "../../../components/Buttons/Grey/GreyButton";
 
 const AddTableForm = ({ addTable }) => {
   const [input, setInput] = useState("");

@@ -158,7 +158,7 @@ const Register = ({ setShowForm }: IRegisterProps) => {
                     id="firstPerson"
                     name="firstPerson"
                     type="text"
-                    className="form-control shadow-none"
+                    class="form-control shadow-none"
                     style={{ borderColor: "#D1D4D5" }}
                   />
                   <span>{errors.firstPerson?.message}</span>
@@ -171,7 +171,7 @@ const Register = ({ setShowForm }: IRegisterProps) => {
                     id="secondPerson"
                     name="secondPerson"
                     type="text"
-                    className="form-control shadow-none"
+                    class="form-control shadow-none"
                     style={{ borderColor: "#D1D4D5" }}
                   />
                   <span>{errors.secondPerson?.message}</span>
@@ -184,7 +184,7 @@ const Register = ({ setShowForm }: IRegisterProps) => {
                     id="email"
                     name="email"
                     type="email"
-                    className="form-control shadow-none"
+                    class="form-control shadow-none"
                     style={{ borderColor: "#D1D4D5" }}
                   />
                   <span>{errors.email?.message}</span>
@@ -197,7 +197,7 @@ const Register = ({ setShowForm }: IRegisterProps) => {
                     id="password"
                     name="password"
                     type="password"
-                    className="form-control shadow-none"
+                    class="form-control shadow-none"
                     style={{ borderColor: "#D1D4D5" }}
                   />
                   <span>{errors.password?.message}</span>
@@ -210,7 +210,7 @@ const Register = ({ setShowForm }: IRegisterProps) => {
                     id="password"
                     name="confirmPassword"
                     type="password"
-                    className="form-control shadow-none"
+                    class="form-control shadow-none"
                     style={{ borderColor: "#D1D4D5" }}
                   />
                   <span>{errors.confirmPassword?.message}</span>
