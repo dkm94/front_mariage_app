@@ -11,7 +11,7 @@ import { TextField } from "@mui/material";
 import { Button, styled } from "@material-ui/core";
 
 import { ILoginProps } from "../../../../types";
-import ErrorAlert from "../../../components/Alert/Error/Error";
+import { ErrorAlert } from "../../../components/Alert";
 
 const CustomButton = styled(Button)({
   textTransform: "unset",

@@ -8,8 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { TextField, styled, Button } from "@mui/material";
 
 import { IRegisterProps } from "../../../../types";
-import ErrorAlert from "../../../components/Alert/Error/Error";
-import SuccessAlert from "../../../components/Alert/Sucess/Success";
+import { SuccessAlert, ErrorAlert } from "../../../components/Alert";
 
 const CustomButton = styled(Button)({
   textTransform: "unset !important",
