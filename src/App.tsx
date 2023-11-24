@@ -7,12 +7,12 @@ import decode from "jwt-decode";
 
 // <------- Components ---------->
 // todo: create index file for components
-import ProtectedRoute from "./ProtectedRoutes/ProtectedRoute.tsx";
-import Footer from "./components/Footer/Footer.js";
+import ProtectedRoute from "./ProtectedRoutes/ProtectedRoute";
+import Footer from "./components/Footer/Footer";
 import { ScrollToTopButton } from "./components/Buttons";
-import { Loader } from "./components/Loader/Loader.tsx";
-import ScrollToTop from "./helpers/ScrollToTop.tsx";
-import Page from "./components/Page/Page.tsx";
+import { Loader } from "./components/Loader/Loader";
+import ScrollToTop from "./helpers/ScrollToTop";
+import Page from "./components/Page/Page";
 
 // <------- Pages ---------->
 // todo: create index file for pages

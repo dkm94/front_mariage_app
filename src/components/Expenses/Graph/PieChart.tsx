@@ -1,34 +1,37 @@
+import "./PieChart.css";
+
 import React, { useState } from "react";
 import { Pie } from "react-chartjs-2";
 import "chart.js/auto";
-import "./PieChart.css";
+
 import { BlackButton } from "../../Buttons";
 import Modal from "../../Modals/PieChart.jsx";
+import { OperationCategoryType, OperationType } from "../../../../types";
 
 const PieChart = ({ operations }) => {
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState<boolean>(false);
   // Permet de supprimer les doublons 'keys' et additionner les 'values' en cas de doublons. Output: un tableau d'objets "result" avec les deux propriétés selectionnées -category et -price: un tableau d'objets avec une key "category" et une value 'price'.
-  var result = [];
-  Array.from(new Set(operations.map((x) => x.category))).forEach((x) => {
-    result.push(
+  let result: Record<OperationCategoryType, number>[] = [];
+  Array.from(new Set(operations?.map((operation: OperationType) => operation.category))).forEach((x:string) => {
+    result?.push(
       operations
-        .filter((y) => y.category === x)
-        .reduce((output, item) => {
-          let val = output[x] === undefined ? 0 : output[x];
-          output[x] = item.price / 100 + val;
+        .filter((filtered: OperationType) => filtered.category === x)
+        .reduce((output: Record<OperationCategoryType, number>, item: OperationType) => {
+          let val: number = output[x] === undefined ? 0 : output[x];
+          output[x] = Number(item.price) / 100 + val;
           return output;
         }, {})
-    );
-  });
-
+        );
+      });
+      
   // Output: un tableau où chaque key est un tableau. ==> [[], [], []]
-  const keys = result.map((item) => Object.keys(item));
+  const keys: string[][] = result?.map((item) => Object.keys(item));
   // Permet de fusionner tous les tableaux pour n'en former qu'un seul.
-  const flatKeys = keys.flat();
+  const flatKeys: string[] = keys?.flat();
   // Output: un tableau où chaque value est un tableau. ==> [[], [], []]
-  const values = result.map((item) => Object.values(item));
+  const values: number[][] = result?.map((item) => Object.values(item));
   // Permet de fusionner tous les tableaux pour n'en former qu'un seul.
-  const flatValues = values.flat();
+  const flatValues: number[] = values?.flat();
 
   const categoryColor = flatKeys.map((category) => {
     switch (category) {

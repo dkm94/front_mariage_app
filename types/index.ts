@@ -118,7 +118,6 @@ export interface ITextfieldOperations {
     width?: string;
     autocomplete?: string;
 }
-
 export interface IGreyButton {
     href?: string;
     type?: string;
@@ -128,3 +127,5 @@ export interface IGreyButton {
     text?: string;
     disabled?: boolean;
 }
+
+export type OperationCategoryType = 'Locations' | 'Habillement/Beauté' | 'Décoration/Fleurs' | 'Alliances/Bijoux' | 'Animation' | 'Traiteur' | 'Faire-part' | 'Autres';

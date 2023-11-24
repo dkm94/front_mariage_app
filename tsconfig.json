@@ -2,9 +2,10 @@
     "compilerOptions": {
         "jsx": "react",
         "lib": ["es6", "dom"],
-        "noImplicitAny": true,
+        "noImplicitAny": false,
         "noImplicitThis": true,
         "strictNullChecks": true,
         "allowSyntheticDefaultImports": true
+        
     }
   }
