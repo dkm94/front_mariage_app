@@ -3,13 +3,13 @@ import { Link, withRouter } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 // import Button from "../../LargeButton/LargeButton";
 import { ScrollButtonContext } from "../../App.tsx";
-import AddForm from "../../components/Invités(affichage)/by_guests/Components/Form/AddGuest";
-import GuestList from "../../components/Invités(affichage)/by_guests/Components/Guests/Guests";
-import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
+import AddForm from "../../components/Invités(affichage)/by_guests/Components/Form/AddGuest.tsx";
+import GuestList from "../../components/Invités(affichage)/by_guests/Components/Guests/Guests.tsx";
+import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar.js";
 import "../../components/Invités(affichage)/by_guests/guests.css";
 import "./Invités.css";
 import axios from "axios";
-import ScreenLoader from "../../components/Loader/Screen/ScreenLoader";
+import ScreenLoader from "../../components/Loader/Screen/ScreenLoader.jsx";
 import Grow from "@mui/material/Grow";
 
 const Byguests = ({ userInfos }) => {

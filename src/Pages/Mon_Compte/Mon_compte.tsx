@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { UserContext, ScrollButtonContext } from "../../App.tsx";
 import { Container, Row, Col } from "react-bootstrap";
-import Button from "../../../src/components/LargeButton/LargeButton";
+import Button from "../../components/LargeButton/LargeButton.js";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';

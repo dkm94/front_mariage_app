@@ -4,7 +4,7 @@ import "./Dashboard.css";
 import axios from "axios";
 import Card from "./Card/Card.jsx";
 import { Container, Row } from "react-bootstrap";
-import ScreenLoader from "../../components/Loader/Screen/ScreenLoader";
+import ScreenLoader from "../../components/Loader/Screen/ScreenLoader.jsx";
 import Grow from "@mui/material/Grow";
 
 const Dashboard = (props) => {

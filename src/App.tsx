@@ -16,16 +16,7 @@ import Page from "./components/Page/Page.tsx";
 
 // <------- Pages ---------->
 // todo: create index file for pages
-import Homepage from "./Pages/Homepage/Home.tsx";
-import Reset from "./Pages/Auth/Reset/Reset.js";
-import TableauDeBord from "./Pages/Dashboard/Dashboard.jsx";
-import CompteUtilisateur from "./Pages/Mon_Compte/Mon_compte.js";
-import LesInvités from "./Pages/Invités/Invités.js";
-import LesTables from "./Pages/Tables/Tables.js";
-import LaCarte from "./Pages/Menu/Menu.js";
-import LesDépenses from "./Pages/Budget/Budget.tsx";
-import Todo from "./Pages/Todo/Todo.tsx";
-import NotFound from "./Pages/PageNotFound/NotFound.js";
+import { Homepage, TodoPage, GuestsPage, TablesPage, BudgetPage, ReceptionPage, DashboardPage, SettingsPage, NotFoundPage, ResetPage } from "./Pages";
 
 // <------- Types ---------->
 import { UserType, RoleType, ScrollButtonType, LoaderType } from "../types/index.js";
@@ -59,7 +50,7 @@ function App() {
   }
 
   function ResetPassword() {
-    return <Page title="Réinitialiser le mot de passe" component={Reset} />;
+    return <Page title="Réinitialiser le mot de passe" component={ResetPage} />;
   }
 
   function Dashboard() {
@@ -68,7 +59,7 @@ function App() {
         title="Tableau de bord"
         userInfos={user}
         auth={role}
-        component={TableauDeBord}
+        component={DashboardPage}
       />
     );
   }
@@ -79,7 +70,7 @@ function App() {
         title="Paramètres du compte"
         userInfos={user}
         auth={role}
-        component={CompteUtilisateur}
+        component={SettingsPage}
       />
     );
   }
@@ -90,7 +81,7 @@ function App() {
         title="Les tables"
         userInfos={user}
         auth={role}
-        component={LesTables}
+        component={TablesPage}
       />
     );
   }
@@ -101,14 +92,14 @@ function App() {
         title="Les invités"
         userInfos={user}
         auth={role}
-        component={LesInvités}
+        component={GuestsPage}
       />
     );
   }
 
   function Carte() {
     return (
-      <Page title="Le repas" userInfos={user} auth={role} component={LaCarte} />
+      <Page title="Le repas" userInfos={user} auth={role} component={ReceptionPage} />
     );
   }
 
@@ -118,7 +109,7 @@ function App() {
         title="Les dépenses"
         userInfos={user}
         auth={role}
-        component={LesDépenses}
+        component={BudgetPage}
       />
     );
   }
@@ -129,7 +120,7 @@ function App() {
         title="Liste des tâches"
         userInfos={user}
         auth={role}
-        component={Todo}
+        component={TodoPage}
       />
     );
   }
@@ -187,7 +178,7 @@ function App() {
                     component={TodoList}
                     isAuth={role}
                   />
-                  <Route component={NotFound} />
+                  <Route component={NotFoundPage} />
                 </Switch>
               </div>
             </LoaderContext.Provider>

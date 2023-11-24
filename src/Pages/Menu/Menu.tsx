@@ -10,7 +10,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import CreateIcon from "@mui/icons-material/Create";
 import styled from "@emotion/styled";
 
-import { ScrollButtonContext } from "../../App.tsx";
+import { ScrollButtonContext } from "../../App";
 
 import starterImg from "../../img/menus/starter_img.jpg";
 import maincourseImg from "../../img/menus/maincourse_img.jpg";
@@ -19,7 +19,7 @@ import apetizerImg from "../../img/menus/apetizers.jpg";
 import beverageImg from "../../img/menus/beverages.jpg";
 import addIcon from "../../img/plus.png";
 
-import AddStarterForm from "./Forms/Add/AddStarter.tsx";
+import AddStarterForm from "./Forms/Add/AddStarter";
 import AddMaincourseForm from "./Forms/Add/AddMaincourse";
 import AddDessertForm from "./Forms/Add/AddDessert";
 import AddApetizerForm from "./Forms/Add/AddApetizer";
