@@ -48,6 +48,7 @@ const AddGuestForm = ({ addGuest }) => {
         />
       </div>
       <GreyButton
+        size="small"
         variant={"contained"}
         type="submit"
         text={loading ? "..." : "Créer"}

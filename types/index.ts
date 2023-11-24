@@ -1,6 +1,7 @@
 import { ChangeEvent } from "react";
 import { ElementType, ReactNode } from "react";
 import { FormikErrors } from "formik";
+import { ButtonPropsSizeOverrides } from "@mui/material";
 
 export type RoleType = "admin" | undefined;
 
@@ -116,4 +117,14 @@ export interface ITextfieldOperations {
     placeholder?: string;
     width?: string;
     autocomplete?: string;
+}
+
+export interface IGreyButton {
+    href?: string;
+    type?: string;
+    size?: ButtonPropsSizeOverrides | undefined;
+    variant?: string;
+    style?: any;
+    text?: string;
+    disabled?: boolean;
 }

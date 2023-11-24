@@ -320,6 +320,7 @@ const Budget = () => {
                             text={"Valider"}
                             variant={"contained"}
                             disabled={formik.isSubmitting}
+                            size="medium"
                           />
                         </div>
                       </Form>
