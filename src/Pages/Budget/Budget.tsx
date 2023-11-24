@@ -14,7 +14,7 @@ import PieChart from "../../components/Expenses/Graph/PieChart";
 import TextField from "../../components/Formik/TextField-Operations.tsx";
 import Expenses from "./Dépenses/Dépenses";
 import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
-import GreyButton from "../../components/Buttons/Grey/GreyButton.tsx";
+import { GreyButton } from "../../components/Buttons";
 import ScreenLoader from "../../components/Loader/Screen/ScreenLoader";
 
 const Budget = () => {

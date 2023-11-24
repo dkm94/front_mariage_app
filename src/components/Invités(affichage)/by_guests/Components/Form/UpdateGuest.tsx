@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import { Button, Grid, IconButton } from "@mui/material";
-import BlackButton from "../../../../Buttons/Black/BlackButton";
+import { BlackButton } from "../../../../Buttons";
 import checkIcon from "../../../../../img/green-check.png";
 import TextField from "@mui/material/TextField";
 import DeleteIcon from "@mui/icons-material/Delete";

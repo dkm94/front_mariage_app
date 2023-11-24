@@ -1,6 +1,6 @@
 import { Button, TextField, IconButton } from "@mui/material";
 import React, { useState, useEffect, useRef } from "react";
-import BlackButton from "../../../components/Buttons/Black/BlackButton";
+import { BlackButton } from "../../../components/Buttons";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 const UpdateExpense = ({

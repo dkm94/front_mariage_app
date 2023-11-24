@@ -5,7 +5,7 @@ import axios from "axios";
 import { Col } from "react-bootstrap";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 
-import GreyButton from "../../../components/Buttons/Grey/GreyButton.tsx";
+import { GreyButton } from "../../../components/Buttons";
 
 const Form = ({ addTodo }) => {
   const [input, setInput] = useState("");

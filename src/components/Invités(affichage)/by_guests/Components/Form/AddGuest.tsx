@@ -1,12 +1,13 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
-import GreyButton from "../../../../components/Buttons/Grey/GreyButton.tsx";
-import "../../Menu.css";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import "../../../../../Pages/Invités/Invités.css";
+import { GreyButton } from "../../../../Buttons";
 
-const AddBeverageForm = ({ addBeverage, icon }) => {
+const AddGuestForm = ({ addGuest }) => {
+  const [loading, setLoading] = useState(false);
   const [input, setInput] = useState("");
   const inputRef = useRef(null);
-  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setInput(e.target.value);
@@ -16,50 +17,45 @@ const AddBeverageForm = ({ addBeverage, icon }) => {
     e.preventDefault();
     setLoading(true);
     await axios
-      .post(`/api/admin/menu/beverages/add`, {
+      .post("/api/admin/guests/add", {
         name: input,
       })
       .then((res) => {
-        addBeverage(res.data);
+        addGuest(res.data);
         setInput("");
         setLoading(false);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => console.log("err", err));
   };
 
   return (
     <form
       onSubmit={handleSumbit}
       style={{ display: "flex", flexDirection: "row", alignItems: "center" }}
-      className="mt-4"
     >
       <div className="add-input">
+        {/* <img src={userIcon} alt="user icon" /> */}
+        <PersonAddIcon style={{ height: "auto", color: "#b2a9a9" }} />
         <input
           type="text"
+          className="form-control shadow-none"
           name="name"
+          placeholder="Nouvel invité"
           value={input}
           onChange={handleChange}
           ref={inputRef}
-          placeholder="Champagne..."
           required
         />
       </div>
       <GreyButton
-        variant="contained"
         size="small"
+        variant={"contained"}
         type="submit"
-        text={loading ? "..." : "Ajouter"}
-        style={{
-          marginLeft: "1rem",
-          height: "fit-content",
-          paddingTop: "0.5rem",
-          paddingBottom: "0.5rem",
-        }}
+        text={loading ? "..." : "Créer"}
+        style={{ marginLeft: "1rem" }}
       />
     </form>
   );
 };
 
-export default AddBeverageForm;
+export default AddGuestForm;

@@ -9,7 +9,7 @@ import decode from "jwt-decode";
 // todo: create index file for components
 import ProtectedRoute from "./ProtectedRoutes/ProtectedRoute.tsx";
 import Footer from "./components/Footer/Footer.js";
-import ScrollButton from "./components/Buttons/ScrollToTop/ScrollToTop.tsx";
+import { ScrollToTopButton } from "./components/Buttons";
 import { Loader } from "./components/Loader/Loader.tsx";
 import ScrollToTop from "./helpers/ScrollToTop.tsx";
 import Page from "./components/Page/Page.tsx";
@@ -24,7 +24,7 @@ import LesInvités from "./Pages/Invités/Invités.js";
 import LesTables from "./Pages/Tables/Tables.js";
 import LaCarte from "./Pages/Menu/Menu.js";
 import LesDépenses from "./Pages/Budget/Budget.tsx";
-import Todo from "./Pages/Todo/Todo.js";
+import Todo from "./Pages/Todo/Todo.tsx";
 import NotFound from "./Pages/PageNotFound/NotFound.js";
 
 // <------- Types ---------->
@@ -51,7 +51,7 @@ function App() {
   // axios.defaults.baseURL = 'http://localhost:3050';
   axios.defaults.headers.common["Authorization"] = "Bearer " + token;
 
-  let scrollButton: ScrollButtonType = <ScrollButton />;
+  let scrollButton: ScrollButtonType = <ScrollToTopButton />;
   let loader: LoaderType = <Loader />;
 
   function Home() {

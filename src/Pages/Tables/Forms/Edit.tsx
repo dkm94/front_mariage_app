@@ -4,7 +4,7 @@ import "../../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Button, IconButton, TextField } from "@mui/material";
 import "../Tables.css";
-import BlackButton from "../../../components/Buttons/Black/BlackButton";
+import { BlackButton } from "../../../components/Buttons";
 
 const EditTableForm = (props) => {
   const {

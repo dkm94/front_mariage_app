@@ -1,11 +1,9 @@
-import "../../Menu.css";
-
 import React, { useState, useRef } from "react";
 import axios from "axios";
+import { GreyButton } from "../../../../components/Buttons";
+import "../../Menu.css";
 
-import GreyButton from "../../../../components/Buttons/Grey/GreyButton.tsx";
-
-const AddMaincourseForm = ({ addMaincourse, icon }) => {
+const AddApetizerForm = ({ addApetizer, icon }) => {
   const [input, setInput] = useState("");
   const inputRef = useRef(null);
   const [loading, setLoading] = useState(false);
@@ -18,11 +16,11 @@ const AddMaincourseForm = ({ addMaincourse, icon }) => {
     e.preventDefault();
     setLoading(true);
     await axios
-      .post(`/api/admin/menu/maincourses/add`, {
+      .post(`/api/admin/menu/apetizers/add`, {
         name: input,
       })
       .then((res) => {
-        addMaincourse(res.data);
+        addApetizer(res.data);
         setInput("");
         setLoading(false);
       })
@@ -44,7 +42,7 @@ const AddMaincourseForm = ({ addMaincourse, icon }) => {
           value={input}
           onChange={handleChange}
           ref={inputRef}
-          placeholder="Boeuf bourguignon..."
+          placeholder="Petits fours..."
           required
         />
       </div>
@@ -64,4 +62,4 @@ const AddMaincourseForm = ({ addMaincourse, icon }) => {
   );
 };
 
-export default AddMaincourseForm;
+export default AddApetizerForm;

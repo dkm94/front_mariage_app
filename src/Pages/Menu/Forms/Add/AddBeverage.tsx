@@ -1,11 +1,9 @@
-import "../../Menu.css";
-
 import React, { useState, useRef } from "react";
 import axios from "axios";
+import { GreyButton } from "../../../../components/Buttons";
+import "../../Menu.css";
 
-import GreyButton from "../../../../components/Buttons/Grey/GreyButton.tsx";
-
-const AddDessertForm = ({ addDessert, icon }) => {
+const AddBeverageForm = ({ addBeverage, icon }) => {
   const [input, setInput] = useState("");
   const inputRef = useRef(null);
   const [loading, setLoading] = useState(false);
@@ -17,13 +15,12 @@ const AddDessertForm = ({ addDessert, icon }) => {
   const handleSumbit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    await axios.get("/api/admin/menu");
     await axios
-      .post(`/api/admin/menu/desserts/add`, {
+      .post(`/api/admin/menu/beverages/add`, {
         name: input,
       })
       .then((res) => {
-        addDessert(res.data);
+        addBeverage(res.data);
         setInput("");
         setLoading(false);
       })
@@ -45,7 +42,7 @@ const AddDessertForm = ({ addDessert, icon }) => {
           value={input}
           onChange={handleChange}
           ref={inputRef}
-          placeholder="Sorbet aux fruits..."
+          placeholder="Champagne..."
           required
         />
       </div>
@@ -65,4 +62,4 @@ const AddDessertForm = ({ addDessert, icon }) => {
   );
 };
 
-export default AddDessertForm;
+export default AddBeverageForm;

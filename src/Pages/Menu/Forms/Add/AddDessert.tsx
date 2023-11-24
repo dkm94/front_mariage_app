@@ -1,12 +1,11 @@
-import "../Tables.css";
+import "../../Menu.css";
 
 import React, { useState, useRef } from "react";
 import axios from "axios";
 
-import GreyButton from "../../../components/Buttons/Grey/GreyButton.tsx";
-import addIcon from "../../../img/add-group.png";
+import { GreyButton } from "../../../../components/Buttons";
 
-const AddTableForm = ({ addTable }) => {
+const AddDessertForm = ({ addDessert, icon }) => {
   const [input, setInput] = useState("");
   const inputRef = useRef(null);
   const [loading, setLoading] = useState(false);
@@ -18,44 +17,52 @@ const AddTableForm = ({ addTable }) => {
   const handleSumbit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    await axios.get("/api/admin/menu");
     await axios
-      .post("/api/admin/tables/add", {
+      .post(`/api/admin/menu/desserts/add`, {
         name: input,
       })
       .then((res) => {
-        addTable(res.data);
+        addDessert(res.data);
         setInput("");
         setLoading(false);
       })
-      .catch((err) => console.log("err", err));
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
     <form
       onSubmit={handleSumbit}
       style={{ display: "flex", flexDirection: "row", alignItems: "center" }}
+      className="mt-4"
     >
       <div className="add-input">
-        <img src={addIcon} alt="add table icon" />
         <input
           type="text"
-          className="form-control shadow-none"
           name="name"
-          placeholder="Nom/Numéro de la table"
           value={input}
           onChange={handleChange}
           ref={inputRef}
+          placeholder="Sorbet aux fruits..."
+          required
         />
       </div>
       <GreyButton
-        size="small"
         variant="contained"
+        size="small"
         type="submit"
-        style={{ marginLeft: "12px" }}
         text={loading ? "..." : "Ajouter"}
+        style={{
+          marginLeft: "1rem",
+          height: "fit-content",
+          paddingTop: "0.5rem",
+          paddingBottom: "0.5rem",
+        }}
       />
     </form>
   );
 };
 
-export default AddTableForm;
+export default AddDessertForm;

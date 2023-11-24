@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Form from "../Form/UpdateGuest";
 import avatar from "../../../../../img/avatar.jpg";
 import { Box } from "@material-ui/core";
-import BlackButton from "../../../../Buttons/Black/BlackButton";
+import { BlackButton } from "../../../../Buttons";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2"; // import { CSSTransition, TransitionGroup, Transition } from "react-transition-group";
 import SmallGuestCard from "../Cards/Small/SmallGuestCard";
 import uploadImg from "../../../../../img/upload-icon-20624.png";

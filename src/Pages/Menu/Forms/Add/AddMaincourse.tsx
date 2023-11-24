@@ -1,13 +1,14 @@
+import "../../Menu.css";
+
 import React, { useState, useRef } from "react";
 import axios from "axios";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import "../../../../../Pages/Invités/Invités.css";
-import GreyButton from "../../../../Buttons/Grey/GreyButton.tsx";
 
-const AddGuestForm = ({ addGuest }) => {
-  const [loading, setLoading] = useState(false);
+import { GreyButton } from "../../../../components/Buttons";
+
+const AddMaincourseForm = ({ addMaincourse, icon }) => {
   const [input, setInput] = useState("");
   const inputRef = useRef(null);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setInput(e.target.value);
@@ -17,45 +18,50 @@ const AddGuestForm = ({ addGuest }) => {
     e.preventDefault();
     setLoading(true);
     await axios
-      .post("/api/admin/guests/add", {
+      .post(`/api/admin/menu/maincourses/add`, {
         name: input,
       })
       .then((res) => {
-        addGuest(res.data);
+        addMaincourse(res.data);
         setInput("");
         setLoading(false);
       })
-      .catch((err) => console.log("err", err));
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
     <form
       onSubmit={handleSumbit}
+      className="mt-4"
       style={{ display: "flex", flexDirection: "row", alignItems: "center" }}
     >
       <div className="add-input">
-        {/* <img src={userIcon} alt="user icon" /> */}
-        <PersonAddIcon style={{ height: "auto", color: "#b2a9a9" }} />
         <input
           type="text"
-          className="form-control shadow-none"
           name="name"
-          placeholder="Nouvel invité"
           value={input}
           onChange={handleChange}
           ref={inputRef}
+          placeholder="Boeuf bourguignon..."
           required
         />
       </div>
       <GreyButton
+        variant="contained"
         size="small"
-        variant={"contained"}
         type="submit"
-        text={loading ? "..." : "Créer"}
-        style={{ marginLeft: "1rem" }}
+        text={loading ? "..." : "Ajouter"}
+        style={{
+          marginLeft: "1rem",
+          height: "fit-content",
+          paddingTop: "0.5rem",
+          paddingBottom: "0.5rem",
+        }}
       />
     </form>
   );
 };
 
-export default AddGuestForm;
+export default AddMaincourseForm;
