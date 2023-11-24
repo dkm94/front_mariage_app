@@ -1,8 +1,11 @@
-import React from "react";
-import { Button, styled } from "@mui/material";
 import "./BlackButton.css";
 
-const CustomButton = styled(Button)({
+import React from "react";
+
+import { Button as MuiButton, ButtonProps, styled } from "@mui/material";
+import { IBlackButton } from "../../../../types";
+
+const CustomButton = styled(MuiButton)({
   textTransform: "unset",
   backgroundColor: "#262626",
   color: "#fff",
@@ -20,25 +23,20 @@ const CustomButton = styled(Button)({
     animation: "none",
     border: "none",
   },
-});
+}) as typeof MuiButton;
+
+export interface IButton extends Omit<ButtonProps, 'text'> {
+  text: string;
+  theme?: IBlackButton;
+}
 
 const BlackButton = ({
-  size,
-  variant,
-  type,
-  style,
   text,
-  disabled,
-  ...rest
+  ...props
 }) => {
   return (
     <CustomButton
-      {...rest}
-      size={size}
-      variant={variant}
-      type={type}
-      style={style}
-      disabled={disabled}
+      {...props}
     >
       {text}
     </CustomButton>

@@ -1,10 +1,11 @@
 import "./PieChart.css";
 
 import React, { useState } from "react";
+import type { ChartData, ChartOptions } from "chart.js/auto";
 import { Pie } from "react-chartjs-2";
 import "chart.js/auto";
 
-import { BlackButton } from "../../Buttons";
+import { GreyButton } from "../../Buttons";
 import Modal from "../../Modals/PieChart.jsx";
 import { OperationCategoryType, OperationType } from "../../../../types";
 
@@ -65,7 +66,7 @@ const PieChart = ({ operations }) => {
     ],
   };
 
-  const options = {
+  const options: any = {
     plugins: {
       legend: {
         display: true,
@@ -78,7 +79,7 @@ const PieChart = ({ operations }) => {
   return (
     <div className="pie">
       <div style={{ display: "flex", justifyContent: "end" }}>
-        <BlackButton
+        <GreyButton
           variant={"contained"}
           text={"Afficher le graphique"}
           style={{ backgroundColor: "#BCBCAD" }}

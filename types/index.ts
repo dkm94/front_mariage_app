@@ -128,4 +128,15 @@ export interface IGreyButton {
     disabled?: boolean;
 }
 
+export interface IBlackButton {
+    href?: string;
+    type?: string;
+    size?: ButtonPropsSizeOverrides | undefined;
+    variant?: string;
+    style?: any;
+    text?: string;
+    disabled?: boolean;
+    onClick?: (ev: MouseEvent) => void;
+}
+
 export type OperationCategoryType = 'Locations' | 'Habillement/Beauté' | 'Décoration/Fleurs' | 'Alliances/Bijoux' | 'Animation' | 'Traiteur' | 'Faire-part' | 'Autres';
