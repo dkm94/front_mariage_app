@@ -1,10 +1,15 @@
+import "./Reset.css";
+
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
+import axios from "axios";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from "yup";
-import axios from "axios";
-import "./Reset.css";
+
+type FormValues = {
+    email: string
+}
 
 const Reset = () => {
     // const history = useHistory();
@@ -14,7 +19,7 @@ const Reset = () => {
             .required('Veuillez compléter ce champ.')
             .notOneOf(emails, 'Cet utilisateur n\'existe pas.')
     })
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const { register, handleSubmit, formState: { errors } } = useForm<FormValues>({
         resolver: yupResolver(validationSchema)
     });
     useEffect(() => {
@@ -22,7 +27,7 @@ const Reset = () => {
             const myHeaders = new Headers();
             const myInit = { method: 'GET',
                headers: myHeaders,
-               mode: 'cors'};
+               mode: 'cors' as RequestMode };
             await fetch(`https://my-wedding-backend.onrender.com/api/admin/admin/`, myInit)
                 .then(res => res.json())
                 .then(data => {
