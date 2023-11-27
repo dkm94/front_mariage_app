@@ -183,3 +183,10 @@ export type TableType = {
     name: string;
     guestID: string[];
 }
+
+export type FoodType = {
+    _id: string;
+    name: string;
+    menuID: string;
+    mariageID: string;
+}

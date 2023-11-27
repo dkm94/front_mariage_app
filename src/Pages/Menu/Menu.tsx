@@ -2,7 +2,7 @@ import "./Menu.css";
 
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import Grow from "@mui/material/Grow";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { IconButton } from "@mui/material";
@@ -30,6 +30,7 @@ import UpdateDessert from "./Forms/Update/Dessert";
 import UpdateApetizer from "./Forms/Update/Apetizer";
 import UpdateBeverage from "./Forms/Update/Beverage";
 import ScreenLoader from "../../components/Loader/Screen/ScreenLoader";
+import { FoodType } from "../../../types";
 
 const IconWrapper = styled(IconButton)({
   "&:hover": {
@@ -40,29 +41,29 @@ const IconWrapper = styled(IconButton)({
 const Menus = () => {
   const scrollBtn = useContext(ScrollButtonContext);
 
-  const [starters, setStarters] = useState([]);
-  const [starter, setStarter] = useState({});
+  const [starters, setStarters] = useState<FoodType[] | []>([]);
+  const [starter, setStarter] = useState<FoodType | {}>({});
 
-  const [maincourses, setMaincourses] = useState([]);
-  const [maincourse, setMaincourse] = useState({});
+  const [maincourses, setMaincourses] = useState<FoodType[] | []>([]);
+  const [maincourse, setMaincourse] = useState<FoodType | {}>({});
 
-  const [desserts, setDesserts] = useState([]);
-  const [dessert, setDessert] = useState({});
+  const [desserts, setDesserts] = useState<FoodType[] | []>([]);
+  const [dessert, setDessert] = useState<FoodType | {}>({});
 
-  const [apetizers, setApetizers] = useState([]);
-  const [apetizer, setApetizer] = useState({});
+  const [apetizers, setApetizers] = useState<FoodType[] | []>([]);
+  const [apetizer, setApetizer] = useState<FoodType | {}>({});
 
-  const [beverages, setBeverages] = useState([]);
-  const [beverage, setBeverage] = useState({});
+  const [beverages, setBeverages] = useState<FoodType[] | []>([]);
+  const [beverage, setBeverage] = useState<FoodType | {}>({});
 
   const [edit, setEdit] = useState({
     id: null,
     name: "",
   });
 
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState<string>("");
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const getUpdatedId = (objId, objName) => {
     setEdit({
@@ -75,11 +76,12 @@ const Menus = () => {
   useEffect(() => {
     setLoading(true);
 
-    let starterData = axios.get("/api/admin/menu/starters/");
-    let maincourseData = axios.get("/api/admin/menu/maincourses/");
-    let dessertData = axios.get("/api/admin/menu/desserts/");
-    let apetizerData = axios.get("/api/admin/menu/apetizers/");
-    let beverageData = axios.get("/api/admin/menu/beverages/");
+    let starterData: Promise<AxiosResponse> = axios.get<FoodType[]>("/api/admin/menu/starters/");
+    let maincourseData: Promise<AxiosResponse> = axios.get<FoodType[]>("/api/admin/menu/maincourses/");
+    let dessertData: Promise<AxiosResponse> = axios.get<FoodType[]>("/api/admin/menu/desserts/");
+    let apetizerData: Promise<AxiosResponse> = axios.get<FoodType[]>("/api/admin/menu/apetizers/");
+    let beverageData: Promise<AxiosResponse> = axios.get<FoodType[]>("/api/admin/menu/beverages/");
+    
     async function getDatas() {
       let res = await Promise.all([
         starterData,
@@ -124,6 +126,8 @@ const Menus = () => {
     setBeverages([...beverages, newBeverage]);
   };
 
+  //todo: error in update handling (param returns update status not object)
+
   const editStarter = (updatedStarter) => {
     const updatedStartersList = [...starters].map((starter) => {
       if (starter._id === updatedStarter.id) {
@@ -153,8 +157,8 @@ const Menus = () => {
       }
       return dessert;
     });
-    setMaincourse(updatedDessert);
-    setMaincourses(updatedDessertList);
+    setDessert(updatedDessert);
+    setDesserts(updatedDessertList);
   };
 
   const editApetizer = (updatedApetizer) => {
@@ -162,10 +166,10 @@ const Menus = () => {
       if (apetizer._id === edit.id) {
         apetizer.name = input;
       }
-      return dessert;
+      return apetizer;
     });
-    setMaincourse(updatedApetizer);
-    setMaincourses(updatedApetizerList);
+    setApetizer(updatedApetizer);
+    setApetizers(updatedApetizerList);
   };
 
   const editBeverage = (updatedBeverage) => {
@@ -173,7 +177,7 @@ const Menus = () => {
       if (beverage._id === edit.id) {
         beverage.name = input;
       }
-      return dessert;
+      return beverage;
     });
     setBeverage(updatedBeverage);
     setBeverages(updatedBeverageList);
@@ -182,7 +186,7 @@ const Menus = () => {
   const deleteStarter = async (id) => {
     await axios.delete(`/api/admin/menu/starters/delete/${id}`).then((res) => {
       if (res.data != null) {
-        setStarters(starters.filter((starter) => starter._id !== id));
+        setStarters(starters.filter((starter: FoodType) => starter._id !== id));
       }
     });
   };
@@ -193,7 +197,7 @@ const Menus = () => {
       .then((res) => {
         if (res.data != null) {
           setMaincourses(
-            maincourses.filter((maincourse) => maincourse._id !== id)
+            maincourses.filter((maincourse: FoodType) => maincourse._id !== id)
           );
         }
       });
@@ -202,7 +206,7 @@ const Menus = () => {
   const deleteDessert = async (id) => {
     await axios.delete(`/api/admin/menu/desserts/delete/${id}`).then((res) => {
       if (res.data != null) {
-        setDesserts(desserts.filter((dessert) => dessert._id !== id));
+        setDesserts(desserts.filter((dessert: FoodType) => dessert._id !== id));
       }
     });
   };
@@ -210,7 +214,7 @@ const Menus = () => {
   const deleteApetizer = async (id) => {
     await axios.delete(`/api/admin/menu/apetizers/delete/${id}`).then((res) => {
       if (res.data != null) {
-        setApetizers(apetizers.filter((apetizer) => apetizer._id !== id));
+        setApetizers(apetizers.filter((apetizer: FoodType) => apetizer._id !== id));
       }
     });
   };
@@ -218,7 +222,7 @@ const Menus = () => {
   const deleteBeverage = async (id) => {
     await axios.delete(`/api/admin/menu/beverages/delete/${id}`).then((res) => {
       if (res.data != null) {
-        setBeverages(beverages.filter((beverage) => beverage._id !== id));
+        setBeverages(beverages.filter((beverage: FoodType) => beverage._id !== id));
       }
     });
   };
