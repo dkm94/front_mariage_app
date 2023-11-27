@@ -1,7 +1,8 @@
-import { Button, TextField, IconButton } from "@mui/material";
 import React, { useState, useEffect, useRef } from "react";
-import { BlackButton } from "../../../components/Buttons";
+import { Button, TextField, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+
+import { BlackButton } from "../../../components/Buttons";
 
 const UpdateExpense = ({
   edit,
@@ -12,7 +13,7 @@ const UpdateExpense = ({
 }) => {
   const [input, setInput] = useState(edit ? edit : "");
 
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     inputRef?.current?.focus();
@@ -154,7 +155,7 @@ const UpdateExpense = ({
               setEdit(null);
               setisOpen(false);
             }}
-            variant="outline"
+            variant="outlined"
           >
             Annuler
           </Button>

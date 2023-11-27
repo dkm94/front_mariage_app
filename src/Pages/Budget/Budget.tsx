@@ -11,7 +11,7 @@ import Grow from "@mui/material/Grow";
 import { OperationType } from "../../../types/index";
 import { ScrollButtonContext } from "../../App";
 import PieChart from "../../components/Expenses/Graph/PieChart";
-import TextField from "../../components/Formik/TextField-Operations.tsx";
+import TextField from "../../components/Formik/TextField-Operations";
 import Expenses from "./Dépenses/Dépenses";
 import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
 import { GreyButton } from "../../components/Buttons";
@@ -94,7 +94,7 @@ const Budget = () => {
       .then((res) => {
         if (res.data != null) {
           const updatedExpenses: OperationType[] | [] = operations.filter(
-            (operation) => operation._id !== id
+            (operation: OperationType) => operation._id !== id
           );
           setOperations(updatedExpenses);
           calculateTotal(updatedExpenses);
@@ -149,6 +149,25 @@ const Budget = () => {
     validationSchema: operationValidationSchema,
     enableReinitialize: true,
   });
+
+  const onSubmit = async (values: OperationType) => {
+    await axios
+        .post(`/api/admin/budget/operations/add`, {
+          category: values.category,
+          price: values.price,
+          description: values.description,
+        })
+        .then((res) => {
+          setOperation(res.data);
+          const updatedExpenses = [...operations, res.data];
+          setOperations([...operations, res.data]);
+          calculateTotal(updatedExpenses);
+          formik.resetForm({});
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      }
 
   function calculateTotal(operations: OperationType[]): void {
     if (operations) {
@@ -235,19 +254,26 @@ const Budget = () => {
                       </div>
                     </div>
                   </div>
-                  <Formik>
-                    <div className="col budget-form mb3">
+                  <Formik
+                  initialValues={newOperationValues}
+                  validationSchema={operationValidationSchema}
+                  onSubmit={onSubmit}
+                  >
+                    {formik => {
+                      const { handleSubmit, values, handleChange, handleBlur, errors, touched, isSubmitting } = formik;
+                      return (
+                        <div className="col budget-form mb3">
                       <Form
                         className="input-group mb-3"
                         style={{ display: "flex", flexDirection: "column" }}
-                        onSubmit={formik.handleSubmit}
+                        onSubmit={handleSubmit}
                       >
                         <div className="budget___select">
                           <select
                             name="category"
-                            value={formik.values.category}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
+                            value={values.category}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
                           >
                             <option
                               value=""
@@ -280,10 +306,10 @@ const Budget = () => {
                             ></option>
                             <option value="Autres" label="Autres"></option>
                           </select>
-                          {formik.errors.category &&
-                            formik.touched.category && (
+                          {errors.category &&
+                            touched.category && (
                               <div className="input-feedback error">
-                                {formik.errors.category}
+                                {errors.category}
                               </div>
                             )}
                         </div>
@@ -292,12 +318,12 @@ const Budget = () => {
                           // label="Description"
                           name="description"
                           type="text"
-                          value={formik.values.description}
-                          onChange={formik.handleChange}
-                          onBlur={formik.handleBlur}
+                          value={values.description}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
                           class="form-control"
-                          errors={formik.errors}
-                          touched={formik.touched}
+                          errors={errors}
+                          touched={touched}
                           placeholder="Description"
                         />
                         <TextField
@@ -305,12 +331,12 @@ const Budget = () => {
                           width="100%"
                           name="price"
                           type="number"
-                          value={formik.values.price}
-                          onChange={formik.handleChange}
-                          onBlur={formik.handleBlur}
+                          value={values.price}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
                           class="form-control"
-                          errors={formik.errors}
-                          touched={formik.touched}
+                          errors={errors}
+                          touched={touched}
                           placeholder="Montant"
                           border-radius="10px"
                         />
@@ -319,12 +345,17 @@ const Budget = () => {
                             type="submit"
                             text={"Valider"}
                             variant={"contained"}
-                            disabled={formik.isSubmitting}
+                            disabled={isSubmitting}
                             size="medium"
                           />
                         </div>
                       </Form>
                     </div>
+                      )
+                    }
+                      
+                      
+                    }
                   </Formik>
                 </div>
                 <div className="col chart-component">
