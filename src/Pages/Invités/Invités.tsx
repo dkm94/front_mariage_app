@@ -1,32 +1,33 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Link, withRouter } from "react-router-dom";
-import { Container, Row, Col } from "react-bootstrap";
-// import Button from "../../LargeButton/LargeButton";
-import { ScrollButtonContext } from "../../App";
-import AddForm from "../../components/Invités(affichage)/by_guests/Components/Form/AddGuest.tsx";
-import GuestList from "../../components/Invités(affichage)/by_guests/Components/Guests/Guests.tsx";
-import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar.js";
-import "../../components/Invités(affichage)/by_guests/guests.css";
 import "./Invités.css";
+import "../../components/Invités(affichage)/by_guests/guests.css";
+
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import ScreenLoader from "../../components/Loader/Screen/ScreenLoader.jsx";
+import { Container, Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import Grow from "@mui/material/Grow";
 
+import { ScrollButtonContext } from "../../App";
+import AddForm from "../../components/Invités(affichage)/by_guests/Components/Form/AddGuest";
+import GuestList from "../../components/Invités(affichage)/by_guests/Components/Guests/Guests";
+import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
+import ScreenLoader from "../../components/Loader/Screen/ScreenLoader.jsx";
+import { GuestType } from "../../../types";
+
 const Byguests = ({ userInfos }) => {
-  const mariageID = userInfos.mariageID;
-  const firstPerson = userInfos.firstPerson;
-  const secondPerson = userInfos.secondPerson;
+  const { mariageID, firstPerson, secondPerson } = userInfos;
+
   const scrollBtn = useContext(ScrollButtonContext);
 
-  const [guests, setGuests] = useState([]);
-  const [editPicture, seteditPicture] = useState(null);
+  const [guests, setGuests] = useState<GuestType[] | []>([]);
+  const [editPicture, seteditPicture] = useState<string>("null");
   const [file, setFile] = useState(null);
-  const [searchValue, setSearchValue] = useState("");
-  const [user, setUser] = useState({});
-  const [appear, setAppear] = useState(false);
-  const [isOpen, setisOpen] = useState(false);
+  const [searchValue, setSearchValue] = useState<string>("");
+  const [user, setUser] = useState<GuestType | {}>({});
+  const [appear, setAppear] = useState<boolean>(false);
+  const [isOpen, setisOpen] = useState<boolean>(false);
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     setLoading(true);
@@ -68,7 +69,7 @@ const Byguests = ({ userInfos }) => {
       .delete(`/api/admin/guests/delete/${id}`)
       .then((result) => {
         if (result.data != null) {
-          setGuests(guests.filter((guest) => guest._id !== id));
+          setGuests(guests.filter((guest: GuestType) => guest._id !== id));
           setisOpen(false);
         }
       })
@@ -111,18 +112,13 @@ const Byguests = ({ userInfos }) => {
       });
   };
 
-  const button_wrapper_style = {
-    position: "relative",
-    zIndex: 1,
-  };
-
   return (
     <>
       {loading ? (
         <ScreenLoader />
       ) : (
         <div className="byguests page-component">
-          <div className="guest-container" style={button_wrapper_style}>
+          <div className="guest-container">
             {scrollBtn}
             <div className="page-location">
               <div>
@@ -191,4 +187,4 @@ const Byguests = ({ userInfos }) => {
   );
 };
 
-export default withRouter(Byguests);
+export default Byguests;
