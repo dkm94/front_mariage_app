@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { UserContext, ScrollButtonContext } from "../../App.tsx";
+import { UserContext, ScrollButtonContext } from "../../App";
 import { Container, Row, Col } from "react-bootstrap";
 import Button from "../../components/LargeButton/LargeButton.js";
 import { useForm } from "react-hook-form";

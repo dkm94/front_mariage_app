@@ -1,11 +1,13 @@
+import "../../guests.css";
+
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import { Button, Grid, IconButton } from "@mui/material";
-import { BlackButton } from "../../../../Buttons";
-import checkIcon from "../../../../../img/green-check.png";
 import TextField from "@mui/material/TextField";
 import DeleteIcon from "@mui/icons-material/Delete";
-import "../../guests.css";
+
+import { BlackButton } from "../../../../Buttons";
+import checkIcon from "../../../../../img/green-check.png";
 
 const UpdateGuest = ({
   edit,
@@ -44,10 +46,10 @@ const UpdateGuest = ({
   }, [mariageID]);
 
   const [input, setInput] = useState(edit ? edit.name : "");
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    inputRef.current.focus();
+    inputRef?.current?.focus();
   });
 
   const handleChange = (e) => {
@@ -192,7 +194,7 @@ const UpdateGuest = ({
                   setEdit({ id: null });
                   setisOpen(false);
                 }}
-                variant="outline"
+                variant="outlined"
                 style={{
                   color: "grey",
                   textTransform: "unset",

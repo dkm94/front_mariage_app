@@ -2,7 +2,7 @@ import "./Login.css";
 
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { Resolver, useForm } from "react-hook-form";
 import axios from "axios";
 import { History } from 'history';
 import * as Yup from "yup";
@@ -39,11 +39,18 @@ const validationSchema = Yup.object().shape({
 });
 
 // type LoginForm = Yup.InferType<typeof validationSchema>;
+const win: Window = window;
+
+type FormValues = {
+  email: string
+  password: string
+}
 
 const Login = ({ setShowForm }: ILoginProps) => {
 
   const history: History = useHistory();
 
+  const [error, setError] = useState<string>("")
   const [showError, setShowError] = useState<boolean>(false);
   const [loadingButton, setLoadingButton] = useState<boolean>(false);
 
@@ -51,11 +58,11 @@ const Login = ({ setShowForm }: ILoginProps) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<FormValues>({
     resolver: yupResolver(validationSchema),
   });
+  
 
-  //todo: handle errors front or back side
   //todo: use formik Form instead of html form
   //todo: handle yup schema
   
@@ -71,13 +78,16 @@ const Login = ({ setShowForm }: ILoginProps) => {
         if (token) {
           setTimeout(() => {
             setLoadingButton(false);
-            window.location = "/tableau-de-bord";
+            win.location = "/tableau-de-bord";
             history.push("/tableau-de-bord");
           }, 500);
         }
       })
       .catch((err) => {
-        console.log(err);
+    //todo: better error handling from backend (status code (401, 400, 500) + message)
+    // todo: handle email error
+
+        setError(err.response.data.message)
         setShowError(true);
         setLoadingButton(false);
         setTimeout(() => {
@@ -91,8 +101,8 @@ const Login = ({ setShowForm }: ILoginProps) => {
     <div className="login-page">
       <ErrorAlert
         showError={showError}
-        title="Oups, une erreur est survenue. Veuillez vérifier vos identifiants ou essayer plus tard."
-        description="Veuillez réessayer plus tard"
+        title={error}
+        description={"Veuillez réessayer"}
       />
       <div className="login-grid">
         <div className="grid-item-2">
@@ -111,10 +121,10 @@ const Login = ({ setShowForm }: ILoginProps) => {
                     id="email"
                     name="email"
                     type="email"
-                    class="form-control shadow-none"
+                    // class="form-control shadow-none"
                     style={{ borderColor: "#D1D4D5" }}
                   />
-                  <div>{errors.email?.message}</div>
+                  <div>{errors?.email?.message}</div>
                 </div>
                 <div className="form-group">
                   {/* <label>Mot de passe</label> */}
@@ -125,10 +135,10 @@ const Login = ({ setShowForm }: ILoginProps) => {
                     id="password"
                     name="password"
                     type="password"
-                    class="form-control shadow-none"
+                    // class="form-control shadow-none"
                     style={{ borderColor: "#D1D4D5" }}
                   />
-                  <div>{errors.password?.message}</div>
+                  <div>{errors?.password?.message}</div>
                 </div>
                 <div style={{ marginTop: "2rem" }}>
                   <CustomButton

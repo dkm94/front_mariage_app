@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import Logo from ".././../../../img/logo-2023-no-shadow.png";
-import { NavigationData } from "../NavigationData.ts";
-import { NavigationDataType } from "../../../../../types/index.ts";
-import NavbarLink from "./NavbarLink.tsx";
+import { NavigationData } from "../NavigationData";
+import { NavigationDataType } from "../../../../../types/index";
+import NavbarLink from "./NavbarLink";
 
 const win: Window = window;
 

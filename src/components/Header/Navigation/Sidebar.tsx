@@ -4,8 +4,8 @@ import React, { useEffect, useState } from "react";
 import { withRouter, Link } from "react-router-dom";
 import axios from "axios";
 
-import { ISidebarProps, WeddingProps } from "../../../../types/index.ts";
-import { NavigationData } from "./NavigationData.ts";
+import { ISidebarProps, WeddingProps } from "../../../../types/index";
+import { NavigationData } from "./NavigationData";
 import profilePicture from "../../../img/couple-img.jpg";
 
 const Sidebar = ({ userInfos }: ISidebarProps) => {
@@ -59,4 +59,4 @@ const Sidebar = ({ userInfos }: ISidebarProps) => {
     </nav>
   );
 };
-export default withRouter(Sidebar);
+export default Sidebar;

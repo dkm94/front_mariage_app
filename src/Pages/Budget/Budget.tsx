@@ -8,8 +8,8 @@ import { Formik, Form, useFormik } from "formik";
 import * as Yup from "yup";
 import Grow from "@mui/material/Grow";
 
-import { OperationType } from "../../../types/index.ts";
-import { ScrollButtonContext } from "../../App.tsx";
+import { OperationType } from "../../../types/index";
+import { ScrollButtonContext } from "../../App";
 import PieChart from "../../components/Expenses/Graph/PieChart";
 import TextField from "../../components/Formik/TextField-Operations.tsx";
 import Expenses from "./Dépenses/Dépenses";

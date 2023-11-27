@@ -60,7 +60,7 @@ export type DashboardCardDataType = {
 export interface IAuthModalProps {
     open: boolean;
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-    close: boolean;
+    close: () => void;
     children: React.ReactNode;
 }
 

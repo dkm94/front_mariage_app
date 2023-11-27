@@ -8,7 +8,7 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 
 import { VerticalNavbarProps } from '../../../../../../types';
-import { NavigationData } from "../../NavigationData.ts";
+import { NavigationData } from "../../NavigationData";
 import profilePicture from "../../../../../img/couple-img.jpg";
 
 const VerticalNavbar = ({ userInfos }: VerticalNavbarProps) => {
