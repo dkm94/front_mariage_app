@@ -1,32 +1,50 @@
+import "./Mon_compte.css";
+
 import React, { useState, useEffect, useContext } from 'react';
-import { UserContext, ScrollButtonContext } from "../../App";
+import axios, { AxiosResponse } from "axios";
 import { Container, Row, Col } from "react-bootstrap";
-import Button from "../../components/LargeButton/LargeButton.js";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
-import axios from "axios";
-import "./Mon_compte.css";
+
+import { UserContext, ScrollButtonContext } from "../../App";
+import Button from "../../components/LargeButton/LargeButton.js";
+import { AccountType, UserType, WeddingType } from '../../../types';
+
+const win: Window = window;
+
+type FormValues = {
+    firstPerson: string;
+    secondPerson: string;
+}
+
+type FormValues2 = {
+    password: string;
+    confirmPassword: string;
+}
 
 const MyAccount = ({ token }) => {
    
-    const { id, mariageID } = useContext(UserContext)
+    const user: UserType = useContext(UserContext);
+    const { id, mariageID } = user as { id: string, mariageID: string };
+
     const scrollBtn = useContext(ScrollButtonContext)
-    const [successfulDeletionMessage, setsuccessfulDeletionMessage] = useState("")
-    
-    const [account, setAccount] = useState({})
-    const [wedding, setWedding] = useState({})
-    const [deleteValidation, setdeleteValidation] = useState(false)
-    const [newPassword, setNewPassword] = useState("")
-    const [editSuccess, setEditSuccess] = useState("")
-    // const [saving, setSaving] = useState(false);
+    const [successfulDeletionMessage, setsuccessfulDeletionMessage] = useState<string>("")
+        
+    const [account, setAccount] = useState<AccountType | {}>({})
+    const [wedding, setWedding] = useState<WeddingType | {}>({})
+    const [deleteValidation, setdeleteValidation] = useState<boolean>(false)
+    const [newPassword, setNewPassword] = useState<string>("")
+    const [editSuccess, setEditSuccess] = useState<string>("")
+
+    const { email } = account as { email: string };
     
     // Fetch data
     useEffect(() => {
-        let account = axios.get(`/api/admin/admin/myAccount/${id}`);
-        let wedding = axios.get(`/api/admin/wedding/${mariageID}`);
+        let account: Promise<AxiosResponse> = axios.get<AccountType>(`/api/admin/admin/myAccount/${id}`);
+        let wedding: Promise<AxiosResponse> = axios.get<WeddingType>(`/api/admin/wedding/${mariageID}`);
 
-        const fetchData = async () => {
+        const fetchData = async (): Promise<void> => {
             let res = await Promise.all([account, wedding])
             setAccount(res[0].data)
             setWedding(res[1].data)
@@ -52,7 +70,7 @@ const MyAccount = ({ token }) => {
             ),
     })
 
-    const { register, formState: { errors }, handleSubmit, reset } = useForm({
+    const { register, formState: { errors }, handleSubmit, reset } = useForm<FormValues>({
         mode: "onBlur",
         resolver: yupResolver(weddingValidationSchema)
       });
@@ -72,16 +90,15 @@ const MyAccount = ({ token }) => {
             })
             .then((res) => {
                 if(res.data != null){
-                    wedding.firstPerson = firstPerson;
-                    wedding.secondPerson = secondPerson;
                     setEditSuccess("La modification a été enregistrée.");
                     setTimeout(() => {
-                        window.location.reload()
+                        setEditSuccess("")
                     }, 2500);
                 }
             })
             .catch((err) => {
-                alert("Une erreur est survenue. Veuillez rééssayer plus tard.", JSON.stringify(err));
+                //todo: handle with toast
+                alert("Une erreur est survenue. Veuillez rééssayer.");
                 console.log(err)
             })
       };
@@ -104,7 +121,7 @@ const MyAccount = ({ token }) => {
             .required('Veuiller compléter ce champ.')
     })
     
-    const { register: register2, formState: { errors: errors2 }, handleSubmit: handleSubmit2, reset: updateAccountData } = useForm({
+    const { register: register2, formState: { errors: errors2 }, handleSubmit: handleSubmit2, reset: updateAccountData } = useForm<FormValues2>({
         mode: "onBlur",
         resolver: yupResolver(accountValidationSchema)
     });
@@ -131,7 +148,9 @@ const MyAccount = ({ token }) => {
             }
         })
         .catch((err) => {
-            alert("Une erreur est survenue. Veuillez rééssayer plus tard.", JSON.stringify(err));
+                //todo: handle with toast
+
+            alert("Une erreur est survenue. Veuillez rééssayer plus tard.");
             console.log(err)
         })
       };
@@ -147,7 +166,7 @@ const MyAccount = ({ token }) => {
                 if(token){
                     localStorage.removeItem("token")
                     setTimeout(() => {
-                        window.location = "/"
+                        win.location = "/"
                     }, 2000);
                 }
             })
@@ -177,9 +196,9 @@ const MyAccount = ({ token }) => {
                                 <div className={`textfield-style account___form-style`}>
                                     <label>Prénom de l'époux/épouse 1</label>
                                     <input
+                                    {...register('firstPerson')}
                                     name="firstPerson"
                                     type="text"
-                                    {...register('firstPerson')}
                                     className="form-control"
                                     />
                                     <span>{errors.firstPerson?.message}</span>
@@ -211,12 +230,12 @@ const MyAccount = ({ token }) => {
                                 <div className={`account___form-style textfield-style`}>
                                     <label>Email</label>
                                     <input
-                                    {...register2('email')}
+                                    // {...register2('email')}
                                     disabled
                                     className="form-control"
                                     name="email"
                                     type="email"
-                                    placeholder={account.email}
+                                    placeholder={email}
                                     />
                                 </div>
                             </Col>

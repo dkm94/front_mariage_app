@@ -14,6 +14,14 @@ export type UserType = {
     email?: string;
 } | undefined;
 
+export type AccountType = {
+    id: string;
+    email: string;
+    password: string;
+    role: RoleType;
+    mariageID: string;
+}
+
 export type ScrollButtonType = ReactNode;
 export type LoaderType = ReactNode;
 
