@@ -141,3 +141,45 @@ export interface IBlackButton {
 }
 
 export type OperationCategoryType = 'Locations' | 'Habillement/Beauté' | 'Décoration/Fleurs' | 'Alliances/Bijoux' | 'Animation' | 'Traiteur' | 'Faire-part' | 'Autres';
+
+export type TaskType = {
+    _id: string;
+    color: string;
+    isCompleted: boolean;
+    mariageID: string;
+    text: string;
+}
+
+export type WeddingType = {
+    _id: string;
+    guestID: string[];
+    tableID: string[];
+    todoListID: string[];
+    firstPerson: string;
+    secondPerson: string;
+    adminID: string;
+    budgetID: string;
+    invitationID: string;
+    menuID: string;
+}
+
+export type GuestType = {
+    family: string;
+    _id: string;
+    name: string;
+    media: string;
+    tableID: string;
+    mariageID: string;
+    guestMenu?: {
+        dessert: string;
+        maincourse: string;
+        starter: string;
+    }
+}
+
+export type TableType = {
+    _id: string;
+    mariageID: string;
+    name: string;
+    guestID: string[];
+}

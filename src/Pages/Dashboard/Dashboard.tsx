@@ -1,41 +1,46 @@
-import React, { useEffect, useState, useContext } from "react";
-import { ScrollButtonContext } from "../../App";
 import "./Dashboard.css";
-import axios from "axios";
-import Card from "./Card/Card.jsx";
+
+import React, { useEffect, useState, useContext } from "react";
+import axios, { AxiosResponse } from "axios";
 import { Container, Row } from "react-bootstrap";
-import ScreenLoader from "../../components/Loader/Screen/ScreenLoader.jsx";
 import Grow from "@mui/material/Grow";
+
+import { ScrollButtonContext } from "../../App";
+import Card from "./Card/Card.jsx";
+import ScreenLoader from "../../components/Loader/Screen/ScreenLoader.jsx";
+import { GuestType, OperationType, TableType, TaskType, WeddingType } from "../../../types";
 
 const Dashboard = (props) => {
   const scrollBtn = useContext(ScrollButtonContext);
   //const loader = useContext(LoaderContext)
   const id = props.userInfos.mariageID;
 
-  const [guests, setGuests] = useState();
-  const [tables, setTables] = useState();
-  const [operations, setOperations] = useState([]);
-  const [tasks, setTasks] = useState([]);
+  const [sum, setSum] = useState<string>("")
+
+  const [guests, setGuests] = useState<GuestType[] | []>([]);
+  const [tables, setTables] = useState<TableType[] | []>();
+  const [operations, setOperations] = useState<OperationType[] | []>([]);
+  const [tasks, setTasks] = useState<TaskType[] | []>([]);
   const [maincourses, setMaincourses] = useState([]);
   const [starters, setStarters] = useState([]);
   const [desserts, setDesserts] = useState([]);
   const [apetizers, setApetizers] = useState([]);
   const [beverages, setBeverages] = useState([]);
-  const [wedding, setWeddding] = useState([]);
+  const [wedding, setWeddding] = useState<WeddingType | {}>({});
 
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    let guests = axios.get("/api/admin/guests/");
-    let tables = axios.get("/api/admin/tables/");
-    let operations = axios.get("/api/admin/budget/operations/");
-    let todos = axios.get("/api/admin/todolist/");
-    let starters = axios.get("/api/admin/menu/starters/");
-    let maincourses = axios.get("/api/admin/menu/maincourses/");
-    let desserts = axios.get("/api/admin/menu/desserts/");
-    let wedding = axios.get(`/api/admin/wedding/${id}`);
-    let apetizers = axios.get("/api/admin/menu/apetizers/");
-    let beverages = axios.get("/api/admin/menu/beverages/");
+    let guests: Promise<AxiosResponse> = axios.get<GuestType[]>("/api/admin/guests/");
+    let tables: Promise<AxiosResponse>  = axios.get<TableType[]>("/api/admin/tables/");
+    let operations: Promise<AxiosResponse>  = axios.get<OperationType[]>("/api/admin/budget/operations/");
+    let todos: Promise<AxiosResponse>  = axios.get<TaskType[]>("/api/admin/todolist/");
+    let starters: Promise<AxiosResponse>  = axios.get("/api/admin/menu/starters/");
+    let maincourses: Promise<AxiosResponse>  = axios.get("/api/admin/menu/maincourses/");
+    let desserts: Promise<AxiosResponse>  = axios.get("/api/admin/menu/desserts/");
+    let wedding: Promise<AxiosResponse>  = axios.get(`/api/admin/wedding/${id}`);
+    let apetizers: Promise<AxiosResponse>  = axios.get("/api/admin/menu/apetizers/");
+    let beverages: Promise<AxiosResponse>  = axios.get("/api/admin/menu/beverages/");
 
     async function getDatas() {
       setLoading(true);
@@ -67,20 +72,21 @@ const Dashboard = (props) => {
     getDatas();
   }, [id]);
 
-  let sum = operations.reduce((a, b) => a + b.price, 0) / 100;
-  function total(sum) {
-    return Number(sum).toFixed(2);
-  }
+  useEffect(() => {
+    if(operations.length > 0) {
+    let spending: number = operations.map((operation: OperationType) => operation.price as number).reduce((a: number, b:number) => a + b) / 100;
+    const fixedSpending = Number(spending).toFixed(2);
+    setSum(fixedSpending)
+    }
+  }, [operations])
 
-  const sumLength = sum.toString().length;
+  const isCompleted = tasks?.filter((task: TaskType) => task?.isCompleted);
+  const notCompleted = tasks?.filter((task: TaskType) => !task?.isCompleted);
 
-  const isCompleted = tasks?.filter((task) => task?.isCompleted);
-  const notCompleted = tasks?.filter((task) => !task?.isCompleted);
+  const { firstPerson, secondPerson } = wedding as WeddingType;
 
-  const { firstPerson, secondPerson } = wedding;
-
-  const firstFamilyGuests = guests?.filter((guest) => guest?.family === "1");
-  const secondFamilyGuests = guests?.filter((guest) => guest?.family === "2");
+  const firstFamilyGuests = guests?.filter((guest: GuestType) => guest?.family === "1");
+  const secondFamilyGuests = guests?.filter((guest: GuestType) => guest?.family === "2");
 
   const meal =
     starters?.length +
@@ -159,8 +165,7 @@ const Dashboard = (props) => {
                   />
                   <Card
                     title={"Dépenses (en €)"}
-                    content={` ${total(sum)}`}
-                    sumLength={sumLength}
+                    content={sum}
                     array={operations}
                     elements={"description"}
                     resume={"expenses"}
