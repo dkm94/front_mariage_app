@@ -6,10 +6,10 @@ import { withRouter } from "react-router-dom";
 import { Button, Container } from "@mui/material";
 
 import Card from "./Card.jsx";
-import dashboardCards from "./data.ts";
-import Register from '../Auth/Register/Register.tsx';
-import Login from '../Auth/Login/Login.tsx';
-import AuthModal from '../../components/Modals/Auth/AuthModal.tsx';
+import dashboardCards from "./data";
+import Register from '../Auth/Register/Register';
+import Login from '../Auth/Login/Login';
+import AuthModal from '../../components/Modals/Auth/AuthModal';
 import introImg from "../../img/section-2-img.jpg";
 
 const Home = () => {
