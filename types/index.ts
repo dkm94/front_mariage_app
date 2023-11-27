@@ -11,6 +11,7 @@ export type UserType = {
     role: RoleType;
     firstPerson: string;
     secondPerson: string;
+    email?: string;
 } | undefined;
 
 export type ScrollButtonType = ReactNode;

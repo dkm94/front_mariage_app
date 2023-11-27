@@ -5,37 +5,27 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { TextField, styled, Button } from "@mui/material";
+import { TextField, Button } from "@mui/material";
 
-import { IRegisterProps } from "../../../../types";
+import { IRegisterProps, UserType } from "../../../../types";
 import { SuccessAlert, ErrorAlert } from "../../../components/Alert";
+import { BlackButton } from "../../../components/Buttons";
 
-const CustomButton = styled(Button)({
-  textTransform: "unset !important",
-  backgroundColor: "#262626 !important",
-  color: "#fff",
-  //   fontfamily: "unset",
-  fontSize: "1rem !important",
-  borderRadius: "36px !important",
-  paddingRight: "30px",
-  paddingLeft: "30px",
-  fontWeight: "unset",
-  fontFamily: "Playfair Display serif",
-  border: "none",
-  width: "100% !important",
-  ":hover": {
-    background: "#4c4a4a",
-    animation: "none",
-    border: "none",
-  },
-});
+type FormValues = {
+  email: string;
+  password: string;
+  firstPerson: string;
+  secondPerson: string;
+  confirmPassword: string;
+}
 
 const Register = ({ setShowForm }: IRegisterProps) => {
-  let tempArr = [];
 
   const [showAlert, setShowAlert] = useState(false);
   const [showError, setShowError] = useState(false);
   const [loadingButton, setLoadingButton] = useState(false);
+
+  const [tempArr, setTempArr] = useState<UserType[]>([]);
 
   const validationSchema = Yup.object().shape({
     checkEmail: Yup.boolean(),
@@ -45,7 +35,7 @@ const Register = ({ setShowForm }: IRegisterProps) => {
       .test(
         "checkEmail",
         "Cet utilisateur existe déjà.",
-        (value) => !tempArr.includes(value)
+        (value:string) => !tempArr.map((account) => account?.email).includes(value),
       ),
     password: Yup.string()
       .required("Veuiller compléter ce champ.")
@@ -76,23 +66,23 @@ const Register = ({ setShowForm }: IRegisterProps) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<FormValues>({
     resolver: yupResolver(validationSchema),
   });
 
+  
   useEffect(() => {
     const fetchData = async () => {
+      alert("fetch")
       const myHeaders: Headers = new Headers();
-      const myInit = { method: "GET", headers: myHeaders, mode: "cors" };
+      const myInit = { method: "GET", headers: myHeaders, mode: "cors" as RequestMode };
       await fetch(
         `https://my-wedding-backend.onrender.com/api/admin/admin/`,
         myInit
       )
         .then((res) => res.json())
         .then((emailArr) => {
-          emailArr.forEach((email) => {
-            tempArr.push(email.email);
-          });
+          setTempArr(emailArr);
         })
         .catch((err) => {
           //do something, show error
@@ -100,7 +90,7 @@ const Register = ({ setShowForm }: IRegisterProps) => {
         });
     };
     fetchData();
-  });
+  }, []);
 
   const onSubmit = async ({ firstPerson, secondPerson, email, password }) => {
     setLoadingButton(true);
@@ -114,7 +104,6 @@ const Register = ({ setShowForm }: IRegisterProps) => {
       .then((res) => {
         setShowAlert(true);
         setLoadingButton(false);
-        tempArr = [];
         setTimeout(() => {
           setShowAlert(false);
           setShowForm("login")
@@ -157,7 +146,6 @@ const Register = ({ setShowForm }: IRegisterProps) => {
                     id="firstPerson"
                     name="firstPerson"
                     type="text"
-                    class="form-control shadow-none"
                     style={{ borderColor: "#D1D4D5" }}
                   />
                   <span>{errors.firstPerson?.message}</span>
@@ -170,7 +158,6 @@ const Register = ({ setShowForm }: IRegisterProps) => {
                     id="secondPerson"
                     name="secondPerson"
                     type="text"
-                    class="form-control shadow-none"
                     style={{ borderColor: "#D1D4D5" }}
                   />
                   <span>{errors.secondPerson?.message}</span>
@@ -183,7 +170,7 @@ const Register = ({ setShowForm }: IRegisterProps) => {
                     id="email"
                     name="email"
                     type="email"
-                    class="form-control shadow-none"
+                    // class="form-control shadow-none"
                     style={{ borderColor: "#D1D4D5" }}
                   />
                   <span>{errors.email?.message}</span>
@@ -196,7 +183,7 @@ const Register = ({ setShowForm }: IRegisterProps) => {
                     id="password"
                     name="password"
                     type="password"
-                    class="form-control shadow-none"
+                    // class="form-control shadow-none"
                     style={{ borderColor: "#D1D4D5" }}
                   />
                   <span>{errors.password?.message}</span>
@@ -209,17 +196,15 @@ const Register = ({ setShowForm }: IRegisterProps) => {
                     id="password"
                     name="confirmPassword"
                     type="password"
-                    class="form-control shadow-none"
+                    // class="form-control shadow-none"
                     style={{ borderColor: "#D1D4D5" }}
                   />
                   <span>{errors.confirmPassword?.message}</span>
                 </div>
                 <div className="form-group">
-                  <CustomButton type="submit" variant="contained">
-                    {loadingButton
+                  <BlackButton type="submit" variant="contained" text={loadingButton
                       ? "Veuillez patienter..."
-                      : "Créer mon compte"}
-                  </CustomButton>
+                      : "Créer mon compte"} />
                 </div>
                 <div className="register__signup">
                   <p>
