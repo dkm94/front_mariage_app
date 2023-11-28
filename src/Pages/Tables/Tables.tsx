@@ -95,6 +95,7 @@ const Tables = (props) => {
         }
       })
       .catch((err) => {
+        // todo: handle error
         console.log(err);
       });
   };
@@ -124,18 +125,18 @@ const Tables = (props) => {
       });
   };
 
-  const deleteTable = async (e, tableId, guest) => {
+  const deleteTable = async (e, tableId:string, guest) => {
     e.preventDefault();
     await axios
       .delete(`/api/admin/tables/delete/${tableId}`)
       .then((res) => {
         if (res.data != null) {
-          // const updateList = tables.filter(table => table._id !== tableId)
-          // setTables(updateList)
-          window.location.reload();
+          const updateList = [...tables].filter((table) => table._id !== tableId);
+          setTables(updateList)
         }
       })
       .catch((err) => {
+        //todo: handle errors
         console.log(err);
       });
   };
