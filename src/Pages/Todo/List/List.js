@@ -1,6 +1,6 @@
-import React, { useState, useRef } from "react";
-import UpdateForm from "../Update/Form";
 import "./List.css";
+
+import React, { useState, useRef } from "react";
 import axios from "axios";
 import { IconButton } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
@@ -8,6 +8,8 @@ import CreateIcon from "@mui/icons-material/Create";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import DeleteIcon from "@mui/icons-material/Delete";
+
+import UpdateForm from "../Update/Form";
 
 const Todos = ({
   todos,
@@ -43,12 +45,6 @@ const Todos = ({
 
   const editTodo = async (e) => {
     e.preventDefault();
-    const updatedTodoList = [...todos].map((obj) => {
-      if (obj._id === edit) {
-        obj.text = input.text;
-      }
-      return obj;
-    });
     await axios
       .post(`/api/admin/todolist/edit/${edit.id}`, { text: input })
       .then((res) => {
@@ -91,6 +87,7 @@ const Todos = ({
         }
       })
       .catch((err) => {
+        //todo: handle error
         console.log(err);
       });
   };
