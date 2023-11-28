@@ -1,32 +1,35 @@
+import "./Todo.css";
+
 import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
+import { Select, MenuItem, Container, Divider } from "@mui/material";
+import Grow from "@mui/material/Grow";
+
 import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
 import AddForm from "./Add/Form";
 import List from "./List/List";
 import { ScrollButtonContext } from "../../App";
-import "./Todo.css";
 import axios from "axios";
-import { Select, MenuItem, Container, Divider } from "@mui/material";
 import ScreenLoader from "../../components/Loader/Screen/ScreenLoader";
-import Grow from "@mui/material/Grow";
+import { TaskType } from "../../../types";
 
 const Todo = () => {
   const scrollBtn = useContext(ScrollButtonContext);
 
-  const [todos, setTodos] = useState([]);
-  const [todo, setTodo] = useState({});
-  const [searchValue, setSearchValue] = useState("");
-  const [selected, setSelected] = useState("all");
-  const [isOpen, setisOpen] = useState(false);
+  const [todos, setTodos] = useState<TaskType[] | []>([]);
+  const [todo, setTodo] = useState<TaskType | {}>({});
+  const [searchValue, setSearchValue] = useState<string>("");
+  const [selected, setSelected] = useState<any>("all");
+  const [isOpen, setisOpen] = useState<boolean>(false);
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     setLoading(true);
 
-    const fetchData = async () => {
+    const fetchData = async (): Promise<void> => {
       const result = await axios.get("/api/admin/todolist/");
       setTodos(result.data);
       setLoading(false);
@@ -46,12 +49,12 @@ const Todo = () => {
   const deleteTodo = (id) => {
     axios.delete(`/api/admin/todolist/delete/${id}`).then((res) => {
       if (res.data != null) {
-        setTodos(todos.filter((todo) => todo._id !== id));
+        setTodos(todos.filter((todo: TaskType) => todo._id !== id));
       }
     });
   };
 
-  const completedTasks = todos.filter((todo) => todo.isCompleted).length;
+  const completedTasks = todos.filter((todo: TaskType) => todo.isCompleted).length;
 
   return (
     <>
@@ -79,7 +82,7 @@ const Todo = () => {
             </Grow>
 
             <Grow in={!loading} timeout={2000}>
-              <Container style={{ padding: "2rem 4rem" }} fluid>
+              <Container style={{ padding: "2rem 4rem" }}>
                 <Row>
                   <AddForm
                     // todos={todos}
@@ -133,7 +136,7 @@ const Todo = () => {
           </Row>
         </Container> */}
             <Grow in={!loading} timeout={3000}>
-              <Container style={{ padding: "0 4rem" }} fluid>
+              <Container style={{ padding: "0 4rem" }}>
                 <Row
                   style={{
                     display: "flex",
@@ -222,7 +225,7 @@ const Todo = () => {
                         </span>
                       )}
                       {todos
-                        .filter((todo) => {
+                        .filter((todo: TaskType) => {
                           return (
                             todo.text
                               .toLowerCase()
@@ -239,11 +242,11 @@ const Todo = () => {
                             return task;
                           }
                         })
-                        .map((todo) => (
+                        .map((todo: TaskType) => (
                           <List
                             todos={todos}
                             obj={todo}
-                            key={todo.id}
+                            key={todo._id}
                             setTodos={setTodos}
                             deleteTodo={deleteTodo}
                             searchValue={searchValue}
