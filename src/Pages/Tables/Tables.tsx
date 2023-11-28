@@ -1,27 +1,36 @@
+import "./Tables.css";
+
 import React, { useState, useEffect, useContext } from "react";
 import { withRouter, Link } from "react-router-dom";
-import { Container, Row, Col } from "react-bootstrap";
-import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
-import Table from "./Table";
-import AddTableForm from "./Forms/Add";
-import { ScrollButtonContext } from "../../App";
 import axios from "axios";
-
-import "./Tables.css";
+import { Container, Row, Col } from "react-bootstrap";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { Box } from "@mui/material";
-import ScreenLoader from "../../components/Loader/Screen/ScreenLoader";
 import Grow from "@mui/material/Grow";
+
+import { GuestType, TableType } from "../../../types";
+import { ScrollButtonContext } from "../../App";
+import AddTableForm from "./Forms/Add";
+import Table from "./Table";
+import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
+import ScreenLoader from "../../components/Loader/Screen/ScreenLoader";
+
+const win: Window = window;
+
+type EditType = {
+  id: string;
+  name: string;
+}
 
 const Tables = (props) => {
   const scrollBtn = useContext(ScrollButtonContext);
   // const loader = useContext(LoaderContext);
 
-  const [searchValue, setSearchValue] = useState("");
-  const [tables, setTables] = useState([]);
-  const [table, setTable] = useState({});
-  const [edit, setEdit] = useState({
-    id: null,
+  const [searchValue, setSearchValue] = useState<string>("");
+  const [tables, setTables] = useState<TableType[] | []>([]);
+  const [table, setTable] = useState<TableType | {}>({});
+  const [edit, setEdit] = useState<EditType>({
+    id: "",
     name: "",
   });
   const [input, setInput] = useState("");
@@ -35,7 +44,7 @@ const Tables = (props) => {
   const handleSearch = (e) => {
     setSearchValue(e.target.value);
   };
-  const [guests, setGuests] = useState([]);
+  const [guests, setGuests] = useState<GuestType[] | []>([]);
 
   useEffect(() => {
     setLoading(true);
@@ -53,7 +62,7 @@ const Tables = (props) => {
     getDatas();
   }, [table]);
 
-  const addTable = (newTable) => {
+  const addTable = (newTable: TableType) => {
     setTable(newTable);
     setTables([...tables, newTable]);
   };
@@ -80,7 +89,10 @@ const Tables = (props) => {
         if (res.data != null) {
           setTimeout(() => {
             setTables(updatedTableList);
-            setEdit("");
+            setEdit({
+              id: "",
+              name: "",
+            });
           }, 1500);
         }
       })
@@ -89,16 +101,27 @@ const Tables = (props) => {
       });
   };
 
-  const deleteGuest = async (guest, table) => {
+  const deleteGuest = async (e, guest: GuestType, table: TableType) => {
+    e.preventDefault();
     await axios
-      .put(`/api/admin/guests/deletetable/${guest}`, { tableID: table })
+      .put(`/api/admin/guests/deletetable/${guest._id}`, { tableID: table._id })
       .then((res) => {
         if (res.data != null) {
-          setGuests(guests.filter((table) => table._id !== table));
-          window.location.reload(false);
+          const guestsCopy = [...guests]
+          const selectedGuestIdx = guestsCopy.findIndex((g) => g._id === guest._id);
+          if(selectedGuestIdx !== -1){
+            guestsCopy[selectedGuestIdx].tableID = "";
+          }
+          setGuests([...guestsCopy]);
+          setEdit({
+            id: "",
+            name: "",
+          });
+          setisOpen(false);
         }
       })
       .catch((err) => {
+        // todo: handle error
         console.log(err);
       });
   };
@@ -175,7 +198,7 @@ const Tables = (props) => {
                 {tables?.length === 0 || null ? (
                   <div
                     className="block"
-                    style={tables ? { display: "none" } : null}
+                    style={{ display: tables &&  "none" }}
                   >
                     <span>Vos tables ici.</span>
                   </div>
@@ -183,7 +206,7 @@ const Tables = (props) => {
                   // loading === true ? loader :
                   <Grid2 container gap={3} justifyContent={"center"}>
                     {tables
-                      .sort((a, b) => {
+                      .sort((a:TableType, b:TableType) => {
                         return a.name > b.name ? 1 : -1;
                       })
                       .filter((table) => {

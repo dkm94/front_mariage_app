@@ -5,6 +5,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { Button, IconButton, TextField } from "@mui/material";
 import "../Tables.css";
 import { BlackButton } from "../../../components/Buttons";
+import { GuestType, TableType } from "../../../../types";
 
 const EditTableForm = (props) => {
   const {
@@ -23,7 +24,14 @@ const EditTableForm = (props) => {
     setisOpen,
   } = props;
 
-  const tableGuests = guests.filter((guest) => guest.tableID === edit.id);
+  const tableGuests: GuestType[] = guests.filter((guest: GuestType) => guest.tableID === edit.id);
+
+  const handleClick = (e, guest: GuestType, table: TableType) => {
+    const selectedGuest: GuestType = guests.find((selected: GuestType) => selected._id === guest._id);
+    if(selectedGuest){
+      deleteGuest(e, selectedGuest, table);
+    }
+  }
 
   return (
     <li key={id} style={{ listStyle: "none" }}>
@@ -81,6 +89,7 @@ const EditTableForm = (props) => {
         >
           {guests &&
             tableGuests.map((guest) => {
+              console.log("🚀 ~ file: Edit.tsx:84 ~ tableGuests.map ~ guest:", guest)
               return (
                 <div key={guest._id} className="guest-del">
                   <span>{guest.name}</span>
@@ -90,9 +99,7 @@ const EditTableForm = (props) => {
                       borderRadius: "5px",
                       color: "#fff",
                     }}
-                    onClick={() => {
-                      deleteGuest(guest._id, table._id);
-                    }}
+                    onClick={(e) => handleClick(e, guest, table)}
                   >
                     <DeleteIcon fontSize="small" />
                   </IconButton>
@@ -121,10 +128,10 @@ const EditTableForm = (props) => {
         <div>
           <Button
             onClick={() => {
-              setEdit({ id: null });
+              setEdit({ id: "" });
               setisOpen(false);
             }}
-            variant="outline"
+            variant="outlined"
             style={{
               color: "grey",
               textTransform: "unset",

@@ -4,6 +4,7 @@ import "./Tables.css";
 import { BlackButton } from "../../components/Buttons";
 import DefaultModal from "../../components/Modals/DefaultModal";
 import EditForm from "./Forms/Edit";
+import { GuestType } from "../../../types";
 
 const Table = ({
   tables,
@@ -25,7 +26,7 @@ const Table = ({
   setisOpen,
 }) => {
   
-  const filteredGuests = guests?.filter((guest) => guest.tableID === table._id);
+  const filteredGuests: GuestType[] = guests?.filter((guest: GuestType) => guest.tableID === table._id);
 
   return (
     <Grid2 xs={12} sm={4} md={3} className="render-tables">
@@ -61,7 +62,7 @@ const Table = ({
           text="Modifier"
         />
       </div>
-      <DefaultModal
+      { edit.id === table._id && <DefaultModal
         open={isOpen}
         setOpen={setisOpen}
         close={() => {
@@ -88,7 +89,7 @@ const Table = ({
           setisOpen={setisOpen}
           filteredGuests={filteredGuests}
         />
-      </DefaultModal>
+      </DefaultModal>}
     </Grid2>
   );
 };

@@ -189,7 +189,7 @@ export type TableType = {
     _id: string;
     mariageID: string;
     name: string;
-    guestID: string[];
+    guestID?: string[];
 }
 
 export type FoodType = {
