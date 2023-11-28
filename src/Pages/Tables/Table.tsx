@@ -21,7 +21,6 @@ const Table = ({
   setEdit,
   getUpdatedId,
   deleteTable,
-  addTable,
   isOpen,
   setisOpen,
 }) => {
@@ -84,7 +83,6 @@ const Table = ({
           setEdit={setEdit}
           getUpdatedId={getUpdatedId}
           deleteTable={deleteTable}
-          addTable={addTable}
           isOpen={isOpen}
           setisOpen={setisOpen}
           filteredGuests={filteredGuests}

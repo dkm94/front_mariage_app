@@ -6,7 +6,7 @@ import axios from "axios";
 import { GreyButton } from "../../../components/Buttons";
 import addIcon from "../../../img/add-group.png";
 
-const AddTableForm = ({ addTable }) => {
+const AddTableForm = ({ tables, setTables }) => {
   const [input, setInput] = useState("");
   const inputRef = useRef(null);
   const [loading, setLoading] = useState(false);
@@ -23,9 +23,10 @@ const AddTableForm = ({ addTable }) => {
         name: input,
       })
       .then((res) => {
-        addTable(res.data);
         setInput("");
         setLoading(false);
+        const newTable = res.data;
+        setTables([...tables, newTable]);
       })
       .catch((err) => console.log("err", err));
   };

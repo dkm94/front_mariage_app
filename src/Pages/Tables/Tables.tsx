@@ -58,12 +58,7 @@ const Tables = (props) => {
       setLoading(false);
     }
     getDatas();
-  }, [table]);
-
-  const addTable = (newTable: TableType) => {
-    setTable(newTable);
-    setTables([...tables, newTable]);
-  };
+  }, []);
 
   const getUpdatedId = (tableId, tableName) => {
     setEdit({
@@ -169,7 +164,7 @@ const Tables = (props) => {
               <Container style={{ padding: "2rem 50px" }} fluid>
                 <Row>
                   <Col xs={12} sm={10} md={6} className="table-form">
-                    <AddTableForm addTable={addTable} />
+                    <AddTableForm tables={tables} setTables={setTables} />
                   </Col>
                   <Col xs={12} sm={10} md={6} className="searchbar">
                     <SearchBar
@@ -231,7 +226,6 @@ const Tables = (props) => {
                           setEdit={setEdit}
                           getUpdatedId={getUpdatedId}
                           deleteTable={deleteTable}
-                          addTable={addTable}
                           isOpen={isOpen}
                           setisOpen={setisOpen}
                         />
