@@ -7,7 +7,7 @@ import EditNoteIcon from "@mui/icons-material/EditNote";
 
 import { GreyButton } from "../../../components/Buttons";
 
-const Form = ({ addTodo }) => {
+const Form = ({ todos, setTodos }) => {
   const [input, setInput] = useState("");
   const inputRef = useRef(null);
   const [loading, setLoading] = useState(false);
@@ -24,11 +24,14 @@ const Form = ({ addTodo }) => {
         text: input,
       })
       .then((res) => {
-        addTodo(res.data);
+        const newTodo = res.data;
+        setTodos([...todos, newTodo]);
+        
         setInput("");
         setLoading(false);
       })
       .catch((err) => {
+        // todo: handle error
         console.log(err);
       });
   };

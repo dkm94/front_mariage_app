@@ -41,11 +41,6 @@ const Todo = () => {
     setSearchValue(e.target.value);
   };
 
-  const addTodo = (newTodo) => {
-    setTodo(newTodo);
-    setTodos([...todos, newTodo]);
-  };
-
   const deleteTodo = (id) => {
     axios.delete(`/api/admin/todolist/delete/${id}`).then((res) => {
       if (res.data != null) {
@@ -85,12 +80,8 @@ const Todo = () => {
               <Container style={{ padding: "2rem 4rem" }}>
                 <Row>
                   <AddForm
-                    // todos={todos}
-                    // setTodos={setTodos}
-                    // todo={todo}
-                    // setTodo={setTodo}
-                    addTodo={addTodo}
-                    // handleInput={handleInput}
+                    todos={todos}
+                    setTodos={setTodos}
                   />
                   <Col xs={12} sm={10} md={6} className="searchbar">
                     <SearchBar
