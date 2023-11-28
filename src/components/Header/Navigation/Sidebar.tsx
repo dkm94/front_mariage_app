@@ -1,10 +1,10 @@
 import "../Header.css";
 
 import React, { useEffect, useState } from "react";
-import { withRouter, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
-import { ISidebarProps, WeddingProps } from "../../../../types/index";
+import { ISidebarProps, NavigationDataType, WeddingProps } from "../../../../types/index";
 import { NavigationData } from "./NavigationData";
 import profilePicture from "../../../img/couple-img.jpg";
 
@@ -12,6 +12,8 @@ const Sidebar = ({ userInfos }: ISidebarProps) => {
 
   const id: string | undefined = userInfos?.mariageID;
   const [wedding, setWedding] = useState<WeddingProps>(undefined);
+  const [selectedTab, setSelectedTab] = useState<string | undefined>(window.location.pathname);
+  const tabs: NavigationDataType[] = NavigationData;
 
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -32,6 +34,11 @@ const Sidebar = ({ userInfos }: ISidebarProps) => {
   const firstPerson = wedding?.["firstPerson"];
   const secondPerson = wedding?.["secondPerson"];
 
+  const handleClick = (pathname: string) => {
+    const selected = tabs.find((tab) => tab.pathname === pathname);
+    setSelectedTab(selected?.pathname);
+  }
+
   return (
     <nav className="sidebar" style={{ animation: "fadeIn 2s", opacity: 1 }}>
       <div className="sidebar__greetings">
@@ -43,12 +50,16 @@ const Sidebar = ({ userInfos }: ISidebarProps) => {
         </p>
       </div>
       <ul className="sidebarList">
-        {NavigationData.map((val, key) => {
+        {tabs.map((val, key) => {
           return (
-            <li key={key} className="menu-row">
+            <li 
+            key={key} 
+            className="menu-row"
+            >
               <Link
-                id={window.location.pathname === val.pathname ? "active" : ""}
+                id={selectedTab === val.pathname ? "active" : ""}
                 to={val?.pathname}
+                onClick={() => handleClick(val.pathname)}
               >
                 {val?.title}
               </Link>

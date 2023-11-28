@@ -48,7 +48,7 @@ const Byguests = ({ userInfos }) => {
     setSearchValue(e.target.value);
   };
 
-  const addGuest = (newGuest) => {
+  const addGuest = (newGuest) => {   
     setUser(newGuest);
     setGuests([...guests, newGuest]);
   };
@@ -62,6 +62,7 @@ const Byguests = ({ userInfos }) => {
     });
     setUser(updatedGuest);
     setGuests(updatedGueslist);
+    setisOpen(false);
   };
 
   const deleteGuest = async (id) => {
