@@ -50,17 +50,23 @@ const Todos = ({
       return obj;
     });
     await axios
-      .post(`/api/admin/todolist/edit/${edit}`, input)
+      .post(`/api/admin/todolist/edit/${edit.id}`, { text: input })
       .then((res) => {
         if (res.data != null) {
+          const todosCopy = [...todos]
+          const selectedTodo = todosCopy.find((t) => t._id === edit.id);
+          if(selectedTodo){
+            selectedTodo.text = input;
+          }
           setTimeout(() => {
-            setTodos(updatedTodoList);
+            setTodos([...todosCopy]);
             setEdit("");
             setInput("");
           }, 1000);
         }
       })
       .catch((err) => {
+        //todo: handle error
         console.log(err);
       });
   };
