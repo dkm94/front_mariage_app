@@ -15,8 +15,6 @@ import Table from "./Table";
 import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
 import ScreenLoader from "../../components/Loader/Screen/ScreenLoader";
 
-const win: Window = window;
-
 type EditType = {
   id: string;
   name: string;
