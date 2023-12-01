@@ -5,7 +5,7 @@ import axios from "axios";
 
 import { GreyButton } from "../../../../components/Buttons";
 
-const AddApetizerForm = ({ addApetizer, icon, apetizers, setApetizers }) => {
+const AddApetizerForm = ({ apetizers, setApetizers }) => {
   const [input, setInput] = useState("");
   const inputRef = useRef(null);
   const [loading, setLoading] = useState(false);

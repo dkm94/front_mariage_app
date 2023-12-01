@@ -17,7 +17,6 @@ import maincourseImg from "../../img/menus/maincourse_img.jpg";
 import dessertImg from "../../img/menus/dessert_img.jpg";
 import apetizerImg from "../../img/menus/apetizers.jpg";
 import beverageImg from "../../img/menus/beverages.jpg";
-import addIcon from "../../img/plus.png";
 
 import AddStarterForm from "./Forms/Add/AddStarter";
 import AddMaincourseForm from "./Forms/Add/AddMaincourse";
@@ -100,31 +99,6 @@ const Menus = () => {
     }
     getDatas();
   }, []);
-
-  const addStarter = (newStarter) => {
-    setStarter(newStarter);
-    setStarters([...starters, newStarter]);
-  };
-
-  const addMaincourse = (newMaincourse) => {
-    setMaincourse(newMaincourse);
-    setMaincourses([...maincourses, newMaincourse]);
-  };
-
-  const addDessert = (newDessert) => {
-    setDessert(newDessert);
-    setDesserts([...desserts, newDessert]);
-  };
-
-  const addApetizer = (newApetizer) => {
-    setApetizer(newApetizer);
-    setApetizers([...apetizers, newApetizer]);
-  };
-
-  const addBeverage = (newBeverage) => {
-    setBeverage(newBeverage);
-    setBeverages([...beverages, newBeverage]);
-  };
 
   //todo: error in update handling (param returns update status not object)
 
@@ -266,8 +240,6 @@ const Menus = () => {
                       )}
                       <div className="menu___forms">
                         <AddStarterForm
-                          addStarter={addStarter}
-                          icon={addIcon}
                           starters={starters}
                           setStarters={setStarters}
                         />
@@ -356,8 +328,6 @@ const Menus = () => {
                       )}
                       <div className="menu___forms">
                         <AddMaincourseForm
-                          addMaincourse={addMaincourse}
-                          icon={addIcon}
                           maincourses={maincourses}
                           setMaincourses={setMaincourses}
                         />
@@ -457,8 +427,6 @@ const Menus = () => {
                       )}
                       <div className="menu___forms">
                         <AddDessertForm
-                          addDessert={addDessert}
-                          icon={addIcon}
                           desserts={desserts}
                           setDesserts={setDesserts}
                         />
@@ -546,8 +514,6 @@ const Menus = () => {
                       )}
                       <div className="menu___forms">
                         <AddApetizerForm
-                          addApetizer={addApetizer}
-                          icon={addIcon}
                           apetizers={apetizers}
                           setApetizers={setApetizers}
                         />
@@ -646,8 +612,6 @@ const Menus = () => {
                       )}
                       <div className="menu___forms">
                         <AddBeverageForm
-                          addBeverage={addBeverage}
-                          icon={addIcon}
                           beverages={beverages}
                           setBeverages={setBeverages}
                         />

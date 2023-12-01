@@ -5,7 +5,7 @@ import axios from "axios";
 
 import { GreyButton } from "../../../../components/Buttons";
 
-const AddMaincourseForm = ({ addMaincourse, icon, maincourses, setMaincourses }) => {
+const AddMaincourseForm = ({ maincourses, setMaincourses }) => {
   const [input, setInput] = useState("");
   const inputRef = useRef(null);
   const [loading, setLoading] = useState(false);

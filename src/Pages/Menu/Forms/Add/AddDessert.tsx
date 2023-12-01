@@ -5,7 +5,7 @@ import axios from "axios";
 
 import { GreyButton } from "../../../../components/Buttons";
 
-const AddDessertForm = ({ addDessert, icon, desserts, setDesserts }) => {
+const AddDessertForm = ({ desserts, setDesserts }) => {
   const [input, setInput] = useState("");
   const inputRef = useRef(null);
   const [loading, setLoading] = useState(false);
