@@ -10,6 +10,8 @@
 
 .guest-container {
     min-height: 600px;
+    position: "relative";
+    z-index: 1;
 }
 
 .guest-form {
