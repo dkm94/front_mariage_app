@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "jsx": "react",
+        "lib": ["es6", "dom"],
+        "noImplicitAny": false,
+        "noImplicitThis": true,
+        "strictNullChecks": true,
+        "allowSyntheticDefaultImports": true,
+        "paths": {
+            "react": [ "./node_modules/@types/react" ]
+          }
+    }
+  }

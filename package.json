@@ -64,6 +64,23 @@
   },
   "proxy": "https://my-wedding-backend.onrender.com/",
   "resolutions": {
-    "react-scripts/eslint-webpack-plugin": "2.4.1"
+    "react-scripts/eslint-webpack-plugin": "2.4.1",
+    "@typescript-eslint/eslint-plugin": "^6.12.0",
+    "@typescript-eslint/parser": "^6.12.0"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-private-property-in-object": "^7.23.4",
+    "@types/jest": "^29.5.9",
+    "@types/node": "^20.9.3",
+    "@types/react": "^18.2.38",
+    "@types/react-dom": "^18.2.16",
+    "@typescript-eslint/eslint-plugin": "^6.12.0",
+    "@typescript-eslint/parser": "^6.12.0",
+    "eslint": "^8.54.0",
+    "typescript": "^4.9"
+  },
+  "overrides": {
+    "typescript": "^4.9",
+    "@typescript-eslint/parser": "^6.12.0"
   }
 }

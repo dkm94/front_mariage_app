@@ -167,8 +167,8 @@ ul {
 }
 
 .menu__title {
-    font-size: 3rem;
-    font-family: 'Corinthia', cursive;
+    font-size: 1rem;
+    text-transform: uppercase;
 }
 
 @media (max-width: 1145px) {

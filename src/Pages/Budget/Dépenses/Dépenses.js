@@ -1,9 +1,11 @@
+import "./Dépenses.css";
+
 import React from "react";
+
 import CreateIcon from "@mui/icons-material/Create";
 import { IconButton } from "@mui/material";
-// import { alpha } from "@material-ui/core";
+
 import UpdateForm from "./UpdateDépense";
-import "./Dépenses.css";
 import DefaultModal from "../../../components/Modals/DefaultModal";
 
 const Expenses = ({
@@ -17,26 +19,6 @@ const Expenses = ({
   isOpen,
   setisOpen,
 }) => {
-  // const renderSwitch = (categoryIcons) => {
-  //   switch (categoryIcons) {
-  //     case "Locations":
-  //       return dealIcon;
-  //     case "Habillement/Beauté":
-  //       return clothesIcon;
-  //     case "Décoration/Fleurs":
-  //       return flowersIcon;
-  //     case "Alliances/Bijoux":
-  //       return ringsIcon;
-  //     case "Animation":
-  //       return musicIcon;
-  //     case "Traiteur":
-  //       return foodIcon;
-  //     case "Faire-part":
-  //       return mailIcon;
-  //     default:
-  //       return otherIcon;
-  //   }
-  // };
 
   const renderSwitchColors = (categoryIconColors) => {
     switch (categoryIconColors) {
@@ -63,6 +45,11 @@ const Expenses = ({
     updateExpense(obj);
   };
 
+  const fixPrice = (price) => {
+    const fixed = price / 100;
+    return Number(fixed).toFixed(2);
+  }
+
   return (
     <ul className="budget-list">
       {expenses
@@ -75,10 +62,7 @@ const Expenses = ({
         })
         .reverse()
         .map((obj) => {
-          let prix = obj.price / 100;
-          function financial(prix) {
-            return Number(prix).toFixed(2);
-          }
+          console.log(obj.price);
           return (
             <li
               key={obj._id}
@@ -129,7 +113,7 @@ const Expenses = ({
                         }}
                       >
                         {" "}
-                        {financial(prix)} €
+                        {fixPrice(obj.price)} €
                       </span>
                     </div>
                     <div style={{ textAlign: "end" }}>
@@ -158,19 +142,6 @@ const Expenses = ({
                     }}
                     className="edit-todo"
                   >
-                    {/* <BlackButton
-                      onClick={() => {
-                        setEdit(obj);
-                        setisOpen(true);
-                      }}
-                      variant={"outlined"}
-                      text={"Modifier"}
-                      style={{
-                        backgroundColor: "unset",
-                        color: "unset",
-                        border: "1px solid #000",
-                      }}
-                    /> */}
                     <IconButton
                       onClick={() => {
                         setEdit(obj);

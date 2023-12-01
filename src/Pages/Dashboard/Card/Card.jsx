@@ -20,7 +20,6 @@ const Card = ({
   secondPerson,
   firstFamilyGuests,
   secondFamilyGuests,
-  sumLength,
 }) => {
   const subContent = (
     <div>
