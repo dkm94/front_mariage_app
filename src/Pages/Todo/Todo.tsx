@@ -2,24 +2,25 @@ import "./Todo.css";
 
 import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import { Row, Col } from "react-bootstrap";
+
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { Select, MenuItem, Container, Divider } from "@mui/material";
 import Grow from "@mui/material/Grow";
 
+import { ScrollButtonContext } from "../../App";
+import { TaskType } from "../../../types";
+
 import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
 import AddForm from "./Add/Form";
 import List from "./List/List";
-import { ScrollButtonContext } from "../../App";
-import axios from "axios";
 import ScreenLoader from "../../components/Loader/Screen/ScreenLoader";
-import { TaskType } from "../../../types";
 
 const Todo = () => {
   const scrollBtn = useContext(ScrollButtonContext);
 
   const [todos, setTodos] = useState<TaskType[] | []>([]);
-  const [todo, setTodo] = useState<TaskType | {}>({});
   const [searchValue, setSearchValue] = useState<string>("");
   const [selected, setSelected] = useState<any>("all");
   const [isOpen, setisOpen] = useState<boolean>(false);
@@ -35,7 +36,7 @@ const Todo = () => {
       setLoading(false);
     };
     fetchData();
-  }, [todo]);
+  }, []);
 
   const handleSearch = (e) => {
     setSearchValue(e.target.value);

@@ -1,13 +1,13 @@
 import "./PieChart.css";
 
 import React, { useState } from "react";
-import type { ChartData, ChartOptions } from "chart.js/auto";
 import { Pie } from "react-chartjs-2";
 import "chart.js/auto";
 
+import { OperationCategoryType, OperationType } from "../../../../types";
+
 import { GreyButton } from "../../Buttons";
 import Modal from "../../Modals/PieChart.jsx";
-import { OperationCategoryType, OperationType } from "../../../../types";
 
 const PieChart = ({ operations }) => {
   const [visible, setVisible] = useState<boolean>(false);
