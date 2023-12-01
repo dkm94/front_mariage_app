@@ -5,7 +5,7 @@ import axios from "axios";
 
 import { GreyButton } from "../../../../components/Buttons";
 
-const AddDessertForm = ({ addDessert, icon }) => {
+const AddDessertForm = ({ addDessert, icon, desserts, setDesserts }) => {
   const [input, setInput] = useState("");
   const inputRef = useRef(null);
   const [loading, setLoading] = useState(false);
@@ -23,7 +23,8 @@ const AddDessertForm = ({ addDessert, icon }) => {
         name: input,
       })
       .then((res) => {
-        addDessert(res.data);
+        const newDessert = res.data;
+        setDesserts([...desserts, newDessert]);
         setInput("");
         setLoading(false);
       })

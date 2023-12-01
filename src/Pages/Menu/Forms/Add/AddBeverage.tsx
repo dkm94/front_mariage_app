@@ -3,7 +3,7 @@ import axios from "axios";
 import { GreyButton } from "../../../../components/Buttons";
 import "../../Menu.css";
 
-const AddBeverageForm = ({ addBeverage, icon }) => {
+const AddBeverageForm = ({ addBeverage, icon, beverages, setBeverages }) => {
   const [input, setInput] = useState("");
   const inputRef = useRef(null);
   const [loading, setLoading] = useState(false);
@@ -20,7 +20,8 @@ const AddBeverageForm = ({ addBeverage, icon }) => {
         name: input,
       })
       .then((res) => {
-        addBeverage(res.data);
+        const newBeverage = res.data;
+        setBeverages([...beverages, newBeverage]);
         setInput("");
         setLoading(false);
       })

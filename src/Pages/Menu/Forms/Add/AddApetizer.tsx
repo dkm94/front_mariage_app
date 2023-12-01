@@ -1,9 +1,11 @@
-import React, { useState, useRef } from "react";
-import axios from "axios";
-import { GreyButton } from "../../../../components/Buttons";
 import "../../Menu.css";
 
-const AddApetizerForm = ({ addApetizer, icon }) => {
+import React, { useState, useRef } from "react";
+import axios from "axios";
+
+import { GreyButton } from "../../../../components/Buttons";
+
+const AddApetizerForm = ({ addApetizer, icon, apetizers, setApetizers }) => {
   const [input, setInput] = useState("");
   const inputRef = useRef(null);
   const [loading, setLoading] = useState(false);
@@ -20,7 +22,8 @@ const AddApetizerForm = ({ addApetizer, icon }) => {
         name: input,
       })
       .then((res) => {
-        addApetizer(res.data);
+        const newApetizer = res.data;
+        setApetizers([...apetizers, newApetizer]);
         setInput("");
         setLoading(false);
       })

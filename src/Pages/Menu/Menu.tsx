@@ -99,7 +99,7 @@ const Menus = () => {
       setLoading(false);
     }
     getDatas();
-  }, [starter, maincourse, dessert, apetizer, beverage]);
+  }, []);
 
   const addStarter = (newStarter) => {
     setStarter(newStarter);
@@ -268,6 +268,8 @@ const Menus = () => {
                         <AddStarterForm
                           addStarter={addStarter}
                           icon={addIcon}
+                          starters={starters}
+                          setStarters={setStarters}
                         />
                       </div>
                       {starters.length === 0 ? (
@@ -356,6 +358,8 @@ const Menus = () => {
                         <AddMaincourseForm
                           addMaincourse={addMaincourse}
                           icon={addIcon}
+                          maincourses={maincourses}
+                          setMaincourses={setMaincourses}
                         />
                       </div>
                       {maincourses.length === 0 ? (
@@ -455,6 +459,8 @@ const Menus = () => {
                         <AddDessertForm
                           addDessert={addDessert}
                           icon={addIcon}
+                          desserts={desserts}
+                          setDesserts={setDesserts}
                         />
                       </div>
                       {desserts.length === 0 ? (
@@ -542,6 +548,8 @@ const Menus = () => {
                         <AddApetizerForm
                           addApetizer={addApetizer}
                           icon={addIcon}
+                          apetizers={apetizers}
+                          setApetizers={setApetizers}
                         />
                       </div>
                       {apetizers.length === 0 ? (
@@ -640,6 +648,8 @@ const Menus = () => {
                         <AddBeverageForm
                           addBeverage={addBeverage}
                           icon={addIcon}
+                          beverages={beverages}
+                          setBeverages={setBeverages}
                         />
                       </div>
                       {beverages.length === 0 ? (

@@ -5,7 +5,7 @@ import axios from "axios";
 
 import { GreyButton } from "../../../../components/Buttons";
 
-const AddStarterForm = ({ addStarter, icon }) => {
+const AddStarterForm = ({ addStarter, icon, starters, setStarters }) => {
   const [input, setInput] = useState("");
   const inputRef = useRef(null);
   const [loading, setLoading] = useState(false);
@@ -22,7 +22,8 @@ const AddStarterForm = ({ addStarter, icon }) => {
         name: input,
       })
       .then((res) => {
-        addStarter(res.data);
+        const newStarter = res.data;
+        setStarters([...starters, newStarter]);
         setInput("");
         setLoading(false);
       })
