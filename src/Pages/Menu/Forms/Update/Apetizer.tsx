@@ -11,7 +11,7 @@ const IconWrapper = styled(IconButton)({
   },
 });
 
-const UpdateApetizer = ({ edit, setEdit, editApetizer, apetizers, setApetizers }) => {
+const UpdateApetizer = ({ edit, setEdit, apetizers, setApetizers }) => {
   const [input, setInput] = useState(edit ? edit.name : "");
   const inputRef = useRef<HTMLDivElement>(null);
 
@@ -80,9 +80,6 @@ const UpdateApetizer = ({ edit, setEdit, editApetizer, apetizers, setApetizers }
         gap={"7px"}
       >
         <IconWrapper
-          onClick={(e) => {
-            editApetizer(e);
-          }}
           type="submit"
           style={{
             backgroundColor: "#262626",

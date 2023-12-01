@@ -97,62 +97,7 @@ const Menus = () => {
     getDatas();
   }, []);
 
-  //todo: error in update handling (param returns update status not object)
-
-  const editStarter = (updatedStarter) => {
-    const updatedStartersList = [...starters].map((starter) => {
-      if (starter._id === updatedStarter.id) {
-        starter.name = updatedStarter.name;
-      }
-      return starter;
-    });
-    setStarter(updatedStarter);
-    setStarters(updatedStartersList);
-  };
-
-  const editMaincourse = (updatedMaincourse) => {
-    const updatedMaincourseList = [...maincourses].map((maincourse) => {
-      if (maincourse._id === edit.id) {
-        maincourse.name = input;
-      }
-      return maincourse;
-    });
-    setMaincourse(updatedMaincourse);
-    setMaincourses(updatedMaincourseList);
-  };
-
-  const editDessert = (updatedDessert) => {
-    const updatedDessertList = [...desserts].map((dessert) => {
-      if (dessert._id === edit.id) {
-        dessert.name = input;
-      }
-      return dessert;
-    });
-    setDessert(updatedDessert);
-    setDesserts(updatedDessertList);
-  };
-
-  const editApetizer = (updatedApetizer) => {
-    const updatedApetizerList = [...apetizers].map((apetizer) => {
-      if (apetizer._id === edit.id) {
-        apetizer.name = input;
-      }
-      return apetizer;
-    });
-    setApetizer(updatedApetizer);
-    setApetizers(updatedApetizerList);
-  };
-
-  const editBeverage = (updatedBeverage) => {
-    const updatedBeverageList = [...beverages].map((beverage) => {
-      if (beverage._id === edit.id) {
-        beverage.name = input;
-      }
-      return beverage;
-    });
-    setBeverage(updatedBeverage);
-    setBeverages(updatedBeverageList);
-  };
+  //todo: error in update handling
 
   const deleteStarter = async (id) => {
     await axios.delete(`/api/admin/menu/starters/delete/${id}`).then((res) => {
@@ -261,7 +206,6 @@ const Menus = () => {
                                 <UpdateStarter
                                   edit={edit}
                                   setEdit={setEdit}
-                                  editStarter={editStarter}
                                   setStarters={setStarters}
                                   starters={starters}
                                 />
@@ -351,7 +295,6 @@ const Menus = () => {
                                 <UpdateMaincourse
                                   edit={edit}
                                   setEdit={setEdit}
-                                  editMaincourse={editMaincourse}
                                   maincourses={maincourses}
                                   setMaincourses={setMaincourses}
                                 />
@@ -452,7 +395,6 @@ const Menus = () => {
                                 <UpdateDessert
                                   edit={edit}
                                   setEdit={setEdit}
-                                  editDessert={editDessert}
                                   desserts={desserts}
                                   setDesserts={setDesserts}
                                 />
@@ -541,7 +483,6 @@ const Menus = () => {
                                 <UpdateApetizer
                                   edit={edit}
                                   setEdit={setEdit}
-                                  editApetizer={editApetizer}
                                   apetizers={apetizers}
                                   setApetizers={setApetizers}
                                 />
@@ -641,7 +582,6 @@ const Menus = () => {
                                 <UpdateBeverage
                                   edit={edit}
                                   setEdit={setEdit}
-                                  editBeverage={editBeverage}
                                   beverages={beverages}
                                   setBeverages={setBeverages}
                                 />

@@ -12,7 +12,7 @@ const IconWrapper = styled(IconButton)({
   },
 });
 
-const UpdateMaincourse = ({ edit, setEdit, editMaincourse, maincourses, setMaincourses }) => {
+const UpdateMaincourse = ({ edit, setEdit, maincourses, setMaincourses }) => {
   const [input, setInput] = useState<string>(edit ? edit.name : "");
   const inputRef = useRef<HTMLDivElement>(null);
 
@@ -81,9 +81,6 @@ const UpdateMaincourse = ({ edit, setEdit, editMaincourse, maincourses, setMainc
         gap={"7px"}
       >
         <IconWrapper
-          onClick={(e) => {
-            editMaincourse(e);
-          }}
           type="submit"
           style={{
             backgroundColor: "#262626",

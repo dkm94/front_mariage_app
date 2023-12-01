@@ -11,7 +11,7 @@ const IconWrapper = styled(IconButton)({
   },
 });
 
-const UpdateBeverage = ({ edit, setEdit, editBeverage, beverages, setBeverages }) => {
+const UpdateBeverage = ({ edit, setEdit, beverages, setBeverages }) => {
   const [input, setInput] = useState(edit ? edit.name : "");
   const inputRef = useRef<HTMLDivElement>(null);
 
