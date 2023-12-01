@@ -50,8 +50,6 @@ const Menus = () => {
     name: "",
   });
 
-  const [input, setInput] = useState<string>("");
-
   const [loading, setLoading] = useState<boolean>(false);
 
   const getUpdatedId = (objId, objName) => {
@@ -59,7 +57,6 @@ const Menus = () => {
       id: objId,
       name: objName,
     });
-    setInput(objName);
   };
 
   useEffect(() => {

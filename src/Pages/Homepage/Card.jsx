@@ -1,6 +1,6 @@
-import React from "react";
 import "./Home.css";
-import { Col, Container } from "react-bootstrap";
+
+import React from "react";
 
 const Card = ({ index, icon, title, description }) => {
   return (

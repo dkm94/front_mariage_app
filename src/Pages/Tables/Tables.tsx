@@ -4,12 +4,14 @@ import React, { useState, useEffect, useContext } from "react";
 import { withRouter, Link } from "react-router-dom";
 import axios from "axios";
 import { Container, Row, Col } from "react-bootstrap";
+
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { Box } from "@mui/material";
 import Grow from "@mui/material/Grow";
 
 import { GuestType, TableType } from "../../../types";
 import { ScrollButtonContext } from "../../App";
+
 import AddTableForm from "./Forms/Add";
 import Table from "./Table";
 import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
@@ -26,7 +28,6 @@ const Tables = (props) => {
 
   const [searchValue, setSearchValue] = useState<string>("");
   const [tables, setTables] = useState<TableType[] | []>([]);
-  const [table, setTable] = useState<TableType | {}>({});
   const [edit, setEdit] = useState<EditType>({
     id: "",
     name: "",
