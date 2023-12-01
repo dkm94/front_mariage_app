@@ -18,16 +18,8 @@ import dessertImg from "../../img/menus/dessert_img.jpg";
 import apetizerImg from "../../img/menus/apetizers.jpg";
 import beverageImg from "../../img/menus/beverages.jpg";
 
-import AddStarterForm from "./Forms/Add/AddStarter";
-import AddMaincourseForm from "./Forms/Add/AddMaincourse";
-import AddDessertForm from "./Forms/Add/AddDessert";
-import AddApetizerForm from "./Forms/Add/AddApetizer";
-import AddBeverageForm from "./Forms/Add/AddBeverage";
-import UpdateStarter from "./Forms/Update/Starter";
-import UpdateMaincourse from "./Forms/Update/Maincourse";
-import UpdateDessert from "./Forms/Update/Dessert";
-import UpdateApetizer from "./Forms/Update/Apetizer";
-import UpdateBeverage from "./Forms/Update/Beverage";
+import { AddStarterForm, AddMaincourseForm, AddDessertForm, AddApetizerForm, AddBeverageForm } from "./Forms/Add";
+import { UpdateStarter, UpdateMaincourse, UpdateDessert, UpdateApetizer, UpdateBeverage } from "./Forms/Update";
 import ScreenLoader from "../../components/Loader/Screen/ScreenLoader";
 import { FoodType } from "../../../types";
 
