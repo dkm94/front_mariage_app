@@ -3,14 +3,7 @@ import "./Menu.css";
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import axios, { AxiosResponse } from "axios";
-import Grow from "@mui/material/Grow";
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
-import { IconButton } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import CreateIcon from "@mui/icons-material/Create";
 import styled from "@emotion/styled";
-
-import { ScrollButtonContext } from "../../App";
 
 import starterImg from "../../img/menus/starter_img.jpg";
 import maincourseImg from "../../img/menus/maincourse_img.jpg";
@@ -18,10 +11,19 @@ import dessertImg from "../../img/menus/dessert_img.jpg";
 import apetizerImg from "../../img/menus/apetizers.jpg";
 import beverageImg from "../../img/menus/beverages.jpg";
 
+import Grow from "@mui/material/Grow";
+import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
+import { IconButton } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import CreateIcon from "@mui/icons-material/Create";
+
 import { AddStarterForm, AddMaincourseForm, AddDessertForm, AddApetizerForm, AddBeverageForm } from "./Forms/Add";
 import { UpdateStarter, UpdateMaincourse, UpdateDessert, UpdateApetizer, UpdateBeverage } from "./Forms/Update";
+
+import { ScrollButtonContext } from "../../App";
 import ScreenLoader from "../../components/Loader/Screen/ScreenLoader";
 import { FoodType } from "../../../types";
+
 
 const IconWrapper = styled(IconButton)({
   "&:hover": {
@@ -38,20 +40,11 @@ const Menus = () => {
   const scrollBtn = useContext(ScrollButtonContext);
 
   const [starters, setStarters] = useState<FoodType[] | []>([]);
-  const [starter, setStarter] = useState<FoodType | {}>({});
-
   const [maincourses, setMaincourses] = useState<FoodType[] | []>([]);
-  const [maincourse, setMaincourse] = useState<FoodType | {}>({});
-
   const [desserts, setDesserts] = useState<FoodType[] | []>([]);
-  const [dessert, setDessert] = useState<FoodType | {}>({});
-
   const [apetizers, setApetizers] = useState<FoodType[] | []>([]);
-  const [apetizer, setApetizer] = useState<FoodType | {}>({});
-
   const [beverages, setBeverages] = useState<FoodType[] | []>([]);
-  const [beverage, setBeverage] = useState<FoodType | {}>({});
-
+  
   const [edit, setEdit] = useState<EditType>({
     id: "",
     name: "",
