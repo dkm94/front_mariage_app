@@ -4,6 +4,7 @@ import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import CheckIcon from "@mui/icons-material/Check";
 import ReplayIcon from "@mui/icons-material/Replay";
 import { IconButton, TextField, styled } from "@mui/material";
+import { FoodType } from "../../../../../types";
 
 const IconWrapper = styled(IconButton)({
   "&:hover": {
@@ -11,12 +12,12 @@ const IconWrapper = styled(IconButton)({
   },
 });
 
-const UpdateDessert = ({ edit, setEdit, editDessert }) => {
-  const [input, setInput] = useState(edit ? edit.name : "");
-  const inputRef = useRef(null);
+const UpdateDessert = ({ edit, setEdit, editDessert, desserts, setDesserts }) => {
+  const [input, setInput] = useState<string>(edit ? edit.name : "");
+  const inputRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    inputRef.current.focus();
+    inputRef?.current?.focus();
   });
 
   const handleChange = (e) => {
@@ -31,14 +32,24 @@ const UpdateDessert = ({ edit, setEdit, editDessert }) => {
       await axios
         .post(`/api/admin/menu/desserts/edit/${edit.id}`, { name: input })
         .then((res) => {
-          editDessert(res.data);
-          setEdit("");
+          if(res.status === 200){
+            const dessertsCopy:FoodType[] = [...desserts];
+            const selectedDessert = dessertsCopy.find((dessert) => dessert._id === edit.id);
+            if(selectedDessert){
+              selectedDessert.name = input;
+              setTimeout(() => {
+                setDesserts(dessertsCopy);
+                setEdit({ id: "", name: "" });
+                setInput("");
+              }, 500);
+            }
+          }
         })
         .catch((err) => {
           console.log(err);
         });
     }
-    setEdit({ id: "" });
+    setEdit({ id: "", name: "" });
     setInput("");
   };
 
@@ -58,8 +69,6 @@ const UpdateDessert = ({ edit, setEdit, editDessert }) => {
         onChange={handleChange}
         value={input}
         ref={inputRef}
-        pl={2}
-        pr={3}
         fullWidth
         style={{ backgroundColor: "#fff" }}
       />

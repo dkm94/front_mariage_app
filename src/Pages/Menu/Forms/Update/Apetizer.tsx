@@ -11,12 +11,12 @@ const IconWrapper = styled(IconButton)({
   },
 });
 
-const UpdateApetizer = ({ edit, setEdit, editApetizer }) => {
+const UpdateApetizer = ({ edit, setEdit, editApetizer, apetizers, setApetizers }) => {
   const [input, setInput] = useState(edit ? edit.name : "");
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    inputRef.current.focus();
+    inputRef?.current?.focus();
   });
 
   const handleChange = (e) => {
@@ -31,14 +31,24 @@ const UpdateApetizer = ({ edit, setEdit, editApetizer }) => {
       await axios
         .post(`/api/admin/menu/apetizers/edit/${edit.id}`, { name: input })
         .then((res) => {
-          editApetizer(res.data);
-          setEdit("");
+          if (res.status === 200) {
+            const apetizersCopy = [...apetizers];
+            const selectedApetizer = apetizersCopy.find((apetizer) => apetizer._id === edit.id);
+            if (selectedApetizer) {
+              selectedApetizer.name = input;
+              setTimeout(() => {
+                setApetizers(apetizersCopy);
+                setEdit({ id: "", name: "" });
+                setInput("");
+              }, 500);
+            }
+          }
         })
         .catch((err) => {
           console.log(err);
         });
     }
-    setEdit({ id: "" });
+    setEdit({ id: "", name: "" });
     setInput("");
   };
 
@@ -58,8 +68,6 @@ const UpdateApetizer = ({ edit, setEdit, editApetizer }) => {
         onChange={handleChange}
         value={input}
         ref={inputRef}
-        pl={2}
-        pr={3}
         fullWidth
         style={{ backgroundColor: "#fff" }}
       />
@@ -92,7 +100,7 @@ const UpdateApetizer = ({ edit, setEdit, editApetizer }) => {
             borderRadius: "5px",
             color: "#262626",
           }}
-          onClick={() => setEdit({ id: null })}
+          onClick={() => setEdit({ id: "", name: "" })}
         >
           <ReplayIcon fontSize="small" />
         </IconWrapper>

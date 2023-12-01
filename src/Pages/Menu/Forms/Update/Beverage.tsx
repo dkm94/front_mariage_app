@@ -11,12 +11,12 @@ const IconWrapper = styled(IconButton)({
   },
 });
 
-const UpdateMaincourse = ({ edit, setEdit, editMaincourse }) => {
+const UpdateBeverage = ({ edit, setEdit, editBeverage, beverages, setBeverages }) => {
   const [input, setInput] = useState(edit ? edit.name : "");
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    inputRef.current.focus();
+    inputRef?.current?.focus();
   });
 
   const handleChange = (e) => {
@@ -29,16 +29,26 @@ const UpdateMaincourse = ({ edit, setEdit, editMaincourse }) => {
       return;
     } else {
       await axios
-        .post(`/api/admin/menu/maincourses/edit/${edit.id}`, { name: input })
+        .post(`/api/admin/menu/beverages/edit/${edit.id}`, { name: input })
         .then((res) => {
-          editMaincourse(res.data);
-          setEdit("");
+          if (res.status === 200) {
+            const beveragesCopy = [...beverages];
+            const selectedBeverage = beveragesCopy.find((beverage) => beverage._id === edit.id);
+            if (selectedBeverage) {
+              selectedBeverage.name = input;
+              setTimeout(() => {
+                setBeverages(beveragesCopy);
+                setEdit({ id: "", name: "" });
+                setInput("");
+              }, 500);
+            }
+          }
         })
         .catch((err) => {
           console.log(err);
         });
     }
-    setEdit({ id: "" });
+    setEdit({ id: "", name: "" });
     setInput("");
   };
 
@@ -58,8 +68,6 @@ const UpdateMaincourse = ({ edit, setEdit, editMaincourse }) => {
         onChange={handleChange}
         value={input}
         ref={inputRef}
-        pl={2}
-        pr={3}
         fullWidth
         style={{ backgroundColor: "#fff" }}
       />
@@ -72,9 +80,6 @@ const UpdateMaincourse = ({ edit, setEdit, editMaincourse }) => {
         gap={"7px"}
       >
         <IconWrapper
-          onClick={(e) => {
-            editMaincourse(e);
-          }}
           type="submit"
           style={{
             backgroundColor: "#262626",
@@ -101,4 +106,4 @@ const UpdateMaincourse = ({ edit, setEdit, editMaincourse }) => {
   );
 };
 
-export default UpdateMaincourse;
+export default UpdateBeverage;

@@ -4,6 +4,7 @@ import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import CheckIcon from "@mui/icons-material/Check";
 import ReplayIcon from "@mui/icons-material/Replay";
 import { IconButton, TextField, styled } from "@mui/material";
+import { FoodType } from "../../../../../types";
 
 const IconWrapper = styled(IconButton)({
   "&:hover": {
@@ -11,12 +12,12 @@ const IconWrapper = styled(IconButton)({
   },
 });
 
-const UpdateBeverage = ({ edit, setEdit, editBeverage }) => {
-  const [input, setInput] = useState(edit ? edit.name : "");
-  const inputRef = useRef(null);
+const UpdateStarter = ({ edit, setEdit, editStarter, setStarters, starters }) => {
+  const [input, setInput] = useState<string>(edit ? edit.name : "");
+  const inputRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    inputRef.current.focus();
+    inputRef?.current?.focus();
   });
 
   const handleChange = (e) => {
@@ -29,17 +30,25 @@ const UpdateBeverage = ({ edit, setEdit, editBeverage }) => {
       return;
     } else {
       await axios
-        .post(`/api/admin/menu/beverages/edit/${edit.id}`, { name: input })
+        .post(`/api/admin/menu/starters/edit/${edit.id}`, { name: input })
         .then((res) => {
-          editBeverage(res.data);
-          setEdit("");
+          if(res.status === 200){
+            const startersCopy:FoodType[] = [...starters];
+            const selectedStarter = startersCopy.find((starter) => starter._id === edit.id);
+            if(selectedStarter){
+              selectedStarter.name = input;
+              setTimeout(() => {
+                setStarters(startersCopy);
+                setEdit({ id: "", name: "" });
+                setInput("");
+              }, 500);
+            }
+          }
         })
         .catch((err) => {
           console.log(err);
         });
     }
-    setEdit({ id: "" });
-    setInput("");
   };
 
   return (
@@ -58,11 +67,10 @@ const UpdateBeverage = ({ edit, setEdit, editBeverage }) => {
         onChange={handleChange}
         value={input}
         ref={inputRef}
-        pl={2}
-        pr={3}
         fullWidth
         style={{ backgroundColor: "#fff" }}
       />
+
       <Grid2
         display={"flex"}
         flexDirection={"row"}
@@ -72,6 +80,9 @@ const UpdateBeverage = ({ edit, setEdit, editBeverage }) => {
         gap={"7px"}
       >
         <IconWrapper
+          onClick={(e) => {
+            editStarter(e);
+          }}
           type="submit"
           style={{
             backgroundColor: "#262626",
@@ -98,4 +109,4 @@ const UpdateBeverage = ({ edit, setEdit, editBeverage }) => {
   );
 };
 
-export default UpdateBeverage;
+export default UpdateStarter;

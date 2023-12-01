@@ -4,6 +4,7 @@ import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import CheckIcon from "@mui/icons-material/Check";
 import ReplayIcon from "@mui/icons-material/Replay";
 import { IconButton, TextField, styled } from "@mui/material";
+import { FoodType } from "../../../../../types";
 
 const IconWrapper = styled(IconButton)({
   "&:hover": {
@@ -11,12 +12,12 @@ const IconWrapper = styled(IconButton)({
   },
 });
 
-const UpdateStarter = ({ edit, setEdit, editStarter }) => {
-  const [input, setInput] = useState(edit ? edit.name : "");
-  const inputRef = useRef(null);
+const UpdateMaincourse = ({ edit, setEdit, editMaincourse, maincourses, setMaincourses }) => {
+  const [input, setInput] = useState<string>(edit ? edit.name : "");
+  const inputRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    inputRef.current.focus();
+    inputRef?.current?.focus();
   });
 
   const handleChange = (e) => {
@@ -29,16 +30,26 @@ const UpdateStarter = ({ edit, setEdit, editStarter }) => {
       return;
     } else {
       await axios
-        .post(`/api/admin/menu/starters/edit/${edit.id}`, { name: input })
+        .post(`/api/admin/menu/maincourses/edit/${edit.id}`, { name: input })
         .then((res) => {
-          editStarter(res.data);
-          setEdit("");
+          if(res.status === 200){
+            const maincoursesCopy:FoodType[] = [...maincourses];
+            const selectedMaincourse = maincoursesCopy.find((maincourse) => maincourse._id === edit.id);
+            if(selectedMaincourse){
+              selectedMaincourse.name = input;
+              setTimeout(() => {
+                setMaincourses(maincoursesCopy);
+                setEdit({ id: "", name: "" });
+                setInput("");
+              }, 500);
+            }
+          }
         })
         .catch((err) => {
           console.log(err);
         });
     }
-    setEdit({ id: "" });
+    setEdit({ id: "", name: "" });
     setInput("");
   };
 
@@ -58,12 +69,9 @@ const UpdateStarter = ({ edit, setEdit, editStarter }) => {
         onChange={handleChange}
         value={input}
         ref={inputRef}
-        pl={2}
-        pr={3}
         fullWidth
         style={{ backgroundColor: "#fff" }}
       />
-
       <Grid2
         display={"flex"}
         flexDirection={"row"}
@@ -74,7 +82,7 @@ const UpdateStarter = ({ edit, setEdit, editStarter }) => {
       >
         <IconWrapper
           onClick={(e) => {
-            editStarter(e);
+            editMaincourse(e);
           }}
           type="submit"
           style={{
@@ -102,4 +110,4 @@ const UpdateStarter = ({ edit, setEdit, editStarter }) => {
   );
 };
 
-export default UpdateStarter;
+export default UpdateMaincourse;

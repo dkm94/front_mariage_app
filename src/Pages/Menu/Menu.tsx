@@ -37,6 +37,11 @@ const IconWrapper = styled(IconButton)({
   },
 });
 
+type EditType = {
+  id: string;
+  name: string;
+};
+
 const Menus = () => {
   const scrollBtn = useContext(ScrollButtonContext);
 
@@ -55,8 +60,8 @@ const Menus = () => {
   const [beverages, setBeverages] = useState<FoodType[] | []>([]);
   const [beverage, setBeverage] = useState<FoodType | {}>({});
 
-  const [edit, setEdit] = useState({
-    id: null,
+  const [edit, setEdit] = useState<EditType>({
+    id: "",
     name: "",
   });
 
@@ -265,6 +270,8 @@ const Menus = () => {
                                   edit={edit}
                                   setEdit={setEdit}
                                   editStarter={editStarter}
+                                  setStarters={setStarters}
+                                  starters={starters}
                                 />
                               ) : (
                                 <Grid2
@@ -353,6 +360,8 @@ const Menus = () => {
                                   edit={edit}
                                   setEdit={setEdit}
                                   editMaincourse={editMaincourse}
+                                  maincourses={maincourses}
+                                  setMaincourses={setMaincourses}
                                 />
                               ) : (
                                 <Grid2
@@ -452,6 +461,8 @@ const Menus = () => {
                                   edit={edit}
                                   setEdit={setEdit}
                                   editDessert={editDessert}
+                                  desserts={desserts}
+                                  setDesserts={setDesserts}
                                 />
                               ) : (
                                 <Grid2
@@ -539,6 +550,8 @@ const Menus = () => {
                                   edit={edit}
                                   setEdit={setEdit}
                                   editApetizer={editApetizer}
+                                  apetizers={apetizers}
+                                  setApetizers={setApetizers}
                                 />
                               ) : (
                                 <Grid2
@@ -637,6 +650,8 @@ const Menus = () => {
                                   edit={edit}
                                   setEdit={setEdit}
                                   editBeverage={editBeverage}
+                                  beverages={beverages}
+                                  setBeverages={setBeverages}
                                 />
                               ) : (
                                 <Grid2
