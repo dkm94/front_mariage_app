@@ -22,9 +22,11 @@ const UpdateExpense = ({
   const handleChange = (e) => {
     const { value, name } = e.target;
     if (name === "price") {
+      const float = parseFloat(value);
+      const price = Math.round(float * 100);
       setInput((prevState) => ({
         ...prevState,
-        [name]: parseFloat(value),
+        [name]: price,
       }));
     } else {
       setInput((prevState) => ({
@@ -45,6 +47,9 @@ const UpdateExpense = ({
       price: "",
     });
   };
+
+
+
 
   return (
     <div className="events-list___inputs">
@@ -118,7 +123,7 @@ const UpdateExpense = ({
           name="price"
           type="number"
           onChange={handleChange}
-          value={input.price}
+          value={input.price / 100}
           ref={inputRef}
           style={{ background: "#fff", width: "100%" }}
         />

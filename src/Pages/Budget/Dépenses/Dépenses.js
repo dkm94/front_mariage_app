@@ -45,6 +45,11 @@ const Expenses = ({
     updateExpense(obj);
   };
 
+  const fixPrice = (price) => {
+    const fixed = price / 100;
+    return Number(fixed).toFixed(2);
+  }
+
   return (
     <ul className="budget-list">
       {expenses
@@ -57,10 +62,7 @@ const Expenses = ({
         })
         .reverse()
         .map((obj) => {
-          let prix = obj.price / 100;
-          function financial(prix) {
-            return Number(prix).toFixed(2);
-          }
+          console.log(obj.price);
           return (
             <li
               key={obj._id}
@@ -111,7 +113,7 @@ const Expenses = ({
                         }}
                       >
                         {" "}
-                        {financial(prix)} €
+                        {fixPrice(obj.price)} €
                       </span>
                     </div>
                     <div style={{ textAlign: "end" }}>

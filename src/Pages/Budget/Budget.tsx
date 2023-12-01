@@ -31,6 +31,7 @@ const Budget = () => {
   };
 
   const [operations, setOperations] = useState<OperationType[] | []>([]);
+  console.log("🚀 ~ file: Budget.tsx:34 ~ Budget ~ operations:", operations)
   const [searchValue, setSearchValue] = useState<string>("");
   const [total, setTotal] = useState<string>("");
 
@@ -131,7 +132,6 @@ const Budget = () => {
   const formik = useFormik({
     initialValues: newOperationValues,
     onSubmit: async (values) => {
-      alert("trigger")
       await axios
         .post(`/api/admin/budget/operations/add`, {
           category: values.category,
