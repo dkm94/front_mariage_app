@@ -4,18 +4,21 @@ import React, { useState, useEffect, useContext, ReactNode, ChangeEvent } from "
 import { Link } from "react-router-dom";
 import axios, { AxiosResponse } from "axios";
 import { Container, Row, Col } from "react-bootstrap";
-import { Formik, Form, useFormik } from "formik";
+import { Form, useFormik, FormikProvider } from "formik";
 import * as Yup from "yup";
+
 import Grow from "@mui/material/Grow";
 
-import { OperationType } from "../../../types/index";
-import { ScrollButtonContext } from "../../App";
 import PieChart from "../../components/Expenses/Graph/PieChart";
 import TextField from "../../components/Formik/TextField-Operations";
 import Expenses from "./Dépenses/Dépenses";
 import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
 import { GreyButton } from "../../components/Buttons";
 import ScreenLoader from "../../components/Loader/Screen/ScreenLoader";
+
+import { ScrollButtonContext } from "../../App";
+import { OperationType } from "../../../types/index";
+
 
 const Budget = () => {
 
@@ -28,7 +31,6 @@ const Budget = () => {
   };
 
   const [operations, setOperations] = useState<OperationType[] | []>([]);
-  const [operation, setOperation] = useState<OperationType | {}>({});
   const [searchValue, setSearchValue] = useState<string>("");
   const [total, setTotal] = useState<string>("");
 
@@ -51,7 +53,7 @@ const Budget = () => {
       setLoading(false);
     }
     getDatas();
-  }, [operation]);
+  }, []);
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>): void => {
     setSearchValue(e.target.value);
@@ -129,6 +131,7 @@ const Budget = () => {
   const formik = useFormik({
     initialValues: newOperationValues,
     onSubmit: async (values) => {
+      alert("trigger")
       await axios
         .post(`/api/admin/budget/operations/add`, {
           category: values.category,
@@ -136,11 +139,11 @@ const Budget = () => {
           description: values.description,
         })
         .then((res) => {
-          setOperation(res.data);
-          const updatedExpenses = [...operations, res.data];
-          setOperations([...operations, res.data]);
-          calculateTotal(updatedExpenses);
-          formik.resetForm({});
+          const newOperation = res.data;
+          const expensesCopy = [...operations]
+          setOperations([...expensesCopy, newOperation]);
+          calculateTotal([...expensesCopy, newOperation]);
+          formik.resetForm();
         })
         .catch((err) => {
           console.log(err);
@@ -149,25 +152,6 @@ const Budget = () => {
     validationSchema: operationValidationSchema,
     enableReinitialize: true,
   });
-
-  const onSubmit = async (values: OperationType) => {
-    await axios
-        .post(`/api/admin/budget/operations/add`, {
-          category: values.category,
-          price: values.price,
-          description: values.description,
-        })
-        .then((res) => {
-          setOperation(res.data);
-          const updatedExpenses = [...operations, res.data];
-          setOperations([...operations, res.data]);
-          calculateTotal(updatedExpenses);
-          formik.resetForm({});
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      }
 
   function calculateTotal(operations: OperationType[]): void {
     if (operations) {
@@ -254,26 +238,19 @@ const Budget = () => {
                       </div>
                     </div>
                   </div>
-                  <Formik
-                  initialValues={newOperationValues}
-                  validationSchema={operationValidationSchema}
-                  onSubmit={onSubmit}
-                  >
-                    {formik => {
-                      const { handleSubmit, values, handleChange, handleBlur, errors, touched, isSubmitting } = formik;
-                      return (
+
                         <div className="col budget-form mb3">
+                          <FormikProvider value={formik}>
                       <Form
                         className="input-group mb-3"
                         style={{ display: "flex", flexDirection: "column" }}
-                        onSubmit={handleSubmit}
                       >
                         <div className="budget___select">
                           <select
                             name="category"
-                            value={values.category}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
+                            value={formik.values.category}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
                           >
                             <option
                               value=""
@@ -306,10 +283,10 @@ const Budget = () => {
                             ></option>
                             <option value="Autres" label="Autres"></option>
                           </select>
-                          {errors.category &&
-                            touched.category && (
+                          {formik.errors.category &&
+                            formik.touched.category && (
                               <div className="input-feedback error">
-                                {errors.category}
+                                {formik.errors.category}
                               </div>
                             )}
                         </div>
@@ -318,12 +295,12 @@ const Budget = () => {
                           // label="Description"
                           name="description"
                           type="text"
-                          value={values.description}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
+                          value={formik.values.description}
+                          onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
                           class="form-control"
-                          errors={errors}
-                          touched={touched}
+                          errors={formik.errors}
+                          touched={formik.touched}
                           placeholder="Description"
                         />
                         <TextField
@@ -331,12 +308,12 @@ const Budget = () => {
                           width="100%"
                           name="price"
                           type="number"
-                          value={values.price}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
+                          value={formik.values.price}
+                          onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
                           class="form-control"
-                          errors={errors}
-                          touched={touched}
+                          errors={formik.errors}
+                          touched={formik.touched}
                           placeholder="Montant"
                           border-radius="10px"
                         />
@@ -345,18 +322,14 @@ const Budget = () => {
                             type="submit"
                             text={"Valider"}
                             variant={"contained"}
-                            disabled={isSubmitting}
+                            disabled={formik.isSubmitting}
                             size="medium"
                           />
                         </div>
                       </Form>
+                      </FormikProvider>
                     </div>
-                      )
-                    }
                       
-                      
-                    }
-                  </Formik>
                 </div>
                 <div className="col chart-component">
                   <PieChart operations={operations} />
