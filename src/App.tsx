@@ -42,7 +42,7 @@ function App() {
   // axios.defaults.baseURL = 'http://localhost:3050';
   axios.defaults.headers.common["Authorization"] = "Bearer " + token;
 
-  let scrollButton: ScrollButtonType = <ScrollToTopButton />;
+  let scrollButton = <ScrollToTopButton />;
   let loader: LoaderType = <Loader />;
 
   function Home() {
