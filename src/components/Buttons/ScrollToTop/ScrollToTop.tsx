@@ -18,7 +18,7 @@ const ScrollToTopButton: React.FC = () => {
     }, [pageYOffset])
 
     if(!visible){
-        return false
+        return null;
     }
 
     const scrollToTop = (): void => window.scrollTo({ top: 0, behavior: "smooth"})
