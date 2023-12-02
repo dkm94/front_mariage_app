@@ -1,9 +1,10 @@
 import "./ScrollToTop.css";
 
 import React, { useEffect, useState } from "react";
+
 import { useWindowScroll } from "react-use";
 
-const ScrollToTopButton = () => {
+const ScrollToTopButton: React.FC = () => {
 
     const { y: pageYOffset } = useWindowScroll();
     const [visible, setVisibility] = useState<boolean>(false);
@@ -17,7 +18,7 @@ const ScrollToTopButton = () => {
     }, [pageYOffset])
 
     if(!visible){
-        return false
+        return null;
     }
 
     const scrollToTop = (): void => window.scrollTo({ top: 0, behavior: "smooth"})
