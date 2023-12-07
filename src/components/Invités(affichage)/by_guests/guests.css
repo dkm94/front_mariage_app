@@ -165,7 +165,6 @@
     justify-content: space-between;
     background-color: #f2f2f2;
     padding: 1rem;
-    border-radius: 0 0 10px 10px;
     }
 
 .guest-card__form__button-container > button {
@@ -462,6 +461,12 @@
     padding-left: 50px;
  }
  
+}
+
+@media (max-width: 600px) {
+    .guest-card__form__button-container {
+        background-color: unset;
+    }
 }
 
 @media (max-width: 480px) { 
