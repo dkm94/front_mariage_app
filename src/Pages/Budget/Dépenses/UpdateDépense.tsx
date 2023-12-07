@@ -2,7 +2,6 @@ import "../Budget.css";
 
 import React, { useState, useEffect, useRef } from "react";
 import { Button, TextField, IconButton } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
 
 import { BlackButton } from "../../../components/Buttons";
 
