@@ -35,7 +35,7 @@ const Table = ({
       <div style={{ marginBottom: "60px" }}>
         {filteredGuests?.map((guest) => (
           <>
-            <span style={{ color: "#7c7676", fontSize: "1.2rem" }}>{guest.name}</span>
+            <span style={{ color: "#7c7676", fontSize: "1rem" }}>{guest.name}</span>
             <br />
           </>
         ))}
