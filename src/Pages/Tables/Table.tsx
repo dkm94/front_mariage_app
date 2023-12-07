@@ -2,7 +2,7 @@ import React from "react";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import "./Tables.css";
 import { BlackButton } from "../../components/Buttons";
-import DefaultModal from "../../components/Modals/DefaultModal";
+import DefaultModal from "../../components/Modals/Default/DefaultModal";
 import EditForm from "./Forms/Edit";
 import { GuestType } from "../../../types";
 

@@ -6,7 +6,7 @@ import { IconButton } from "@mui/material";
 import CreateIcon from "@mui/icons-material/Create";
 
 import Form from "../Form/UpdateGuest";
-import DefaultModal from "../../../../Modals/DefaultModal";
+import DefaultModal from "../../../../Modals/Default/DefaultModal";
 
 import avatar from "../../../../../img/avatar.jpg";
 import uploadImg from "../../../../../img/upload-icon-20624.png";
@@ -125,7 +125,7 @@ const Guests = ({
                         id: guest._id,
                         name: guest.name,
                       });
-                      setisOpen(true);
+                      
                     }}
                     style={{
                       backgroundColor: "#fff",
@@ -168,13 +168,15 @@ const Guests = ({
                           ) : null}
                         </Box>
                       </div>
-                      <DefaultModal
-                        open={isOpen}
+                     {guest._id === edit.id && <DefaultModal
+                        // open={isOpen}
+                        setEdit={setEdit}
                         setOpen={setisOpen}
                         guestId={editPicture}
                         close={() => {
                           setisOpen(false);
                         }}
+                        title="Modifier l'invité"
                       >
                         <Form
                           edit={edit}
@@ -191,7 +193,7 @@ const Guests = ({
                           setisOpen={setisOpen}
                           deleteGuest={deleteGuest}
                         />
-                      </DefaultModal>
+                      </DefaultModal>}
                     </div>
                   </div>
                   </div>

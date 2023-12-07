@@ -6,7 +6,7 @@ import CreateIcon from "@mui/icons-material/Create";
 import { IconButton } from "@mui/material";
 
 import UpdateForm from "./UpdateDépense";
-import DefaultModal from "../../../components/Modals/DefaultModal";
+import DefaultModal from "../../../components/Modals/Default/DefaultModal";
 
 const Expenses = ({
   expenses,
