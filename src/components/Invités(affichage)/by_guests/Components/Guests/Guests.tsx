@@ -7,6 +7,15 @@ import Grid2 from "@mui/material/Unstable_Grid2/Grid2"; // import { CSSTransitio
 import SmallGuestCard from "../Cards/Small/SmallGuestCard";
 import uploadImg from "../../../../../img/upload-icon-20624.png";
 import DefaultModal from "../../../../Modals/DefaultModal";
+import styled from "@emotion/styled";
+import { IconButton } from "@mui/material";
+import CreateIcon from "@mui/icons-material/Create";
+
+const IconWrapper = styled(IconButton)({
+  "&:hover": {
+    background: "none",
+  },
+});
 
 const Guests = ({
   guests,
@@ -118,6 +127,7 @@ const Guests = ({
                     // width={"20rem"}
                     minWidth={"250px"}
                     className={`fade-in guest-card-style`}
+                    sx={{ position: "relative" }}
                   >
                     {/* {edit.id === guest._id && (
                       <div className="guest-card__delete-btn">
@@ -131,23 +141,43 @@ const Guests = ({
                       </div>
                     )} */}
                     {/* <li className={(isFadingOut && guest._id === deleteId) ? 'div-guest item-fadeout' :'div-guest'}> */}
-                    {/* <div className="custom-dropdown">
-                                            <Dropdown>
-                                                <Dropdown.Toggle as={CustomToggle} />
-                                                <Dropdown.Menu size="sm" title="">
-                                                    {edit.id ? (<>
-                                                        <Dropdown.Item onClick={() => setEdit({id: null})}>Annuler</Dropdown.Item>
-                                                    </>) : (<>
-                                                        <Dropdown.Item onClick={() => setEdit({
-                                                            id: guest._id, 
-                                                            name: guest.name
-                                                        })}>Modifier</Dropdown.Item>
-                                                        
-                                                        <Dropdown.Item onClick={()=>{handleRemoveGuest(guest._id)}}>Supprimer l'invité</Dropdown.Item>
-                                                    </>)}
-                                                </Dropdown.Menu>
-                                            </Dropdown>
-                                        </div> */}
+                    {/* <div className="custom-dropdown"> */}
+                          {/* <Dropdown>
+                              <Dropdown.Menu title="">
+                                  {edit.id ? (<>
+                                      <Dropdown.Item onClick={() => setEdit({
+                                        id: null,
+                                        name: ""
+                                      })}>Annuler</Dropdown.Item>
+                                  </>) : (<>
+                                      <Dropdown.Item onClick={() => setEdit({
+                                          id: guest._id, 
+                                          name: guest.name
+                                      })}>Modifier</Dropdown.Item>
+                                  </>)}
+                              </Dropdown.Menu>
+                          </Dropdown> */}
+                          <IconWrapper
+                          onClick={() => {
+                            setEdit({
+                              id: guest._id,
+                              name: guest.name,
+                            });
+                            setisOpen(true);
+                          }}
+                          style={{
+                            backgroundColor: "#fff",
+                            border: "1px solid lightgray",
+                            borderRadius: "5px",
+                            color: "#262626",
+                            position: "absolute",
+                            right: "20px",
+                            top: "20px",
+                          }}
+                          >
+                            <CreateIcon fontSize="small" />
+                          </IconWrapper>
+                      {/* </div> */}
                     <div className="div-guest___container">
                       <div className="guest-picture center-x">
                         {guest.media === "" ? (
@@ -176,7 +206,7 @@ const Guests = ({
                           ) : null}
                         </Box>
                       </div>
-                      <div className="guest-card__button-container">
+                      {/* <div className="guest-card__button-container">
                         <BlackButton
                           onClick={() => {
                             setEdit({
@@ -188,7 +218,7 @@ const Guests = ({
                           variant="contained"
                           text="Modifier"
                         />
-                      </div>
+                      </div> */}
                       <DefaultModal
                         open={isOpen}
                         setOpen={setisOpen}
