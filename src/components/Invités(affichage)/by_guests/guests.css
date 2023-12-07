@@ -146,17 +146,6 @@
     width: 80%;
 }
 
-.guest-card__button-container {
-    word-break: break-word;
-    margin-top: 30px;
-    width: 100%;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    margin-bottom: 20px;
-    height: 100%;
-}
-
 .guest__updateForm > form {
     display: flex;
     flex-direction: column;
@@ -226,7 +215,7 @@
 .guest-picture > img {
     object-fit: cover;
     width: 100%;
-    height: 14rem;
+    height: 10rem;
 }
 
 #upload-avatar {
@@ -375,44 +364,108 @@
     padding: 1rem 1rem !important;
     flex-direction: column;
     align-items: center;
-    height: -moz-fit-content;
-    height: auto;
+    /* height: -moz-fit-content;
+    height: auto; */
     justify-items: center;
     text-align: center;
     background-color: #f9f9f9;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    -webkit-box-sizing: initial;
+    -moz-box-sizing: initial;
+    box-sizing: initial;
+    position: relative;
 }
 
-@media only screen and (max-device-width : 1024px) {
+.guest-wrapper {
+    height: 290px;
+    flex-basis: 20%;
+    -ms-flex: auto;
+    width: 250px;
+    position: relative;
+    padding: 10px;
+    box-sizing: border-box;
+}
 
-    /* .guest__updateForm > form {
-        width: 100%;
+
+.guests-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+ }
+
+ @media(max-width: 1366px) {
+    .guest-wrapper {
+      flex-basis: 25%;
     }
-    .guest__updateForm > form > input {
-        width: 100%;
-    } */
-}
+  }
+
+  @media(max-width: 1211px) {
+    .guest-wrapper {
+      flex-basis: 33.33%;
+    }
+  }
+
+  @media(max-width: 767px) {
+    .guest-picture > img {
+        height: 8rem;
+    }
+    #guest-name {
+        font-size: 1rem;
+        line-height: normal;
+    }
+    .guest-family {
+        font-size: 0.8rem;
+        line-height: normal;
+    }
+    .guest-wrapper {
+        height: 250px;
+    }
+  }
+
 
 @media (max-width: 700px) { 
-    .guest-card-style {
-        width: 200px;
-        /* max-width: unset !important; */
-        min-width: 200px !important;
+    .guest-wrapper {
+        /* height: 220px; */
+      }
+
+    .guest-picture > img {
+        height: 8rem;
+        width: 8rem;
     }
+   }
+
+   @media (max-width: 667px) { 
+    .guest-wrapper {
+        flex-basis: 33.33%;
+        height: 230px;
+      }
+
+    .guest-picture > img {
+    height: 6rem;
+    width: 100%;
+    }
+    /* #guest-name {
+        font-size: 1rem;
+    }
+    .guest-family {
+        font-size: 0.8rem;
+    } */
    }
 
 @media (max-width: 600px) { 
  .div-guest___container {
-    display: none;
+    /* display: none; */
  }
+ .guest-wrapper {
+    flex-basis: 33.33%;
+  }
 
  .guest-card-style {
     min-width: unset !important;
     width: 100% !important;
     max-width: unset !important;
- }
-
- .guests-container {
-    gap: 0 !important;
  }
 
  .guests-container > div {
@@ -432,12 +485,35 @@
         width: 100%;
     }
 
-    #guest-name {
-        font-size: 2rem;
+    .guest-wrapper {
+        padding: 0;
     }
-
-    .guest-family {
-        font-size: 0.9rem;
-        line-height: unset !important;
+    .guest-card-style {
+        box-shadow: none;
+    }
+    .guest-container {
+        overflow: hidden;
+    }
+    .guests-container {
+        margin: 0 -4px -4px 0;
+    }
+    .guest-wrapper {
+        border-right: 1px solid rgb(224, 224, 224);
+	    border-bottom: 1px solid rgb(224, 224, 224) !important;
+    }
+    .guest-card-style {
+        padding: 0 !important;
+    }
+    .guest-card-style > button {
+        right: 5px !important;
+        top: 5px !important;
+    }
+    .guest-wrapper {
+        height: 185px;
+    }
+    .nameField {
+        margin-top: 0;
+        padding-left: 5px;
+        padding-right: 5px;
     }
 }

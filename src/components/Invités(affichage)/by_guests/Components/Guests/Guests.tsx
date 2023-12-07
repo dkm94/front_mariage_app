@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import Form from "../Form/UpdateGuest";
-import avatar from "../../../../../img/avatar.jpg";
+
 import { Box } from "@material-ui/core";
-import { BlackButton } from "../../../../Buttons";
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2"; // import { CSSTransition, TransitionGroup, Transition } from "react-transition-group";
-import SmallGuestCard from "../Cards/Small/SmallGuestCard";
-import uploadImg from "../../../../../img/upload-icon-20624.png";
-import DefaultModal from "../../../../Modals/DefaultModal";
 import styled from "@emotion/styled";
 import { IconButton } from "@mui/material";
 import CreateIcon from "@mui/icons-material/Create";
+
+import Form from "../Form/UpdateGuest";
+import DefaultModal from "../../../../Modals/DefaultModal";
+
+import avatar from "../../../../../img/avatar.jpg";
+import uploadImg from "../../../../../img/upload-icon-20624.png";
 
 const IconWrapper = styled(IconButton)({
   "&:hover": {
@@ -86,15 +86,10 @@ const Guests = ({
         <Box
           className="guest-container"
           sx={{
-            minHeight: "500px",
+            minHeight: guests ? "0px" : "600px",
           }}
         >
-          <Grid2
-            container
-            gap={3}
-            justifyContent={"center"}
-            className="guests-container"
-          >
+          <div className="guests-container">
             {guests
               //searchbar filter
               .filter((guest) => {
@@ -118,65 +113,32 @@ const Guests = ({
               })
               .map((guest) => {
                 return (
-                  <Grid2
-                    xs={12}
-                    sm={4}
-                    md={3}
+                  <div className="guest-wrapper">
+                    <div
                     key={guest._id}
-                    maxWidth={"300px"}
-                    // width={"20rem"}
-                    minWidth={"250px"}
                     className={`fade-in guest-card-style`}
-                    sx={{ position: "relative" }}
+                    style={{ position: "relative", width: "100%", boxSizing: "border-box" }}
                   >
-                    {/* {edit.id === guest._id && (
-                      <div className="guest-card__delete-btn">
-                        <IconButton
-                          onClick={() => {
-                            handleRemoveGuest(guest._id);
-                          }}
-                        >
-                          <CloseIcon />
-                        </IconButton>
-                      </div>
-                    )} */}
-                    {/* <li className={(isFadingOut && guest._id === deleteId) ? 'div-guest item-fadeout' :'div-guest'}> */}
-                    {/* <div className="custom-dropdown"> */}
-                          {/* <Dropdown>
-                              <Dropdown.Menu title="">
-                                  {edit.id ? (<>
-                                      <Dropdown.Item onClick={() => setEdit({
-                                        id: null,
-                                        name: ""
-                                      })}>Annuler</Dropdown.Item>
-                                  </>) : (<>
-                                      <Dropdown.Item onClick={() => setEdit({
-                                          id: guest._id, 
-                                          name: guest.name
-                                      })}>Modifier</Dropdown.Item>
-                                  </>)}
-                              </Dropdown.Menu>
-                          </Dropdown> */}
-                          <IconWrapper
-                          onClick={() => {
-                            setEdit({
-                              id: guest._id,
-                              name: guest.name,
-                            });
-                            setisOpen(true);
-                          }}
-                          style={{
-                            backgroundColor: "#fff",
-                            border: "1px solid lightgray",
-                            borderRadius: "5px",
-                            color: "#262626",
-                            position: "absolute",
-                            right: "20px",
-                            top: "20px",
-                          }}
-                          >
-                            <CreateIcon fontSize="small" />
-                          </IconWrapper>
+                    <IconWrapper
+                    onClick={() => {
+                      setEdit({
+                        id: guest._id,
+                        name: guest.name,
+                      });
+                      setisOpen(true);
+                    }}
+                    style={{
+                      backgroundColor: "#fff",
+                      border: "1px solid lightgray",
+                      borderRadius: "5px",
+                      color: "#262626",
+                      position: "absolute",
+                      right: "20px",
+                      top: "20px",
+                    }}
+                    >
+                      <CreateIcon fontSize="small" />
+                    </IconWrapper>
                       {/* </div> */}
                     <div className="div-guest___container">
                       <div className="guest-picture center-x">
@@ -206,19 +168,6 @@ const Guests = ({
                           ) : null}
                         </Box>
                       </div>
-                      {/* <div className="guest-card__button-container">
-                        <BlackButton
-                          onClick={() => {
-                            setEdit({
-                              id: guest._id,
-                              name: guest.name,
-                            });
-                            setisOpen(true);
-                          }}
-                          variant="contained"
-                          text="Modifier"
-                        />
-                      </div> */}
                       <DefaultModal
                         open={isOpen}
                         setOpen={setisOpen}
@@ -243,44 +192,12 @@ const Guests = ({
                           deleteGuest={deleteGuest}
                         />
                       </DefaultModal>
-                      {/* <Modal
-                        open={isOpen}
-                        setOpen={setisOpen}
-                        guestId={editPicture}
-                        close={() => {
-                          setisOpen(false);
-                        }}
-                      >
-                        <form
-                          className="modal___picture"
-                          onSubmit={(e) => {
-                            upload(editPicture);
-                            e.preventDefault();
-                          }}
-                        >
-                          <label>
-                            Télécharger une photo (format: JPG/JPEG ou PNG)
-                          </label>
-                          <input
-                            type="file"
-                            name="media"
-                            onChange={handleFileInput}
-                          />
-                          <button type="submit">Valider</button>
-                        </form>
-                      </Modal> */}
                     </div>
-                    <SmallGuestCard
-                      guest={guest}
-                      firstPerson={firstPerson}
-                      secondPerson={secondPerson}
-                      setEdit={setEdit}
-                      setisOpen={setisOpen}
-                    />
-                  </Grid2>
+                  </div>
+                  </div>
                 );
               })}
-          </Grid2>
+          </div>
         </Box>
       )}
     </>
