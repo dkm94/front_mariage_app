@@ -8,12 +8,13 @@ const SearchBar = ({ className, value, name, onChange, type, placeholder }) => {
       <div className={`search__container mt-3 mb-3 ${className}`}>
         <img src={magnifyingGlass} alt="magnifying glass icon" />
         <input
-          className="search__input form-control shadow-none"
+          className="form-control shadow-none"
           type={type}
           placeholder={placeholder}
           name={name}
           value={value}
           onChange={onChange}
+          style={{ border: "none" }}
         />
       </div>
     </>
