@@ -128,14 +128,15 @@
 #guest-name {
     color: #000;
     font-family: 'Italiana', serif;
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: 600;
     word-break: break-word;
     word-spacing: 4px;
 }
 
 .guest-family {
-    color: grey
+    color: grey;
+    font-size: 0.85rem;
 }
 
 .nameField > span {
@@ -508,11 +509,11 @@
         top: 5px !important;
     }
     .guest-wrapper {
-        height: 185px;
+        height: 180px;
     }
     .nameField {
         margin-top: 0;
-        padding-left: 5px;
-        padding-right: 5px;
+        padding-left: 8px;
+        padding-right: 8px;
     }
 }
