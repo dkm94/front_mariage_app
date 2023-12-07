@@ -1,9 +1,10 @@
 import "./Default.css";
+import "../../Expenses/Graph/PieChart.css";
 
 import React from "react";
 import ReactDom from "react-dom";
+
 import CloseIcon from "@mui/icons-material/Close";
-import "../../Expenses/Graph/PieChart.css";
 import { IconButton } from "@mui/material";
 
 export default function DefaultModal({ open, children, close, setOpen, title, setEdit }) {

@@ -4,9 +4,9 @@ import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import { Button, Grid, IconButton } from "@mui/material";
 import TextField from "@mui/material/TextField";
-import DeleteIcon from "@mui/icons-material/Delete";
 
 import { BlackButton } from "../../../../Buttons";
+
 import checkIcon from "../../../../../img/green-check.png";
 
 const UpdateGuest = ({
