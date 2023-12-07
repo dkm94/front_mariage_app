@@ -62,7 +62,6 @@ const Expenses = ({
         })
         .reverse()
         .map((obj) => {
-          console.log(obj.price);
           return (
             <li
               key={obj._id}
@@ -145,7 +144,7 @@ const Expenses = ({
                     <IconButton
                       onClick={() => {
                         setEdit(obj);
-                        setisOpen(true);
+                        // setisOpen(true);
                       }}
                     >
                       <CreateIcon fontSize="small" />
@@ -159,12 +158,14 @@ const Expenses = ({
                           text="Supprimer"
                         /> */}
                   </div>
-                  <DefaultModal
-                    open={isOpen}
+                  {edit?._id === obj?._id && <DefaultModal
+                    // open={isOpen}
+                    setEdit={setEdit}
                     setOpen={setisOpen}
                     close={() => {
                       setisOpen(false);
                     }}
+                    title={"Modifier une dépense"}
                   >
                     <UpdateForm
                       edit={edit}
@@ -174,7 +175,7 @@ const Expenses = ({
                       deleteExpense={deleteExpense}
                       setisOpen={setisOpen}
                     />
-                  </DefaultModal>
+                  </DefaultModal>}
                 </div>
               </div>
             </li>

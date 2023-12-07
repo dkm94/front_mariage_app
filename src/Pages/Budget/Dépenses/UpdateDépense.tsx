@@ -1,3 +1,5 @@
+import "../Budget.css";
+
 import React, { useState, useEffect, useRef } from "react";
 import { Button, TextField, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -60,15 +62,6 @@ const UpdateExpense = ({
           paddingBottom: "1rem",
         }}
       >
-        <h1
-          style={{
-            textAlign: "start",
-            fontSize: "1.5rem",
-            paddingLeft: "30px",
-          }}
-        >
-          Gérer la dépense
-        </h1>
       </div>
       <form
         onSubmit={handleSubmit}
@@ -145,19 +138,24 @@ const UpdateExpense = ({
           }}
           onClick={() => deleteExpense(edit._id)}
         >
-          <DeleteIcon style={{ color: "#F4F4F4" }} />
-          <span style={{ color: "#F4F4F4" }}>Supprimer</span>
+          {/* <DeleteIcon style={{ color: "#F4F4F4" }} /> */}
+          <span style={{ color: "#F4F4F4", padding: "0px 6px" }}>Supprimer</span>
         </IconButton>
-        <div>
+        <div className="exp-modal-action-right">
           <Button
+            className="exp-modal-action-right__cancel"
             style={{
               background: "none",
               color: "grey",
               textTransform: "unset",
               fontSize: "1rem",
+              border: "1px solid darkgrey"
             }}
             onClick={() => {
-              setEdit(null);
+              setEdit({
+                id: null,
+                name: ""
+              });
               setisOpen(false);
             }}
             variant="outlined"

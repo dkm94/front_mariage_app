@@ -165,6 +165,14 @@
     padding: 1rem;
     border-radius: 0 0 10px 10px;
 }
+.exp-modal-action-right {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+.exp-modal-action-right__cancel {
+    border: 1px solid darkgrey;
+}
 
 @media (max-width: 1024px) { 
     .card-body > span {
