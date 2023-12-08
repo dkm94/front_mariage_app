@@ -39,8 +39,6 @@ const Budget = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [isOpen, setisOpen] = useState<boolean>(false);
 
-  //TODO: bug prix au moment de la modification d'une dépense 
-
   useEffect(() => {
     setLoading(true);
 
