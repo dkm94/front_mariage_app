@@ -1,140 +1,99 @@
 .budget-list {
-    list-style: none;
+    width: 100%;
     margin-top: 50px;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    gap: 24px;
-    flex-wrap: wrap;
 }
 
-.budget-list > li > ul {
-    list-style: none;
-    background-color: #FFFFFF;
-    padding: 20px;
-    border-radius: 0 10px 10px 0;
-}
-
-.expenses-container {
+.budget-list li {
     border-radius: 5px;
-    /* max-width: 350px; */
-    min-width: 300px;
-    /* box-shadow: 0 2px 10px 0 rgb(0 0 0 / 14%); */
-    border: solid 1px rgb(151, 151, 151, 0.18);
-    padding: 1rem 1rem !important;
-    flex-direction: column;
-    align-items: center;
-    /* max-width: 400px; */
-    height: fit-content;
-    justify-items: center;
-    text-align: center;
+    padding: 25px 30px;
     display: flex;
-    flex-direction: row;
-    background-color: #fcfcfc;
+    /* justify-content: space-between; */
+    margin-bottom: 25px;
+}
+.budget-list .table-header {
+    background-color: #95a5a6;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+.budget-list .table-row {
+    background-color: #fff;
+    box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
+}
+.budget-list .cols-1 {
+    width: 20%;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.budget-list .cols-2 {
+    width: 20%;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.budget-list .cols-3 {
+    width: 20%;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.budget-list .cols-4 {
+    width: 35%;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.budget-list .cols-5 {
+    width: 5%;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
-.li___icon {
-    background-color: inherit;
-}
-
-.icon___container {
-    height: 4rem;
-    border-radius: 50%;
-    background-color: yellow;
-    padding: 15px;
-}
-
-.icon___container > img {
-    height: 100%;
-    /* margin: 5px; */
-
-}
-
-.expense-li {
-    width: 100%;
-    background-color: inherit;
-}
-
-/* .expense__li__style {
-    list-style: none;
-    display: grid;
-    grid-template-columns: 4fr 2fr;
-    padding: 0.5rem 1.5rem;
-    margin-top: 0.5rem;
-} */
-/* 
-.expense__li__style > div {
-    display: flex;
-    flex-direction: row;
-} */
-
-.expense__li__style > div > span:nth-child(2) {
-    margin-top: .5rem;
-    color: grey;
-}
-
-.expense-li___btn {
-    text-align: end;
-    padding-right: 0.4rem;
-}
-
-.expense-li___btn > button {
-    background: inherit;
-}
-
-.expense_li___edit-btn {
-    text-align: end;
-}
-
-.close-btn > button {
-    color: #c1b8b8;
-}
-
-.expense-update-form {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    padding: 5px 30px !important; 
-}
-
-.expense-update-form > div:not(:last-child) {
-    padding: 5px 30px !important; 
-}
-
-.expense-update-form > input {
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-}
-
-@media (max-width: 768px) { 
-    .budget-list > li {
-        margin-left: 0;
-        width: 100%;
+@media (max-width: 768px) {
+    .budget-list li {
+        padding-left: 10px ;
+    }
+    .budget-list .cols-1 {
+        width: 25%;
+    }
+    .budget-list .cols-2 {
+        width: 15%;
+    }
+    .budget-list .cols-4 {
+        width: 30%;
+    }
+    .budget-list .cols-5 {
+        width: 10%;
     }
 }
-@media (max-width: 600px) { 
-    .expenses-container {
-        display: flex;
-        flex-direction: column;
-        box-shadow: none;
-        margin: 0 !important;
-        border-bottom: 1px solid #e5e5e5;
-        min-width: unset;
+
+@media all and (max-width: 600px) {
+    .budget___col-2 {
+        padding-left: 20px;
+        padding-right: 20px;
     }
-    .icon___container {
+    .budget-list .table-header {
         display: none;
-    }
-    .budget-list {
-        gap: 0;
-    }
-    .edit-todo {
-        margin-top: 0 !important;
-    }
- }
-
- @media (max-width: 444px) { 
-    .expense__li__style {
+   }
+    .budget-list li {
+        display: block;
+   }
+    .budget-list .cols  {
+        width: 100%;
+        align-items: center;
+   }
+    .budget-list .cols  {
         display: flex;
-        flex-direction: column;
-    }
- }
+        padding: 10px 0;
+   }
+    .budget-list .cols:before {
+        color: #6c7a89;
+        padding-right: 10px;
+        content: attr(data-label);
+        width: 50%;
+        text-align: right;
+   }
+}
+
+@media (max-width: 420px) {
+    .budget-list .cols  {
+        text-align-last: start;
+   }
+}

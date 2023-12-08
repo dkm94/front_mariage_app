@@ -66,9 +66,6 @@
 .budget___col-2 {
     display: flex;
 }
-/* .budget___col-2 > .budget-list, .chart-component {
-    padding: 0 10rem;
-} */
 
 .budget-form {
     display: flex;

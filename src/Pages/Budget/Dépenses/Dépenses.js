@@ -4,6 +4,7 @@ import React from "react";
 
 import CreateIcon from "@mui/icons-material/Create";
 import { IconButton } from "@mui/material";
+import { Chip } from '@material-ui/core';
 
 import UpdateForm from "./UpdateDépense";
 import DefaultModal from "../../../components/Modals/Default/DefaultModal";
@@ -52,6 +53,13 @@ const Expenses = ({
 
   return (
     <ul className="budget-list">
+      <li className="table-header">
+        <div className="cols cols-1">Catégorie</div>
+        <div className="cols cols-2">Date</div>
+        <div className="cols cols-3">Prix</div>
+        <div className="cols cols-4">Description</div>
+        <div className="cols cols-5">Gérer</div>
+      </li>
       {expenses
         .filter((expense) => {
           return (
@@ -66,98 +74,41 @@ const Expenses = ({
             <li
               key={obj._id}
               style={{
-                // backgroundColor: alpha(renderSwitchColors(obj.category), 0.2),
                 backgroundColor: edit?._id === obj?._id && "#FFF",
               }}
-              className="mb-3 expenses-container fade-in"
+              className="fade-in table-row"
             >
-              <div className="expense-li">
-                <div>
-                  <div className="expense__li__style">
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <div
-                        style={{
-                          backgroundColor: renderSwitchColors(obj.category),
-                          paddingRight: "10px",
-                          paddingLeft: "10px",
-                          borderRadius: "15px",
-                          display: "flex",
-                          alignContent: "center",
-                        }}
-                      >
-                        <span
-                          style={{
-                            textTransform: "uppercase",
-                            fontSize: "0.9rem",
-                            placeSelf: "center",
-                            color: "grey",
-                            fontFamily: "none",
-                          }}
-                        >
-                          {obj.category}
-                        </span>
-                      </div>
-                      <span
-                        style={{
-                          fontFamily: "none",
-                          fontSize: "1.2rem",
-                          fontWeight: "bold",
-                          color: "#4f4e4e",
-                        }}
-                      >
-                        {" "}
-                        {fixPrice(obj.price)} €
-                      </span>
-                    </div>
-                    <div style={{ textAlign: "end" }}>
-                      <span
-                        style={{
-                          fontFamily: "none",
-                          paddingLeft: "10px",
-                          color: "grey",
-                        }}
-                      >
-                        {obj.date}
-                      </span>
-                    </div>
-                    <div style={{ marginTop: "20px" }}>
-                      <span style={{ fontSize: "1.2rem" }}>
-                        {obj.description}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div
-                    style={{
-                      marginTop: "2rem",
-                      display: "flex",
-                      justifyContent: "end",
-                    }}
-                    className="edit-todo"
-                  >
-                    <IconButton
-                      onClick={() => {
-                        setEdit(obj);
-                        // setisOpen(true);
-                      }}
-                    >
-                      <CreateIcon fontSize="small" />
-                    </IconButton>
-
-                    {/* <BlackButton
-                          onClick={() => {
-                            deleteExpense(obj._id);
-                          }}
-                          variant="contained"
-                          text="Supprimer"
-                        /> */}
-                  </div>
+              <div className='cols cols-1' data-label="Catégorie">
+                  <Chip
+                  sx={{
+                    height: 'auto',
+                    '& .MuiChip-label': {
+                      display: 'block',
+                      whiteSpace: 'normal',
+                    },
+                  }}
+                  label={obj.category}
+                  style={{ backgroundColor: renderSwitchColors(obj.category), width: "100%", maxWidth: "150px"}} />
+                </div>
+              <div className='cols cols-2'  data-label="Date">
+                {" "}
+                {fixPrice(obj.price)} €
+              </div>
+              <div className='cols cols-3'  data-label="Prix">
+                {obj.date}
+              </div>
+              <div className='cols cols-4'  data-label="Description">
+                {obj.description}
+              </div>
+              <div className='cols cols-5'  data-label="Gérer">
+                <IconButton
+                  onClick={() => {
+                    setEdit(obj);
+                  }}
+                >
+                  <CreateIcon fontSize="small" />
+                </IconButton>
+              </div>
                   {edit?._id === obj?._id && <DefaultModal
                     // open={isOpen}
                     setEdit={setEdit}
@@ -176,8 +127,6 @@ const Expenses = ({
                       setisOpen={setisOpen}
                     />
                   </DefaultModal>}
-                </div>
-              </div>
             </li>
           );
         })}
