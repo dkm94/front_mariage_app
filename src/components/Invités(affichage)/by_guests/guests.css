@@ -128,14 +128,15 @@
 #guest-name {
     color: #000;
     font-family: 'Italiana', serif;
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: 600;
     word-break: break-word;
     word-spacing: 4px;
 }
 
 .guest-family {
-    color: grey
+    color: grey;
+    font-size: 0.85rem;
 }
 
 .nameField > span {
@@ -144,17 +145,6 @@
 
 .nameField > form > input {
     width: 80%;
-}
-
-.guest-card__button-container {
-    word-break: break-word;
-    margin-top: 30px;
-    width: 100%;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    margin-bottom: 20px;
-    height: 100%;
 }
 
 .guest__updateForm > form {
@@ -175,7 +165,6 @@
     justify-content: space-between;
     background-color: #f2f2f2;
     padding: 1rem;
-    border-radius: 0 0 10px 10px;
     }
 
 .guest-card__form__button-container > button {
@@ -226,7 +215,7 @@
 .guest-picture > img {
     object-fit: cover;
     width: 100%;
-    height: 14rem;
+    height: 10rem;
 }
 
 #upload-avatar {
@@ -235,12 +224,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-radius: 5px;
     padding: 1rem;
-    background-image: repeating-linear-gradient(-7deg, #bababa, #bababa 16px, transparent 16px, transparent 23px, #bababa 23px), repeating-linear-gradient(83deg, #bababa, #bababa 16px, transparent 16px, transparent 23px, #bababa 23px), repeating-linear-gradient(173deg, #bababa, #bababa 16px, transparent 16px, transparent 23px, #bababa 23px), repeating-linear-gradient(263deg, #bababa, #bababa 16px, transparent 16px, transparent 23px, #bababa 23px);
+    background-image: repeating-linear-gradient(0deg, #bfbfbf, #bfbfbf 7px, transparent 7px, transparent 11px, #bfbfbf 11px), repeating-linear-gradient(90deg, #bfbfbf, #bfbfbf 7px, transparent 7px, transparent 11px, #bfbfbf 11px), repeating-linear-gradient(180deg, #bfbfbf, #bfbfbf 7px, transparent 7px, transparent 11px, #bfbfbf 11px), repeating-linear-gradient(270deg, #bfbfbf, #bfbfbf 7px, transparent 7px, transparent 11px, #bfbfbf 11px);
     background-size: 2px 100%, 100% 2px, 2px 100% , 100% 2px;
     background-position: 0 0, 0 0, 100% 0, 0 100%;
     background-repeat: no-repeat;
+    background-color: #f6f6f6;
 }
 
 .guest-picture > div > button {
@@ -303,71 +292,46 @@
 }
 .chose-family {
     margin-top: 3rem;
-    align-self: flex-start;
     margin-bottom: 2rem;
     display: flex;
     flex-direction: column;
     gap: 7px;
+    width: 100%;
 }
-
-.chose-family > p {
-    margin-bottom: 0;
+.fam-input-container {
+    display: flex;
 }
-
-.chose-family > p > label {
-    font-weight: unset;
-}
-
-[type="radio"]:checked,
-[type="radio"]:not(:checked) {
+.fam-input-container input[type="radio"] {
     position: absolute;
-    left: -9999px;
+	 opacity: 0;
 }
-[type="radio"]:checked + label,
-[type="radio"]:not(:checked) + label
-{
-    position: relative;
-    padding-left: 28px;
-    cursor: pointer;
-    line-height: 20px;
+.fam-input-container input[type="radio"] + .choose-fam-label:before {
+    content: '';
+    background: #f4f4f4;
+    border-radius: 100%;
+    border: 1px solid #b4b4b4;
     display: inline-block;
-    /* color: #666; */
+    width: 1.4em;
+    height: 1.4em;
+    position: relative;
+    top: -0.2em;
+    margin-right: 1em;
+    vertical-align: top;
+    cursor: pointer;
+    text-align: center;
+    transition: all 250ms ease;
+    margin-top: 3px;
 }
-[type="radio"]:checked + label:before,
-[type="radio"]:not(:checked) + label:before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 18px;
-    height: 18px;
-    border: 1px solid #ddd;
-    border-radius: 100%;
-    background: #fff;
+.fam-input-container input[type="radio"]:checked + .choose-fam-label:before {
+    background-color: #bb9c71;
+    box-shadow: inset 0 0 0 4px #f4f4f4;
 }
-[type="radio"]:checked + label:after,
-[type="radio"]:not(:checked) + label:after {
-    content: '';
-    width: 12px;
-    height: 12px;
-    /* background: #fae1dd; */
-    background: #B4BC98;
-    position: absolute;
-    top: 3px;
-    left: 3px;
-    border-radius: 100%;
-    -webkit-transition: all 0.2s ease;
-    transition: all 0.2s ease;
+.fam-input-container input[type="radio"]:focus + .choose-fam-label:before {
+    outline: none;
+	 border-color: #bb9c71;
 }
-[type="radio"]:not(:checked) + label:after {
-    opacity: 0;
-    -webkit-transform: scale(0);
-    transform: scale(0);
-}
-[type="radio"]:checked + label:after {
-    opacity: 1;
-    -webkit-transform: scale(1);
-    transform: scale(1);
+.fam-input-container input[type="radio"] + .choose-fam-label:empty:before {
+    margin-right: 0;
 }
 
 .guest-card-style {
@@ -375,35 +339,112 @@
     padding: 1rem 1rem !important;
     flex-direction: column;
     align-items: center;
-    height: -moz-fit-content;
-    height: auto;
+    /* height: -moz-fit-content;
+    height: auto; */
     justify-items: center;
     text-align: center;
     background-color: #f9f9f9;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    -webkit-box-sizing: initial;
+    -moz-box-sizing: initial;
+    box-sizing: initial;
+    position: relative;
 }
 
-@media only screen and (max-device-width : 1024px) {
+.guest-wrapper {
+    height: 290px;
+    flex-basis: 20%;
+    -ms-flex: auto;
+    width: 250px;
+    position: relative;
+    padding: 10px;
+    box-sizing: border-box;
+}
 
-    /* .guest__updateForm > form {
-        width: 100%;
+
+.guests-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+ }
+
+ .guest-modal-action-right {
+    display: flex;
+    gap: 5px;
+ }
+
+ .guest-modal-action-right > #cancel-button {
+    border: 1px solid darkgrey;
+ }
+
+ @media(max-width: 1366px) {
+    .guest-wrapper {
+      flex-basis: 25%;
     }
-    .guest__updateForm > form > input {
-        width: 100%;
-    } */
-}
+  }
+
+  @media(max-width: 1211px) {
+    .guest-wrapper {
+      flex-basis: 33.33%;
+    }
+  }
+
+  @media(max-width: 767px) {
+    .guest-picture > img {
+        height: 8rem;
+    }
+    #guest-name {
+        font-size: 1rem;
+        line-height: normal;
+    }
+    .guest-family {
+        font-size: 0.8rem;
+        line-height: normal;
+    }
+    .guest-wrapper {
+        height: 250px;
+    }
+  }
+
 
 @media (max-width: 700px) { 
-    .guest-card-style {
-        width: 200px;
-        /* max-width: unset !important; */
-        min-width: 200px !important;
+    .guest-wrapper {
+        /* height: 220px; */
+      }
+
+    .guest-picture > img {
+        height: 8rem;
+        width: 8rem;
     }
+   }
+
+   @media (max-width: 667px) { 
+    .guest-wrapper {
+        flex-basis: 33.33%;
+        height: 230px;
+      }
+
+    .guest-picture > img {
+    height: 6rem;
+    width: 100%;
+    }
+    /* #guest-name {
+        font-size: 1rem;
+    }
+    .guest-family {
+        font-size: 0.8rem;
+    } */
    }
 
 @media (max-width: 600px) { 
  .div-guest___container {
-    display: none;
+    /* display: none; */
  }
+ .guest-wrapper {
+    flex-basis: 33.33%;
+  }
 
  .guest-card-style {
     min-width: unset !important;
@@ -411,13 +452,8 @@
     max-width: unset !important;
  }
 
- .guests-container {
-    gap: 0 !important;
- }
-
  .guests-container > div {
     box-shadow: none !important;
-    border-bottom: 1px solid #e5e5e5;
  }
  
  .select-guest {
@@ -427,17 +463,46 @@
  
 }
 
+@media (max-width: 600px) {
+    .guest-card__form__button-container {
+        background-color: unset;
+    }
+}
+
 @media (max-width: 480px) { 
     .guest__updateForm > form {
         width: 100%;
     }
 
-    #guest-name {
-        font-size: 2rem;
+    .guest-wrapper {
+        padding: 0;
     }
-
-    .guest-family {
-        font-size: 0.9rem;
-        line-height: unset !important;
+    .guest-card-style {
+        box-shadow: none;
+    }
+    .guest-container {
+        overflow: hidden;
+    }
+    .guests-container {
+        margin: 0 -4px -4px 0;
+    }
+    .guest-wrapper {
+        border-right: 1px solid rgb(224, 224, 224);
+	    border-bottom: 1px solid rgb(224, 224, 224) !important;
+    }
+    .guest-card-style {
+        padding: 0 !important;
+    }
+    .guest-card-style > button {
+        right: 5px !important;
+        top: 5px !important;
+    }
+    .guest-wrapper {
+        height: 180px;
+    }
+    .nameField {
+        margin-top: 0;
+        padding-left: 8px;
+        padding-right: 8px;
     }
 }

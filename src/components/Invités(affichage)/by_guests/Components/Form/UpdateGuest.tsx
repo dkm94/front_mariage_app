@@ -4,9 +4,9 @@ import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import { Button, Grid, IconButton } from "@mui/material";
 import TextField from "@mui/material/TextField";
-import DeleteIcon from "@mui/icons-material/Delete";
 
 import { BlackButton } from "../../../../Buttons";
+
 import checkIcon from "../../../../../img/green-check.png";
 
 const UpdateGuest = ({
@@ -93,15 +93,6 @@ const UpdateGuest = ({
             paddingBottom: "1rem",
           }}
         >
-          <h1
-            style={{
-              textAlign: "start",
-              fontSize: "1.5rem",
-              paddingLeft: "30px",
-            }}
-          >
-            Modifier l'invité
-          </h1>
         </div>
         <form onSubmit={handleSubmit} id="update-form">
           <Grid padding={"5px 30px"}>
@@ -157,7 +148,7 @@ const UpdateGuest = ({
           </Grid>
 
           <div className="chose-family" style={{ padding: "5px 30px" }}>
-            <p>
+            <div className="fam-input-container">
               <input
                 type="radio"
                 id="test1"
@@ -166,9 +157,9 @@ const UpdateGuest = ({
                 onChange={(e) => setRadioValue(e.target.value)}
                 checked={radioValue === "1"}
               />
-              <label htmlFor="test1">Famille de {family.firstPerson}</label>
-            </p>
-            <p>
+              <label htmlFor="test1" className="choose-fam-label">Famille de {family.firstPerson}</label>
+            </div>
+            <div className="fam-input-container">
               <input
                 type="radio"
                 id="test2"
@@ -177,19 +168,20 @@ const UpdateGuest = ({
                 onChange={(e) => setRadioValue(e.target.value)}
                 checked={radioValue === "2"}
               />
-              <label htmlFor="test2">Famille de {family.secondPerson} </label>
-            </p>
+              <label htmlFor="test2" className="choose-fam-label">Famille de {family.secondPerson} </label>
+            </div>
           </div>
           <div className="guest-card__form__button-container">
             <IconButton
-              style={{ backgroundColor: "darkred", borderRadius: "5px" }}
+              style={{ backgroundColor: "darkred", borderRadius: "5px", padding: "6px 16px" }}
               onClick={() => deleteGuest(edit.id)}
             >
-              <DeleteIcon style={{ color: "#F4F4F4" }} />
+              {/* <DeleteIcon style={{ color: "#F4F4F4" }} /> */}
               <span style={{ color: "#F4F4F4" }}>Supprimer</span>
             </IconButton>
-            <div>
+            <div className="guest-modal-action-right">
               <Button
+                id="cancel-button"
                 onClick={() => {
                   setEdit({ id: null });
                   setisOpen(false);

@@ -89,7 +89,6 @@ const EditTableForm = (props) => {
         >
           {guests &&
             tableGuests.map((guest) => {
-              console.log("🚀 ~ file: Edit.tsx:84 ~ tableGuests.map ~ guest:", guest)
               return (
                 <div key={guest._id} className="guest-del">
                   <span>{guest.name}</span>

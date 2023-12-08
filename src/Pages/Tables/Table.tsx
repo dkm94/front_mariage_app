@@ -2,7 +2,7 @@ import React from "react";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import "./Tables.css";
 import { BlackButton } from "../../components/Buttons";
-import DefaultModal from "../../components/Modals/DefaultModal";
+import DefaultModal from "../../components/Modals/Default/DefaultModal";
 import EditForm from "./Forms/Edit";
 import { GuestType } from "../../../types";
 
@@ -35,7 +35,7 @@ const Table = ({
       <div style={{ marginBottom: "60px" }}>
         {filteredGuests?.map((guest) => (
           <>
-            <span style={{ color: "#7c7676", fontSize: "1.2rem" }}>{guest.name}</span>
+            <span style={{ color: "#7c7676", fontSize: "1rem" }}>{guest.name}</span>
             <br />
           </>
         ))}

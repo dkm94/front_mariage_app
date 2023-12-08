@@ -287,11 +287,13 @@
 }
 
 .table-name-span {
-    font-size: 2rem;
+    font-size: 1.3rem;
     text-align: center;
     line-height: 23px;
     margin-bottom: 2rem;
     font-family: 'Italiana', serif;
+    font-weight: 600;
+    text-transform: uppercase;
 }
 
 .div-table-name-span {
