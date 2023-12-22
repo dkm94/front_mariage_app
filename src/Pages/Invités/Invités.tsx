@@ -7,17 +7,21 @@ import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Grow from "@mui/material/Grow";
 
+import { GuestType } from "../../../types";
 import { ScrollButtonContext } from "../../App";
 import AddForm from "../../components/Invités(affichage)/by_guests/Components/Form/AddGuest";
 import GuestList from "../../components/Invités(affichage)/by_guests/Components/Guests/Guests";
 import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
 import ScreenLoader from "../../components/Loader/Screen/ScreenLoader.jsx";
-import { GuestType } from "../../../types";
+
+type NewUser = string;
 
 const Byguests = ({ userInfos }) => {
   const { mariageID, firstPerson, secondPerson } = userInfos;
 
   const scrollBtn = useContext(ScrollButtonContext);
+
+  const [newUser, setNewUser] = useState<NewUser>("");
 
   const [guests, setGuests] = useState<GuestType[] | []>([]);
   const [editPicture, seteditPicture] = useState<string>("null");
@@ -48,9 +52,8 @@ const Byguests = ({ userInfos }) => {
     setSearchValue(e.target.value);
   };
 
-  const addGuest = (newGuest) => {   
-    setUser(newGuest);
-    setGuests([...guests, newGuest]);
+  const addGuest = (createdUser: GuestType) => {   
+    setGuests([...guests, createdUser]);
   };
 
   const editGuest = (updatedGuest) => {
@@ -142,7 +145,7 @@ const Byguests = ({ userInfos }) => {
               <Container style={{ padding: "2rem 50px" }} fluid>
                 <Row>
                   <Col xs={12} sm={10} md={6} className="guest-form">
-                    <AddForm addGuest={addGuest} />
+                    <AddForm newUser={newUser} setNewUser={setNewUser} addGuest={addGuest} />
                   </Col>
                   <Col xs={12} sm={10} md={6} className="searchbar">
                     <SearchBar
