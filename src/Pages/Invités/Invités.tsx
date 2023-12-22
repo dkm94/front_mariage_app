@@ -13,6 +13,7 @@ import AddForm from "../../components/Invités(affichage)/by_guests/Components/F
 import GuestList from "../../components/Invités(affichage)/by_guests/Components/Guests/Guests";
 import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
 import ScreenLoader from "../../components/Loader/Screen/ScreenLoader.jsx";
+import { getGuests } from "../../services/guests/guestRequests";
 
 type NewUser = string;
 
@@ -32,18 +33,19 @@ const Byguests = ({ userInfos }) => {
   const [isOpen, setisOpen] = useState<boolean>(false);
 
   const [loading, setLoading] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     setLoading(true);
     const fetchData = async () => {
-      await axios
-        .get("/api/admin/guests/")
-        .then((result) => {
-          setAppear(true);
-          setGuests(result.data);
-        })
-        .then(() => setLoading(false))
-        .catch((err) => err.json("Failed to load the ressource"));
+      const guestsResponse = await getGuests();
+      if(guestsResponse.code === "success") {
+        setAppear(true);
+        setGuests(guestsResponse.data);
+      } else {
+        setErrorMessage(guestsResponse.error.message);
+      }
+      setLoading(false);
     };
     fetchData();
   }, [user]);
@@ -161,6 +163,7 @@ const Byguests = ({ userInfos }) => {
               </Container>
             </Grow>
 
+            <div><span style={{ color: "darkred"}}>{errorMessage}</span></div>
             <Grow in={!loading} timeout={2000}>
               <div className="guests___list">
                 <div className="byguests___block">
