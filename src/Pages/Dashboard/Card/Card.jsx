@@ -148,8 +148,8 @@ const Card = ({
       >
         <h3>{title}</h3>
         {content ? (
-          <div className="db-component-content">
-            <span style={{ fontSize: "3rem" }}>{content}</span>
+          <div className="db-component-count">
+            <span>{content}</span>
           </div>
         ) : (
           <div className="db-component-content">

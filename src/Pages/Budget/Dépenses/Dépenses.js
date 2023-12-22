@@ -4,10 +4,20 @@ import React from "react";
 
 import CreateIcon from "@mui/icons-material/Create";
 import { IconButton } from "@mui/material";
-import { Chip } from '@material-ui/core';
+import { Chip, styled } from '@material-ui/core';
 
 import UpdateForm from "./UpdateDépense";
 import DefaultModal from "../../../components/Modals/Default/DefaultModal";
+
+const CustomChip = styled(Chip)({
+  height: 'auto',
+  '& .MuiChip-label': {
+    display: 'block',
+    fontFamily: "initial",
+    fontSize: '1.1rem',
+    padding: "5px"
+  },
+});
 
 const Expenses = ({
   expenses,
@@ -77,13 +87,8 @@ const Expenses = ({
               className="fade-in table-row"
             >
               <div className='cols cols-1' data-label="Catégorie">
-                  <Chip
+                  <CustomChip
                   sx={{
-                    height: 'auto',
-                    '& .MuiChip-label': {
-                      display: 'block',
-                      whiteSpace: 'normal',
-                    },
                   }}
                   label={obj.category}
                   style={{ backgroundColor: renderSwitchColors(obj.category), width: "100%", maxWidth: "150px"}} />

@@ -18,6 +18,7 @@ import ScreenLoader from "../../components/Loader/Screen/ScreenLoader";
 
 import { ScrollButtonContext } from "../../App";
 import { OperationType } from "../../../types/index";
+import { floatToEuro } from "../../helpers/formatCurrency";
 
 
 const Budget = () => {
@@ -153,8 +154,7 @@ const Budget = () => {
       const getSums = operations?.map((op) => Number(op.price));
       const add = getSums.reduce((a, b) => a + b);
       const p = add / 100;
-      const tot = p.toFixed(2);
-      setTotal(tot);
+      setTotal(floatToEuro(p));
     }
   }
 
@@ -221,12 +221,8 @@ const Budget = () => {
                             >
                               Dépenses
                             </h5>
-                            <span
-                              style={{
-                                fontFamily: "none",
-                              }}
-                            >
-                              {total} €
+                            <span>
+                              {total}
                             </span>
                           </div>
                         </div>
