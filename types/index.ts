@@ -104,7 +104,7 @@ export type OperationType = {
     price: number | string;
     description: string;
     mariageID?: string;
-}
+};
 
 // export type BudgetProps = {
 //     _id: string;
@@ -197,4 +197,16 @@ export type FoodType = {
     name: string;
     menuID: string;
     mariageID: string;
+}
+
+export type Edit = {
+    _id: string;
+    name: string;
+}
+export interface IUpdateExpensesFormProps {
+    edit: Edit;
+    // setEdit: (value: string) => void;
+    setEdit: React.Dispatch<React.SetStateAction<OperationType | null>>;
+    onSubmit: (obj: any) => void
+    deleteExpense: (id: string) => Promise<void>
 }

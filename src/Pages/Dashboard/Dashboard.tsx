@@ -74,7 +74,7 @@ const Dashboard = (props) => {
 
   useEffect(() => {
     if(operations.length > 0) {
-    let spending: number = operations.map((operation: OperationType) => operation.price as number).reduce((a: number, b:number) => a + b) / 100;
+    let spending: number = operations.map((operation: OperationType) => operation?.price as number).reduce((a: number, b:number) => a + b) / 100;
     const fixedSpending = Number(spending).toFixed(2);
     setSum(fixedSpending)
     }

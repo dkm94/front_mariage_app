@@ -37,7 +37,6 @@ const Budget = () => {
   const [edit, setEdit] = useState<OperationType | null>(null);
 
   const [loading, setLoading] = useState<boolean>(false);
-  const [isOpen, setisOpen] = useState<boolean>(false);
 
   useEffect(() => {
     setLoading(true);
@@ -79,7 +78,6 @@ const Budget = () => {
             calculateTotal(updatedExpenses);
             setEdit(null);
           }, 1000);
-          setisOpen(false);
         }
       })
       .catch((err) => {
@@ -98,7 +96,7 @@ const Budget = () => {
           );
           setOperations(updatedExpenses);
           calculateTotal(updatedExpenses);
-          setisOpen(false);
+          setEdit(null);
           //todo: handle success message from the backend **TOAST**
 
         }
@@ -340,8 +338,6 @@ const Budget = () => {
                     setEdit={setEdit}
                     updateExpense={editExpense}
                     handleChange={formik?.handleChange}
-                    isOpen={isOpen}
-                    setisOpen={setisOpen}
                   />
                 </div>
               </div>

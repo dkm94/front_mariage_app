@@ -17,8 +17,6 @@ const Expenses = ({
   edit,
   setEdit,
   handleChange,
-  isOpen,
-  setisOpen,
 }) => {
 
   const renderSwitchColors = (categoryIconColors) => {
@@ -110,11 +108,9 @@ const Expenses = ({
                 </IconButton>
               </div>
                   {edit?._id === obj?._id && <DefaultModal
-                    // open={isOpen}
                     setEdit={setEdit}
-                    setOpen={setisOpen}
                     close={() => {
-                      setisOpen(false);
+                      setEdit(null)
                     }}
                     title={"Modifier une dépense"}
                   >
@@ -124,7 +120,6 @@ const Expenses = ({
                       onSubmit={submitUpdate}
                       handleChange={handleChange}
                       deleteExpense={deleteExpense}
-                      setisOpen={setisOpen}
                     />
                   </DefaultModal>}
             </li>
