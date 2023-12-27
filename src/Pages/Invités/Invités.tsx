@@ -54,6 +54,7 @@ const Byguests = (props: ByGuestsProps) => {
       setLoading(true);
       const guestsResponse = await getGuests();
       if(guestsResponse.success && guestsResponse.statusCode === 200) {
+        setAppear(true);
         setGuests(guestsResponse.data  || []);
       } else {
         setError(true);
@@ -64,7 +65,7 @@ const Byguests = (props: ByGuestsProps) => {
         }
       }
     } catch (err) {
-      console.error('Error fetching guests:', err);
+      setErrorMessage(err.message);
     } finally {
       setLoading(false);
     }
@@ -73,8 +74,6 @@ const Byguests = (props: ByGuestsProps) => {
   useEffect(() => {
     fetchGuests()
 }, [user]);
-
-console.log(guests)
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);

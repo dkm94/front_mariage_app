@@ -1,5 +1,3 @@
-import axios from "axios";
-
 import { requestHandler } from "../../helpers/requestHandler";
 import { GuestType } from "../../../types";
 
