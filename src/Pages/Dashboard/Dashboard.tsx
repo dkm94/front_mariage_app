@@ -58,7 +58,7 @@ const Dashboard = (props) => {
         apetizers,
         beverages,
       ]);
-      setGuests(res[0].data);
+      setGuests(res[0].data.data);
       setTables(res[1].data);
       setOperations(res[2].data);
       setTasks(res[3].data);

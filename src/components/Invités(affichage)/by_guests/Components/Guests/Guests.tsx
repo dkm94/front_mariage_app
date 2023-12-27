@@ -56,12 +56,6 @@ const Guests = ({
     updateGuest(props);
   };
 
-  // const handleRemoveGuest = (props) => {
-  //   // setIsFadingOut(false)
-  //   deleteGuest(props);
-  // };
-  console.log(guests)
-
   return (
     <>
       <div

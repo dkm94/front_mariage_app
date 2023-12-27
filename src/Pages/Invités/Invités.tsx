@@ -49,7 +49,7 @@ const Byguests = (props: ByGuestsProps) => {
   const [error, setError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
 
-  const fetchGuests = async () => {
+  const fetchGuests = async () => { // TODO: problème de performances, trop de re rendus (search bar, update picture...)
     try {
       setLoading(true);
       const guestsResponse = await getGuests();
