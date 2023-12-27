@@ -1,23 +1,41 @@
 import "./Invités.css";
 import "../../components/Invités(affichage)/by_guests/guests.css";
 
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, ChangeEvent } from "react";
 import axios from "axios";
-import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+
+import { Container, Row, Col } from "react-bootstrap";
 import Grow from "@mui/material/Grow";
 
+import { GuestType } from "../../../types";
+import { getGuests } from "../../services/guests/guestRequests";
 import { ScrollButtonContext } from "../../App";
+
 import AddForm from "../../components/Invités(affichage)/by_guests/Components/Form/AddGuest";
 import GuestList from "../../components/Invités(affichage)/by_guests/Components/Guests/Guests";
 import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
 import ScreenLoader from "../../components/Loader/Screen/ScreenLoader.jsx";
-import { GuestType } from "../../../types";
 
-const Byguests = ({ userInfos }) => {
-  const { mariageID, firstPerson, secondPerson } = userInfos;
+type NewUser = string;
 
+type UserType = {
+  firstPerson: string;
+  secondPerson: string;
+  mariageID: string;
+}
+interface ByGuestsProps {
+  page: string;
+  token: string;
+  userRole: string;
+  userInfos: UserType;
+}
+
+const Byguests = (props: ByGuestsProps) => {
+  const { firstPerson, secondPerson, mariageID } = props.userInfos;
   const scrollBtn = useContext(ScrollButtonContext);
+
+  const [newUser, setNewUser] = useState<NewUser>("");
 
   const [guests, setGuests] = useState<GuestType[] | []>([]);
   const [editPicture, seteditPicture] = useState<string>("null");
@@ -28,34 +46,46 @@ const Byguests = ({ userInfos }) => {
   const [isOpen, setisOpen] = useState<boolean>(false);
 
   const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
+
+  const fetchGuests = async () => { // TODO: problème de performances, trop de re rendus (search bar, update picture...)
+    try {
+      setLoading(true);
+      const guestsResponse = await getGuests();
+      if(guestsResponse.success && guestsResponse.statusCode === 200) {
+        setAppear(true);
+        setGuests(guestsResponse.data  || []);
+      } else {
+        setError(true);
+        if(guestsResponse.message === "Network Error"){
+          setErrorMessage("Oups, une erreur s'est produite.");
+        } else {
+          setErrorMessage(guestsResponse.message);
+        }
+      }
+    } catch (err) {
+      setErrorMessage(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    setLoading(true);
-    const fetchData = async () => {
-      await axios
-        .get("/api/admin/guests/")
-        .then((result) => {
-          setAppear(true);
-          setGuests(result.data);
-        })
-        .then(() => setLoading(false))
-        .catch((err) => err.json("Failed to load the ressource"));
-    };
-    fetchData();
-  }, [user]);
+    fetchGuests()
+}, [user]);
 
-  const handleSearch = (e) => {
+  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
   };
 
-  const addGuest = (newGuest) => {   
-    setUser(newGuest);
-    setGuests([...guests, newGuest]);
+  const addGuest = (createdUser: GuestType) => {   
+    setGuests([...guests, createdUser]);
   };
 
-  const editGuest = (updatedGuest) => {
+  const editGuest = (updatedGuest: GuestType) => {
     const updatedGueslist = [...guests].map((guest) => {
-      if (guest._id === updatedGuest.id) {
+      if (guest._id === updatedGuest._id) {
         guest.name = updatedGuest.name;
       }
       return guest;
@@ -65,7 +95,7 @@ const Byguests = ({ userInfos }) => {
     setisOpen(false);
   };
 
-  const deleteGuest = async (id) => {
+  const deleteGuest = async (id: string) => {
     await axios
       .delete(`/api/admin/guests/delete/${id}`)
       .then((result) => {
@@ -142,7 +172,7 @@ const Byguests = ({ userInfos }) => {
               <Container style={{ padding: "2rem 50px" }} fluid>
                 <Row>
                   <Col xs={12} sm={10} md={6} className="guest-form">
-                    <AddForm addGuest={addGuest} />
+                    <AddForm newUser={newUser} setNewUser={setNewUser} addGuest={addGuest} />
                   </Col>
                   <Col xs={12} sm={10} md={6} className="searchbar">
                     <SearchBar
@@ -177,6 +207,8 @@ const Byguests = ({ userInfos }) => {
                     secondPerson={secondPerson}
                     isOpen={isOpen}
                     setisOpen={setisOpen}
+                    errorMessage={errorMessage}
+                    error={error}
                   />
                 </div>
               </div>

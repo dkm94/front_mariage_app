@@ -5,6 +5,8 @@ import axios, { AxiosResponse } from "axios";
 import { Container, Row } from "react-bootstrap";
 import Grow from "@mui/material/Grow";
 
+import { floatToEuro } from "../../helpers/formatCurrency";
+
 import { ScrollButtonContext } from "../../App";
 import Card from "./Card/Card.jsx";
 import ScreenLoader from "../../components/Loader/Screen/ScreenLoader.jsx";
@@ -56,7 +58,7 @@ const Dashboard = (props) => {
         apetizers,
         beverages,
       ]);
-      setGuests(res[0].data);
+      setGuests(res[0].data.data);
       setTables(res[1].data);
       setOperations(res[2].data);
       setTasks(res[3].data);
@@ -74,9 +76,10 @@ const Dashboard = (props) => {
 
   useEffect(() => {
     if(operations.length > 0) {
-    let spending: number = operations.map((operation: OperationType) => operation.price as number).reduce((a: number, b:number) => a + b) / 100;
-    const fixedSpending = Number(spending).toFixed(2);
-    setSum(fixedSpending)
+    let spending: number = operations.map((operation: OperationType) => operation?.price as number).reduce((a: number, b:number) => a + b) / 100;
+    const formattedSum = floatToEuro(spending);
+    // const fixedSpending = Number(spending).toFixed(2);
+    setSum(formattedSum)
     }
   }, [operations])
 
@@ -164,7 +167,7 @@ const Dashboard = (props) => {
                     path={"menu/taches"}
                   />
                   <Card
-                    title={"Dépenses (en €)"}
+                    title={"Dépenses"}
                     content={sum}
                     array={operations}
                     elements={"description"}

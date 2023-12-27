@@ -1,16 +1,17 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
+
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
+
 import "../../../../../Pages/Invités/Invités.css";
 import { GreyButton } from "../../../../Buttons";
 
-const AddGuestForm = ({ addGuest }) => {
+const AddGuestForm = ({ newUser, setNewUser, addGuest }) => {
   const [loading, setLoading] = useState(false);
-  const [input, setInput] = useState("");
   const inputRef = useRef(null);
 
   const handleChange = (e) => {
-    setInput(e.target.value);
+    setNewUser(e.target.value);
   };
 
   const handleSumbit = async (e) => {
@@ -18,11 +19,11 @@ const AddGuestForm = ({ addGuest }) => {
     setLoading(true);
     await axios
       .post("/api/admin/guests/add", {
-        name: input,
+        name: newUser,
       })
       .then((res) => {
         addGuest(res.data);
-        setInput("");
+        setNewUser("");
         setLoading(false);
       })
       .catch((err) => console.log("err", err));
@@ -41,7 +42,7 @@ const AddGuestForm = ({ addGuest }) => {
           className="form-control shadow-none"
           name="name"
           placeholder="Nouvel invité"
-          value={input}
+          value={newUser}
           onChange={handleChange}
           ref={inputRef}
           required

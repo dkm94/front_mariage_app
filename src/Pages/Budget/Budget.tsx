@@ -18,6 +18,7 @@ import ScreenLoader from "../../components/Loader/Screen/ScreenLoader";
 
 import { ScrollButtonContext } from "../../App";
 import { OperationType } from "../../../types/index";
+import { floatToEuro } from "../../helpers/formatCurrency";
 
 
 const Budget = () => {
@@ -37,7 +38,6 @@ const Budget = () => {
   const [edit, setEdit] = useState<OperationType | null>(null);
 
   const [loading, setLoading] = useState<boolean>(false);
-  const [isOpen, setisOpen] = useState<boolean>(false);
 
   useEffect(() => {
     setLoading(true);
@@ -79,7 +79,6 @@ const Budget = () => {
             calculateTotal(updatedExpenses);
             setEdit(null);
           }, 1000);
-          setisOpen(false);
         }
       })
       .catch((err) => {
@@ -98,7 +97,7 @@ const Budget = () => {
           );
           setOperations(updatedExpenses);
           calculateTotal(updatedExpenses);
-          setisOpen(false);
+          setEdit(null);
           //todo: handle success message from the backend **TOAST**
 
         }
@@ -155,8 +154,7 @@ const Budget = () => {
       const getSums = operations?.map((op) => Number(op.price));
       const add = getSums.reduce((a, b) => a + b);
       const p = add / 100;
-      const tot = p.toFixed(2);
-      setTotal(tot);
+      setTotal(floatToEuro(p));
     }
   }
 
@@ -223,12 +221,8 @@ const Budget = () => {
                             >
                               Dépenses
                             </h5>
-                            <span
-                              style={{
-                                fontFamily: "none",
-                              }}
-                            >
-                              {total} €
+                            <span>
+                              {total}
                             </span>
                           </div>
                         </div>
@@ -340,8 +334,6 @@ const Budget = () => {
                     setEdit={setEdit}
                     updateExpense={editExpense}
                     handleChange={formik?.handleChange}
-                    isOpen={isOpen}
-                    setisOpen={setisOpen}
                   />
                 </div>
               </div>

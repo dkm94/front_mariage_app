@@ -59,7 +59,7 @@ const UpdateGuest = ({
   const handleSubmit = async (e) => {
     e.preventDefault();
     onSubmit({
-      id: edit.id,
+      _id: edit.id,
       name: input,
     });
     if (input.trim() === "") {

@@ -10,9 +10,9 @@ const UpdateExpense = ({
   setEdit,
   onSubmit,
   deleteExpense,
-  setisOpen,
 }) => {
-  const [input, setInput] = useState(edit ? edit : "");
+
+  const [input, setInput] = useState(edit ? edit : null);
 
   const inputRef = useRef<HTMLDivElement>(null);
 
@@ -43,10 +43,8 @@ const UpdateExpense = ({
       id: edit.id,
       expense: input,
     });
-    setInput({
-      description: "",
-      price: "",
-    });
+    setInput(null);
+    setEdit(null)
   };
 
 
@@ -152,10 +150,12 @@ const UpdateExpense = ({
             }}
             onClick={() => {
               setEdit({
-                id: null,
-                name: ""
+                category: "",
+                price: "",
+                description: "",
+                date: "",
+                mariageID: ""
               });
-              setisOpen(false);
             }}
             variant="outlined"
           >

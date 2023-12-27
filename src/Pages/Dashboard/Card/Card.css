@@ -1,7 +1,12 @@
-.db-component-content {
+.db-component-content, .db-component-count {
     font-size: 3rem !important;
     margin-bottom: 2rem;
     min-height: 50px;
+}
+
+.db-component-count > span {
+    font-size: 3vw;
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 #dashboard-cards {
@@ -57,7 +62,7 @@
 .dashboard-cards {
     box-shadow: 0 2px 10px 0 rgb(0 0 0 / 14%);
     border: solid 1px rgb(151, 151, 151, 0.18);
-    padding: 3rem 5rem !important;
+    padding: 3rem !important;
     flex-direction: column;
     align-items: center;
     max-width: 400px;
@@ -88,8 +93,14 @@
     }
 }
 
-@media (max-width: 991.98px) { 
-    /* #dashboard-cards {
-        width: 100%;
-    } */
+@media (max-width: 954px) { 
+    .db-component-count > span {
+        font-size: 4vw;
+    }    
+}
+
+@media (max-width: 576px) { 
+    .db-component-count > span {
+        font-size: 2.2rem;
+    }    
 }
