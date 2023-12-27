@@ -1,31 +1,32 @@
-import { AxiosError, AxiosResponse } from "axios";
+import axios, { AxiosRequestConfig } from 'axios';
 
-// T: parameter type
-// V: API's returned value type
-type BaseRequest<T, V> = (params?: T) => Promise<AxiosResponse<V>>;
+type RequestHandler<TParams, TResult> = (params?: TParams) => Promise<AxiosRequestConfig>;
 
-type SuccessResponse<V> = {
-  code: "success";
-  data: V;
-  status: number;
+interface ApiResponse<T> {
+  data?: T;
+  statusCode: number;
+  success: boolean;
+  message?: string;
+}
+
+export const requestHandler = <TParams, TResult>(
+  handler: RequestHandler<TParams, TResult>
+): ((params?: TParams) => Promise<ApiResponse<TResult>>) => {
+  return async (params?: TParams): Promise<ApiResponse<TResult>> => {
+    try {
+      const config = await handler(params);
+      const response = await axios(config);
+      return {
+        data: response.data.data,
+        statusCode: response.data.statusCode,
+        success: response.data.success,
+      };
+    } catch (error) {
+      return {
+        statusCode: error.response ? error.response.status : 500,
+        success: false,
+        message: error.message,
+      };
+    }
+  };
 };
-
-// E: error
-type ErrorResponse<E = AxiosError> = {
-  code: "error";
-  error: E;
-  status: number;
-};
-
-type BaseResponse<V, E> = Promise<SuccessResponse<V> | ErrorResponse<E>>;
-
-export const requestHandler =
-    <T, V, E = AxiosError>(request: BaseRequest<T, V>) =>
-    async (params?: T): Promise<BaseResponse<V, E>> => {
-        try {
-            const response = await request(params);
-            return { code: "success", data: response.data, status: response.status };
-        } catch (e) {
-            return { code: "error", error: e as E, status: e.status };
-        }
-    };

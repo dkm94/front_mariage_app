@@ -33,6 +33,8 @@ const Guests = ({
   secondPerson,
   isOpen,
   setisOpen,
+  errorMessage,
+  error
 }) => {
   const [edit, setEdit] = useState({
     id: null,
@@ -58,6 +60,7 @@ const Guests = ({
   //   // setIsFadingOut(false)
   //   deleteGuest(props);
   // };
+  console.log(guests)
 
   return (
     <>
@@ -78,12 +81,15 @@ const Guests = ({
           <option value="2">{`Invités de ${secondPerson}`}</option>
         </select>
       </div>
-      {guests.length === 0 || null ? (
+
+      {error && <div style={{ alignSelf: "center" }}><span style={{ color: "darkred"}}>{errorMessage}</span></div>}
+
+      {!error && guests.length === 0 && (
         <div className="block">
           <span>Vos invités ici.</span>
-        </div>
-      ) : (
-        <Box
+        </div>)}
+
+        {guests && guests.length > 0 && <Box
           className="guest-container"
           sx={{
             minHeight: guests ? "0px" : "600px",
@@ -113,9 +119,9 @@ const Guests = ({
               })
               .map((guest) => {
                 return (
-                  <div className="guest-wrapper">
+                    
+                    <div className="guest-wrapper" key={guest._id}>
                     <div
-                    key={guest._id}
                     className={`fade-in guest-card-style`}
                     style={{ position: "relative", width: "100%", boxSizing: "border-box" }}
                   >
@@ -200,8 +206,7 @@ const Guests = ({
                 );
               })}
           </div>
-        </Box>
-      )}
+        </Box>}
     </>
   );
 };

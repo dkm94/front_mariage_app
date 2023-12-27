@@ -6,9 +6,9 @@ import { ButtonPropsSizeOverrides } from "@mui/material";
 export type RoleType = "admin" | undefined;
 
 export type UserType = {
-    id: string;
+    id?: string;
     mariageID: string;
-    role: RoleType;
+    role?: RoleType;
     firstPerson: string;
     secondPerson: string;
     email?: string;
@@ -172,12 +172,12 @@ export type WeddingType = {
 }
 
 export type GuestType = {
-    family: string;
+    family?: string;
     _id: string;
     name: string;
-    media: string;
-    tableID: string;
-    mariageID: string;
+    media?: string;
+    tableID?: string;
+    mariageID?: string;
     guestMenu?: {
         dessert: string;
         maincourse: string;
