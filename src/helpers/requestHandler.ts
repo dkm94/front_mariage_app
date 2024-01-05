@@ -9,6 +9,7 @@ interface ApiResponse<T> {
   message?: string;
 }
 
+// type du parametre et type de la réponse
 export const requestHandler = <TParams, TResult>(
   handler: RequestHandler<TParams, TResult>
 ): ((params?: TParams) => Promise<ApiResponse<TResult>>) => {

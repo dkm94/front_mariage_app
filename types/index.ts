@@ -185,6 +185,12 @@ export type GuestType = {
     }
 }
 
+export type FormattedGuestType = {
+    id: string;
+    name: string;
+    tableID: string;
+}
+
 export type TableType = {
     _id: string;
     mariageID: string;

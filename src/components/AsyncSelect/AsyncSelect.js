@@ -6,6 +6,7 @@ import { IconButton } from "@mui/material";
 import "./AsyncSelect.css";
 
 const Select = ({ tables, table, guests, setTables, tableId }) => {
+  console.log("🚀 ~ file: AsyncSelect.js:9 ~ Select ~ guests:", guests)
   const [loadingList, setloadingList] = useState(tables);
 
   const disableBtn = {
@@ -45,7 +46,7 @@ const Select = ({ tables, table, guests, setTables, tableId }) => {
       return table;
     });
     await axios
-      .put(`/api/admin/guests/addtable/${selectedGuest}`, {
+      .put(`/api/admin/guests/addtable/${tableID}`, {
         tableID: tableId,
       })
       .then((res) => {
@@ -98,16 +99,6 @@ const Select = ({ tables, table, guests, setTables, tableId }) => {
     }, 1500);
   };
 
-  // const loadOptions = async (callback) => {
-  //     const token = localStorage.getItem("token");
-  //     const config = {
-  //         headers: { Authorization: 'Bearer '+ token }
-  //         };
-  //     const data = await fetch(`api/admin/guests/`, config)
-  //     const formatted = await data.json()
-  //     console.log(formatted)
-  //     callback(formatted.map(guest => ({ label: guest.name, value: guest._id, avatar: guest.media })))
-  // }
   return (
     <div className="select-style">
       <AsyncSelect

@@ -16,10 +16,7 @@ export default function DefaultModal({ open, children, close, setOpen, title, se
       <div className="modal-default">
         <div className="modal-head">
           <h2>{title}</h2>
-          <IconButton onClick={() => setEdit({
-            id: null,
-            name: ""
-          })}>
+          <IconButton onClick={() => setEdit(null)}>
             <CloseIcon />
           </IconButton>
         </div>

@@ -12,17 +12,15 @@ const Table = ({
   id,
   key,
   edit,
-  editTableName,
   handleUpdatedTable,
   input,
   setTables,
   guests,
-  deleteGuest,
   setEdit,
   getUpdatedId,
-  deleteTable,
   isOpen,
   setisOpen,
+  deleteTable 
 }) => {
   
   const filteredGuests: GuestType[] = guests?.filter((guest: GuestType) => guest.tableID === table._id);
@@ -61,25 +59,25 @@ const Table = ({
           text="Modifier"
         />
       </div>
-      { edit.id === table._id && <DefaultModal
+      { edit?.id === table._id && <DefaultModal
         open={isOpen}
         setOpen={setisOpen}
         close={() => {
           setisOpen(false);
         }}
+        setEdit={setEdit}
+        title="Gérer les invités/la table"
       >
         <EditForm
           tables={tables}
           table={table}
-          id={table._id}
+          tableId={table._id}
           key={table._id}
           edit={edit}
-          editTableName={editTableName}
           handleUpdatedTable={handleUpdatedTable}
           input={input}
           setTables={setTables}
           guests={guests}
-          deleteGuest={deleteGuest}
           setEdit={setEdit}
           getUpdatedId={getUpdatedId}
           deleteTable={deleteTable}
