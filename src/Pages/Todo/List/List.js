@@ -153,12 +153,12 @@ const Todos = ({
                 borderRadius: "5px",
                 color: "#fff",
               }}
+              onClick={() => {
+                deleteTodo(obj._id);
+              }}
             >
               <DeleteIcon
                 fontSize="small"
-                onClick={() => {
-                  deleteTodo(obj._id);
-                }}
               />
             </IconButton>
           </Grid2>
