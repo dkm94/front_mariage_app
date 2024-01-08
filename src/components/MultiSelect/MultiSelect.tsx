@@ -33,19 +33,16 @@ function getStyles(name: string, guestValues: readonly string[], theme: Theme) {
 
 interface MultipleSelectProps {
   guests: FormattedGuestType[];
-  tableId: string;
   setGuestsIds: (ids) => any;
   edit: FormattedGuestType;
 }
 
 const MultipleSelect = (props: MultipleSelectProps) => {
-  //TODO: disable guest who sits in another table
-  const { guests, tableId, setGuestsIds, edit } = props;
+  const { guests, setGuestsIds, edit } = props;
+  const theme = useTheme();
 
   const tableGuests = guests.filter((guest) => guest.tableID === edit.id);
-  const initialListWithNames = tableGuests.map((guest) => guest.name);
-
-  const theme = useTheme();
+  const initialListWithNames = tableGuests.map((guest) => guest.name).slice().sort();
 
   const [guestValues, setGuestValues] = React.useState<string[]>(initialListWithNames);
 
@@ -90,6 +87,7 @@ const MultipleSelect = (props: MultipleSelectProps) => {
               key={guest.id}
               value={guest.name}
               style={getStyles(guest.name, guestValues, theme)}
+              disabled={guest.tableID !== null && guest.tableID !== edit.id}
             >
               {guest.name}
             </MenuItem>

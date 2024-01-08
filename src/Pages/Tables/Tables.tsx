@@ -44,6 +44,7 @@ const Tables = (props) => {
   const [errorTables, setErrorTables] = useState<boolean>(false);
   const [errorMessageTables, setErrorMessageTables] = useState<string | undefined>(undefined);
 
+  const orderedGuests = guests.slice().sort((a, b) => a.name.localeCompare(b.name));
 
   // TODO: Créer une fonction fetch dynamique fetchData(), qui prend en params un string corresondant à ce que je veux récupérer
   // TODO: Créer un objet qui contient les différents états de mes fetchs, et qui me permet de les appeler dynamiquement (ex: guests: getGuests(), tables: getTables(), etc.)
@@ -212,7 +213,7 @@ const Tables = (props) => {
                           handleUpdatedTable={handleUpdatedTable}
                           input={input}
                           setTables={setTables}
-                          guests={guests}
+                          guests={orderedGuests}
                           setEdit={setEdit}
                           getUpdatedId={getUpdatedId}
                           deleteTable={deleteTable}

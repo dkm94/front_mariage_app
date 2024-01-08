@@ -69,7 +69,7 @@ const EditTableForm = (props) => {
               }}
             />
 
-            <MultipleSelect guests={guests} tableId={tableId} setGuestsIds={setGuestsIds} edit={edit} />
+            <MultipleSelect guests={guests} setGuestsIds={setGuestsIds} edit={edit} />
 
             <div className="guest-card__form__button-container">
               <IconButton
