@@ -1,16 +1,17 @@
-import React from "react";
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import "./Tables.css";
+
+import React from "react";
+
+import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
+
 import { BlackButton } from "../../components/Buttons";
 import DefaultModal from "../../components/Modals/Default/DefaultModal";
 import EditForm from "./Forms/Edit";
-import { GuestType } from "../../../types";
 
 const Table = ({
   tables,
   table,
   id,
-  key,
   edit,
   handleUpdatedTable,
   input,
@@ -23,32 +24,21 @@ const Table = ({
   deleteTable 
 }) => {
   
-  const filteredGuests: GuestType[] = guests?.filter((guest: GuestType) => guest.tableID === table._id);
-
+  const returnName = (id: string) => {
+    const guest = guests?.find((guest) => guest.id === id);
+    return guest?.name;
+  }
   return (
-    <Grid2 xs={12} sm={4} md={3} className="render-tables">
+    <Grid2 xs={12} sm={4} md={3} className="render-tables" key={id}>
       <div className="div-table-name-span">
         <span className="table-name-span">{table.name}</span>
       </div>
       <div style={{ marginBottom: "60px" }}>
-        {filteredGuests?.map((guest) => (
-          <>
-            <span style={{ color: "#7c7676", fontSize: "1rem" }}>{guest.name}</span>
-            <br />
-          </>
-        ))}
+        <ul style={{ padding: "0"}}>
+          {table?.guestID?.map((guestId: string) => <li key={guestId}>{returnName(guestId)}</li>)}
+        </ul>
       </div>
-      {/* <div className="custom-dropdown dots-menu">
-            <Dropdown>
-                <Dropdown.Toggle as={CustomToggle} />
-                <Dropdown.Menu size="sm" title="">
-                    <Dropdown.Item onClick={() => getUpdatedId(table._id, table.name)}>Modifier</Dropdown.Item>
-                    <Dropdown.Item onClick={(e) => {
-                        deleteTable(e, table._id, table.guestID)}}>
-                        Supprimer</Dropdown.Item>
-                </Dropdown.Menu>
-            </Dropdown>
-        </div> */}
+
       <div className="table-card__button-container">
         <BlackButton
           onClick={() => {
@@ -70,7 +60,6 @@ const Table = ({
       >
         <EditForm
           tables={tables}
-          table={table}
           tableId={table._id}
           key={table._id}
           edit={edit}
@@ -83,7 +72,6 @@ const Table = ({
           deleteTable={deleteTable}
           isOpen={isOpen}
           setisOpen={setisOpen}
-          filteredGuests={filteredGuests}
         />
       </DefaultModal>}
     </Grid2>

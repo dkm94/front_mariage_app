@@ -20,7 +20,6 @@ export const getTables = requestHandler<void, TableType[]>((params) => {
 });
 
 export const updateTableWithGuests = requestHandler<AddGuestsParams, any>((params) => {
-    console.log("🚀 ~ file: tableRequests.ts:23 ~ updateTableWithGuests ~ params:", params)
     return Promise.resolve({
     method: 'post',
     url: `/api/admin/guests/addtable/${params?.id}`,
@@ -32,7 +31,6 @@ export const updateTableWithGuests = requestHandler<AddGuestsParams, any>((param
 });
 
 export const updateTablesName = requestHandler<UpdateTableNameParams, any>((params) => {
-    console.log("🚀 ~ file: tableRequests.ts:34 ~ updateTablesName ~ params:", params)
     return Promise.resolve({
     method: 'post',
     url: `/api/admin/tables/edit/${params?.id}`,

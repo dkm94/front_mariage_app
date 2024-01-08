@@ -1,19 +1,19 @@
-import React, { useState } from "react";
-import Select from "../../../components/AsyncSelect/AsyncSelect";
 import "../../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "../Tables.css";
+
+import React, { useState } from "react";
+
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Button, IconButton, TextField } from "@mui/material";
-import "../Tables.css";
+
 import { BlackButton } from "../../../components/Buttons";
-import { GuestType, TableType } from "../../../../types";
 import MultipleSelect from "../../../components/MultiSelect/MultiSelect";
-import formatArray from "../../../helpers/formatDefault";
+
 import { updateTableWithGuests, updateTablesName } from "../../../services/tables/tableRequests";
 
 const EditTableForm = (props) => {
   const {
     tables,
-    table,
     tableId,
     edit,
     handleUpdatedTable,
@@ -23,50 +23,29 @@ const EditTableForm = (props) => {
     setEdit,
     deleteTable,
     setisOpen,
-    filteredGuests
   } = props;
   
   const [guestsIds, setGuestsIds] = useState<string[]>([])
-  const formattedGuests = formatArray(guests);
   
-
-  // function 2: handle table name
-  // const editTableName = async (e) => {
-  //   e.preventDefault();
-  //   const updatedTableList = [...tables].map((table) => {
-  //     if (table._id === edit?.id) {
-  //       table.name = input;
-  //     }
-  //     return table;
-  //   });
-  //   await axios
-  //     .post(`/api/admin/tables/edit/${edit?.id}`, { name: input })
-  //     .then((res) => {
-  //       if (res.data != null) {
-  //         setTimeout(() => {
-  //           setTables(updatedTableList);
-  //           setEdit(null);
-  //         }, 1500);
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       // todo: handle error
-  //       console.log(err);
-  //     });
-  // };
-
-  const handleSubmit = async (e) => { // ajouter les guestsIds à guestID dans Table(côté backend)
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(input);
-    console.log(guestsIds);
-    // debugger;
+    
     const tablesResponse = await updateTableWithGuests({ id: tableId, guestIds: guestsIds });
     const updateNameResponse = await updateTablesName({ id: tableId, name: input });
-
+    
     if (tablesResponse.success && updateNameResponse.success) {
       setGuestsIds([]);
       setEdit(null);
       setisOpen(false);
+
+      const updatedTables = [...tables].map((table) => {
+        if (table._id === tableId) {
+          table.name = input;
+          table.guestID = guestsIds
+        }
+        return table;
+      });
+      setTables(updatedTables);
     }
   }
 
@@ -90,7 +69,7 @@ const EditTableForm = (props) => {
               }}
             />
 
-            <MultipleSelect guests={formattedGuests} tableId={tableId} setGuestsIds={setGuestsIds} edit={edit} />
+            <MultipleSelect guests={guests} tableId={tableId} setGuestsIds={setGuestsIds} edit={edit} />
 
             <div className="guest-card__form__button-container">
               <IconButton
@@ -126,36 +105,7 @@ const EditTableForm = (props) => {
             </div>
           </form>
         </div>
-
-
-        {/* <div
-          style={{
-            marginBottom: "40px",
-            marginTop: "40px",
-            width: "100%",
-          }}
-        >
-          {guests &&
-            tableGuests.map((guest) => {
-              return (
-                <div key={guest._id} className="guest-del">
-                  <span>{guest.name}</span>
-                  <IconButton
-                    style={{
-                      backgroundColor: "darkred",
-                      borderRadius: "5px",
-                      color: "#fff",
-                    }}
-                    onClick={(e) => handleClick(e, guest, table)}
-                  >
-                    <DeleteIcon fontSize="small" />
-                  </IconButton>
-                </div>
-              );
-            })}
-        </div> */}
       </div>
-      
     </li>
   );
 };

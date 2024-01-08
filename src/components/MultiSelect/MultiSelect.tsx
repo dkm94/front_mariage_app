@@ -9,7 +9,7 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
 
-import { FormattedGuestType, GuestType } from '../../../types';
+import { FormattedGuestType } from '../../../types';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -40,8 +40,6 @@ interface MultipleSelectProps {
 
 const MultipleSelect = (props: MultipleSelectProps) => {
   //TODO: disable guest who sits in another table
-  // TODO BUG: Je peux ajouter un guest, je ne peux pas le supprimer
-  // TODO BUG: La modification du titre ne marche que si je le modifie
   const { guests, tableId, setGuestsIds, edit } = props;
 
   const tableGuests = guests.filter((guest) => guest.tableID === edit.id);
@@ -60,12 +58,12 @@ const MultipleSelect = (props: MultipleSelectProps) => {
       typeof value === 'string' ? value.split(',') : value,
     );
   };
-
+  
   useEffect(() => {
     const getIds = (guestValues: string[]) => guests.filter((guest: FormattedGuestType) => guestValues.includes(guest.name)).map((guest: FormattedGuestType) => guest.id);
       const guestsIds = getIds(guestValues);
       setGuestsIds(guestsIds);
-    }, [guestValues])
+    }, [guestValues, guests, setGuestsIds])
 
   return (
     <div>
