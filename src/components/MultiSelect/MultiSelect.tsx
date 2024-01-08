@@ -64,7 +64,7 @@ const MultipleSelect = (props: MultipleSelectProps) => {
 
   return (
     <div>
-      <FormControl sx={{ m: 1, width: 300 }}>
+      <FormControl sx={{ width: 1 }}>
         <InputLabel id="demo-multiple-chip-label">Chip</InputLabel>
         <Select
           labelId="demo-multiple-chip-label"
