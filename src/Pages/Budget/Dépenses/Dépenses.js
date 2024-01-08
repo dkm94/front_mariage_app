@@ -68,6 +68,7 @@ const Expenses = ({
         <div className="cols cols-4">Description</div>
         <div className="cols cols-5">Gérer</div>
       </li>
+      {expenses.length === 0 && <div style={{ textAlign: "center"}}><span>Vos dépenses ici</span></div>}
       {expenses
         .filter((expense) => {
           return (

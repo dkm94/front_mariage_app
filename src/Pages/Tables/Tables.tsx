@@ -3,14 +3,17 @@ import "./Tables.css";
 import React, { useState, useEffect, useContext } from "react";
 import { withRouter, Link } from "react-router-dom";
 import axios from "axios";
-import { Container, Row, Col } from "react-bootstrap";
 
+import { Container, Row, Col } from "react-bootstrap";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { Box } from "@mui/material";
 import Grow from "@mui/material/Grow";
 
 import { GuestType, TableType } from "../../../types";
 import { ScrollButtonContext } from "../../App";
+import { getGuests } from "../../services/guests/guestRequests";
+import { getTables } from "../../services/tables/tableRequests";
+import formatArray from "../../helpers/formatDefault";
 
 import AddTableForm from "./Forms/Add";
 import Table from "./Table";
@@ -25,17 +28,66 @@ type EditType = {
 const Tables = (props) => {
   const scrollBtn = useContext(ScrollButtonContext);
   // const loader = useContext(LoaderContext);
+  const [guests, setGuests] = useState<GuestType[] | []>([]);
 
   const [searchValue, setSearchValue] = useState<string>("");
   const [tables, setTables] = useState<TableType[] | []>([]);
-  const [edit, setEdit] = useState<EditType>({
-    id: "",
-    name: "",
-  });
+  const [edit, setEdit] = useState<EditType | null>(null);
   const [input, setInput] = useState("");
 
   const [loading, setLoading] = useState(false);
   const [isOpen, setisOpen] = useState(false);
+
+  const [errorGuests, setErrorGuests] = useState<boolean>(false);
+  const [errorMessageGuests, setErrorMessageGuests] = useState<string | undefined>(undefined);
+
+  const [errorTables, setErrorTables] = useState<boolean>(false);
+  const [errorMessageTables, setErrorMessageTables] = useState<string | undefined>(undefined);
+
+
+  // TODO: Créer une fonction fetch dynamique fetchData(), qui prend en params un string corresondant à ce que je veux récupérer
+  // TODO: Créer un objet qui contient les différents états de mes fetchs, et qui me permet de les appeler dynamiquement (ex: guests: getGuests(), tables: getTables(), etc.)
+  const fetchGuests = async () => { // TODO: problème de performances, trop de re rendus (search bar, update picture...)
+    try {
+      setLoading(true);
+      const guestsResponse = await getGuests();
+      if(guestsResponse.success && guestsResponse.statusCode === 200) {
+        setGuests(formatArray(guestsResponse.data)  || []);
+      } else {
+        setErrorGuests(true);
+        if(guestsResponse.message === "Network Error"){
+          setErrorMessageGuests("Oups, une erreur s'est produite.");
+        } else {
+          setErrorMessageGuests(guestsResponse.message);
+        }
+      }
+    } catch (err) {
+      setErrorMessageGuests(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchTables = async () => { // TODO: problème de performances, trop de re rendus (search bar, update picture...)
+    try {
+      setLoading(true);
+      const tablesResponse = await getTables();
+      if(tablesResponse.success && tablesResponse.statusCode === 200) {
+        setTables(tablesResponse.data  || []);
+      } else {
+        setErrorTables(true);
+        if(tablesResponse.message === "Network Error"){
+          setErrorMessageTables("Oups, une erreur s'est produite.");
+        } else {
+          setErrorMessageTables(tablesResponse.message);
+        }
+      }
+    } catch (err) {
+      setErrorMessageTables(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleUpdatedTable = (e) => {
     setInput(e.target.value);
@@ -43,23 +95,11 @@ const Tables = (props) => {
   const handleSearch = (e) => {
     setSearchValue(e.target.value);
   };
-  const [guests, setGuests] = useState<GuestType[] | []>([]);
 
   useEffect(() => {
-    setLoading(true);
-
-    let guests = axios.get("/api/admin/guests/");
-    let tables = axios.get("/api/admin/tables/");
-
-    async function getDatas() {
-      let res = await Promise.all([guests, tables]);
-      setGuests(res[0].data);
-      setTables(res[1].data);
-
-      setLoading(false);
-    }
-    getDatas();
-  }, []);
+    fetchGuests();
+    fetchTables();
+}, []);
 
   const getUpdatedId = (tableId, tableName) => {
     setEdit({
@@ -67,58 +107,6 @@ const Tables = (props) => {
       name: tableName,
     });
     setInput(tableName);
-  };
-
-  const editTableName = async (e) => {
-    e.preventDefault();
-    const updatedTableList = [...tables].map((table) => {
-      if (table._id === edit.id) {
-        table.name = input;
-      }
-      return table;
-    });
-    await axios
-      .post(`/api/admin/tables/edit/${edit.id}`, { name: input })
-      .then((res) => {
-        if (res.data != null) {
-          setTimeout(() => {
-            setTables(updatedTableList);
-            setEdit({
-              id: "",
-              name: "",
-            });
-          }, 1500);
-        }
-      })
-      .catch((err) => {
-        // todo: handle error
-        console.log(err);
-      });
-  };
-
-  const deleteGuest = async (e, guest: GuestType, table: TableType) => {
-    e.preventDefault();
-    await axios
-      .put(`/api/admin/guests/deletetable/${guest._id}`, { tableID: table._id })
-      .then((res) => {
-        if (res.data != null) {
-          const guestsCopy = [...guests]
-          const selectedGuestIdx = guestsCopy.findIndex((g) => g._id === guest._id);
-          if(selectedGuestIdx !== -1){
-            guestsCopy[selectedGuestIdx].tableID = "";
-          }
-          setGuests([...guestsCopy]);
-          setEdit({
-            id: "",
-            name: "",
-          });
-          setisOpen(false);
-        }
-      })
-      .catch((err) => {
-        // todo: handle error
-        console.log(err);
-      });
   };
 
   const deleteTable = async (e, tableId:string, guest) => {
@@ -189,7 +177,10 @@ const Tables = (props) => {
                 className="tables-grid"
                 pl={"50px"}
                 pr={"50px"}
-              >
+                >
+                {errorTables && <div style={{ alignSelf: "center" }}><span style={{ color: "darkred"}}>{errorMessageTables}</span></div>}
+                {errorGuests && <div style={{ alignSelf: "center" }}><span style={{ color: "darkred"}}>{errorMessageGuests}</span></div>}
+
                 {tables?.length === 0 || null ? (
                   <div
                     className="block"
@@ -218,12 +209,10 @@ const Tables = (props) => {
                           id={table._id}
                           key={table._id}
                           edit={edit}
-                          editTableName={editTableName}
                           handleUpdatedTable={handleUpdatedTable}
                           input={input}
                           setTables={setTables}
                           guests={guests}
-                          deleteGuest={deleteGuest}
                           setEdit={setEdit}
                           getUpdatedId={getUpdatedId}
                           deleteTable={deleteTable}

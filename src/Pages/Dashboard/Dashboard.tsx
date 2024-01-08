@@ -2,15 +2,17 @@ import "./Dashboard.css";
 
 import React, { useEffect, useState, useContext } from "react";
 import axios, { AxiosResponse } from "axios";
+
 import { Container, Row } from "react-bootstrap";
 import Grow from "@mui/material/Grow";
 
-import { floatToEuro } from "../../helpers/formatCurrency";
-
-import { ScrollButtonContext } from "../../App";
-import Card from "./Card/Card.jsx";
 import ScreenLoader from "../../components/Loader/Screen/ScreenLoader.jsx";
+import Card from "./Card/Card.jsx";
+
+import { floatToEuro } from "../../helpers/formatCurrency";
 import { GuestType, OperationType, TableType, TaskType, WeddingType } from "../../../types";
+import { ScrollButtonContext } from "../../App";
+
 
 const Dashboard = (props) => {
   const scrollBtn = useContext(ScrollButtonContext);
@@ -59,7 +61,7 @@ const Dashboard = (props) => {
         beverages,
       ]);
       setGuests(res[0].data.data);
-      setTables(res[1].data);
+      setTables(res[1].data.data);
       setOperations(res[2].data);
       setTasks(res[3].data);
       setStarters(res[4].data);

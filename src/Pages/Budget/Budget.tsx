@@ -47,8 +47,10 @@ const Budget = () => {
       let res: AxiosResponse = await Promise.resolve(operations);
       const data: OperationType[] = res.data;
       setOperations(data);
-      calculateTotal(data);
       setLoading(false);
+      if (data.length > 0) {
+        calculateTotal(data);
+      }
     }
     getDatas();
   }, []);
@@ -149,12 +151,15 @@ const Budget = () => {
     enableReinitialize: true,
   });
 
-  function calculateTotal(operations: OperationType[]): void {
-    if (operations) {
+  function calculateTotal(operations: OperationType[]) {
+    alert("trigger")
+    if (operations.length > 0) {
       const getSums = operations?.map((op) => Number(op.price));
       const add = getSums.reduce((a, b) => a + b);
       const p = add / 100;
       setTotal(floatToEuro(p));
+    } else {
+      setTotal("")
     }
   }
 
@@ -322,9 +327,9 @@ const Budget = () => {
                     </div>
                       
                 </div>
-                <div className="col chart-component">
+                {operations.length > 0 && <div className="col chart-component">
                   <PieChart operations={operations} />
-                </div>
+                </div>}
                 <div className="budget___col-2">
                   <Expenses
                     expenses={operations}
