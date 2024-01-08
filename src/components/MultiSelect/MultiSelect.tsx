@@ -18,6 +18,8 @@ const MenuProps = {
     style: {
       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
       width: 250,
+      color: "red",
+      background: "yellow"
     },
   },
 };
@@ -30,6 +32,12 @@ function getStyles(name: string, guestValues: readonly string[], theme: Theme) {
         : theme.typography.fontWeightBold,
   };
 }
+
+// const useStyles = makeStyles((theme) => ({
+//   selectComponent: {
+//     padding: "0px"
+//   }
+// }))
 
 interface MultipleSelectProps {
   guests: FormattedGuestType[];
@@ -65,7 +73,7 @@ const MultipleSelect = (props: MultipleSelectProps) => {
   return (
     <div>
       <FormControl sx={{ width: 1 }}>
-        <InputLabel id="demo-multiple-chip-label">Chip</InputLabel>
+        <InputLabel id="demo-multiple-chip-label">Liste</InputLabel>
         <Select
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
@@ -74,13 +82,14 @@ const MultipleSelect = (props: MultipleSelectProps) => {
           onChange={handleChange}
           input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
           renderValue={(selected) => (
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, padding: 0 }}>
               {selected.map((value) => (
                 <Chip key={value} label={value} />
               ))}
             </Box>
           )}
           MenuProps={MenuProps}
+          SelectDisplayProps={{ style: { padding: "9px" } }}
         >
           {guests.map((guest) => (
             <MenuItem
