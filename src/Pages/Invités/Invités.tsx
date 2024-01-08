@@ -16,6 +16,7 @@ import AddForm from "../../components/Invités(affichage)/by_guests/Components/F
 import GuestList from "../../components/Invités(affichage)/by_guests/Components/Guests/Guests";
 import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
 import ScreenLoader from "../../components/Loader/Screen/ScreenLoader.jsx";
+import { useFetch } from "../../hooks";
 
 type NewUser = string;
 
@@ -37,7 +38,11 @@ const Byguests = (props: ByGuestsProps) => {
 
   const [newUser, setNewUser] = useState<NewUser>("");
 
-  const [guests, setGuests] = useState<GuestType[] | []>([]);
+  const { data: guests, setData: setGuests, loading, error, errorMessage } = useFetch<void, GuestType[]>(
+    getGuests,
+    []
+    );
+    
   const [editPicture, seteditPicture] = useState<string>("null");
   const [file, setFile] = useState(null);
   const [searchValue, setSearchValue] = useState<string>("");
@@ -45,35 +50,11 @@ const Byguests = (props: ByGuestsProps) => {
   const [appear, setAppear] = useState<boolean>(false);
   const [isOpen, setisOpen] = useState<boolean>(false);
 
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
-
-  const fetchGuests = async () => { // TODO: problème de performances, trop de re rendus (search bar, update picture...)
-    try {
-      setLoading(true);
-      const guestsResponse = await getGuests();
-      if(guestsResponse.success && guestsResponse.statusCode === 200) {
-        setAppear(true);
-        setGuests(guestsResponse.data  || []);
-      } else {
-        setError(true);
-        if(guestsResponse.message === "Network Error"){
-          setErrorMessage("Oups, une erreur s'est produite.");
-        } else {
-          setErrorMessage(guestsResponse.message);
-        }
-      }
-    } catch (err) {
-      setErrorMessage(err.message);
-    } finally {
-      setLoading(false);
+  useEffect(() => { // TODO: problème de performances, trop de re rendus (search bar, update picture...)
+    if (guests && guests.length > 0) {
+      setAppear(true);
     }
-  };
-
-  useEffect(() => {
-    fetchGuests()
-}, [user]);
+  }, [user]);
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);

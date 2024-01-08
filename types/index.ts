@@ -60,6 +60,13 @@ export interface ILoginProps {
 
 export interface IRegisterProps extends ILoginProps {}
 
+export interface IDashboardProps {
+    userInfos?: UserType | undefined;
+    userRole: string;
+    token?: string | null;
+    page: string;
+}
+
 export type DashboardCardDataType = {
     icon: string;
     title: string;

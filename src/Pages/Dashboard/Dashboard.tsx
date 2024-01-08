@@ -10,14 +10,14 @@ import ScreenLoader from "../../components/Loader/Screen/ScreenLoader.jsx";
 import Card from "./Card/Card.jsx";
 
 import { floatToEuro } from "../../helpers/formatCurrency";
-import { GuestType, OperationType, TableType, TaskType, WeddingType } from "../../../types";
+import { GuestType, IDashboardProps, OperationType, TableType, TaskType, WeddingType } from "../../../types";
 import { ScrollButtonContext } from "../../App";
 
 
-const Dashboard = (props) => {
+const Dashboard = (props: IDashboardProps) => {
   const scrollBtn = useContext(ScrollButtonContext);
   //const loader = useContext(LoaderContext)
-  const id = props.userInfos.mariageID;
+  const id = props?.userInfos?.mariageID;
 
   const [sum, setSum] = useState<string>("")
 
@@ -80,7 +80,6 @@ const Dashboard = (props) => {
     if(operations.length > 0) {
     let spending: number = operations.map((operation: OperationType) => operation?.price as number).reduce((a: number, b:number) => a + b) / 100;
     const formattedSum = floatToEuro(spending);
-    // const fixedSpending = Number(spending).toFixed(2);
     setSum(formattedSum)
     }
   }, [operations])
