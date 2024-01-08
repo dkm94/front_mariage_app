@@ -1,8 +1,10 @@
-import React from "react";
-import { Button } from "@mui/material";
-import { Link } from "react-router-dom";
 import "./Card.css";
+
+import React from "react";
+import { Link } from "react-router-dom";
+
 import { Col, Container } from "react-bootstrap";
+import { Button } from "@mui/material";
 
 const Card = ({
   title,
@@ -40,12 +42,6 @@ const Card = ({
     </div>
   );
 
-  // const returnName = (array) => {
-  //   const getElement = array?.map(el => <li key={el?._id}>{el?.name}</li>);
-  //   const getLast = getElement?.slice(-3);
-  //   return getLast;
-  // }
-
   const guests = (
     <div>
       <span>{firstPerson} </span>
@@ -65,9 +61,9 @@ const Card = ({
     const getElement = array?.map((el) => (
       <li key={el?._id}>
         <span>{el?.name} </span>
-        {/* <span style={{ fontWeight: "bold" }}>
+        <span style={{ fontWeight: "bold" }}>
           ({el?.guestID?.length} pers.)
-        </span> */}
+        </span>
       </li>
     ));
     const getLast = getElement?.slice(-3);
