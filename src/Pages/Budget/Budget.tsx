@@ -44,7 +44,7 @@ const Budget = () => {
     if (operations.length > 0) {
       calculateTotal(operations);
     }
-  }, [])
+  }, [operations])
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>): void => {
     setSearchValue(e.target.value);

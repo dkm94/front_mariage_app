@@ -2,7 +2,7 @@ import "./Menu.css";
 
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import styled from "@emotion/styled";
 
 import starterImg from "../../img/menus/starter_img.jpg";
@@ -23,6 +23,8 @@ import { UpdateStarter, UpdateMaincourse, UpdateDessert, UpdateApetizer, UpdateB
 import { ScrollButtonContext } from "../../App";
 import ScreenLoader from "../../components/Loader/Screen/ScreenLoader";
 import { FoodType } from "../../../types";
+import { useFetch } from "../../hooks";
+import { getApetizers, getBeverages, getDesserts, getMaincourses, getStarters } from "../../services";
 
 
 const IconWrapper = styled(IconButton)({
@@ -39,18 +41,27 @@ type EditType = {
 const Menus = () => {
   const scrollBtn = useContext(ScrollButtonContext);
 
-  const [starters, setStarters] = useState<FoodType[] | []>([]);
-  const [maincourses, setMaincourses] = useState<FoodType[] | []>([]);
-  const [desserts, setDesserts] = useState<FoodType[] | []>([]);
-  const [apetizers, setApetizers] = useState<FoodType[] | []>([]);
-  const [beverages, setBeverages] = useState<FoodType[] | []>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const { data: starters, setData: setStarters } = useFetch<void, FoodType[]>(getStarters, []);
+  const { data: maincourses,setData: setMaincourses} = useFetch<void, FoodType[]>(getMaincourses, []);
+  const { data: desserts, setData: setDesserts } = useFetch<void, FoodType[]>(getDesserts, []);
+  const { data: apetizers, setData: setApetizers } = useFetch<void, FoodType[]>(getApetizers, []);
+  const { data: beverages, setData: setBeverages } = useFetch<void, FoodType[]>(getBeverages, []);
+
+  useEffect(() => {
+    setLoading(true);
+
+    if(starters && maincourses && desserts && apetizers && beverages) {
+      setLoading(false);
+    }
+  }, [starters, maincourses, desserts, apetizers, beverages])
   
   const [edit, setEdit] = useState<EditType>({
     id: "",
     name: "",
   });
 
-  const [loading, setLoading] = useState<boolean>(false);
 
   const getUpdatedId = (objId, objName) => {
     setEdit({
@@ -58,34 +69,6 @@ const Menus = () => {
       name: objName,
     });
   };
-
-  useEffect(() => {
-    setLoading(true);
-
-    let starterData: Promise<AxiosResponse> = axios.get<FoodType[]>("/api/admin/menu/starters/");
-    let maincourseData: Promise<AxiosResponse> = axios.get<FoodType[]>("/api/admin/menu/maincourses/");
-    let dessertData: Promise<AxiosResponse> = axios.get<FoodType[]>("/api/admin/menu/desserts/");
-    let apetizerData: Promise<AxiosResponse> = axios.get<FoodType[]>("/api/admin/menu/apetizers/");
-    let beverageData: Promise<AxiosResponse> = axios.get<FoodType[]>("/api/admin/menu/beverages/");
-    
-    async function getDatas() {
-      let res = await Promise.all([
-        starterData,
-        maincourseData,
-        dessertData,
-        apetizerData,
-        beverageData,
-      ]);
-      setStarters(res[0].data);
-      setMaincourses(res[1].data);
-      setDesserts(res[2].data);
-      setApetizers(res[3].data);
-      setBeverages(res[4].data);
-
-      setLoading(false);
-    }
-    getDatas();
-  }, []);
 
   //todo: error in update handling
 
