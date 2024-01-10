@@ -17,6 +17,11 @@ const IconWrapper = styled(IconButton)({
   },
 });
 
+type Edit = {
+  id: string;
+  name: string;
+}
+
 const Guests = ({
   guests,
   setGuests,
@@ -36,10 +41,8 @@ const Guests = ({
   errorMessage,
   error
 }) => {
-  const [edit, setEdit] = useState({
-    id: null,
-    name: "",
-  });
+  const [edit, setEdit] = useState<Edit | null>(null);
+  console.log("🚀 ~ file: Guests.tsx:43 ~ edit:", edit)
   const [uploadedFile, setUploadedFile] = useState(null);
 
   const [selected, setSelected] = useState("tous");
@@ -168,7 +171,7 @@ const Guests = ({
                           ) : null}
                         </Box>
                       </div>
-                     {guest._id === edit.id && <DefaultModal
+                     {guest._id === edit?.id && <DefaultModal
                         // open={isOpen}
                         setEdit={setEdit}
                         setOpen={setisOpen}

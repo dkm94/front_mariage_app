@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import axios from "axios";
 import decode from "jwt-decode";
@@ -10,12 +10,16 @@ import VerticalNavbar from "./components/Header/Navigation/Responsive/VerticalNa
 import { UserType } from "../types/index";
 
 const Layout = ({ children }) => {
+  const [user, setUser] = useState<UserType | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
   const token: string | null = localStorage.getItem("token");
-
-  let user: UserType;
-  if (token) {
-    user = decode(token);
-  }
+  
+  useEffect(() => {
+    if (token) {
+      setUser(decode(token));
+      setLoading(false);
+    }
+  }, [token])
 
   axios.defaults.baseURL = "https://my-wedding-backend.onrender.com/";
   // axios.defaults.baseURL = 'http://localhost:3050';
@@ -26,8 +30,8 @@ const Layout = ({ children }) => {
       <div className="navigation-layout">
         {token ? <TopNav /> : <LoggedOutNavigation />}
         <div className={token ? "body-content" : "body-content___home"}>
-          {token && <Sidebar userInfos={user} />}
-          {token && <VerticalNavbar userInfos={user} />}
+          {token && <Sidebar userInfos={user} loading={loading} />}
+          {token && <VerticalNavbar userInfos={user} loading={loading} />}
           {children}
         </div>
       </div>

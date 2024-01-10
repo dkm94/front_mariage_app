@@ -160,11 +160,10 @@
 
 .guest-card__form__button-container {
     display: flex;
-    flex-direction: row;
+    /* flex-direction: row; */
     gap: 7px;
     justify-content: space-between;
-    background-color: #f2f2f2;
-    padding: 1rem;
+    flex-wrap: wrap;
     }
 
 .guest-card__form__button-container > button {

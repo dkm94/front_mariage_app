@@ -69,39 +69,42 @@ const EditTableForm = (props) => {
               }}
             />
 
-            <MultipleSelect guests={guests} tableId={tableId} setGuestsIds={setGuestsIds} edit={edit} />
+            <MultipleSelect guests={guests} setGuestsIds={setGuestsIds} edit={edit} />
 
             <div className="guest-card__form__button-container">
               <IconButton
                 onClick={(e) => deleteTable(e, edit.id)}
-                style={{ backgroundColor: "darkred", borderRadius: "5px" }}
+                style={{ backgroundColor: "darkred", borderRadius: "5px", flexGrow: 1 }}
               >
                 <DeleteIcon style={{ color: "#F4F4F4" }} />
                 <span style={{ color: "#F4F4F4" }}>Supprimer</span>
               </IconButton>
 
-              <div>
-                <Button
-                  onClick={() => {
-                    setEdit(null);
-                    setisOpen(false);
-                  }}
-                  variant="outlined"
-                  style={{
-                    color: "grey",
-                    textTransform: "unset",
-                    fontSize: "1rem",
-                  }}
-                >
-                  Annuler
-                </Button>
-                <BlackButton
-                  type={"submit"}
-                  text={"Enregistrer"}
-                  variant="contained"
-                  style={{ borderRadius: "5px", padding: "6px 16px" }}
-                />
-              </div>
+              <BlackButton
+                type={"submit"}
+                text={"Enregistrer"}
+                variant="contained"
+                style={{ borderRadius: "5px", padding: "6px 16px", flexGrow: 1 }}
+              />
+
+              <Button
+                onClick={() => {
+                  setEdit(null);
+                  setisOpen(false);
+                }}
+                variant="outlined"
+                style={{
+                  color: "grey",
+                  textTransform: "unset",
+                  fontSize: "1rem",
+                  width: "100%",
+                  borderColor: "#e4e8e8",
+                }}
+              >
+                Annuler
+              </Button>
+
+              
             </div>
           </form>
         </div>

@@ -44,7 +44,8 @@ export interface ProtectedRouteProps {
 }
 
 export interface VerticalNavbarProps {
-    userInfos?: UserType | undefined;
+    userInfos?: UserType | null;
+    loading: boolean;
 }
 
 export type NavigationDataType = {
@@ -60,6 +61,13 @@ export interface ILoginProps {
 
 export interface IRegisterProps extends ILoginProps {}
 
+export interface IDashboardProps {
+    userInfos?: UserType | undefined;
+    userRole: string;
+    token?: string | null;
+    page: string;
+}
+
 export type DashboardCardDataType = {
     icon: string;
     title: string;
@@ -74,7 +82,8 @@ export interface IAuthModalProps {
 }
 
 export interface ISidebarProps {
-    userInfos?: UserType | undefined;
+    userInfos?: UserType | null;
+    loading: boolean;
 }
 
 export type WeddingProps = {
@@ -169,7 +178,7 @@ export type WeddingType = {
     budgetID: string;
     invitationID: string;
     menuID: string;
-}
+} | undefined;
 
 export type GuestType = {
     family?: string;

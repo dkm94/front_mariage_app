@@ -73,7 +73,6 @@ const Register = ({ setShowForm }: IRegisterProps) => {
   
   useEffect(() => {
     const fetchData = async () => {
-      alert("fetch")
       const myHeaders: Headers = new Headers();
       const myInit = { method: "GET", headers: myHeaders, mode: "cors" as RequestMode };
       await fetch(

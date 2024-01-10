@@ -18,6 +18,8 @@ const MenuProps = {
     style: {
       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
       width: 250,
+      color: "red",
+      background: "yellow"
     },
   },
 };
@@ -31,21 +33,24 @@ function getStyles(name: string, guestValues: readonly string[], theme: Theme) {
   };
 }
 
+// const useStyles = makeStyles((theme) => ({
+//   selectComponent: {
+//     padding: "0px"
+//   }
+// }))
+
 interface MultipleSelectProps {
   guests: FormattedGuestType[];
-  tableId: string;
   setGuestsIds: (ids) => any;
   edit: FormattedGuestType;
 }
 
 const MultipleSelect = (props: MultipleSelectProps) => {
-  //TODO: disable guest who sits in another table
-  const { guests, tableId, setGuestsIds, edit } = props;
+  const { guests, setGuestsIds, edit } = props;
+  const theme = useTheme();
 
   const tableGuests = guests.filter((guest) => guest.tableID === edit.id);
-  const initialListWithNames = tableGuests.map((guest) => guest.name);
-
-  const theme = useTheme();
+  const initialListWithNames = tableGuests.map((guest) => guest.name).slice().sort();
 
   const [guestValues, setGuestValues] = React.useState<string[]>(initialListWithNames);
 
@@ -67,8 +72,8 @@ const MultipleSelect = (props: MultipleSelectProps) => {
 
   return (
     <div>
-      <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-multiple-chip-label">Chip</InputLabel>
+      <FormControl sx={{ width: 1 }}>
+        <InputLabel id="demo-multiple-chip-label">Liste</InputLabel>
         <Select
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
@@ -77,19 +82,21 @@ const MultipleSelect = (props: MultipleSelectProps) => {
           onChange={handleChange}
           input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
           renderValue={(selected) => (
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, padding: 0 }}>
               {selected.map((value) => (
                 <Chip key={value} label={value} />
               ))}
             </Box>
           )}
           MenuProps={MenuProps}
+          SelectDisplayProps={{ style: { padding: "9px" } }}
         >
           {guests.map((guest) => (
             <MenuItem
               key={guest.id}
               value={guest.name}
               style={getStyles(guest.name, guestValues, theme)}
+              disabled={guest.tableID !== null && guest.tableID !== edit.id}
             >
               {guest.name}
             </MenuItem>
