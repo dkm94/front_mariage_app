@@ -19,6 +19,8 @@ import ScreenLoader from "../../components/Loader/Screen/ScreenLoader";
 import { ScrollButtonContext } from "../../App";
 import { OperationType } from "../../../types/index";
 import { floatToEuro } from "../../helpers/formatCurrency";
+import { useFetch } from "../../hooks";
+import { getOperations } from "../../services";
 
 
 const Budget = () => {
@@ -31,30 +33,18 @@ const Budget = () => {
     description: "",
   };
 
-  const [operations, setOperations] = useState<OperationType[] | []>([]);
-  console.log("🚀 ~ Budget ~ operations:", operations)
   const [searchValue, setSearchValue] = useState<string>("");
   const [total, setTotal] = useState<string>("");
 
   const [edit, setEdit] = useState<OperationType | null>(null);
 
-  const [loading, setLoading] = useState<boolean>(false);
+  const { data: operations, setData: setOperations, loading } = useFetch<void, OperationType[]>(getOperations, []);
 
   useEffect(() => {
-    setLoading(true);
-
-    let operations: Promise<AxiosResponse> = axios.get<OperationType[]>(`/api/admin/budget/operations/`);
-    const getDatas = async (): Promise<void> => {
-      let res: AxiosResponse = await Promise.resolve(operations);
-      const data: OperationType[] = res.data;
-      setOperations(data);
-      setLoading(false);
-      if (data.length > 0) {
-        calculateTotal(data);
-      }
+    if (operations.length > 0) {
+      calculateTotal(operations);
     }
-    getDatas();
-  }, []);
+  }, [])
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>): void => {
     setSearchValue(e.target.value);

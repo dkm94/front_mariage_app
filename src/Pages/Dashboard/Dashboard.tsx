@@ -24,11 +24,11 @@ const Dashboard = (props: IDashboardProps) => { // Ce composant est rendu beauco
 
   const [loading, setLoading] = useState(false);
 
+  const { data: wedding, fetchData: fetchWedding } = useFetch<any, WeddingType>(() => getWedding({ id }), undefined);
   const { data: tasks } = useFetch<void, TaskType[]>(getTodos, []);
-  const { data: guests, loading: LOADING_GUESTS, error: ERROR_GUESTS, errorMessage: ERROR_MESSAGE_GUESTS } = useFetch<void, GuestType[]>(getGuests, []);
-  const { data: tables, loading: LOADING_TABLES, error: ERROR_TABLES, errorMessage: ERROR_MESSAGE_TABLES } = useFetch<void, TableType[]>(getTables, []);
+  const { data: guests } = useFetch<void, GuestType[]>(getGuests, []);
+  const { data: tables } = useFetch<void, TableType[]>(getTables, []);
   const { data: operations } = useFetch<void, OperationType[]>(getOperations, []);
-  const { data: wedding, loading: LOADING_WEDDING, error: ERROR_WEDDING, errorMessage: ERROR_MESSAGE_WEDDING, fetchData: fetchWedding } = useFetch<any, WeddingType>(() => getWedding({ id }), undefined);
   const { data: starters } = useFetch<void, FoodType[]>(getStarters, []);
   const { data: maincourses } = useFetch<void, FoodType[]>(getMaincourses, []);
   const { data: desserts } = useFetch<void, FoodType[]>(getDesserts, []);

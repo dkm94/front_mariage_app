@@ -1,38 +1,16 @@
 import "../Header.css";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 
-import { ISidebarProps, NavigationDataType, WeddingProps } from "../../../../types/index";
+import { ISidebarProps, NavigationDataType } from "../../../../types/index";
 import { NavigationData } from "./NavigationData";
 import profilePicture from "../../../img/couple-img.jpg";
 
-const Sidebar = ({ userInfos }: ISidebarProps) => {
+const Sidebar = ({ userInfos, loading }: ISidebarProps) => {
 
-  const id: string | undefined = userInfos?.mariageID;
-  const [wedding, setWedding] = useState<WeddingProps>(undefined);
   const [selectedTab, setSelectedTab] = useState<string | undefined>(window.location.pathname);
   const tabs: NavigationDataType[] = NavigationData;
-
-  const [loading, setLoading] = useState<boolean>(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      await axios
-        .get(`/api/admin/wedding/${id}`, { withCredentials: true })
-        .then((res) => {
-          setWedding(res.data);
-        })
-        .catch((err) => console.log(err))
-        .finally(() => setLoading(false));
-    };
-    fetchData();
-  }, [id]);
-
-  const firstPerson = wedding?.["firstPerson"];
-  const secondPerson = wedding?.["secondPerson"];
 
   const handleClick = (pathname: string) => {
     const selected = tabs.find((tab) => tab.pathname === pathname);
@@ -46,7 +24,7 @@ const Sidebar = ({ userInfos }: ISidebarProps) => {
           <img alt="profile" src={profilePicture} />
         </div>
         <p className="names">
-          {loading ? "" : `${firstPerson} & ${secondPerson}`}
+          {loading ? "" : `${userInfos?.firstPerson} & ${userInfos?.secondPerson}`}
         </p>
       </div>
       <ul className="sidebarList">

@@ -44,7 +44,8 @@ export interface ProtectedRouteProps {
 }
 
 export interface VerticalNavbarProps {
-    userInfos?: UserType | undefined;
+    userInfos?: UserType | null;
+    loading: boolean;
 }
 
 export type NavigationDataType = {
@@ -81,7 +82,8 @@ export interface IAuthModalProps {
 }
 
 export interface ISidebarProps {
-    userInfos?: UserType | undefined;
+    userInfos?: UserType | null;
+    loading: boolean;
 }
 
 export type WeddingProps = {

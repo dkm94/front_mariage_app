@@ -11,30 +11,9 @@ import { VerticalNavbarProps } from '../../../../../../types';
 import { NavigationData } from "../../NavigationData";
 import profilePicture from "../../../../../img/couple-img.jpg";
 
-const VerticalNavbar = ({ userInfos }: VerticalNavbarProps) => {
-
-  const id: string | undefined = userInfos?.mariageID;
-  const [weddingId, setWeddingId] = useState<string>("");
-
-  const firstPerson: string = weddingId["firstPerson"];
-  const secondPerson: string = weddingId["secondPerson"];
+const VerticalNavbar = ({ userInfos, loading }: VerticalNavbarProps) => {
 
   const [isExpanded, setExpendState] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      await axios
-        .get(`/api/admin/wedding/${id}`, { withCredentials: true })
-        .then((res) => {
-          setWeddingId(res.data);
-        })
-        .catch((err) => console.log(err))
-        .finally(() => setLoading(false));
-    };
-    fetchData();
-  }, [id]);
 
   return (
     <nav
@@ -47,7 +26,7 @@ const VerticalNavbar = ({ userInfos }: VerticalNavbarProps) => {
     >
       <div className="nav-upper">
         <div className="nav-heading">
-          {weddingId && (
+          {userInfos && (
             <div
               style={{ display: !isExpanded ? "none" : "" }}
               className="nav-brand"
@@ -65,7 +44,7 @@ const VerticalNavbar = ({ userInfos }: VerticalNavbarProps) => {
                   fontSize: "1.2rem",
                 }}
               >
-                {loading ? "" : `${firstPerson} & ${secondPerson}`}
+                {loading ? "" : `${userInfos?.firstPerson} & ${userInfos?.secondPerson}`}
               </span>
             </div>
           )}
