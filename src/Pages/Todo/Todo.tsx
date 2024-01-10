@@ -21,6 +21,7 @@ const Todo = () => {
   const scrollBtn = useContext(ScrollButtonContext);
 
   const [todos, setTodos] = useState<TaskType[] | []>([]);
+  console.log("🚀 ~ file: Todo.tsx:24 ~ Todo ~ todos:", todos)
   const [searchValue, setSearchValue] = useState<string>("");
   const [selected, setSelected] = useState<any>("all");
   const [isOpen, setisOpen] = useState<boolean>(false);

@@ -176,7 +176,7 @@ export type WeddingType = {
     budgetID: string;
     invitationID: string;
     menuID: string;
-}
+} | undefined;
 
 export type GuestType = {
     family?: string;

@@ -32,6 +32,7 @@ const Budget = () => {
   };
 
   const [operations, setOperations] = useState<OperationType[] | []>([]);
+  console.log("🚀 ~ Budget ~ operations:", operations)
   const [searchValue, setSearchValue] = useState<string>("");
   const [total, setTotal] = useState<string>("");
 
@@ -152,7 +153,6 @@ const Budget = () => {
   });
 
   function calculateTotal(operations: OperationType[]) {
-    alert("trigger")
     if (operations.length > 0) {
       const getSums = operations?.map((op) => Number(op.price));
       const add = getSums.reduce((a, b) => a + b);

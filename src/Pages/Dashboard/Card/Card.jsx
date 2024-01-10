@@ -149,7 +149,7 @@ const Card = ({
           </div>
         ) : (
           <div className="db-component-content">
-            <span style={{ fontSize: "3rem" }}>0</span>
+            <span>0</span>
           </div>
         )}
         <div className="dashbord-return-content">
