@@ -16,28 +16,19 @@ import SearchBar from "../../components/Invités(affichage)/by_guests/Components
 import AddForm from "./Add/Form";
 import List from "./List/List";
 import ScreenLoader from "../../components/Loader/Screen/ScreenLoader";
+import { useFetch } from "../../hooks";
+import { getTodos } from "../../services";
 
 const Todo = () => {
   const scrollBtn = useContext(ScrollButtonContext);
 
-  const [todos, setTodos] = useState<TaskType[] | []>([]);
-  console.log("🚀 ~ file: Todo.tsx:24 ~ Todo ~ todos:", todos)
+  const { data: todos, setData: setTodos } = useFetch<void, TaskType[]>(getTodos, []);
+
   const [searchValue, setSearchValue] = useState<string>("");
   const [selected, setSelected] = useState<any>("all");
   const [isOpen, setisOpen] = useState<boolean>(false);
 
   const [loading, setLoading] = useState<boolean>(false);
-
-  useEffect(() => {
-    setLoading(true);
-
-    const fetchData = async (): Promise<void> => {
-      const result = await axios.get("/api/admin/todolist/");
-      setTodos(result.data);
-      setLoading(false);
-    };
-    fetchData();
-  }, []);
 
   const handleSearch = (e) => {
     setSearchValue(e.target.value);
