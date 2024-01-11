@@ -10,6 +10,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { UserContext, ScrollButtonContext } from "../../App";
 import Button from "../../components/LargeButton/LargeButton.js";
 import { AccountType, UserType, WeddingType } from '../../../types';
+import { Grow } from "@mui/material";
+import { BlackButton } from "../../components/Buttons";
 
 const win: Window = window;
 
@@ -26,7 +28,7 @@ type FormValues2 = {
 const MyAccount = ({ token }) => {
    
     const user: UserType = useContext(UserContext);
-    const { id, mariageID } = user as { id: string, mariageID: string };
+    const { id, mariageID, firstPerson, secondPerson } = user as { id: string, mariageID: string, firstPerson: string, secondPerson: string};
 
     const scrollBtn = useContext(ScrollButtonContext)
     const [successfulDeletionMessage, setsuccessfulDeletionMessage] = useState<string>("")
@@ -51,6 +53,10 @@ const MyAccount = ({ token }) => {
         }
         fetchData()}, [id, mariageID])
 
+    useEffect(() => {
+
+    }, [])
+
 
     // Handle wedding Form
     const weddingValidationSchema = Yup.object().shape({
@@ -72,7 +78,11 @@ const MyAccount = ({ token }) => {
 
     const { register, formState: { errors }, handleSubmit, reset } = useForm<FormValues>({
         mode: "onBlur",
-        resolver: yupResolver(weddingValidationSchema)
+        resolver: yupResolver(weddingValidationSchema),
+        defaultValues: {
+            firstPerson,
+            secondPerson
+        }
       });
 
     // mount DefaultValues 
@@ -185,111 +195,117 @@ const MyAccount = ({ token }) => {
         <div className="account page-component">
             {scrollBtn}
             <div className="account___container">
+                <Grow in={true}>
+                    <div className="titles mb-3">
+                        <h2>Paramètres du compte</h2>
+                    </div>
+                </Grow>
                 <div  className="account___bgimage" />
-                <div className="titles mb-3">
-                    <h1>Votre compte</h1>
-                </div>
-                <Container style={{ padding: "5rem 10rem" }} fluid>
-                    <Row style={{ marginBottom: "8rem"}}>
-                        <form className="wedding-form__style" key={1} onSubmit={handleSubmit(onSubmitWedding)}>
-                            <Col xs={12} md={6} className="account__row">
-                                <div className={`textfield-style account___form-style`}>
-                                    <label>Prénom de l'époux/épouse 1</label>
-                                    <input
-                                    {...register('firstPerson')}
-                                    name="firstPerson"
-                                    type="text"
-                                    className="form-control"
-                                    />
-                                    <span>{errors.firstPerson?.message}</span>
-                                </div>
-                            </Col>
-                            <Col xs={12} md={6} className="account__row">
-                                <div className={`textfield-style account___form-style`}>
-                                    <label>Prénom de l'époux/épouse 2</label>
-                                    <input
-                                    {...register('secondPerson')}
-                                    type="text"
-                                    name="secondPerson"
-                                    className="form-control"
-                                    />
-                                    <span>{errors.secondPerson?.message}</span>
-                                </div>
-                            </Col>
-                            <Col xs={12} style={{ display: "flex", justifyContent: "end"}}>
-                                <Button type="submit" title="Enregistrer"/>
-                            </Col>
-                            {editSuccess}
-                        </form>
-                    </Row>
-                </Container>
-                <Container style={{ padding: "5rem 10rem" }} fluid>
-                    <form className="account-form__style" key={2} onSubmit={handleSubmit2(onSubmitAccount)}>
-                        <Row>
-                            <Col xs={12} md={6} className="account__row">
-                                <div className={`account___form-style textfield-style`}>
-                                    <label>Email</label>
-                                    <input
-                                    // {...register2('email')}
-                                    disabled
-                                    className="form-control"
-                                    name="email"
-                                    type="email"
-                                    placeholder={email}
-                                    />
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row>
+                <Grow in={true}>
+                    <div style={{ padding: "2rem 50px", display: "flex", flexDirection: "column", gap: "30px" }}>
+                        <Container fluid>
+                            <Row>
+                                <form className="wedding-form__style" key={1} onSubmit={handleSubmit(onSubmitWedding)}>
+                                    <Col xs={12} md={6} className="account__row">
+                                        <div className={`textfield-style account___form-style`}>
+                                            <label>Prénom de l'époux/épouse 1</label>
+                                            <input
+                                            {...register('firstPerson')}
+                                            name="firstPerson"
+                                            type="text"
+                                            className="form-control"
+                                            />
+                                            <span>{errors.firstPerson?.message}</span>
+                                        </div>
+                                    </Col>
+                                    <Col xs={12} md={6} className="account__row">
+                                        <div className={`textfield-style account___form-style`}>
+                                            <label>Prénom de l'époux/épouse 2</label>
+                                            <input
+                                            {...register('secondPerson')}
+                                            type="text"
+                                            name="secondPerson"
+                                            className="form-control"
+                                            />
+                                            <span>{errors.secondPerson?.message}</span>
+                                        </div>
+                                    </Col>
+                                    <Col xs={12} style={{ display: "flex", justifyContent: "end"}}>
+                                        <BlackButton 
+                                            type="submit" 
+                                            text={"Enregistrer"} 
+                                            variant="contained"
+                                            style={{ borderRadius: "5px", padding: "6px 16px"}}/>
+                                    </Col>
+                                    {editSuccess}
+                                </form>
+                            </Row>
+                        </Container>
+                        <Container fluid>
+                            <Row>
+                                <form className="account-form__style" key={2} onSubmit={handleSubmit2(onSubmitAccount)}>
+                                    <Col xs={12} md={6} className="account__row">
+                                        <div className={`account___form-style textfield-style`}>
+                                            <label>Email</label>
+                                            <input
+                                            // {...register2('email')}
+                                            disabled
+                                            className="form-control"
+                                            name="email"
+                                            type="email"
+                                            placeholder={email}
+                                            />
+                                        </div>
+                                    </Col>
 
-                            <Col xs={12} md={6} className="account__row">
-                                <div className={`textfield-style account___form-style`}>
-                                    <label>Nouveau mot de passe</label>
-                                    <input
-                                    {...register2('password')}
-                                    name="password"
-                                    type="password"
-                                    className="form-control"
-                                    value={newPassword}
-                                    onChange={(e) => setNewPassword(e.target.value)}
-                                    />
-                                </div>
-                            </Col>
-                            <Col xs={12} md={6} className="account__row">
-                                <div className={`textfield-style account___form-style`}>
-                                    <label>Confirmer le nouveau mot de passe</label>
-                                    <input
-                                    {...register2('confirmPassword')}
-                                    name="confirmPassword"
-                                    type="password"
-                                    className="form-control"
-                                    />
-                                    <span>{errors2.confirmPassword?.message}</span>
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col xs={12} style={{ display: "flex", justifyContent: "end"}} >
-                                <div className="account___btn_container">
-                                    <Button title="Enregistrer" type="submit"/>
-                                </div>
-                            </Col>
-                            {editSuccess}
-                        </Row>
-                    </form>
-                </Container>
-                <Container style={{ padding: "5rem 10rem" }} fluid>
-                    <Row>
-                        <Col xs={12} md={8} id="delete-account___link">
-                            <span onClick={() => setdeleteValidation(!deleteValidation)}>Supprimer le compte</span>
+                                    <Col xs={12} md={6} className="account__row">
+                                        <div className={`textfield-style account___form-style`}>
+                                            <label>Nouveau mot de passe</label>
+                                            <input
+                                            {...register2('password')}
+                                            name="password"
+                                            type="password"
+                                            className="form-control"
+                                            value={newPassword}
+                                            onChange={(e) => setNewPassword(e.target.value)}
+                                            />
+                                        </div>
+                                    </Col>
+                                    <Col xs={12} md={6} className="account__row">
+                                        <div className={`textfield-style account___form-style`}>
+                                            <label>Confirmer le nouveau mot de passe</label>
+                                            <input
+                                            {...register2('confirmPassword')}
+                                            name="confirmPassword"
+                                            type="password"
+                                            className="form-control"
+                                            />
+                                            <span>{errors2.confirmPassword?.message}</span>
+                                        </div>
+                                    </Col>
+                                    <Col xs={12} style={{ display: "flex", justifyContent: "end"}} >
+                                        <BlackButton 
+                                            type="submit" 
+                                            text={"Enregistrer"} 
+                                            variant="contained"
+                                            style={{ borderRadius: "5px", padding: "6px 16px"}}
+                                        />
+                                    </Col>
+                                    {editSuccess}
+                                </form>
+                            </Row>
+                        </Container>
+                        <Container fluid style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", marginTop: "50px" }}>
+                            <BlackButton text="Supprimer le compte" onClick={() => setdeleteValidation(!deleteValidation)} style={{ backgroundColor: "darkred", borderRadius: "5px" }} />
+                            {/* <span onClick={() => setdeleteValidation(!deleteValidation)}>Supprimer le compte</span> */}
                             <div style={deleteValidation ? showButtons : hideButtons}>
                                 <span>La suppression du compte étant définitive, toutes les données seront perdues. Souhaitez-vous continuer ?</span>
                                 <button onClick={deleteAccount}>OUI</button>
                                 <button type="submit" onClick={() => setdeleteValidation(!deleteValidation)}>NON</button>
                             </div>
-                        </Col>
-                    </Row>
-                </Container>
+                        </Container>
+                    </div>
+                </Grow>
             </div>
             <div><span>{successfulDeletionMessage}</span></div>
         </div>

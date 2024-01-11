@@ -9,11 +9,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
-}
-
-.account__content {
-    padding: 5rem 10rem;
-}
+}   
 
 .account__row {
     display: flex;
@@ -35,10 +31,6 @@
 .account___settings {
     height: 200px;
     width: 100%;
-}
-
-.account___btn_container {
-    text-align: end;
 }
 
 #delete-account___link {

@@ -41,7 +41,7 @@ const NavbarWithUser = () => {
             to={"/menu/mon-compte"}
             onClick={() => setShowLinks(!showLinks)}
           >
-            Votre compte
+            Paramètres
           </Link>
         </li>
         <li className="navbar__item hidden-links slideDown-8"  id="showNavLinks">
