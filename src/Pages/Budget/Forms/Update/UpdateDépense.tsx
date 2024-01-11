@@ -1,9 +1,11 @@
-import "../Budget.css";
+import "../../Budget.css";
+import "./Update.css";
 
 import React, { useState, useEffect, useRef } from "react";
 import { Button, TextField, IconButton } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 
-import { BlackButton } from "../../../components/Buttons";
+import { BlackButton } from "../../../../components/Buttons";
 
 const UpdateExpense = ({
   edit,
@@ -51,25 +53,8 @@ const UpdateExpense = ({
 
 
   return (
-    <div className="events-list___inputs">
-      <div
-        style={{
-          marginBottom: "2rem",
-          paddingRight: "1rem",
-          paddingBottom: "1rem",
-        }}
-      >
-      </div>
-      <form
-        onSubmit={handleSubmit}
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "20px",
-          marginBottom: "5rem",
-          padding: "5px 30px",
-        }}
-      >
+    <div className="modal-child">
+      <form onSubmit={handleSubmit}>
         <div className="budget___select">
           <select
             name="category"
@@ -117,58 +102,47 @@ const UpdateExpense = ({
           ref={inputRef}
           style={{ background: "#fff", width: "100%" }}
         />
-      </form>
-      <div className="expense__edit-form">
-        {/* <Button
-          onClick={() => deleteExpense(edit._id)}
-          color="error"
-          variant="contained"
-          style={{ textTransform: "unset" }}
-        >
-          Supprimer
-        </Button> */}
-        <IconButton
-          style={{
-            backgroundColor: "darkred",
-            borderRadius: "5px",
-            fontSize: "unset",
-          }}
-          onClick={() => deleteExpense(edit._id)}
-        >
-          {/* <DeleteIcon style={{ color: "#F4F4F4" }} /> */}
-          <span style={{ color: "#F4F4F4", padding: "0px 6px" }}>Supprimer</span>
-        </IconButton>
-        <div className="exp-modal-action-right">
-          <Button
-            className="exp-modal-action-right__cancel"
-            style={{
-              background: "none",
-              color: "grey",
-              textTransform: "unset",
-              fontSize: "1rem",
-              border: "1px solid darkgrey"
-            }}
-            onClick={() => {
-              setEdit({
-                category: "",
-                price: "",
-                description: "",
-                date: "",
-                mariageID: ""
-              });
-            }}
-            variant="outlined"
+
+        <div className="action-buttons">
+          <IconButton
+            onClick={() => deleteExpense(edit._id)}
+            style={{ backgroundColor: "darkred", borderRadius: "5px", flexGrow: 1 }}
           >
-            Annuler
-          </Button>
+            <DeleteIcon style={{ color: "#F4F4F4" }} />
+            <span style={{ color: "#F4F4F4", padding: "0px 6px" }}>Supprimer</span>
+          </IconButton>
+
           <BlackButton
-            text={"Valider"}
-            variant={"contained"}
-            onClick={handleSubmit}
-            style={{ borderRadius: "5px", padding: "6px 16px" }}
-          />
+              text={"Valider"}
+              variant={"contained"}
+              onClick={handleSubmit}
+              style={{ borderRadius: "5px", padding: "6px 16px", flexGrow: 1 }}
+            />
+
+            <Button
+              style={{
+                color: "grey",
+                textTransform: "unset",
+                fontSize: "1rem",
+                width: "100%",
+                borderColor: "#e4e8e8",
+              }}
+              onClick={() => {
+                setEdit({
+                  category: "",
+                  price: "",
+                  description: "",
+                  date: "",
+                  mariageID: ""
+                });
+              }}
+              variant="outlined"
+            >
+              Annuler
+            </Button>
         </div>
-      </div>
+      </form>
+      
     </div>
   );
 };

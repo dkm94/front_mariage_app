@@ -154,23 +154,6 @@
     border-radius: 0;
 }
 
-.expense__edit-form {
-    display: flex;
-    flex-direction: row;
-    gap: 7px;
-    justify-content: space-between;
-    background-color: #f2f2f2;
-    padding: 1rem;
-}
-.exp-modal-action-right {
-    display: flex;
-    flex-direction: row;
-    gap: 5px;
-}
-.exp-modal-action-right__cancel {
-    border: 1px solid darkgrey;
-}
-
 @media (max-width: 1024px) { 
     .card-body > span {
         font-size: 2.5rem;

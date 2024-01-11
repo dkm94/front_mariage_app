@@ -5,7 +5,7 @@ import styled from "@emotion/styled";
 import { IconButton } from "@mui/material";
 import CreateIcon from "@mui/icons-material/Create";
 
-import Form from "../Form/UpdateGuest";
+import Form from "../Form/Update/UpdateGuest";
 import DefaultModal from "../../../../Modals/Default/DefaultModal";
 
 import avatar from "../../../../../img/avatar.jpg";
