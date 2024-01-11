@@ -42,12 +42,10 @@ const Guests = ({
   error
 }) => {
   const [edit, setEdit] = useState<Edit | null>(null);
-  console.log("🚀 ~ file: Guests.tsx:43 ~ edit:", edit)
+
   const [uploadedFile, setUploadedFile] = useState(null);
 
   const [selected, setSelected] = useState("tous");
-  // const [deleteId, setDeleteId] = useState("")
-  // const nodeRef = useRef(null)
 
   const handleFileInput = (e) => {
     const fileValue = e.target.files[0];

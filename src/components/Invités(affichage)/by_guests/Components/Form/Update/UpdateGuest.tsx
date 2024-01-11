@@ -1,7 +1,7 @@
 import "../../../guests.css";
 import "./Update.css";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import axios from "axios";
 import { Button, Grid, IconButton } from "@mui/material";
 import TextField from "@mui/material/TextField";
@@ -10,6 +10,10 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { BlackButton } from "../../../../../Buttons";
 
 import checkIcon from "../../../../../../img/green-check.png";
+import { useFetch } from "../../../../../../hooks";
+import { getWedding } from "../../../../../../services";
+import { UserType, WeddingType } from "../../../../../../../types";
+import { UserContext } from "../../../../../../App";
 
 const UpdateGuest = ({
   edit,
@@ -26,26 +30,10 @@ const UpdateGuest = ({
   setisOpen,
   deleteGuest,
 }) => {
-  const [family, setFamily] = useState({
-    firstPerson: "",
-    secondPerson: "",
-  });
   const [radioValue, setRadioValue] = useState(guestFamily);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      await axios
-        .get(`/api/admin/wedding/${mariageID}`, { withCredentials: true })
-        .then((res) => {
-          setFamily({
-            firstPerson: res.data.firstPerson,
-            secondPerson: res.data.secondPerson,
-          });
-        })
-        .catch((err) => console.log(err));
-    };
-    fetchData();
-  }, [mariageID]);
+  const user: UserType = useContext(UserContext);
+  const { firstPerson, secondPerson } = user as { firstPerson: string, secondPerson: string };
 
   const [input, setInput] = useState(edit ? edit.name : "");
   const inputRef = useRef<HTMLDivElement>(null);
@@ -151,7 +139,7 @@ const UpdateGuest = ({
                 onChange={(e) => setRadioValue(e.target.value)}
                 checked={radioValue === "1"}
               />
-              <label htmlFor="test1" className="choose-fam-label">Famille de {family.firstPerson}</label>
+              <label htmlFor="test1" className="choose-fam-label">Famille de {firstPerson}</label>
             </div>
             <div className="fam-input-container">
               <input
@@ -162,7 +150,7 @@ const UpdateGuest = ({
                 onChange={(e) => setRadioValue(e.target.value)}
                 checked={radioValue === "2"}
               />
-              <label htmlFor="test2" className="choose-fam-label">Famille de {family.secondPerson} </label>
+              <label htmlFor="test2" className="choose-fam-label">Famille de {secondPerson}</label>
             </div>
           </div>
           <div className="action-buttons">
