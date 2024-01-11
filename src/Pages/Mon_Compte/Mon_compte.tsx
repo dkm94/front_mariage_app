@@ -7,9 +7,11 @@ import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { UserContext, ScrollButtonContext } from "../../App";
-import Button from "../../components/LargeButton/LargeButton.js";
+import { useFetch } from "../../hooks";
+import { getWedding } from "../../services";
 import { AccountType, UserType, WeddingType } from '../../../types';
+
+import { UserContext, ScrollButtonContext } from "../../App";
 import { Grow } from "@mui/material";
 import { BlackButton } from "../../components/Buttons";
 
@@ -34,28 +36,23 @@ const MyAccount = ({ token }) => {
     const [successfulDeletionMessage, setsuccessfulDeletionMessage] = useState<string>("")
         
     const [account, setAccount] = useState<AccountType | {}>({})
-    const [wedding, setWedding] = useState<WeddingType | {}>({})
     const [deleteValidation, setdeleteValidation] = useState<boolean>(false)
     const [newPassword, setNewPassword] = useState<string>("")
     const [editSuccess, setEditSuccess] = useState<string>("")
 
     const { email } = account as { email: string };
-    
+
+    const { data: wedding, fetchData: fetchWedding } = useFetch<any, WeddingType>(() => getWedding({ id: mariageID }), undefined);
+
     // Fetch data
     useEffect(() => {
         let account: Promise<AxiosResponse> = axios.get<AccountType>(`/api/admin/admin/myAccount/${id}`);
-        let wedding: Promise<AxiosResponse> = axios.get<WeddingType>(`/api/admin/wedding/${mariageID}`);
 
         const fetchData = async (): Promise<void> => {
             let res = await Promise.all([account, wedding])
             setAccount(res[0].data)
-            setWedding(res[1].data)
         }
         fetchData()}, [id, mariageID])
-
-    useEffect(() => {
-
-    }, [])
 
 
     // Handle wedding Form

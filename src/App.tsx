@@ -15,8 +15,18 @@ import ScrollToTop from "./helpers/ScrollToTop";
 import Page from "./components/Page/Page";
 
 // <------- Pages ---------->
-// todo: create index file for pages
-import { Homepage, TodoPage, GuestsPage, TablesPage, BudgetPage, ReceptionPage, DashboardPage, SettingsPage, NotFoundPage, ResetPage } from "./Pages";
+import { 
+  Homepage, 
+  TodoPage, 
+  GuestsPage, 
+  TablesPage, 
+  BudgetPage, 
+  ReceptionPage, 
+  DashboardPage, 
+  SettingsPage, 
+  NotFoundPage, 
+  ResetPage 
+} from "./Pages";
 
 // <------- Types ---------->
 import { UserType, RoleType, ScrollButtonType, LoaderType } from "../types/index.js";
@@ -45,85 +55,15 @@ function App() {
   let scrollButton: ScrollButtonType = <ScrollToTopButton />;
   let loader: LoaderType = <Loader />;
 
-  function Home() {
-    return <Page title="Accueil" component={Homepage} token={token} />;
-  }
-
-  function ResetPassword() {
-    return <Page title="Réinitialiser le mot de passe" component={ResetPage} />;
-  }
-
-  function Dashboard() {
-    return (
-      <Page
-        title="Tableau de bord"
-        userInfos={user}
-        auth={role}
-        component={DashboardPage}
-      />
-    );
-  }
-
-  function Account() {
-    return (
-      <Page
-        title="Paramètres du compte"
-        userInfos={user}
-        auth={role}
-        component={SettingsPage}
-      />
-    );
-  }
-
-  function Tables() {
-    return (
-      <Page
-        title="Les tables"
-        userInfos={user}
-        auth={role}
-        component={TablesPage}
-      />
-    );
-  }
-
-  function Guests() {
-    return (
-      <Page
-        title="Les invités"
-        userInfos={user}
-        auth={role}
-        component={GuestsPage}
-      />
-    );
-  }
-
-  function Carte() {
-    return (
-      <Page title="Le repas" userInfos={user} auth={role} component={ReceptionPage} />
-    );
-  }
-
-  function Budget() {
-    return (
-      <Page
-        title="Les dépenses"
-        userInfos={user}
-        auth={role}
-        component={BudgetPage}
-      />
-    );
-  }
-
-  function TodoList() {
-    return (
-      <Page
-        title="Liste des tâches"
-        userInfos={user}
-        auth={role}
-        component={TodoPage}
-      />
-    );
-  }
+  const Home = () => <Page title="Accueil" component={Homepage} token={token} />
+  const ResetPassword = () => <Page title="Réinitialiser le mot de passe" component={ResetPage} token={token} />
+  const Dashboard = () => <Page title="Tableau de bord" userInfos={user} auth={role} component={DashboardPage} token={token} />
+  const Account = () => <Page title="Paramètres du compte" userInfos={user} auth={role} component={SettingsPage} />
+  const Tables = () => <Page title="Les tables" userInfos={user} auth={role} component={TablesPage} />
+  const Guests = () => <Page title="Les invités" userInfos={user} auth={role} component={GuestsPage} />
+  const Carte = () => <Page title="Le repas" userInfos={user} auth={role} component={ReceptionPage} />
+  const Budget = () => <Page title="Les dépenses" userInfos={user} auth={role} component={BudgetPage} />
+  const TodoList = () => <Page title="Liste des tâches" userInfos={user} auth={role} component={TodoPage} />
 
   return (
     <div className={token ? "App-home" : "App"}>
