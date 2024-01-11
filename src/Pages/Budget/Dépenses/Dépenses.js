@@ -6,7 +6,7 @@ import CreateIcon from "@mui/icons-material/Create";
 import { IconButton } from "@mui/material";
 import { Chip, styled } from '@material-ui/core';
 
-import UpdateForm from "./UpdateDépense";
+import UpdateForm from "../Forms/Update/UpdateDépense";
 import DefaultModal from "../../../components/Modals/Default/DefaultModal";
 
 const CustomChip = styled(Chip)({

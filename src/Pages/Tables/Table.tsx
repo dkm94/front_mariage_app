@@ -6,7 +6,7 @@ import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 
 import { BlackButton } from "../../components/Buttons";
 import DefaultModal from "../../components/Modals/Default/DefaultModal";
-import EditForm from "./Forms/Edit";
+import EditForm from "./Forms/Edit/Edit";
 
 const Table = ({
   tables,

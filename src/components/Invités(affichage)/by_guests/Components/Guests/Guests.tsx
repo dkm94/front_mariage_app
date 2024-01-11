@@ -5,7 +5,7 @@ import styled from "@emotion/styled";
 import { IconButton } from "@mui/material";
 import CreateIcon from "@mui/icons-material/Create";
 
-import Form from "../Form/UpdateGuest";
+import Form from "../Form/Update/UpdateGuest";
 import DefaultModal from "../../../../Modals/Default/DefaultModal";
 
 import avatar from "../../../../../img/avatar.jpg";
@@ -42,12 +42,10 @@ const Guests = ({
   error
 }) => {
   const [edit, setEdit] = useState<Edit | null>(null);
-  console.log("🚀 ~ file: Guests.tsx:43 ~ edit:", edit)
+
   const [uploadedFile, setUploadedFile] = useState(null);
 
   const [selected, setSelected] = useState("tous");
-  // const [deleteId, setDeleteId] = useState("")
-  // const nodeRef = useRef(null)
 
   const handleFileInput = (e) => {
     const fileValue = e.target.files[0];
