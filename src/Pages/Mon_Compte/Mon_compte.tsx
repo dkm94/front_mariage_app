@@ -11,9 +11,10 @@ import { useFetch } from "../../hooks";
 import { getWedding } from "../../services";
 import { AccountType, UserType, WeddingType } from '../../../types';
 
-import { UserContext, ScrollButtonContext } from "../../App";
 import { Grow } from "@mui/material";
+import { UserContext, ScrollButtonContext } from "../../App";
 import { BlackButton } from "../../components/Buttons";
+import DefaultModal from "../../components/Modals/Default/DefaultModal";
 
 import profilePicture from "../../img/couple-img.jpg";
 import changePwdIcon from "../../img/change-password-icon.png";
@@ -39,9 +40,10 @@ const MyAccount = ({ token }) => {
     const [successfulDeletionMessage, setsuccessfulDeletionMessage] = useState<string>("")
         
     const [account, setAccount] = useState<AccountType | {}>({})
-    const [deleteValidation, setdeleteValidation] = useState<boolean>(false)
     const [newPassword, setNewPassword] = useState<string>("")
     const [editSuccess, setEditSuccess] = useState<string>("")
+
+    const [openModal, setOpenModal] = useState<boolean>(false);
 
     const { email } = account as { email: string };
 
@@ -183,17 +185,6 @@ const MyAccount = ({ token }) => {
             .catch(err => console.log(err))
     }
 
-    const hideButtons = {
-        display: 'none'
-    }
-
-    const showButtons = {
-        display: "block"
-    }
-
-    console.log(newPassword);
-    
-
     return (
         <div className="account page-component">
             {scrollBtn}
@@ -316,17 +307,41 @@ const MyAccount = ({ token }) => {
                             </Row>
                         </Container>
                         <Container fluid style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", marginTop: "50px" }}>
-                            <BlackButton text="Supprimer le compte" onClick={() => setdeleteValidation(!deleteValidation)} style={{ backgroundColor: "darkred", borderRadius: "5px" }} />
-                            {/* <span onClick={() => setdeleteValidation(!deleteValidation)}>Supprimer le compte</span> */}
-                            <div style={deleteValidation ? showButtons : hideButtons}>
-                                <span>La suppression du compte étant définitive, toutes les données seront perdues. Souhaitez-vous continuer ?</span>
-                                <button onClick={deleteAccount}>OUI</button>
-                                <button type="submit" onClick={() => setdeleteValidation(!deleteValidation)}>NON</button>
-                            </div>
+                            <BlackButton text="Supprimer le compte" onClick={() => setOpenModal(true)} style={{ backgroundColor: "darkred", borderRadius: "5px" }} />
                         </Container>
                     </div>
                 </Grow>
             </div>
+            {openModal && (
+                <DefaultModal title="Supprimer votre compte" setOpen={() => setOpenModal(false)}>
+                    <div id="modal-account">
+                        <span>La suppression du compte étant définitive, toutes les données seront perdues. Souhaitez-vous continuer ?</span>
+                        <div className="action-buttons">
+                            <BlackButton
+                            onClick={deleteAccount}
+                            text={"Supprimer"}
+                            variant="contained"
+                            style={{ borderRadius: "5px", padding: "6px 16px", flexGrow: 1, color: "#F4F4F4", backgroundColor: "darkred" }}
+                            />
+                            {/* <button onClick={deleteAccount}>OUI</button> */}
+                            <BlackButton
+                            onClick={() => setOpenModal(false)}
+                            text={"Annuler"}
+                            type={"submit"}
+                            variant="contained"
+                            style={{ 
+                            color: "grey",
+                            border: "#e4e8e8 1px solid",
+                            borderRadius: "5px", 
+                            padding: "6px 16px",
+                            backgroundColor: "unset",
+                            boxShadow: "unset",
+                            flexGrow: 1 }}
+                            />
+                        </div>
+                    </div>
+                </DefaultModal>
+            )}
             <div><span>{successfulDeletionMessage}</span></div>
         </div>
     )
