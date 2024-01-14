@@ -15,6 +15,9 @@ import { UserContext, ScrollButtonContext } from "../../App";
 import { Grow } from "@mui/material";
 import { BlackButton } from "../../components/Buttons";
 
+import profilePicture from "../../img/couple-img.jpg";
+import changePwdIcon from "../../img/change-password-icon.png";
+
 const win: Window = window;
 
 type FormValues = {
@@ -188,6 +191,9 @@ const MyAccount = ({ token }) => {
         display: "block"
     }
 
+    console.log(newPassword);
+    
+
     return (
         <div className="account page-component">
             {scrollBtn}
@@ -200,96 +206,113 @@ const MyAccount = ({ token }) => {
                 <div  className="account___bgimage" />
                 <Grow in={true}>
                     <div style={{ padding: "2rem 50px", display: "flex", flexDirection: "column", gap: "30px" }}>
-                        <Container fluid>
+                        <Container className="account-container" fluid>
                             <Row>
-                                <form className="wedding-form__style" key={1} onSubmit={handleSubmit(onSubmitWedding)}>
-                                    <Col xs={12} md={6} className="account__row">
-                                        <div className={`textfield-style account___form-style`}>
-                                            <label>Prénom de l'époux/épouse 1</label>
-                                            <input
-                                            {...register('firstPerson')}
-                                            name="firstPerson"
-                                            type="text"
-                                            className="form-control"
-                                            />
-                                            <span>{errors.firstPerson?.message}</span>
-                                        </div>
-                                    </Col>
-                                    <Col xs={12} md={6} className="account__row">
-                                        <div className={`textfield-style account___form-style`}>
-                                            <label>Prénom de l'époux/épouse 2</label>
-                                            <input
-                                            {...register('secondPerson')}
-                                            type="text"
-                                            name="secondPerson"
-                                            className="form-control"
-                                            />
-                                            <span>{errors.secondPerson?.message}</span>
-                                        </div>
-                                    </Col>
-                                    <Col xs={12} style={{ display: "flex", justifyContent: "end"}}>
-                                        <BlackButton 
-                                            type="submit" 
-                                            text={"Enregistrer"} 
-                                            variant="contained"
-                                            style={{ borderRadius: "5px", padding: "6px 16px"}}/>
-                                    </Col>
-                                    {editSuccess}
-                                </form>
+                                <Col className="settings-img-container">
+                                    <div>
+                                        <img 
+                                        alt="profile" 
+                                        src={profilePicture}
+                                        />
+                                    </div>
+                                </Col>
+                                <Col className="settings-content-container">
+                                    <form className="wedding-form__style" key={1} onSubmit={handleSubmit(onSubmitWedding)}>
+                                        <Col className="account__row">
+                                            <div className={`textfield-style account___form-style`}>
+                                                <label>Prénom de l'époux/épouse 1</label>
+                                                <input
+                                                {...register('firstPerson')}
+                                                name="firstPerson"
+                                                type="text"
+                                                className="form-control"
+                                                />
+                                                <span>{errors.firstPerson?.message}</span>
+                                            </div>
+                                        </Col>
+                                        <Col  className="account__row">
+                                            <div className={`textfield-style account___form-style`}>
+                                                <label>Prénom de l'époux/épouse 2</label>
+                                                <input
+                                                {...register('secondPerson')}
+                                                type="text"
+                                                name="secondPerson"
+                                                className="form-control"
+                                                />
+                                                <span>{errors.secondPerson?.message}</span>
+                                            </div>
+                                        </Col>
+                                        <Col xs={12} style={{ display: "flex", justifyContent: "end"}}>
+                                            <BlackButton 
+                                                type="submit" 
+                                                text={"Enregistrer"} 
+                                                variant="contained"
+                                                style={{ borderRadius: "5px", padding: "6px 16px"}}/>
+                                        </Col>
+                                        {editSuccess}
+                                    </form>
+                                </Col>
                             </Row>
                         </Container>
-                        <Container fluid>
+                        <Container fluid className="account-container">
                             <Row>
-                                <form className="account-form__style" key={2} onSubmit={handleSubmit2(onSubmitAccount)}>
-                                    <Col xs={12} md={6} className="account__row">
-                                        <div className={`account___form-style textfield-style`}>
-                                            <label>Email</label>
-                                            <input
-                                            // {...register2('email')}
-                                            disabled
-                                            className="form-control"
-                                            name="email"
-                                            type="email"
-                                            placeholder={email}
-                                            />
+                                <Col className="settings-img-container">
+                                        <div>
+                                            <img src={changePwdIcon} alt="change password icon" />
                                         </div>
-                                    </Col>
+                                </Col>
+                                <Col className="settings-content-container">
+                                    <form className="account-form__style" key={2} onSubmit={handleSubmit2(onSubmitAccount)}>
+                                        <Col  className="account__row">
+                                            <div className={`account___form-style textfield-style`}>
+                                                <label>Email</label>
+                                                <input
+                                                // {...register2('email')}
+                                                disabled
+                                                className="form-control"
+                                                name="email"
+                                                type="email"
+                                                placeholder={email}
+                                                />
+                                            </div>
+                                        </Col>
 
-                                    <Col xs={12} md={6} className="account__row">
-                                        <div className={`textfield-style account___form-style`}>
-                                            <label>Nouveau mot de passe</label>
-                                            <input
-                                            {...register2('password')}
-                                            name="password"
-                                            type="password"
-                                            className="form-control"
-                                            value={newPassword}
-                                            onChange={(e) => setNewPassword(e.target.value)}
+                                        <Col className="account__row">
+                                            <div className={`textfield-style account___form-style`}>
+                                                <label>Nouveau mot de passe</label>
+                                                <input
+                                                {...register2('password')}
+                                                name="password"
+                                                type="password"
+                                                className="form-control"
+                                                value={newPassword}
+                                                onChange={(e) => setNewPassword(e.target.value)}
+                                                />
+                                            </div>
+                                        </Col>
+                                        <Col className="account__row">
+                                            <div className={`textfield-style account___form-style`}>
+                                                <label>Confirmer le nouveau mot de passe</label>
+                                                <input
+                                                {...register2('confirmPassword')}
+                                                name="confirmPassword"
+                                                type="password"
+                                                className="form-control"
+                                                />
+                                                <span>{errors2.confirmPassword?.message}</span>
+                                            </div>
+                                        </Col>
+                                        <Col xs={12} style={{ display: "flex", justifyContent: "end"}} >
+                                            <BlackButton 
+                                                type="submit" 
+                                                text={"Enregistrer"} 
+                                                variant="contained"
+                                                style={{ borderRadius: "5px", padding: "6px 16px"}}
                                             />
-                                        </div>
-                                    </Col>
-                                    <Col xs={12} md={6} className="account__row">
-                                        <div className={`textfield-style account___form-style`}>
-                                            <label>Confirmer le nouveau mot de passe</label>
-                                            <input
-                                            {...register2('confirmPassword')}
-                                            name="confirmPassword"
-                                            type="password"
-                                            className="form-control"
-                                            />
-                                            <span>{errors2.confirmPassword?.message}</span>
-                                        </div>
-                                    </Col>
-                                    <Col xs={12} style={{ display: "flex", justifyContent: "end"}} >
-                                        <BlackButton 
-                                            type="submit" 
-                                            text={"Enregistrer"} 
-                                            variant="contained"
-                                            style={{ borderRadius: "5px", padding: "6px 16px"}}
-                                        />
-                                    </Col>
-                                    {editSuccess}
-                                </form>
+                                        </Col>
+                                        {editSuccess}
+                                    </form>
+                                </Col>
                             </Row>
                         </Container>
                         <Container fluid style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", marginTop: "50px" }}>
