@@ -116,6 +116,7 @@ const UpdateExpense = ({
               text={"Valider"}
               variant={"contained"}
               onClick={handleSubmit}
+              sx={{ "&:hover": { backgroundColor: "#333232" } }}
               style={{ borderRadius: "20px", padding: "6px 16px", flexGrow: 1 }}
             />
 

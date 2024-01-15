@@ -238,6 +238,7 @@ const MyAccount = ({ token }) => {
                                                 type="submit" 
                                                 text={"Enregistrer"} 
                                                 variant="contained"
+                                                sx={{ "&:hover": { backgroundColor: "#333232" } }}
                                                 style={{ borderRadius: "20px", padding: "6px 16px"}}/>
                                         </Col>
                                         {editSuccess}
@@ -298,7 +299,8 @@ const MyAccount = ({ token }) => {
                                                 type="submit" 
                                                 text={"Enregistrer"} 
                                                 variant="contained"
-                                                style={{ borderRadius: "20px", padding: "6px 16px"}}
+                                                sx={{ "&:hover": { backgroundColor: "#333232" } }}
+                                                style={{ borderRadius: "20px", padding: "6px 16px" }}
                                             />
                                         </Col>
                                         {editSuccess}
@@ -306,7 +308,7 @@ const MyAccount = ({ token }) => {
                                 </Col>
                             </Row>
                         </Container>
-                        <Container fluid style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", marginTop: "50px" }}>
+                        <Container fluid style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", marginTop: "50px", maxWidth: "950px" }}>
                             <BlackButton text="Supprimer le compte" onClick={() => setOpenModal(true)} style={{ backgroundColor: "darkred", borderRadius: "5px" }} />
                         </Container>
                     </div>

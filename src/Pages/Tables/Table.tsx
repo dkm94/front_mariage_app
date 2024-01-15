@@ -47,6 +47,7 @@ const Table = ({
           }}
           variant={"contained"}
           text="Modifier"
+          sx={{ "&:hover": { backgroundColor: "#333232" } }}
         />
       </div>
       { edit?.id === table._id && <DefaultModal

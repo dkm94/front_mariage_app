@@ -166,6 +166,7 @@ const UpdateGuest = ({
               text={"Valider"}
               type={"submit"}
               variant="contained"
+              sx={{ "&:hover": { backgroundColor: "#333232" } }}
               style={{ borderRadius: "20px", padding: "6px 16px", flexGrow: 1 }}
             />
 

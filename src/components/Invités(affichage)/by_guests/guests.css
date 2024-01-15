@@ -164,10 +164,6 @@
     font-size: 1rem !important;
     }
 
-.action-buttons > button:hover {
-    background: none;
-    }
-
 .guest-picture {
     width: 100%;
 }
