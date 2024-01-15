@@ -24,15 +24,6 @@ ul {
     padding-bottom: 100px;
 }
 
-.menu___bgimage {
-    height: 20rem;
-    background-image: url("../../img/menus/menu-4.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-}
-
 .menu___list {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
@@ -203,18 +194,9 @@ ul {
     .menu__list__container {
         padding: 5rem 0rem;
     }
-
-    .menu___bgimage {
-        border-radius: 0;
-        margin: 0;
-    }
 }
 
 @media (max-width: 600px) {
-    .menu___bgimage {
-        height: 10rem;
-    }
-
     .menu___list {
         grid-template-columns: repeat(1, 97%);
     }

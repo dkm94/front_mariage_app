@@ -70,11 +70,6 @@ const Dashboard = (props: IDashboardProps) => { // Ce composant est rendu beauco
       ) : (
         <div className="dashboard page-component">
           {scrollBtn}
-          <div className="page-location">
-            <div>
-              <span>Dashboard</span>
-            </div>
-          </div>
           
           <PageTitle loading={loading} title={"Que souhaitez-vous faire aujourd'hui ?"} />
 

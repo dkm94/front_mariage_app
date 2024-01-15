@@ -134,12 +134,6 @@ const Byguests = (props: ByGuestsProps) => {
         <div className="byguests page-component">
           <div className="guest-container">
             {scrollBtn}
-            <div className="page-location">
-              <div>
-                <Link to={"/"}>Dashboard</Link>
-                {">"} Invités
-              </div>
-            </div>
 
             <PageTitle loading={loading} title="Souhaitez-vous ajouter de nouveaux invités ?" />
 

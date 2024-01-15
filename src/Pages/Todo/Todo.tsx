@@ -54,12 +54,6 @@ const Todo = () => {
         <div className="todo-container page-component">
           {scrollBtn}
           <div className="todo">
-            <div className="page-location">
-              <div>
-                <Link to={"/"}>Dashboard</Link>
-                {">"} Tâches
-              </div>
-            </div>
 
             <PageTitle loading={loading} title="Souhaitez-vous ajouter de nouvelles tâches ?" />
 

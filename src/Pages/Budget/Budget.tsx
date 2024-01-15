@@ -162,12 +162,7 @@ const Budget = () => {
       ) : (
         <div className="budget-container page-component">
           {scrollBtn}
-          <div className="page-location">
-            <div>
-              <Link to={"/"}>Dashboard</Link>
-              {">"} Dépenses
-            </div>
-          </div>
+
           <div className="budget">
 
             <PageTitle loading={loading} title="Souhaitez-vous ajouter une nouvelle dépense ?" />

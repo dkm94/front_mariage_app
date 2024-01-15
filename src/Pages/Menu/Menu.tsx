@@ -126,12 +126,6 @@ const Menus = () => {
         <div className="menu-container page-component">
           {scrollBtn}
           <div className="menu">
-            <div className="page-location">
-              <div>
-                <Link to={"/"}>Dashboard</Link>
-                {">"} Carte
-              </div>
-            </div>
 
             <PageTitle loading={loading} title="Avez-vous prévu une réception ?" />
 

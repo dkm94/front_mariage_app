@@ -135,12 +135,7 @@ const Tables = (props) => {
       ) : (
         <div className="tables page-component">
           {scrollBtn}
-          <div className="page-location">
-            <div>
-              <Link to={"/"}>Dashboard</Link>
-              {">"} Tables
-            </div>
-          </div>
+
           <div className="tables-container">
 
             <PageTitle loading={loading} title="Comment souhaitez-vous organiser votre plan de table ?" />
