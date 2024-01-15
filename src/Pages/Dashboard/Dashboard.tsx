@@ -13,6 +13,7 @@ import { useFetch } from "../../hooks";
 import { FoodType, GuestType, IDashboardProps, OperationType, TableType, TaskType, WeddingType } from "../../../types";
 import { ScrollButtonContext } from "../../App";
 import { floatToEuro } from "../../helpers/formatCurrency";
+import PageTitle from "../../components/LayoutPage/PageTitle/PageTitle";
 
 
 const Dashboard = (props: IDashboardProps) => { // Ce composant est rendu beaucoup trop de fois
@@ -72,11 +73,8 @@ const Dashboard = (props: IDashboardProps) => { // Ce composant est rendu beauco
               <span>Dashboard</span>
             </div>
           </div>
-          <Grow in={!loading}>
-            <div className="titles mb3" style={{ marginBottom: "1rem" }}>
-              <h2>Que souhaitez-vous faire aujourd'hui ?</h2>
-            </div>
-          </Grow>
+          
+          <PageTitle loading={loading} title={"Que souhaitez-vous faire aujourd'hui ?"} />
 
           <Grow in={!loading} timeout={1000}>
             <div className="dashboard___bgimage"></div>

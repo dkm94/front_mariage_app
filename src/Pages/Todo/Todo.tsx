@@ -18,6 +18,7 @@ import List from "./List/List";
 import ScreenLoader from "../../components/Loader/Screen/ScreenLoader";
 import { useFetch } from "../../hooks";
 import { getTodos } from "../../services";
+import PageTitle from "../../components/LayoutPage/PageTitle/PageTitle";
 
 const Todo = () => {
   const scrollBtn = useContext(ScrollButtonContext);
@@ -59,11 +60,7 @@ const Todo = () => {
               </div>
             </div>
 
-            <Grow in={!loading}>
-              <div className="titles mb-3">
-                <h2>Souhaitez-vous ajouter de nouvelles tâches ?</h2>
-              </div>
-            </Grow>
+            <PageTitle loading={loading} title="Souhaitez-vous ajouter de nouvelles tâches ?" />
 
             <Grow in={!loading} timeout={1000}>
               <div className="todo___bgimage"></div>

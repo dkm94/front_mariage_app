@@ -19,6 +19,7 @@ import AddTableForm from "./Forms/Add";
 import Table from "./Table";
 import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
 import ScreenLoader from "../../components/Loader/Screen/ScreenLoader";
+import PageTitle from "../../components/LayoutPage/PageTitle/PageTitle";
 
 type EditType = {
   id: string;
@@ -140,11 +141,8 @@ const Tables = (props) => {
             </div>
           </div>
           <div className="tables-container">
-            <Grow in={!loading}>
-              <div className="titles mb-3">
-                <h2>Comment souhaitez-vous organiser votre plan de table ? </h2>
-              </div>
-            </Grow>
+            
+            <PageTitle loading={loading} title="Comment souhaitez-vous organiser votre plan de table ?" />
 
             <Grow in={!loading} timeout={1000}>
               <div className="tables___bgimage"></div>

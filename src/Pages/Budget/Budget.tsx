@@ -21,6 +21,7 @@ import { OperationType } from "../../../types/index";
 import { floatToEuro } from "../../helpers/formatCurrency";
 import { useFetch } from "../../hooks";
 import { getOperations } from "../../services";
+import PageTitle from "../../components/LayoutPage/PageTitle/PageTitle";
 
 
 const Budget = () => {
@@ -167,11 +168,8 @@ const Budget = () => {
             </div>
           </div>
           <div className="budget">
-            <Grow in={!loading}>
-              <div className="titles mb-3">
-                <h2>Souhaitez-vous ajouter une nouvelle dépense ?</h2>
-              </div>
-            </Grow>
+
+            <PageTitle loading={loading} title="Souhaitez-vous ajouter une nouvelle dépense ?" />
 
             <Grow in={!loading} timeout={1000}>
               <div className="budget___bgimage"></div>

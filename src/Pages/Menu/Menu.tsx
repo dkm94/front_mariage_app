@@ -25,6 +25,7 @@ import ScreenLoader from "../../components/Loader/Screen/ScreenLoader";
 import { FoodType } from "../../../types";
 import { useFetch } from "../../hooks";
 import { getApetizers, getBeverages, getDesserts, getMaincourses, getStarters } from "../../services";
+import PageTitle from "../../components/LayoutPage/PageTitle/PageTitle";
 
 
 const IconWrapper = styled(IconButton)({
@@ -130,11 +131,8 @@ const Menus = () => {
                 {">"} Carte
               </div>
             </div>
-            <Grow in={!loading}>
-              <div className="titles mb-3">
-                <h2>Avez-vous prévu une réception ?</h2>
-              </div>
-            </Grow>
+
+            <PageTitle loading={loading} title="Avez-vous prévu une réception ?" />
 
             <Grow in={!loading} timeout={1000}>
               <div className="menu___bgimage"></div>

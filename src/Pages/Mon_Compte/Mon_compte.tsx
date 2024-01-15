@@ -18,6 +18,7 @@ import DefaultModal from "../../components/Modals/Default/DefaultModal";
 
 import profilePicture from "../../img/couple-img.jpg";
 import changePwdIcon from "../../img/change-password-icon.png";
+import PageTitle from "../../components/LayoutPage/PageTitle/PageTitle";
 
 const win: Window = window;
 
@@ -47,7 +48,7 @@ const MyAccount = ({ token }) => {
 
     const { email } = account as { email: string };
 
-    const { data: wedding, fetchData: fetchWedding } = useFetch<any, WeddingType>(() => getWedding({ id: mariageID }), undefined);
+    const { data: wedding, fetchData: fetchWedding, loading } = useFetch<any, WeddingType>(() => getWedding({ id: mariageID }), undefined);
 
     // Fetch data
     useEffect(() => {
@@ -189,13 +190,10 @@ const MyAccount = ({ token }) => {
         <div className="account page-component">
             {scrollBtn}
             <div className="account___container">
-                <Grow in={true}>
-                    <div className="titles mb-3">
-                        <h2>Paramètres du compte</h2>
-                    </div>
-                </Grow>
+                <PageTitle loading={loading} title="Paramètres du compte" />
+
                 <div  className="account___bgimage" />
-                <Grow in={true}>
+                <Grow in={!loading}>
                     <div style={{ padding: "2rem 50px", display: "flex", flexDirection: "column", gap: "30px" }}>
                         <Container className="account-container" fluid>
                             <Row>

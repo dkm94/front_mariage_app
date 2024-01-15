@@ -17,6 +17,7 @@ import GuestList from "../../components/Invités(affichage)/by_guests/Components
 import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
 import ScreenLoader from "../../components/Loader/Screen/ScreenLoader.jsx";
 import { useFetch } from "../../hooks";
+import PageTitle from "../../components/LayoutPage/PageTitle/PageTitle";
 
 type NewUser = string;
 
@@ -139,11 +140,7 @@ const Byguests = (props: ByGuestsProps) => {
               </div>
             </div>
 
-            <Grow in={!loading}>
-              <div className="titles mb-3">
-                <h2>Souhaitez-vous ajouter de nouveaux invités ?</h2>
-              </div>
-            </Grow>
+            <PageTitle loading={loading} title="Souhaitez-vous ajouter de nouveaux invités ?" />
 
             <Grow in={!loading} timeout={1000}>
               <div className="guests___bgimage"></div>
