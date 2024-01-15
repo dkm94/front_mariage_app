@@ -1,13 +1,3 @@
-.todo___bgimage {
-    height: 20rem;
-    /* background-attachment: fixed; */
-    background-image: url("../../img/todo-bg.png");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-}
-
 .todo-container {
   padding-bottom: 100px;
 }
@@ -131,11 +121,6 @@
 }
 
 @media (max-width: 786px) {
-    .todo___bgimage {
-      border-radius: 0;
-      margin: 0;
-  }
-
   .tasks-title {
     display: none;
   }
@@ -146,9 +131,6 @@
 }
 
 @media (max-width: 600px) {
-  .todo___bgimage {
-    height: 10rem;
-  }
   .tasks-count {
     font-size: 1.3rem !important;
   }

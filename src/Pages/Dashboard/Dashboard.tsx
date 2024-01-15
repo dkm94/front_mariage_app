@@ -1,4 +1,5 @@
 import "./Dashboard.css";
+import src from "../../img/orchids.jpg";
 
 import React, { useEffect, useState, useContext } from "react";
 
@@ -14,6 +15,7 @@ import { FoodType, GuestType, IDashboardProps, OperationType, TableType, TaskTyp
 import { ScrollButtonContext } from "../../App";
 import { floatToEuro } from "../../helpers/formatCurrency";
 import PageTitle from "../../components/LayoutPage/PageTitle/PageTitle";
+import PageBanner from "../../components/LayoutPage/PageBanner/PageBanner";
 
 
 const Dashboard = (props: IDashboardProps) => { // Ce composant est rendu beaucoup trop de fois
@@ -76,9 +78,8 @@ const Dashboard = (props: IDashboardProps) => { // Ce composant est rendu beauco
           
           <PageTitle loading={loading} title={"Que souhaitez-vous faire aujourd'hui ?"} />
 
-          <Grow in={!loading} timeout={1000}>
-            <div className="dashboard___bgimage"></div>
-          </Grow>
+          <PageBanner loading={loading} src={"dashboard"} />
+
           <Grow in={!loading} timeout={2000}>
             <div className="dashboard-cards__style">
               <Container>

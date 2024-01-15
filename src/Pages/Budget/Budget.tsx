@@ -22,6 +22,7 @@ import { floatToEuro } from "../../helpers/formatCurrency";
 import { useFetch } from "../../hooks";
 import { getOperations } from "../../services";
 import PageTitle from "../../components/LayoutPage/PageTitle/PageTitle";
+import PageBanner from "../../components/LayoutPage/PageBanner/PageBanner";
 
 
 const Budget = () => {
@@ -171,9 +172,7 @@ const Budget = () => {
 
             <PageTitle loading={loading} title="Souhaitez-vous ajouter une nouvelle dépense ?" />
 
-            <Grow in={!loading} timeout={1000}>
-              <div className="budget___bgimage"></div>
-            </Grow>
+            <PageBanner loading={loading} src="budget" />
 
             <Grow in={!loading} timeout={2000}>
               <Container style={{ padding: "2rem 4rem" }} fluid>

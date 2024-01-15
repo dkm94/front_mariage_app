@@ -26,6 +26,7 @@ import { FoodType } from "../../../types";
 import { useFetch } from "../../hooks";
 import { getApetizers, getBeverages, getDesserts, getMaincourses, getStarters } from "../../services";
 import PageTitle from "../../components/LayoutPage/PageTitle/PageTitle";
+import PageBanner from "../../components/LayoutPage/PageBanner/PageBanner";
 
 
 const IconWrapper = styled(IconButton)({
@@ -134,9 +135,7 @@ const Menus = () => {
 
             <PageTitle loading={loading} title="Avez-vous prévu une réception ?" />
 
-            <Grow in={!loading} timeout={1000}>
-              <div className="menu___bgimage"></div>
-            </Grow>
+            <PageBanner loading={loading} src="reception" />
 
             <Grow in={!loading} timeout={2000}>
               <div className="menu__list__container">

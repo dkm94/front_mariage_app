@@ -20,6 +20,7 @@ import Table from "./Table";
 import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
 import ScreenLoader from "../../components/Loader/Screen/ScreenLoader";
 import PageTitle from "../../components/LayoutPage/PageTitle/PageTitle";
+import PageBanner from "../../components/LayoutPage/PageBanner/PageBanner";
 
 type EditType = {
   id: string;
@@ -141,12 +142,10 @@ const Tables = (props) => {
             </div>
           </div>
           <div className="tables-container">
-            
+
             <PageTitle loading={loading} title="Comment souhaitez-vous organiser votre plan de table ?" />
 
-            <Grow in={!loading} timeout={1000}>
-              <div className="tables___bgimage"></div>
-            </Grow>
+            <PageBanner loading={loading} src={"tables"} />
 
             <Grow in={!loading} timeout={2000}>
               <Container style={{ padding: "2rem 50px" }} fluid>

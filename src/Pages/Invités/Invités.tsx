@@ -18,6 +18,7 @@ import SearchBar from "../../components/Invités(affichage)/by_guests/Components
 import ScreenLoader from "../../components/Loader/Screen/ScreenLoader.jsx";
 import { useFetch } from "../../hooks";
 import PageTitle from "../../components/LayoutPage/PageTitle/PageTitle";
+import PageBanner from "../../components/LayoutPage/PageBanner/PageBanner";
 
 type NewUser = string;
 
@@ -142,9 +143,7 @@ const Byguests = (props: ByGuestsProps) => {
 
             <PageTitle loading={loading} title="Souhaitez-vous ajouter de nouveaux invités ?" />
 
-            <Grow in={!loading} timeout={1000}>
-              <div className="guests___bgimage"></div>
-            </Grow>
+            <PageBanner loading={loading} src={"guests"}  />
 
             <Grow in={!loading} timeout={2000}>
               <Container style={{ padding: "2rem 50px" }} fluid>
