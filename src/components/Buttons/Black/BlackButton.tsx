@@ -17,7 +17,10 @@ const CustomButton = styled(MuiButton)({
   fontWeight: "unset",
   fontFamily: "Playfair Display serif",
   border: "none",
-  width: "fit-content"
+  width: "fit-content",
+  // ":hover": {
+  //   backgroundColor: "unset",
+  // },
 }) as typeof MuiButton;
 
 export interface IButton extends Omit<ButtonProps, 'text'> {

@@ -18,7 +18,7 @@ const CustomButton = styled(MuiButton)({
   border: "none",
   width: "fit-content",
   ":hover": {
-    background: "#a09898",
+    background: "#b2a9a9",
     animation: "none",
     border: "none",
   },

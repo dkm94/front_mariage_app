@@ -71,7 +71,7 @@ const EditTableForm = (props) => {
         <div className="action-buttons">
           <IconButton
             onClick={(e) => deleteTable(e, edit.id)}
-            style={{ backgroundColor: "darkred", borderRadius: "5px", flexGrow: 1 }}
+            style={{ backgroundColor: "darkred", borderRadius: "20px", flexGrow: 1 }}
           >
             <DeleteIcon style={{ color: "#F4F4F4" }} />
             <span style={{ color: "#F4F4F4" }}>Supprimer</span>
@@ -81,7 +81,8 @@ const EditTableForm = (props) => {
             type={"submit"}
             text={"Enregistrer"}
             variant="contained"
-            style={{ borderRadius: "5px", padding: "6px 16px", flexGrow: 1 }}
+            sx={{ "&:hover": { backgroundColor: "#333232" } }}
+            style={{ borderRadius: "20px", padding: "6px 16px", flexGrow: 1 }}
           />
 
           <Button
@@ -91,6 +92,7 @@ const EditTableForm = (props) => {
             }}
             variant="outlined"
             style={{
+              borderRadius: "20px",
               color: "grey",
               textTransform: "unset",
               fontSize: "1rem",

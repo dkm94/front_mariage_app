@@ -156,7 +156,7 @@ const UpdateGuest = ({
           <div className="action-buttons">
             <IconButton
               onClick={() => deleteGuest(edit.id)}
-              style={{ backgroundColor: "darkred", borderRadius: "5px", flexGrow: 1 }}
+              style={{ backgroundColor: "darkred", borderRadius: "20px", flexGrow: 1 }}
             >
               <DeleteIcon style={{ color: "#F4F4F4" }} />
               <span style={{ color: "#F4F4F4" }}>Supprimer</span>
@@ -166,7 +166,8 @@ const UpdateGuest = ({
               text={"Valider"}
               type={"submit"}
               variant="contained"
-              style={{ borderRadius: "5px", padding: "6px 16px", flexGrow: 1 }}
+              sx={{ "&:hover": { backgroundColor: "#333232" } }}
+              style={{ borderRadius: "20px", padding: "6px 16px", flexGrow: 1 }}
             />
 
             <Button
@@ -176,6 +177,7 @@ const UpdateGuest = ({
               }}
               variant="outlined"
               style={{
+                borderRadius: "20px",
                 color: "grey",
                 textTransform: "unset",
                 fontSize: "1rem",

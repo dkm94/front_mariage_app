@@ -10,13 +10,20 @@ import { IconButton } from "@mui/material";
 export default function DefaultModal({ open, children, close, setOpen, title, setEdit }) {
   // if (!open) return null;
 
+  function handleClose() {
+    if(setEdit) {
+      setEdit(null);
+    } else {
+      setOpen(false);
+    }
+  }
   return ReactDom.createPortal(
     <>
       <div className="modal-overlay" onClick={close} />
       <div className="modal-default">
         <div className="modal-head">
           <h2>{title}</h2>
-          <IconButton onClick={() => setEdit(null)}>
+          <IconButton onClick={handleClose}>
             <CloseIcon />
           </IconButton>
         </div>

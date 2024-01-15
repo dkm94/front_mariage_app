@@ -9,11 +9,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
-}
-
-.account__content {
-    padding: 5rem 10rem;
-}
+}   
 
 .account__row {
     display: flex;
@@ -35,10 +31,6 @@
 .account___settings {
     height: 200px;
     width: 100%;
-}
-
-.account___btn_container {
-    text-align: end;
 }
 
 #delete-account___link {
@@ -69,6 +61,52 @@
 .account___form-style, .wedding-form__style {
     width: 100%;
 }
+.account-container {
+    box-shadow: rgba(0, 0, 0, 0.14) 0px 2px 10px 0px;
+    padding: 90px;
+    max-width: 950px;
+}
+.settings-img-container > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.settings-img-container > div > img {
+    border-radius: 50%;
+    height: 15rem;
+    width: auto;
+    object-fit: contain;
+}
+#modal-account {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 20px;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+@media (max-width: 1200px) {
+	.settings-img-container {
+        flex-grow: unset;
+        flex-basis: unset;
+        width: 35%;
+    }
+    .settings-content-container {
+        flex-grow: unset;
+        flex-basis: unset;
+        width: 65%;
+    }
+    .settings-img-container > div > img {
+        width: 100%;
+        height: auto;
+    }
+    .account-container {
+        padding: 40px;
+    }
+}
 @media (max-width: 1024px) {
 	/* .account___bgimage {
         background-attachment: unset;
@@ -87,5 +125,19 @@
 
     .account___form-style {
         padding-right: 1.5rem;
+    }
+    .account-container .row {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .settings-content-container {
+        width: 100%;
+    }
+    .settings-img-container {
+        width: 100%;
+    }
+    .settings-img-container > div > img {
+        width: auto;
+        height: 8rem;
     }
 }

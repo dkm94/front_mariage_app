@@ -53,10 +53,9 @@ const Form = ({ todos, setTodos }) => {
           />
         </div>
         <GreyButton
-          size="small"
           variant="contained"
           type="submit"
-          style={{ marginLeft: "12px" }}
+          style={{ marginLeft: "12px", height: "97%", borderRadius: "5px 20px 20px 5px" }}
           text={loading ? "..." : "Créer"}
         />
       </form>

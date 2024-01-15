@@ -49,11 +49,11 @@ const AddGuestForm = ({ newUser, setNewUser, addGuest }) => {
         />
       </div>
       <GreyButton
-        size="small"
+        // size="small"
         variant={"contained"}
         type="submit"
         text={loading ? "..." : "Créer"}
-        style={{ marginLeft: "1rem" }}
+        style={{ marginLeft: "1rem", height: "97%", borderRadius: "5px 20px 20px 5px" }}
       />
     </form>
   );

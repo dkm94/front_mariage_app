@@ -56,9 +56,10 @@ const AddApetizerForm = ({ apetizers, setApetizers }) => {
         text={loading ? "..." : "Ajouter"}
         style={{
           marginLeft: "1rem",
-          height: "fit-content",
           paddingTop: "0.5rem",
           paddingBottom: "0.5rem",
+          height: "97%", 
+          borderRadius: "5px 20px 20px 5px"
         }}
       />
     </form>
