@@ -56,9 +56,10 @@ const AddStarterForm = ({ starters, setStarters }) => {
         text={loading ? "..." : "Ajouter"}
         style={{
           marginLeft: "1rem",
-          height: "fit-content",
+          height: "97%",
           paddingTop: "0.5rem",
           paddingBottom: "0.5rem",
+          borderRadius: "5px 20px 20px 5px",
         }}
       />
     </form>

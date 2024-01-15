@@ -238,7 +238,7 @@ const MyAccount = ({ token }) => {
                                                 type="submit" 
                                                 text={"Enregistrer"} 
                                                 variant="contained"
-                                                style={{ borderRadius: "5px", padding: "6px 16px"}}/>
+                                                style={{ borderRadius: "20px", padding: "6px 16px"}}/>
                                         </Col>
                                         {editSuccess}
                                     </form>
@@ -298,7 +298,7 @@ const MyAccount = ({ token }) => {
                                                 type="submit" 
                                                 text={"Enregistrer"} 
                                                 variant="contained"
-                                                style={{ borderRadius: "5px", padding: "6px 16px"}}
+                                                style={{ borderRadius: "20px", padding: "6px 16px"}}
                                             />
                                         </Col>
                                         {editSuccess}
@@ -321,7 +321,7 @@ const MyAccount = ({ token }) => {
                             onClick={deleteAccount}
                             text={"Supprimer"}
                             variant="contained"
-                            style={{ borderRadius: "5px", padding: "6px 16px", flexGrow: 1, color: "#F4F4F4", backgroundColor: "darkred" }}
+                            style={{ borderRadius: "20px", padding: "6px 16px", flexGrow: 1, color: "#F4F4F4", backgroundColor: "darkred" }}
                             />
                             {/* <button onClick={deleteAccount}>OUI</button> */}
                             <BlackButton
@@ -332,7 +332,7 @@ const MyAccount = ({ token }) => {
                             style={{ 
                             color: "grey",
                             border: "#e4e8e8 1px solid",
-                            borderRadius: "5px", 
+                            borderRadius: "20px", 
                             padding: "6px 16px",
                             backgroundColor: "unset",
                             boxShadow: "unset",

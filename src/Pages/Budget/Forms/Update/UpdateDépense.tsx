@@ -106,7 +106,7 @@ const UpdateExpense = ({
         <div className="action-buttons">
           <IconButton
             onClick={() => deleteExpense(edit._id)}
-            style={{ backgroundColor: "darkred", borderRadius: "5px", flexGrow: 1 }}
+            style={{ backgroundColor: "darkred", borderRadius: "20px", flexGrow: 1 }}
           >
             <DeleteIcon style={{ color: "#F4F4F4" }} />
             <span style={{ color: "#F4F4F4", padding: "0px 6px" }}>Supprimer</span>
@@ -116,11 +116,12 @@ const UpdateExpense = ({
               text={"Valider"}
               variant={"contained"}
               onClick={handleSubmit}
-              style={{ borderRadius: "5px", padding: "6px 16px", flexGrow: 1 }}
+              style={{ borderRadius: "20px", padding: "6px 16px", flexGrow: 1 }}
             />
 
             <Button
               style={{
+                borderRadius: "20px",
                 color: "grey",
                 textTransform: "unset",
                 fontSize: "1rem",
