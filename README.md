@@ -1,6 +1,6 @@
 <div align="center">
     <h1>
-        <img src="readme-assets/img/logo.png" alt="my wedding logo" height="75px">
+        <img src="readme-assets/img/logo1.jpg" alt="my wedding logo" height="75px">
     </h1>
     <h4><b>Carnet de bord de mariage</b></h4>
     <h4>
