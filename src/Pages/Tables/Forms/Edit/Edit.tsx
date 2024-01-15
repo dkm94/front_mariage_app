@@ -20,6 +20,7 @@ const EditTableForm = (props) => {
     input,
     setTables,
     guests,
+    setGuests,
     setEdit,
     deleteTable,
     setisOpen,
@@ -46,6 +47,14 @@ const EditTableForm = (props) => {
         return table;
       });
       setTables(updatedTables);
+
+      const updatedGuests = [...guests].map((guest) => {
+        if (guestsIds.includes(guest.id)) {
+          guest.tableID = tableId;
+        }
+        return guest;
+      });
+      setGuests(updatedGuests); 
     }
   }
 

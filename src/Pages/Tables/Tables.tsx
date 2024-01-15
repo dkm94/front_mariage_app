@@ -214,6 +214,7 @@ const Tables = (props) => {
                           input={input}
                           setTables={setTables}
                           guests={orderedGuests}
+                          setGuests={setGuests}
                           setEdit={setEdit}
                           getUpdatedId={getUpdatedId}
                           deleteTable={deleteTable}
