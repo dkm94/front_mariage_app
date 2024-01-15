@@ -17,6 +17,7 @@ const Table = ({
   input,
   setTables,
   guests,
+  setGuests,
   setEdit,
   getUpdatedId,
   isOpen,
@@ -68,6 +69,7 @@ const Table = ({
           input={input}
           setTables={setTables}
           guests={guests}
+          setGuests={setGuests}
           setEdit={setEdit}
           getUpdatedId={getUpdatedId}
           deleteTable={deleteTable}

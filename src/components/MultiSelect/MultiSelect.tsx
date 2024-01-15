@@ -31,12 +31,6 @@ function getStyles(name: string, guestValues: readonly string[], theme: Theme) {
   };
 }
 
-// const useStyles = makeStyles((theme) => ({
-//   selectComponent: {
-//     padding: "0px"
-//   }
-// }))
-
 interface MultipleSelectProps {
   guests: FormattedGuestType[];
   setGuestsIds: (ids) => any;
