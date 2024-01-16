@@ -1,8 +1,7 @@
 import "./Budget.css";
 
-import React, { useState, useEffect, useContext, ReactNode, ChangeEvent } from "react";
-import { Link } from "react-router-dom";
-import axios, { AxiosResponse } from "axios";
+import React, { useState, useEffect, ChangeEvent } from "react";
+import axios from "axios";
 import { Container, Row, Col } from "react-bootstrap";
 import { Form, useFormik, FormikProvider } from "formik";
 import * as Yup from "yup";
@@ -14,21 +13,15 @@ import TextField from "../../components/Formik/TextField-Operations";
 import Expenses from "./Dépenses/Dépenses";
 import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
 import { GreyButton } from "../../components/Buttons";
-import ScreenLoader from "../../components/Loader/Screen/ScreenLoader";
 
-import { ScrollButtonContext } from "../../App";
 import { OperationType } from "../../../types/index";
 import { floatToEuro } from "../../helpers/formatCurrency";
 import { useFetch } from "../../hooks";
 import { getOperations } from "../../services";
-import PageTitle from "../../components/LayoutPage/PageTitle/PageTitle";
-import PageBanner from "../../components/LayoutPage/PageBanner/PageBanner";
+import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
 
 
 const Budget = () => {
-
-  const scrollBtn = useContext<ReactNode>(ScrollButtonContext);
-
   const newOperationValues: OperationType = {
     category: "",
     price: "",
@@ -156,179 +149,164 @@ const Budget = () => {
   }
 
   return (
-    <>
-      {loading ? (
-        <ScreenLoader />
-      ) : (
-        <div className="budget-container page-component">
-          {scrollBtn}
+    <ContentLayout loading={loading} title={"Souhaitez-vous ajouter une nouvelle dépense ?"} src={"budget"} >
+      <Grow in={!loading} timeout={2000}>
+        <Container style={{ padding: "2rem 4rem" }} fluid>
+          <Row>
+            <Col xs={12} sm={10} md={6} />
+            <Col
+              xs={12}
+              sm={10}
+              md={6}
+              style={{ display: "flex", justifyContent: "end" }}
+            >
+              <SearchBar
+                className="search__input"
+                type="text"
+                placeholder="Rechercher une dépense"
+                name="searchbar"
+                value={searchValue}
+                onChange={handleSearch}
+              />
+            </Col>
+          </Row>
+        </Container>
+      </Grow>
 
-          <div className="budget">
-
-            <PageTitle loading={loading} title="Souhaitez-vous ajouter une nouvelle dépense ?" />
-
-            <PageBanner loading={loading} src="budget" />
-
-            <Grow in={!loading} timeout={2000}>
-              <Container style={{ padding: "2rem 4rem" }} fluid>
-                <Row>
-                  <Col xs={12} sm={10} md={6} />
-                  <Col
-                    xs={12}
-                    sm={10}
-                    md={6}
-                    style={{ display: "flex", justifyContent: "end" }}
-                  >
-                    <SearchBar
-                      className="search__input"
-                      type="text"
-                      placeholder="Rechercher une dépense"
-                      name="searchbar"
-                      value={searchValue}
-                      onChange={handleSearch}
-                    />
-                  </Col>
-                </Row>
-              </Container>
-            </Grow>
-
-            <Grow in={!loading} timeout={3000}>
-              <div className="budget-cols">
-                <div className="budget___col-1">
-                  <div className="col card-expense-component">
-                    <div className="card" style={{ backgroundColor: "#fff" }}>
-                      <div className="g-0">
-                        <div className="card-pd">
-                          <div className="card-body">
-                            <h5
-                              style={{
-                                textTransform: "uppercase",
-                              }}
-                              className="card-title"
-                            >
-                              Dépenses
-                            </h5>
-                            <span>
-                              {total}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
+      <Grow in={!loading} timeout={3000}>
+        <div className="budget-cols">
+          <div className="budget___col-1">
+            <div className="col card-expense-component">
+              <div className="card" style={{ backgroundColor: "#fff" }}>
+                <div className="g-0">
+                  <div className="card-pd">
+                    <div className="card-body">
+                      <h5
+                        style={{
+                          textTransform: "uppercase",
+                        }}
+                        className="card-title"
+                      >
+                        Dépenses
+                      </h5>
+                      <span>
+                        {total}
+                      </span>
                     </div>
                   </div>
-
-                        <div className="col budget-form mb3">
-                          <FormikProvider value={formik}>
-                      <Form
-                        className="input-group mb-3"
-                        style={{ display: "flex", flexDirection: "column" }}
-                      >
-                        <div className="budget___select">
-                          <select
-                            name="category"
-                            value={formik.values.category}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                          >
-                            <option
-                              value=""
-                              label="Sélectionnez une catégorie"
-                            ></option>
-                            <option
-                              value="Locations"
-                              label="Locations"
-                            ></option>
-                            <option
-                              value="Habillement/Beauté"
-                              label="Habillement/Beauté"
-                            ></option>
-                            <option
-                              value="Décoration/Fleurs"
-                              label="Décoration/Fleurs"
-                            ></option>
-                            <option
-                              value="Alliances/Bijoux"
-                              label="Alliances/Bijoux"
-                            ></option>
-                            <option
-                              value="Animation"
-                              label="Animation (DJ, Photographe...)"
-                            ></option>
-                            <option value="Traiteur" label="Traiteur"></option>
-                            <option
-                              value="Faire-part"
-                              label="Faire-part"
-                            ></option>
-                            <option value="Autres" label="Autres"></option>
-                          </select>
-                          {formik.errors.category &&
-                            formik.touched.category && (
-                              <div className="input-feedback error">
-                                {formik.errors.category}
-                              </div>
-                            )}
-                        </div>
-                        <TextField
-                          size="40%"
-                          // label="Description"
-                          name="description"
-                          type="text"
-                          value={formik.values.description}
-                          onChange={formik.handleChange}
-                          onBlur={formik.handleBlur}
-                          class="form-control"
-                          errors={formik.errors}
-                          touched={formik.touched}
-                          placeholder="Description"
-                        />
-                        <TextField
-                          size="20%"
-                          width="100%"
-                          name="price"
-                          type="number"
-                          value={formik.values.price}
-                          onChange={formik.handleChange}
-                          onBlur={formik.handleBlur}
-                          class="form-control"
-                          errors={formik.errors}
-                          touched={formik.touched}
-                          placeholder="Montant"
-                          border-radius="10px"
-                        />
-                        <div className="col-12 budget-form___submit">
-                          <GreyButton
-                            type="submit"
-                            text={"Valider"}
-                            variant={"contained"}
-                            disabled={formik.isSubmitting}
-                            size="medium"
-                          />
-                        </div>
-                      </Form>
-                      </FormikProvider>
-                    </div>
-                      
-                </div>
-                {operations.length > 0 && <div className="col chart-component">
-                  <PieChart operations={operations} />
-                </div>}
-                <div className="budget___col-2">
-                  <Expenses
-                    expenses={operations}
-                    deleteExpense={deleteExpense}
-                    searchValue={searchValue}
-                    edit={edit}
-                    setEdit={setEdit}
-                    updateExpense={editExpense}
-                    handleChange={formik?.handleChange}
-                  />
                 </div>
               </div>
-            </Grow>
+            </div>
+
+                  <div className="col budget-form mb3">
+                    <FormikProvider value={formik}>
+                <Form
+                  className="input-group mb-3"
+                  style={{ display: "flex", flexDirection: "column" }}
+                >
+                  <div className="budget___select">
+                    <select
+                      name="category"
+                      value={formik.values.category}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                    >
+                      <option
+                        value=""
+                        label="Sélectionnez une catégorie"
+                      ></option>
+                      <option
+                        value="Locations"
+                        label="Locations"
+                      ></option>
+                      <option
+                        value="Habillement/Beauté"
+                        label="Habillement/Beauté"
+                      ></option>
+                      <option
+                        value="Décoration/Fleurs"
+                        label="Décoration/Fleurs"
+                      ></option>
+                      <option
+                        value="Alliances/Bijoux"
+                        label="Alliances/Bijoux"
+                      ></option>
+                      <option
+                        value="Animation"
+                        label="Animation (DJ, Photographe...)"
+                      ></option>
+                      <option value="Traiteur" label="Traiteur"></option>
+                      <option
+                        value="Faire-part"
+                        label="Faire-part"
+                      ></option>
+                      <option value="Autres" label="Autres"></option>
+                    </select>
+                    {formik.errors.category &&
+                      formik.touched.category && (
+                        <div className="input-feedback error">
+                          {formik.errors.category}
+                        </div>
+                      )}
+                  </div>
+                  <TextField
+                    size="40%"
+                    // label="Description"
+                    name="description"
+                    type="text"
+                    value={formik.values.description}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    class="form-control"
+                    errors={formik.errors}
+                    touched={formik.touched}
+                    placeholder="Description"
+                  />
+                  <TextField
+                    size="20%"
+                    width="100%"
+                    name="price"
+                    type="number"
+                    value={formik.values.price}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    class="form-control"
+                    errors={formik.errors}
+                    touched={formik.touched}
+                    placeholder="Montant"
+                    border-radius="10px"
+                  />
+                  <div className="col-12 budget-form___submit">
+                    <GreyButton
+                      type="submit"
+                      text={"Valider"}
+                      variant={"contained"}
+                      disabled={formik.isSubmitting}
+                      size="medium"
+                    />
+                  </div>
+                </Form>
+                </FormikProvider>
+              </div>
+                
+          </div>
+          {operations.length > 0 && <div className="col chart-component">
+            <PieChart operations={operations} />
+          </div>}
+          <div className="budget___col-2">
+            <Expenses
+              expenses={operations}
+              deleteExpense={deleteExpense}
+              searchValue={searchValue}
+              edit={edit}
+              setEdit={setEdit}
+              updateExpense={editExpense}
+              handleChange={formik?.handleChange}
+            />
           </div>
         </div>
-      )}
-    </>
+      </Grow>
+    </ContentLayout>
   );
 };
 
