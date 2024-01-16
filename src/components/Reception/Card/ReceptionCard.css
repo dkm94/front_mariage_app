@@ -115,6 +115,11 @@
     color: #D18476;
 }
 
+.empty-div {
+    margin: 5rem 0;
+    text-align: center;
+}
+
 @media (max-width: 1145px) {
     .reception-form-even {
         width: 100%;

@@ -105,7 +105,7 @@ const Menus = () => {
     <ContentLayout loading={loading} title={"Avez-vous prévu une réception ?"} src={"reception"}>
       <Grow in={!loading} timeout={2000}>
         <div className="reception-container">
-          <div className="menu___list">
+          <div className="reception">
 
             <ReceptionCard 
             img={starterImg} 
