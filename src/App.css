@@ -310,7 +310,7 @@ a:-webkit-any-link {
         padding: 0;
         margin-bottom: 5rem;
     } */
-    .byguests, .budget, .dashboard, .dashboard___elements, .menu-container > .menu {
+    .budget, .dashboard, .dashboard___elements, .menu-container > .menu {
         padding-bottom: 0;
     }
     .titles > h2 {
