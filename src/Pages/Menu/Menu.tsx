@@ -1,6 +1,6 @@
 import "./Menu.css";
 
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "@emotion/styled";
 
@@ -19,7 +19,6 @@ import CreateIcon from "@mui/icons-material/Create";
 import { AddStarterForm, AddMaincourseForm, AddDessertForm, AddApetizerForm, AddBeverageForm } from "./Forms/Add";
 import { UpdateStarter, UpdateMaincourse, UpdateDessert, UpdateApetizer, UpdateBeverage } from "./Forms/Update";
 
-import { ScrollButtonContext } from "../../App";
 import { FoodType } from "../../../types";
 import { useFetch } from "../../hooks";
 import { getApetizers, getBeverages, getDesserts, getMaincourses, getStarters } from "../../services";
