@@ -96,9 +96,6 @@ h1 {
 }
 
 /******Components******/
-.page-component {
-    width: 100%;
-}
 
 button:focus {
     outline: none;

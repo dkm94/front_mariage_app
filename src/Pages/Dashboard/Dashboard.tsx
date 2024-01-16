@@ -1,26 +1,19 @@
 import "./Dashboard.css";
-import src from "../../img/orchids.jpg";
 
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Container, Row } from "react-bootstrap";
-import Grow from "@mui/material/Grow";
 
-import ScreenLoader from "../../components/Loader/Screen/ScreenLoader.jsx";
 import Card from "./Card/Card.jsx";
+import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
 
 import { getGuests, getTables, getTodos, getWedding, getOperations, getStarters, getMaincourses, getDesserts, getApetizers, getBeverages } from "../../services";
 import { useFetch } from "../../hooks";
 import { FoodType, GuestType, IDashboardProps, OperationType, TableType, TaskType, WeddingType } from "../../../types";
-import { ScrollButtonContext } from "../../App";
 import { floatToEuro } from "../../helpers/formatCurrency";
-import PageTitle from "../../components/LayoutPage/PageTitle/PageTitle";
-import PageBanner from "../../components/LayoutPage/PageBanner/PageBanner";
 
 
 const Dashboard = (props: IDashboardProps) => { // Ce composant est rendu beaucoup trop de fois
-  const scrollBtn = useContext(ScrollButtonContext);
-  //const loader = useContext(LoaderContext)
   const id = props?.userInfos?.mariageID;
 
   const [sum, setSum] = useState<string>("")
@@ -64,80 +57,64 @@ const Dashboard = (props: IDashboardProps) => { // Ce composant est rendu beauco
     beverages?.length;
 
   return (
-    <>
-      {loading ? (
-        <ScreenLoader />
-      ) : (
-        <div className="dashboard page-component">
-          {scrollBtn}
-          
-          <PageTitle loading={loading} title={"Que souhaitez-vous faire aujourd'hui ?"} />
-
-          <PageBanner loading={loading} src={"dashboard"} />
-
-          <Grow in={!loading} timeout={2000}>
-            <div className="dashboard-cards__style">
-              <Container>
-                <Row>
-                  <Card
-                    title={"Invités"}
-                    content={guests?.length}
-                    array={guests}
-                    resume={"repartition"}
-                    extraProp={"name"}
-                    path={"menu/invites"}
-                    firstPerson={wedding?.firstPerson}
-                    secondPerson={wedding?.secondPerson}
-                    firstFamilyGuests={firstFamilyGuests}
-                    secondFamilyGuests={secondFamilyGuests}
-                  />
-                  <Card
-                    title={"Tables"}
-                    content={tables?.length}
-                    array={tables}
-                    resume={"tables"}
-                    extraProp={"tables"}
-                    path={"menu/tables"}
-                  />
-                  <Card
-                    title={"Réception"}
-                    content={meal}
-                    subArrayOne={starters?.length}
-                    subArrayTwo={maincourses?.length}
-                    subArrayThree={desserts?.length}
-                    subArrayFour={maincourses?.length}
-                    subArrayFive={desserts?.length}
-                    resume={"composition"}
-                    extraProp={"composition"}
-                    path={"menu/carte"}
-                  />
-                  <Card
-                    title={"Tâches"}
-                    content={tasks?.length}
-                    subArrayOne={isCompleted?.length}
-                    subArrayTwo={notCompleted?.length}
-                    array={tasks}
-                    elements={"text"}
-                    resume={"status"}
-                    extraProp={"tache"}
-                    path={"menu/taches"}
-                  />
-                  <Card
-                    title={"Dépenses"}
-                    content={sum}
-                    array={operations}
-                    elements={"description"}
-                    resume={"expenses"}
-                    extraProp={"description"}
-                    path={"menu/budget"}
-                  />
-                </Row>
-              </Container>
-            </div>
-          </Grow>
-        </div>
-      )}
-    </>
+    <ContentLayout loading={loading} title={"Que souhaitez-vous faire aujourd'hui ?"} src={"dashboard"} >
+      <Container>
+        <Row>
+          <Card
+            title={"Invités"}
+            content={guests?.length}
+            array={guests}
+            resume={"repartition"}
+            extraProp={"name"}
+            path={"menu/invites"}
+            firstPerson={wedding?.firstPerson}
+            secondPerson={wedding?.secondPerson}
+            firstFamilyGuests={firstFamilyGuests}
+            secondFamilyGuests={secondFamilyGuests}
+          />
+          <Card
+            title={"Tables"}
+            content={tables?.length}
+            array={tables}
+            resume={"tables"}
+            extraProp={"tables"}
+            path={"menu/tables"}
+          />
+          <Card
+            title={"Réception"}
+            content={meal}
+            subArrayOne={starters?.length}
+            subArrayTwo={maincourses?.length}
+            subArrayThree={desserts?.length}
+            subArrayFour={maincourses?.length}
+            subArrayFive={desserts?.length}
+            resume={"composition"}
+            extraProp={"composition"}
+            path={"menu/carte"}
+          />
+          <Card
+            title={"Tâches"}
+            content={tasks?.length}
+            subArrayOne={isCompleted?.length}
+            subArrayTwo={notCompleted?.length}
+            array={tasks}
+            elements={"text"}
+            resume={"status"}
+            extraProp={"tache"}
+            path={"menu/taches"}
+          />
+          <Card
+            title={"Dépenses"}
+            content={sum}
+            array={operations}
+            elements={"description"}
+            resume={"expenses"}
+            extraProp={"description"}
+            path={"menu/budget"}
+          />
+        </Row>
+      </Container>
+    </ContentLayout>
   );
 };
 
