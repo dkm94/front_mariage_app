@@ -1,5 +1,6 @@
 .page-component {
     width: 100%;
+    padding-bottom: 100px;
 }
 .page-container {
     padding: 3rem;
