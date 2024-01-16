@@ -19,6 +19,7 @@ import { floatToEuro } from "../../helpers/formatCurrency";
 import { useFetch } from "../../hooks";
 import { getOperations } from "../../services";
 import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
+import PriceCard from "../../components/Expenses/PriceCard/PriceCard";
 
 
 const Budget = () => {
@@ -177,25 +178,7 @@ const Budget = () => {
         <div className="budget-cols">
           <div className="budget___col-1">
             <div className="col card-expense-component">
-              <div className="card" style={{ backgroundColor: "#fff" }}>
-                <div className="g-0">
-                  <div className="card-pd">
-                    <div className="card-body">
-                      <h5
-                        style={{
-                          textTransform: "uppercase",
-                        }}
-                        className="card-title"
-                      >
-                        Dépenses
-                      </h5>
-                      <span>
-                        {total}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <PriceCard total={total} />
             </div>
 
                   <div className="col budget-form mb3">
