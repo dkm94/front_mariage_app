@@ -1,7 +1,7 @@
 import "./Tables.css";
 
 import React, { useState, useEffect, useContext } from "react";
-import { withRouter, Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import axios from "axios";
 
 import { Container, Row, Col } from "react-bootstrap";
@@ -18,9 +18,7 @@ import formatArray from "../../helpers/formatDefault";
 import AddTableForm from "./Forms/Add";
 import Table from "./Table";
 import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
-import ScreenLoader from "../../components/Loader/Screen/ScreenLoader";
-import PageTitle from "../../components/LayoutPage/PageTitle/PageTitle";
-import PageBanner from "../../components/LayoutPage/PageBanner/PageBanner";
+import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
 
 type EditType = {
   id: string;
@@ -28,8 +26,6 @@ type EditType = {
 }
 
 const Tables = (props) => {
-  const scrollBtn = useContext(ScrollButtonContext);
-  // const loader = useContext(LoaderContext);
   const [guests, setGuests] = useState<GuestType[] | []>([]);
 
   const [searchValue, setSearchValue] = useState<string>("");
@@ -48,8 +44,6 @@ const Tables = (props) => {
 
   const orderedGuests = guests.slice().sort((a, b) => a.name.localeCompare(b.name));
 
-  // TODO: Créer une fonction fetch dynamique fetchData(), qui prend en params un string corresondant à ce que je veux récupérer
-  // TODO: Créer un objet qui contient les différents états de mes fetchs, et qui me permet de les appeler dynamiquement (ex: guests: getGuests(), tables: getTables(), etc.)
   const fetchGuests = async () => { // TODO: problème de performances, trop de re rendus (search bar, update picture...)
     try {
       setLoading(true);
@@ -129,99 +123,81 @@ const Tables = (props) => {
   };
 
   return (
-    <>
-      {loading ? (
-        <ScreenLoader />
-      ) : (
-        <div className="tables page-component">
-          {scrollBtn}
+    <ContentLayout loading={loading} title={"Comment souhaitez-vous organiser votre plan de table ?"} src={"tables"} >
+      <Container style={{ padding: "2rem 50px" }} fluid>
+        <Row>
+          <Col xs={12} sm={10} md={6} className="table-form">
+            <AddTableForm tables={tables} setTables={setTables} />
+          </Col>
+          <Col xs={12} sm={10} md={6} className="searchbar">
+            <SearchBar
+              className="search__input"
+              type="text"
+              placeholder="Rechercher une table"
+              name="searchbar"
+              value={searchValue}
+              onChange={handleSearch}
+            />
+          </Col>
+        </Row>
+      </Container>
 
-          <div className="tables-container">
+      <Grow in={!loading} timeout={2000}>
+        <Box
+          sx={{
+            minHeight: "500px",
+          }}
+          className="tables-grid"
+          pl={"50px"}
+          pr={"50px"}
+          >
+          {errorTables && <div style={{ alignSelf: "center" }}><span style={{ color: "darkred"}}>{errorMessageTables}</span></div>}
+          {errorGuests && <div style={{ alignSelf: "center" }}><span style={{ color: "darkred"}}>{errorMessageGuests}</span></div>}
 
-            <PageTitle loading={loading} title="Comment souhaitez-vous organiser votre plan de table ?" />
-
-            <PageBanner loading={loading} src={"tables"} />
-
-            <Grow in={!loading} timeout={2000}>
-              <Container style={{ padding: "2rem 50px" }} fluid>
-                <Row>
-                  <Col xs={12} sm={10} md={6} className="table-form">
-                    <AddTableForm tables={tables} setTables={setTables} />
-                  </Col>
-                  <Col xs={12} sm={10} md={6} className="searchbar">
-                    <SearchBar
-                      className="search__input"
-                      type="text"
-                      placeholder="Rechercher une table"
-                      name="searchbar"
-                      value={searchValue}
-                      onChange={handleSearch}
-                    />
-                  </Col>
-                </Row>
-              </Container>
-            </Grow>
-
-            <Grow in={!loading} timeout={2000}>
-              <Box
-                sx={{
-                  minHeight: "500px",
-                }}
-                className="tables-grid"
-                pl={"50px"}
-                pr={"50px"}
-                >
-                {errorTables && <div style={{ alignSelf: "center" }}><span style={{ color: "darkred"}}>{errorMessageTables}</span></div>}
-                {errorGuests && <div style={{ alignSelf: "center" }}><span style={{ color: "darkred"}}>{errorMessageGuests}</span></div>}
-
-                {tables?.length === 0 || null ? (
-                  <div
-                    className="block"
-                    style={{ display: tables &&  "none" }}
-                  >
-                    <span>Vos tables ici.</span>
-                  </div>
-                ) : (
-                  // loading === true ? loader :
-                  <Grid2 container gap={3} justifyContent={"center"}>
-                    {tables
-                      .sort((a:TableType, b:TableType) => {
-                        return a.name > b.name ? 1 : -1;
-                      })
-                      .filter((table) => {
-                        return (
-                          table.name
-                            .toLowerCase()
-                            .indexOf(searchValue.toLowerCase()) >= 0
-                        );
-                      })
-                      .map((table) => (
-                        <Table
-                          tables={tables}
-                          table={table}
-                          id={table._id}
-                          key={table._id}
-                          edit={edit}
-                          handleUpdatedTable={handleUpdatedTable}
-                          input={input}
-                          setTables={setTables}
-                          guests={orderedGuests}
-                          setGuests={setGuests}
-                          setEdit={setEdit}
-                          getUpdatedId={getUpdatedId}
-                          deleteTable={deleteTable}
-                          isOpen={isOpen}
-                          setisOpen={setisOpen}
-                        />
-                      ))}
-                  </Grid2>
-                )}
-              </Box>
-            </Grow>
-          </div>
-        </div>
-      )}
-    </>
+          {tables?.length === 0 || null ? (
+            <div
+              className="block"
+              style={{ display: tables &&  "none" }}
+            >
+              <span>Vos tables ici.</span>
+            </div>
+          ) : (
+            <Grid2 container gap={3} justifyContent={"center"}>
+              {tables
+                .sort((a:TableType, b:TableType) => {
+                  return a.name > b.name ? 1 : -1;
+                })
+                .filter((table) => {
+                  return (
+                    table.name
+                      .toLowerCase()
+                      .indexOf(searchValue.toLowerCase()) >= 0
+                  );
+                })
+                .map((table) => (
+                  <Table
+                    tables={tables}
+                    table={table}
+                    id={table._id}
+                    key={table._id}
+                    edit={edit}
+                    handleUpdatedTable={handleUpdatedTable}
+                    input={input}
+                    setTables={setTables}
+                    guests={orderedGuests}
+                    setGuests={setGuests}
+                    setEdit={setEdit}
+                    getUpdatedId={getUpdatedId}
+                    deleteTable={deleteTable}
+                    isOpen={isOpen}
+                    setisOpen={setisOpen}
+                  />
+                ))}
+            </Grid2>
+          )}
+        </Box>
+      </Grow>
+    </ContentLayout>
   );
 };
 
