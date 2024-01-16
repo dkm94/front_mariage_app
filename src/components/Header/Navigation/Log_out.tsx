@@ -1,7 +1,7 @@
 import "../Header.css";
 
-import React, { useState } from "react";
-import { Link, withRouter } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useHistory, withRouter } from "react-router-dom";
 import { Button } from "@mui/material";
 
 import Login from "../../../Pages/Auth/Login/Login";
@@ -11,9 +11,21 @@ import { Logo } from "../../../img";
 
 const Logout = () => {
   const path: string = window.location.pathname;
+  const history = useHistory();
 
   const [isOpen, setisOpen] = useState<boolean>(false);
   const [showForm, setShowForm] = useState<string>("");
+
+  useEffect(() => {
+    if (path === "/login") {
+      setisOpen(true);
+      setShowForm("login");
+    }
+    if (path === "/register") {
+      setisOpen(true);
+      setShowForm("register");
+    }
+  }, [path])
 
   return (
     <div
@@ -35,10 +47,12 @@ const Logout = () => {
             variant="outlined"
             className="li-style"
             id="login"
-            style={{ fontFamily: "none", color: "#000" }}
+            sx={{ "&:hover": { backgroundColor: "inherit" } }}
+            style={{ fontFamily: "none", color: "#000", border: "none", textTransform: "unset"}}
             onClick={() => {
               setisOpen(true);
               setShowForm("login");
+              history.push("/login")
             }}
           >
             Connexion
@@ -49,7 +63,11 @@ const Logout = () => {
       <AuthModal
         open={isOpen}
         setOpen={setisOpen}
-        close={() => setisOpen(false)}
+        close={() => {
+          setisOpen(false);
+          setShowForm("");
+          history.push("/")
+        }}
       >
         {showForm === "login" && <Login setShowForm={setShowForm} />}
         {showForm === "register" && <Register setShowForm={setShowForm} />}

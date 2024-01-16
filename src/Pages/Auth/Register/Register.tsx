@@ -1,15 +1,19 @@
 import "./Register.css";
 
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router";
+
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+
 import { TextField, Button } from "@mui/material";
 
-import { IRegisterProps, UserType } from "../../../../types";
 import { SuccessAlert, ErrorAlert } from "../../../components/Alert";
 import { BlackButton } from "../../../components/Buttons";
+
+import { IRegisterProps, UserType } from "../../../../types";
 
 type FormValues = {
   email: string;
@@ -20,6 +24,7 @@ type FormValues = {
 }
 
 const Register = ({ setShowForm }: IRegisterProps) => {
+  const history = useHistory();
 
   const [showAlert, setShowAlert] = useState(false);
   const [showError, setShowError] = useState(false);
@@ -215,7 +220,10 @@ const Register = ({ setShowForm }: IRegisterProps) => {
                         marginTop: "-2px",
                         color: "#000",
                       }}
-                      onClick={() => setShowForm("login")}
+                      onClick={() => {
+                        setShowForm("login")
+                        history.push("/login");
+                      }}
                     >
                       Connectez-vous
                     </Button>
