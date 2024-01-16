@@ -228,7 +228,7 @@ const Budget = () => {
           {operations.length > 0 && <div className="col chart-component">
             <PieChart operations={operations} />
           </div>}
-          
+
           <div className="budget___col-2">
             <Expenses
               expenses={operations}
@@ -237,7 +237,6 @@ const Budget = () => {
               edit={edit}
               setEdit={setEdit}
               updateExpense={editExpense}
-              handleChange={formik?.handleChange}
             />
           </div>
         </div>
