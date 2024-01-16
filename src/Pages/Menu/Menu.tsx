@@ -2,7 +2,6 @@ import "./Menu.css";
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import styled from "@emotion/styled";
 
 import starterImg from "../../img/menus/starter_img.jpg";
 import maincourseImg from "../../img/menus/maincourse_img.jpg";
@@ -11,10 +10,6 @@ import apetizerImg from "../../img/menus/apetizers.jpg";
 import beverageImg from "../../img/menus/beverages.jpg";
 
 import Grow from "@mui/material/Grow";
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
-import { IconButton } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import CreateIcon from "@mui/icons-material/Create";
 
 import { AddStarterForm, AddMaincourseForm, AddDessertForm, AddApetizerForm, AddBeverageForm } from "./Forms/Add";
 import { UpdateStarter, UpdateMaincourse, UpdateDessert, UpdateApetizer, UpdateBeverage } from "./Forms/Update";
@@ -23,13 +18,7 @@ import { FoodType } from "../../../types";
 import { useFetch } from "../../hooks";
 import { getApetizers, getBeverages, getDesserts, getMaincourses, getStarters } from "../../services";
 import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
-
-
-const IconWrapper = styled(IconButton)({
-  "&:hover": {
-    background: "none",
-  },
-});
+import ReceptionCard from "../../components/Reception/Card/ReceptionCard";
 
 type EditType = {
   id: string;
@@ -115,480 +104,69 @@ const Menus = () => {
   return (
     <ContentLayout loading={loading} title={"Avez-vous prévu une réception ?"} src={"reception"}>
       <Grow in={!loading} timeout={2000}>
-        <div className="menu__list__container">
+        <div className="reception-container">
           <div className="menu___list">
-            <div className="starter forms">
-              <div className="starter___div_img">
-                <img src={starterImg} alt="starter" />
-              </div>
-              <div className="starter___div_form fade-in fade-in">
-                {starters.length === 0 || starters.length === 1 ? (
-                  <h3 className="menu__title">Entrée</h3>
-                ) : (
-                  <h3 className="menu__title">Entrées</h3>
-                )}
-                <div className="menu___forms">
-                  <AddStarterForm
-                    starters={starters}
-                    setStarters={setStarters}
-                  />
-                </div>
-                {starters.length === 0 ? (
-                  <div className="empty-div">
-                    <span>Vos entrées ici</span>
-                  </div>
-                ) : (
-                  <Grid2 xs={12} component={"ul"} container>
-                    {starters.map((starter) => (
-                      <Grid2
-                        xs={12}
-                        key={starter._id}
-                        component={"li"}
-                        display={"flex"}
-                        flexDirection={"row"}
-                        minHeight="36px"
-                        alignItems={"center"}
-                      >
-                        {edit.id === starter._id ? (
-                          <UpdateStarter
-                            edit={edit}
-                            setEdit={setEdit}
-                            setStarters={setStarters}
-                            starters={starters}
-                          />
-                        ) : (
-                          <Grid2
-                            lg={8}
-                            md={8}
-                            xs={8}
-                            component={"span"}
-                            width={"100%"}
-                          >
-                            {starter.name}
-                          </Grid2>
-                        )}
 
-                        <Grid2
-                          lg={4}
-                          display={"flex"}
-                          flexDirection={"row"}
-                          gap={"7px"}
-                        >
-                          {!edit.id && (
-                            <>
-                              <IconWrapper
-                                onClick={() =>
-                                  getUpdatedId(starter._id, starter.name)
-                                }
-                                style={{
-                                  backgroundColor: "#fff",
-                                  border: "1px solid lightgray",
-                                  borderRadius: "5px",
-                                  color: "#262626",
-                                }}
-                              >
-                                <CreateIcon fontSize="small" />
-                              </IconWrapper>
-                              <IconWrapper
-                                type="submit"
-                                onClick={() => deleteStarter(starter._id)}
-                                style={{
-                                  backgroundColor: "darkred",
-                                  borderRadius: "5px",
-                                  color: "#fff",
-                                }}
-                              >
-                                <DeleteIcon fontSize="small" />
-                              </IconWrapper>
-                            </>
-                          )}
-                        </Grid2>
-                      </Grid2>
-                    ))}
-                  </Grid2>
-                )}
-              </div>
-            </div>
-            <div className="maincourse forms" id="forms_reverse">
-              <div className="maincourse___div_form fade-in fade-in">
-                {maincourses.length === 0 || maincourses.length === 1 ? (
-                  <h3 className="menu__title">Plat</h3>
-                ) : (
-                  <h3 className="menu__title">Plats</h3>
-                )}
-                <div className="menu___forms">
-                  <AddMaincourseForm
-                    maincourses={maincourses}
-                    setMaincourses={setMaincourses}
-                  />
-                </div>
-                {maincourses.length === 0 ? (
-                  <div className="empty-div">
-                    <span>Vos plats ici</span>
-                  </div>
-                ) : (
-                  <Grid2 xs={12} component={"ul"} container>
-                    {maincourses.map((maincourse) => (
-                      <Grid2
-                        xs={12}
-                        key={maincourse._id}
-                        component={"li"}
-                        display={"flex"}
-                        flexDirection={"row"}
-                        minHeight="36px"
-                        alignItems={"center"}
-                      >
-                        {edit.id === maincourse._id ? (
-                          <UpdateMaincourse
-                            edit={edit}
-                            setEdit={setEdit}
-                            maincourses={maincourses}
-                            setMaincourses={setMaincourses}
-                          />
-                        ) : (
-                          <Grid2
-                            lg={8}
-                            md={8}
-                            xs={8}
-                            component={"span"}
-                            width={"100%"}
-                          >
-                            {maincourse.name}
-                          </Grid2>
-                        )}
+            <ReceptionCard 
+            img={starterImg} 
+            type={"entrée"} 
+            array={starters} 
+            edit={edit} 
+            getUpdatedId={getUpdatedId} 
+            deleteElement={deleteStarter} 
+            even={true} 
+            addForm={<AddStarterForm starters={starters} setStarters={setStarters} />} 
+            editForm={<UpdateStarter edit={edit} setEdit={setEdit} setStarters={setStarters} starters={starters} />}            
+            />
 
-                        <Grid2
-                          lg={4}
-                          display={"flex"}
-                          flexDirection={"row"}
-                          gap={"7px"}
-                        >
-                          {!edit.id && (
-                            <>
-                              <IconWrapper
-                                onClick={() =>
-                                  getUpdatedId(
-                                    maincourse._id,
-                                    maincourse.name
-                                  )
-                                }
-                                style={{
-                                  backgroundColor: "#fff",
-                                  border: "1px solid lightgray",
-                                  borderRadius: "5px",
-                                  color: "#262626",
-                                }}
-                              >
-                                <CreateIcon fontSize="small" />
-                              </IconWrapper>
-                              <IconWrapper
-                                type="submit"
-                                onClick={() =>
-                                  deleteMaincourse(maincourse._id)
-                                }
-                                style={{
-                                  backgroundColor: "darkred",
-                                  borderRadius: "5px",
-                                  color: "#fff",
-                                }}
-                              >
-                                <DeleteIcon fontSize="small" />
-                              </IconWrapper>
-                            </>
-                          )}
-                        </Grid2>
-                      </Grid2>
-                    ))}
-                  </Grid2>
-                )}
-              </div>
-              <div className="maincourse___div_img">
-                <img src={maincourseImg} alt="main couse" />
-              </div>
-            </div>
-            <div className="starter forms">
-              <div className="dessert___div_img">
-                <img src={dessertImg} alt="dessert" />
-              </div>
-              <div className="starter___div_form fade-in fade-in">
-                {desserts.length === 0 || desserts.length === 1 ? (
-                  <h3 className="menu__title">Dessert</h3>
-                ) : (
-                  <h3 className="menu__title">Desserts</h3>
-                )}
-                <div className="menu___forms">
-                  <AddDessertForm
-                    desserts={desserts}
-                    setDesserts={setDesserts}
-                  />
-                </div>
-                {desserts.length === 0 ? (
-                  <div className="empty-div">
-                    <span>Vos desserts ici</span>
-                  </div>
-                ) : (
-                  <Grid2 xs={12} component={"ul"} container>
-                    {desserts.map((dessert) => (
-                      <Grid2
-                        xs={12}
-                        key={dessert._id}
-                        component={"li"}
-                        display={"flex"}
-                        flexDirection={"row"}
-                        minHeight="36px"
-                        alignItems={"center"}
-                      >
-                        {edit.id === dessert._id ? (
-                          <UpdateDessert
-                            edit={edit}
-                            setEdit={setEdit}
-                            desserts={desserts}
-                            setDesserts={setDesserts}
-                          />
-                        ) : (
-                          <Grid2
-                            lg={8}
-                            md={8}
-                            xs={8}
-                            component={"span"}
-                            width={"100%"}
-                          >
-                            {dessert.name}
-                          </Grid2>
-                        )}
-                        <Grid2
-                          lg={4}
-                          display={"flex"}
-                          flexDirection={"row"}
-                          gap={"7px"}
-                        >
-                          {!edit.id && (
-                            <>
-                              <IconWrapper
-                                onClick={() =>
-                                  getUpdatedId(dessert._id, dessert.name)
-                                }
-                                style={{
-                                  backgroundColor: "#fff",
-                                  border: "1px solid lightgray",
-                                  borderRadius: "5px",
-                                  color: "#262626",
-                                }}
-                              >
-                                <CreateIcon fontSize="small" />
-                              </IconWrapper>
-                              <IconWrapper
-                                type="submit"
-                                onClick={() => deleteDessert(dessert._id)}
-                                style={{
-                                  backgroundColor: "darkred",
-                                  borderRadius: "5px",
-                                  color: "#fff",
-                                }}
-                              >
-                                <DeleteIcon fontSize="small" />
-                              </IconWrapper>
-                            </>
-                          )}
-                        </Grid2>
-                      </Grid2>
-                    ))}
-                  </Grid2>
-                )}
-              </div>
-            </div>
-            <div className="maincourse forms" id="forms_reverse">
-              <div className="dessert___div_form fade-in">
-                {apetizers.length === 0 || apetizers.length === 1 ? (
-                  <h3 className="menu__title">Apéritif</h3>
-                ) : (
-                  <h3 className="menu__title">Apéritifs</h3>
-                )}
-                <div className="menu___forms">
-                  <AddApetizerForm
-                    apetizers={apetizers}
-                    setApetizers={setApetizers}
-                  />
-                </div>
-                {apetizers.length === 0 ? (
-                  <div className="empty-div">
-                    <span>Vos apéritifs ici</span>
-                  </div>
-                ) : (
-                  <Grid2 xs={12} component={"ul"} container>
-                    {apetizers.map((apetizer) => (
-                      <Grid2
-                        xs={12}
-                        key={apetizer._id}
-                        component={"li"}
-                        display={"flex"}
-                        flexDirection={"row"}
-                        minHeight="36px"
-                        alignItems={"center"}
-                      >
-                        {edit.id === apetizer._id ? (
-                          <UpdateApetizer
-                            edit={edit}
-                            setEdit={setEdit}
-                            apetizers={apetizers}
-                            setApetizers={setApetizers}
-                          />
-                        ) : (
-                          <Grid2
-                            lg={8}
-                            md={8}
-                            xs={8}
-                            component={"span"}
-                            width={"100%"}
-                          >
-                            {apetizer.name}
-                          </Grid2>
-                        )}
-                        <Grid2
-                          lg={4}
-                          display={"flex"}
-                          flexDirection={"row"}
-                          gap={"7px"}
-                        >
-                          {!edit.id && (
-                            <>
-                              <IconWrapper
-                                onClick={() =>
-                                  getUpdatedId(
-                                    apetizer._id,
-                                    apetizer.name
-                                  )
-                                }
-                                style={{
-                                  backgroundColor: "#fff",
-                                  border: "1px solid lightgray",
-                                  borderRadius: "5px",
-                                  color: "#262626",
-                                }}
-                              >
-                                <CreateIcon fontSize="small" />
-                              </IconWrapper>
-                              <IconWrapper
-                                type="submit"
-                                onClick={() => {
-                                  deleteApetizer(apetizer._id);
-                                }}
-                                style={{
-                                  backgroundColor: "darkred",
-                                  borderRadius: "5px",
-                                  color: "#fff",
-                                }}
-                              >
-                                <DeleteIcon fontSize="small" />
-                              </IconWrapper>
-                            </>
-                          )}
-                        </Grid2>
-                      </Grid2>
-                    ))}
-                  </Grid2>
-                )}
-              </div>
-              <div className="dessert___div_img">
-                <img src={apetizerImg} alt="apéritif" />
-              </div>
-            </div>
-            <div className="dessert forms">
-              <div className="dessert___div_img">
-                <img src={beverageImg} alt="boisson" />
-              </div>
-              <div className="dessert___div_form fade-in">
-                {beverages.length === 0 || beverages.length === 1 ? (
-                  <h3 className="menu__title" style={{ textAlign: "end"}}>Boisson</h3>
-                ) : (
-                  <h3 className="menu__title" style={{ textAlign: "end"}}>Boissons</h3>
-                )}
-                <div className="menu___forms">
-                  <AddBeverageForm
-                    beverages={beverages}
-                    setBeverages={setBeverages}
-                  />
-                </div>
-                {beverages.length === 0 ? (
-                  <div className="empty-div">
-                    <span>Vos boissons ici</span>
-                  </div>
-                ) : (
-                  <Grid2 xs={12} component={"ul"} container>
-                    {beverages.map((beverage) => (
-                      <Grid2
-                        xs={12}
-                        key={beverage._id}
-                        component={"li"}
-                        display={"flex"}
-                        flexDirection={"row"}
-                        minHeight="36px"
-                        alignItems={"center"}
-                      >
-                        {edit.id === beverage._id ? (
-                          <UpdateBeverage
-                            edit={edit}
-                            setEdit={setEdit}
-                            beverages={beverages}
-                            setBeverages={setBeverages}
-                          />
-                        ) : (
-                          <Grid2
-                            lg={8}
-                            md={8}
-                            xs={8}
-                            component={"span"}
-                            width={"100%"}
-                          >
-                            {beverage.name}
-                          </Grid2>
-                        )}
-                        <Grid2
-                          lg={4}
-                          display={"flex"}
-                          flexDirection={"row"}
-                          gap={"7px"}
-                        >
-                          {!edit.id && (
-                            <>
-                              <IconWrapper
-                                onClick={() =>
-                                  getUpdatedId(
-                                    beverage._id,
-                                    beverage.name
-                                  )
-                                }
-                                style={{
-                                  backgroundColor: "#fff",
-                                  border: "1px solid lightgray",
-                                  borderRadius: "5px",
-                                  color: "#262626",
-                                }}
-                              >
-                                <CreateIcon fontSize="small" />
-                              </IconWrapper>
-                              <IconWrapper
-                                type="submit"
-                                onClick={() =>
-                                  deleteBeverage(beverage._id)
-                                }
-                                style={{
-                                  backgroundColor: "darkred",
-                                  borderRadius: "5px",
-                                  color: "#fff",
-                                }}
-                              >
-                                <DeleteIcon fontSize="small" />
-                              </IconWrapper>
-                            </>
-                          )}
-                        </Grid2>
-                      </Grid2>
-                    ))}
-                  </Grid2>
-                )}
-              </div>
-            </div>
+            <ReceptionCard 
+            img={maincourseImg} 
+            type={"plat"} 
+            array={maincourses} 
+            edit={edit} 
+            getUpdatedId={getUpdatedId} 
+            deleteElement={deleteMaincourse} 
+            even={false} 
+            addForm={<AddMaincourseForm maincourses={maincourses} setMaincourses={setMaincourses} />} 
+            editForm={<UpdateMaincourse edit={edit} setEdit={setEdit} maincourses={maincourses} setMaincourses={setMaincourses} />}            
+            />
+
+            <ReceptionCard 
+            img={dessertImg} 
+            type={"dessert"} 
+            array={desserts} 
+            edit={edit} 
+            getUpdatedId={getUpdatedId} 
+            deleteElement={deleteDessert} 
+            even={true} 
+            addForm={<AddDessertForm desserts={desserts} setDesserts={setDesserts} />} 
+            editForm={<UpdateDessert edit={edit} setEdit={setEdit} desserts={desserts} setDesserts={setDesserts} />} 
+            />
+
+            <ReceptionCard 
+            img={apetizerImg}
+            type={"apéritif"} 
+            array={apetizers} 
+            edit={edit} 
+            getUpdatedId={getUpdatedId} 
+            deleteElement={deleteApetizer} 
+            even={false} 
+            addForm={<AddApetizerForm apetizers={apetizers} setApetizers={setApetizers} />} 
+            editForm={<UpdateApetizer edit={edit} setEdit={setEdit} apetizers={apetizers} setApetizers={setApetizers} />}            
+            />
+
+            <ReceptionCard 
+            img={beverageImg} 
+            type={"boisson"} 
+            array={beverages} 
+            edit={edit} 
+            getUpdatedId={getUpdatedId} 
+            deleteElement={deleteBeverage} 
+            even={true} 
+            addForm={<AddBeverageForm beverages={beverages} setBeverages={setBeverages} />} 
+            editForm={<UpdateBeverage edit={edit} setEdit={setEdit} beverages={beverages} setBeverages={setBeverages} />} 
+            />
+
           </div>
         </div>
       </Grow>

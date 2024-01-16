@@ -11,7 +11,7 @@ import { useFetch } from "../../hooks";
 import { getWedding } from "../../services";
 import { AccountType, UserType, WeddingType } from '../../../types';
 
-import { UserContext, ScrollButtonContext } from "../../App";
+import { UserContext } from "../../App";
 import { BlackButton } from "../../components/Buttons";
 import DefaultModal from "../../components/Modals/Default/DefaultModal";
 
