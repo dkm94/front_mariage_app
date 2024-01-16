@@ -4,6 +4,7 @@ import guestBanner from "../img/demoiselles.jpg";
 import todosBanner from "../img/todo-bg.png";
 import budgetBanner from "../img/white-wallpaper.jpg";
 import receptionBanner from "../img/menus/menu-4.jpg";
+import accountBanner from "../img/dashboard-bg.jpg";
 
 const bannerElements = [
     {
@@ -29,6 +30,10 @@ const bannerElements = [
     {
         name: "budget",
         img: budgetBanner
+    },
+    {
+        name: "account",
+        img: accountBanner
     }
 ]
 
