@@ -11,14 +11,12 @@ import { useFetch } from "../../hooks";
 import { getWedding } from "../../services";
 import { AccountType, UserType, WeddingType } from '../../../types';
 
-import { Grow } from "@mui/material";
 import { UserContext, ScrollButtonContext } from "../../App";
 import { BlackButton } from "../../components/Buttons";
 import DefaultModal from "../../components/Modals/Default/DefaultModal";
 
 import profilePicture from "../../img/couple-img.jpg";
 import changePwdIcon from "../../img/change-password-icon.png";
-import PageTitle from "../../components/LayoutPage/PageTitle/PageTitle";
 import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
 
 const win: Window = window;
@@ -38,7 +36,6 @@ const MyAccount = ({ token }) => {
     const user: UserType = useContext(UserContext);
     const { id, mariageID, firstPerson, secondPerson } = user as { id: string, mariageID: string, firstPerson: string, secondPerson: string};
 
-    const scrollBtn = useContext(ScrollButtonContext)
     const [successfulDeletionMessage, setsuccessfulDeletionMessage] = useState<string>("")
         
     const [account, setAccount] = useState<AccountType | {}>({})
