@@ -3,16 +3,14 @@ import "./Budget.css";
 import React, { useState, useEffect, ChangeEvent } from "react";
 import axios from "axios";
 import { Container, Row, Col } from "react-bootstrap";
-import { Form, useFormik, FormikProvider } from "formik";
+import { useFormik } from "formik";
 import * as Yup from "yup";
 
 import Grow from "@mui/material/Grow";
 
 import PieChart from "../../components/Expenses/Graph/PieChart";
-import TextField from "../../components/Formik/TextField-Operations";
 import Expenses from "./Dépenses/Dépenses";
 import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
-import { GreyButton } from "../../components/Buttons";
 
 import { OperationType } from "../../../types/index";
 import { floatToEuro } from "../../helpers/formatCurrency";
@@ -20,7 +18,46 @@ import { useFetch } from "../../hooks";
 import { getOperations } from "../../services";
 import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
 import PriceCard from "../../components/Expenses/PriceCard/PriceCard";
+import AddExpenseForm from "../../components/Expenses/Forms/AddExpenseForm/AddExpenseForm";
 
+const categories = [
+  { 
+    label: "Sélectionnez une catégorie",
+    value: ""
+  },
+  {
+    label: "Locations",
+    value: "Locations"
+  },
+  {
+    label: "Habillement/Beauté",
+    value: "Habillement/Beauté"
+  },
+  { 
+    label: "Décoration/Fleurs",
+    value: "Décoration/Fleurs"
+  },
+  {
+    label: "Alliances/Bijoux",
+    value: "Alliances/Bijoux"
+  },
+  {
+    label: "Animation (DJ, Photographe...)",
+    value: "Animation"
+  },
+  {
+    label: "Traiteur",
+    value: "Traiteur"
+  },
+  {
+    label: "Faire-part",
+    value: "Faire-part"
+  },
+  {
+    label: "Autres",
+    value: "Autres"
+  },
+];
 
 const Budget = () => {
   const newOperationValues: OperationType = {
@@ -177,105 +214,21 @@ const Budget = () => {
       <Grow in={!loading} timeout={3000}>
         <div className="budget-cols">
           <div className="budget___col-1">
+
             <div className="col card-expense-component">
               <PriceCard total={total} />
             </div>
 
-                  <div className="col budget-form mb3">
-                    <FormikProvider value={formik}>
-                <Form
-                  className="input-group mb-3"
-                  style={{ display: "flex", flexDirection: "column" }}
-                >
-                  <div className="budget___select">
-                    <select
-                      name="category"
-                      value={formik.values.category}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                    >
-                      <option
-                        value=""
-                        label="Sélectionnez une catégorie"
-                      ></option>
-                      <option
-                        value="Locations"
-                        label="Locations"
-                      ></option>
-                      <option
-                        value="Habillement/Beauté"
-                        label="Habillement/Beauté"
-                      ></option>
-                      <option
-                        value="Décoration/Fleurs"
-                        label="Décoration/Fleurs"
-                      ></option>
-                      <option
-                        value="Alliances/Bijoux"
-                        label="Alliances/Bijoux"
-                      ></option>
-                      <option
-                        value="Animation"
-                        label="Animation (DJ, Photographe...)"
-                      ></option>
-                      <option value="Traiteur" label="Traiteur"></option>
-                      <option
-                        value="Faire-part"
-                        label="Faire-part"
-                      ></option>
-                      <option value="Autres" label="Autres"></option>
-                    </select>
-                    {formik.errors.category &&
-                      formik.touched.category && (
-                        <div className="input-feedback error">
-                          {formik.errors.category}
-                        </div>
-                      )}
-                  </div>
-                  <TextField
-                    size="40%"
-                    // label="Description"
-                    name="description"
-                    type="text"
-                    value={formik.values.description}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    class="form-control"
-                    errors={formik.errors}
-                    touched={formik.touched}
-                    placeholder="Description"
-                  />
-                  <TextField
-                    size="20%"
-                    width="100%"
-                    name="price"
-                    type="number"
-                    value={formik.values.price}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    class="form-control"
-                    errors={formik.errors}
-                    touched={formik.touched}
-                    placeholder="Montant"
-                    border-radius="10px"
-                  />
-                  <div className="col-12 budget-form___submit">
-                    <GreyButton
-                      type="submit"
-                      text={"Valider"}
-                      variant={"contained"}
-                      disabled={formik.isSubmitting}
-                      size="medium"
-                    />
-                  </div>
-                </Form>
-                </FormikProvider>
-              </div>
+            <div className="col budget-form mb3">
+              <AddExpenseForm formik={formik} categories={categories} />
+            </div>
                 
           </div>
+
           {operations.length > 0 && <div className="col chart-component">
             <PieChart operations={operations} />
           </div>}
+          
           <div className="budget___col-2">
             <Expenses
               expenses={operations}

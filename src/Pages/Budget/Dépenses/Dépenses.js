@@ -63,8 +63,8 @@ const Expenses = ({
     <ul className="budget-list">
       <li className="table-header">
         <div className="cols cols-1">Catégorie</div>
-        <div className="cols cols-2">Date</div>
-        <div className="cols cols-3">Prix</div>
+        <div className="cols cols-2">Prix</div>
+        <div className="cols cols-3">Date</div>
         <div className="cols cols-4">Description</div>
         <div className="cols cols-5">Gérer</div>
       </li>
@@ -94,11 +94,11 @@ const Expenses = ({
                   label={obj.category}
                   style={{ backgroundColor: renderSwitchColors(obj.category), width: "100%", maxWidth: "150px"}} />
                 </div>
-              <div className='cols cols-2'  data-label="Date">
+              <div className='cols cols-2'  data-label="Prix">
                 {" "}
                 {fixPrice(obj.price)} €
               </div>
-              <div className='cols cols-3'  data-label="Prix">
+              <div className='cols cols-3'  data-label="Date">
                 {obj.date}
               </div>
               <div className='cols cols-4'  data-label="Description">
