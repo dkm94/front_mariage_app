@@ -1,20 +1,29 @@
 import "../../Menu.css";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, RefObject, ChangeEvent, FormEvent, SetStateAction, Dispatch } from "react";
 import axios from "axios";
 
 import { GreyButton } from "../../../../components/Buttons";
 
-const AddApetizerForm = ({ apetizers, setApetizers }) => {
-  const [input, setInput] = useState("");
-  const inputRef = useRef(null);
-  const [loading, setLoading] = useState(false);
+import { FoodType } from "../../../../../types";
 
-  const handleChange = (e) => {
+interface AddApetizerFormProps {
+  apetizers: FoodType[];
+  setApetizers: Dispatch<SetStateAction<FoodType[]>>;
+}
+
+const AddApetizerForm = (props: AddApetizerFormProps) => {
+  const { apetizers, setApetizers } = props;
+
+  const [input, setInput] = useState<string>("");
+  const inputRef: RefObject<HTMLInputElement> = useRef(null);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
   };
 
-  const handleSumbit = async (e) => {
+  const handleSumbit = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
     await axios

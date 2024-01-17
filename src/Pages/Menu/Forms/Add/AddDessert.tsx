@@ -1,23 +1,31 @@
 import "../../Menu.css";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, ChangeEvent, RefObject, FormEvent, Dispatch, SetStateAction } from "react";
 import axios from "axios";
 
 import { GreyButton } from "../../../../components/Buttons";
 
-const AddDessertForm = ({ desserts, setDesserts }) => {
-  const [input, setInput] = useState("");
-  const inputRef = useRef(null);
-  const [loading, setLoading] = useState(false);
+import { FoodType } from "../../../../../types";
 
-  const handleChange = (e) => {
+interface AddDessertFormProps {
+  desserts: FoodType[];
+  setDesserts: Dispatch<SetStateAction<FoodType[]>>;
+}
+
+const AddDessertForm = (props: AddDessertFormProps) => {
+  const { desserts, setDesserts } = props;
+
+  const [input, setInput] = useState<string>("");
+  const inputRef: RefObject<HTMLInputElement> = useRef(null);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
   };
 
-  const handleSumbit = async (e) => {
+  const handleSumbit = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    await axios.get("/api/admin/menu");
     await axios
       .post(`/api/admin/menu/desserts/add`, {
         name: input,

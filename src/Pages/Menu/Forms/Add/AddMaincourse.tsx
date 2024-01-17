@@ -1,20 +1,28 @@
 import "../../Menu.css";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, Dispatch, SetStateAction, RefObject, ChangeEvent, FormEvent } from "react";
 import axios from "axios";
 
 import { GreyButton } from "../../../../components/Buttons";
+import { FoodType } from "../../../../../types";
 
-const AddMaincourseForm = ({ maincourses, setMaincourses }) => {
-  const [input, setInput] = useState("");
-  const inputRef = useRef(null);
-  const [loading, setLoading] = useState(false);
+interface AddMaincourseFormProps {
+  maincourses: FoodType[];
+  setMaincourses: Dispatch<SetStateAction<FoodType[]>>;
+}
 
-  const handleChange = (e) => {
+const AddMaincourseForm = (props: AddMaincourseFormProps) => {
+  const { maincourses, setMaincourses } = props;
+
+  const [input, setInput] = useState<string>("");
+  const inputRef: RefObject<HTMLInputElement> = useRef(null);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
   };
 
-  const handleSumbit = async (e) => {
+  const handleSumbit = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
     await axios
