@@ -128,8 +128,7 @@ const Login = ({ setShowForm }: ILoginProps) => {
                     type="submit"
                     variant="contained"
                     text={loadingButton ? "Veuillez patienter..." : "Se connecter"}  
-                    // sx={{ "&:hover": { backgroundColor: "#333232" } }}
-                    // style={{ borderRadius: "20px", padding: "6px 16px", flexGrow: 1,textTransform: "unset" }}
+                    style={{ width: "100%", "&:hover": { backgroundColor: "#333232" } }}
                   />
                 </div>
                 <div

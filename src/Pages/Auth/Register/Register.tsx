@@ -206,9 +206,12 @@ const Register = ({ setShowForm }: IRegisterProps) => {
                   <span>{errors.confirmPassword?.message}</span>
                 </div>
                 <div className="form-group">
-                  <BlackButton type="submit" variant="contained" text={loadingButton
+                  <BlackButton 
+                  variant="contained" 
+                  type="submit" 
+                  text={loadingButton
                       ? "Veuillez patienter..."
-                      : "Créer mon compte"} />
+                      : "Créer un compte"} />
                 </div>
                 <div className="register__signup">
                   <p>
