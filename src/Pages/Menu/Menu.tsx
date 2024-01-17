@@ -57,7 +57,7 @@ const Menus = () => {
 
   //todo: error in update handling
 
-  const deleteStarter = async (id) => {
+  const deleteStarter = async (id: string) => {
     await axios.delete(`/api/admin/menu/starters/delete/${id}`).then((res) => {
       if (res.data != null) {
         setStarters(starters.filter((starter: FoodType) => starter._id !== id));
@@ -65,7 +65,7 @@ const Menus = () => {
     });
   };
 
-  const deleteMaincourse = async (id) => {
+  const deleteMaincourse = async (id: string) => {
     await axios
       .delete(`/api/admin/menu/maincourses/delete/${id}`)
       .then((res) => {
@@ -77,7 +77,7 @@ const Menus = () => {
       });
   };
 
-  const deleteDessert = async (id) => {
+  const deleteDessert = async (id: string) => {
     await axios.delete(`/api/admin/menu/desserts/delete/${id}`).then((res) => {
       if (res.data != null) {
         setDesserts(desserts.filter((dessert: FoodType) => dessert._id !== id));
@@ -85,7 +85,7 @@ const Menus = () => {
     });
   };
 
-  const deleteApetizer = async (id) => {
+  const deleteApetizer = async (id: string) => {
     await axios.delete(`/api/admin/menu/apetizers/delete/${id}`).then((res) => {
       if (res.data != null) {
         setApetizers(apetizers.filter((apetizer: FoodType) => apetizer._id !== id));
@@ -93,7 +93,7 @@ const Menus = () => {
     });
   };
 
-  const deleteBeverage = async (id) => {
+  const deleteBeverage = async (id: string) => {
     await axios.delete(`/api/admin/menu/beverages/delete/${id}`).then((res) => {
       if (res.data != null) {
         setBeverages(beverages.filter((beverage: FoodType) => beverage._id !== id));

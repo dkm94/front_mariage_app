@@ -1,6 +1,6 @@
 import "./Tables.css";
 
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, ChangeEvent } from "react";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
 
@@ -10,15 +10,14 @@ import { Box } from "@mui/material";
 import Grow from "@mui/material/Grow";
 
 import { GuestType, TableType } from "../../../types";
-import { ScrollButtonContext } from "../../App";
 import { getGuests } from "../../services/guests/guestRequests";
 import { getTables } from "../../services/tables/tableRequests";
-import formatArray from "../../helpers/formatDefault";
 
 import AddTableForm from "./Forms/Add";
 import Table from "./Table";
 import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
 import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
+import { useFetch } from "../../hooks";
 
 type EditType = {
   id: string;
@@ -26,79 +25,56 @@ type EditType = {
 }
 
 const Tables = (props) => {
-  const [guests, setGuests] = useState<GuestType[] | []>([]);
-
   const [searchValue, setSearchValue] = useState<string>("");
-  const [tables, setTables] = useState<TableType[] | []>([]);
   const [edit, setEdit] = useState<EditType | null>(null);
   const [input, setInput] = useState("");
 
-  const [loading, setLoading] = useState(false);
   const [isOpen, setisOpen] = useState(false);
 
-  const [errorGuests, setErrorGuests] = useState<boolean>(false);
-  const [errorMessageGuests, setErrorMessageGuests] = useState<string | undefined>(undefined);
+  // const fetchGuests = async () => { // TODO: problème de performances, trop de re rendus (search bar, update picture...)
+  //   try {
+  //     setLoading(true);
+  //     const guestsResponse = await getGuests();
+  //     if(guestsResponse.success && guestsResponse.statusCode === 200) {
+  //       setGuests(formatArray(guestsResponse.data)  || []);
+  //     } else {
+  //       setErrorGuests(true);
+  //       if(guestsResponse.message === "Network Error"){
+  //         setErrorMessageGuests("Oups, une erreur s'est produite.");
+  //       } else {
+  //         setErrorMessageGuests(guestsResponse.message);
+  //       }
+  //     }
+  //   } catch (err) {
+  //     setErrorMessageGuests(err.message);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
-  const [errorTables, setErrorTables] = useState<boolean>(false);
-  const [errorMessageTables, setErrorMessageTables] = useState<string | undefined>(undefined);
+  const { 
+    data: tables, 
+    setData: setTables, 
+    loading: loadingTables, 
+    error: errorTables, 
+    errorMessage: errorMessageTables } = useFetch<void, TableType[]>(getTables, []);
+
+  const { 
+    data: guests, 
+    setData: setGuests, 
+    error: errorGuests, 
+    errorMessage: errorMessageGuests } = useFetch<void, GuestType[]>(getGuests, []);
 
   const orderedGuests = guests.slice().sort((a, b) => a.name.localeCompare(b.name));
 
-  const fetchGuests = async () => { // TODO: problème de performances, trop de re rendus (search bar, update picture...)
-    try {
-      setLoading(true);
-      const guestsResponse = await getGuests();
-      if(guestsResponse.success && guestsResponse.statusCode === 200) {
-        setGuests(formatArray(guestsResponse.data)  || []);
-      } else {
-        setErrorGuests(true);
-        if(guestsResponse.message === "Network Error"){
-          setErrorMessageGuests("Oups, une erreur s'est produite.");
-        } else {
-          setErrorMessageGuests(guestsResponse.message);
-        }
-      }
-    } catch (err) {
-      setErrorMessageGuests(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const fetchTables = async () => { // TODO: problème de performances, trop de re rendus (search bar, update picture...)
-    try {
-      setLoading(true);
-      const tablesResponse = await getTables();
-      if(tablesResponse.success && tablesResponse.statusCode === 200) {
-        setTables(tablesResponse.data  || []);
-      } else {
-        setErrorTables(true);
-        if(tablesResponse.message === "Network Error"){
-          setErrorMessageTables("Oups, une erreur s'est produite.");
-        } else {
-          setErrorMessageTables(tablesResponse.message);
-        }
-      }
-    } catch (err) {
-      setErrorMessageTables(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleUpdatedTable = (e) => {
+  const handleUpdatedTable = (e: ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
   };
-  const handleSearch = (e) => {
+  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
   };
 
-  useEffect(() => {
-    fetchGuests();
-    fetchTables();
-}, []);
-
-  const getUpdatedId = (tableId, tableName) => {
+  const getUpdatedId = (tableId: string, tableName: string) => {
     setEdit({
       id: tableId,
       name: tableName,
@@ -123,7 +99,13 @@ const Tables = (props) => {
   };
 
   return (
-    <ContentLayout loading={loading} title={"Comment souhaitez-vous organiser votre plan de table ?"} src={"tables"} >
+    <ContentLayout 
+    loading={loadingTables} 
+    title={"Comment souhaitez-vous organiser votre plan de table ?"} 
+    src={"tables"}
+    error={errorTables}
+    errorMessage={errorMessageTables}
+    >
       <Container style={{ padding: "2rem 50px" }} fluid>
         <Row>
           <Col xs={12} sm={10} md={6} className="table-form">
@@ -142,7 +124,7 @@ const Tables = (props) => {
         </Row>
       </Container>
 
-      <Grow in={!loading} timeout={2000}>
+      <Grow in={!loadingTables} timeout={2000}>
         <Box
           sx={{
             minHeight: "500px",
@@ -151,7 +133,6 @@ const Tables = (props) => {
           pl={"50px"}
           pr={"50px"}
           >
-          {errorTables && <div style={{ alignSelf: "center" }}><span style={{ color: "darkred"}}>{errorMessageTables}</span></div>}
           {errorGuests && <div style={{ alignSelf: "center" }}><span style={{ color: "darkred"}}>{errorMessageGuests}</span></div>}
 
           {tables?.length === 0 || null ? (
