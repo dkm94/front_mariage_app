@@ -11,10 +11,12 @@ import { TaskType } from '../../../../types';
 interface IconButtonProps {
     buttonType: string;
     obj?: TaskType;
+    onClick: any;
+    type: "submit" | "button" | "reset" | undefined;
 }
 
 const CustomIconButton = (props: IconButtonProps) => {
-    const { buttonType, obj, ...rest } = props;
+    const { buttonType, obj, onClick, type, ...rest } = props;
     
     const editStyle = {
         backgroundColor: obj?.isCompleted ? "lightgrey" : "#fff",
@@ -62,6 +64,8 @@ const CustomIconButton = (props: IconButtonProps) => {
   return (
     <IconWrapper
     {...rest}
+    type={type}
+    onClick={onClick}
     style={
         buttonType === "edit" ? editStyle 
         : buttonType === "save" ? saveStyle 

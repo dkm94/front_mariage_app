@@ -2,12 +2,9 @@ import "./ReceptionCard.css";
 
 import React from 'react';
 
-import styled from "@emotion/styled";
-
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
-import { IconButton } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import CreateIcon from "@mui/icons-material/Create";
+
+import CustomIconButton from "../../Buttons/SmallIconButton/IconButton";
 
 interface CardPropos {
     img: any;
@@ -20,12 +17,6 @@ interface CardPropos {
     addForm: any;
     editForm: any;
 }
-
-const IconWrapper = styled(IconButton)({
-    "&:hover": {
-      background: "none",
-    },
-  });
 
 const ReceptionCard = (props: CardPropos) => {
     const { array, edit, getUpdatedId, deleteElement, even, img, editForm, addForm, type } = props;
@@ -89,32 +80,19 @@ const ReceptionCard = (props: CardPropos) => {
                 >
                     {!edit.id && (
                     <>
-                        <IconWrapper
-                        onClick={() =>
-                            getUpdatedId(starter._id, starter.name)
-                        }
-                        style={{
-                            backgroundColor: "#fff",
-                            border: "1px solid lightgray",
-                            borderRadius: "5px",
-                            color: "#262626",
-                        }}
-                        >
-                        <CreateIcon fontSize="small" />
-                        </IconWrapper>
-                        <IconWrapper
+                        <CustomIconButton
+                        type="button"
+                        buttonType={"edit"}
+                        onClick={() => getUpdatedId(starter._id, starter.name)}
+                        />
+                        <CustomIconButton 
                         type="submit"
+                        buttonType="delete"
                         onClick={() => deleteElement(starter._id)}
-                        style={{
-                            backgroundColor: "darkred",
-                            borderRadius: "5px",
-                            color: "#fff",
-                        }}
-                        >
-                        <DeleteIcon fontSize="small" />
-                        </IconWrapper>
+                        /> 
                     </>
                     )}
+
                 </Grid2>
                 </Grid2>
             ))}
