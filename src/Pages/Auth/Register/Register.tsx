@@ -11,7 +11,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { TextField, Button } from "@mui/material";
 
 import { SuccessAlert, ErrorAlert } from "../../../components/Alert";
-import { BlackButton } from "../../../components/Buttons";
+import { CustomButton } from "../../../components/Buttons";
 
 import { IRegisterProps, UserType } from "../../../../types";
 
@@ -206,7 +206,7 @@ const Register = ({ setShowForm }: IRegisterProps) => {
                   <span>{errors.confirmPassword?.message}</span>
                 </div>
                 <div className="form-group">
-                  <BlackButton 
+                  <CustomButton 
                   variant="contained" 
                   type="submit" 
                   text={loadingButton

@@ -6,10 +6,11 @@ import React, { useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Button, IconButton, TextField } from "@mui/material";
 
-import { BlackButton } from "../../../../components/Buttons";
+import { ClearButton, CustomButton } from "../../../../components/Buttons";
 import MultipleSelect from "../../../../components/MultiSelect/MultiSelect";
 
 import { updateTableWithGuests, updateTablesName } from "../../../../services/tables/tableRequests";
+import RedButton from "../../../../components/Buttons/RedButton/RedButton";
 
 const EditTableForm = (props) => {
   const {
@@ -78,40 +79,29 @@ const EditTableForm = (props) => {
         <MultipleSelect guests={guests} setGuestsIds={setGuestsIds} edit={edit} />
 
         <div className="action-buttons">
-          <IconButton
-            onClick={(e) => deleteTable(e, edit.id)}
-            style={{ backgroundColor: "darkred", borderRadius: "20px", flexGrow: 1 }}
-          >
-            <DeleteIcon style={{ color: "#F4F4F4" }} />
-            <span style={{ color: "#F4F4F4" }}>Supprimer</span>
-          </IconButton>
 
-          <BlackButton
+          <RedButton 
+          type={"submit"} 
+          text={"Suprimer"} 
+          handleClick={(e) => deleteTable(e, edit.id)} 
+          />
+
+          <CustomButton
             type={"submit"}
             text={"Enregistrer"}
             variant="contained"
-            sx={{ "&:hover": { backgroundColor: "#333232" } }}
-            style={{ borderRadius: "20px", padding: "6px 16px", flexGrow: 1 }}
+            sx={{ flexGrow: 1 , "&:hover": { backgroundColor: "#333232" } }}
           />
 
-          <Button
+          <ClearButton
+            text={"Annuler"}     
             onClick={() => {
               setEdit(null);
               setisOpen(false);
             }}
-            variant="outlined"
-            style={{
-              borderRadius: "20px",
-              color: "grey",
-              textTransform: "unset",
-              fontSize: "1rem",
-              width: "100%",
-              borderColor: "#e4e8e8",
-            }}
-          >
-            Annuler
-          </Button>
-
+            sx={{ width: "100% !important" }}
+            variant="outlined"    
+            />
           
         </div>
       </form>

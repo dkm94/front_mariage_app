@@ -12,7 +12,7 @@ import { getWedding } from "../../services";
 import { AccountType, UserType, WeddingType } from '../../../types';
 
 import { UserContext } from "../../App";
-import { BlackButton } from "../../components/Buttons";
+import { CustomButton } from "../../components/Buttons";
 import DefaultModal from "../../components/Modals/Default/DefaultModal";
 
 import profilePicture from "../../img/couple-img.jpg";
@@ -224,7 +224,7 @@ const MyAccount = ({ token }) => {
                                     </div>
                                 </Col>
                                 <Col xs={12} style={{ display: "flex", justifyContent: "end"}}>
-                                    <BlackButton 
+                                    <CustomButton 
                                         type="submit" 
                                         text={"Enregistrer"} 
                                         variant="contained"
@@ -285,7 +285,7 @@ const MyAccount = ({ token }) => {
                                     </div>
                                 </Col>
                                 <Col xs={12} style={{ display: "flex", justifyContent: "end"}} >
-                                    <BlackButton 
+                                    <CustomButton 
                                         type="submit" 
                                         text={"Enregistrer"} 
                                         variant="contained"
@@ -299,7 +299,7 @@ const MyAccount = ({ token }) => {
                     </Row>
                 </Container>
                 <Container fluid style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", marginTop: "50px", maxWidth: "950px" }}>
-                    <BlackButton text="Supprimer le compte" onClick={() => setOpenModal(true)} style={{ backgroundColor: "darkred", borderRadius: "5px" }} />
+                    <CustomButton text="Supprimer le compte" onClick={() => setOpenModal(true)} style={{ backgroundColor: "darkred", borderRadius: "5px" }} />
                 </Container>
             </div>
             {openModal && (
@@ -307,13 +307,13 @@ const MyAccount = ({ token }) => {
                     <div id="modal-account">
                         <span>La suppression du compte étant définitive, toutes les données seront perdues. Souhaitez-vous continuer ?</span>
                         <div className="action-buttons">
-                            <BlackButton
+                            <CustomButton
                             onClick={deleteAccount}
                             text={"Supprimer"}
                             variant="contained"
                             style={{ borderRadius: "20px", padding: "6px 16px", flexGrow: 1, color: "#F4F4F4", backgroundColor: "darkred" }}
                             />
-                            <BlackButton
+                            <CustomButton
                             onClick={() => setOpenModal(false)}
                             text={"Annuler"}
                             type={"submit"}

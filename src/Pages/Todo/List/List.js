@@ -2,12 +2,13 @@ import "./List.css";
 
 import React, { useState, useRef } from "react";
 import axios from "axios";
+
 import { IconButton } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
-import CreateIcon from "@mui/icons-material/Create";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import DeleteIcon from "@mui/icons-material/Delete";
+
+import CustomIconButton from "../../../components/Buttons/SmallIconButton/IconButton";
 
 import UpdateForm from "../Update/Form";
 
@@ -135,32 +136,20 @@ const Todos = ({
             <span>{obj.text}</span>
           </Grid2>
           <Grid2 className="todolist___checkbox_span">
-            <IconButton
-              disabled={obj.isCompleted && true}
-              onClick={() => getUpdatedId(obj._id, obj.text)}
-              style={{
-                backgroundColor: obj.isCompleted ? "lightgrey" : "#fff",
-                border: "1px solid lightgray",
-                borderRadius: "5px",
-                color: obj.isCompleted ? "grey" : "#262626",
-              }}
-            >
-              <CreateIcon fontSize="small" />
-            </IconButton>
-            <IconButton
-              style={{
-                backgroundColor: "darkred",
-                borderRadius: "5px",
-                color: "#fff",
-              }}
-              onClick={() => {
-                deleteTodo(obj._id);
-              }}
-            >
-              <DeleteIcon
-                fontSize="small"
-              />
-            </IconButton>
+            
+            <CustomIconButton
+            type="submit"
+            buttonType='edit' 
+            obj={obj} 
+            onClick={() => getUpdatedId(obj._id, obj.text)} 
+            />
+
+            <CustomIconButton 
+            type="submit"
+            buttonType="delete"
+            onClick={() => deleteTodo(obj._id)} 
+            />
+
           </Grid2>
         </Grid2>
       )}

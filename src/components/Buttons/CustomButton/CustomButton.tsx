@@ -1,17 +1,17 @@
-import "./BlackButton.css";
+import "./CustomButton.css";
 
 import React from "react";
 
 import { Button, ButtonProps } from "@mui/material";
 
-import { IBlackButton } from "../../../../types";
+// import { IBlackButton } from "../../../../types";
 
-export interface IButton extends Omit<ButtonProps, 'text'> {
-  text: string;
-  theme?: IBlackButton;
-}
+// export interface IButton extends Omit<ButtonProps, 'text'> {
+//   text: string;
+//   theme?: IBlackButton;
+// }
 
-const BlackButton = ({
+const CustomButton = ({
   text,
   ...props
 }) => {
@@ -38,4 +38,4 @@ const BlackButton = ({
   );
 };
 
-export default BlackButton;
+export default CustomButton;

@@ -14,7 +14,7 @@ import { Button, styled } from "@material-ui/core";
 import { ILoginProps } from "../../../../types";
 
 import { ErrorAlert } from "../../../components/Alert";
-import { BlackButton } from "../../../components/Buttons";
+import { CustomButton } from "../../../components/Buttons";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required("Veuillez compléter ce champ."),
@@ -124,7 +124,7 @@ const Login = ({ setShowForm }: ILoginProps) => {
                   <div>{errors?.password?.message}</div>
                 </div>
                 <div style={{ marginTop: "2rem" }}>
-                  <BlackButton
+                  <CustomButton
                     type="submit"
                     variant="contained"
                     text={loadingButton ? "Veuillez patienter..." : "Se connecter"}  

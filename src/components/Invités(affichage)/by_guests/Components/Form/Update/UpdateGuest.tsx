@@ -7,13 +7,14 @@ import { Button, Grid, IconButton } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-import { BlackButton } from "../../../../../Buttons";
+import { ClearButton, CustomButton } from "../../../../../Buttons";
 
 import checkIcon from "../../../../../../img/green-check.png";
 import { useFetch } from "../../../../../../hooks";
 import { getWedding } from "../../../../../../services";
 import { UserType, WeddingType } from "../../../../../../../types";
 import { UserContext } from "../../../../../../App";
+import RedButton from "../../../../../Buttons/RedButton/RedButton";
 
 const UpdateGuest = ({
   edit,
@@ -154,39 +155,33 @@ const UpdateGuest = ({
             </div>
           </div>
           <div className="action-buttons">
-            <IconButton
-              onClick={() => deleteGuest(edit.id)}
-              style={{ backgroundColor: "darkred", borderRadius: "20px", flexGrow: 1 }}
-            >
-              <DeleteIcon style={{ color: "#F4F4F4" }} />
-              <span style={{ color: "#F4F4F4" }}>Supprimer</span>
-            </IconButton>
-
-            <BlackButton
-              text={"Valider"}
-              type={"submit"}
-              variant="contained"
-              sx={{ "&:hover": { backgroundColor: "#333232" } }}
-              style={{ borderRadius: "20px", padding: "6px 16px", flexGrow: 1 }}
+            
+            <RedButton 
+            type="submit"
+            text="Supprimer"
+            handleClick={() => deleteGuest(edit.id)}
             />
 
-            <Button
+            <CustomButton
+              text={"Enregistrer"}
+              type={"submit"}
+              variant="contained"
+              sx={{ flexGrow: 1 }}
+            />
+
+            <ClearButton
+              text={"Annuler"}
+              type={"button"}
               onClick={() => {
                 setEdit({ id: null });
                 setisOpen(false);
-              }}
+              } }
               variant="outlined"
               style={{
-                borderRadius: "20px",
-                color: "grey",
-                textTransform: "unset",
-                fontSize: "1rem",
-                width: "100%",
-                borderColor: "#e4e8e8",
+                width: "100% !important",
               }}
-            >
-              Annuler
-            </Button>
+              sx={{ width: "100% !important" }}
+              />
               
           </div>
         </form>

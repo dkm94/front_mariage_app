@@ -5,7 +5,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Button, TextField, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-import { BlackButton } from "../../../../components/Buttons";
+import { CustomButton } from "../../../../components/Buttons";
 
 const UpdateExpense = ({
   edit,
@@ -112,8 +112,8 @@ const UpdateExpense = ({
             <span style={{ color: "#F4F4F4", padding: "0px 6px" }}>Supprimer</span>
           </IconButton>
 
-          <BlackButton
-              text={"Valider"}
+          <CustomButton
+              text={"Enregistrer"}
               variant={"contained"}
               onClick={handleSubmit}
               sx={{ "&:hover": { backgroundColor: "#333232" } }}
