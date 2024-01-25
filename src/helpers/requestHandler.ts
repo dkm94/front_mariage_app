@@ -28,8 +28,8 @@ export const requestHandler = <TParams, TResult>(
     } catch (error) {
       return {
         statusCode: error.response ? error.response.status : 500,
-        success: false,
-        message: error.message,
+        success: error.response.data.success,
+        message: error.response.data.message,
       };
     }
   };

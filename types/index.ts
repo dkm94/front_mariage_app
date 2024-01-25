@@ -43,11 +43,6 @@ export interface ProtectedRouteProps {
     token?: string | null;
 }
 
-export interface VerticalNavbarProps {
-    userInfos?: UserType | null;
-    loading: boolean;
-}
-
 export type NavigationDataType = {
     idx: number;
     title: string;

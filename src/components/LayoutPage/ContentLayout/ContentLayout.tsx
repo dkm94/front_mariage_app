@@ -1,5 +1,4 @@
 import "./ContentLayout.css";
-
 import 'react-toastify/dist/ReactToastify.css';
 
 import React, { useContext, useEffect } from 'react';

@@ -34,6 +34,7 @@ type FormValues2 = {
 const MyAccount = ({ token }) => {
    
     const user: UserType = useContext(UserContext);
+    console.log("🚀 ~ MyAccount ~ user:", user)
     const { id, mariageID, firstPerson, secondPerson } = user as { id: string, mariageID: string, firstPerson: string, secondPerson: string};
 
     const [successfulDeletionMessage, setsuccessfulDeletionMessage] = useState<string>("")

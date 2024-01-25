@@ -1,9 +1,11 @@
+import { getFoods } from './foodRequests';
 import { getGuests } from "./guests/guestRequests";
 import { getTables } from "./tables/tableRequests";
 import { getTodos } from "./todos/todosRequests";
 import { getWedding } from "./weddings/weddingsRequests";
 import { getOperations } from "./budget/operationsRequests";
 import { getStarters, getMaincourses, getDesserts, getApetizers, getBeverages } from "./reception";
+import { login } from "./authRequests";
 
 export { 
     getGuests, 
@@ -15,5 +17,7 @@ export {
     getMaincourses, 
     getDesserts, 
     getApetizers, 
-    getBeverages 
+    getBeverages, 
+    login, 
+    getFoods
 };

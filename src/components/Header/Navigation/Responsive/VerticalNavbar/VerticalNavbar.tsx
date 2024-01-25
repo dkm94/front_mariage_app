@@ -1,17 +1,22 @@
 import "./VerticalNavbar.css";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { IconButton } from "@mui/material";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 
-import { VerticalNavbarProps } from '../../../../../../types';
+import { UserType } from '../../../../../../types';
 import { NavigationData } from "../../NavigationData";
 import profilePicture from "../../../../../img/couple-img.jpg";
 
-const VerticalNavbar = ({ userInfos, loading }: VerticalNavbarProps) => {
+interface VerticalNavbarProps {
+  userInfos?: UserType | null;
+  loading: boolean;
+}
+
+const VerticalNavbar = (props: VerticalNavbarProps) => {
+  const { userInfos, loading } = props;
 
   const [isExpanded, setExpendState] = useState<boolean>(false);
 

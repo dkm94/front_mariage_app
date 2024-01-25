@@ -7,29 +7,36 @@ import { Container, Row } from "react-bootstrap";
 import Card from "./Card/Card.jsx";
 import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
 
-import { getGuests, getTables, getTodos, getWedding, getOperations, getStarters, getMaincourses, getDesserts, getApetizers, getBeverages } from "../../services";
+import { getGuests, getTables, getTodos, getWedding, getOperations, getFoods } from "../../services";
 import { useFetch } from "../../hooks";
-import { FoodType, GuestType, IDashboardProps, OperationType, TableType, TaskType, WeddingType } from "../../../types";
+import { GuestType, IDashboardProps, OperationType, TableType, TaskType, WeddingType } from "../../../types";
 import { floatToEuro } from "../../helpers/formatCurrency";
 
+type Food = {
+  name: string;
+  mariageID: string;
+  category: string;
+}
 
 const Dashboard = (props: IDashboardProps) => { // Ce composant est rendu beaucoup trop de fois
   const id = props?.userInfos?.mariageID;
 
-  const [sum, setSum] = useState<string>("")
+  const [sum, setSum] = useState<string>("");
 
   const [loading, setLoading] = useState(false);
+
+  const [starters, setStarters] = useState<Food[]>([]);
+  const [maincourses, setMaincourses] = useState<Food[]>([]);
+  const [desserts, setDesserts] = useState<Food[]>([]);
+  const [apetizers, setApetizers] = useState<Food[]>([]);
+  const [beverages, setBeverages] = useState<Food[]>([]);
 
   const { data: wedding, fetchData: fetchWedding } = useFetch<any, WeddingType>(() => getWedding({ id }), undefined);
   const { data: tasks } = useFetch<void, TaskType[]>(getTodos, []);
   const { data: guests } = useFetch<void, GuestType[]>(getGuests, []);
   const { data: tables } = useFetch<void, TableType[]>(getTables, []);
   const { data: operations } = useFetch<void, OperationType[]>(getOperations, []);
-  const { data: starters } = useFetch<void, FoodType[]>(getStarters, []);
-  const { data: maincourses } = useFetch<void, FoodType[]>(getMaincourses, []);
-  const { data: desserts } = useFetch<void, FoodType[]>(getDesserts, []);
-  const { data: apetizers } = useFetch<void, FoodType[]>(getApetizers, []);
-  const { data: beverages } = useFetch<void, FoodType[]>(getBeverages, []);
+  const { data: foods } = useFetch<void, Food[]>(getFoods, []);
 
   useEffect(() => {
     fetchWedding({ id });
@@ -49,12 +56,23 @@ const Dashboard = (props: IDashboardProps) => { // Ce composant est rendu beauco
   const firstFamilyGuests = guests?.filter((guest: GuestType) => guest?.family === "1");
   const secondFamilyGuests = guests?.filter((guest: GuestType) => guest?.family === "2");
 
-  const meal =
-    starters?.length +
-    maincourses?.length +
-    desserts?.length +
-    apetizers?.length +
-    beverages?.length;
+  const getAllKindsOfFoods = (foods: Food[]) => {
+    const starters = foods?.filter((food: Food) => food?.category === "starter");
+    const maincourses = foods?.filter((food: Food) => food?.category === "maincourse");
+    const desserts = foods?.filter((food: Food) => food?.category === "dessert");
+    const apetizers = foods?.filter((food: Food) => food?.category === "apetizer");
+    const beverages = foods?.filter((food: Food) => food?.category === "beverage");
+    
+    if(starters) setStarters(starters);
+    if(maincourses) setMaincourses(maincourses);
+    if(desserts) setDesserts(desserts);
+    if(apetizers) setApetizers(apetizers);
+    if(beverages) setBeverages(beverages);
+    }
+
+  useEffect(() => {
+    getAllKindsOfFoods(foods);
+  }, [foods])
 
   return (
     <ContentLayout loading={loading} title={"Que souhaitez-vous faire aujourd'hui ?"} src={"dashboard"} >
@@ -82,12 +100,12 @@ const Dashboard = (props: IDashboardProps) => { // Ce composant est rendu beauco
           />
           <Card
             title={"Réception"}
-            content={meal}
+            content={foods?.length}
             subArrayOne={starters?.length}
             subArrayTwo={maincourses?.length}
             subArrayThree={desserts?.length}
-            subArrayFour={maincourses?.length}
-            subArrayFive={desserts?.length}
+            subArrayFour={apetizers?.length}
+            subArrayFive={beverages?.length}
             resume={"composition"}
             extraProp={"composition"}
             path={"menu/carte"}
