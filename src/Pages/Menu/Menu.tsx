@@ -11,36 +11,57 @@ import beverageImg from "../../img/menus/beverages.jpg";
 
 import Grow from "@mui/material/Grow";
 
-import { AddStarterForm, AddMaincourseForm, AddDessertForm, AddApetizerForm, AddBeverageForm } from "./Forms/Add";
-import { UpdateStarter, UpdateMaincourse, UpdateDessert, UpdateApetizer, UpdateBeverage } from "./Forms/Update";
-
-import { FoodType } from "../../../types";
 import { useFetch } from "../../hooks";
-import { getApetizers, getBeverages, getDesserts, getMaincourses, getStarters } from "../../services";
+import { getFoods } from "../../services";
+
 import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
 import ReceptionCard from "../../components/Reception/Card/ReceptionCard";
+import AddFoodForm from "./Forms/Add/AddFood";
+import UpdateFood from "./Forms/Update/UpdateFood";
 
 type EditType = {
   id: string;
   name: string;
 };
 
+type Food = {
+  _id?: string;
+  name: string;
+  mariageID?: string;
+  category: string;
+}
+
 const Menus = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
-  const { data: starters, setData: setStarters } = useFetch<void, FoodType[]>(getStarters, []);
-  const { data: maincourses,setData: setMaincourses} = useFetch<void, FoodType[]>(getMaincourses, []);
-  const { data: desserts, setData: setDesserts } = useFetch<void, FoodType[]>(getDesserts, []);
-  const { data: apetizers, setData: setApetizers } = useFetch<void, FoodType[]>(getApetizers, []);
-  const { data: beverages, setData: setBeverages } = useFetch<void, FoodType[]>(getBeverages, []);
+  const [starters, setStarters] = useState<Food[]>([]);
+  const [maincourses, setMaincourses] = useState<Food[]>([]);
+  const [desserts, setDesserts] = useState<Food[]>([]);
+  const [apetizers, setApetizers] = useState<Food[]>([]);
+  const [beverages, setBeverages] = useState<Food[]>([]);
+
+  const { data: foods, setData: setFoods } = useFetch<void, Food[]>(getFoods, []);
 
   useEffect(() => {
     setLoading(true);
 
-    if(starters && maincourses && desserts && apetizers && beverages) {
+    if(foods) {
       setLoading(false);
+
+      const starters = foods?.filter((food: Food) => food?.category === "starter");
+      const maincourses = foods?.filter((food: Food) => food?.category === "maincourse");
+      const desserts = foods?.filter((food: Food) => food?.category === "dessert");
+      const apetizers = foods?.filter((food: Food) => food?.category === "apetizer");
+      const beverages = foods?.filter((food: Food) => food?.category === "beverage");
+
+      if(starters) setStarters(starters);
+      if(maincourses) setMaincourses(maincourses);
+      if(desserts) setDesserts(desserts);
+      if(apetizers) setApetizers(apetizers);
+      if(beverages) setBeverages(beverages);
+
     }
-  }, [starters, maincourses, desserts, apetizers, beverages])
+  }, [foods])
   
   const [edit, setEdit] = useState<EditType>({
     id: "",
@@ -55,52 +76,6 @@ const Menus = () => {
     });
   };
 
-  //todo: error in update handling
-
-  const deleteStarter = async (id: string) => {
-    await axios.delete(`/api/admin/menu/starters/delete/${id}`).then((res) => {
-      if (res.data != null) {
-        setStarters(starters.filter((starter: FoodType) => starter._id !== id));
-      }
-    });
-  };
-
-  const deleteMaincourse = async (id: string) => {
-    await axios
-      .delete(`/api/admin/menu/maincourses/delete/${id}`)
-      .then((res) => {
-        if (res.data != null) {
-          setMaincourses(
-            maincourses.filter((maincourse: FoodType) => maincourse._id !== id)
-          );
-        }
-      });
-  };
-
-  const deleteDessert = async (id: string) => {
-    await axios.delete(`/api/admin/menu/desserts/delete/${id}`).then((res) => {
-      if (res.data != null) {
-        setDesserts(desserts.filter((dessert: FoodType) => dessert._id !== id));
-      }
-    });
-  };
-
-  const deleteApetizer = async (id: string) => {
-    await axios.delete(`/api/admin/menu/apetizers/delete/${id}`).then((res) => {
-      if (res.data != null) {
-        setApetizers(apetizers.filter((apetizer: FoodType) => apetizer._id !== id));
-      }
-    });
-  };
-
-  const deleteBeverage = async (id: string) => {
-    await axios.delete(`/api/admin/menu/beverages/delete/${id}`).then((res) => {
-      if (res.data != null) {
-        setBeverages(beverages.filter((beverage: FoodType) => beverage._id !== id));
-      }
-    });
-  };
-
   return (
     <ContentLayout loading={loading} title={"Avez-vous prévu une réception ?"} src={"reception"}>
       <Grow in={!loading} timeout={2000}>
@@ -110,61 +85,61 @@ const Menus = () => {
             <ReceptionCard 
             img={starterImg} 
             type={"entrée"} 
-            array={starters} 
+            array={starters}
+            setArray={setStarters}
             edit={edit} 
             getUpdatedId={getUpdatedId} 
-            deleteElement={deleteStarter} 
             even={true} 
-            addForm={<AddStarterForm starters={starters} setStarters={setStarters} />} 
-            editForm={<UpdateStarter edit={edit} setEdit={setEdit} setStarters={setStarters} starters={starters} />}            
+            addForm={<AddFoodForm foods={starters} setFoods={setStarters} category="starter" />} 
+            editForm={<UpdateFood edit={edit} setEdit={setEdit} setFoods={setStarters} foods={starters} />}            
             />
 
             <ReceptionCard 
             img={maincourseImg} 
             type={"plat"} 
             array={maincourses} 
+            setArray={setMaincourses}
             edit={edit} 
             getUpdatedId={getUpdatedId} 
-            deleteElement={deleteMaincourse} 
             even={false} 
-            addForm={<AddMaincourseForm maincourses={maincourses} setMaincourses={setMaincourses} />} 
-            editForm={<UpdateMaincourse edit={edit} setEdit={setEdit} maincourses={maincourses} setMaincourses={setMaincourses} />}            
+            addForm={<AddFoodForm foods={maincourses} setFoods={setMaincourses} category="maincourse" />} 
+            editForm={<UpdateFood edit={edit} setEdit={setEdit} foods={maincourses} setFoods={setMaincourses} />}            
             />
 
             <ReceptionCard 
             img={dessertImg} 
             type={"dessert"} 
             array={desserts} 
+            setArray={setDesserts}
             edit={edit} 
             getUpdatedId={getUpdatedId} 
-            deleteElement={deleteDessert} 
             even={true} 
-            addForm={<AddDessertForm desserts={desserts} setDesserts={setDesserts} />} 
-            editForm={<UpdateDessert edit={edit} setEdit={setEdit} desserts={desserts} setDesserts={setDesserts} />} 
+            addForm={<AddFoodForm foods={desserts} setFoods={setDesserts} category="dessert" />} 
+            editForm={<UpdateFood edit={edit} setEdit={setEdit} foods={desserts} setFoods={setDesserts} />} 
             />
 
             <ReceptionCard 
             img={apetizerImg}
             type={"apéritif"} 
             array={apetizers} 
+            setArray={setApetizers}
             edit={edit} 
             getUpdatedId={getUpdatedId} 
-            deleteElement={deleteApetizer} 
             even={false} 
-            addForm={<AddApetizerForm apetizers={apetizers} setApetizers={setApetizers} />} 
-            editForm={<UpdateApetizer edit={edit} setEdit={setEdit} apetizers={apetizers} setApetizers={setApetizers} />}            
+            addForm={<AddFoodForm foods={apetizers} setFoods={setApetizers} category="apetizer" />} 
+            editForm={<UpdateFood edit={edit} setEdit={setEdit} foods={apetizers} setFoods={setApetizers} />}            
             />
 
             <ReceptionCard 
             img={beverageImg} 
             type={"boisson"} 
-            array={beverages} 
+            array={beverages}
+            setArray={setBeverages} 
             edit={edit} 
             getUpdatedId={getUpdatedId} 
-            deleteElement={deleteBeverage} 
             even={true} 
-            addForm={<AddBeverageForm beverages={beverages} setBeverages={setBeverages} />} 
-            editForm={<UpdateBeverage edit={edit} setEdit={setEdit} beverages={beverages} setBeverages={setBeverages} />} 
+            addForm={<AddFoodForm foods={beverages} setFoods={setBeverages} category="beverage" />} 
+            editForm={<UpdateFood edit={edit} setEdit={setEdit} foods={beverages} setFoods={setBeverages} />} 
             />
 
           </div>

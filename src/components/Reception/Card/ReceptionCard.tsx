@@ -1,29 +1,59 @@
 import "./ReceptionCard.css";
 
-import React from 'react';
+import React, { useState } from 'react';
 
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 
 import CustomIconButton from "../../Buttons/SmallIconButton/IconButton";
 
+import { deleteFood } from "../../../services";
+import Toast from "../../Toast/Toast";
+
+type Food = {
+    _id?: string;
+    name: string;
+    mariageID?: string;
+    category: string;
+}
+
 interface CardPropos {
     img: any;
     type: string;
     array: any;
+    setArray: any;
     edit: any;
     getUpdatedId: any;
-    deleteElement: any;
     even: boolean
     addForm: any;
     editForm: any;
 }
 
 const ReceptionCard = (props: CardPropos) => {
-    const { array, edit, getUpdatedId, deleteElement, even, img, editForm, addForm, type } = props;
+    const { array, setArray, edit, getUpdatedId, even, img, editForm, addForm, type } = props;
+
+    const [message, setMessage] = useState<string | undefined>(undefined);
+    const [messageType, setMessageType] = useState<"error" | "success" | undefined>(undefined);
+    
+  const deleteElement = async (id: string) => {
+    const response = await deleteFood({ id });
+    const { success, message, statusCode } = response;
+    console.log("🚀 ~ deleteElement ~ response:", response)
+
+    if(!success){
+      setMessageType("error");
+      setMessage(message);
+      return;
+    }
+
+    if(success && statusCode === 200){
+        setArray(array.filter((food: Food) => food._id !== id));
+    }
+  };
 
   return (
     <div className={even ? "forms" : "forms forms_reverse"}>
         {/* Image */}
+        <Toast message={message} messageType={messageType} />
         <div className={even ? "reception-form-even" : "reception-form-odd"}>
             <img src={img} alt="" />
         </div>

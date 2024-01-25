@@ -1,4 +1,4 @@
-import { getFoods } from './foodRequests';
+import { getFoods, addFood, updateFood, deleteFood } from './foodRequests';
 import { getGuests } from "./guests/guestRequests";
 import { getTables } from "./tables/tableRequests";
 import { getTodos } from "./todos/todosRequests";
@@ -19,5 +19,8 @@ export {
     getApetizers, 
     getBeverages, 
     login, 
-    getFoods
+    getFoods,
+    addFood, 
+    updateFood, 
+    deleteFood
 };

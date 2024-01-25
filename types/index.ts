@@ -203,10 +203,10 @@ export type TableType = {
 }
 
 export type FoodType = {
-    _id: string;
+    _id?: string;
     name: string;
-    menuID: string;
-    mariageID: string;
+    mariageID?: string;
+    category: string;
 }
 
 export type Edit = {
