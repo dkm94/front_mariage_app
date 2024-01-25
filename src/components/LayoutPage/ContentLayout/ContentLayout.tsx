@@ -26,7 +26,8 @@ const ContentLayout = (props: ContentLayoutProps) => {
 
     const scrollBtn = useContext(ScrollButtonContext);
 
-    
+    // update toast (passer data ici ou créer le toast dans la fonction edit)
+    // changer le texte du bouton en "Enregistré !" => Voir loading button mui
     useEffect(() => {
         const showToastMessage = () => {
             toast.error(errorMessage, {
