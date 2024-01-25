@@ -1,9 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
+
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import CheckIcon from "@mui/icons-material/Check";
 import ReplayIcon from "@mui/icons-material/Replay";
 import { IconButton, TextField, styled } from "@mui/material";
+
 import Toast from "../../../../components/Toast/Toast";
+
 import { updateFood } from "../../../../services";
 
 const IconWrapper = styled(IconButton)({

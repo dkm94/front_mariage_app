@@ -4,7 +4,6 @@ import { getTables } from "./tables/tableRequests";
 import { getTodos } from "./todos/todosRequests";
 import { getWedding } from "./weddings/weddingsRequests";
 import { getOperations } from "./budget/operationsRequests";
-import { getStarters, getMaincourses, getDesserts, getApetizers, getBeverages } from "./reception";
 import { login } from "./authRequests";
 
 export { 
@@ -13,11 +12,6 @@ export {
     getTodos, 
     getWedding, 
     getOperations, 
-    getStarters, 
-    getMaincourses, 
-    getDesserts, 
-    getApetizers, 
-    getBeverages, 
     login, 
     getFoods,
     addFood, 

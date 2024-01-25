@@ -1,7 +1,6 @@
 import "./Menu.css";
 
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 
 import starterImg from "../../img/menus/starter_img.jpg";
 import maincourseImg from "../../img/menus/maincourse_img.jpg";
@@ -40,7 +39,7 @@ const Menus = () => {
   const [apetizers, setApetizers] = useState<Food[]>([]);
   const [beverages, setBeverages] = useState<Food[]>([]);
 
-  const { data: foods, setData: setFoods } = useFetch<void, Food[]>(getFoods, []);
+  const { data: foods } = useFetch<void, Food[]>(getFoods, []);
 
   useEffect(() => {
     setLoading(true);
