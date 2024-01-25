@@ -4,16 +4,19 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { TextField, Button } from "@mui/material";
 
-import { SuccessAlert, ErrorAlert } from "../../../components/Alert";
 import { CustomButton } from "../../../components/Buttons";
 
 import { IRegisterProps, UserType } from "../../../../types";
+import { register as customRegister } from "../../../services/authRequests";
+import { useFetch } from "../../../hooks";
+import { getAdmins } from "../../../services/adminRequests";
+
+import Toast from "../../../components/Toast/Toast";
 
 type FormValues = {
   email: string;
@@ -26,9 +29,9 @@ type FormValues = {
 const Register = ({ setShowForm }: IRegisterProps) => {
   const history = useHistory();
 
-  const [showAlert, setShowAlert] = useState(false);
-  const [showError, setShowError] = useState(false);
   const [loadingButton, setLoadingButton] = useState(false);
+  const [message, setMessage] = useState<string | undefined>(undefined);
+  const [messageType, setMessageType] = useState<"error" | "success" | undefined>(undefined);
 
   const [tempArr, setTempArr] = useState<UserType[]>([]);
 
@@ -75,65 +78,36 @@ const Register = ({ setShowForm }: IRegisterProps) => {
     resolver: yupResolver(validationSchema),
   });
 
-  
+  const { data: admins } = useFetch<void, UserType[]>(getAdmins, []);
   useEffect(() => {
-    const fetchData = async () => {
-      const myHeaders: Headers = new Headers();
-      const myInit = { method: "GET", headers: myHeaders, mode: "cors" as RequestMode };
-      await fetch(
-        `https://my-wedding-backend.onrender.com/api/admin/admin/`,
-        myInit
-      )
-        .then((res) => res.json())
-        .then((emailArr) => {
-          setTempArr(emailArr);
-        })
-        .catch((err) => {
-          //do something, show error
-          console.log(err)
-        });
-    };
-    fetchData();
-  }, []);
+    if(admins) setTempArr(admins);
+  }, [admins])
 
   const onSubmit = async ({ firstPerson, secondPerson, email, password }) => {
     setLoadingButton(true);
-    await axios
-      .post(`/api/auth/createAccount`, {
-        firstPerson: firstPerson,
-        secondPerson: secondPerson,
-        email: email,
-        password: password,
-      })
-      .then((res) => {
-        setShowAlert(true);
-        setLoadingButton(false);
-        setTimeout(() => {
-          setShowAlert(false);
-          setShowForm("login")
-        }, 4500);
-      })
-      .catch((err) => {
-        console.log(err);
-        setShowError(true);
-        setTimeout(() => {
-          setShowError(false);
-        }, 5000);
-      });
+    
+    const response = await customRegister({ firstPerson, secondPerson, email, password });
+    const { success, message } = response;
+
+    if(!success) {
+      setLoadingButton(false);
+      setMessageType("error");
+      setMessage(message);
+    }
+
+    if(success){
+      setLoadingButton(false);
+      setMessageType("success");
+      setMessage(message);
+      setTimeout(() => {
+        setShowForm("login")
+      }, 4500);
+    }
   };
 
   return (
     <div className="register-page">
-      <ErrorAlert
-        showError={showError}
-        title="Oups, une erreur est survenue"
-        description="Veuillez réessayer plus tard"
-      />
-      <SuccessAlert
-        showAlert={showAlert}
-        title="Votre compte a été créé avec succès"
-        description="Redirection vers la page de connexion..."
-      />
+      <Toast message={message} messageType={messageType} />
       <div className="register-grid">
         <div className="grid-item-2">
           <div className="register">
