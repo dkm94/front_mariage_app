@@ -77,7 +77,7 @@ const UpdateGuest = ({
       const response = await axios.post(`/api/admin/guests/edit/${id}`, formData);
   
       if (response.data != null) {
-        const updatedGuestList = guests.map((guest) =>
+        const updatedGuestList = [...guests].map((guest) =>
           guest._id === id
             ? {
                 _id: response.data._id,
@@ -96,7 +96,6 @@ const UpdateGuest = ({
           media: response.data.media,
         });
         setGuests(updatedGuestList);
-        window.location.reload();
       }
     } catch (error) {
       setMessageType("error");
@@ -106,7 +105,6 @@ const UpdateGuest = ({
   
 
   const handleSubmit = async (e) => {
-    alert("submit")
     e.preventDefault();
 
     if(input === ""){
@@ -121,7 +119,6 @@ const UpdateGuest = ({
     const { message, statusCode } = response;
 
     if(statusCode !== 200){
-      console.log("reset values")
       setMessageType("error");
       setMessage(message);
       return;
@@ -147,7 +144,6 @@ const UpdateGuest = ({
   };
 
   const deleteGuestfn = async (id: string) => {
-    alert("delete")
     const response = await deleteGuest({ id });
     const { success, message } = response;
 

@@ -37,7 +37,7 @@ const Byguests = (props: ByGuestsProps) => {
 
   const [newUser, setNewUser] = useState<NewUser>("");
 
-  const { data: guests, setData: setGuests, loading, error, errorMessage } = useFetch<void, GuestType[]>(
+  const { data: guests, setData: setGuests, loading, error, errorMessage, fetchData } = useFetch<void, GuestType[]>(
     getGuests,
     []
     );
