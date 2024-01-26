@@ -9,7 +9,7 @@ import { Button, IconButton, TextField } from "@mui/material";
 import { ClearButton, CustomButton } from "../../../../components/Buttons";
 import MultipleSelect from "../../../../components/MultiSelect/MultiSelect";
 
-import { updateTableWithGuests, updateTablesName } from "../../../../services/tables/tableRequests";
+import { deleteTable, updateTableWithGuests, updateTablesName } from "../../../../services/tableRequests";
 import RedButton from "../../../../components/Buttons/RedButton/RedButton";
 
 const EditTableForm = (props) => {
@@ -23,8 +23,10 @@ const EditTableForm = (props) => {
     guests,
     setGuests,
     setEdit,
-    deleteTable,
+    // deleteTable,
     setisOpen,
+    setMessage, 
+    setMessageType
   } = props;
   
   const [guestsIds, setGuestsIds] = useState<string[]>([])
@@ -59,6 +61,21 @@ const EditTableForm = (props) => {
     }
   }
 
+  const deleteTableFn = async (e, tableId:string) => {
+    e.preventDefault();
+
+    const response = await deleteTable({ id : tableId });
+    const { message, success } = response;
+    
+    if(!success){
+      setMessage(message)
+      setMessageType("error")
+      return;
+    }
+    
+    setTables([...tables].filter((table) => table._id !== tableId))
+  };
+
   return (
     <div className="modal-child">
       <form onSubmit={handleSubmit}>
@@ -83,7 +100,7 @@ const EditTableForm = (props) => {
           <RedButton 
           type={"submit"} 
           text={"Suprimer"} 
-          handleClick={(e) => deleteTable(e, edit.id)} 
+          handleClick={(e) => deleteTableFn(e, edit.id)} 
           />
 
           <CustomButton

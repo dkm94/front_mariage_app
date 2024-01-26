@@ -1,6 +1,6 @@
 import { getFoods, addFood, updateFood, deleteFood } from './foodRequests';
 import { getGuests, addGuest, updateGuest, deleteGuest } from "./guests/guestRequests";
-import { getTables } from "./tables/tableRequests";
+import { getTables, addTable, deleteTable } from "./tableRequests";
 import { getTodos } from "./todos/todosRequests";
 import { getWedding } from "./weddings/weddingsRequests";
 import { getOperations } from "./budget/operationsRequests";
@@ -19,5 +19,7 @@ export {
     deleteFood,
     addGuest,
     updateGuest,
-    deleteGuest
+    deleteGuest,
+    addTable, 
+    deleteTable
 };

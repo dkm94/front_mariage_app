@@ -11,13 +11,14 @@ import Grow from "@mui/material/Grow";
 
 import { GuestType, TableType } from "../../../types";
 import { getGuests } from "../../services/guests/guestRequests";
-import { getTables } from "../../services/tables/tableRequests";
+import { getTables } from "../../services/tableRequests";
 
 import AddTableForm from "./Forms/Add";
 import Table from "./Table";
 import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
 import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
 import { useFetch } from "../../hooks";
+import Toast from "../../components/Toast/Toast";
 
 type EditType = {
   id: string;
@@ -30,6 +31,9 @@ const Tables = (props) => {
   const [input, setInput] = useState("");
 
   const [isOpen, setisOpen] = useState(false);
+
+  const [message, setMessage] = useState<string | undefined>(undefined);
+  const [messageType, setMessageType] = useState<"error" | "success" | undefined>(undefined);
 
   // const fetchGuests = async () => { // TODO: problème de performances, trop de re rendus (search bar, update picture...)
   //   try {
@@ -106,10 +110,11 @@ const Tables = (props) => {
     error={errorTables}
     errorMessage={errorMessageTables}
     >
+      <Toast message={message} messageType={messageType} />
       <Container style={{ padding: "2rem 50px" }} fluid>
         <Row>
           <Col xs={12} sm={10} md={6} className="table-form">
-            <AddTableForm tables={tables} setTables={setTables} />
+            <AddTableForm tables={tables} setTables={setTables} setMessage={setMessage} setMessageType={setMessageType} />
           </Col>
           <Col xs={12} sm={10} md={6} className="searchbar">
             <SearchBar
@@ -172,6 +177,8 @@ const Tables = (props) => {
                     deleteTable={deleteTable}
                     isOpen={isOpen}
                     setisOpen={setisOpen}
+                    setMessage={setMessage}
+                    setMessageType={setMessageType}
                   />
                 ))}
             </Grid2>

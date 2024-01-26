@@ -22,7 +22,9 @@ const Table = ({
   getUpdatedId,
   isOpen,
   setisOpen,
-  deleteTable 
+  deleteTable,
+  setMessage, 
+  setMessageType
 }) => {
   
   const returnName = (id: string) => {
@@ -75,6 +77,8 @@ const Table = ({
           deleteTable={deleteTable}
           isOpen={isOpen}
           setisOpen={setisOpen}
+          setMessage={setMessage}
+          setMessageType={setMessageType}
         />
       </DefaultModal>}
     </Grid2>

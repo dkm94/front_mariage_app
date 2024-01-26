@@ -1,12 +1,12 @@
 import "../Tables.css";
 
 import React, { useState, useRef } from "react";
-import axios from "axios";
 
 import { GreyButton } from "../../../components/Buttons";
 import addIcon from "../../../img/add-group.png";
+import { addTable } from "../../../services";
 
-const AddTableForm = ({ tables, setTables }) => {
+const AddTableForm = ({ tables, setTables, setMessage, setMessageType }) => {
   const [input, setInput] = useState("");
   const inputRef = useRef(null);
   const [loading, setLoading] = useState(false);
@@ -18,17 +18,21 @@ const AddTableForm = ({ tables, setTables }) => {
   const handleSumbit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    await axios
-      .post("/api/admin/tables/add", {
-        name: input,
-      })
-      .then((res) => {
-        setInput("");
-        setLoading(false);
-        const newTable = res.data;
-        setTables([...tables, newTable]);
-      })
-      .catch((err) => console.log("err", err));
+
+    const response = await addTable({ name: input });
+    const { data, success, message } = response;
+
+    if (!success) {
+      setMessage(message);
+      setMessageType("error");
+      return;
+    }
+    
+    setLoading(false);
+    setInput("");
+    setLoading(false);
+    const newTable = data;
+    setTables([...tables, newTable]);
   };
 
   return (

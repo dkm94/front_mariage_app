@@ -37,7 +37,6 @@ const ReceptionCard = (props: CardPropos) => {
   const deleteElement = async (id: string) => {
     const response = await deleteFood({ id });
     const { success, message, statusCode } = response;
-    console.log("🚀 ~ deleteElement ~ response:", response)
 
     if(!success){
       setMessageType("error");
