@@ -1,12 +1,23 @@
-import React, { useState, useRef } from "react";
-import axios from "axios";
+import React, { useState, useRef, Dispatch, SetStateAction } from "react";
 
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 
 import "../../../../../Pages/Invités/Invités.css";
 import { GreyButton } from "../../../../Buttons";
+import { GuestType } from "../../../../../../types";
+import { addGuest } from "../../../../../services";
 
-const AddGuestForm = ({ newUser, setNewUser, addGuest }) => {
+interface FormProps {
+  newUser: string;
+  setNewUser: Dispatch<SetStateAction<string>>;
+  guests: GuestType[];
+  setGuests: Dispatch<SetStateAction<GuestType[]>>;
+  setMessage:Dispatch<SetStateAction<string | undefined>>;
+  setMessageType: Dispatch<SetStateAction<"error" | "success" | undefined>>;
+}
+
+const AddGuestForm = (props:FormProps) => {
+  const { newUser, setNewUser, setMessage, setMessageType, guests, setGuests } = props;
   const [loading, setLoading] = useState(false);
   const inputRef = useRef(null);
 
@@ -17,16 +28,23 @@ const AddGuestForm = ({ newUser, setNewUser, addGuest }) => {
   const handleSumbit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    await axios
-      .post("/api/admin/guests/add", {
-        name: newUser,
-      })
-      .then((res) => {
-        addGuest(res.data);
-        setNewUser("");
-        setLoading(false);
-      })
-      .catch((err) => console.log("err", err));
+
+    newUser.trim();
+
+    const response = await addGuest({ name: newUser })
+    const { data, success, message } = response;
+
+    if(!success){
+      setLoading(false);
+      setMessageType("error");
+      setMessage(message);
+      return;
+    }
+
+    const guestsCopy = [...guests];
+    setGuests([...guestsCopy, data]);
+    setNewUser("");
+    setLoading(false);
   };
 
   return (
