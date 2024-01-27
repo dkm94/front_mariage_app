@@ -37,7 +37,7 @@ const EditTableForm = (props) => {
     const tablesResponse = await updateTableWithGuests({ id: tableId, guestIds: guestsIds });
     const updateNameResponse = await updateTablesName({ id: tableId, name: input });
     
-    if (tablesResponse.success && updateNameResponse.success) {
+    if (tablesResponse.success || updateNameResponse.success) {
       setGuestsIds([]);
       setEdit(null);
       setisOpen(false);

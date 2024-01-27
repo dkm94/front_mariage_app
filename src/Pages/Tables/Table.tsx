@@ -28,9 +28,10 @@ const Table = ({
 }) => {
   
   const returnName = (id: string) => {
-    const guest = guests?.find((guest) => guest.id === id);
+    const guest = guests?.find((guest) => guest._id === id);
     return guest?.name;
   }
+
   return (
     <Grid2 xs={12} sm={4} md={3} className="render-tables" key={id}>
       <div className="div-table-name-span">

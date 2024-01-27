@@ -16,9 +16,13 @@ import List from "./List/List";
 import { useFetch } from "../../hooks";
 import { TaskType } from "../../../types";
 import { getTodos } from "../../services";
+import Toast from "../../components/Toast/Toast";
 
 const Todo = () => {
   const { data: todos, setData: setTodos } = useFetch<void, TaskType[]>(getTodos, []);
+
+  const [message, setMessage] = useState<string | undefined>(undefined);
+  const [messageType, setMessageType] = useState<"error" | "success" | undefined>(undefined);
 
   const [searchValue, setSearchValue] = useState<string>("");
   const [selected, setSelected] = useState<any>("all");
@@ -30,23 +34,18 @@ const Todo = () => {
     setSearchValue(e.target.value);
   };
 
-  const deleteTodo = (id) => {
-    axios.delete(`/api/admin/todolist/delete/${id}`).then((res) => {
-      if (res.data != null) {
-        setTodos(todos.filter((todo: TaskType) => todo._id !== id));
-      }
-    });
-  };
-
   const completedTasks = todos.filter((todo: TaskType) => todo.isCompleted).length;
 
   return (
     <ContentLayout loading={loading} title={"Souhaitez-vous ajouter de nouvelles tâches ?"} src={"todos"} >
+      <Toast message={message} messageType={messageType} />
       <Container style={{ padding: "2rem 4rem" }}>
         <Row>
           <AddForm
             todos={todos}
             setTodos={setTodos}
+            setMessage={setMessage}
+            setMessageType={setMessageType}
           />
           <Col xs={12} sm={10} md={6} className="searchbar">
             <SearchBar
@@ -197,18 +196,20 @@ const Todo = () => {
                       return task;
                     }
                   })
-                  .map((todo: TaskType) => (
+                  .map((todo: TaskType, i) => (
                     <List
+                      i={i}
                       todos={todos}
                       obj={todo}
                       key={todo._id}
                       setTodos={setTodos}
-                      deleteTodo={deleteTodo}
                       searchValue={searchValue}
                       setSearchValue={setSearchValue}
                       isOpen={isOpen}
                       setisOpen={setisOpen}
-                    />
+                      setMessage={setMessage}
+                      setMessageType={setMessageType}
+                      />
                   ))}
               </Grid2>
             </div>

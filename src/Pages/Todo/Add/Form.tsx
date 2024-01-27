@@ -1,13 +1,13 @@
 import "./Form.css";
 
 import React, { useState, useRef } from "react";
-import axios from "axios";
 import { Col } from "react-bootstrap";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 
 import { GreyButton } from "../../../components/Buttons";
+import { addTodo } from "../../../services";
 
-const Form = ({ todos, setTodos }) => {
+const Form = ({ todos, setTodos, setMessage, setMessageType }) => {
   const [input, setInput] = useState("");
   const inputRef = useRef(null);
   const [loading, setLoading] = useState(false);
@@ -19,21 +19,19 @@ const Form = ({ todos, setTodos }) => {
   const handleSumbit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    await axios
-      .post(`/api/admin/todolist/add`, {
-        text: input,
-      })
-      .then((res) => {
-        const newTodo = res.data;
-        setTodos([...todos, newTodo]);
-        
-        setInput("");
-        setLoading(false);
-      })
-      .catch((err) => {
-        // todo: handle error
-        console.log(err);
-      });
+
+    const response = await addTodo({ text: input });
+    const { success, message, data: newTodo } = response;
+    if (!success) {
+      setMessageType("error");
+      setMessage(message);
+      setLoading(false);
+      return;
+    }
+
+    setTodos([...todos, newTodo]);
+    setInput("");
+    setLoading(false);
   };
 
   return (

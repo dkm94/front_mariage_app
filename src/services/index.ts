@@ -1,7 +1,7 @@
 import { getFoods, addFood, updateFood, deleteFood } from './foodRequests';
 import { getGuests, addGuest, updateGuest, deleteGuest } from "./guests/guestRequests";
 import { getTables, addTable, deleteTable } from "./tableRequests";
-import { getTodos } from "./todos/todosRequests";
+import { getTodos, addTodo, updateTodo, updateTodosStatus, deleteTodo } from "./todosRequests";
 import { getWedding } from "./weddings/weddingsRequests";
 import { getOperations } from "./budget/operationsRequests";
 import { login } from "./authRequests";
@@ -21,5 +21,9 @@ export {
     updateGuest,
     deleteGuest,
     addTable, 
-    deleteTable
+    deleteTable,
+    addTodo,
+    updateTodo,
+    updateTodosStatus,
+    deleteTodo
 };

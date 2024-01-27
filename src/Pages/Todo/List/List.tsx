@@ -1,7 +1,6 @@
 import "./List.css";
 
 import React, { useState, useRef } from "react";
-import axios from "axios";
 
 import { IconButton } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
@@ -11,61 +10,35 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CustomIconButton from "../../../components/Buttons/SmallIconButton/IconButton";
 
 import UpdateForm from "../Update/Form";
+import { updateTodosStatus, deleteTodo } from '../../../services';
+import { TaskType } from "../../../../types";
+
+type EditType = {
+  id?: string;
+  text?: string;
+}
 
 const Todos = ({
   todos,
   setTodos,
-  deleteTodo,
   searchValue,
   setSearchValue,
   obj,
   i,
   isOpen,
   setisOpen,
+  setMessage,
+  setMessageType
 }) => {
-  const [edit, setEdit] = useState(null);
+  const [edit, setEdit] = useState<EditType | null>(null);
   const [input, setInput] = useState("");
   const inputRef = useRef(null);
 
-  const handleChange = (e) => {
-    const { value, name } = e.target;
-    setInput((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
-  const getUpdatedId = (objId, objText) => {
+  const getUpdatedId = (objId: string, objText: string) => {
     setEdit({
       id: objId,
     });
-    setInput({
-      text: objText,
-    });
-  };
-
-  const editTodo = async (e) => {
-    e.preventDefault();
-    await axios
-      .post(`/api/admin/todolist/edit/${edit.id}`, { text: input })
-      .then((res) => {
-        if (res.data != null) {
-          const todosCopy = [...todos]
-          const selectedTodo = todosCopy.find((t) => t._id === edit.id);
-          if(selectedTodo){
-            selectedTodo.text = input;
-          }
-          setTimeout(() => {
-            setTodos([...todosCopy]);
-            setEdit("");
-            setInput("");
-          }, 1000);
-        }
-      })
-      .catch((err) => {
-        //todo: handle error
-        console.log(err);
-      });
+    setInput(objText);
   };
 
   const toggleCompleted = async (task) => {
@@ -75,26 +48,38 @@ const Todos = ({
       }
       return todo;
     });
-    await axios
-      .post(`/api/admin/todolist/edit/${task._id}`, {
-        _id: task._id,
-        isCompleted: task.isCompleted,
-      })
-      .then((res) => {
-        if (res.data != null) {
-          setTimeout(() => {
-            setTodos(updatedList);
-          }, 500);
-        }
-      })
-      .catch((err) => {
-        //todo: handle error
-        console.log(err);
-      });
+
+    const response = await updateTodosStatus({ isCompleted: task.isCompleted, id: task._id })
+    const { success, message } = response;
+
+    if(!success) {
+      setMessageType("error");
+      setMessage(message);
+      return;
+    }
+
+    setTimeout(() => {
+      setTodos(updatedList);
+    }, 500);
   };
+
+  const deleteTodoFn = async (id) => {
+    const response = await deleteTodo({ id })
+    const { success, message } = response;
+
+    if(!success) {
+      setMessageType("error");
+      setMessage(message);
+      return;
+    }
+
+    setTodos(todos.filter((todo: TaskType) => todo._id !== id));
+  };
+
 
   return (
     <Grid2
+      component="div" // Add the component prop with value "div"
       xs={12}
       key={obj._id}
       className={
@@ -102,7 +87,7 @@ const Todos = ({
           ? "tasks-list__li__done fade-in"
           : "tasks-list__li fade-in"
       }
-      style={edit === obj._id ? { backgroundColor: `#F5F5F5` } : null}
+      style={edit === obj._id ? { backgroundColor: `#F5F5F5` } : undefined} // Change null to undefined
     >
       {edit?.id === obj._id ? (
         <UpdateForm
@@ -111,8 +96,10 @@ const Todos = ({
           input={input}
           setInput={setInput}
           inputRef={inputRef}
-          editTodo={editTodo}
-          handleChange={handleChange}
+          setTodos={setTodos}
+          todos={todos}
+          setMessage={setMessage}
+          setMessageType={setMessageType}
         />
       ) : (
         <Grid2
@@ -147,7 +134,7 @@ const Todos = ({
             <CustomIconButton 
             type="submit"
             buttonType="delete"
-            onClick={() => deleteTodo(obj._id)} 
+            onClick={() => deleteTodoFn(obj._id)} 
             />
 
           </Grid2>

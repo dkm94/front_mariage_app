@@ -190,7 +190,8 @@ export type GuestType = {
 }
 
 export type FormattedGuestType = {
-    id: string;
+    _id?: string;
+    id?: string;
     name: string;
     tableID: string;
 }

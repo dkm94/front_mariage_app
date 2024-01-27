@@ -5,24 +5,55 @@ import React, { useEffect, useRef } from "react";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { TextField } from "@mui/material";
 
+import { updateTodo } from "../../../services"
+
 import CustomIconButton from '../../../components/Buttons/SmallIconButton/IconButton';
 
 const UpdateTask = ({
   edit,
   input,
-  editTodo,
+  // editTodo,
   setEdit,
   setInput,
   setisOpen,
   todo,
+  setTodos,
+  todos,
+  setMessage,
+  setMessageType
 }) => {
   const inputRef = useRef(null);
+  
   useEffect(() => {
     inputRef.current.focus();
   });
 
   const handleChange = (e) => {
     setInput(e.target.value);
+  };
+
+  const editTodo = async (e) => {
+    e.preventDefault();
+
+    const response = await updateTodo({ text: input, id: edit.id })
+    const { success, message } = response;
+    
+    if(!success) {
+      setMessageType("error");
+      setMessage(message);
+      return;
+    }
+
+    const todosCopy = [...todos]
+    const selectedTodo = todosCopy.find((t) => t._id === edit.id);
+    if(selectedTodo){
+      selectedTodo.text = input;
+    }
+    setTimeout(() => {
+      setTodos([...todosCopy]);
+      setEdit("");
+      setInput("");
+    }, 1000);
   };
 
   return (
@@ -45,7 +76,7 @@ const UpdateTask = ({
             type="text"
             name="text"
             onChange={(e) => handleChange(e)}
-            value={input.text}
+            value={input}
             ref={inputRef}
           />
         </Grid2>

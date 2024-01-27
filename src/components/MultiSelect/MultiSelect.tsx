@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Theme, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -41,6 +41,8 @@ const MultipleSelect = (props: MultipleSelectProps) => {
   const { guests, setGuestsIds, edit } = props;
   const theme = useTheme();
 
+  const [isDisabled, setIsDisabled] = useState<boolean>(false);
+
   const tableGuests = guests.filter((guest) => guest.tableID === edit.id);
   const initialListWithNames = tableGuests.map((guest) => guest.name).slice().sort();
 
@@ -57,10 +59,17 @@ const MultipleSelect = (props: MultipleSelectProps) => {
   };
   
   useEffect(() => {
-    const getIds = (guestValues: string[]) => guests.filter((guest: FormattedGuestType) => guestValues.includes(guest.name)).map((guest: FormattedGuestType) => guest.id);
-      const guestsIds = getIds(guestValues);
-      setGuestsIds(guestsIds);
+    const filteredValues = guestValues.filter((guest) => guestValues.includes(guest));
+    const findFilteredValuesIds = filteredValues.map((value) => {
+      const matchingGuests = guests?.find((guest) => guest?.name === value)
+      return matchingGuests?._id;
+    });
+    setGuestsIds(findFilteredValuesIds);
     }, [guestValues, guests, setGuestsIds])
+
+    useEffect(() => {
+      
+    }, []);
 
   return (
     <div>
