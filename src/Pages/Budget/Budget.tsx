@@ -1,7 +1,6 @@
 import "./Budget.css";
 
 import React, { useState, useEffect, ChangeEvent } from "react";
-import axios from "axios";
 import { Container, Row, Col } from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -15,10 +14,11 @@ import SearchBar from "../../components/Invités(affichage)/by_guests/Components
 import { OperationType } from "../../../types/index";
 import { floatToEuro } from "../../helpers/formatCurrency";
 import { useFetch } from "../../hooks";
-import { getOperations } from "../../services";
+import { addOperation, deleteOperation, getOperations, updateOperation } from "../../services";
 import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
 import PriceCard from "../../components/Expenses/PriceCard/PriceCard";
 import AddExpenseForm from "../../components/Expenses/Forms/AddExpenseForm/AddExpenseForm";
+import Toast from "../../components/Toast/Toast";
 
 const categories = [
   { 
@@ -60,6 +60,9 @@ const categories = [
 ];
 
 const Budget = () => {
+  const [message, setMessage] = useState<string | undefined>(undefined);
+  const [messageType, setMessageType] = useState<"error" | "success" | undefined>(undefined);
+
   const newOperationValues: OperationType = {
     category: "",
     price: "",
@@ -95,44 +98,39 @@ const Budget = () => {
       return obj;
     });
 
-    await axios
-      .post<OperationType>(`/api/admin/budget/operations/edit/${_id}`, expense)
-      .then((res) => {
-        //todo: handle success message from the backend **TOAST**
-        if (res.data != null) {
-          setTimeout(() => {
-            setOperations(updatedExpenses);
-            calculateTotal(updatedExpenses);
-            setEdit(null);
-          }, 1000);
-        }
-      })
-      .catch((err) => {
-        //todo: handle error message from the backend **TOAST**
-        console.log(err);
-      });
+    const response = await updateOperation({ id: _id, description: description, price: price, category: category })
+    const { success, message } = response;
+
+    if(!success) {
+      setMessageType("error");
+      setMessage(message);
+      return;
+    }
+
+    setTimeout(() => {
+      setOperations(updatedExpenses);
+      calculateTotal(updatedExpenses);
+      setEdit(null);
+    }, 1000);
   };
 
-  const deleteExpense = async (id: string): Promise<void> => {
-    await axios
-      .delete(`/api/admin/budget/operations/delete/${id}`)
-      .then((res) => {
-        if (res.data != null) {
-          const updatedExpenses: OperationType[] | [] = operations.filter(
-            (operation: OperationType) => operation._id !== id
-          );
-          setOperations(updatedExpenses);
-          calculateTotal(updatedExpenses);
-          setEdit(null);
-          //todo: handle success message from the backend **TOAST**
+  const deleteExpense = async (id: string) => {
+    // debugger;
+    const response = await deleteOperation({ id })
+    const { success, message } =  response;
 
-        }
-      })
-      .catch((err) => {
-        //todo: handle error message from the backend **TOAST**
+    if(!success) {
+      setMessageType("error");
+      setMessage(message);
+      return;
+    }
 
-        console.log(err);
-      });
+    const updatedExpenses: OperationType[] | [] = operations.filter(
+      (operation: OperationType) => operation._id !== id
+    );
+    setOperations(updatedExpenses);
+    calculateTotal(updatedExpenses);
+    setEdit(null);
   };
 
   const operationValidationSchema = Yup.object().shape({
@@ -154,22 +152,19 @@ const Budget = () => {
   const formik = useFormik({
     initialValues: newOperationValues,
     onSubmit: async (values) => {
-      await axios
-        .post(`/api/admin/budget/operations/add`, {
-          category: values.category,
-          price: values.price,
-          description: values.description,
-        })
-        .then((res) => {
-          const newOperation = res.data;
-          const expensesCopy = [...operations]
-          setOperations([...expensesCopy, newOperation]);
-          calculateTotal([...expensesCopy, newOperation]);
-          formik.resetForm();
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      const response = await addOperation({ category: values.category, price: values.price, description: values.description })
+      const { success, message, data: newOperation } = response;
+
+      if(!success) {
+        setMessageType("error");
+        setMessage(message);
+        return;
+      };
+
+      const expensesCopy = [...operations]
+      setOperations([...expensesCopy, newOperation]);
+      calculateTotal([...expensesCopy, newOperation]);
+      formik.resetForm();
     },
     validationSchema: operationValidationSchema,
     enableReinitialize: true,
@@ -188,6 +183,7 @@ const Budget = () => {
 
   return (
     <ContentLayout loading={loading} title={"Souhaitez-vous ajouter une nouvelle dépense ?"} src={"budget"} >
+      <Toast message={message} messageType={messageType} />
       <Grow in={!loading} timeout={2000}>
         <Container style={{ padding: "2rem 4rem" }} fluid>
           <Row>

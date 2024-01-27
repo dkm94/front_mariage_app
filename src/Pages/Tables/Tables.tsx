@@ -10,7 +10,7 @@ import { Box } from "@mui/material";
 import Grow from "@mui/material/Grow";
 
 import { GuestType, TableType } from "../../../types";
-import { getGuests } from "../../services/guests/guestRequests";
+import { getGuests } from "../../services/guestRequests";
 import { getTables } from "../../services/tableRequests";
 
 import AddTableForm from "./Forms/Add";

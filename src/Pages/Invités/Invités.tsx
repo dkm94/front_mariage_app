@@ -6,7 +6,7 @@ import React, { useState, useEffect, ChangeEvent } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 
 import { GuestType } from "../../../types";
-import { getGuests } from "../../services/guests/guestRequests";
+import { getGuests } from "../../services/guestRequests";
 
 import AddForm from "../../components/Invités(affichage)/by_guests/Components/Form/AddGuest";
 import GuestList from "../../components/Invités(affichage)/by_guests/Components/Guests/Guests";
