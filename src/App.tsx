@@ -30,6 +30,8 @@ import {
 
 // <------- Types ---------->
 import { UserType, RoleType, ScrollButtonType, LoaderType } from "../types/index.js";
+import Login from "./Pages/Auth/Login/Login";
+import Register from "./Pages/Auth/Register/Register";
 
 // <------- Ctx ---------->
 export const UserContext = createContext<UserType>(undefined);
@@ -77,12 +79,18 @@ function App() {
                   <Route exact path="/">
                     {token ? <Redirect to="/tableau-de-bord" /> : Home}
                   </Route>
+                  <Route path="/login" component={Login}>
+                    {token ? <Redirect to="/tableau-de-bord" /> : Home}
+                  </Route>
+                  <Route path="/register" component={Register}>
+                    {token ? <Redirect to="/tableau-de-bord" /> : Home}
+                  </Route>
                   <Route path="/reset-password">
                     {token ? <Redirect to="/menu/mon-compte" /> : ResetPassword}
                   </Route>
                   {/* todo: create dynamic protected routes, update navigation data file */}
                   <ProtectedRoute
-                    exact
+                    // exact
                     path="/tableau-de-bord"
                     component={Dashboard}
                     isAuth={role}

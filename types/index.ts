@@ -43,11 +43,6 @@ export interface ProtectedRouteProps {
     token?: string | null;
 }
 
-export interface VerticalNavbarProps {
-    userInfos?: UserType | null;
-    loading: boolean;
-}
-
 export type NavigationDataType = {
     idx: number;
     title: string;
@@ -195,7 +190,8 @@ export type GuestType = {
 }
 
 export type FormattedGuestType = {
-    id: string;
+    _id?: string;
+    id?: string;
     name: string;
     tableID: string;
 }
@@ -208,10 +204,10 @@ export type TableType = {
 }
 
 export type FoodType = {
-    _id: string;
+    _id?: string;
     name: string;
-    menuID: string;
-    mariageID: string;
+    mariageID?: string;
+    category: string;
 }
 
 export type Edit = {

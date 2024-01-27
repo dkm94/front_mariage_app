@@ -7,28 +7,33 @@ import { Button, Grid, IconButton } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-import { BlackButton } from "../../../../../Buttons";
+import { ClearButton, CustomButton } from "../../../../../Buttons";
 
 import checkIcon from "../../../../../../img/green-check.png";
 import { useFetch } from "../../../../../../hooks";
-import { getWedding } from "../../../../../../services";
-import { UserType, WeddingType } from "../../../../../../../types";
+import { deleteGuest, getWedding, updateGuest } from "../../../../../../services";
+import { GuestType, UserType, WeddingType } from "../../../../../../../types";
 import { UserContext } from "../../../../../../App";
+import RedButton from "../../../../../Buttons/RedButton/RedButton";
 
 const UpdateGuest = ({
   edit,
+  guests,
+  setGuests,
   setEdit,
-  onSubmit,
   mariageID,
   guestFamily,
   uploadImg,
-  handleFileInput,
+  // handleFileInput,
   seteditPicture,
   guestId,
-  upload,
-  uploadedFile,
+  // upload,
+  // uploadedFile,
   setisOpen,
-  deleteGuest,
+  setMessage,
+  setMessageType,
+  setIsOpen,
+  setUser
 }) => {
   const [radioValue, setRadioValue] = useState(guestFamily);
 
@@ -38,39 +43,122 @@ const UpdateGuest = ({
   const [input, setInput] = useState(edit ? edit.name : "");
   const inputRef = useRef<HTMLDivElement>(null);
 
+  const [uploadedFile, setUploadedFile] = useState(null);
+  const [file, setFile] = useState(null);
+
+
   useEffect(() => {
     inputRef?.current?.focus();
   });
+
+  const handleFile = (file) => {
+    setFile(file);
+  };
+
+  const handleFileInput = (e) => {
+    const fileValue = e.target.files[0];
+    setUploadedFile(fileValue);
+    handleFile(fileValue);
+  };
 
   const handleChange = (e) => {
     setInput(e.target.value);
   };
 
+  const uploadPicture = async (id: string) => {
+    if (file == null) {
+      return;
+    }
+  
+    try {
+      const formData = new FormData();
+      formData.append("media", file);
+  
+      const response = await axios.post(`/api/admin/guests/edit/${id}`, formData);
+  
+      if (response.data != null) {
+        const updatedGuestList = [...guests].map((guest) =>
+          guest._id === id
+            ? {
+                _id: response.data._id,
+                name: response.data.name,
+                family: response.data.family,
+                media: response.data.media,
+              }
+            : guest
+        );
+  
+        setFile(null);
+        setUser({
+          _id: response.data._id,
+          name: response.data.name,
+          family: response.data.family,
+          media: response.data.media,
+        });
+        setGuests(updatedGuestList);
+      }
+    } catch (error) {
+      setMessageType("error");
+      setMessage("Erreur initialisation de l'image");
+    }
+  };
+  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    onSubmit({
-      _id: edit.id,
-      name: input,
-    });
-    if (input.trim() === "") {
+
+    if(input === ""){
+      setMessageType("error");
+      setMessage("Veuillez entrer un nom");
       return;
-    } else {
-      await axios
-        .post(`api/admin/guests/edit/${edit.id}`, {
-          _id: edit.id,
-          name: input,
-          family: radioValue,
-        })
-        .then((res) => {
-          upload(edit.id);
-          onSubmit(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    }
+
+    input.trim();
+
+    const response = await updateGuest({ id: edit.id, name: input, family: radioValue });
+    const { message, statusCode } = response;
+
+    if(statusCode !== 200){
+      setMessageType("error");
+      setMessage(message);
+      return;
     }
     setEdit({ id: "" });
     setInput("");
+
+    uploadPicture(edit.id)
+    
+    const updatedGuestlist = [...guests].map((guest) => {
+      if (guest._id === edit.id) {
+        guest.name = input;
+        guest.family = radioValue;
+      }
+      return guest;
+    });
+
+    setGuests(updatedGuestlist);
+    setTimeout(() => {
+      setMessageType(undefined);
+      setMessage(undefined);
+    })
+  };
+
+  const deleteGuestfn = async (id: string) => {
+    const response = await deleteGuest({ id });
+    const { success, message } = response;
+
+    // if(!success){
+    //   setMessageType("error");
+    //   setMessage(message);
+    //   return;
+    // }
+    if(success){
+      // setMessageType("success");
+      // setMessage(message);
+      setGuests(guests.filter((guest: GuestType) => guest._id !== id));
+      setisOpen(false);
+    }
+
   };
 
   return (
@@ -154,39 +242,33 @@ const UpdateGuest = ({
             </div>
           </div>
           <div className="action-buttons">
-            <IconButton
-              onClick={() => deleteGuest(edit.id)}
-              style={{ backgroundColor: "darkred", borderRadius: "20px", flexGrow: 1 }}
-            >
-              <DeleteIcon style={{ color: "#F4F4F4" }} />
-              <span style={{ color: "#F4F4F4" }}>Supprimer</span>
-            </IconButton>
-
-            <BlackButton
-              text={"Valider"}
-              type={"submit"}
-              variant="contained"
-              sx={{ "&:hover": { backgroundColor: "#333232" } }}
-              style={{ borderRadius: "20px", padding: "6px 16px", flexGrow: 1 }}
+            
+            <RedButton 
+            type="button"
+            text="Supprimer"
+            handleClick={() => deleteGuestfn(edit.id)}
             />
 
-            <Button
+            <CustomButton
+              text={"Enregistrer"}
+              type={"submit"}
+              variant="contained"
+              sx={{ flexGrow: 1 }}
+            />
+
+            <ClearButton
+              text={"Annuler"}
+              type={"button"}
               onClick={() => {
                 setEdit({ id: null });
                 setisOpen(false);
-              }}
+              } }
               variant="outlined"
               style={{
-                borderRadius: "20px",
-                color: "grey",
-                textTransform: "unset",
-                fontSize: "1rem",
-                width: "100%",
-                borderColor: "#e4e8e8",
+                width: "100% !important",
               }}
-            >
-              Annuler
-            </Button>
+              sx={{ width: "100% !important" }}
+              />
               
           </div>
         </form>

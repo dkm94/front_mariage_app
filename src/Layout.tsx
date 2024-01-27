@@ -10,16 +10,18 @@ import VerticalNavbar from "./components/Header/Navigation/Responsive/VerticalNa
 import { UserType } from "../types/index";
 
 const Layout = ({ children }) => {
-  const [user, setUser] = useState<UserType | null>(null);
+  let user:UserType;
   const [loading, setLoading] = useState<boolean>(true);
   const token: string | null = localStorage.getItem("token");
   
+  if(token){
+    user = decode(token);
+  }
+
   useEffect(() => {
-    if (token) {
-      setUser(decode(token));
-      setLoading(false);
-    }
-  }, [token])
+    if(user) setLoading(false);
+  }, [user])
+
 
   axios.defaults.baseURL = "https://my-wedding-backend.onrender.com/";
   // axios.defaults.baseURL = 'http://localhost:3050';

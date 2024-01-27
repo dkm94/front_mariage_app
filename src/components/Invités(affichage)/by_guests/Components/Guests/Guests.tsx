@@ -25,11 +25,9 @@ type Edit = {
 const Guests = ({
   guests,
   setGuests,
-  deleteGuest,
-  updateGuest,
   editPicture,
   seteditPicture,
-  upload,
+  // upload,
   handleFile,
   searchValue,
   mariageID,
@@ -39,7 +37,11 @@ const Guests = ({
   isOpen,
   setisOpen,
   errorMessage,
-  error
+  error,
+  setMessage,
+  setMessageType,
+  setIsOpen,
+  setUser
 }) => {
   const [edit, setEdit] = useState<Edit | null>(null);
 
@@ -51,10 +53,6 @@ const Guests = ({
     const fileValue = e.target.files[0];
     setUploadedFile(fileValue);
     handleFile(fileValue);
-  };
-
-  const submitUpdate = (props) => {
-    updateGuest(props);
   };
 
   return (
@@ -181,18 +179,22 @@ const Guests = ({
                       >
                         <Form
                           edit={edit}
+                          guests={guests}
+                          setGuests={setGuests}
                           setEdit={setEdit}
-                          onSubmit={submitUpdate}
                           mariageID={mariageID}
                           guestId={guest._id}
                           guestFamily={guest.family}
                           uploadImg={uploadImg}
-                          handleFileInput={handleFileInput}
+                          // handleFileInput={handleFileInput}
                           seteditPicture={seteditPicture}
-                          upload={upload}
-                          uploadedFile={uploadedFile}
+                          // upload={upload}
+                          // uploadedFile={uploadedFile}
                           setisOpen={setisOpen}
-                          deleteGuest={deleteGuest}
+                          setMessage={setMessage}
+                          setMessageType={setMessageType}
+                          setIsOpen={setIsOpen}
+                          setUser={setUser}
                         />
                       </DefaultModal>}
                     </div>

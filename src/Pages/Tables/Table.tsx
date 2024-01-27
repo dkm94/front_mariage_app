@@ -4,7 +4,7 @@ import React from "react";
 
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 
-import { BlackButton } from "../../components/Buttons";
+import { CustomButton } from "../../components/Buttons";
 import DefaultModal from "../../components/Modals/Default/DefaultModal";
 import EditForm from "./Forms/Edit/Edit";
 
@@ -22,13 +22,16 @@ const Table = ({
   getUpdatedId,
   isOpen,
   setisOpen,
-  deleteTable 
+  deleteTable,
+  setMessage, 
+  setMessageType
 }) => {
   
   const returnName = (id: string) => {
-    const guest = guests?.find((guest) => guest.id === id);
+    const guest = guests?.find((guest) => guest._id === id);
     return guest?.name;
   }
+
   return (
     <Grid2 xs={12} sm={4} md={3} className="render-tables" key={id}>
       <div className="div-table-name-span">
@@ -41,7 +44,7 @@ const Table = ({
       </div>
 
       <div className="table-card__button-container">
-        <BlackButton
+        <CustomButton
           onClick={() => {
             getUpdatedId(table._id, table.name);
             setisOpen(true);
@@ -75,6 +78,8 @@ const Table = ({
           deleteTable={deleteTable}
           isOpen={isOpen}
           setisOpen={setisOpen}
+          setMessage={setMessage}
+          setMessageType={setMessageType}
         />
       </DefaultModal>}
     </Grid2>

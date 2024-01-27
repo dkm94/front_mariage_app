@@ -4,36 +4,17 @@ import React, { useState } from "react";
 import { History } from 'history';
 import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { TextField } from "@mui/material";
-import { Button, styled } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 
 import { ILoginProps } from "../../../../types";
 
-import { ErrorAlert } from "../../../components/Alert";
-
-const CustomButton = styled(Button)({
-  textTransform: "unset",
-  backgroundColor: "#262626",
-  color: "#fff",
-  //   fontfamily: "unset",
-  fontSize: "1rem",
-  borderRadius: "36px",
-  paddingRight: "30px",
-  paddingLeft: "30px",
-  fontWeight: "unset",
-  fontFamily: "Playfair Display serif",
-  border: "none",
-  width: "fit-content",
-  ":hover": {
-    background: "#4c4a4a",
-    animation: "none",
-    border: "none",
-  },
-});
+import { CustomButton } from "../../../components/Buttons";
+import { login } from "../../../services";
+import Toast from "../../../components/Toast/Toast";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required("Veuillez compléter ce champ."),
@@ -52,9 +33,9 @@ const Login = ({ setShowForm }: ILoginProps) => {
 
   const history: History = useHistory();
 
-  const [error, setError] = useState<string>("")
-  const [showError, setShowError] = useState<boolean>(false);
   const [loadingButton, setLoadingButton] = useState<boolean>(false);
+  const [message, setMessage] = useState<string | undefined>(undefined);
+  const [messageType, setMessageType] = useState<"error" | "success" | undefined>(undefined);
 
   const {
     register,
@@ -64,48 +45,35 @@ const Login = ({ setShowForm }: ILoginProps) => {
     resolver: yupResolver(validationSchema),
   });
   
-
-  //todo: use formik Form instead of html form
-  //todo: handle yup schema
-  
-
-  const onSubmit = async (form) => {
+  const onSubmit = async (form: FormValues) => {
     setLoadingButton(true);
 
-    await axios
-      .post(`/api/auth/adminLogin`, form)
-      .then((res) => {
-        localStorage.setItem("token", res.data.token);
-        const token = localStorage.getItem("token");
-        if (token) {
-          setTimeout(() => {
-            setLoadingButton(false);
-            win.location = "/tableau-de-bord";
-            history.push("/tableau-de-bord");
-          }, 500);
-        }
-      })
-      .catch((err) => {
-    //todo: better error handling from backend (status code (401, 400, 500) + message)
-    // todo: handle email error
-
-        setError(err.response.data.message)
-        setShowError(true);
-        setLoadingButton(false);
+    const authResponse = await login({ email: form.email, password: form.password });
+    const { success, statusCode, message, token } = authResponse;
+    
+    if(!success) {
+      setLoadingButton(false);
+      setMessageType("error");
+      setMessage(message);
+      return;
+    }
+    
+    if (success && statusCode === 200 && token) {
+      localStorage.setItem("token", token as string);
+      const tokenInfos = localStorage.getItem("token");
+      if (tokenInfos) {
         setTimeout(() => {
-          setShowError(false);
-        }, 5000);
-      });
+          win.location = "/tableau-de-bord";
+          history.push("/tableau-de-bord");
+        }, 500);
+      }
+    }
   };
 
 
   return (
     <div className="login-page">
-      <ErrorAlert
-        showError={showError}
-        title={error}
-        description={"Veuillez réessayer"}
-      />
+      <Toast message={message} messageType={messageType} />
       <div className="login-grid">
         <div className="grid-item-2">
           <div className="login">
@@ -146,11 +114,9 @@ const Login = ({ setShowForm }: ILoginProps) => {
                   <CustomButton
                     type="submit"
                     variant="contained"
-                    style={{ width: "100%", textTransform: "unset" }}
-                    fullWidth
-                  >
-                    {loadingButton ? "Veuillez patienter..." : "Se connecter"}
-                  </CustomButton>
+                    text={loadingButton ? "Veuillez patienter..." : "Se connecter"}  
+                    style={{ width: "100%", "&:hover": { backgroundColor: "#333232" } }}
+                  />
                 </div>
                 <div
                   className="login__signup"
@@ -170,7 +136,10 @@ const Login = ({ setShowForm }: ILoginProps) => {
                       fontSize: "unset",
                       marginTop: "-2px",
                     }}
-                    onClick={() => setShowForm("register")}
+                    onClick={() => {
+                      setShowForm("register");
+                      history.push("/register");
+                    }}
                   >
                     <span>Inscrivez-vous</span>
                   </Button>

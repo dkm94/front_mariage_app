@@ -1,26 +1,59 @@
-import React, { useEffect, useRef } from "react";
 import "./Form.css";
+
+import React, { useEffect, useRef } from "react";
+
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
-import CheckIcon from "@mui/icons-material/Check";
-import ReplayIcon from "@mui/icons-material/Replay";
-import { IconButton, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
+
+import { updateTodo } from "../../../services"
+
+import CustomIconButton from '../../../components/Buttons/SmallIconButton/IconButton';
 
 const UpdateTask = ({
   edit,
   input,
-  editTodo,
+  // editTodo,
   setEdit,
   setInput,
   setisOpen,
   todo,
+  setTodos,
+  todos,
+  setMessage,
+  setMessageType
 }) => {
   const inputRef = useRef(null);
+  
   useEffect(() => {
     inputRef.current.focus();
   });
 
   const handleChange = (e) => {
     setInput(e.target.value);
+  };
+
+  const editTodo = async (e) => {
+    e.preventDefault();
+
+    const response = await updateTodo({ text: input, id: edit.id })
+    const { success, message } = response;
+    
+    if(!success) {
+      setMessageType("error");
+      setMessage(message);
+      return;
+    }
+
+    const todosCopy = [...todos]
+    const selectedTodo = todosCopy.find((t) => t._id === edit.id);
+    if(selectedTodo){
+      selectedTodo.text = input;
+    }
+    setTimeout(() => {
+      setTodos([...todosCopy]);
+      setEdit("");
+      setInput("");
+    }, 1000);
   };
 
   return (
@@ -32,6 +65,7 @@ const UpdateTask = ({
       width={"100%"}
     >
       <form onSubmit={editTodo} className="todo-form">
+
         <Grid2 width={"100%"}>
           <TextField
             size="small"
@@ -42,37 +76,23 @@ const UpdateTask = ({
             type="text"
             name="text"
             onChange={(e) => handleChange(e)}
-            value={input.text}
+            value={input}
             ref={inputRef}
           />
         </Grid2>
+
         <Grid2 display={"flex"} gap={"7px"}>
-          <IconButton
-            type="submit"
-            style={{
-              backgroundColor: "#262626",
-              border: "1px solid lightgray",
-              borderRadius: "5px",
-              color: "#fff",
-            }}
-          >
-            <CheckIcon fontSize="small" />
-          </IconButton>
-          <IconButton
-            onClick={() => {
-              setEdit(null);
-              setInput("");
-            }}
-            style={{
-              backgroundColor: "#fff",
-              border: "1px solid lightgray",
-              borderRadius: "5px",
-              color: "#262626",
-            }}
-          >
-            <ReplayIcon fontSize="small" />
-          </IconButton>
+          <CustomIconButton type="submit" buttonType="save"/>
+          <CustomIconButton
+          type="reset" 
+          buttonType="cancel" 
+          onClick={() => {
+            setEdit(null);
+            setInput("");
+          }}
+          />
         </Grid2>
+
       </form>
     </Grid2>
   );

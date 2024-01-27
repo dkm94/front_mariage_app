@@ -1,9 +1,10 @@
-import { getGuests } from "./guests/guestRequests";
-import { getTables } from "./tables/tableRequests";
-import { getTodos } from "./todos/todosRequests";
+import { getFoods, addFood, updateFood, deleteFood } from './foodRequests';
+import { getGuests, addGuest, updateGuest, deleteGuest } from "./guestRequests";
+import { getTables, addTable, deleteTable } from "./tableRequests";
+import { getTodos, addTodo, updateTodo, updateTodosStatus, deleteTodo } from "./todosRequests";
 import { getWedding } from "./weddings/weddingsRequests";
-import { getOperations } from "./budget/operationsRequests";
-import { getStarters, getMaincourses, getDesserts, getApetizers, getBeverages } from "./reception";
+import { getOperations, addOperation, updateOperation, deleteOperation } from "./operationsRequests";
+import { login } from "./authRequests";
 
 export { 
     getGuests, 
@@ -11,9 +12,21 @@ export {
     getTodos, 
     getWedding, 
     getOperations, 
-    getStarters, 
-    getMaincourses, 
-    getDesserts, 
-    getApetizers, 
-    getBeverages 
+    login, 
+    getFoods,
+    addFood, 
+    updateFood, 
+    deleteFood,
+    addGuest,
+    updateGuest,
+    deleteGuest,
+    addTable, 
+    deleteTable,
+    addTodo,
+    updateTodo,
+    updateTodosStatus,
+    deleteTodo,
+    addOperation,
+    updateOperation,
+    deleteOperation
 };

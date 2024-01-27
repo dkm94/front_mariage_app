@@ -96,26 +96,6 @@ h1 {
 }
 
 /******Components******/
-.page-component {
-    width: 100%;
-}
-
-.page-location {
-    display: none;
-    height: 82px;
-    position: relative;
-}
-
-.page-location > div {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.page-location > div > a {
-    color: black;
-}
 
 button:focus {
     outline: none;
@@ -154,28 +134,6 @@ button:focus {
     padding: 3px 6px;
     font: unset;
     margin: 20px 0px 20px 0px;
-}
-
-.titles {
-    /* text-shadow: 1px 1px 1px rgba(238, 235, 235, 0.85); */
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-left: 3rem;
-    padding-right: 3rem;
-    background-color: #323535;
-    display: flex;
-    align-items: center;
-    min-height: 60px;
-    height: fit-content;
-    text-transform: uppercase;
-    font-family: 'Italiana', serif;
-}
-.titles > h2 {
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 0;
-    color: #FFF;
-    letter-spacing: 1px;
 }
 
 .searchbar {
@@ -341,23 +299,6 @@ a:-webkit-any-link {
 .addCakeCroix {
     font-size: 63px;
     margin-bottom: 15px;
-}
-
-@media only screen and (max-width : 1150px) {
-
-    }
-
-@media only screen and (max-device-width : 1024px) {
-    /* .App-home > .content {
-        padding: 0;
-        margin-bottom: 5rem;
-    } */
-    .byguests, .budget, .dashboard, .dashboard___elements, .menu-container > .menu {
-        padding-bottom: 0;
-    }
-    .titles > h2 {
-        /* font-size: 2rem !important; */
-    }
 }
 
 @media (max-width: 954px) { 

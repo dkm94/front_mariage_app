@@ -1,39 +1,42 @@
 import "./Dashboard.css";
 
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Container, Row } from "react-bootstrap";
-import Grow from "@mui/material/Grow";
 
-import ScreenLoader from "../../components/Loader/Screen/ScreenLoader.jsx";
 import Card from "./Card/Card.jsx";
+import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
 
-import { getGuests, getTables, getTodos, getWedding, getOperations, getStarters, getMaincourses, getDesserts, getApetizers, getBeverages } from "../../services";
+import { getGuests, getTables, getTodos, getWedding, getOperations, getFoods } from "../../services";
 import { useFetch } from "../../hooks";
-import { FoodType, GuestType, IDashboardProps, OperationType, TableType, TaskType, WeddingType } from "../../../types";
-import { ScrollButtonContext } from "../../App";
+import { GuestType, IDashboardProps, OperationType, TableType, TaskType, WeddingType } from "../../../types";
 import { floatToEuro } from "../../helpers/formatCurrency";
 
+type Food = {
+  name: string;
+  mariageID: string;
+  category: string;
+}
 
 const Dashboard = (props: IDashboardProps) => { // Ce composant est rendu beaucoup trop de fois
-  const scrollBtn = useContext(ScrollButtonContext);
-  //const loader = useContext(LoaderContext)
   const id = props?.userInfos?.mariageID;
 
-  const [sum, setSum] = useState<string>("")
+  const [sum, setSum] = useState<string>("");
 
   const [loading, setLoading] = useState(false);
+
+  const [starters, setStarters] = useState<Food[]>([]);
+  const [maincourses, setMaincourses] = useState<Food[]>([]);
+  const [desserts, setDesserts] = useState<Food[]>([]);
+  const [apetizers, setApetizers] = useState<Food[]>([]);
+  const [beverages, setBeverages] = useState<Food[]>([]);
 
   const { data: wedding, fetchData: fetchWedding } = useFetch<any, WeddingType>(() => getWedding({ id }), undefined);
   const { data: tasks } = useFetch<void, TaskType[]>(getTodos, []);
   const { data: guests } = useFetch<void, GuestType[]>(getGuests, []);
   const { data: tables } = useFetch<void, TableType[]>(getTables, []);
   const { data: operations } = useFetch<void, OperationType[]>(getOperations, []);
-  const { data: starters } = useFetch<void, FoodType[]>(getStarters, []);
-  const { data: maincourses } = useFetch<void, FoodType[]>(getMaincourses, []);
-  const { data: desserts } = useFetch<void, FoodType[]>(getDesserts, []);
-  const { data: apetizers } = useFetch<void, FoodType[]>(getApetizers, []);
-  const { data: beverages } = useFetch<void, FoodType[]>(getBeverages, []);
+  const { data: foods } = useFetch<void, Food[]>(getFoods, []);
 
   useEffect(() => {
     fetchWedding({ id });
@@ -53,97 +56,83 @@ const Dashboard = (props: IDashboardProps) => { // Ce composant est rendu beauco
   const firstFamilyGuests = guests?.filter((guest: GuestType) => guest?.family === "1");
   const secondFamilyGuests = guests?.filter((guest: GuestType) => guest?.family === "2");
 
-  const meal =
-    starters?.length +
-    maincourses?.length +
-    desserts?.length +
-    apetizers?.length +
-    beverages?.length;
+  const getAllKindsOfFoods = (foods: Food[]) => {
+    const starters = foods?.filter((food: Food) => food?.category === "starter");
+    const maincourses = foods?.filter((food: Food) => food?.category === "maincourse");
+    const desserts = foods?.filter((food: Food) => food?.category === "dessert");
+    const apetizers = foods?.filter((food: Food) => food?.category === "apetizer");
+    const beverages = foods?.filter((food: Food) => food?.category === "beverage");
+    
+    if(starters) setStarters(starters);
+    if(maincourses) setMaincourses(maincourses);
+    if(desserts) setDesserts(desserts);
+    if(apetizers) setApetizers(apetizers);
+    if(beverages) setBeverages(beverages);
+    }
+
+  useEffect(() => {
+    getAllKindsOfFoods(foods);
+  }, [foods])
 
   return (
-    <>
-      {loading ? (
-        <ScreenLoader />
-      ) : (
-        <div className="dashboard page-component">
-          {scrollBtn}
-          <div className="page-location">
-            <div>
-              <span>Dashboard</span>
-            </div>
-          </div>
-          <Grow in={!loading}>
-            <div className="titles mb3" style={{ marginBottom: "1rem" }}>
-              <h2>Que souhaitez-vous faire aujourd'hui ?</h2>
-            </div>
-          </Grow>
-
-          <Grow in={!loading} timeout={1000}>
-            <div className="dashboard___bgimage"></div>
-          </Grow>
-          <Grow in={!loading} timeout={2000}>
-            <div className="dashboard-cards__style">
-              <Container>
-                <Row>
-                  <Card
-                    title={"Invités"}
-                    content={guests?.length}
-                    array={guests}
-                    resume={"repartition"}
-                    extraProp={"name"}
-                    path={"menu/invites"}
-                    firstPerson={wedding?.firstPerson}
-                    secondPerson={wedding?.secondPerson}
-                    firstFamilyGuests={firstFamilyGuests}
-                    secondFamilyGuests={secondFamilyGuests}
-                  />
-                  <Card
-                    title={"Tables"}
-                    content={tables?.length}
-                    array={tables}
-                    resume={"tables"}
-                    extraProp={"tables"}
-                    path={"menu/tables"}
-                  />
-                  <Card
-                    title={"Réception"}
-                    content={meal}
-                    subArrayOne={starters?.length}
-                    subArrayTwo={maincourses?.length}
-                    subArrayThree={desserts?.length}
-                    subArrayFour={maincourses?.length}
-                    subArrayFive={desserts?.length}
-                    resume={"composition"}
-                    extraProp={"composition"}
-                    path={"menu/carte"}
-                  />
-                  <Card
-                    title={"Tâches"}
-                    content={tasks?.length}
-                    subArrayOne={isCompleted?.length}
-                    subArrayTwo={notCompleted?.length}
-                    array={tasks}
-                    elements={"text"}
-                    resume={"status"}
-                    extraProp={"tache"}
-                    path={"menu/taches"}
-                  />
-                  <Card
-                    title={"Dépenses"}
-                    content={sum}
-                    array={operations}
-                    elements={"description"}
-                    resume={"expenses"}
-                    extraProp={"description"}
-                    path={"menu/budget"}
-                  />
-                </Row>
-              </Container>
-            </div>
-          </Grow>
-        </div>
-      )}
-    </>
+    <ContentLayout loading={loading} title={"Que souhaitez-vous faire aujourd'hui ?"} src={"dashboard"} >
+      <Container>
+        <Row>
+          <Card
+            title={"Invités"}
+            content={guests?.length}
+            array={guests}
+            resume={"repartition"}
+            extraProp={"name"}
+            path={"menu/invites"}
+            firstPerson={wedding?.firstPerson}
+            secondPerson={wedding?.secondPerson}
+            firstFamilyGuests={firstFamilyGuests}
+            secondFamilyGuests={secondFamilyGuests}
+          />
+          <Card
+            title={"Tables"}
+            content={tables?.length}
+            array={tables}
+            resume={"tables"}
+            extraProp={"tables"}
+            path={"menu/tables"}
+          />
+          <Card
+            title={"Réception"}
+            content={foods?.length}
+            subArrayOne={starters?.length}
+            subArrayTwo={maincourses?.length}
+            subArrayThree={desserts?.length}
+            subArrayFour={apetizers?.length}
+            subArrayFive={beverages?.length}
+            resume={"composition"}
+            extraProp={"composition"}
+            path={"menu/carte"}
+          />
+          <Card
+            title={"Tâches"}
+            content={tasks?.length}
+            subArrayOne={isCompleted?.length}
+            subArrayTwo={notCompleted?.length}
+            array={tasks}
+            elements={"text"}
+            resume={"status"}
+            extraProp={"tache"}
+            path={"menu/taches"}
+          />
+          <Card
+            title={"Dépenses"}
+            content={sum}
+            array={operations}
+            elements={"description"}
+            resume={"expenses"}
+            extraProp={"description"}
+            path={"menu/budget"}
+          />
+        </Row>
+      </Container>
+    </ContentLayout>
   );
 };
 

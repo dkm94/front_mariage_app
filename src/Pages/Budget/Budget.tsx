@@ -1,31 +1,67 @@
 import "./Budget.css";
 
-import React, { useState, useEffect, useContext, ReactNode, ChangeEvent } from "react";
-import { Link } from "react-router-dom";
-import axios, { AxiosResponse } from "axios";
+import React, { useState, useEffect, ChangeEvent } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { Form, useFormik, FormikProvider } from "formik";
+import { useFormik } from "formik";
 import * as Yup from "yup";
 
 import Grow from "@mui/material/Grow";
 
 import PieChart from "../../components/Expenses/Graph/PieChart";
-import TextField from "../../components/Formik/TextField-Operations";
 import Expenses from "./Dépenses/Dépenses";
 import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
-import { GreyButton } from "../../components/Buttons";
-import ScreenLoader from "../../components/Loader/Screen/ScreenLoader";
 
-import { ScrollButtonContext } from "../../App";
 import { OperationType } from "../../../types/index";
 import { floatToEuro } from "../../helpers/formatCurrency";
 import { useFetch } from "../../hooks";
-import { getOperations } from "../../services";
+import { addOperation, deleteOperation, getOperations, updateOperation } from "../../services";
+import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
+import PriceCard from "../../components/Expenses/PriceCard/PriceCard";
+import AddExpenseForm from "../../components/Expenses/Forms/AddExpenseForm/AddExpenseForm";
+import Toast from "../../components/Toast/Toast";
 
+const categories = [
+  { 
+    label: "Sélectionnez une catégorie",
+    value: ""
+  },
+  {
+    label: "Locations",
+    value: "Locations"
+  },
+  {
+    label: "Habillement/Beauté",
+    value: "Habillement/Beauté"
+  },
+  { 
+    label: "Décoration/Fleurs",
+    value: "Décoration/Fleurs"
+  },
+  {
+    label: "Alliances/Bijoux",
+    value: "Alliances/Bijoux"
+  },
+  {
+    label: "Animation (DJ, Photographe...)",
+    value: "Animation"
+  },
+  {
+    label: "Traiteur",
+    value: "Traiteur"
+  },
+  {
+    label: "Faire-part",
+    value: "Faire-part"
+  },
+  {
+    label: "Autres",
+    value: "Autres"
+  },
+];
 
 const Budget = () => {
-
-  const scrollBtn = useContext<ReactNode>(ScrollButtonContext);
+  const [message, setMessage] = useState<string | undefined>(undefined);
+  const [messageType, setMessageType] = useState<"error" | "success" | undefined>(undefined);
 
   const newOperationValues: OperationType = {
     category: "",
@@ -62,44 +98,39 @@ const Budget = () => {
       return obj;
     });
 
-    await axios
-      .post<OperationType>(`/api/admin/budget/operations/edit/${_id}`, expense)
-      .then((res) => {
-        //todo: handle success message from the backend **TOAST**
-        if (res.data != null) {
-          setTimeout(() => {
-            setOperations(updatedExpenses);
-            calculateTotal(updatedExpenses);
-            setEdit(null);
-          }, 1000);
-        }
-      })
-      .catch((err) => {
-        //todo: handle error message from the backend **TOAST**
-        console.log(err);
-      });
+    const response = await updateOperation({ id: _id, description: description, price: price, category: category })
+    const { success, message } = response;
+
+    if(!success) {
+      setMessageType("error");
+      setMessage(message);
+      return;
+    }
+
+    setTimeout(() => {
+      setOperations(updatedExpenses);
+      calculateTotal(updatedExpenses);
+      setEdit(null);
+    }, 1000);
   };
 
-  const deleteExpense = async (id: string): Promise<void> => {
-    await axios
-      .delete(`/api/admin/budget/operations/delete/${id}`)
-      .then((res) => {
-        if (res.data != null) {
-          const updatedExpenses: OperationType[] | [] = operations.filter(
-            (operation: OperationType) => operation._id !== id
-          );
-          setOperations(updatedExpenses);
-          calculateTotal(updatedExpenses);
-          setEdit(null);
-          //todo: handle success message from the backend **TOAST**
+  const deleteExpense = async (id: string) => {
+    // debugger;
+    const response = await deleteOperation({ id })
+    const { success, message } =  response;
 
-        }
-      })
-      .catch((err) => {
-        //todo: handle error message from the backend **TOAST**
+    if(!success) {
+      setMessageType("error");
+      setMessage(message);
+      return;
+    }
 
-        console.log(err);
-      });
+    const updatedExpenses: OperationType[] | [] = operations.filter(
+      (operation: OperationType) => operation._id !== id
+    );
+    setOperations(updatedExpenses);
+    calculateTotal(updatedExpenses);
+    setEdit(null);
   };
 
   const operationValidationSchema = Yup.object().shape({
@@ -121,22 +152,19 @@ const Budget = () => {
   const formik = useFormik({
     initialValues: newOperationValues,
     onSubmit: async (values) => {
-      await axios
-        .post(`/api/admin/budget/operations/add`, {
-          category: values.category,
-          price: values.price,
-          description: values.description,
-        })
-        .then((res) => {
-          const newOperation = res.data;
-          const expensesCopy = [...operations]
-          setOperations([...expensesCopy, newOperation]);
-          calculateTotal([...expensesCopy, newOperation]);
-          formik.resetForm();
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      const response = await addOperation({ category: values.category, price: values.price, description: values.description })
+      const { success, message, data: newOperation } = response;
+
+      if(!success) {
+        setMessageType("error");
+        setMessage(message);
+        return;
+      };
+
+      const expensesCopy = [...operations]
+      setOperations([...expensesCopy, newOperation]);
+      calculateTotal([...expensesCopy, newOperation]);
+      formik.resetForm();
     },
     validationSchema: operationValidationSchema,
     enableReinitialize: true,
@@ -154,189 +182,62 @@ const Budget = () => {
   }
 
   return (
-    <>
-      {loading ? (
-        <ScreenLoader />
-      ) : (
-        <div className="budget-container page-component">
-          {scrollBtn}
-          <div className="page-location">
-            <div>
-              <Link to={"/"}>Dashboard</Link>
-              {">"} Dépenses
+    <ContentLayout loading={loading} title={"Souhaitez-vous ajouter une nouvelle dépense ?"} src={"budget"} >
+      <Toast message={message} messageType={messageType} />
+      <Grow in={!loading} timeout={2000}>
+        <Container style={{ padding: "2rem 4rem" }} fluid>
+          <Row>
+            <Col xs={12} sm={10} md={6} />
+            <Col
+              xs={12}
+              sm={10}
+              md={6}
+              style={{ display: "flex", justifyContent: "end" }}
+            >
+              <SearchBar
+                className="search__input"
+                type="text"
+                placeholder="Rechercher une dépense"
+                name="searchbar"
+                value={searchValue}
+                onChange={handleSearch}
+              />
+            </Col>
+          </Row>
+        </Container>
+      </Grow>
+
+      <Grow in={!loading} timeout={3000}>
+        <div className="budget-cols">
+          <div className="budget___col-1">
+
+            <div className="col card-expense-component">
+              <PriceCard total={total} />
             </div>
+
+            <div className="col budget-form mb3">
+              <AddExpenseForm formik={formik} categories={categories} />
+            </div>
+                
           </div>
-          <div className="budget">
-            <Grow in={!loading}>
-              <div className="titles mb-3">
-                <h2>Souhaitez-vous ajouter une nouvelle dépense ?</h2>
-              </div>
-            </Grow>
 
-            <Grow in={!loading} timeout={1000}>
-              <div className="budget___bgimage"></div>
-            </Grow>
+          {operations.length > 0 && <div className="col chart-component">
+            <PieChart operations={operations} />
+          </div>}
 
-            <Grow in={!loading} timeout={2000}>
-              <Container style={{ padding: "2rem 4rem" }} fluid>
-                <Row>
-                  <Col xs={12} sm={10} md={6} />
-                  <Col
-                    xs={12}
-                    sm={10}
-                    md={6}
-                    style={{ display: "flex", justifyContent: "end" }}
-                  >
-                    <SearchBar
-                      className="search__input"
-                      type="text"
-                      placeholder="Rechercher une dépense"
-                      name="searchbar"
-                      value={searchValue}
-                      onChange={handleSearch}
-                    />
-                  </Col>
-                </Row>
-              </Container>
-            </Grow>
-
-            <Grow in={!loading} timeout={3000}>
-              <div className="budget-cols">
-                <div className="budget___col-1">
-                  <div className="col card-expense-component">
-                    <div className="card" style={{ backgroundColor: "#fff" }}>
-                      <div className="g-0">
-                        <div className="card-pd">
-                          <div className="card-body">
-                            <h5
-                              style={{
-                                textTransform: "uppercase",
-                              }}
-                              className="card-title"
-                            >
-                              Dépenses
-                            </h5>
-                            <span>
-                              {total}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                        <div className="col budget-form mb3">
-                          <FormikProvider value={formik}>
-                      <Form
-                        className="input-group mb-3"
-                        style={{ display: "flex", flexDirection: "column" }}
-                      >
-                        <div className="budget___select">
-                          <select
-                            name="category"
-                            value={formik.values.category}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                          >
-                            <option
-                              value=""
-                              label="Sélectionnez une catégorie"
-                            ></option>
-                            <option
-                              value="Locations"
-                              label="Locations"
-                            ></option>
-                            <option
-                              value="Habillement/Beauté"
-                              label="Habillement/Beauté"
-                            ></option>
-                            <option
-                              value="Décoration/Fleurs"
-                              label="Décoration/Fleurs"
-                            ></option>
-                            <option
-                              value="Alliances/Bijoux"
-                              label="Alliances/Bijoux"
-                            ></option>
-                            <option
-                              value="Animation"
-                              label="Animation (DJ, Photographe...)"
-                            ></option>
-                            <option value="Traiteur" label="Traiteur"></option>
-                            <option
-                              value="Faire-part"
-                              label="Faire-part"
-                            ></option>
-                            <option value="Autres" label="Autres"></option>
-                          </select>
-                          {formik.errors.category &&
-                            formik.touched.category && (
-                              <div className="input-feedback error">
-                                {formik.errors.category}
-                              </div>
-                            )}
-                        </div>
-                        <TextField
-                          size="40%"
-                          // label="Description"
-                          name="description"
-                          type="text"
-                          value={formik.values.description}
-                          onChange={formik.handleChange}
-                          onBlur={formik.handleBlur}
-                          class="form-control"
-                          errors={formik.errors}
-                          touched={formik.touched}
-                          placeholder="Description"
-                        />
-                        <TextField
-                          size="20%"
-                          width="100%"
-                          name="price"
-                          type="number"
-                          value={formik.values.price}
-                          onChange={formik.handleChange}
-                          onBlur={formik.handleBlur}
-                          class="form-control"
-                          errors={formik.errors}
-                          touched={formik.touched}
-                          placeholder="Montant"
-                          border-radius="10px"
-                        />
-                        <div className="col-12 budget-form___submit">
-                          <GreyButton
-                            type="submit"
-                            text={"Valider"}
-                            variant={"contained"}
-                            disabled={formik.isSubmitting}
-                            size="medium"
-                          />
-                        </div>
-                      </Form>
-                      </FormikProvider>
-                    </div>
-                      
-                </div>
-                {operations.length > 0 && <div className="col chart-component">
-                  <PieChart operations={operations} />
-                </div>}
-                <div className="budget___col-2">
-                  <Expenses
-                    expenses={operations}
-                    deleteExpense={deleteExpense}
-                    searchValue={searchValue}
-                    edit={edit}
-                    setEdit={setEdit}
-                    updateExpense={editExpense}
-                    handleChange={formik?.handleChange}
-                  />
-                </div>
-              </div>
-            </Grow>
+          <div className="budget___col-2">
+            <Expenses
+              expenses={operations}
+              deleteExpense={deleteExpense}
+              searchValue={searchValue}
+              edit={edit}
+              setEdit={setEdit}
+              updateExpense={editExpense}
+            />
           </div>
         </div>
-      )}
-    </>
+      </Grow>
+    </ContentLayout>
   );
 };
 
