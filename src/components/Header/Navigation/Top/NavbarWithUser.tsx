@@ -3,12 +3,17 @@ import { Link } from "react-router-dom";
 
 import Logo from ".././../../../img/logo-2023-no-shadow.png";
 import { NavigationData } from "../NavigationData";
-import { NavigationDataType } from "../../../../../types/index";
+import { NavigationDataType, UserType } from "../../../../../types/index";
 import NavbarLink from "./NavbarLink";
 
 const win: Window = window;
 
-const NavbarWithUser = () => {
+interface NavbarWithUserProps {
+  user: UserType;
+}
+
+const NavbarWithUser = (props:NavbarWithUserProps) => {
+  const { user } = props;
 
   const [showLinks, setShowLinks] = useState<boolean>(false);
   const [links, setLinks] = useState<NavigationDataType[]>([]);
@@ -38,7 +43,7 @@ const NavbarWithUser = () => {
         <li className="navbar__item hidden-links slideDown-7" id="showNavLinks">
           <Link
             className="navbar__link"
-            to={"/menu/mon-compte"}
+            to={`/compte/${user?.id}/configuration`}
             onClick={() => setShowLinks(!showLinks)}
           >
             Paramètres
