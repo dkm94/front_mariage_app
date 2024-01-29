@@ -47,12 +47,11 @@ const Sidebar = ({ userInfos, loading }: ISidebarProps) => {
     setSelectedTab(selected?.pathname);
   }
   
-  console.log("🚀 ~ useEffect ~ selectedTab:", selectedTab)
+  //TODO: créer un ctx pour les onglets. Appeler dans dashboard card ou utiliser les classes (plus simple)
   
   useEffect(() => {
     const selected = tabs.find((tab) => tab.pathname === selectedTab);
     setSelectedTab(selected?.pathname);
-    console.log("🚀 ~ useEffect ~ selectedTab:", selectedTab)
   }, [selectedTab, tabs]);
 
   return (
