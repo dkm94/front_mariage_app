@@ -13,8 +13,9 @@ import checkIcon from "../../../../../../img/green-check.png";
 import { useFetch } from "../../../../../../hooks";
 import { deleteGuest, getWedding, updateGuest } from "../../../../../../services";
 import { GuestType, UserType, WeddingType } from "../../../../../../../types";
-import { UserContext } from "../../../../../../App";
+// import { UserContext } from "../../../../../../App";
 import RedButton from "../../../../../Buttons/RedButton/RedButton";
+import { useCurrentUser } from "../../../../../../ctx/userCtx";
 
 const UpdateGuest = ({
   edit,
@@ -37,7 +38,7 @@ const UpdateGuest = ({
 }) => {
   const [radioValue, setRadioValue] = useState(guestFamily);
 
-  const user: UserType = useContext(UserContext);
+  const user:UserType = useCurrentUser();
   const { firstPerson, secondPerson } = user as { firstPerson: string, secondPerson: string };
 
   const [input, setInput] = useState(edit ? edit.name : "");

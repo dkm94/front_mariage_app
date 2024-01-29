@@ -158,9 +158,11 @@ const Card = ({
           <ul className="dashbord-content">{returnContent(extraProp)}</ul>
         </div>
         <div className="dashbord-view-details">
-          <Button type="button" variant="contained" component={Link} to={path}>
-            Voir détails
-          </Button>
+          <Link to={`/${path}`}>
+            <Button type="button" variant="contained">
+              Voir détails
+            </Button>
+          </Link>
         </div>
       </Container>
     </Col>

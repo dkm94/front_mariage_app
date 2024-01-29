@@ -11,13 +11,14 @@ import { useFetch } from "../../hooks";
 import { getWedding } from "../../services";
 import { AccountType, UserType, WeddingType } from '../../../types';
 
-import { UserContext } from "../../App";
+// import { UserContext } from "../../App";
 import { CustomButton } from "../../components/Buttons";
 import DefaultModal from "../../components/Modals/Default/DefaultModal";
 
 import profilePicture from "../../img/couple-img.jpg";
 import changePwdIcon from "../../img/change-password-icon.png";
 import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
+import { useCurrentUser } from "../../ctx/userCtx";
 
 const win: Window = window;
 
@@ -33,7 +34,7 @@ type FormValues2 = {
 
 const MyAccount = ({ token }) => {
    
-    const user: UserType = useContext(UserContext);
+    const user: UserType = useCurrentUser();
     const { id, mariageID, firstPerson, secondPerson } = user as { id: string, mariageID: string, firstPerson: string, secondPerson: string};
 
     const [successfulDeletionMessage, setsuccessfulDeletionMessage] = useState<string>("")

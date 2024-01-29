@@ -1,6 +1,6 @@
 import "./App.css";
 
-import React, { createContext } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import axios from "axios";
 import decode from "jwt-decode";
@@ -32,9 +32,10 @@ import {
 import { UserType, RoleType, ScrollButtonType, LoaderType } from "../types/index.js";
 import Login from "./Pages/Auth/Login/Login";
 import Register from "./Pages/Auth/Register/Register";
+import { CurrentUserContext } from "./ctx/userCtx";
 
 // <------- Ctx ---------->
-export const UserContext = createContext<UserType>(undefined);
+// export const UserContext = createContext<UserType>({} as UserType);
 export const AuthenticationContext = createContext<RoleType>(undefined);
 export const ScrollButtonContext = createContext<ScrollButtonType>({} as ScrollButtonType);
 export const LoaderContext = createContext<LoaderType>({} as LoaderType);
@@ -42,12 +43,18 @@ export const LoaderContext = createContext<LoaderType>({} as LoaderType);
 function App() {
   const token: string | null = localStorage.getItem("token");
 
-  let user: UserType;
-  let role: RoleType;
-  if (token) {
-    user = decode(token);
-    role = user?.role;
-  }
+  const [user, setUser] = useState<UserType | undefined>(undefined);
+  const [role, setRole] = useState<RoleType | undefined>(undefined);
+
+  useEffect(() => {
+    const token: string | null = localStorage.getItem("token");
+
+    if (token) {
+      const decodedUser = decode(token);
+      setUser(decodedUser as UserType);
+      setRole((decodedUser as UserType)?.role);
+    }
+  }, []);
 
   axios.defaults.baseURL = "https://my-wedding-backend.onrender.com/";
   axios.defaults.withCredentials = true;
@@ -59,70 +66,71 @@ function App() {
 
   const Home = () => <Page title="Accueil" component={Homepage} token={token} />
   const ResetPassword = () => <Page title="Réinitialiser le mot de passe" component={ResetPage} token={token} />
-  const Dashboard = () => <Page title="Tableau de bord" userInfos={user} auth={role} component={DashboardPage} token={token} />
-  const Account = () => <Page title="Paramètres du compte" userInfos={user} auth={role} component={SettingsPage} />
-  const Tables = () => <Page title="Les tables" userInfos={user} auth={role} component={TablesPage} />
-  const Guests = () => <Page title="Les invités" userInfos={user} auth={role} component={GuestsPage} />
-  const Carte = () => <Page title="Le repas" userInfos={user} auth={role} component={ReceptionPage} />
-  const Budget = () => <Page title="Les dépenses" userInfos={user} auth={role} component={BudgetPage} />
-  const TodoList = () => <Page title="Liste des tâches" userInfos={user} auth={role} component={TodoPage} />
+
+  const Dashboard = () => user?.id ? <Page title="Tableau de bord" userInfos={user} auth={role} component={DashboardPage} token={token} /> : null;
+  const Account = () => user?.id ? <Page title="Paramètres du compte" userInfos={user} auth={role} component={SettingsPage} /> : null;
+  const Tables = () => user?.id ? <Page title="Les tables" userInfos={user} auth={role} component={TablesPage} /> : null;
+  const Guests = () => user?.id ? <Page title="Les invités" userInfos={user} auth={role} component={GuestsPage} /> : null;
+  const Carte = () => user?.id ? <Page title="Le repas" userInfos={user} auth={role} component={ReceptionPage} /> : null;
+  const Budget = () => user?.id ? <Page title="Les dépenses" userInfos={user} auth={role} component={BudgetPage} /> : null;
+  const TodoList = () => user?.id ? <Page title="Liste des tâches" userInfos={user} auth={role} component={TodoPage} /> : null;
 
   return (
     <div className={token ? "App-home" : "App"}>
       <AuthenticationContext.Provider value={role}>
-        <UserContext.Provider value={user}>
+        <CurrentUserContext.Provider value={user}>
           <ScrollButtonContext.Provider value={scrollButton}>
             <LoaderContext.Provider value={loader}>
               <div className={token ? "content" : "content-home"}>
                 <ScrollToTop />
                 <Switch>
                   <Route exact path="/">
-                    {token ? <Redirect to="/tableau-de-bord" /> : Home}
+                    {token && user?.id ? <Redirect to={`/mariage/${user?.id}/tableau-de-bord`} /> : Home}
                   </Route>
                   <Route path="/login" component={Login}>
-                    {token ? <Redirect to="/tableau-de-bord" /> : Home}
+                    {token && user?.id ? <Redirect to={`/mariage/${user?.id}/tableau-de-bord`} /> : Home}
                   </Route>
                   <Route path="/register" component={Register}>
-                    {token ? <Redirect to="/tableau-de-bord" /> : Home}
+                    {token && user?.id ? <Redirect to={`/mariage/${user?.id}/tableau-de-bord`} /> : Home}
                   </Route>
                   <Route path="/reset-password">
-                    {token ? <Redirect to="/menu/mon-compte" /> : ResetPassword}
+                    {token ? <Redirect to="/compte/:id/configuration" /> : ResetPassword}
                   </Route>
                   {/* todo: create dynamic protected routes, update navigation data file */}
                   <ProtectedRoute
                     // exact
-                    path="/tableau-de-bord"
+                    path="/mariage/:id/tableau-de-bord"
                     component={Dashboard}
                     isAuth={role}
                   />
                   <ProtectedRoute
-                    path="/menu/mon-compte"
+                    path="/compte/:id/configuration"
                     component={Account}
                     isAuth={role}
                   />
                   <ProtectedRoute
-                    path="/menu/tables"
+                    path="/mariage/:id/tables"
                     component={Tables}
                     isAuth={role}
                     infos={user}
                   />
                   <ProtectedRoute
-                    path="/menu/invites"
+                    path="/mariage/:id/invites"
                     component={Guests}
                     isAuth={role}
                   />
                   <ProtectedRoute
-                    path="/menu/carte"
+                    path="/mariage/:id/carte"
                     component={Carte}
                     isAuth={role}
                   />
                   <ProtectedRoute
-                    path="/menu/budget"
+                    path="/mariage/:id/budget"
                     component={Budget}
                     isAuth={role}
                   />
                   <ProtectedRoute
-                    path="/menu/taches"
+                    path="/mariage/:id/taches"
                     component={TodoList}
                     isAuth={role}
                   />
@@ -131,7 +139,7 @@ function App() {
               </div>
             </LoaderContext.Provider>
           </ScrollButtonContext.Provider>
-        </UserContext.Provider>
+        </CurrentUserContext.Provider>
       </AuthenticationContext.Provider>
       <Footer token={token} />
     </div>

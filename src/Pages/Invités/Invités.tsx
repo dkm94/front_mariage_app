@@ -14,6 +14,7 @@ import SearchBar from "../../components/Invités(affichage)/by_guests/Components
 import { useFetch } from "../../hooks";
 import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
 import Toast from "../../components/Toast/Toast";
+import { useSearchParam } from "react-use";
 
 type NewUser = string;
 

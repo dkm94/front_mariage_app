@@ -84,7 +84,7 @@ const Dashboard = (props: IDashboardProps) => { // Ce composant est rendu beauco
             array={guests}
             resume={"repartition"}
             extraProp={"name"}
-            path={"menu/invites"}
+            path={`mariage/${id}/invites`}
             firstPerson={wedding?.firstPerson}
             secondPerson={wedding?.secondPerson}
             firstFamilyGuests={firstFamilyGuests}
@@ -96,7 +96,7 @@ const Dashboard = (props: IDashboardProps) => { // Ce composant est rendu beauco
             array={tables}
             resume={"tables"}
             extraProp={"tables"}
-            path={"menu/tables"}
+            path={`mariage/${id}/tables`}
           />
           <Card
             title={"Réception"}
@@ -108,7 +108,7 @@ const Dashboard = (props: IDashboardProps) => { // Ce composant est rendu beauco
             subArrayFive={beverages?.length}
             resume={"composition"}
             extraProp={"composition"}
-            path={"menu/carte"}
+            path={`mariage/${id}/carte`}
           />
           <Card
             title={"Tâches"}
@@ -119,7 +119,7 @@ const Dashboard = (props: IDashboardProps) => { // Ce composant est rendu beauco
             elements={"text"}
             resume={"status"}
             extraProp={"tache"}
-            path={"menu/taches"}
+            path={`mariage/${id}/taches`}
           />
           <Card
             title={"Dépenses"}
@@ -128,7 +128,7 @@ const Dashboard = (props: IDashboardProps) => { // Ce composant est rendu beauco
             elements={"description"}
             resume={"expenses"}
             extraProp={"description"}
-            path={"menu/budget"}
+            path={`mariage/${id}/budget`}
           />
         </Row>
       </Container>

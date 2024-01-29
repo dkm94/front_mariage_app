@@ -73,7 +73,7 @@
     background-color: #fff;
 }
 
-.dashbord-view-details > a{
+.dashbord-view-details > a > button {
     text-transform: unset;
     background-color: #BCBCAD;
     color: #fff;
@@ -83,7 +83,7 @@
     padding-left: 30px;
 }
 
-.dashbord-view-details > a:hover{
+.dashbord-view-details > a > button:hover{
     color: #fff;
     background-color: #afafa3;
 }
