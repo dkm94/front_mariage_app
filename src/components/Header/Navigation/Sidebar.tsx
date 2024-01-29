@@ -9,7 +9,7 @@ import profilePicture from "../../../img/couple-img.jpg";
 
 const Sidebar = ({ userInfos, loading }: ISidebarProps) => {
 
-  const [selectedTab, setSelectedTab] = useState<string | undefined>(window.location.pathname === "/" ? "/tableau-de-bord" : window.location.pathname);
+  const [selectedTab, setSelectedTab] = useState<string | undefined>(`/tableau-de-bord`);
   const tabs: NavigationDataType[] = NavigationData;
 
   const handleClick = (pathname: string) => {
@@ -36,7 +36,7 @@ const Sidebar = ({ userInfos, loading }: ISidebarProps) => {
             >
               <Link
                 id={selectedTab === val.pathname ? "active" : ""}
-                to={val?.pathname}
+                to={`/mariage/${userInfos?.id}${val.pathname}`}
                 onClick={() => handleClick(val.pathname)}
               >
                 {val?.title}

@@ -9,11 +9,11 @@ import NavbarLink from "./NavbarLink";
 const win: Window = window;
 
 interface NavbarWithUserProps {
-  user: UserType;
+  userInfos: UserType;
 }
 
 const NavbarWithUser = (props:NavbarWithUserProps) => {
-  const { user } = props;
+  const { userInfos } = props;
 
   const [showLinks, setShowLinks] = useState<boolean>(false);
   const [links, setLinks] = useState<NavigationDataType[]>([]);
@@ -43,7 +43,7 @@ const NavbarWithUser = (props:NavbarWithUserProps) => {
         <li className="navbar__item hidden-links slideDown-7" id="showNavLinks">
           <Link
             className="navbar__link"
-            to={`/compte/${user?.id}/configuration`}
+            to={`/compte/${userInfos?.id}/configuration`}
             onClick={() => setShowLinks(!showLinks)}
           >
             Paramètres

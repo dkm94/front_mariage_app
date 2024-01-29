@@ -40,25 +40,12 @@ export const AuthenticationContext = createContext<RoleType>(undefined);
 export const ScrollButtonContext = createContext<ScrollButtonType>({} as ScrollButtonType);
 export const LoaderContext = createContext<LoaderType>({} as LoaderType);
 
-// function getUser(token: string | null): UserType {
-//   if (token) {
-//     return decode(token);
-//   }
-//   return {} as UserType;
-// }
-
 function App() {
   const token: string | null = localStorage.getItem("token");
 
   const [user, setUser] = useState<UserType | undefined>(undefined);
   const [role, setRole] = useState<RoleType | undefined>(undefined);
 
-  // let user: UserType;
-  // let role: RoleType;
-  // if (token) {
-  //   user = decode(token);
-  //   role = user?.role;
-  // }
   useEffect(() => {
     const token: string | null = localStorage.getItem("token");
 
@@ -79,13 +66,14 @@ function App() {
 
   const Home = () => <Page title="Accueil" component={Homepage} token={token} />
   const ResetPassword = () => <Page title="Réinitialiser le mot de passe" component={ResetPage} token={token} />
-  const Dashboard = () => <Page title="Tableau de bord" userInfos={user} auth={role} component={DashboardPage} token={token} />
-  const Account = () => <Page title="Paramètres du compte" userInfos={user} auth={role} component={SettingsPage} />
-  const Tables = () => <Page title="Les tables" userInfos={user} auth={role} component={TablesPage} />
-  const Guests = () => <Page title="Les invités" userInfos={user} auth={role} component={GuestsPage} />
-  const Carte = () => <Page title="Le repas" userInfos={user} auth={role} component={ReceptionPage} />
-  const Budget = () => <Page title="Les dépenses" userInfos={user} auth={role} component={BudgetPage} />
-  const TodoList = () => <Page title="Liste des tâches" userInfos={user} auth={role} component={TodoPage} />
+
+  const Dashboard = () => user?.id ? <Page title="Tableau de bord" userInfos={user} auth={role} component={DashboardPage} token={token} /> : null;
+  const Account = () => user?.id ? <Page title="Paramètres du compte" userInfos={user} auth={role} component={SettingsPage} /> : null;
+  const Tables = () => user?.id ? <Page title="Les tables" userInfos={user} auth={role} component={TablesPage} /> : null;
+  const Guests = () => user?.id ? <Page title="Les invités" userInfos={user} auth={role} component={GuestsPage} /> : null;
+  const Carte = () => user?.id ? <Page title="Le repas" userInfos={user} auth={role} component={ReceptionPage} /> : null;
+  const Budget = () => user?.id ? <Page title="Les dépenses" userInfos={user} auth={role} component={BudgetPage} /> : null;
+  const TodoList = () => user?.id ? <Page title="Liste des tâches" userInfos={user} auth={role} component={TodoPage} /> : null;
 
   return (
     <div className={token ? "App-home" : "App"}>
@@ -97,13 +85,13 @@ function App() {
                 <ScrollToTop />
                 <Switch>
                   <Route exact path="/">
-                    {token ? <Redirect to="/tableau-de-bord" /> : Home}
+                    {token && user?.id ? <Redirect to={`/mariage/${user?.id}/tableau-de-bord`} /> : Home}
                   </Route>
                   <Route path="/login" component={Login}>
-                    {token ? <Redirect to="/tableau-de-bord" /> : Home}
+                    {token && user?.id ? <Redirect to={`/mariage/${user?.id}/tableau-de-bord`} /> : Home}
                   </Route>
                   <Route path="/register" component={Register}>
-                    {token ? <Redirect to="/tableau-de-bord" /> : Home}
+                    {token && user?.id ? <Redirect to={`/mariage/${user?.id}/tableau-de-bord`} /> : Home}
                   </Route>
                   <Route path="/reset-password">
                     {token ? <Redirect to="/compte/:id/configuration" /> : ResetPassword}
@@ -111,7 +99,7 @@ function App() {
                   {/* todo: create dynamic protected routes, update navigation data file */}
                   <ProtectedRoute
                     // exact
-                    path="/tableau-de-bord"
+                    path="/mariage/:id/tableau-de-bord"
                     component={Dashboard}
                     isAuth={role}
                   />
@@ -121,28 +109,28 @@ function App() {
                     isAuth={role}
                   />
                   <ProtectedRoute
-                    path="/menu/tables"
+                    path="/mariage/:id/tables"
                     component={Tables}
                     isAuth={role}
                     infos={user}
                   />
                   <ProtectedRoute
-                    path="/menu/invites"
+                    path="/mariage/:id/invites"
                     component={Guests}
                     isAuth={role}
                   />
                   <ProtectedRoute
-                    path="/menu/carte"
+                    path="/mariage/:id/carte"
                     component={Carte}
                     isAuth={role}
                   />
                   <ProtectedRoute
-                    path="/menu/budget"
+                    path="/mariage/:id/budget"
                     component={Budget}
                     isAuth={role}
                   />
                   <ProtectedRoute
-                    path="/menu/taches"
+                    path="/mariage/:id/taches"
                     component={TodoList}
                     isAuth={role}
                   />

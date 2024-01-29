@@ -10,11 +10,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { TextField } from "@mui/material";
 import { Button } from "@material-ui/core";
 
-import { ILoginProps } from "../../../../types";
+import { ILoginProps, UserType } from "../../../../types";
 
 import { CustomButton } from "../../../components/Buttons";
 import { login } from "../../../services";
 import Toast from "../../../components/Toast/Toast";
+import decode from "jwt-decode";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required("Veuillez compléter ce champ."),
@@ -61,11 +62,14 @@ const Login = ({ setShowForm }: ILoginProps) => {
     if (success && statusCode === 200 && token) {
       localStorage.setItem("token", token as string);
       const tokenInfos = localStorage.getItem("token");
-      if (tokenInfos) {
-        setTimeout(() => {
-          win.location = "/tableau-de-bord";
-          history.push("/tableau-de-bord");
-        }, 500);
+      if(tokenInfos) {
+        const decodedToken: UserType = decode(tokenInfos);
+        if (decodedToken) {
+          setTimeout(() => {
+            win.location = `/mariage/${decodedToken?.id}/tableau-de-bord`;
+            history.push(`/mariage/${decodedToken?.id}/tableau-de-bord`);
+          }, 500);
+        }
       }
     }
   };
