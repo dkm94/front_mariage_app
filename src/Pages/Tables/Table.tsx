@@ -26,11 +26,12 @@ const Table = ({
   setisOpen,
   deleteTable,
   setMessage, 
-  setMessageType
+  setMessageType,
 }) => {
   const history = useHistory();
   const { id: tableId } = useParams<{id: string}>();
   const { mariageID } = useCurrentUser();
+
   const returnName = (id: string) => {
     const guest = guests?.find((guest) => guest._id === id);
     return guest?.name;
@@ -52,7 +53,8 @@ const Table = ({
           onClick={() => {
             getUpdatedId(table._id, table.name);
             setisOpen(true);
-            history.push(`/mariage/${mariageID}/tables/edit/${tableId}`);
+            const currentPosition = window.scrollY;
+            history.replace(`/mariage/${mariageID}/tables/edit/${tableId}`, { currentPosition });
           }}
           variant={"contained"}
           text="Modifier"
@@ -65,7 +67,8 @@ const Table = ({
         close={() => {
           setEdit(null);
           setisOpen(false);
-          history.push(`/mariage/${mariageID}/tables`);
+          const currentPosition = window.scrollY;
+          history.replace(`/mariage/${mariageID}/tables`, { currentPosition });
         }}
         setEdit={setEdit}
         title="Gérer les invités/la table"

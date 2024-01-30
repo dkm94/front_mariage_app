@@ -58,7 +58,8 @@ const UpdateTask = ({
       setInput("");
     }, 1000);
 
-    history.push(`/mariage/${mariageID}/taches`)
+    const currentPosition = window.scrollY;
+    history.replace(`/mariage/${mariageID}/taches`, { currentPosition })
   };
 
   return (
@@ -94,7 +95,9 @@ const UpdateTask = ({
           onClick={() => {
             setEdit(null);
             setInput("");
-            history.push(`/mariage/${mariageID}/taches`)
+
+            const currentPosition = window.scrollY;
+            history.replace(`/mariage/${mariageID}/taches`, { currentPosition })
           }}
           />
         </Grid2>

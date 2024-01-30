@@ -28,10 +28,10 @@ const EditTableForm = (props) => {
     setisOpen,
     setMessage, 
     setMessageType,
-    mariageID
+    mariageID,
   } = props;
   const history = useHistory();
-  
+
   const [guestsIds, setGuestsIds] = useState<string[]>([])
   
   const handleSubmit = async (e) => {
@@ -61,7 +61,8 @@ const EditTableForm = (props) => {
         return guest;
       });
       setGuests(updatedGuests); 
-      history.push(`/mariage/${mariageID}/tables`)
+      const currentPosition = window.scrollY;
+      history.replace(`/mariage/${mariageID}/tables`, { currentPosition });
     }
   }
 
@@ -119,7 +120,8 @@ const EditTableForm = (props) => {
             onClick={() => {
               setEdit(null);
               setisOpen(false);
-              history.push(`/mariage/${mariageID}/tables`)
+              const currentPosition = window.scrollY;
+              history.replace(`/mariage/${mariageID}/tables`, { currentPosition })
             }}
             sx={{ width: "100% !important" }}
             variant="outlined"    

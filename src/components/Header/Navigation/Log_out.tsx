@@ -66,7 +66,9 @@ const Logout = () => {
         close={() => {
           setisOpen(false);
           setShowForm("");
-          history.push("/")
+
+          const currentPosition = window.scrollY;
+          history.replace("/", { currentPosition });
         }}
       >
         {showForm === "login" && <Login setShowForm={setShowForm} />}

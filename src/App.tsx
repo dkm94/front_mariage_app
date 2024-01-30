@@ -37,6 +37,7 @@ import Login from "./Pages/Auth/Login/Login";
 import Register from "./Pages/Auth/Register/Register";
 import { CurrentUserContext } from "./ctx/userCtx";
 import UpdateExpense from "./Pages/Budget/Forms/Update/UpdateDépense";
+import ScrollRestoration from "./components/scrollRestauration/scrollRestauration";
 
 // <------- Ctx ---------->
 // export const UserContext = createContext<UserType>({} as UserType);
@@ -87,85 +88,87 @@ function App() {
             <LoaderContext.Provider value={loader}>
               <div className={token ? "content" : "content-home"}>
                 <ScrollToTop />
-                <Switch>
-                  <Route exact path="/">
-                    {token && user?.id ? <Redirect to={`/mariage/${user?.id}/tableau-de-bord`} /> : Home}
-                  </Route>
-                  <Route path="/login" component={Login}>
-                    {token && user?.id ? <Redirect to={`/mariage/${user?.id}/tableau-de-bord`} /> : Home}
-                  </Route>
-                  <Route path="/register" component={Register}>
-                    {token && user?.id ? <Redirect to={`/mariage/${user?.id}/tableau-de-bord`} /> : Home}
-                  </Route>
-                  <Route path="/reset-password">
-                    {token ? <Redirect to="/compte/:id/configuration" /> : ResetPassword}
-                  </Route>
-                  {/* todo: create dynamic protected routes, update navigation data file */}
-                  <ProtectedRoute
-                    // exact
-                    path="/mariage/:id/tableau-de-bord"
-                    component={Dashboard}
-                    isAuth={role}
-                  />
-                  <ProtectedRoute
-                    path="/compte/:id/configuration"
-                    component={Account}
-                    isAuth={role}
-                  />
-                  <ProtectedRoute
-                    path="/mariage/:id/tables"
-                    component={Tables}
-                    isAuth={role}
-                    infos={user}
-                  />
-                  <ProtectedRoute
-                    path="/mariage/:id/tables/edit/:id"
-                    component={EditTableForm}
-                    isAuth={role}
-                    infos={user}
-                  />
-                  <ProtectedRoute
-                    path="/mariage/:id/invites"
-                    component={Guests}
-                    isAuth={role}
-                  />
-                  <ProtectedRoute
-                    path="/mariage/:id/invites/edit/:id"
-                    component={UpdateGuest}
-                    isAuth={role}
-                  />
-                  <ProtectedRoute
-                    path="/mariage/:id/carte"
-                    component={Carte}
-                    isAuth={role}
-                  />
-                  <ProtectedRoute
-                    path="/mariage/:id/carte/edit/:id"
-                    component={UpdateFood}
-                    isAuth={role}
-                  />
-                  <ProtectedRoute
-                    path="/mariage/:id/budget"
-                    component={Budget}
-                    isAuth={role}
-                  />
-                  <ProtectedRoute
-                    path="/mariage/:id/budget/edit/:id"
-                    component={UpdateExpense}
-                    isAuth={role}
-                  />
-                  <ProtectedRoute
-                    path="/mariage/:id/taches"
-                    component={TodoList}
-                    isAuth={role}
-                  />
-                  <ProtectedRoute
-                    path="/mariage/:id/taches/edit/:id"
-                    component={TodoList}
-                    isAuth={role}
-                  />
-                  <Route component={NotFoundPage} />
-                </Switch>
+                <ScrollRestoration>
+                  <Switch>
+                    <Route exact path="/">
+                      {token && user?.id ? <Redirect to={`/mariage/${user?.id}/tableau-de-bord`} /> : Home}
+                    </Route>
+                    <Route path="/login" component={Login}>
+                      {token && user?.id ? <Redirect to={`/mariage/${user?.id}/tableau-de-bord`} /> : Home}
+                    </Route>
+                    <Route path="/register" component={Register}>
+                      {token && user?.id ? <Redirect to={`/mariage/${user?.id}/tableau-de-bord`} /> : Home}
+                    </Route>
+                    <Route path="/reset-password">
+                      {token ? <Redirect to="/compte/:id/configuration" /> : ResetPassword}
+                    </Route>
+                    {/* todo: create dynamic protected routes, update navigation data file */}
+                    <ProtectedRoute
+                      // exact
+                      path="/mariage/:id/tableau-de-bord"
+                      component={Dashboard}
+                      isAuth={role}
+                    />
+                    <ProtectedRoute
+                      path="/compte/:id/configuration"
+                      component={Account}
+                      isAuth={role}
+                    />
+                    <ProtectedRoute
+                      path="/mariage/:id/tables"
+                      component={Tables}
+                      isAuth={role}
+                      infos={user}
+                    />
+                    <ProtectedRoute
+                      path="/mariage/:id/tables/edit/:id"
+                      component={EditTableForm}
+                      isAuth={role}
+                      infos={user}
+                    />
+                    <ProtectedRoute
+                      path="/mariage/:id/invites"
+                      component={Guests}
+                      isAuth={role}
+                    />
+                    <ProtectedRoute
+                      path="/mariage/:id/invites/edit/:id"
+                      component={UpdateGuest}
+                      isAuth={role}
+                    />
+                    <ProtectedRoute
+                      path="/mariage/:id/carte"
+                      component={Carte}
+                      isAuth={role}
+                    />
+                    <ProtectedRoute
+                      path="/mariage/:id/carte/edit/:id"
+                      component={UpdateFood}
+                      isAuth={role}
+                    />
+                    <ProtectedRoute
+                      path="/mariage/:id/budget"
+                      component={Budget}
+                      isAuth={role}
+                    />
+                    <ProtectedRoute
+                      path="/mariage/:id/budget/edit/:id"
+                      component={UpdateExpense}
+                      isAuth={role}
+                    />
+                    <ProtectedRoute
+                      path="/mariage/:id/taches"
+                      component={TodoList}
+                      isAuth={role}
+                    />
+                    <ProtectedRoute
+                      path="/mariage/:id/taches/edit/:id"
+                      component={TodoList}
+                      isAuth={role}
+                    />
+                    <Route component={NotFoundPage} />
+                  </Switch>
+                </ScrollRestoration>
               </div>
             </LoaderContext.Provider>
           </ScrollButtonContext.Provider>

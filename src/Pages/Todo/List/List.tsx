@@ -137,7 +137,9 @@ const Todos = ({
             obj={obj} 
             onClick={() => {
               getUpdatedId(obj._id, obj.text);
-              history.push(`/mariage/${mariageID}/taches/edit/${todoId}`)
+
+              const currentPosition = window.scrollY;
+              history.replace(`/mariage/${mariageID}/taches/edit/${todoId}`, { currentPosition })
             }} 
             />
 

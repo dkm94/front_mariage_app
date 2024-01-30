@@ -136,7 +136,9 @@ const UpdateExpense = ({
                   date: "",
                   mariageID: ""
                 });
-                history.push(`/mariage/${mariageID}/budget`);
+
+                const currentPosition = window.scrollY;
+                history.replace(`/mariage/${mariageID}/budget`, { currentPosition });
               }}
               variant="outlined"
             >

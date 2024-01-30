@@ -120,7 +120,8 @@ const ReceptionCard = (props: CardPropos) => {
                         buttonType={"edit"}
                         onClick={() => {
                             getUpdatedId(starter._id, starter.name);
-                            history.push(`/mariage/${mariageID}/carte/edit/${foodId}`)
+                            const currentPosition = window.scrollY;
+                            history.replace(`/mariage/${mariageID}/carte/edit/${foodId}`, { currentPosition })
                         }}
                         />
                         <CustomIconButton 

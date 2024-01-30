@@ -66,7 +66,7 @@ const Login = ({ setShowForm }: ILoginProps) => {
         const decodedToken: UserType = decode(tokenInfos);
         if (decodedToken) {
           setTimeout(() => {
-            win.location = `/mariage/${decodedToken?.id}/tableau-de-bord`;
+            win.location = `/mariage/${decodedToken?.id}/tableau-de-bord`; 
             history.push(`/mariage/${decodedToken?.id}/tableau-de-bord`);
           }, 500);
         }
@@ -142,7 +142,9 @@ const Login = ({ setShowForm }: ILoginProps) => {
                     }}
                     onClick={() => {
                       setShowForm("register");
-                      history.push("/register");
+
+                      const currentPosition = window.scrollY;
+                      history.replace("/register", { currentPosition });
                     }}
                   >
                     <span>Inscrivez-vous</span>

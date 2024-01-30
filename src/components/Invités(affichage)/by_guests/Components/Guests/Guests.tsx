@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useHistory, useLocation, useParams } from "react-router";
 
 import { Box } from "@material-ui/core";
 import styled from "@emotion/styled";
@@ -10,8 +11,6 @@ import DefaultModal from "../../../../Modals/Default/DefaultModal";
 
 import avatar from "../../../../../img/avatar.jpg";
 import uploadImg from "../../../../../img/upload-icon-20624.png";
-import { useHistory, useParams } from "react-router";
-import { Link } from "react-router-dom";
 
 const IconWrapper = styled(IconButton)({
   "&:hover": {
@@ -125,7 +124,8 @@ const Guests = ({
                   >
                       <IconWrapper
                       onClick={() => {
-                        history.push(`/mariage/${mariageID}/invites/edit/${id}`)
+                        const currentPosition = window.scrollY;
+                        history.replace(`/mariage/${mariageID}/invites/edit/${id}`,{ currentPosition })
                         setEdit({
                           id: guest._id,
                           name: guest.name,
@@ -180,7 +180,8 @@ const Guests = ({
                         close={() => {
                           setEdit(null);
                           setisOpen(false);
-                          history.push(`/mariage/${mariageID}/invites`);
+                          const currentPosition = window.scrollY;
+                          history.replace(`/mariage/${mariageID}/invites`, { currentPosition });
                         }}
                         title="Modifier l'invité"
                       >
