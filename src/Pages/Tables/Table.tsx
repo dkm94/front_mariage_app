@@ -87,6 +87,7 @@ const Table = ({
           setisOpen={setisOpen}
           setMessage={setMessage}
           setMessageType={setMessageType}
+          mariageID={mariageID}
         />
       </DefaultModal>}
     </Grid2>
