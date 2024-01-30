@@ -1,60 +1,27 @@
 import "../Header.css";
 
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { ISidebarProps, NavigationDataType } from "../../../../types/index";
 import { NavigationData } from "./NavigationData";
 import profilePicture from "../../../img/couple-img.jpg";
 
 const Sidebar = ({ userInfos, loading }: ISidebarProps) => {
-  const loggedInTabs = [
-    {
-      title: "Tableau de bord",
-      pathname: "/tableau-de-bord",
-    },
-    {
-      title: "Tâches",
-      pathname: "/taches",
-    },
-    {
-      title: "Invités",
-      pathname: "/invites",
-    },
-    {
-      title: "Tables",
-      pathname: "/tables",
-    },
-    {
-      title: "Budget",
-      pathname: "/budget",
-    },
-    {
-      title: "Réception",
-      pathname: "/reception",
-    },
-    {
-      title: "Paramètres",
-      pathname: "/parametres",
-    },
-  ]
+  const location = useLocation();
 
-  const [selectedTab, setSelectedTab] = useState<string | undefined>(`/tableau-de-bord`);
+  const [selectedTab, setSelectedTab] = useState<string | undefined>(`/mariage/${userInfos?.id}/carte`);
   const tabs: NavigationDataType[] = NavigationData;
   
-  const handleClick = (pathname: string) => {
-    const selected = tabs.find((tab) => tab.pathname === pathname);
-    setSelectedTab(selected?.pathname);
-  }
-  
-  console.log("🚀 ~ useEffect ~ selectedTab:", selectedTab)
-  
   useEffect(() => {
-    const selected = tabs.find((tab) => tab.pathname === selectedTab);
-    setSelectedTab(selected?.pathname);
-    console.log("🚀 ~ useEffect ~ selectedTab:", selectedTab)
-  }, [selectedTab, tabs]);
-
+    const path = location.pathname;
+    setSelectedTab(path);
+  }, [location]);
+  
+  const isTabActive = (tabName: string) => {
+    return selectedTab === tabName;
+  };
+  
   return (
     <nav className="sidebar" style={{ animation: "fadeIn 2s", opacity: 1 }}>
       <div className="sidebar__greetings">
@@ -70,12 +37,10 @@ const Sidebar = ({ userInfos, loading }: ISidebarProps) => {
           return (
             <li 
             key={key} 
-            className="menu-row"
+            className={`menu-row ${isTabActive(`/mariage/${userInfos?.id}${val.pathname}`) ? "active" : ""}`}
             >
               <Link
-                id={selectedTab === val.pathname ? "active" : ""}
                 to={`/mariage/${userInfos?.id}${val.pathname}`}
-                onClick={() => handleClick(val.pathname)}
               >
                 {val?.title}
               </Link>

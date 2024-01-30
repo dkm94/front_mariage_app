@@ -20,6 +20,7 @@ type Food = {
 
 const Dashboard = (props: IDashboardProps) => { // Ce composant est rendu beaucoup trop de fois
   const id = props?.userInfos?.mariageID;
+  const userId = props?.userInfos?.id;
 
   const [sum, setSum] = useState<string>("");
 
@@ -84,7 +85,7 @@ const Dashboard = (props: IDashboardProps) => { // Ce composant est rendu beauco
             array={guests}
             resume={"repartition"}
             extraProp={"name"}
-            path={`mariage/${id}/invites`}
+            path={`mariage/${userId}/invites`}
             firstPerson={wedding?.firstPerson}
             secondPerson={wedding?.secondPerson}
             firstFamilyGuests={firstFamilyGuests}
@@ -96,7 +97,7 @@ const Dashboard = (props: IDashboardProps) => { // Ce composant est rendu beauco
             array={tables}
             resume={"tables"}
             extraProp={"tables"}
-            path={`mariage/${id}/tables`}
+            path={`mariage/${userId}/tables`}
           />
           <Card
             title={"Réception"}
@@ -108,7 +109,7 @@ const Dashboard = (props: IDashboardProps) => { // Ce composant est rendu beauco
             subArrayFive={beverages?.length}
             resume={"composition"}
             extraProp={"composition"}
-            path={`mariage/${id}/carte`}
+            path={`mariage/${userId}/carte`}
           />
           <Card
             title={"Tâches"}
@@ -119,7 +120,7 @@ const Dashboard = (props: IDashboardProps) => { // Ce composant est rendu beauco
             elements={"text"}
             resume={"status"}
             extraProp={"tache"}
-            path={`mariage/${id}/taches`}
+            path={`mariage/${userId}/taches`}
           />
           <Card
             title={"Dépenses"}
@@ -128,7 +129,7 @@ const Dashboard = (props: IDashboardProps) => { // Ce composant est rendu beauco
             elements={"description"}
             resume={"expenses"}
             extraProp={"description"}
-            path={`mariage/${id}/budget`}
+            path={`mariage/${userId}/budget`}
           />
         </Row>
       </Container>
