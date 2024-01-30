@@ -102,7 +102,7 @@ const UpdateFood = (props: UpdateFoodProps) => {
         setInput("");
     }
 
-    history.push(`mariage/${mariageID}/carte`)
+    history.push(`/mariage/${mariageID}/carte`)
   };
 }
 
@@ -152,7 +152,7 @@ const UpdateFood = (props: UpdateFoodProps) => {
           onClick={() => {
             setEdit({ id: "", name: "" })
             setInput("");
-            history.push(`mariage/${mariageID}/carte`)
+            history.push(`/mariage/${mariageID}/carte`)
           }}
         >
           <ReplayIcon fontSize="small" />
