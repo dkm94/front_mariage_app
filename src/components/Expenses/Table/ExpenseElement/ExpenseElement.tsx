@@ -10,6 +10,8 @@ import DefaultModal from "../../../Modals/Default/DefaultModal.jsx";
 import UpdateForm from "../../../../Pages/Budget/Forms/Update/UpdateDépense";
 
 import { OperationType } from "../../../../../types";
+import { useHistory, useParams } from "react-router";
+import { useCurrentUser } from "../../../../ctx/userCtx";
 
 const CustomChip = styled(Chip)({
     height: 'auto',
@@ -31,6 +33,11 @@ interface ExpenseElementProps {
 
 const ExpenseElement = (props: ExpenseElementProps) => {
     const { obj, edit, setEdit, submit, deleteExpense } = props;
+
+    const history = useHistory();
+    const{ mariageID } = useCurrentUser();
+    const { id: expenseId } = useParams<{id: string}>();
+
 
     const renderSwitchColors = (categoryIconColors) => {
         switch (categoryIconColors) {
@@ -83,6 +90,7 @@ const ExpenseElement = (props: ExpenseElementProps) => {
         <IconButton
             onClick={() => {
             setEdit(obj);
+            history.push(`/mariage/${mariageID}/budget/edit/${expenseId}`)
             }}
         >
           <CreateIcon fontSize="small" />
@@ -94,6 +102,7 @@ const ExpenseElement = (props: ExpenseElementProps) => {
       setEdit={setEdit}
       close={() => {
           setEdit(null)
+          history.push(`/mariage/${mariageID}/budget`)
       }}
       title={"Modifier une dépense"}
       >
@@ -102,6 +111,7 @@ const ExpenseElement = (props: ExpenseElementProps) => {
       setEdit={setEdit}
       onSubmit={submit}
       deleteExpense={deleteExpense}
+      mariageID={mariageID}
       />
       </DefaultModal>}
     </li>

@@ -36,6 +36,7 @@ import { UserType, RoleType, ScrollButtonType, LoaderType } from "../types/index
 import Login from "./Pages/Auth/Login/Login";
 import Register from "./Pages/Auth/Register/Register";
 import { CurrentUserContext } from "./ctx/userCtx";
+import UpdateExpense from "./Pages/Budget/Forms/Update/UpdateDépense";
 
 // <------- Ctx ---------->
 // export const UserContext = createContext<UserType>({} as UserType);
@@ -146,6 +147,11 @@ function App() {
                   <ProtectedRoute
                     path="/mariage/:id/budget"
                     component={Budget}
+                    isAuth={role}
+                  />
+                  <ProtectedRoute
+                    path="/mariage/:id/budget/edit/:id"
+                    component={UpdateExpense}
                     isAuth={role}
                   />
                   <ProtectedRoute
