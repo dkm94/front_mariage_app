@@ -15,6 +15,11 @@ interface DeleteGuestParams {
   id: string;
 }
 
+interface UpdateMedia {
+  id: string;
+  formData: FormData;
+}
+
 export const getGuests = requestHandler<void, GuestType[]>((params) => {
     return Promise.resolve({
       method: 'get',
@@ -44,6 +49,16 @@ export const updateGuest = requestHandler<UpdateGuestParams, any>((params) => {
     family: params?.family,
   },
   params: params
+  });
+});
+
+export const updateGuestMedia = requestHandler<UpdateMedia, any>((params) => {
+  return Promise.resolve({
+  method: 'post',
+  url: `api/admin/guests/edit/${params?.id}`,
+  formData: params?.formData,
+  params: params,
+  headers: {'Content-Type': 'multipart/form-data' }
   });
 });
 

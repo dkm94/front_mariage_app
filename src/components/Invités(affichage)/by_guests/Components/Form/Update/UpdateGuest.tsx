@@ -12,7 +12,7 @@ import { ClearButton, CustomButton } from "../../../../../Buttons";
 
 import checkIcon from "../../../../../../img/green-check.png";
 import { useFetch } from "../../../../../../hooks";
-import { deleteGuest, getWedding, updateGuest } from "../../../../../../services";
+import { deleteGuest, getWedding, updateGuest, updateGuestMedia } from "../../../../../../services";
 import { GuestType, UserType, WeddingType } from "../../../../../../../types";
 // import { UserContext } from "../../../../../../App";
 import RedButton from "../../../../../Buttons/RedButton/RedButton";
@@ -85,33 +85,35 @@ const UpdateGuest = ({
     try {
       const formData = new FormData();
       formData.append("media", file);
-  
-      const response = await axios.post(`/api/admin/guests/edit/${id}`, formData);
-  
-      if (response.data != null) {
-        const updatedGuestList: GuestType[] = [...guests].map((guest: GuestType) =>
-          guest?._id === id
-            ? {
-                _id: response.data._id,
-                name: response.data.name,
-                family: response.data.family,
-                media: response.data.media,
-              }
-            : guest
-        );
-  
-        setFile(null);
-        setUser({
-          _id: response.data._id,
-          name: response.data.name,
-          family: response.data.family,
-          media: response.data.media,
-        });
-        setGuests(updatedGuestList);
-      }
+      const { data, status } = await axios.post(`/api/admin/guests/edit/${id}`, formData);
+      // const response = await updateGuestMedia({ id: id, formData });
+      // const { message, statusCode, data } = response;
+
+      setEdit({ id: "" });
+      setInput("");
+
+      const updatedGuestList: GuestType[] = [...guests].map((guest: GuestType) =>
+        guest?._id === id
+          ? {
+              _id: data._id,
+              name: data.name,
+              family: data.family,
+              media: data.media,
+            }
+          : guest
+      );
+      
+      setFile(null);
+      setUser({
+        _id: data._id,
+        name: data.name,
+        family: data.family,
+        media: data.media,
+      });
+      setGuests(updatedGuestList);
     } catch (error) {
       setMessageType("error");
-      setMessage("Erreur initialisation de l'image");
+      setMessage("La photo n'a pas été chargée");
     }
   };
   
