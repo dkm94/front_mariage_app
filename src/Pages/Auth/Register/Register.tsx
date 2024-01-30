@@ -1,24 +1,24 @@
 import "./Register.css";
 
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useHistory } from "react-router";
-
+import { History } from 'history';
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { TextField, Button } from "@mui/material";
 
+import Toast from "../../../components/Toast/Toast";
 import { CustomButton } from "../../../components/Buttons";
 
-import { IRegisterProps, UserType } from "../../../../types";
+import { UserType } from "../../../../types";
 import { register as customRegister } from "../../../services/authRequests";
 import { useFetch } from "../../../hooks";
 import { getAdmins } from "../../../services/adminRequests";
+import { ApiResponse } from "../../../helpers/requestHandler";
 
-import Toast from "../../../components/Toast/Toast";
-
-type FormValues = {
+type Auth = {
   email: string;
   password: string;
   firstPerson: string;
@@ -26,8 +26,13 @@ type FormValues = {
   confirmPassword: string;
 }
 
-const Register = ({ setShowForm }: IRegisterProps) => {
-  const history = useHistory();
+interface RegisterProps {
+  setShowForm: Dispatch<SetStateAction<string>>
+}
+
+const Register = (props: RegisterProps) => {
+  const { setShowForm } = props;
+  const history: History = useHistory();
 
   const [loadingButton, setLoadingButton] = useState(false);
   const [message, setMessage] = useState<string | undefined>(undefined);
@@ -74,7 +79,7 @@ const Register = ({ setShowForm }: IRegisterProps) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>({
+  } = useForm<Auth>({
     resolver: yupResolver(validationSchema),
   });
 
@@ -83,10 +88,10 @@ const Register = ({ setShowForm }: IRegisterProps) => {
     if(admins) setTempArr(admins);
   }, [admins])
 
-  const onSubmit = async ({ firstPerson, secondPerson, email, password }) => {
+  const onSubmit = async ({ firstPerson, secondPerson, email, password }): Promise<void> => {
     setLoadingButton(true);
     
-    const response = await customRegister({ firstPerson, secondPerson, email, password });
+    const response:ApiResponse<Auth> = await customRegister({ firstPerson, secondPerson, email, password });
     const { success, message } = response;
 
     if(!success) {

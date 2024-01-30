@@ -50,12 +50,6 @@ export type NavigationDataType = {
     pathname: string;
 }
 
-export interface ILoginProps {
-    setShowForm: React.Dispatch<React.SetStateAction<string>>
-}
-
-export interface IRegisterProps extends ILoginProps {}
-
 export interface IDashboardProps {
     userInfos?: UserType | undefined;
     userRole: string;
