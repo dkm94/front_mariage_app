@@ -53,7 +53,7 @@ const Table = ({
           onClick={() => {
             getUpdatedId(table._id, table.name);
             setisOpen(true);
-            const currentPosition = window.scrollY;
+            const currentPosition: number = window.scrollY;
             history.replace(`/mariage/${mariageID}/tables/edit/${tableId}`, { currentPosition });
           }}
           variant={"contained"}
@@ -67,7 +67,7 @@ const Table = ({
         close={() => {
           setEdit(null);
           setisOpen(false);
-          const currentPosition = window.scrollY;
+          const currentPosition: number = window.scrollY;
           history.replace(`/mariage/${mariageID}/tables`, { currentPosition });
         }}
         setEdit={setEdit}

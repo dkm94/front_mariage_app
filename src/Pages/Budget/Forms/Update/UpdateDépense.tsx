@@ -43,10 +43,7 @@ const UpdateExpense = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({
-      id: edit.id,
-      expense: input,
-    });
+    onSubmit(input);
     setInput(null);
     setEdit(null)
   };
@@ -137,7 +134,7 @@ const UpdateExpense = ({
                   mariageID: ""
                 });
 
-                const currentPosition = window.scrollY;
+                const currentPosition: number = window.scrollY;
                 history.replace(`/mariage/${mariageID}/budget`, { currentPosition });
               }}
               variant="outlined"

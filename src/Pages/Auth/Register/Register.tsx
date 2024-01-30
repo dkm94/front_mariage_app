@@ -205,7 +205,7 @@ const Register = (props: RegisterProps) => {
                       onClick={() => {
                         setShowForm("login")
 
-                        const currentPosition = window.scrollY;
+                        const currentPosition: number = window.scrollY;
                           history.replace("/login", { currentPosition });
                         }}
                     >

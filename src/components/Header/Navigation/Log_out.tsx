@@ -67,7 +67,7 @@ const Logout = () => {
           setisOpen(false);
           setShowForm("");
 
-          const currentPosition = window.scrollY;
+          const currentPosition: number = window.scrollY;
           history.replace("/", { currentPosition });
         }}
       >

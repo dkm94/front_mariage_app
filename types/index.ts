@@ -104,12 +104,6 @@ export type OperationType = {
     mariageID?: string;
 };
 
-// export type BudgetProps = {
-//     _id: string;
-//     mariageID: string;
-//     operations: OperationType[];
-// } | undefined;
-
 export interface ITextfieldOperations {
     size?: string;
     label?: string;

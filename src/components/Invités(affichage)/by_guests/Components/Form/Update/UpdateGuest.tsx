@@ -146,7 +146,7 @@ const UpdateGuest = ({
       setMessage(undefined);
     })
 
-    const currentPosition = window.scrollY;
+    const currentPosition: number = window.scrollY;
     history.replace(`/mariage/${mariageID}/invites`, { currentPosition });
   };
 
@@ -269,7 +269,7 @@ const UpdateGuest = ({
               onClick={() => {
                 setEdit({ id: null });
                 setisOpen(false);
-                const currentPosition = window.scrollY;
+                const currentPosition: number = window.scrollY;
                 history.replace(`/mariage/${mariageID}/invites`, { currentPosition });
               }}
               variant="outlined"

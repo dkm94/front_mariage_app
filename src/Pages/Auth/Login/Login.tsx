@@ -148,7 +148,7 @@ const Login = (props: LoginProps) => {
                     onClick={() => {
                       setShowForm("register");
 
-                      const currentPosition = window.scrollY;
+                      const currentPosition: number = window.scrollY;
                       history.replace("/register", { currentPosition });
                     }}
                   >

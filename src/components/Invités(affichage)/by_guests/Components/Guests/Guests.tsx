@@ -124,7 +124,7 @@ const Guests = ({
                   >
                       <IconWrapper
                       onClick={() => {
-                        const currentPosition = window.scrollY;
+                        const currentPosition: number = window.scrollY;
                         history.replace(`/mariage/${mariageID}/invites/edit/${id}`,{ currentPosition })
                         setEdit({
                           id: guest._id,
@@ -180,7 +180,7 @@ const Guests = ({
                         close={() => {
                           setEdit(null);
                           setisOpen(false);
-                          const currentPosition = window.scrollY;
+                          const currentPosition: number = window.scrollY;
                           history.replace(`/mariage/${mariageID}/invites`, { currentPosition });
                         }}
                         title="Modifier l'invité"

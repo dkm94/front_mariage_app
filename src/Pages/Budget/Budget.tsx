@@ -1,8 +1,9 @@
 import "./Budget.css";
 
 import React, { useState, useEffect, ChangeEvent } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { useHistory } from "react-router";
 import { useFormik } from "formik";
+import { Container, Row, Col } from "react-bootstrap";
 import * as Yup from "yup";
 
 import Grow from "@mui/material/Grow";
@@ -10,56 +11,23 @@ import Grow from "@mui/material/Grow";
 import PieChart from "../../components/Expenses/Graph/PieChart";
 import Expenses from "./Dépenses/Dépenses";
 import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
-
-import { OperationType } from "../../../types/index";
-import { floatToEuro } from "../../helpers/formatCurrency";
-import { useFetch } from "../../hooks";
-import { addOperation, deleteOperation, getOperations, updateOperation } from "../../services";
 import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
 import PriceCard from "../../components/Expenses/PriceCard/PriceCard";
 import AddExpenseForm from "../../components/Expenses/Forms/AddExpenseForm/AddExpenseForm";
 import Toast from "../../components/Toast/Toast";
-import { useHistory } from "react-router";
-import { useCurrentUser } from "../../ctx/userCtx";
 
-const categories = [
-  { 
-    label: "Sélectionnez une catégorie",
-    value: ""
-  },
-  {
-    label: "Locations",
-    value: "Locations"
-  },
-  {
-    label: "Habillement/Beauté",
-    value: "Habillement/Beauté"
-  },
-  { 
-    label: "Décoration/Fleurs",
-    value: "Décoration/Fleurs"
-  },
-  {
-    label: "Alliances/Bijoux",
-    value: "Alliances/Bijoux"
-  },
-  {
-    label: "Animation (DJ, Photographe...)",
-    value: "Animation"
-  },
-  {
-    label: "Traiteur",
-    value: "Traiteur"
-  },
-  {
-    label: "Faire-part",
-    value: "Faire-part"
-  },
-  {
-    label: "Autres",
-    value: "Autres"
-  },
-];
+import { OperationType } from "../../../types/index";
+import { useCurrentUser } from "../../ctx/userCtx";
+import { floatToEuro } from "../../helpers/formatCurrency";
+import { useFetch } from "../../hooks";
+import { addOperation, deleteOperation, getOperations, updateOperation } from "../../services";
+import { categories } from "../../data";
+
+const operationValues: OperationType = {
+  category: "",
+  price: "",
+  description: "",
+};
 
 const Budget = () => {
   const history = useHistory();
@@ -68,11 +36,6 @@ const Budget = () => {
   const [message, setMessage] = useState<string | undefined>(undefined);
   const [messageType, setMessageType] = useState<"error" | "success" | undefined>(undefined);
 
-  const newOperationValues: OperationType = {
-    category: "",
-    price: "",
-    description: "",
-  };
 
   const [searchValue, setSearchValue] = useState<string>("");
   const [total, setTotal] = useState<string>("");
@@ -91,9 +54,8 @@ const Budget = () => {
     setSearchValue(e.target.value);
   };
 
-  const editExpense = async ({ expense }: { expense: OperationType}): Promise<void> => {
-    let { _id, category, description, price } = expense;
-
+  const editExpense = async (expense: OperationType): Promise<void> => {
+    const { _id, description, price, category } = expense;
     const updatedExpenses: OperationType[] = [...operations].map((obj) => {
       if (obj._id === _id) {
         obj.description = description;
@@ -118,12 +80,11 @@ const Budget = () => {
       setEdit(null);
     }, 1000);
 
-    const currentPosition = window.scrollY;
+    const currentPosition: number = window.scrollY;
     history.replace(`/mariage/${mariageID}/budget`, { currentPosition })
   };
 
-  const deleteExpense = async (id: string) => {
-    // debugger;
+  const deleteExpense = async (id: string): Promise<void> => {
     const response = await deleteOperation({ id })
     const { success, message } =  response;
 
@@ -141,7 +102,7 @@ const Budget = () => {
     setEdit(null);
   };
 
-  const operationValidationSchema = Yup.object().shape({
+  const operationSchema = Yup.object().shape({
     category: Yup.string().required("Veuillez choisir une catégorie."),
     price: Yup.number()
       .test("maxDigitsAfterDecimal", "Format invalide.", (value) => {
@@ -158,7 +119,7 @@ const Budget = () => {
   });
 
   const formik = useFormik({
-    initialValues: newOperationValues,
+    initialValues: operationValues,
     onSubmit: async (values) => {
       const response = await addOperation({ category: values.category, price: values.price, description: values.description })
       const { success, message, data: newOperation } = response;
@@ -174,15 +135,15 @@ const Budget = () => {
       calculateTotal([...expensesCopy, newOperation]);
       formik.resetForm();
     },
-    validationSchema: operationValidationSchema,
+    validationSchema: operationSchema,
     enableReinitialize: true,
   });
 
-  function calculateTotal(operations: OperationType[]) {
+  function calculateTotal(operations: OperationType[]): void {
     if (operations.length > 0) {
-      const getSums = operations?.map((op) => Number(op.price));
-      const add = getSums.reduce((a, b) => a + b);
-      const p = add / 100;
+      const getSums: number[] = operations?.map((op) => Number(op.price));
+      const add: number = getSums.reduce((a, b) => a + b);
+      const p: number = add / 100;
       setTotal(floatToEuro(p));
     } else {
       setTotal("")

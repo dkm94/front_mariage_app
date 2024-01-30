@@ -61,7 +61,7 @@ const EditTableForm = (props) => {
         return guest;
       });
       setGuests(updatedGuests); 
-      const currentPosition = window.scrollY;
+      const currentPosition: number = window.scrollY;
       history.replace(`/mariage/${mariageID}/tables`, { currentPosition });
     }
   }
@@ -120,7 +120,7 @@ const EditTableForm = (props) => {
             onClick={() => {
               setEdit(null);
               setisOpen(false);
-              const currentPosition = window.scrollY;
+              const currentPosition: number = window.scrollY;
               history.replace(`/mariage/${mariageID}/tables`, { currentPosition })
             }}
             sx={{ width: "100% !important" }}

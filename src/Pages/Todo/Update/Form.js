@@ -58,7 +58,7 @@ const UpdateTask = ({
       setInput("");
     }, 1000);
 
-    const currentPosition = window.scrollY;
+    const currentPosition: number = window.scrollY;
     history.replace(`/mariage/${mariageID}/taches`, { currentPosition })
   };
 
@@ -96,7 +96,7 @@ const UpdateTask = ({
             setEdit(null);
             setInput("");
 
-            const currentPosition = window.scrollY;
+            const currentPosition: number = window.scrollY;
             history.replace(`/mariage/${mariageID}/taches`, { currentPosition })
           }}
           />

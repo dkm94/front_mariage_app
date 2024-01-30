@@ -102,7 +102,7 @@ const UpdateFood = (props: UpdateFoodProps) => {
         setInput("");
     }
 
-    const currentPosition = window.scrollY;
+    const currentPosition: number = window.scrollY;
     history.replace(`/mariage/${mariageID}/carte`, { currentPosition })
   };
 }
@@ -154,7 +154,7 @@ const UpdateFood = (props: UpdateFoodProps) => {
             setEdit({ id: "", name: "" })
             setInput("");
 
-            const currentPosition = window.scrollY;
+            const currentPosition: number = window.scrollY;
             history.replace(`/mariage/${mariageID}/carte`, { currentPosition })
           }}
         >

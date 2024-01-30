@@ -4,24 +4,21 @@ import React from "react";
 
 import ExpenseElement from "../../../components/Expenses/Table/ExpenseElement/ExpenseElement";
 
-const headerItems = [
-  "Catégorie",
-  "Prix",
-  "Date",
-  "Description",
-  "Gérer",
-]
+import { headerItems } from '../../../data';
+import { OperationType } from "../../../../types";
 
-const Expenses = ({
-  expenses,
-  deleteExpense,
-  updateExpense,
-  searchValue,
-  edit,
-  setEdit,
-}) => {
+interface ExpensesProps {
+  expenses: OperationType[];
+  deleteExpense: (id: string) => void;
+  updateExpense: (operation:OperationType) => Promise<void>;
+  searchValue: string;
+  edit: OperationType | null;
+  setEdit: (operation: OperationType | null) => void;
+}
 
-  const submitUpdate = (obj) => {
+const Expenses = (props: ExpensesProps) => {
+  const { expenses, deleteExpense, updateExpense, searchValue, edit, setEdit } = props;
+  const submitUpdate = (obj): void => {
     updateExpense(obj);
   };
 

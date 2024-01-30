@@ -120,7 +120,7 @@ const ReceptionCard = (props: CardPropos) => {
                         buttonType={"edit"}
                         onClick={() => {
                             getUpdatedId(starter._id, starter.name);
-                            const currentPosition = window.scrollY;
+                            const currentPosition: number = window.scrollY;
                             history.replace(`/mariage/${mariageID}/carte/edit/${foodId}`, { currentPosition })
                         }}
                         />
