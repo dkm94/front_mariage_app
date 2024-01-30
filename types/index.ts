@@ -182,11 +182,6 @@ export type GuestType = {
     media?: string;
     tableID?: string;
     mariageID?: string;
-    guestMenu?: {
-        dessert: string;
-        maincourse: string;
-        starter: string;
-    }
 }
 
 export type FormattedGuestType = {

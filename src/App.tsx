@@ -33,6 +33,7 @@ import { UserType, RoleType, ScrollButtonType, LoaderType } from "../types/index
 import Login from "./Pages/Auth/Login/Login";
 import Register from "./Pages/Auth/Register/Register";
 import { CurrentUserContext } from "./ctx/userCtx";
+import UpdateGuest from "./components/Invités(affichage)/by_guests/Components/Form/Update/UpdateGuest";
 
 // <------- Ctx ---------->
 // export const UserContext = createContext<UserType>({} as UserType);
@@ -117,6 +118,11 @@ function App() {
                   <ProtectedRoute
                     path="/mariage/:id/invites"
                     component={Guests}
+                    isAuth={role}
+                  />
+                  <ProtectedRoute
+                    path="/mariage/:id/invites/edit/:id"
+                    component={UpdateGuest}
                     isAuth={role}
                   />
                   <ProtectedRoute
