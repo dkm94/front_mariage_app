@@ -7,6 +7,7 @@ import { GreyButton } from "../../../../components/Buttons";
 import { FoodType } from "../../../../../types";
 import { addFood } from "../../../../services/foodRequests";
 import Toast from "../../../../components/Toast/Toast";
+import { ApiResponse } from "../../../../helpers/requestHandler";
 
 type Category = "starter" | "maincourse" | "dessert" | "apetizer" | "beverage";
 
@@ -26,16 +27,16 @@ const AddFoodForm = (props: AddFoodsFormProps) => {
   const inputRef: RefObject<HTMLInputElement> = useRef(null);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setInput(e.target.value);
   };
 
-  const handleSumbit = async (e: FormEvent) => {
+  const handleSumbit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
     setLoading(true);
 
-    const response = await addFood({ name: input, category });
-    const { data, success, message } = response;
+    const response:ApiResponse<FoodType> = await addFood({ name: input, category });
+    const { data: newFood, success, message } = response;
 
     if(!success){
       setLoading(false);
@@ -44,7 +45,7 @@ const AddFoodForm = (props: AddFoodsFormProps) => {
       return;
     }
 
-    setFoods([...foods, data]);
+    setFoods([...foods, newFood]);
     setInput("");
     setLoading(false);
   };

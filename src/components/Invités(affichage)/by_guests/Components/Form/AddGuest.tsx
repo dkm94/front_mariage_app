@@ -1,11 +1,14 @@
-import React, { useState, useRef, Dispatch, SetStateAction } from "react";
+import "../../../../../Pages/Invités/Invités.css";
+
+import React, { useState, useRef, Dispatch, SetStateAction, FormEvent, ChangeEvent } from "react";
 
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 
-import "../../../../../Pages/Invités/Invités.css";
 import { GreyButton } from "../../../../Buttons";
+
 import { GuestType } from "../../../../../../types";
 import { addGuest } from "../../../../../services";
+import { ApiResponse } from "../../../../../helpers/requestHandler";
 
 interface FormProps {
   newUser: string;
@@ -21,17 +24,17 @@ const AddGuestForm = (props:FormProps) => {
   const [loading, setLoading] = useState(false);
   const inputRef = useRef(null);
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setNewUser(e.target.value);
   };
 
-  const handleSumbit = async (e) => {
+  const handleSumbit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
     setLoading(true);
 
     newUser.trim();
 
-    const response = await addGuest({ name: newUser })
+    const response:ApiResponse<GuestType> = await addGuest({ name: newUser })
     const { data, success, message } = response;
 
     if(!success){
@@ -53,7 +56,6 @@ const AddGuestForm = (props:FormProps) => {
       style={{ display: "flex", flexDirection: "row", alignItems: "center" }}
     >
       <div className="add-input">
-        {/* <img src={userIcon} alt="user icon" /> */}
         <PersonAddIcon style={{ height: "auto", color: "#b2a9a9" }} />
         <input
           type="text"
@@ -67,7 +69,6 @@ const AddGuestForm = (props:FormProps) => {
         />
       </div>
       <GreyButton
-        // size="small"
         variant={"contained"}
         type="submit"
         text={loading ? "..." : "Créer"}

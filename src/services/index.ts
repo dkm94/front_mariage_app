@@ -2,7 +2,7 @@ import { getFoods, addFood, updateFood, deleteFood } from './foodRequests';
 import { getGuests, addGuest, updateGuest, deleteGuest } from "./guestRequests";
 import { getTables, addTable, deleteTable } from "./tableRequests";
 import { getTodos, addTodo, updateTodo, updateTodosStatus, deleteTodo } from "./todosRequests";
-import { getWedding } from "./weddings/weddingsRequests";
+import { getWedding } from "./weddingsRequests";
 import { getOperations, addOperation, updateOperation, deleteOperation } from "./operationsRequests";
 import { login } from "./authRequests";
 

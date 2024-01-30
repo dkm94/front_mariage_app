@@ -1,7 +1,8 @@
 import "../../../guests.css";
 import "./Update.css";
 
-import React, { useState, useRef, useEffect, useContext } from "react";
+import React, { useState, useRef, useEffect, useContext, FormEvent, ChangeEvent, Dispatch, SetStateAction } from "react";
+import { History } from "history";
 import axios from "axios";
 import { Button, Grid, IconButton } from "@mui/material";
 import TextField from "@mui/material/TextField";
@@ -17,6 +18,8 @@ import { GuestType, UserType, WeddingType } from "../../../../../../../types";
 import RedButton from "../../../../../Buttons/RedButton/RedButton";
 import { useCurrentUser } from "../../../../../../ctx/userCtx";
 import { useHistory, useLocation } from "react-router";
+
+type FileState = File | null;
 
 const UpdateGuest = ({
   edit,
@@ -37,9 +40,9 @@ const UpdateGuest = ({
   setIsOpen,
   setUser, 
 }) => {
-  const history = useHistory();
+  const history: History = useHistory();
 
-  const [radioValue, setRadioValue] = useState(guestFamily);
+  const [radioValue, setRadioValue] = useState<string>(guestFamily);
 
   const user:UserType = useCurrentUser();
   const { firstPerson, secondPerson } = user as { firstPerson: string, secondPerson: string };
@@ -47,29 +50,34 @@ const UpdateGuest = ({
   const [input, setInput] = useState(edit ? edit.name : "");
   const inputRef = useRef<HTMLDivElement>(null);
 
-  const [uploadedFile, setUploadedFile] = useState(null);
-  const [file, setFile] = useState(null);
+  const [uploadedFile, setUploadedFile] = useState<FileState>(null);
+  const [file, setFile] = useState<FileState>(null);
 
 
   useEffect(() => {
     inputRef?.current?.focus();
   });
 
-  const handleFile = (file) => {
+  const handleFile = (file: FileState) => {
     setFile(file);
   };
 
-  const handleFileInput = (e) => {
-    const fileValue = e.target.files[0];
-    setUploadedFile(fileValue);
-    handleFile(fileValue);
+  const handleFileInput = (e: ChangeEvent<HTMLInputElement>, setUploadedFile: Dispatch<SetStateAction<FileState>>) => {
+    const fileValue: File | null = e.target.files?.[0] || null;
+  
+    if (fileValue) {
+      setUploadedFile(fileValue);
+      handleFile(fileValue);
+    } else {
+      setUploadedFile(null);
+    }
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
   };
 
-  const uploadPicture = async (id: string) => {
+  const uploadPicture = async (id: string): Promise<void> => {
     if (file == null) {
       return;
     }
@@ -81,8 +89,8 @@ const UpdateGuest = ({
       const response = await axios.post(`/api/admin/guests/edit/${id}`, formData);
   
       if (response.data != null) {
-        const updatedGuestList = [...guests].map((guest) =>
-          guest._id === id
+        const updatedGuestList: GuestType[] = [...guests].map((guest: GuestType) =>
+          guest?._id === id
             ? {
                 _id: response.data._id,
                 name: response.data.name,
@@ -108,7 +116,7 @@ const UpdateGuest = ({
   };
   
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
 
     if(input === ""){
@@ -132,10 +140,12 @@ const UpdateGuest = ({
 
     uploadPicture(edit.id)
     
-    const updatedGuestlist = [...guests].map((guest) => {
-      if (guest._id === edit.id) {
-        guest.name = input;
-        guest.family = radioValue;
+    const updatedGuestlist: GuestType[] = [...guests].map((guest: GuestType) => {
+      if (guest?._id === edit.id) {
+        if (guest) {
+          guest.name = input;
+          guest.family = radioValue;
+        }
       }
       return guest;
     });
@@ -150,7 +160,7 @@ const UpdateGuest = ({
     history.replace(`/mariage/${mariageID}/invites`, { currentPosition });
   };
 
-  const deleteGuestfn = async (id: string) => {
+  const deleteGuestfn = async (id: string): Promise<void> => {
     const response = await deleteGuest({ id });
     const { success, message } = response;
 
@@ -162,7 +172,7 @@ const UpdateGuest = ({
     if(success){
       // setMessageType("success");
       // setMessage(message);
-      setGuests(guests.filter((guest: GuestType) => guest._id !== id));
+      setGuests(guests.filter((guest: GuestType) => guest?._id !== id));
       setisOpen(false);
     }
 
@@ -202,7 +212,7 @@ const UpdateGuest = ({
                 id="file-input"
                 type="file"
                 name="media"
-                onChange={handleFileInput}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => handleFileInput(e, setUploadedFile)}
                 style={{ display: "none" }}
                 onClick={() => seteditPicture(guestId)}
               />

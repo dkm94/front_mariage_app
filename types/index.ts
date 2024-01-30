@@ -170,7 +170,7 @@ export type GuestType = {
     media?: string;
     tableID?: string;
     mariageID?: string;
-}
+} | undefined;
 
 export type FormattedGuestType = {
     _id?: string;
@@ -191,7 +191,7 @@ export type FoodType = {
     name: string;
     mariageID?: string;
     category: string;
-}
+} | undefined;
 
 export type Edit = {
     _id: string;

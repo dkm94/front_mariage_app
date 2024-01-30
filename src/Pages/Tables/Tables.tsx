@@ -1,6 +1,6 @@
 import "./Tables.css";
 
-import React, { useState, useEffect, ChangeEvent } from "react";
+import React, { useState, ChangeEvent } from "react";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
 
@@ -12,12 +12,12 @@ import Grow from "@mui/material/Grow";
 import { GuestType, TableType } from "../../../types";
 import { getGuests } from "../../services/guestRequests";
 import { getTables } from "../../services/tableRequests";
+import { useFetch } from "../../hooks";
 
 import AddTableForm from "./Forms/Add";
 import Table from "./Table";
 import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
 import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
-import { useFetch } from "../../hooks";
 import Toast from "../../components/Toast/Toast";
 
 type EditType = {
@@ -35,27 +35,6 @@ const Tables = (props) => {
   const [message, setMessage] = useState<string | undefined>(undefined);
   const [messageType, setMessageType] = useState<"error" | "success" | undefined>(undefined);
 
-  // const fetchGuests = async () => { // TODO: problème de performances, trop de re rendus (search bar, update picture...)
-  //   try {
-  //     setLoading(true);
-  //     const guestsResponse = await getGuests();
-  //     if(guestsResponse.success && guestsResponse.statusCode === 200) {
-  //       setGuests(formatArray(guestsResponse.data)  || []);
-  //     } else {
-  //       setErrorGuests(true);
-  //       if(guestsResponse.message === "Network Error"){
-  //         setErrorMessageGuests("Oups, une erreur s'est produite.");
-  //       } else {
-  //         setErrorMessageGuests(guestsResponse.message);
-  //       }
-  //     }
-  //   } catch (err) {
-  //     setErrorMessageGuests(err.message);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
   const { 
     data: tables, 
     setData: setTables, 
@@ -69,7 +48,13 @@ const Tables = (props) => {
     error: errorGuests, 
     errorMessage: errorMessageGuests } = useFetch<void, GuestType[]>(getGuests, []);
 
-  const orderedGuests = guests.slice().sort((a, b) => a.name.localeCompare(b.name));
+    const orderedGuests = guests
+    ?.slice()
+    .sort((a, b) => {
+      const nameA = a?.name || '';
+      const nameB = b?.name || '';
+      return nameA.localeCompare(nameB);
+    });
 
   const handleUpdatedTable = (e: ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
