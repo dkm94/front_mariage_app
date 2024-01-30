@@ -6,14 +6,16 @@ import { Button, TextField, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 import { CustomButton } from "../../../../components/Buttons";
+import { useHistory } from "react-router";
 
 const UpdateExpense = ({
   edit,
   setEdit,
   onSubmit,
   deleteExpense,
+  mariageID
 }) => {
-
+  const history = useHistory();
   const [input, setInput] = useState(edit ? edit : null);
 
   const inputRef = useRef<HTMLDivElement>(null);
@@ -48,9 +50,6 @@ const UpdateExpense = ({
     setInput(null);
     setEdit(null)
   };
-
-
-
 
   return (
     <div className="modal-child">
@@ -137,6 +136,7 @@ const UpdateExpense = ({
                   date: "",
                   mariageID: ""
                 });
+                history.push(`/mariage/${mariageID}/budget`);
               }}
               variant="outlined"
             >

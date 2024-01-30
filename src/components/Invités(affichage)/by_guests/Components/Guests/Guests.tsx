@@ -10,6 +10,8 @@ import DefaultModal from "../../../../Modals/Default/DefaultModal";
 
 import avatar from "../../../../../img/avatar.jpg";
 import uploadImg from "../../../../../img/upload-icon-20624.png";
+import { useHistory, useParams } from "react-router";
+import { Link } from "react-router-dom";
 
 const IconWrapper = styled(IconButton)({
   "&:hover": {
@@ -41,8 +43,11 @@ const Guests = ({
   setMessage,
   setMessageType,
   setIsOpen,
-  setUser
+  setUser,
 }) => {
+  const { id } = useParams<{id: string}>();
+  
+  const history = useHistory();
   const [edit, setEdit] = useState<Edit | null>(null);
 
   const [uploadedFile, setUploadedFile] = useState(null);
@@ -118,26 +123,27 @@ const Guests = ({
                     className={`fade-in guest-card-style`}
                     style={{ position: "relative", width: "100%", boxSizing: "border-box" }}
                   >
-                    <IconWrapper
-                    onClick={() => {
-                      setEdit({
-                        id: guest._id,
-                        name: guest.name,
-                      });
+                      <IconWrapper
+                      onClick={() => {
+                        history.push(`/mariage/${mariageID}/invites/edit/${id}`)
+                        setEdit({
+                          id: guest._id,
+                          name: guest.name,
+                        });
+                      }}
                       
-                    }}
-                    style={{
-                      backgroundColor: "#fff",
-                      border: "1px solid lightgray",
-                      borderRadius: "5px",
-                      color: "#262626",
-                      position: "absolute",
-                      right: "20px",
-                      top: "20px",
-                    }}
-                    >
-                      <CreateIcon fontSize="small" />
-                    </IconWrapper>
+                      style={{
+                        backgroundColor: "#fff",
+                        border: "1px solid lightgray",
+                        borderRadius: "5px",
+                        color: "#262626",
+                        position: "absolute",
+                        right: "20px",
+                        top: "20px",
+                      }}
+                      >
+                        <CreateIcon fontSize="small" />
+                      </IconWrapper>
                       {/* </div> */}
                     <div className="div-guest___container">
                       <div className="guest-picture center-x">
@@ -168,12 +174,13 @@ const Guests = ({
                         </Box>
                       </div>
                      {guest._id === edit?.id && <DefaultModal
-                        // open={isOpen}
                         setEdit={setEdit}
                         setOpen={setisOpen}
                         guestId={editPicture}
                         close={() => {
+                          setEdit(null);
                           setisOpen(false);
+                          history.push(`/mariage/${mariageID}/invites`);
                         }}
                         title="Modifier l'invité"
                       >

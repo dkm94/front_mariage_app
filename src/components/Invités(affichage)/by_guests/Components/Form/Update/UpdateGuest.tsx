@@ -16,6 +16,7 @@ import { GuestType, UserType, WeddingType } from "../../../../../../../types";
 // import { UserContext } from "../../../../../../App";
 import RedButton from "../../../../../Buttons/RedButton/RedButton";
 import { useCurrentUser } from "../../../../../../ctx/userCtx";
+import { useHistory } from "react-router";
 
 const UpdateGuest = ({
   edit,
@@ -36,6 +37,7 @@ const UpdateGuest = ({
   setIsOpen,
   setUser
 }) => {
+  const history = useHistory();
   const [radioValue, setRadioValue] = useState(guestFamily);
 
   const user:UserType = useCurrentUser();
@@ -142,6 +144,7 @@ const UpdateGuest = ({
       setMessageType(undefined);
       setMessage(undefined);
     })
+    history.push(`/mariage/${mariageID}/invites`);
   };
 
   const deleteGuestfn = async (id: string) => {
@@ -263,7 +266,8 @@ const UpdateGuest = ({
               onClick={() => {
                 setEdit({ id: null });
                 setisOpen(false);
-              } }
+                history.push(`/mariage/${mariageID}/invites`);
+              }}
               variant="outlined"
               style={{
                 width: "100% !important",

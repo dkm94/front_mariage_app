@@ -7,12 +7,13 @@ import ReactDom from "react-dom";
 import CloseIcon from "@mui/icons-material/Close";
 import { IconButton } from "@mui/material";
 
-export default function DefaultModal({ open, children, close, setOpen, title, setEdit }) {
+export default function DefaultModal({ children, close, setOpen, title, setEdit }) {
   // if (!open) return null;
 
   function handleClose() {
     if(setEdit) {
       setEdit(null);
+      close();
     } else {
       setOpen(false);
     }

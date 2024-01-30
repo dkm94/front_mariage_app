@@ -13,6 +13,9 @@ import { ScrollToTopButton } from "./components/Buttons";
 import { Loader } from "./components/Loader/Loader";
 import ScrollToTop from "./helpers/ScrollToTop";
 import Page from "./components/Page/Page";
+import UpdateGuest from "./components/Invités(affichage)/by_guests/Components/Form/Update/UpdateGuest";
+import EditTableForm from "./Pages/Tables/Forms/Edit/Edit";
+import UpdateFood from "./Pages/Menu/Forms/Update/UpdateFood";
 
 // <------- Pages ---------->
 import { 
@@ -33,6 +36,7 @@ import { UserType, RoleType, ScrollButtonType, LoaderType } from "../types/index
 import Login from "./Pages/Auth/Login/Login";
 import Register from "./Pages/Auth/Register/Register";
 import { CurrentUserContext } from "./ctx/userCtx";
+import UpdateExpense from "./Pages/Budget/Forms/Update/UpdateDépense";
 
 // <------- Ctx ---------->
 // export const UserContext = createContext<UserType>({} as UserType);
@@ -115,8 +119,19 @@ function App() {
                     infos={user}
                   />
                   <ProtectedRoute
+                    path="/mariage/:id/tables/edit/:id"
+                    component={EditTableForm}
+                    isAuth={role}
+                    infos={user}
+                  />
+                  <ProtectedRoute
                     path="/mariage/:id/invites"
                     component={Guests}
+                    isAuth={role}
+                  />
+                  <ProtectedRoute
+                    path="/mariage/:id/invites/edit/:id"
+                    component={UpdateGuest}
                     isAuth={role}
                   />
                   <ProtectedRoute
@@ -125,12 +140,27 @@ function App() {
                     isAuth={role}
                   />
                   <ProtectedRoute
+                    path="/mariage/:id/carte/edit/:id"
+                    component={UpdateFood}
+                    isAuth={role}
+                  />
+                  <ProtectedRoute
                     path="/mariage/:id/budget"
                     component={Budget}
                     isAuth={role}
                   />
                   <ProtectedRoute
+                    path="/mariage/:id/budget/edit/:id"
+                    component={UpdateExpense}
+                    isAuth={role}
+                  />
+                  <ProtectedRoute
                     path="/mariage/:id/taches"
+                    component={TodoList}
+                    isAuth={role}
+                  />
+                  <ProtectedRoute
+                    path="/mariage/:id/taches/edit/:id"
                     component={TodoList}
                     isAuth={role}
                   />

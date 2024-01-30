@@ -2,7 +2,7 @@ import "./Home.css";
 import "../../components/LargeButton/LargeButton.css";
 
 import React, { useState } from "react";
-import { withRouter } from "react-router-dom";
+import { useHistory, withRouter } from "react-router-dom";
 import { Button, Container } from "@mui/material";
 
 import Card from "./Card.jsx";
@@ -13,6 +13,7 @@ import AuthModal from '../../components/Modals/Auth/AuthModal';
 import introImg from "../../img/section-2-img.jpg";
 
 const Home = () => {
+  const history = useHistory();
   const [isOpen, setisOpen] = useState<boolean>(false);
   const [showForm, setShowForm] = useState<string>("");
 
@@ -47,8 +48,8 @@ const Home = () => {
                 className="home-link"
                 style={{ fontSize: "1.2rem" }}
                 onClick={() => {
-                  setisOpen(true);
                   setShowForm("register");
+                  history.push("/register")
                 }}
               >
                 Inscrivez-vous

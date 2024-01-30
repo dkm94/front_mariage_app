@@ -11,6 +11,7 @@ import MultipleSelect from "../../../../components/MultiSelect/MultiSelect";
 
 import { deleteTable, updateTableWithGuests, updateTablesName } from "../../../../services/tableRequests";
 import RedButton from "../../../../components/Buttons/RedButton/RedButton";
+import { useHistory } from "react-router";
 
 const EditTableForm = (props) => {
   const {
@@ -26,8 +27,10 @@ const EditTableForm = (props) => {
     // deleteTable,
     setisOpen,
     setMessage, 
-    setMessageType
+    setMessageType,
+    mariageID
   } = props;
+  const history = useHistory();
   
   const [guestsIds, setGuestsIds] = useState<string[]>([])
   
@@ -58,6 +61,7 @@ const EditTableForm = (props) => {
         return guest;
       });
       setGuests(updatedGuests); 
+      history.push(`/mariage/${mariageID}/tables`)
     }
   }
 
@@ -115,6 +119,7 @@ const EditTableForm = (props) => {
             onClick={() => {
               setEdit(null);
               setisOpen(false);
+              history.push(`/mariage/${mariageID}/tables`)
             }}
             sx={{ width: "100% !important" }}
             variant="outlined"    

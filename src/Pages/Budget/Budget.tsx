@@ -19,6 +19,8 @@ import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayo
 import PriceCard from "../../components/Expenses/PriceCard/PriceCard";
 import AddExpenseForm from "../../components/Expenses/Forms/AddExpenseForm/AddExpenseForm";
 import Toast from "../../components/Toast/Toast";
+import { useHistory } from "react-router";
+import { useCurrentUser } from "../../ctx/userCtx";
 
 const categories = [
   { 
@@ -60,6 +62,9 @@ const categories = [
 ];
 
 const Budget = () => {
+  const history = useHistory();
+  const { mariageID } = useCurrentUser();
+
   const [message, setMessage] = useState<string | undefined>(undefined);
   const [messageType, setMessageType] = useState<"error" | "success" | undefined>(undefined);
 
@@ -112,6 +117,8 @@ const Budget = () => {
       calculateTotal(updatedExpenses);
       setEdit(null);
     }, 1000);
+
+    history.push(`/mariage/${mariageID}/budget`)
   };
 
   const deleteExpense = async (id: string) => {
