@@ -8,6 +8,7 @@ import { TextField } from "@mui/material";
 import { updateTodo } from "../../../services"
 
 import CustomIconButton from '../../../components/Buttons/SmallIconButton/IconButton';
+import { useHistory } from 'react-router';
 
 const UpdateTask = ({
   edit,
@@ -20,8 +21,10 @@ const UpdateTask = ({
   setTodos,
   todos,
   setMessage,
-  setMessageType
+  setMessageType,
+  mariageID
 }) => {
+  const history = useHistory();
   const inputRef = useRef(null);
   
   useEffect(() => {
@@ -54,6 +57,8 @@ const UpdateTask = ({
       setEdit("");
       setInput("");
     }, 1000);
+
+    history.push(`/mariage/${mariageID}/taches`)
   };
 
   return (
@@ -89,6 +94,7 @@ const UpdateTask = ({
           onClick={() => {
             setEdit(null);
             setInput("");
+            history.push(`/mariage/${mariageID}/taches`)
           }}
           />
         </Grid2>

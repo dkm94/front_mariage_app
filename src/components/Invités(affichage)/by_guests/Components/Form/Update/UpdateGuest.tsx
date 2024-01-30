@@ -266,7 +266,8 @@ const UpdateGuest = ({
               onClick={() => {
                 setEdit({ id: null });
                 setisOpen(false);
-              } }
+                history.push(`/mariage/${mariageID}/invites`);
+              }}
               variant="outlined"
               style={{
                 width: "100% !important",

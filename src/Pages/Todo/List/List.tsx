@@ -12,6 +12,8 @@ import CustomIconButton from "../../../components/Buttons/SmallIconButton/IconBu
 import UpdateForm from "../Update/Form";
 import { updateTodosStatus, deleteTodo } from '../../../services';
 import { TaskType } from "../../../../types";
+import { useHistory, useParams } from "react-router";
+import { useCurrentUser } from "../../../ctx/userCtx";
 
 type EditType = {
   id?: string;
@@ -30,6 +32,10 @@ const Todos = ({
   setMessage,
   setMessageType
 }) => {
+  const history = useHistory();
+  const { mariageID } = useCurrentUser();
+  const { id: todoId } = useParams<{id: string}>();
+
   const [edit, setEdit] = useState<EditType | null>(null);
   const [input, setInput] = useState("");
   const inputRef = useRef(null);
@@ -100,6 +106,7 @@ const Todos = ({
           todos={todos}
           setMessage={setMessage}
           setMessageType={setMessageType}
+          mariageID={mariageID}
         />
       ) : (
         <Grid2
@@ -128,7 +135,10 @@ const Todos = ({
             type="submit"
             buttonType='edit' 
             obj={obj} 
-            onClick={() => getUpdatedId(obj._id, obj.text)} 
+            onClick={() => {
+              getUpdatedId(obj._id, obj.text);
+              history.push(`/mariage/${mariageID}/taches/edit/${todoId}`)
+            }} 
             />
 
             <CustomIconButton 

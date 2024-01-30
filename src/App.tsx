@@ -34,6 +34,7 @@ import Login from "./Pages/Auth/Login/Login";
 import Register from "./Pages/Auth/Register/Register";
 import { CurrentUserContext } from "./ctx/userCtx";
 import UpdateGuest from "./components/Invités(affichage)/by_guests/Components/Form/Update/UpdateGuest";
+import EditTableForm from "./Pages/Tables/Forms/Edit/Edit";
 
 // <------- Ctx ---------->
 // export const UserContext = createContext<UserType>({} as UserType);
@@ -117,7 +118,7 @@ function App() {
                   />
                   <ProtectedRoute
                     path="/mariage/:id/tables/edit/:id"
-                    component={Tables}
+                    component={EditTableForm}
                     isAuth={role}
                     infos={user}
                   />
@@ -143,6 +144,11 @@ function App() {
                   />
                   <ProtectedRoute
                     path="/mariage/:id/taches"
+                    component={TodoList}
+                    isAuth={role}
+                  />
+                  <ProtectedRoute
+                    path="/mariage/:id/taches/edit/:id"
                     component={TodoList}
                     isAuth={role}
                   />

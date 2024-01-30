@@ -119,6 +119,7 @@ const EditTableForm = (props) => {
             onClick={() => {
               setEdit(null);
               setisOpen(false);
+              history.push(`/mariage/${mariageID}/tables`)
             }}
             sx={{ width: "100% !important" }}
             variant="outlined"    
