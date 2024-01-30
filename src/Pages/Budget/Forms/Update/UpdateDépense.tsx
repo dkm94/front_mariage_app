@@ -1,14 +1,23 @@
 import "../../Budget.css";
 import "./Update.css";
 
-import React, { useState, useEffect, useRef, FormEvent } from "react";
+import React, { useState, useEffect, useRef, FormEvent, ChangeEvent } from "react";
+import { useHistory } from "react-router";
+import { History } from "history";
+
 import { Button, TextField, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 import { CustomButton } from "../../../../components/Buttons";
-import { useHistory } from "react-router";
+
 import { OperationType } from "../../../../../types";
+import { categories } from "../../../../data";
 import { deleteOperation, updateOperation } from "../../../../services";
+
+type Category = {
+  value: string;
+  label: string;
+}
 
 const UpdateExpense = ({
   edit,
@@ -20,8 +29,8 @@ const UpdateExpense = ({
   setOperations,
   calculateTotal
 }) => {
-  const history = useHistory();
-  const [input, setInput] = useState(edit ? edit : null);
+  const history: History = useHistory();
+  const [input, setInput] = useState<OperationType>(edit ? edit : null);
 
   const inputRef = useRef<HTMLDivElement>(null);
 
@@ -29,21 +38,32 @@ const UpdateExpense = ({
     inputRef?.current?.focus();
   });
 
-  const handleChange = (e) => {
+  const handlePriceChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const { value, name } = e.target;
-    if (name === "price") {
-      const float = parseFloat(value);
-      const price = Math.round(float * 100);
+    const float: number = parseFloat(value);
+      const price: number = Math.round(float * 100);
       setInput((prevState) => ({
         ...prevState,
         [name]: price,
       }));
-    } else {
-      setInput((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }));
-    }
+  };
+
+  const handleTextChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    const { value, name } = e.target;
+
+    setInput((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>): void => {
+    const { value, name } = e.target;
+
+    setInput((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
   const editExpense = async (e: FormEvent): Promise<void> => {
@@ -103,34 +123,20 @@ const UpdateExpense = ({
           <select
             name="category"
             value={input.category}
-            onChange={handleChange}
+            onChange={handleSelectChange}
           >
-            <option value="" label="Sélectionnez une catégorie"></option>
-            <option value="Locations" label="Locations"></option>
-            <option
-              value="Habillement/Beauté"
-              label="Habillement/Beauté"
-            ></option>
-            <option
-              value="Décoration/Fleurs"
-              label="Décoration/Fleurs"
-            ></option>
-            <option value="Alliances/Bijoux" label="Alliances/Bijoux"></option>
-            <option
-              value="Animation"
-              label="Animation (DJ, Photographe...)"
-            ></option>
-            <option value="Traiteur" label="Traiteur"></option>
-            <option value="Faire-part" label="Faire-part"></option>
-            <option value="Autres" label="Autres"></option>
+            {categories.map((category: Category) => (
+              <option key={category.label} value={category.value} label={category.label}></option>
+            ))}
           </select>
         </div>
+        
         <TextField
           label="Description"
           size="small"
           type="text"
           name="description"
-          onChange={handleChange}
+          onChange={handleTextChange}
           value={input.description}
           ref={inputRef}
           style={{ background: "#fff", width: "100%" }}
@@ -141,8 +147,8 @@ const UpdateExpense = ({
           size="small"
           name="price"
           type="number"
-          onChange={handleChange}
-          value={input.price / 100}
+          onChange={handlePriceChange}
+          value={input.price as number / 100}
           ref={inputRef}
           style={{ background: "#fff", width: "100%" }}
         />
@@ -160,7 +166,6 @@ const UpdateExpense = ({
               text={"Enregistrer"}
               variant={"contained"}
               type="submit"
-              // onClick={(e) => editExpense(e)}
               sx={{ "&:hover": { backgroundColor: "#333232" } }}
               style={{ borderRadius: "20px", padding: "6px 16px", flexGrow: 1 }}
             />

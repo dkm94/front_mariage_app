@@ -9,10 +9,10 @@ import CreateIcon from '@mui/icons-material/Create';
 
 import DefaultModal from "../../../Modals/Default/DefaultModal.jsx";
 import UpdateForm from "../../../../Pages/Budget/Forms/Update/UpdateDépense";
+import CustomChip from "../../../Chip/Chip";
 
 import { OperationType } from "../../../../../types";
 import { useCurrentUser } from "../../../../ctx/userCtx";
-import CustomChip from "../../../Chip/Chip";
 
 interface ExpenseElementProps {
   obj: OperationType;
@@ -102,16 +102,16 @@ const ExpenseElement = (props: ExpenseElementProps) => {
       }}
       title={"Modifier une dépense"}
       >
-      <UpdateForm
-      edit={edit}
-      setEdit={setEdit}
-      mariageID={mariageID}
-      setMessage={setMessage}
-      setMessageType={setMessageType}
-      operations={operations}
-      setOperations={setOperations}
-      calculateTotal={calculateTotal}
-      />
+        <UpdateForm
+        edit={edit}
+        setEdit={setEdit}
+        mariageID={mariageID}
+        setMessage={setMessage}
+        setMessageType={setMessageType}
+        operations={operations}
+        setOperations={setOperations}
+        calculateTotal={calculateTotal}
+        />
       </DefaultModal>}
     </li>
   )

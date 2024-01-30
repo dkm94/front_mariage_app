@@ -8,18 +8,18 @@ import * as Yup from "yup";
 import Grow from "@mui/material/Grow";
 
 import PieChart from "../../components/Expenses/Graph/PieChart";
-import Expenses from "./Dépenses/Dépenses";
 import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
 import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
 import PriceCard from "../../components/Expenses/PriceCard/PriceCard";
 import AddExpenseForm from "../../components/Expenses/Forms/AddExpenseForm/AddExpenseForm";
 import Toast from "../../components/Toast/Toast";
+import ExpenseElement from "../../components/Expenses/Table/ExpenseElement/ExpenseElement";
 
 import { OperationType } from "../../../types/index";
 import { floatToEuro } from "../../helpers/formatCurrency";
 import { useFetch } from "../../hooks";
 import { addOperation, getOperations } from "../../services";
-import { categories } from "../../data";
+import { categories, headerItems } from "../../data";
 
 const operationValues: OperationType = {
   category: "",
@@ -141,16 +141,41 @@ const Budget = () => {
           </div>}
 
           <div className="budget___col-2">
-            <Expenses
-              expenses={operations}
-              searchValue={searchValue}
-              edit={edit}
-              setEdit={setEdit}
-              setMessageType={setMessageType}
-              setMessage={setMessage}
-              setOperations={setOperations}
-              calculateTotal={calculateTotal}
-            />
+            <ul className="budget-list">
+              <li className="table-header">
+                {headerItems.map((item, index) => {
+                  return (
+                    <div key={index} className={`cols cols-${index + 1}`}>
+                      {item}
+                    </div>
+                  );
+                })}
+              </li>
+              {operations?.length === 0 && <div style={{ textAlign: "center"}}><span>Vos dépenses ici</span></div>}
+              {operations
+                ?.filter((expense) => {
+                  return (
+                    expense.description
+                      .toLowerCase()
+                      .indexOf(searchValue.toLowerCase()) >= 0
+                  );
+                })
+                ?.reverse()
+                ?.map((obj) => {
+                  return (
+                    <ExpenseElement 
+                    obj={obj} 
+                    edit={edit} 
+                    setEdit={setEdit} 
+                    setMessage={setMessage}
+                    setMessageType={setMessageType}
+                    operations={operations}
+                    setOperations={setOperations}
+                    calculateTotal={calculateTotal}
+                    />
+                  );
+                })}
+            </ul>
           </div>
         </div>
       </Grow>
