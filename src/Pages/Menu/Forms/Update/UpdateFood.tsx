@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useHistory } from "react-router";
 
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import CheckIcon from "@mui/icons-material/Check";
@@ -8,6 +9,7 @@ import { IconButton, TextField, styled } from "@mui/material";
 import Toast from "../../../../components/Toast/Toast";
 
 import { updateFood } from "../../../../services";
+import { useCurrentUser } from "../../../../ctx/userCtx";
 
 const IconWrapper = styled(IconButton)({
   "&:hover": {
@@ -37,7 +39,10 @@ const disableStyle = {
 }
 
 const UpdateFood = (props: UpdateFoodProps) => {
-    const { edit, setEdit, foods, setFoods } = props;
+  const { edit, setEdit, foods, setFoods } = props;
+
+    const history = useHistory();
+    const{ mariageID } = useCurrentUser();
 
     const [isDisabled, setIsDisabled] = useState<boolean>(false);
 
@@ -96,6 +101,8 @@ const UpdateFood = (props: UpdateFoodProps) => {
         setEdit({ id: "", name: "" });
         setInput("");
     }
+
+    history.push(`mariage/${mariageID}/carte`)
   };
 }
 
@@ -142,7 +149,11 @@ const UpdateFood = (props: UpdateFoodProps) => {
             borderRadius: "5px",
             color: "#262626",
           }}
-          onClick={() => setEdit({ id: "", name: "" })}
+          onClick={() => {
+            setEdit({ id: "", name: "" })
+            setInput("");
+            history.push(`mariage/${mariageID}/carte`)
+          }}
         >
           <ReplayIcon fontSize="small" />
         </IconWrapper>

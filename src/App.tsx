@@ -13,6 +13,9 @@ import { ScrollToTopButton } from "./components/Buttons";
 import { Loader } from "./components/Loader/Loader";
 import ScrollToTop from "./helpers/ScrollToTop";
 import Page from "./components/Page/Page";
+import UpdateGuest from "./components/Invités(affichage)/by_guests/Components/Form/Update/UpdateGuest";
+import EditTableForm from "./Pages/Tables/Forms/Edit/Edit";
+import UpdateFood from "./Pages/Menu/Forms/Update/UpdateFood";
 
 // <------- Pages ---------->
 import { 
@@ -33,8 +36,6 @@ import { UserType, RoleType, ScrollButtonType, LoaderType } from "../types/index
 import Login from "./Pages/Auth/Login/Login";
 import Register from "./Pages/Auth/Register/Register";
 import { CurrentUserContext } from "./ctx/userCtx";
-import UpdateGuest from "./components/Invités(affichage)/by_guests/Components/Form/Update/UpdateGuest";
-import EditTableForm from "./Pages/Tables/Forms/Edit/Edit";
 
 // <------- Ctx ---------->
 // export const UserContext = createContext<UserType>({} as UserType);
@@ -135,6 +136,11 @@ function App() {
                   <ProtectedRoute
                     path="/mariage/:id/carte"
                     component={Carte}
+                    isAuth={role}
+                  />
+                  <ProtectedRoute
+                    path="/mariage/:id/carte/edit/:id"
+                    component={UpdateFood}
                     isAuth={role}
                   />
                   <ProtectedRoute

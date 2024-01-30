@@ -8,6 +8,8 @@ import CustomIconButton from "../../Buttons/SmallIconButton/IconButton";
 
 import { deleteFood } from "../../../services";
 import Toast from "../../Toast/Toast";
+import { useHistory, useParams } from "react-router";
+import { useCurrentUser } from "../../../ctx/userCtx";
 
 type Food = {
     _id?: string;
@@ -29,6 +31,10 @@ interface CardPropos {
 }
 
 const ReceptionCard = (props: CardPropos) => {
+    const history = useHistory();
+    const { mariageID } = useCurrentUser();
+    const { id: foodId } = useParams<{id: string}>();
+
     const { array, setArray, edit, getUpdatedId, even, img, editForm, addForm, type } = props;
 
     const [message, setMessage] = useState<string | undefined>(undefined);
@@ -112,7 +118,10 @@ const ReceptionCard = (props: CardPropos) => {
                         <CustomIconButton
                         type="button"
                         buttonType={"edit"}
-                        onClick={() => getUpdatedId(starter._id, starter.name)}
+                        onClick={() => {
+                            getUpdatedId(starter._id, starter.name);
+                            history.push(`/mariage/${mariageID}/carte/edit/${foodId}`)
+                        }}
                         />
                         <CustomIconButton 
                         type="submit"
