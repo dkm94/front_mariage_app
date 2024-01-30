@@ -1,6 +1,6 @@
 import "./ExpenseElement.css";
 
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 
 import { Chip, styled } from '@material-ui/core';
 import IconButton from '@mui/material/IconButton';
@@ -27,12 +27,16 @@ interface ExpenseElementProps {
     obj: OperationType;
     edit: OperationType | null;
     setEdit: (value: OperationType | null) => void;
-    submit: (value: OperationType) => void;
     deleteExpense: (value: string) => void;
+    setMessage: Dispatch<SetStateAction<string>>;
+    setMessageType: Dispatch<SetStateAction<"error" | "success" | undefined>>;
+    operations: OperationType[];
+    setOperations: Dispatch<SetStateAction<OperationType[]>>;
+    calculateTotal: (operations: OperationType[]) => void;
 }
 
 const ExpenseElement = (props: ExpenseElementProps) => {
-    const { obj, edit, setEdit, submit, deleteExpense } = props;
+    const { obj, edit, setEdit, deleteExpense, setMessage, setMessageType, operations, setOperations, calculateTotal } = props;
 
     const history = useHistory();
     const{ mariageID } = useCurrentUser();
@@ -111,9 +115,13 @@ const ExpenseElement = (props: ExpenseElementProps) => {
       <UpdateForm
       edit={edit}
       setEdit={setEdit}
-      onSubmit={submit}
       deleteExpense={deleteExpense}
       mariageID={mariageID}
+      setMessage={setMessage}
+      setMessageType={setMessageType}
+      operations={operations}
+      setOperations={setOperations}
+      calculateTotal={calculateTotal}
       />
       </DefaultModal>}
     </li>

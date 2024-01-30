@@ -1,19 +1,25 @@
 import "../../Budget.css";
 import "./Update.css";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, FormEvent } from "react";
 import { Button, TextField, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 import { CustomButton } from "../../../../components/Buttons";
 import { useHistory } from "react-router";
+import { OperationType } from "../../../../../types";
+import { updateOperation } from "../../../../services";
 
 const UpdateExpense = ({
   edit,
   setEdit,
-  onSubmit,
   deleteExpense,
-  mariageID
+  mariageID,
+  setMessage,
+  setMessageType,
+  operations,
+  setOperations,
+  calculateTotal
 }) => {
   const history = useHistory();
   const [input, setInput] = useState(edit ? edit : null);
@@ -41,16 +47,41 @@ const UpdateExpense = ({
     }
   };
 
-  const handleSubmit = (e) => {
+  const editExpense = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
-    onSubmit(input);
-    setInput(null);
-    setEdit(null)
-  };
+
+    const { _id, description, price, category } = input;
+    const updatedExpenses: OperationType[] = [...operations].map((obj) => {
+      if (obj._id === _id) {
+        obj.description = description;
+        obj.price = price;
+        obj.category = category;
+      }
+      return obj;
+    });
+
+    const response = await updateOperation({ id: _id, description: description, price: price, category: category })
+    const { success, message } = response;
+
+    if(!success) {
+      setMessageType("error");
+      setMessage(message);
+      return;
+    }
+
+    setTimeout(() => {
+      setOperations(updatedExpenses);
+      calculateTotal(updatedExpenses);
+      setEdit(null);
+    }, 1000);
+
+    const currentPosition: number = window.scrollY;
+    history.replace(`/mariage/${mariageID}/budget`, { currentPosition })
+    };
 
   return (
     <div className="modal-child">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={editExpense}>
         <div className="budget___select">
           <select
             name="category"
@@ -111,7 +142,8 @@ const UpdateExpense = ({
           <CustomButton
               text={"Enregistrer"}
               variant={"contained"}
-              onClick={handleSubmit}
+              type="submit"
+              // onClick={(e) => editExpense(e)}
               sx={{ "&:hover": { backgroundColor: "#333232" } }}
               style={{ borderRadius: "20px", padding: "6px 16px", flexGrow: 1 }}
             />

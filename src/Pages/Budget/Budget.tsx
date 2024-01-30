@@ -1,7 +1,6 @@
 import "./Budget.css";
 
 import React, { useState, useEffect, ChangeEvent } from "react";
-import { useHistory } from "react-router";
 import { useFormik } from "formik";
 import { Container, Row, Col } from "react-bootstrap";
 import * as Yup from "yup";
@@ -17,10 +16,9 @@ import AddExpenseForm from "../../components/Expenses/Forms/AddExpenseForm/AddEx
 import Toast from "../../components/Toast/Toast";
 
 import { OperationType } from "../../../types/index";
-import { useCurrentUser } from "../../ctx/userCtx";
 import { floatToEuro } from "../../helpers/formatCurrency";
 import { useFetch } from "../../hooks";
-import { addOperation, deleteOperation, getOperations, updateOperation } from "../../services";
+import { addOperation, deleteOperation, getOperations } from "../../services";
 import { categories } from "../../data";
 
 const operationValues: OperationType = {
@@ -30,12 +28,8 @@ const operationValues: OperationType = {
 };
 
 const Budget = () => {
-  const history = useHistory();
-  const { mariageID } = useCurrentUser();
-
   const [message, setMessage] = useState<string | undefined>(undefined);
   const [messageType, setMessageType] = useState<"error" | "success" | undefined>(undefined);
-
 
   const [searchValue, setSearchValue] = useState<string>("");
   const [total, setTotal] = useState<string>("");
@@ -52,36 +46,6 @@ const Budget = () => {
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>): void => {
     setSearchValue(e.target.value);
-  };
-
-  const editExpense = async (expense: OperationType): Promise<void> => {
-    const { _id, description, price, category } = expense;
-    const updatedExpenses: OperationType[] = [...operations].map((obj) => {
-      if (obj._id === _id) {
-        obj.description = description;
-        obj.price = price;
-        obj.category = category;
-      }
-      return obj;
-    });
-
-    const response = await updateOperation({ id: _id, description: description, price: price, category: category })
-    const { success, message } = response;
-
-    if(!success) {
-      setMessageType("error");
-      setMessage(message);
-      return;
-    }
-
-    setTimeout(() => {
-      setOperations(updatedExpenses);
-      calculateTotal(updatedExpenses);
-      setEdit(null);
-    }, 1000);
-
-    const currentPosition: number = window.scrollY;
-    history.replace(`/mariage/${mariageID}/budget`, { currentPosition })
   };
 
   const deleteExpense = async (id: string): Promise<void> => {
@@ -201,7 +165,10 @@ const Budget = () => {
               searchValue={searchValue}
               edit={edit}
               setEdit={setEdit}
-              updateExpense={editExpense}
+              setMessageType={setMessageType}
+              setMessage={setMessage}
+              setOperations={setOperations}
+              calculateTotal={calculateTotal}
             />
           </div>
         </div>

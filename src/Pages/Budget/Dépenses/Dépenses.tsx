@@ -1,6 +1,6 @@
 import "./Dépenses.css";
 
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 
 import ExpenseElement from "../../../components/Expenses/Table/ExpenseElement/ExpenseElement";
 
@@ -10,17 +10,17 @@ import { OperationType } from "../../../../types";
 interface ExpensesProps {
   expenses: OperationType[];
   deleteExpense: (id: string) => void;
-  updateExpense: (operation:OperationType) => Promise<void>;
   searchValue: string;
   edit: OperationType | null;
   setEdit: (operation: OperationType | null) => void;
+  setMessage: Dispatch<SetStateAction<string>>;
+  setMessageType: Dispatch<SetStateAction<"error" | "success" | undefined>>;
+  setOperations: Dispatch<SetStateAction<OperationType[]>>;
+  calculateTotal: (operations: OperationType[]) => void;
 }
 
 const Expenses = (props: ExpensesProps) => {
-  const { expenses, deleteExpense, updateExpense, searchValue, edit, setEdit } = props;
-  const submitUpdate = (obj): void => {
-    updateExpense(obj);
-  };
+  const { expenses, deleteExpense, searchValue, edit, setEdit, setMessage, setMessageType, setOperations, calculateTotal } = props;
 
   return (
     <ul className="budget-list">
@@ -49,8 +49,12 @@ const Expenses = (props: ExpensesProps) => {
             obj={obj} 
             edit={edit} 
             setEdit={setEdit} 
-            submit={submitUpdate} 
-            deleteExpense={deleteExpense} 
+            deleteExpense={deleteExpense}
+            setMessage={setMessage}
+            setMessageType={setMessageType}
+            operations={expenses}
+            setOperations={setOperations}
+            calculateTotal={calculateTotal}
             />
           );
         })}
