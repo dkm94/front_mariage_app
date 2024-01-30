@@ -116,6 +116,12 @@ function App() {
                     infos={user}
                   />
                   <ProtectedRoute
+                    path="/mariage/:id/tables/edit/:id"
+                    component={Tables}
+                    isAuth={role}
+                    infos={user}
+                  />
+                  <ProtectedRoute
                     path="/mariage/:id/invites"
                     component={Guests}
                     isAuth={role}

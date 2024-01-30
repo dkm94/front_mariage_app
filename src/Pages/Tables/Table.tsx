@@ -7,6 +7,8 @@ import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { CustomButton } from "../../components/Buttons";
 import DefaultModal from "../../components/Modals/Default/DefaultModal";
 import EditForm from "./Forms/Edit/Edit";
+import { useHistory, useParams } from "react-router";
+import { useCurrentUser } from "../../ctx/userCtx";
 
 const Table = ({
   tables,
@@ -26,7 +28,9 @@ const Table = ({
   setMessage, 
   setMessageType
 }) => {
-  
+  const history = useHistory();
+  const { id: tableId } = useParams<{id: string}>();
+  const { mariageID } = useCurrentUser();
   const returnName = (id: string) => {
     const guest = guests?.find((guest) => guest._id === id);
     return guest?.name;
@@ -48,6 +52,7 @@ const Table = ({
           onClick={() => {
             getUpdatedId(table._id, table.name);
             setisOpen(true);
+            history.push(`/mariage/${mariageID}/tables/edit/${tableId}`);
           }}
           variant={"contained"}
           text="Modifier"
@@ -58,7 +63,9 @@ const Table = ({
         open={isOpen}
         setOpen={setisOpen}
         close={() => {
+          setEdit(null);
           setisOpen(false);
+          history.push(`/mariage/${mariageID}/tables`);
         }}
         setEdit={setEdit}
         title="Gérer les invités/la table"
