@@ -49,7 +49,9 @@ const Home = () => {
                 style={{ fontSize: "1.2rem" }}
                 onClick={() => {
                   setShowForm("register");
-                  history.push("/register")
+
+                  const currentPosition = window.scrollY;
+                  history.replace("/register", { currentPosition });
                 }}
               >
                 Inscrivez-vous

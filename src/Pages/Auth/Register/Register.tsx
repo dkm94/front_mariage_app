@@ -199,8 +199,10 @@ const Register = ({ setShowForm }: IRegisterProps) => {
                       }}
                       onClick={() => {
                         setShowForm("login")
-                        history.push("/login");
-                      }}
+
+                        const currentPosition = window.scrollY;
+                          history.replace("/login", { currentPosition });
+                        }}
                     >
                       Connectez-vous
                     </Button>

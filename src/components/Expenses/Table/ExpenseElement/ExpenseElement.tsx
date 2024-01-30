@@ -90,7 +90,8 @@ const ExpenseElement = (props: ExpenseElementProps) => {
         <IconButton
             onClick={() => {
             setEdit(obj);
-            history.push(`/mariage/${mariageID}/budget/edit/${expenseId}`)
+            const currentPosition = window.scrollY;
+            history.replace(`/mariage/${mariageID}/budget/edit/${expenseId}`, { currentPosition })
             }}
         >
           <CreateIcon fontSize="small" />
@@ -102,7 +103,8 @@ const ExpenseElement = (props: ExpenseElementProps) => {
       setEdit={setEdit}
       close={() => {
           setEdit(null)
-          history.push(`/mariage/${mariageID}/budget`)
+          const currentPosition = window.scrollY;
+          history.replace(`/mariage/${mariageID}/budget`, { currentPosition } )
       }}
       title={"Modifier une dépense"}
       >

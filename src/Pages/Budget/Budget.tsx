@@ -118,7 +118,8 @@ const Budget = () => {
       setEdit(null);
     }, 1000);
 
-    history.push(`/mariage/${mariageID}/budget`)
+    const currentPosition = window.scrollY;
+    history.replace(`/mariage/${mariageID}/budget`, { currentPosition })
   };
 
   const deleteExpense = async (id: string) => {
