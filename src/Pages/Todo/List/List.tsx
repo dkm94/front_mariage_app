@@ -30,7 +30,8 @@ const Todos = ({
   isOpen,
   setisOpen,
   setMessage,
-  setMessageType
+  setMessageType,
+  setTodo
 }) => {
   const history = useHistory();
   const { mariageID } = useCurrentUser();
@@ -69,7 +70,9 @@ const Todos = ({
     }, 500);
   };
 
-  const deleteTodoFn = async (id) => {
+  const deleteTodoFn = async (id: string) => {
+    setTodo({ _id: id })
+
     const response = await deleteTodo({ id })
     const { success, message } = response;
 
@@ -79,6 +82,8 @@ const Todos = ({
       return;
     }
 
+    setMessageType("success");
+    setMessage(message);
     setTodos(todos.filter((todo: TaskType) => todo._id !== id));
   };
 

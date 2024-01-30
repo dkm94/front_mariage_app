@@ -12,7 +12,6 @@ interface ToastProps {
 
 const Toast = (props: ToastProps) => {
   const { message, messageType, id, options } = props;
-  console.log("🚀 ~ Toast ~ props:", props)
 
   useEffect(() => {
     const showToast = messageType === "error" ? toast.error : toast.success;

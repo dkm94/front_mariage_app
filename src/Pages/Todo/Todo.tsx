@@ -20,6 +20,7 @@ import Toast from "../../components/Toast/Toast";
 
 const Todo = () => {
   const { data: todos, setData: setTodos } = useFetch<void, TaskType[]>(getTodos, []);
+  const [todo, setTodo] = useState<TaskType | null>(null);
 
   const [message, setMessage] = useState<string | undefined>(undefined);
   const [messageType, setMessageType] = useState<"error" | "success" | undefined>(undefined);
@@ -37,8 +38,13 @@ const Todo = () => {
   const completedTasks = todos.filter((todo: TaskType) => todo.isCompleted).length;
 
   return (
-    <ContentLayout loading={loading} title={"Souhaitez-vous ajouter de nouvelles tâches ?"} src={"todos"} >
-      <Toast message={message} messageType={messageType} />
+    <ContentLayout 
+    loading={loading} 
+    title={"Souhaitez-vous ajouter de nouvelles tâches ?"} 
+    src={"todos"} 
+    message={message} 
+    messageType={messageType} 
+    id={todo?._id}>
       <Container style={{ padding: "2rem 4rem" }}>
         <Row>
           <AddForm
@@ -209,6 +215,7 @@ const Todo = () => {
                       setisOpen={setisOpen}
                       setMessage={setMessage}
                       setMessageType={setMessageType}
+                      setTodo={setTodo}
                       />
                   ))}
               </Grid2>
