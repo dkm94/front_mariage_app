@@ -7,6 +7,7 @@ import TopNav from "./components/Header/Navigation/Top/NavbarWithUser";
 import LoggedOutNavigation from "./components/Header/Navigation/Log_out";
 import Sidebar from "./components/Header/Navigation/Sidebar";
 import VerticalNavbar from "./components/Header/Navigation/Responsive/VerticalNavbar/VerticalNavbar";
+
 import { UserType } from "../types/index";
 
 const Layout = ({ children }) => {
