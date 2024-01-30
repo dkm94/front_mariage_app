@@ -7,10 +7,12 @@ interface ToastProps {
   message: string | undefined;
   messageType: "error" | "success" | undefined;
   options?: Partial<ToastOptions>;
+  id?: string | undefined;
 }
 
 const Toast = (props: ToastProps) => {
-  const { message, messageType, options } = props;
+  const { message, messageType, id, options } = props;
+  console.log("🚀 ~ Toast ~ props:", props)
 
   useEffect(() => {
     const showToast = messageType === "error" ? toast.error : toast.success;
@@ -27,9 +29,10 @@ const Toast = (props: ToastProps) => {
     }
     showToast(message, {
       ...toastOptions,
-      ...options
+      ...options,
+      toastId: id
     });
-}, [message]);
+}, [id, message, messageType, options]);
 
   return  <ToastContainer
   position="top-right"

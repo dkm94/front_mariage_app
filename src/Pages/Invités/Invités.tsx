@@ -47,6 +47,7 @@ const Byguests = (props: ByGuestsProps) => {
   const [file, setFile] = useState(null);
   const [searchValue, setSearchValue] = useState<string>("");
   const [user, setUser] = useState<GuestType | {}>({});
+  console.log("🚀 ~ Byguests ~ user:", user)
   const [appear, setAppear] = useState<boolean>(false);
   const [isOpen, setisOpen] = useState<boolean>(false);
 
@@ -65,8 +66,13 @@ const Byguests = (props: ByGuestsProps) => {
   };
 
   return (
-    <ContentLayout loading={loading} title={"Souhaitez-vous ajouter de nouveaux invités ?"} src={"guests"} >
-    {/* <Toast message={message} messageType={messageType} /> */}
+    <ContentLayout 
+    loading={loading} 
+    title={"Souhaitez-vous ajouter de nouveaux invités ?"} 
+    src={"guests"} 
+    message={message} 
+    messageType={messageType} 
+    id={(user as { _id?: string })?._id || ""} >
       <>
         <Container style={{ padding: "2rem 50px" }} fluid>
           <Row>

@@ -163,21 +163,21 @@ const UpdateGuest = ({
   };
 
   const deleteGuestfn = async (id: string): Promise<void> => {
-    const response = await deleteGuest({ id });
-    const { success, message } = response;
+    try{
+      setUser({ _id: id });
+      const response = await deleteGuest({ id });
+      const { success, message } = response;
 
-    // if(!success){
-    //   setMessageType("error");
-    //   setMessage(message);
-    //   return;
-    // }
-    if(success){
-      // setMessageType("success");
-      // setMessage(message);
-      setGuests(guests.filter((guest: GuestType) => guest?._id !== id));
-      setisOpen(false);
+      if(success){
+        setMessageType("success");
+        setMessage(message);
+        setGuests(guests.filter((guest: GuestType) => guest?._id !== id));
+        setisOpen(false);
+      }
+    } catch (e) {
+      setMessageType("error");
+      setMessage("Oups, une erreur est survenue lors de la suppression de l'invité");
     }
-
   };
 
   return (
