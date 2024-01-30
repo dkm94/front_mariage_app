@@ -18,7 +18,7 @@ import Toast from "../../components/Toast/Toast";
 import { OperationType } from "../../../types/index";
 import { floatToEuro } from "../../helpers/formatCurrency";
 import { useFetch } from "../../hooks";
-import { addOperation, deleteOperation, getOperations } from "../../services";
+import { addOperation, getOperations } from "../../services";
 import { categories } from "../../data";
 
 const operationValues: OperationType = {
@@ -46,24 +46,6 @@ const Budget = () => {
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>): void => {
     setSearchValue(e.target.value);
-  };
-
-  const deleteExpense = async (id: string): Promise<void> => {
-    const response = await deleteOperation({ id })
-    const { success, message } =  response;
-
-    if(!success) {
-      setMessageType("error");
-      setMessage(message);
-      return;
-    }
-
-    const updatedExpenses: OperationType[] | [] = operations.filter(
-      (operation: OperationType) => operation._id !== id
-    );
-    setOperations(updatedExpenses);
-    calculateTotal(updatedExpenses);
-    setEdit(null);
   };
 
   const operationSchema = Yup.object().shape({
@@ -161,7 +143,6 @@ const Budget = () => {
           <div className="budget___col-2">
             <Expenses
               expenses={operations}
-              deleteExpense={deleteExpense}
               searchValue={searchValue}
               edit={edit}
               setEdit={setEdit}

@@ -9,7 +9,6 @@ import { OperationType } from "../../../../types";
 
 interface ExpensesProps {
   expenses: OperationType[];
-  deleteExpense: (id: string) => void;
   searchValue: string;
   edit: OperationType | null;
   setEdit: (operation: OperationType | null) => void;
@@ -20,7 +19,7 @@ interface ExpensesProps {
 }
 
 const Expenses = (props: ExpensesProps) => {
-  const { expenses, deleteExpense, searchValue, edit, setEdit, setMessage, setMessageType, setOperations, calculateTotal } = props;
+  const { expenses, searchValue, edit, setEdit, setMessage, setMessageType, setOperations, calculateTotal } = props;
 
   return (
     <ul className="budget-list">
@@ -49,7 +48,6 @@ const Expenses = (props: ExpensesProps) => {
             obj={obj} 
             edit={edit} 
             setEdit={setEdit} 
-            deleteExpense={deleteExpense}
             setMessage={setMessage}
             setMessageType={setMessageType}
             operations={expenses}

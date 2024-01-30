@@ -8,12 +8,11 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { CustomButton } from "../../../../components/Buttons";
 import { useHistory } from "react-router";
 import { OperationType } from "../../../../../types";
-import { updateOperation } from "../../../../services";
+import { deleteOperation, updateOperation } from "../../../../services";
 
 const UpdateExpense = ({
   edit,
   setEdit,
-  deleteExpense,
   mariageID,
   setMessage,
   setMessageType,
@@ -77,6 +76,24 @@ const UpdateExpense = ({
 
     const currentPosition: number = window.scrollY;
     history.replace(`/mariage/${mariageID}/budget`, { currentPosition })
+    };
+
+    const deleteExpense = async (id: string): Promise<void> => {
+      const response = await deleteOperation({ id })
+      const { success, message } =  response;
+  
+      if(!success) {
+        setMessageType("error");
+        setMessage(message);
+        return;
+      }
+  
+      const updatedExpenses: OperationType[] | [] = operations.filter(
+        (operation: OperationType) => operation._id !== id
+      );
+      setOperations(updatedExpenses);
+      calculateTotal(updatedExpenses);
+      setEdit(null);
     };
 
   return (
