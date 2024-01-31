@@ -182,8 +182,16 @@
     padding-left: 5px;
     padding-right: 5px;
 }
-
-
+.search-bar-section {
+    padding: 2rem 4rem;
+}
+.search-bar-wrapper {
+    display: flex;
+    justify-content: end;
+}
+.budget-list #empty {
+    text-align: center;
+}
 @media (max-width: 768px) {
     .budget-list li {
         padding-left: 10px ;

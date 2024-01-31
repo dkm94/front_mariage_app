@@ -81,7 +81,7 @@ const Budget = () => {
         return;
       };
 
-      const expensesCopy = [...operations]
+      const expensesCopy: OperationType[] = [...operations]
       setOperations([...expensesCopy, newOperation]);
       calculateTotal([...expensesCopy, newOperation]);
       formik.resetForm();
@@ -111,14 +111,14 @@ const Budget = () => {
     id={operation?._id || ""}
     >
       <Grow in={!loading} timeout={2000}>
-        <Container style={{ padding: "2rem 4rem" }} fluid>
+        <Container className="search-bar-section" fluid>
           <Row>
             <Col xs={12} sm={10} md={6} />
             <Col
               xs={12}
               sm={10}
               md={6}
-              style={{ display: "flex", justifyContent: "end" }}
+              className="search-bar-wrapper"
             >
               <SearchBar
                 className="search__input"
@@ -154,7 +154,7 @@ const Budget = () => {
           <div className="budget___col-2">
             <ul className="budget-list">
               <li className="table-header">
-                {headerItems.map((item, index) => {
+                {headerItems.map((item: string, index: number) => {
                   return (
                     <div key={index} className={`cols cols-${index + 1}`}>
                       {item}
@@ -162,7 +162,7 @@ const Budget = () => {
                   );
                 })}
               </li>
-              {operations?.length === 0 && <div style={{ textAlign: "center"}}><span>Vos dépenses ici</span></div>}
+              {operations?.length === 0 && <div id="empty"><span>Vos dépenses ici</span></div>}
               {operations
                 ?.filter((expense) => {
                   return (
