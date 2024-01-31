@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 
 import { Container, Row } from "react-bootstrap";
 
-import Card from "./Card/Card.jsx";
+import Card from "./Card/Card";
 import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
 
 import { getGuests, getTables, getTodos, getWedding, getOperations, getFoods } from "../../services";
