@@ -12,7 +12,6 @@ import SearchBar from "../../components/Invités(affichage)/by_guests/Components
 import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
 import PriceCard from "../../components/Expenses/PriceCard/PriceCard";
 import AddExpenseForm from "../../components/Expenses/Forms/AddExpenseForm/AddExpenseForm";
-import Toast from "../../components/Toast/Toast";
 import ExpenseElement from "../../components/Expenses/Table/ExpenseElement/ExpenseElement";
 
 import { OperationType } from "../../../types/index";

@@ -3,21 +3,31 @@ import "../../components/LargeButton/LargeButton.css";
 
 import React, { useState } from "react";
 import { useHistory, withRouter } from "react-router-dom";
-import { History } from "history"; 
-import { Button, Container } from "@mui/material";
+import { History } from "history";
+
+import { Container } from "@mui/material";
+
+import dashboardCards from "./data";
 
 import Card from "./Card.jsx";
-import dashboardCards from "./data";
 import Register from '../Auth/Register/Register';
 import Login from '../Auth/Login/Login';
 import AuthModal from '../../components/Modals/Auth/AuthModal';
+
 import introImg from "../../img/section-2-img.jpg";
+import { CustomButton } from "../../components/Buttons";
 
 const Home = () => {
   const history: History = useHistory();
   
   const [isOpen, setisOpen] = useState<boolean>(false);
   const [showForm, setShowForm] = useState<string>("");
+
+  const handleRegisterButton = ():void => {
+    setShowForm("register");
+    const currentPosition: number = window.scrollY;
+    history.replace("/register", { currentPosition });
+  }
 
   return (
     <>
@@ -46,18 +56,10 @@ const Home = () => {
             </span>
           </p>
           <div className="register-btn">
-              <Button
-                className="home-link"
-                style={{ fontSize: "1.2rem" }}
-                onClick={() => {
-                  setShowForm("register");
-
-                  const currentPosition: number = window.scrollY;
-                  history.replace("/register", { currentPosition });
-                }}
-              >
-                Inscrivez-vous
-              </Button>
+            <CustomButton
+              onClick={handleRegisterButton} 
+              text={"Inscrivez-vous"}
+              />
           </div>
           </div>
           <div className='intro-img'>

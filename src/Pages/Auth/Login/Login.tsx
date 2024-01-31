@@ -96,7 +96,6 @@ const Login = (props: LoginProps) => {
             <div className="login__form">
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="form-group">
-                  {/* <label>Email</label> */}
                   <TextField
                     size="small"
                     label="Email"
@@ -104,13 +103,11 @@ const Login = (props: LoginProps) => {
                     id="email"
                     name="email"
                     type="email"
-                    // class="form-control shadow-none"
                     style={{ borderColor: "#D1D4D5" }}
                   />
                   <div>{errors?.email?.message}</div>
                 </div>
                 <div className="form-group">
-                  {/* <label>Mot de passe</label> */}
                   <TextField
                     size="small"
                     label="Mot de passe"
@@ -118,7 +115,6 @@ const Login = (props: LoginProps) => {
                     id="password"
                     name="password"
                     type="password"
-                    // class="form-control shadow-none"
                     style={{ borderColor: "#D1D4D5" }}
                   />
                   <div>{errors?.password?.message}</div>
