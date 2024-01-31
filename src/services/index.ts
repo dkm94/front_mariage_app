@@ -2,9 +2,9 @@ import { getFoods, addFood, updateFood, deleteFood } from './foodRequests';
 import { getGuests, addGuest, updateGuest, deleteGuest, updateGuestMedia } from "./guestRequests";
 import { getTables, addTable, deleteTable } from "./tableRequests";
 import { getTodos, addTodo, updateTodo, updateTodosStatus, deleteTodo } from "./todosRequests";
-import { getWedding } from "./weddingsRequests";
+import { getWedding, updateWedding } from "./weddingsRequests";
 import { getOperations, addOperation, updateOperation, deleteOperation } from "./operationsRequests";
-import { login, getUser, deleteAccount } from "./authRequests";
+import { login, getUser, deleteAccount, updatePassword } from "./authRequests";
 
 export { 
     getGuests, 
@@ -31,5 +31,7 @@ export {
     deleteOperation,
     updateGuestMedia,
     getUser,
-    deleteAccount
+    deleteAccount,
+    updatePassword,
+    updateWedding
 };

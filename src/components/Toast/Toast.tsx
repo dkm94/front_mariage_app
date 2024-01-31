@@ -31,7 +31,7 @@ const Toast = (props: ToastProps) => {
       ...options,
       toastId: id
     });
-}, []);
+}, [id, message, messageType, options]);
 
   return  <ToastContainer
   position="top-right"

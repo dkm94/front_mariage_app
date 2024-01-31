@@ -23,10 +23,20 @@ interface ExpenseElementProps {
   operations: OperationType[];
   setOperations: Dispatch<SetStateAction<OperationType[]>>;
   calculateTotal: (operations: OperationType[]) => void;
+  setOperation: Dispatch<SetStateAction<OperationType | null>>;
 }
 
 const ExpenseElement = (props: ExpenseElementProps) => {
-  const { obj, edit, setEdit, setMessage, setMessageType, operations, setOperations, calculateTotal } = props;
+  const { 
+    obj, 
+    edit, 
+    setEdit, 
+    setMessage, 
+    setMessageType, 
+    operations, 
+    setOperations, 
+    calculateTotal, 
+    setOperation } = props;
 
   const history: History = useHistory();
   const{ mariageID } = useCurrentUser();
@@ -111,6 +121,7 @@ const ExpenseElement = (props: ExpenseElementProps) => {
         operations={operations}
         setOperations={setOperations}
         calculateTotal={calculateTotal}
+        setOperation={setOperation}
         />
       </DefaultModal>}
     </li>

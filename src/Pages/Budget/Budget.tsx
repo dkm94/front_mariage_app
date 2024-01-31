@@ -184,6 +184,7 @@ const Budget = () => {
                     operations={operations}
                     setOperations={setOperations}
                     calculateTotal={calculateTotal}
+                    setOperation={setOperation}
                     />
                   );
                 })}

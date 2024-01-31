@@ -27,7 +27,8 @@ const UpdateExpense = ({
   setMessageType,
   operations,
   setOperations,
-  calculateTotal
+  calculateTotal,
+  setOperation
 }) => {
   const history: History = useHistory();
   const [input, setInput] = useState<OperationType>(edit ? edit : null);
@@ -67,6 +68,7 @@ const UpdateExpense = ({
   };
 
   const editExpense = async (e: FormEvent): Promise<void> => {
+    setOperation(input._id);
     e.preventDefault();
 
     const { _id, description, price, category } = input;
@@ -97,6 +99,7 @@ const UpdateExpense = ({
       setOperations(updatedExpenses);
       calculateTotal(updatedExpenses);
       setEdit(null);
+      setOperation(null);
     }, 1000);
 
     const currentPosition: number = window.scrollY;
@@ -104,6 +107,7 @@ const UpdateExpense = ({
     };
 
     const deleteExpense = async (id: string): Promise<void> => {
+      setOperation(id)
       const response = await deleteOperation({ id })
       const { success, message } =  response;
   
@@ -124,6 +128,7 @@ const UpdateExpense = ({
       setOperations(updatedExpenses);
       calculateTotal(updatedExpenses);
       setEdit(null);
+      setOperation(null);
     };
 
   return (

@@ -1,14 +1,13 @@
 import "./Mon_compte.css";
 
 import React, { useState, useEffect } from 'react';
-import axios, { AxiosResponse } from "axios";
 import { Container, Row, Col } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { useFetch } from "../../hooks";
-import { getWedding } from "../../services";
+import { deleteAccount, getUser, updatePassword, getWedding, updateWedding } from "../../services";
 import { useCurrentUser } from "../../ctx/userCtx";
 import { AccountType, UserType, WeddingType } from '../../../types';
 
@@ -18,7 +17,6 @@ import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayo
 
 import profilePicture from "../../img/couple-img.jpg";
 import changePwdIcon from "../../img/change-password-icon.png";
-import { deleteAccount, getUser, updatePassword } from "../../services/authRequests";
 
 const win: Window = window;
 
@@ -32,22 +30,25 @@ type FormValues2 = {
     confirmPassword: string;
 }
 
-const MyAccount = ({ token }) => {
+interface AccountProps {
+    token: string;
+}
+
+const MyAccount = (props: AccountProps) => {
     const user: UserType = useCurrentUser();
     const { id, mariageID, firstPerson, secondPerson } = user as { id: string, mariageID: string, firstPerson: string, secondPerson: string};
 
     const [newPassword, setNewPassword] = useState<string>("")
-    const [editSuccess, setEditSuccess] = useState<string>("")
 
     const [openModal, setOpenModal] = useState<boolean>(false);
 
     const { 
         data: wedding, 
         loading,
-        message,
-        messageType,
-        setMessage,
-        setMessageType
+        message: messageWedding,
+        messageType: messageTypeWedding,
+        setMessage: setMessageWedding,
+        setMessageType: setMessageTypeWedding
     } = useFetch<any, WeddingType>(() => getWedding({ id: mariageID }), undefined);
 
 
@@ -59,8 +60,6 @@ const MyAccount = ({ token }) => {
         setMessageType: setMessageTypeAccount
     } = useFetch<any, AccountType>(() => getUser({ id }), undefined);
 
-
-    // Handle wedding Form
     const weddingValidationSchema = Yup.object().shape({
         firstPerson: Yup.string()
             .min(2, "Le prénom doit contenir au moins 2 caractères.")
@@ -95,24 +94,19 @@ const MyAccount = ({ token }) => {
     }, [reset, wedding]);
 
     const onSubmitWedding = async ({firstPerson, secondPerson}) => {
-        await axios.post(`/api/admin/wedding/edit/${mariageID}`,
-            {
-                firstPerson: firstPerson,
-                secondPerson: secondPerson
-            })
-            .then((res) => {
-                if(res.data != null){
-                    setEditSuccess("La modification a été enregistrée.");
-                    setTimeout(() => {
-                        setEditSuccess("")
-                    }, 2500);
-                }
-            })
-            .catch((err) => {
-                //todo: handle with toast
-                alert("Une erreur est survenue. Veuillez rééssayer.");
-                console.log(err)
-            })
+        const response = await updateWedding({ id: mariageID, firstPerson, secondPerson });
+        const { success, message } = response;
+
+        if(!success){
+            setMessageTypeWedding("error")
+            setMessageWedding(message)
+            return;
+        }
+
+        if(success && message){
+            setMessageTypeWedding("success")
+            setMessageWedding(message)
+        }
       };
 
 
@@ -170,6 +164,7 @@ const MyAccount = ({ token }) => {
         if(!success){
             setMessageTypeAccount("error")
             setMessageAccount(message)
+            return;
         }
 
         if(success && statusCode === 200 && message){
@@ -191,8 +186,8 @@ const MyAccount = ({ token }) => {
         loading={loading} 
         title={"Paramètres du compte"} 
         src={"account"} 
-        message={message || messageAccount} 
-        messageType={messageType || messageTypeAccount}
+        message={messageWedding || messageAccount} 
+        messageType={messageTypeWedding || messageTypeAccount}
         id={id || ""}
         >
             <div style={{ padding: "2rem 50px", display: "flex", flexDirection: "column", gap: "30px" }}>
@@ -240,7 +235,6 @@ const MyAccount = ({ token }) => {
                                         sx={{ "&:hover": { backgroundColor: "#333232" } }}
                                         style={{ borderRadius: "20px", padding: "6px 16px"}}/>
                                 </Col>
-                                {editSuccess}
                             </form>
                         </Col>
                     </Row>
@@ -301,7 +295,6 @@ const MyAccount = ({ token }) => {
                                         style={{ borderRadius: "20px", padding: "6px 16px" }}
                                     />
                                 </Col>
-                                {editSuccess}
                             </form>
                         </Col>
                     </Row>
