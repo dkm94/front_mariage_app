@@ -24,9 +24,9 @@ const Table = ({
   getUpdatedId,
   isOpen,
   setisOpen,
-  deleteTable,
   setMessage, 
   setMessageType,
+  setTable
 }) => {
   const history = useHistory();
   const { id: tableId } = useParams<{id: string}>();
@@ -85,12 +85,12 @@ const Table = ({
           setGuests={setGuests}
           setEdit={setEdit}
           getUpdatedId={getUpdatedId}
-          deleteTable={deleteTable}
           isOpen={isOpen}
           setisOpen={setisOpen}
           setMessage={setMessage}
           setMessageType={setMessageType}
           mariageID={mariageID}
+          setTable={setTable}
         />
       </DefaultModal>}
     </Grid2>

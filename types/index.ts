@@ -20,7 +20,7 @@ export type AccountType = {
     password: string;
     role: RoleType;
     mariageID: string;
-}
+} | undefined;
 
 export type ScrollButtonType = ReactNode;
 export type LoaderType = ReactNode;

@@ -6,7 +6,6 @@ import { GreyButton } from "../../../../components/Buttons";
 
 import { FoodType } from "../../../../../types";
 import { addFood } from "../../../../services/foodRequests";
-import Toast from "../../../../components/Toast/Toast";
 import { ApiResponse } from "../../../../helpers/requestHandler";
 
 type Category = "starter" | "maincourse" | "dessert" | "apetizer" | "beverage";
@@ -15,13 +14,12 @@ interface AddFoodsFormProps {
   foods: FoodType[];
   setFoods: Dispatch<SetStateAction<FoodType[]>>;
   category: Category;
+  setMessage: Dispatch<SetStateAction<string | undefined>>;
+  setMessageType: Dispatch<SetStateAction<"error" | "success" | undefined>>;
 }
 
 const AddFoodForm = (props: AddFoodsFormProps) => {
-  const { foods, setFoods, category } = props;
-
-  const [message, setMessage] = useState<string | undefined>(undefined);
-  const [messageType, setMessageType] = useState<"error" | "success" | undefined>(undefined);
+  const { foods, setFoods, category, setMessage, setMessageType } = props;
 
   const [input, setInput] = useState<string>("");
   const inputRef: RefObject<HTMLInputElement> = useRef(null);
@@ -52,7 +50,6 @@ const AddFoodForm = (props: AddFoodsFormProps) => {
 
   return (
     <>
-      <Toast message={message} messageType={messageType} />
       <form
         onSubmit={handleSumbit}
         className="mt-4"

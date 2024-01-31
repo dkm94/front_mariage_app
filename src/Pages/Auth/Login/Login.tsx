@@ -77,12 +77,16 @@ const Login = (props: LoginProps) => {
         }
       }
     }
-  };
 
+    setTimeout(() => {
+      setMessageType(undefined);
+      setMessage(undefined);
+    }, 3000);
+  };
 
   return (
     <div className="login-page">
-      <Toast message={message} messageType={messageType} />
+      {message === undefined ? null : <Toast message={message} messageType={messageType} /> }
       <div className="login-grid">
         <div className="grid-item-2">
           <div className="login">

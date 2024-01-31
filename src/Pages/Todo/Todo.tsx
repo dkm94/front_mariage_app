@@ -44,7 +44,7 @@ const Todo = () => {
     src={"todos"} 
     message={message} 
     messageType={messageType} 
-    id={todo?._id}>
+    id={todo?._id || ""}>
       <Container style={{ padding: "2rem 4rem" }}>
         <Row>
           <AddForm

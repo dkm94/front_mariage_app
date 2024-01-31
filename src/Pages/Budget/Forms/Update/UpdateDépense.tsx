@@ -88,6 +88,11 @@ const UpdateExpense = ({
       return;
     }
 
+    if(message){
+      setMessageType("success");
+      setMessage(message);
+    }
+
     setTimeout(() => {
       setOperations(updatedExpenses);
       calculateTotal(updatedExpenses);
@@ -106,6 +111,11 @@ const UpdateExpense = ({
         setMessageType("error");
         setMessage(message);
         return;
+      }
+
+      if(message){
+        setMessageType("success");
+        setMessage(message);
       }
   
       const updatedExpenses: OperationType[] | [] = operations.filter(

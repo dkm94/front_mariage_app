@@ -1,12 +1,10 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, Dispatch, SetStateAction } from "react";
 import { useHistory } from "react-router";
 
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import CheckIcon from "@mui/icons-material/Check";
 import ReplayIcon from "@mui/icons-material/Replay";
 import { IconButton, TextField, styled } from "@mui/material";
-
-import Toast from "../../../../components/Toast/Toast";
 
 import { updateFood } from "../../../../services";
 import { useCurrentUser } from "../../../../ctx/userCtx";
@@ -21,7 +19,9 @@ interface UpdateFoodProps {
     edit: any;
     setEdit: any;
     foods: any;
-    setFoods: any
+    setFoods: any;
+    setMessage: Dispatch<SetStateAction<string | undefined>>;
+    setMessageType: Dispatch<SetStateAction<"error" | "success" | undefined>>;
 }
 
 const enableStyle = {
@@ -39,18 +39,15 @@ const disableStyle = {
 }
 
 const UpdateFood = (props: UpdateFoodProps) => {
-  const { edit, setEdit, foods, setFoods } = props;
+  const { edit, setEdit, foods, setFoods, setMessage, setMessageType } = props;
 
-    const history = useHistory();
-    const{ mariageID } = useCurrentUser();
+  const history = useHistory();
+  const{ mariageID } = useCurrentUser();
 
-    const [isDisabled, setIsDisabled] = useState<boolean>(false);
+  const [isDisabled, setIsDisabled] = useState<boolean>(false);
 
   const [input, setInput] = useState(edit ? edit.name : "");
   const inputRef = useRef<HTMLDivElement>(null);
-
-  const [message, setMessage] = useState<string | undefined>(undefined);
-  const [messageType, setMessageType] = useState<"error" | "success" | undefined>(undefined);
 
   useEffect(() => {
     inputRef?.current?.focus();
@@ -100,7 +97,9 @@ const UpdateFood = (props: UpdateFoodProps) => {
             }, 500);
         setEdit({ id: "", name: "" });
         setInput("");
-    }
+        setMessageType("success");
+        setMessage(message);
+      }
 
     const currentPosition: number = window.scrollY;
     history.replace(`/mariage/${mariageID}/carte`, { currentPosition })
@@ -116,7 +115,6 @@ const UpdateFood = (props: UpdateFoodProps) => {
       flexDirection={"row"}
       gap={"23px"}
     >
-    <Toast message={message} messageType={messageType} />
       <TextField
         required
         size="small"

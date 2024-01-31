@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { useHistory, useLocation, useParams } from "react-router";
+import React, { useState } from "react";
+import { useHistory, useParams } from "react-router";
+import { History } from "history";
 
 import { Box } from "@material-ui/core";
 import styled from "@emotion/styled";
@@ -28,36 +29,21 @@ const Guests = ({
   setGuests,
   editPicture,
   seteditPicture,
-  // upload,
-  handleFile,
   searchValue,
   mariageID,
-  appear,
   firstPerson,
   secondPerson,
-  isOpen,
   setisOpen,
-  errorMessage,
-  error,
   setMessage,
   setMessageType,
   setIsOpen,
   setUser,
 }) => {
   const { id } = useParams<{id: string}>();
-  
-  const history = useHistory();
+  const history: History = useHistory();
+
   const [edit, setEdit] = useState<Edit | null>(null);
-
-  const [uploadedFile, setUploadedFile] = useState(null);
-
-  const [selected, setSelected] = useState("tous");
-
-  const handleFileInput = (e) => {
-    const fileValue = e.target.files[0];
-    setUploadedFile(fileValue);
-    handleFile(fileValue);
-  };
+  const [selected, setSelected] = useState<string>("tous");
 
   return (
     <>
@@ -79,9 +65,7 @@ const Guests = ({
         </select>
       </div>
 
-      {error && <div style={{ alignSelf: "center" }}><span style={{ color: "darkred"}}>{errorMessage}</span></div>}
-
-      {!error && guests.length === 0 && (
+      {guests.length === 0 && (
         <div className="block">
           <span>Vos invités ici.</span>
         </div>)}
@@ -194,10 +178,7 @@ const Guests = ({
                           guestId={guest._id}
                           guestFamily={guest.family}
                           uploadImg={uploadImg}
-                          // handleFileInput={handleFileInput}
                           seteditPicture={seteditPicture}
-                          // upload={upload}
-                          // uploadedFile={uploadedFile}
                           setisOpen={setisOpen}
                           setMessage={setMessage}
                           setMessageType={setMessageType}

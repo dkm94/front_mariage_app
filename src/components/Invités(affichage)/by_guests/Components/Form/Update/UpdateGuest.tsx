@@ -29,11 +29,8 @@ const UpdateGuest = ({
   mariageID,
   guestFamily,
   uploadImg,
-  // handleFileInput,
   seteditPicture,
   guestId,
-  // upload,
-  // uploadedFile,
   setisOpen,
   setMessage,
   setMessageType,
@@ -137,6 +134,12 @@ const UpdateGuest = ({
       setMessage(message);
       return;
     }
+
+    if(statusCode === 200 && message){
+      setMessageType("success");
+      setMessage(message);
+    }
+
     setEdit({ id: "" });
     setInput("");
 
@@ -153,13 +156,12 @@ const UpdateGuest = ({
     });
 
     setGuests(updatedGuestlist);
-    setTimeout(() => {
-      setMessageType(undefined);
-      setMessage(undefined);
-    })
-
+    
     const currentPosition: number = window.scrollY;
     history.replace(`/mariage/${mariageID}/invites`, { currentPosition });
+
+    setMessageType(undefined);
+    setMessage(undefined);
   };
 
   const deleteGuestfn = async (id: string): Promise<void> => {

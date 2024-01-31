@@ -29,24 +29,24 @@ const Tables = (props) => {
   const [searchValue, setSearchValue] = useState<string>("");
   const [edit, setEdit] = useState<EditType | null>(null);
   const [input, setInput] = useState("");
+  const [table, setTable]= useState<TableType | null>(null);
 
   const [isOpen, setisOpen] = useState(false);
-
-  const [message, setMessage] = useState<string | undefined>(undefined);
-  const [messageType, setMessageType] = useState<"error" | "success" | undefined>(undefined);
 
   const { 
     data: tables, 
     setData: setTables, 
     loading: loadingTables, 
-    error: errorTables, 
-    errorMessage: errorMessageTables } = useFetch<void, TableType[]>(getTables, []);
+    message: tableMessage, 
+    messageType: tableTypeMessage,
+    setMessage: setMessageTable,
+    setMessageType: setMessageTypeTable } = useFetch<void, TableType[]>(getTables, []);
 
   const { 
     data: guests, 
     setData: setGuests, 
-    error: errorGuests, 
-    errorMessage: errorMessageGuests } = useFetch<void, GuestType[]>(getGuests, []);
+    message: guestMessage, 
+    messageType: guestTypeMessage } = useFetch<void, GuestType[]>(getGuests, []);
 
     const orderedGuests = guests
     ?.slice()
@@ -71,35 +71,19 @@ const Tables = (props) => {
     setInput(tableName);
   };
 
-  const deleteTable = async (e, tableId:string, guest) => {
-    e.preventDefault();
-    await axios
-      .delete(`/api/admin/tables/delete/${tableId}`)
-      .then((res) => {
-        if (res.data != null) {
-          const updateList = [...tables].filter((table) => table._id !== tableId);
-          setTables(updateList)
-        }
-      })
-      .catch((err) => {
-        //todo: handle errors
-        console.log(err);
-      });
-  };
-
   return (
     <ContentLayout 
-    loading={loadingTables} 
-    title={"Comment souhaitez-vous organiser votre plan de table ?"} 
-    src={"tables"}
-    error={errorTables}
-    errorMessage={errorMessageTables}
+      loading={loadingTables}
+      title={"Comment souhaitez-vous organiser votre plan de table ?"}
+      src={"tables"}
+      message={tableMessage || guestMessage} 
+      messageType={tableTypeMessage || guestTypeMessage} 
+      id={table?._id || ""}    
     >
-      <Toast message={message} messageType={messageType} />
       <Container style={{ padding: "2rem 50px" }} fluid>
         <Row>
           <Col xs={12} sm={10} md={6} className="table-form">
-            <AddTableForm tables={tables} setTables={setTables} setMessage={setMessage} setMessageType={setMessageType} />
+            <AddTableForm tables={tables} setTables={setTables} setMessage={setMessageTable} setMessageType={setMessageTypeTable} />
           </Col>
           <Col xs={12} sm={10} md={6} className="searchbar">
             <SearchBar
@@ -123,7 +107,7 @@ const Tables = (props) => {
           pl={"50px"}
           pr={"50px"}
           >
-          {errorGuests && <div style={{ alignSelf: "center" }}><span style={{ color: "darkred"}}>{errorMessageGuests}</span></div>}
+          {/* {errorGuests && <div style={{ alignSelf: "center" }}><span style={{ color: "darkred"}}>{errorMessageGuests}</span></div>} */}
 
           {tables?.length === 0 || null ? (
             <div
@@ -159,11 +143,11 @@ const Tables = (props) => {
                     setGuests={setGuests}
                     setEdit={setEdit}
                     getUpdatedId={getUpdatedId}
-                    deleteTable={deleteTable}
                     isOpen={isOpen}
                     setisOpen={setisOpen}
-                    setMessage={setMessage}
-                    setMessageType={setMessageType}
+                    setMessage={setMessageTable}
+                    setMessageType={setMessageTypeTable}
+                    setTable={setTable}
                   />
                 ))}
             </Grid2>

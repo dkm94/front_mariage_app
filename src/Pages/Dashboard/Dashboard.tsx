@@ -33,11 +33,11 @@ const Dashboard = (props: IDashboardProps) => { // Ce composant est rendu beauco
   const [beverages, setBeverages] = useState<Food[]>([]);
 
   const { data: wedding, fetchData: fetchWedding } = useFetch<any, WeddingType>(() => getWedding({ id }), undefined);
-  const { data: tasks } = useFetch<void, TaskType[]>(getTodos, []);
-  const { data: guests } = useFetch<void, GuestType[]>(getGuests, []);
-  const { data: tables } = useFetch<void, TableType[]>(getTables, []);
-  const { data: operations } = useFetch<void, OperationType[]>(getOperations, []);
-  const { data: foods } = useFetch<void, Food[]>(getFoods, []);
+  const { data: tasks, message: todosMessage, messageType: todosMessageType } = useFetch<void, TaskType[]>(getTodos, []);
+  const { data: guests, message: guestsMessage, messageType: guestsMessageType } = useFetch<void, GuestType[]>(getGuests, []);
+  const { data: tables, message: tablesMessage, messageType: tablesMessageType } = useFetch<void, TableType[]>(getTables, []);
+  const { data: operations, message: operationsMessage, messageType: operationsMessageType } = useFetch<void, OperationType[]>(getOperations, []);
+  const { data: foods, message: foodsMessage, messageType: foodsMessageType } = useFetch<void, Food[]>(getFoods, []);
 
   useEffect(() => {
     fetchWedding({ id });
@@ -76,7 +76,13 @@ const Dashboard = (props: IDashboardProps) => { // Ce composant est rendu beauco
   }, [foods])
 
   return (
-    <ContentLayout loading={loading} title={"Que souhaitez-vous faire aujourd'hui ?"} src={"dashboard"} >
+    <ContentLayout 
+    loading={loading} 
+    title={"Que souhaitez-vous faire aujourd'hui ?"} 
+    src={"dashboard"} 
+    message={todosMessage || guestsMessage || tablesMessage || operationsMessage || foodsMessage} 
+    messageType={todosMessageType || guestsMessageType || tablesMessageType || operationsMessageType || foodsMessageType} 
+    id={""} >
       <Container>
         <Row>
           <Card

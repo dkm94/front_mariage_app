@@ -21,8 +21,10 @@ const useFetch = <TParams, TResult>(
 
   const [data, setData] = useState<TResult>(initialData);
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
+  const [message, setMessage] = useState<string | undefined>(undefined);
+  const [messageType, setMessageType] = useState<"error" | "success" | undefined>(undefined);
+  // const [error, setError] = useState<boolean>(false);
+  // const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
 
   const fetchData = async (params?: TParams) => {
       try {
@@ -32,23 +34,29 @@ const useFetch = <TParams, TResult>(
   
         if (apiResponse.success && apiResponse.statusCode === 200) {
           setData(apiResponse.data || initialData);
+
+          if(apiResponse.message) {
+            setMessageType("success");
+            setMessage(apiResponse.message);
+          }
         } else {
-          setError(true);
-      if(apiResponse.message === "Network Error"){
-        setErrorMessage("Oups, une erreur s'est produite.");
-      } else {
-        setErrorMessage(apiResponse.message);
-      }
+          setMessageType("error");
+
+          if(apiResponse.message === "Network Error"){
+            setMessage("Oups, une erreur s'est produite.");
+          } else {
+            setMessage(apiResponse.message);
+          }
         }
       } catch (error) {
-      setError(true);
+      setMessageType("error");
       //   setErrorMessage(
       //     error.response && error.response.data && error.response.data.message
       //     ? error.response.data.message
       //     : 'Une erreur s\'est produite.'
       //   );
       // } finally {
-      setErrorMessage(error.message);
+      setMessage(error.message);
       } finally {
         setLoading(false);
       }
@@ -57,7 +65,7 @@ const useFetch = <TParams, TResult>(
       fetchData();
   }, []);
 
-  return { data, setData, loading, error, errorMessage, fetchData };
+  return { data, setData, loading, message, messageType, fetchData, setMessage, setMessageType };
 };
 
 export default useFetch;

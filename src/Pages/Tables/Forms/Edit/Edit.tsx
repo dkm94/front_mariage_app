@@ -24,11 +24,11 @@ const EditTableForm = (props) => {
     guests,
     setGuests,
     setEdit,
-    // deleteTable,
     setisOpen,
     setMessage, 
     setMessageType,
     mariageID,
+    setTable
   } = props;
   const history = useHistory();
 
@@ -69,16 +69,22 @@ const EditTableForm = (props) => {
   const deleteTableFn = async (e, tableId:string) => {
     e.preventDefault();
 
+    setTable({ _id: tableId });
     const response = await deleteTable({ id : tableId });
     const { message, success } = response;
     
     if(!success){
-      setMessage(message)
-      setMessageType("error")
+      setMessage(message);
+      setMessageType("error");
       return;
     }
     
-    setTables([...tables].filter((table) => table._id !== tableId))
+    setMessageType("success");
+    setMessage(message);
+    setTables([...tables].filter((table) => table._id !== tableId));
+
+    const currentPosition = window.scrollY;
+    history.replace(`/mariage/${mariageID}/tables`, { currentPosition });
   };
 
   return (

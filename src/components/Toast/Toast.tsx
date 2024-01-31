@@ -12,7 +12,7 @@ interface ToastProps {
 
 const Toast = (props: ToastProps) => {
   const { message, messageType, id, options } = props;
-
+  
   useEffect(() => {
     const showToast = messageType === "error" ? toast.error : toast.success;
     const toastOptions: ToastOptions = {
@@ -31,7 +31,7 @@ const Toast = (props: ToastProps) => {
       ...options,
       toastId: id
     });
-}, [id, message, messageType, options]);
+}, []);
 
   return  <ToastContainer
   position="top-right"

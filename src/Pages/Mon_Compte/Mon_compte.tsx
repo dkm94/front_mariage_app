@@ -1,6 +1,6 @@
 import "./Mon_compte.css";
 
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios, { AxiosResponse } from "axios";
 import { Container, Row, Col } from "react-bootstrap";
 import { useForm } from "react-hook-form";
@@ -9,16 +9,16 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import { useFetch } from "../../hooks";
 import { getWedding } from "../../services";
+import { useCurrentUser } from "../../ctx/userCtx";
 import { AccountType, UserType, WeddingType } from '../../../types';
 
-// import { UserContext } from "../../App";
 import { CustomButton } from "../../components/Buttons";
 import DefaultModal from "../../components/Modals/Default/DefaultModal";
+import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
 
 import profilePicture from "../../img/couple-img.jpg";
 import changePwdIcon from "../../img/change-password-icon.png";
-import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
-import { useCurrentUser } from "../../ctx/userCtx";
+import { deleteAccount, getUser, updatePassword } from "../../services/authRequests";
 
 const win: Window = window;
 
@@ -33,31 +33,31 @@ type FormValues2 = {
 }
 
 const MyAccount = ({ token }) => {
-   
     const user: UserType = useCurrentUser();
     const { id, mariageID, firstPerson, secondPerson } = user as { id: string, mariageID: string, firstPerson: string, secondPerson: string};
 
-    const [successfulDeletionMessage, setsuccessfulDeletionMessage] = useState<string>("")
-        
-    const [account, setAccount] = useState<AccountType | {}>({})
     const [newPassword, setNewPassword] = useState<string>("")
     const [editSuccess, setEditSuccess] = useState<string>("")
 
     const [openModal, setOpenModal] = useState<boolean>(false);
 
-    const { email } = account as { email: string };
+    const { 
+        data: wedding, 
+        loading,
+        message,
+        messageType,
+        setMessage,
+        setMessageType
+    } = useFetch<any, WeddingType>(() => getWedding({ id: mariageID }), undefined);
 
-    const { data: wedding, fetchData: fetchWedding, loading } = useFetch<any, WeddingType>(() => getWedding({ id: mariageID }), undefined);
 
-    // Fetch data
-    useEffect(() => {
-        let account: Promise<AxiosResponse> = axios.get<AccountType>(`/api/admin/admin/myAccount/${id}`);
-
-        const fetchData = async (): Promise<void> => {
-            let res = await Promise.all([account, wedding])
-            setAccount(res[0].data)
-        }
-        fetchData()}, [id, mariageID])
+    const {
+        data: account,
+        message: messageAccount,
+        messageType: messageTypeAccount,
+        setMessage: setMessageAccount,
+        setMessageType: setMessageTypeAccount
+    } = useFetch<any, AccountType>(() => getUser({ id }), undefined);
 
 
     // Handle wedding Form
@@ -137,56 +137,64 @@ const MyAccount = ({ token }) => {
         mode: "onBlur",
         resolver: yupResolver(accountValidationSchema)
     });
+
     useEffect(() => {
         if (account) {
             updateAccountData(account)
         }
     }, [updateAccountData, account]);
-
     
-    
-      const onSubmitAccount = async () => {
-        await axios.post(`/api/admin/admin/editAccount/${id}`,
-        {
-            password: newPassword
-        })
-        .then((res) => {
-            if(res.data != null){
-                setTimeout(() => {
-                    setEditSuccess("La modification a été enregistrée.");
-                    setNewPassword("");
-                    window.location.reload()
-                }, 1000);
-            }
-        })
-        .catch((err) => {
-                //todo: handle with toast
+    const onSubmitAccount = async () => {
+        const response = await updatePassword({ id, password: newPassword })
+        const { success, message } = response; 
+        
+        if(!success){
+            setMessageTypeAccount("error")
+            setMessageAccount(message)
+        }
 
-            alert("Une erreur est survenue. Veuillez rééssayer plus tard.");
-            console.log(err)
-        })
-      };
+        if(success && message){
+            setMessageTypeAccount("success")
+            setMessageAccount(message)
+        }
+        setTimeout(() => {
+            setNewPassword("");
+            window.location.reload()
+        }, 1000);
+    };
 
-    const deleteAccount = async () => {
-        await axios.delete(`/api/admin/admin/deleteAccount/${id}`)
-            .then(res => {
-                if(res.data === 200){
-                    setsuccessfulDeletionMessage(res.statusText)
-                }
-            })
-            .then(() => {
-                if(token){
-                    localStorage.removeItem("token")
-                    setTimeout(() => {
-                        win.location = "/"
-                    }, 2000);
-                }
-            })
-            .catch(err => console.log(err))
+    const deleteAccountFn = async () => {
+        const response = await deleteAccount({ id });
+        const { success, message, statusCode } = response;
+
+        if(!success){
+            setMessageTypeAccount("error")
+            setMessageAccount(message)
+        }
+
+        if(success && statusCode === 200 && message){
+            setMessageTypeAccount("success");
+            setMessageAccount(message);
+        }
+
+        if(statusCode === 200){
+            setTimeout(() => {
+                localStorage.removeItem("token")
+                win.location = "/"
+                // win.location.reload();
+            }, 5000);
+        }
     }
 
     return (
-        <ContentLayout loading={loading} title={"Paramètres du compte"} src={"account"} >
+        <ContentLayout 
+        loading={loading} 
+        title={"Paramètres du compte"} 
+        src={"account"} 
+        message={message || messageAccount} 
+        messageType={messageType || messageTypeAccount}
+        id={id || ""}
+        >
             <div style={{ padding: "2rem 50px", display: "flex", flexDirection: "column", gap: "30px" }}>
                 <Container className="account-container" fluid>
                     <Row>
@@ -250,12 +258,11 @@ const MyAccount = ({ token }) => {
                                     <div className={`account___form-style textfield-style`}>
                                         <label>Email</label>
                                         <input
-                                        // {...register2('email')}
+                                        value={account?.email}
                                         disabled
                                         className="form-control"
                                         name="email"
                                         type="email"
-                                        placeholder={email}
                                         />
                                     </div>
                                 </Col>
@@ -309,7 +316,7 @@ const MyAccount = ({ token }) => {
                         <span>La suppression du compte étant définitive, toutes les données seront perdues. Souhaitez-vous continuer ?</span>
                         <div className="action-buttons">
                             <CustomButton
-                            onClick={deleteAccount}
+                            onClick={deleteAccountFn}
                             text={"Supprimer"}
                             variant="contained"
                             style={{ borderRadius: "20px", padding: "6px 16px", flexGrow: 1, color: "#F4F4F4", backgroundColor: "darkred" }}
@@ -332,7 +339,6 @@ const MyAccount = ({ token }) => {
                     </div>
                 </DefaultModal>
             )}
-            <div><span>{successfulDeletionMessage}</span></div>
         </ContentLayout>
     )
 }

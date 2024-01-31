@@ -28,15 +28,21 @@ const operationValues: OperationType = {
 };
 
 const Budget = () => {
-  const [message, setMessage] = useState<string | undefined>(undefined);
-  const [messageType, setMessageType] = useState<"error" | "success" | undefined>(undefined);
-
   const [searchValue, setSearchValue] = useState<string>("");
   const [total, setTotal] = useState<string>("");
+  const [operation, setOperation] = useState<OperationType | null>(null);
 
   const [edit, setEdit] = useState<OperationType | null>(null);
 
-  const { data: operations, setData: setOperations, loading } = useFetch<void, OperationType[]>(getOperations, []);
+  const { 
+    data: operations, 
+    setData: setOperations, 
+    loading,
+    message, 
+    messageType,
+    setMessage,
+    setMessageType
+  } = useFetch<void, OperationType[]>(getOperations, []);
 
   useEffect(() => {
     if (operations.length > 0) {
@@ -97,8 +103,14 @@ const Budget = () => {
   }
 
   return (
-    <ContentLayout loading={loading} title={"Souhaitez-vous ajouter une nouvelle dépense ?"} src={"budget"} >
-      <Toast message={message} messageType={messageType} />
+    <ContentLayout 
+    loading={loading} 
+    title={"Souhaitez-vous ajouter une nouvelle dépense ?"} 
+    src={"budget"} 
+    message={message} 
+    messageType={messageType}
+    id={operation?._id || ""}
+    >
       <Grow in={!loading} timeout={2000}>
         <Container style={{ padding: "2rem 4rem" }} fluid>
           <Row>

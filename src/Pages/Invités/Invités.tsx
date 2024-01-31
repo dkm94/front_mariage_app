@@ -33,21 +33,21 @@ interface ByGuestsProps {
 const Byguests = (props: ByGuestsProps) => {
   const { firstPerson, secondPerson, mariageID } = props.userInfos;
 
-  const [message, setMessage] = useState<string | undefined>(undefined);
-  const [messageType, setMessageType] = useState<"error" | "success" | undefined>(undefined);
-
   const [newUser, setNewUser] = useState<NewUser>("");
 
-  const { data: guests, setData: setGuests, loading, error, errorMessage, fetchData } = useFetch<void, GuestType[]>(
-    getGuests,
-    []
-    );
+  const { 
+    data: guests, 
+    setData: setGuests, 
+    loading, 
+    message, 
+    messageType,
+    setMessage,
+    setMessageType,
+    fetchData } = useFetch<void, GuestType[]>(getGuests,[]);
     
   const [editPicture, seteditPicture] = useState<string>("null");
-  const [file, setFile] = useState(null);
   const [searchValue, setSearchValue] = useState<string>("");
   const [user, setUser] = useState<GuestType | {}>({});
-  console.log("🚀 ~ Byguests ~ user:", user)
   const [appear, setAppear] = useState<boolean>(false);
   const [isOpen, setisOpen] = useState<boolean>(false);
 
@@ -59,10 +59,6 @@ const Byguests = (props: ByGuestsProps) => {
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
-  };
-
-  const handleFile = (file) => {
-    setFile(file);
   };
 
   return (
@@ -105,17 +101,11 @@ const Byguests = (props: ByGuestsProps) => {
               setGuests={setGuests}
               editPicture={editPicture}
               seteditPicture={seteditPicture}
-              // upload={uploadPicture}
-              handleFile={handleFile}
               searchValue={searchValue}
               mariageID={mariageID}
-              appear={appear}
               firstPerson={firstPerson}
               secondPerson={secondPerson}
-              isOpen={isOpen}
               setisOpen={setisOpen}
-              errorMessage={errorMessage}
-              error={error}
               setMessage={setMessage}
               setMessageType={setMessageType}
               setIsOpen={setisOpen}

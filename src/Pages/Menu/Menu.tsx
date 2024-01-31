@@ -39,7 +39,7 @@ const Menus = () => {
   const [apetizers, setApetizers] = useState<Food[]>([]);
   const [beverages, setBeverages] = useState<Food[]>([]);
 
-  const { data: foods } = useFetch<void, Food[]>(getFoods, []);
+  const { data: foods, setMessage, setMessageType, message, messageType } = useFetch<void, Food[]>(getFoods, []);
 
   useEffect(() => {
     setLoading(true);
@@ -68,7 +68,7 @@ const Menus = () => {
   });
 
 
-  const getUpdatedId = (objId, objName) => {
+  const getUpdatedId = (objId: string, objName: string) => {
     setEdit({
       id: objId,
       name: objName,
@@ -76,7 +76,13 @@ const Menus = () => {
   };
 
   return (
-    <ContentLayout loading={loading} title={"Avez-vous prévu une réception ?"} src={"reception"}>
+    <ContentLayout 
+    loading={loading} 
+    title={"Avez-vous prévu une réception ?"} 
+    src={"reception"} 
+    message={message} 
+    messageType={messageType} 
+    id={""}>
       <Grow in={!loading} timeout={2000}>
         <div className="reception-container">
           <div className="reception">
@@ -89,8 +95,22 @@ const Menus = () => {
             edit={edit} 
             getUpdatedId={getUpdatedId} 
             even={true} 
-            addForm={<AddFoodForm foods={starters} setFoods={setStarters} category="starter" />} 
-            editForm={<UpdateFood edit={edit} setEdit={setEdit} setFoods={setStarters} foods={starters} />}            
+            addForm={
+            <AddFoodForm 
+            foods={starters} 
+            setFoods={setStarters} 
+            category="starter"
+            setMessage={setMessage}
+            setMessageType={setMessageType}
+            />} 
+            editForm={
+            <UpdateFood 
+            edit={edit} 
+            setEdit={setEdit} 
+            setFoods={setStarters} 
+            foods={starters} 
+            setMessage={setMessage}
+            setMessageType={setMessageType} />}            
             />
 
             <ReceptionCard 
@@ -101,8 +121,23 @@ const Menus = () => {
             edit={edit} 
             getUpdatedId={getUpdatedId} 
             even={false} 
-            addForm={<AddFoodForm foods={maincourses} setFoods={setMaincourses} category="maincourse" />} 
-            editForm={<UpdateFood edit={edit} setEdit={setEdit} foods={maincourses} setFoods={setMaincourses} />}            
+            addForm={
+            <AddFoodForm 
+            foods={maincourses} 
+            setFoods={setMaincourses} 
+            category="maincourse"
+            setMessage={setMessage}
+            setMessageType={setMessageType}
+            />} 
+            editForm={
+            <UpdateFood 
+            edit={edit} 
+            setEdit={setEdit} 
+            foods={maincourses} 
+            setFoods={setMaincourses}
+            setMessage={setMessage}
+            setMessageType={setMessageType}
+            />}            
             />
 
             <ReceptionCard 
@@ -113,8 +148,23 @@ const Menus = () => {
             edit={edit} 
             getUpdatedId={getUpdatedId} 
             even={true} 
-            addForm={<AddFoodForm foods={desserts} setFoods={setDesserts} category="dessert" />} 
-            editForm={<UpdateFood edit={edit} setEdit={setEdit} foods={desserts} setFoods={setDesserts} />} 
+            addForm={
+            <AddFoodForm 
+            foods={desserts} 
+            setFoods={setDesserts} 
+            category="dessert"
+            setMessage={setMessage}
+            setMessageType={setMessageType}
+            />} 
+            editForm={
+            <UpdateFood 
+            edit={edit} 
+            setEdit={setEdit} 
+            foods={desserts} 
+            setFoods={setDesserts} 
+            setMessage={setMessage}
+            setMessageType={setMessageType}
+            />} 
             />
 
             <ReceptionCard 
@@ -125,8 +175,23 @@ const Menus = () => {
             edit={edit} 
             getUpdatedId={getUpdatedId} 
             even={false} 
-            addForm={<AddFoodForm foods={apetizers} setFoods={setApetizers} category="apetizer" />} 
-            editForm={<UpdateFood edit={edit} setEdit={setEdit} foods={apetizers} setFoods={setApetizers} />}            
+            addForm={
+            <AddFoodForm 
+            foods={apetizers} 
+            setFoods={setApetizers} 
+            category="apetizer"
+            setMessage={setMessage}
+            setMessageType={setMessageType}
+            />} 
+            editForm={
+            <UpdateFood 
+            edit={edit} 
+            setEdit={setEdit} 
+            foods={apetizers} 
+            setFoods={setApetizers}
+            setMessage={setMessage}
+            setMessageType={setMessageType}
+            />}            
             />
 
             <ReceptionCard 
@@ -137,8 +202,23 @@ const Menus = () => {
             edit={edit} 
             getUpdatedId={getUpdatedId} 
             even={true} 
-            addForm={<AddFoodForm foods={beverages} setFoods={setBeverages} category="beverage" />} 
-            editForm={<UpdateFood edit={edit} setEdit={setEdit} foods={beverages} setFoods={setBeverages} />} 
+            addForm={
+            <AddFoodForm 
+            foods={beverages} 
+            setFoods={setBeverages} 
+            category="beverage"
+            setMessage={setMessage}
+            setMessageType={setMessageType}
+            />} 
+            editForm={
+            <UpdateFood 
+            edit={edit} 
+            setEdit={setEdit} 
+            foods={beverages} 
+            setFoods={setBeverages}
+            setMessage={setMessage}
+            setMessageType={setMessageType}
+            />} 
             />
 
           </div>
