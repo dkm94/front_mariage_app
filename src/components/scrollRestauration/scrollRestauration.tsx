@@ -7,7 +7,7 @@ const ScrollRestoration = ({ children }) => {
   const location = useLocation<{ currentPosition?: number }>();
 
   useEffect(() => {
-    const currentPosition = location.state?.currentPosition || 0;
+    const currentPosition: number = location.state?.currentPosition || 0;
     window.scrollTo(0, currentPosition);
   }, [location.state]);
 

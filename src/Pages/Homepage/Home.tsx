@@ -3,6 +3,7 @@ import "../../components/LargeButton/LargeButton.css";
 
 import React, { useState } from "react";
 import { useHistory, withRouter } from "react-router-dom";
+import { History } from "history"; 
 import { Button, Container } from "@mui/material";
 
 import Card from "./Card.jsx";
@@ -13,7 +14,8 @@ import AuthModal from '../../components/Modals/Auth/AuthModal';
 import introImg from "../../img/section-2-img.jpg";
 
 const Home = () => {
-  const history = useHistory();
+  const history: History = useHistory();
+  
   const [isOpen, setisOpen] = useState<boolean>(false);
   const [showForm, setShowForm] = useState<string>("");
 
@@ -50,7 +52,7 @@ const Home = () => {
                 onClick={() => {
                   setShowForm("register");
 
-                  const currentPosition = window.scrollY;
+                  const currentPosition: number = window.scrollY;
                   history.replace("/register", { currentPosition });
                 }}
               >

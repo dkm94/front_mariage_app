@@ -1,7 +1,8 @@
 import "../../../guests.css";
 import "./Update.css";
 
-import React, { useState, useRef, useEffect, useContext } from "react";
+import React, { useState, useRef, useEffect, useContext, FormEvent, ChangeEvent, Dispatch, SetStateAction } from "react";
+import { History } from "history";
 import axios from "axios";
 import { Button, Grid, IconButton } from "@mui/material";
 import TextField from "@mui/material/TextField";
@@ -11,12 +12,14 @@ import { ClearButton, CustomButton } from "../../../../../Buttons";
 
 import checkIcon from "../../../../../../img/green-check.png";
 import { useFetch } from "../../../../../../hooks";
-import { deleteGuest, getWedding, updateGuest } from "../../../../../../services";
+import { deleteGuest, getWedding, updateGuest, updateGuestMedia } from "../../../../../../services";
 import { GuestType, UserType, WeddingType } from "../../../../../../../types";
 // import { UserContext } from "../../../../../../App";
 import RedButton from "../../../../../Buttons/RedButton/RedButton";
 import { useCurrentUser } from "../../../../../../ctx/userCtx";
 import { useHistory, useLocation } from "react-router";
+
+type FileState = File | null;
 
 const UpdateGuest = ({
   edit,
@@ -26,20 +29,17 @@ const UpdateGuest = ({
   mariageID,
   guestFamily,
   uploadImg,
-  // handleFileInput,
   seteditPicture,
   guestId,
-  // upload,
-  // uploadedFile,
   setisOpen,
   setMessage,
   setMessageType,
   setIsOpen,
   setUser, 
 }) => {
-  const history = useHistory();
+  const history: History = useHistory();
 
-  const [radioValue, setRadioValue] = useState(guestFamily);
+  const [radioValue, setRadioValue] = useState<string>(guestFamily);
 
   const user:UserType = useCurrentUser();
   const { firstPerson, secondPerson } = user as { firstPerson: string, secondPerson: string };
@@ -47,29 +47,34 @@ const UpdateGuest = ({
   const [input, setInput] = useState(edit ? edit.name : "");
   const inputRef = useRef<HTMLDivElement>(null);
 
-  const [uploadedFile, setUploadedFile] = useState(null);
-  const [file, setFile] = useState(null);
+  const [uploadedFile, setUploadedFile] = useState<FileState>(null);
+  const [file, setFile] = useState<FileState>(null);
 
 
   useEffect(() => {
     inputRef?.current?.focus();
   });
 
-  const handleFile = (file) => {
+  const handleFile = (file: FileState) => {
     setFile(file);
   };
 
-  const handleFileInput = (e) => {
-    const fileValue = e.target.files[0];
-    setUploadedFile(fileValue);
-    handleFile(fileValue);
+  const handleFileInput = (e: ChangeEvent<HTMLInputElement>, setUploadedFile: Dispatch<SetStateAction<FileState>>) => {
+    const fileValue: File | null = e.target.files?.[0] || null;
+  
+    if (fileValue) {
+      setUploadedFile(fileValue);
+      handleFile(fileValue);
+    } else {
+      setUploadedFile(null);
+    }
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
   };
 
-  const uploadPicture = async (id: string) => {
+  const uploadPicture = async (id: string): Promise<void> => {
     if (file == null) {
       return;
     }
@@ -77,38 +82,40 @@ const UpdateGuest = ({
     try {
       const formData = new FormData();
       formData.append("media", file);
-  
-      const response = await axios.post(`/api/admin/guests/edit/${id}`, formData);
-  
-      if (response.data != null) {
-        const updatedGuestList = [...guests].map((guest) =>
-          guest._id === id
-            ? {
-                _id: response.data._id,
-                name: response.data.name,
-                family: response.data.family,
-                media: response.data.media,
-              }
-            : guest
-        );
-  
-        setFile(null);
-        setUser({
-          _id: response.data._id,
-          name: response.data.name,
-          family: response.data.family,
-          media: response.data.media,
-        });
-        setGuests(updatedGuestList);
-      }
+      const { data, status } = await axios.post(`/api/admin/guests/edit/${id}`, formData);
+      // const response = await updateGuestMedia({ id: id, formData });
+      // const { message, statusCode, data } = response;
+
+      setEdit({ id: "" });
+      setInput("");
+
+      const updatedGuestList: GuestType[] = [...guests].map((guest: GuestType) =>
+        guest?._id === id
+          ? {
+              _id: data._id,
+              name: data.name,
+              family: data.family,
+              media: data.media,
+            }
+          : guest
+      );
+      
+      setFile(null);
+      setUser({
+        _id: data._id,
+        name: data.name,
+        family: data.family,
+        media: data.media,
+      });
+      setGuests(updatedGuestList);
     } catch (error) {
       setMessageType("error");
-      setMessage("Erreur initialisation de l'image");
+      setMessage("La photo n'a pas été chargée");
     }
   };
   
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
 
     if(input === ""){
@@ -127,45 +134,52 @@ const UpdateGuest = ({
       setMessage(message);
       return;
     }
+
+    if(statusCode === 200 && message){
+      setMessageType("success");
+      setMessage(message);
+    }
+
     setEdit({ id: "" });
     setInput("");
 
     uploadPicture(edit.id)
     
-    const updatedGuestlist = [...guests].map((guest) => {
-      if (guest._id === edit.id) {
-        guest.name = input;
-        guest.family = radioValue;
+    const updatedGuestlist: GuestType[] = [...guests].map((guest: GuestType) => {
+      if (guest?._id === edit.id) {
+        if (guest) {
+          guest.name = input;
+          guest.family = radioValue;
+        }
       }
       return guest;
     });
 
     setGuests(updatedGuestlist);
-    setTimeout(() => {
-      setMessageType(undefined);
-      setMessage(undefined);
-    })
-
-    const currentPosition = window.scrollY;
+    
+    const currentPosition: number = window.scrollY;
     history.replace(`/mariage/${mariageID}/invites`, { currentPosition });
+
+    setMessageType(undefined);
+    setMessage(undefined);
   };
 
-  const deleteGuestfn = async (id: string) => {
-    const response = await deleteGuest({ id });
-    const { success, message } = response;
+  const deleteGuestfn = async (id: string): Promise<void> => {
+    try{
+      setUser({ _id: id });
+      const response = await deleteGuest({ id });
+      const { success, message } = response;
 
-    // if(!success){
-    //   setMessageType("error");
-    //   setMessage(message);
-    //   return;
-    // }
-    if(success){
-      // setMessageType("success");
-      // setMessage(message);
-      setGuests(guests.filter((guest: GuestType) => guest._id !== id));
-      setisOpen(false);
+      if(success){
+        setMessageType("success");
+        setMessage(message);
+        setGuests(guests.filter((guest: GuestType) => guest?._id !== id));
+        setisOpen(false);
+      }
+    } catch (e) {
+      setMessageType("error");
+      setMessage("Oups, une erreur est survenue lors de la suppression de l'invité");
     }
-
   };
 
   return (
@@ -202,7 +216,7 @@ const UpdateGuest = ({
                 id="file-input"
                 type="file"
                 name="media"
-                onChange={handleFileInput}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => handleFileInput(e, setUploadedFile)}
                 style={{ display: "none" }}
                 onClick={() => seteditPicture(guestId)}
               />
@@ -269,7 +283,7 @@ const UpdateGuest = ({
               onClick={() => {
                 setEdit({ id: null });
                 setisOpen(false);
-                const currentPosition = window.scrollY;
+                const currentPosition: number = window.scrollY;
                 history.replace(`/mariage/${mariageID}/invites`, { currentPosition });
               }}
               variant="outlined"

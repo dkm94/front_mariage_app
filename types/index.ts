@@ -20,7 +20,7 @@ export type AccountType = {
     password: string;
     role: RoleType;
     mariageID: string;
-}
+} | undefined;
 
 export type ScrollButtonType = ReactNode;
 export type LoaderType = ReactNode;
@@ -49,12 +49,6 @@ export type NavigationDataType = {
     icon: ElementType;
     pathname: string;
 }
-
-export interface ILoginProps {
-    setShowForm: React.Dispatch<React.SetStateAction<string>>
-}
-
-export interface IRegisterProps extends ILoginProps {}
 
 export interface IDashboardProps {
     userInfos?: UserType | undefined;
@@ -109,12 +103,6 @@ export type OperationType = {
     description: string;
     mariageID?: string;
 };
-
-// export type BudgetProps = {
-//     _id: string;
-//     mariageID: string;
-//     operations: OperationType[];
-// } | undefined;
 
 export interface ITextfieldOperations {
     size?: string;
@@ -182,7 +170,7 @@ export type GuestType = {
     media?: string;
     tableID?: string;
     mariageID?: string;
-}
+} | undefined;
 
 export type FormattedGuestType = {
     _id?: string;
@@ -203,7 +191,7 @@ export type FoodType = {
     name: string;
     mariageID?: string;
     category: string;
-}
+} | undefined;
 
 export type Edit = {
     _id: string;

@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 
 type RequestHandler<TParams, TResult> = (params?: TParams) => Promise<AxiosRequestConfig>;
 
-interface ApiResponse<T> {
+export interface ApiResponse<T> {
   data?: T;
   statusCode: number;
   success: boolean;

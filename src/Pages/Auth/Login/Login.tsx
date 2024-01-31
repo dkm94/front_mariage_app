@@ -1,21 +1,22 @@
 import "./Login.css";
 
-import React, { useState } from "react";
-import { History } from 'history';
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { History } from 'history';
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import decode from "jwt-decode";
 
 import { TextField } from "@mui/material";
 import { Button } from "@material-ui/core";
 
-import { ILoginProps, UserType } from "../../../../types";
+import { UserType } from "../../../../types";
 
 import { CustomButton } from "../../../components/Buttons";
 import { login } from "../../../services";
 import Toast from "../../../components/Toast/Toast";
-import decode from "jwt-decode";
+import { ApiResponse } from "../../../helpers/requestHandler";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required("Veuillez compléter ce champ."),
@@ -25,12 +26,16 @@ const validationSchema = Yup.object().shape({
 // type LoginForm = Yup.InferType<typeof validationSchema>;
 const win: Window = window;
 
-type FormValues = {
+type Auth = {
   email: string
   password: string
 }
+interface LoginProps {
+  setShowForm: Dispatch<SetStateAction<string>>
+}
 
-const Login = ({ setShowForm }: ILoginProps) => {
+const Login = (props: LoginProps) => {
+  const { setShowForm } = props;
 
   const history: History = useHistory();
 
@@ -42,14 +47,14 @@ const Login = ({ setShowForm }: ILoginProps) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>({
+  } = useForm<Auth>({
     resolver: yupResolver(validationSchema),
   });
   
-  const onSubmit = async (form: FormValues) => {
+  const onSubmit = async (form: Auth): Promise<void> => {
     setLoadingButton(true);
 
-    const authResponse = await login({ email: form.email, password: form.password });
+    const authResponse:ApiResponse<Auth> = await login({ email: form.email, password: form.password });
     const { success, statusCode, message, token } = authResponse;
     
     if(!success) {
@@ -61,7 +66,7 @@ const Login = ({ setShowForm }: ILoginProps) => {
     
     if (success && statusCode === 200 && token) {
       localStorage.setItem("token", token as string);
-      const tokenInfos = localStorage.getItem("token");
+      const tokenInfos: string | null = localStorage.getItem("token");
       if(tokenInfos) {
         const decodedToken: UserType = decode(tokenInfos);
         if (decodedToken) {
@@ -72,12 +77,16 @@ const Login = ({ setShowForm }: ILoginProps) => {
         }
       }
     }
-  };
 
+    setTimeout(() => {
+      setMessageType(undefined);
+      setMessage(undefined);
+    }, 3000);
+  };
 
   return (
     <div className="login-page">
-      <Toast message={message} messageType={messageType} />
+      {message === undefined ? null : <Toast message={message} messageType={messageType} /> }
       <div className="login-grid">
         <div className="grid-item-2">
           <div className="login">
@@ -143,7 +152,7 @@ const Login = ({ setShowForm }: ILoginProps) => {
                     onClick={() => {
                       setShowForm("register");
 
-                      const currentPosition = window.scrollY;
+                      const currentPosition: number = window.scrollY;
                       history.replace("/register", { currentPosition });
                     }}
                   >

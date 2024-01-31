@@ -24,9 +24,9 @@ const Table = ({
   getUpdatedId,
   isOpen,
   setisOpen,
-  deleteTable,
   setMessage, 
   setMessageType,
+  setTable
 }) => {
   const history = useHistory();
   const { id: tableId } = useParams<{id: string}>();
@@ -53,7 +53,7 @@ const Table = ({
           onClick={() => {
             getUpdatedId(table._id, table.name);
             setisOpen(true);
-            const currentPosition = window.scrollY;
+            const currentPosition: number = window.scrollY;
             history.replace(`/mariage/${mariageID}/tables/edit/${tableId}`, { currentPosition });
           }}
           variant={"contained"}
@@ -67,7 +67,7 @@ const Table = ({
         close={() => {
           setEdit(null);
           setisOpen(false);
-          const currentPosition = window.scrollY;
+          const currentPosition: number = window.scrollY;
           history.replace(`/mariage/${mariageID}/tables`, { currentPosition });
         }}
         setEdit={setEdit}
@@ -85,12 +85,12 @@ const Table = ({
           setGuests={setGuests}
           setEdit={setEdit}
           getUpdatedId={getUpdatedId}
-          deleteTable={deleteTable}
           isOpen={isOpen}
           setisOpen={setisOpen}
           setMessage={setMessage}
           setMessageType={setMessageType}
           mariageID={mariageID}
+          setTable={setTable}
         />
       </DefaultModal>}
     </Grid2>

@@ -1,5 +1,5 @@
-import { requestHandler } from "../../helpers/requestHandler";
-import { WeddingType } from "../../../types";
+import { requestHandler } from "../helpers/requestHandler";
+import { WeddingType } from "../../types";
 
 interface IGetWeddingParams {
     id: string | undefined;

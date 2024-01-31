@@ -1,3 +1,4 @@
+import { AccountType } from "../../types";
 import { requestHandler } from "../helpers/requestHandler";
 
 interface LoginParams {
@@ -12,6 +13,16 @@ interface RegisterParams {
   secondPerson: string;
   confirmPassword?: string;
 }
+interface UpdatePasswordParams {
+  id: string;
+  password: string;
+}
+
+interface GetUserParams {
+  id: string;
+}
+
+interface DeleteUserParams extends GetUserParams {};
 
 export const login = requestHandler<LoginParams, any>((params) => {
     return Promise.resolve({
@@ -36,5 +47,31 @@ export const register = requestHandler<RegisterParams, any>((params) => {
       firstPerson: params?.firstPerson,
       secondPerson: params?.secondPerson
     }
+  });
+});
+
+export const updatePassword = requestHandler<UpdatePasswordParams, any>((params) => {
+  return Promise.resolve({
+  method: 'post',
+  url: `/api/admin/admin/editAccount/${params?.id}`,
+  data: {
+      password: params?.password
+  },
+  params: params
+  });
+});
+
+export const getUser = requestHandler<GetUserParams, AccountType>((params) => {
+  return Promise.resolve({
+  method: 'get',
+  url: `/api/admin/admin/myAccount/${params?.id}`,
+  params: params || {},
+  });
+});
+
+export const deleteAccount = requestHandler<DeleteUserParams, any>((params) => {
+  return Promise.resolve({
+  method: 'delete',
+  url: `/api/admin/admin/deleteAccount/${params?.id}`,
   });
 });

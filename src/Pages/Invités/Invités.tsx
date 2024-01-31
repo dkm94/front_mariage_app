@@ -33,18 +33,19 @@ interface ByGuestsProps {
 const Byguests = (props: ByGuestsProps) => {
   const { firstPerson, secondPerson, mariageID } = props.userInfos;
 
-  const [message, setMessage] = useState<string | undefined>(undefined);
-  const [messageType, setMessageType] = useState<"error" | "success" | undefined>(undefined);
-
   const [newUser, setNewUser] = useState<NewUser>("");
 
-  const { data: guests, setData: setGuests, loading, error, errorMessage, fetchData } = useFetch<void, GuestType[]>(
-    getGuests,
-    []
-    );
+  const { 
+    data: guests, 
+    setData: setGuests, 
+    loading, 
+    message, 
+    messageType,
+    setMessage,
+    setMessageType,
+    fetchData } = useFetch<void, GuestType[]>(getGuests,[]);
     
   const [editPicture, seteditPicture] = useState<string>("null");
-  const [file, setFile] = useState(null);
   const [searchValue, setSearchValue] = useState<string>("");
   const [user, setUser] = useState<GuestType | {}>({});
   const [appear, setAppear] = useState<boolean>(false);
@@ -60,13 +61,14 @@ const Byguests = (props: ByGuestsProps) => {
     setSearchValue(e.target.value);
   };
 
-  const handleFile = (file) => {
-    setFile(file);
-  };
-
   return (
-    <ContentLayout loading={loading} title={"Souhaitez-vous ajouter de nouveaux invités ?"} src={"guests"} >
-    {/* <Toast message={message} messageType={messageType} /> */}
+    <ContentLayout 
+    loading={loading} 
+    title={"Souhaitez-vous ajouter de nouveaux invités ?"} 
+    src={"guests"} 
+    message={message} 
+    messageType={messageType} 
+    id={(user as { _id?: string })?._id || ""} >
       <>
         <Container style={{ padding: "2rem 50px" }} fluid>
           <Row>
@@ -99,17 +101,11 @@ const Byguests = (props: ByGuestsProps) => {
               setGuests={setGuests}
               editPicture={editPicture}
               seteditPicture={seteditPicture}
-              // upload={uploadPicture}
-              handleFile={handleFile}
               searchValue={searchValue}
               mariageID={mariageID}
-              appear={appear}
               firstPerson={firstPerson}
               secondPerson={secondPerson}
-              isOpen={isOpen}
               setisOpen={setisOpen}
-              errorMessage={errorMessage}
-              error={error}
               setMessage={setMessage}
               setMessageType={setMessageType}
               setIsOpen={setisOpen}

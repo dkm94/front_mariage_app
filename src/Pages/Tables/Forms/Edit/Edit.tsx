@@ -24,11 +24,11 @@ const EditTableForm = (props) => {
     guests,
     setGuests,
     setEdit,
-    // deleteTable,
     setisOpen,
     setMessage, 
     setMessageType,
     mariageID,
+    setTable
   } = props;
   const history = useHistory();
 
@@ -61,7 +61,7 @@ const EditTableForm = (props) => {
         return guest;
       });
       setGuests(updatedGuests); 
-      const currentPosition = window.scrollY;
+      const currentPosition: number = window.scrollY;
       history.replace(`/mariage/${mariageID}/tables`, { currentPosition });
     }
   }
@@ -69,16 +69,22 @@ const EditTableForm = (props) => {
   const deleteTableFn = async (e, tableId:string) => {
     e.preventDefault();
 
+    setTable({ _id: tableId });
     const response = await deleteTable({ id : tableId });
     const { message, success } = response;
     
     if(!success){
-      setMessage(message)
-      setMessageType("error")
+      setMessage(message);
+      setMessageType("error");
       return;
     }
     
-    setTables([...tables].filter((table) => table._id !== tableId))
+    setMessageType("success");
+    setMessage(message);
+    setTables([...tables].filter((table) => table._id !== tableId));
+
+    const currentPosition = window.scrollY;
+    history.replace(`/mariage/${mariageID}/tables`, { currentPosition });
   };
 
   return (
@@ -120,7 +126,7 @@ const EditTableForm = (props) => {
             onClick={() => {
               setEdit(null);
               setisOpen(false);
-              const currentPosition = window.scrollY;
+              const currentPosition: number = window.scrollY;
               history.replace(`/mariage/${mariageID}/tables`, { currentPosition })
             }}
             sx={{ width: "100% !important" }}
