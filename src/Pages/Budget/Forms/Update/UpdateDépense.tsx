@@ -8,7 +8,7 @@ import { History } from "history";
 import { Button, TextField, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-import { CustomButton } from "../../../../components/Buttons";
+import { ClearButton, CustomButton } from "../../../../components/Buttons";
 
 import { OperationType } from "../../../../../types";
 import { categories } from "../../../../data";
@@ -191,6 +191,19 @@ const UpdateExpense = (props: UpdateExpenseProps) => {
         }, 2000);
     };
 
+    const handleCancel = () => {
+      setEdit({
+        category: "",
+        price: "",
+        description: "",
+        date: "",
+        mariageID: ""
+      });
+
+      const currentPosition: number = window.scrollY;
+      history.replace(`/mariage/${mariageID}/budget`, { currentPosition });
+    }
+
   return (
     <div className="modal-child">
       <form onSubmit={editExpense}>
@@ -229,47 +242,26 @@ const UpdateExpense = (props: UpdateExpenseProps) => {
         />
 
         <div className="action-buttons">
-          <IconButton
+          <CustomButton 
+            text="Supprimer"
+            variant="contained"
             onClick={() => deleteExpense(edit?._id as string)}
-            style={{ backgroundColor: "darkred", borderRadius: "20px", flexGrow: 1 }}
-          >
-            <DeleteIcon style={{ color: "#F4F4F4" }} />
-            <span style={{ color: "#F4F4F4", padding: "0px 6px" }}>Supprimer</span>
-          </IconButton>
-
+            type="button"
+            backgroundColor="darkred"
+            width="48%"
+          />
+          
           <CustomButton
-              text={"Enregistrer"}
-              variant={"contained"}
-              type="submit"
-              sx={{ "&:hover": { backgroundColor: "#333232" } }}
-              style={{ borderRadius: "20px", padding: "6px 16px", flexGrow: 1 }}
-            />
+            text="Enregistrer"
+            variant="contained"
+            type="submit"
+            width="48%"
+          />
 
-            <Button
-              style={{
-                borderRadius: "20px",
-                color: "grey",
-                textTransform: "unset",
-                fontSize: "1rem",
-                width: "100%",
-                borderColor: "#e4e8e8",
-              }}
-              onClick={() => {
-                setEdit({
-                  category: "",
-                  price: "",
-                  description: "",
-                  date: "",
-                  mariageID: ""
-                });
-
-                const currentPosition: number = window.scrollY;
-                history.replace(`/mariage/${mariageID}/budget`, { currentPosition });
-              }}
-              variant="outlined"
-            >
-              Annuler
-            </Button>
+          <ClearButton
+            text="Annuler"
+            onClick={handleCancel}
+          />
         </div>
       </form>
       

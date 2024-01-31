@@ -5,7 +5,7 @@ import React from 'react';
 import { FormikProvider, Form } from "formik";
 
 import TextField from "../../../Formik/TextField-Operations";
-import { GreyButton } from "../../../Buttons";
+import { CustomButton } from "../../../Buttons";
 
 interface AddExpenseFormProps {
     formik: any;
@@ -68,7 +68,7 @@ const AddExpenseForm = (props: AddExpenseFormProps) => {
             border-radius="10px"
             />
             <div className="col-12 budget-form___submit">
-                <GreyButton
+                <CustomButton
                 type="submit"
                 text={"Valider"}
                 variant={"contained"}

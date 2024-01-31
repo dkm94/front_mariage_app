@@ -21,7 +21,7 @@ const CustomButton = ({
       {...props}
       style={{
       textTransform: "unset",
-      backgroundColor: "#262626",
+      backgroundColor: props.backgroundColor ? props.backgroundColor : "#262626",
       color: "#fff",
       fontFamily: "unset",
       fontSize: "1rem",
@@ -31,6 +31,7 @@ const CustomButton = ({
       fontWeight: "unset",
       // fontFamily: "Playfair Display serif",
       border: "none",
+      width: props.width ? props.width : "auto",
       }}
     >
       {text}
