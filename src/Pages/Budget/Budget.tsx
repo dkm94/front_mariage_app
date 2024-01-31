@@ -29,7 +29,7 @@ const operationValues: OperationType = {
 const Budget = () => {
   const [searchValue, setSearchValue] = useState<string>("");
   const [total, setTotal] = useState<string>("");
-  const [operation, setOperation] = useState<OperationType | null>(null);
+  const [operationId, setOperationId] = useState<string | null>(null);
 
   const [edit, setEdit] = useState<OperationType | null>(null);
 
@@ -58,7 +58,7 @@ const Budget = () => {
     price: Yup.number()
       .test("maxDigitsAfterDecimal", "Format invalide.", (value) => {
         if (value !== undefined) {
-          const regex = /^\d+(\.\d{1,2})?$/;
+          const regex: RegExp = /^\d+(\.\d{1,2})?$/;
           return regex.test(value.toString());
         }
         return true;
@@ -108,7 +108,7 @@ const Budget = () => {
     src={"budget"} 
     message={message} 
     messageType={messageType}
-    id={operation?._id || ""}
+    id={operationId || ""}
     >
       <Grow in={!loading} timeout={2000}>
         <Container className="search-bar-section" fluid>
@@ -174,7 +174,8 @@ const Budget = () => {
                 ?.reverse()
                 ?.map((obj) => {
                   return (
-                    <ExpenseElement 
+                    <ExpenseElement
+                    key={obj._id}
                     obj={obj} 
                     edit={edit} 
                     setEdit={setEdit} 
@@ -183,7 +184,7 @@ const Budget = () => {
                     operations={operations}
                     setOperations={setOperations}
                     calculateTotal={calculateTotal}
-                    setOperation={setOperation}
+                    setOperationId={setOperationId}
                     />
                   );
                 })}

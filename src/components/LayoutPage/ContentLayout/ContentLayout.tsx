@@ -1,10 +1,9 @@
 import "./ContentLayout.css";
 import 'react-toastify/dist/ReactToastify.css';
 
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 
 import { Grow } from "@mui/material";
-import { Slide, ToastContainer, toast } from 'react-toastify';
 
 import ScreenLoader from "../../Loader/Screen/ScreenLoader.jsx"
 import { ScrollButtonContext } from "../../../App";
@@ -25,7 +24,7 @@ interface ContentLayoutProps {
 }
 
 const ContentLayout = (props: ContentLayoutProps) => {
-    const { loading, title, src, children, error, errorMessage, message, messageType, id } = props;
+    const { loading, title, src, children, message, messageType, id } = props;
 
     const scrollBtn = useContext(ScrollButtonContext);
 

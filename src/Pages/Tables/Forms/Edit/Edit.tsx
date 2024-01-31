@@ -3,8 +3,7 @@ import "../../Tables.css";
 
 import React, { useState } from "react";
 
-import DeleteIcon from "@mui/icons-material/Delete";
-import { Button, IconButton, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 
 import { ClearButton, CustomButton } from "../../../../components/Buttons";
 import MultipleSelect from "../../../../components/MultiSelect/MultiSelect";

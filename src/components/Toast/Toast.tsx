@@ -17,7 +17,7 @@ const Toast = (props: ToastProps) => {
     const showToast = messageType === "error" ? toast.error : toast.success;
     const toastOptions: ToastOptions = {
       position: "top-right",
-      autoClose: 5000,
+      autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -26,16 +26,18 @@ const Toast = (props: ToastProps) => {
       theme: "light",
       transition: Zoom,
     }
-    showToast(message, {
-      ...toastOptions,
-      ...options,
-      toastId: id
-    });
-}, [id, message, messageType, options]);
+    if(id){
+      showToast(message, {
+        ...toastOptions,
+        ...options,
+        toastId: id
+      });
+    }
+}, [id]);
 
   return  <ToastContainer
   position="top-right"
-  autoClose={5000}
+  autoClose={2000}
   hideProgressBar={false}
   newestOnTop={false}
   closeOnClick
