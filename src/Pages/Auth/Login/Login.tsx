@@ -9,14 +9,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import decode from "jwt-decode";
 
 import { TextField } from "@mui/material";
-import { Button } from "@material-ui/core";
+
+import { AuthSwitchButton, CustomButton } from "../../../components/Buttons";
+import Toast from "../../../components/Toast/Toast";
 
 import { UserType } from "../../../../types";
-
-import { CustomButton } from "../../../components/Buttons";
 import { login } from "../../../services";
-import Toast from "../../../components/Toast/Toast";
 import { ApiResponse } from "../../../helpers/requestHandler";
+
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required("Veuillez compléter ce champ."),
@@ -42,6 +42,12 @@ const Login = (props: LoginProps) => {
   const [loadingButton, setLoadingButton] = useState<boolean>(false);
   const [message, setMessage] = useState<string | undefined>(undefined);
   const [messageType, setMessageType] = useState<"error" | "success" | undefined>(undefined);
+
+  const handleSwitch = (): void => {
+    setShowForm("register");
+    const currentPosition: number = window.scrollY;
+    history.replace("/register", { currentPosition });
+  };
 
   const {
     register,
@@ -91,7 +97,7 @@ const Login = (props: LoginProps) => {
         <div className="grid-item-2">
           <div className="login">
             <div className="form-group">
-              <h1 style={{ fontSize: "1.5rem" }}>Connectez-vous</h1>
+              <h1>Connectez-vous</h1>
             </div>
             <div className="login__form">
               <form onSubmit={handleSubmit(onSubmit)}>
@@ -103,7 +109,6 @@ const Login = (props: LoginProps) => {
                     id="email"
                     name="email"
                     type="email"
-                    style={{ borderColor: "#D1D4D5" }}
                   />
                   <div>{errors?.email?.message}</div>
                 </div>
@@ -115,45 +120,22 @@ const Login = (props: LoginProps) => {
                     id="password"
                     name="password"
                     type="password"
-                    style={{ borderColor: "#D1D4D5" }}
                   />
                   <div>{errors?.password?.message}</div>
                 </div>
-                <div style={{ marginTop: "2rem" }}>
+                <div className="form-group">
                   <CustomButton
                     type="submit"
                     variant="contained"
-                    text={loadingButton ? "Veuillez patienter..." : "Se connecter"}  
-                    style={{ width: "100%", "&:hover": { backgroundColor: "#333232" } }}
+                    text={loadingButton ? "..." : "Se connecter"}  
                   />
                 </div>
-                <div
-                  className="login__signup"
-                  style={{
-                    marginTop: "2rem",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "4px",
-                  }}
-                >
+                <div className="login__signup">
                   <span>Vous n'avez pas encore de compte ?</span>
-                  <Button
-                    style={{
-                      background: "none",
-                      textTransform: "unset",
-                      padding: 0,
-                      fontSize: "unset",
-                      marginTop: "-2px",
-                    }}
-                    onClick={() => {
-                      setShowForm("register");
-
-                      const currentPosition: number = window.scrollY;
-                      history.replace("/register", { currentPosition });
-                    }}
-                  >
-                    <span>Inscrivez-vous</span>
-                  </Button>
+                  <AuthSwitchButton
+                    text="Inscrivez-vous"
+                    onClick={handleSwitch}
+                  />
                   {/* <p className="forgotten-password"><Link to={"/reset-password"}>Mot de passe oublié ?</Link></p> */}
                 </div>
               </form>
