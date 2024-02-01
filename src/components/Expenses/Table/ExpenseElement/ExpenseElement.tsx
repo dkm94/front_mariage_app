@@ -1,6 +1,6 @@
 import "./ExpenseElement.css";
 
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { useHistory, useParams } from "react-router";
 import { History } from "history";
 
@@ -23,15 +23,26 @@ interface ExpenseElementProps {
   operations: OperationType[];
   setOperations: Dispatch<SetStateAction<OperationType[]>>;
   calculateTotal: (operations: OperationType[]) => void;
+  setOperationId: Dispatch<SetStateAction<string | null>>;
 }
 
 const ExpenseElement = (props: ExpenseElementProps) => {
-  const { obj, edit, setEdit, setMessage, setMessageType, operations, setOperations, calculateTotal } = props;
+  const { 
+    obj, 
+    edit, 
+    setEdit, 
+    setMessage, 
+    setMessageType, 
+    operations, 
+    setOperations, 
+    calculateTotal, 
+    setOperationId } = props;
 
   const history: History = useHistory();
   const{ mariageID } = useCurrentUser();
   const { id: expenseId } = useParams<{id: string}>();
 
+  const [isDisabled, setIsDisabled] = useState<boolean>(false);
 
   const renderSwitchColors = (categoryIconColors: string) => {
     switch (categoryIconColors) {
@@ -59,6 +70,12 @@ const ExpenseElement = (props: ExpenseElementProps) => {
     return Number(fixed).toFixed(2);
   }
 
+  const handleCloseModal = () => {
+    setEdit(obj);
+    const currentPosition: number = window.scrollY;
+    history.replace(`/mariage/${mariageID}/budget/edit/${expenseId}`, { currentPosition })
+  }
+
   return (
     <li key={obj._id} className="fade-in table-row">
       <div className='cols cols-1' data-label="Catégorie">
@@ -81,13 +98,7 @@ const ExpenseElement = (props: ExpenseElementProps) => {
       </div>
 
       <div className='cols cols-5'  data-label="Gérer">
-        <IconButton
-            onClick={() => {
-            setEdit(obj);
-            const currentPosition: number = window.scrollY;
-            history.replace(`/mariage/${mariageID}/budget/edit/${expenseId}`, { currentPosition })
-            }}
-        >
+        <IconButton onClick={handleCloseModal} disabled={isDisabled}>
           <CreateIcon fontSize="small" />
         </IconButton>
       </div>
@@ -111,6 +122,8 @@ const ExpenseElement = (props: ExpenseElementProps) => {
         operations={operations}
         setOperations={setOperations}
         calculateTotal={calculateTotal}
+        setOperationId={setOperationId}
+        setIsDisabled={setIsDisabled}
         />
       </DefaultModal>}
     </li>

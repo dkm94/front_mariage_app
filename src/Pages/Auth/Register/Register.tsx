@@ -7,10 +7,10 @@ import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { TextField, Button } from "@mui/material";
+import { TextField } from "@mui/material";
 
 import Toast from "../../../components/Toast/Toast";
-import { CustomButton } from "../../../components/Buttons";
+import { AuthSwitchButton, CustomButton } from "../../../components/Buttons";
 
 import { UserType } from "../../../../types";
 import { register as customRegister } from "../../../services/authRequests";
@@ -39,6 +39,12 @@ const Register = (props: RegisterProps) => {
   const [messageType, setMessageType] = useState<"error" | "success" | undefined>(undefined);
 
   const [tempArr, setTempArr] = useState<UserType[]>([]);
+
+  const handleLoginSwitch = (): void => {
+    setShowForm("login")
+    const currentPosition: number = window.scrollY;
+    history.replace("/login", { currentPosition });
+  }
 
   const validationSchema = Yup.object().shape({
     checkEmail: Yup.boolean(),
@@ -112,12 +118,12 @@ const Register = (props: RegisterProps) => {
 
   return (
     <div className="register-page">
-      <Toast message={message} messageType={messageType} />
+      {message === undefined ? null : <Toast message={message} messageType={messageType} />}
       <div className="register-grid">
         <div className="grid-item-2">
           <div className="register">
             <div className="form-group">
-              <h1 style={{ fontSize: "1.5rem" }}>Inscrivez-vous</h1>
+              <h1>Inscrivez-vous</h1>
             </div>
             <div className="register__form">
               <form onSubmit={handleSubmit(onSubmit)}>
@@ -129,7 +135,6 @@ const Register = (props: RegisterProps) => {
                     id="firstPerson"
                     name="firstPerson"
                     type="text"
-                    style={{ borderColor: "#D1D4D5" }}
                   />
                   <span>{errors.firstPerson?.message}</span>
                 </div>
@@ -141,7 +146,6 @@ const Register = (props: RegisterProps) => {
                     id="secondPerson"
                     name="secondPerson"
                     type="text"
-                    style={{ borderColor: "#D1D4D5" }}
                   />
                   <span>{errors.secondPerson?.message}</span>
                 </div>
@@ -153,8 +157,6 @@ const Register = (props: RegisterProps) => {
                     id="email"
                     name="email"
                     type="email"
-                    // class="form-control shadow-none"
-                    style={{ borderColor: "#D1D4D5" }}
                   />
                   <span>{errors.email?.message}</span>
                 </div>
@@ -166,8 +168,6 @@ const Register = (props: RegisterProps) => {
                     id="password"
                     name="password"
                     type="password"
-                    // class="form-control shadow-none"
-                    style={{ borderColor: "#D1D4D5" }}
                   />
                   <span>{errors.password?.message}</span>
                 </div>
@@ -179,8 +179,6 @@ const Register = (props: RegisterProps) => {
                     id="password"
                     name="confirmPassword"
                     type="password"
-                    // class="form-control shadow-none"
-                    style={{ borderColor: "#D1D4D5" }}
                   />
                   <span>{errors.confirmPassword?.message}</span>
                 </div>
@@ -189,29 +187,15 @@ const Register = (props: RegisterProps) => {
                   variant="contained" 
                   type="submit" 
                   text={loadingButton
-                      ? "Veuillez patienter..."
+                      ? "..."
                       : "Créer un compte"} />
                 </div>
                 <div className="register__signup">
-                  <p>
-                    Déjà inscrit ? &nbsp;
-                    <Button
-                      style={{
-                        textTransform: "unset",
-                        fontSize: "unset",
-                        marginTop: "-2px",
-                        color: "#000",
-                      }}
-                      onClick={() => {
-                        setShowForm("login")
-
-                        const currentPosition: number = window.scrollY;
-                          history.replace("/login", { currentPosition });
-                        }}
-                    >
-                      Connectez-vous
-                    </Button>
-                  </p>
+                  <span>Déjà inscrit ?</span>
+                  <AuthSwitchButton
+                    text="Connectez-vous"
+                    onClick={handleLoginSwitch}
+                  />
                 </div>
               </form>
             </div>

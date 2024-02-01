@@ -196,10 +196,15 @@ input, button {
 
 .register__signup {
     color: #ABA8AE;
-    height: 15%;
+	height: 15%;
+	margin-top: 2rem;
+	display: flex;
+	flex-direction: row !important;
+	justify-content: center;
+	gap: 4px;
 }
 
-.register__signup > p {
+.register__signup:nth-child(even) {
 	text-align: center;
 }
 
@@ -207,6 +212,7 @@ input, button {
 	color: #000000;
 	cursor: pointer;
 	text-decoration: underline;
+
 }
 
 

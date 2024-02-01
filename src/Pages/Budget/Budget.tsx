@@ -12,7 +12,6 @@ import SearchBar from "../../components/Invités(affichage)/by_guests/Components
 import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
 import PriceCard from "../../components/Expenses/PriceCard/PriceCard";
 import AddExpenseForm from "../../components/Expenses/Forms/AddExpenseForm/AddExpenseForm";
-import Toast from "../../components/Toast/Toast";
 import ExpenseElement from "../../components/Expenses/Table/ExpenseElement/ExpenseElement";
 
 import { OperationType } from "../../../types/index";
@@ -30,7 +29,7 @@ const operationValues: OperationType = {
 const Budget = () => {
   const [searchValue, setSearchValue] = useState<string>("");
   const [total, setTotal] = useState<string>("");
-  const [operation, setOperation] = useState<OperationType | null>(null);
+  const [operationId, setOperationId] = useState<string | null>(null);
 
   const [edit, setEdit] = useState<OperationType | null>(null);
 
@@ -59,7 +58,7 @@ const Budget = () => {
     price: Yup.number()
       .test("maxDigitsAfterDecimal", "Format invalide.", (value) => {
         if (value !== undefined) {
-          const regex = /^\d+(\.\d{1,2})?$/;
+          const regex: RegExp = /^\d+(\.\d{1,2})?$/;
           return regex.test(value.toString());
         }
         return true;
@@ -82,7 +81,7 @@ const Budget = () => {
         return;
       };
 
-      const expensesCopy = [...operations]
+      const expensesCopy: OperationType[] = [...operations]
       setOperations([...expensesCopy, newOperation]);
       calculateTotal([...expensesCopy, newOperation]);
       formik.resetForm();
@@ -109,17 +108,17 @@ const Budget = () => {
     src={"budget"} 
     message={message} 
     messageType={messageType}
-    id={operation?._id || ""}
+    id={operationId || ""}
     >
       <Grow in={!loading} timeout={2000}>
-        <Container style={{ padding: "2rem 4rem" }} fluid>
+        <Container className="search-bar-section" fluid>
           <Row>
             <Col xs={12} sm={10} md={6} />
             <Col
               xs={12}
               sm={10}
               md={6}
-              style={{ display: "flex", justifyContent: "end" }}
+              className="search-bar-wrapper"
             >
               <SearchBar
                 className="search__input"
@@ -155,7 +154,7 @@ const Budget = () => {
           <div className="budget___col-2">
             <ul className="budget-list">
               <li className="table-header">
-                {headerItems.map((item, index) => {
+                {headerItems.map((item: string, index: number) => {
                   return (
                     <div key={index} className={`cols cols-${index + 1}`}>
                       {item}
@@ -163,7 +162,7 @@ const Budget = () => {
                   );
                 })}
               </li>
-              {operations?.length === 0 && <div style={{ textAlign: "center"}}><span>Vos dépenses ici</span></div>}
+              {operations?.length === 0 && <div id="empty"><span>Vos dépenses ici</span></div>}
               {operations
                 ?.filter((expense) => {
                   return (
@@ -175,7 +174,8 @@ const Budget = () => {
                 ?.reverse()
                 ?.map((obj) => {
                   return (
-                    <ExpenseElement 
+                    <ExpenseElement
+                    key={obj._id}
                     obj={obj} 
                     edit={edit} 
                     setEdit={setEdit} 
@@ -184,6 +184,7 @@ const Budget = () => {
                     operations={operations}
                     setOperations={setOperations}
                     calculateTotal={calculateTotal}
+                    setOperationId={setOperationId}
                     />
                   );
                 })}

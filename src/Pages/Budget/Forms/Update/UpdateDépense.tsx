@@ -1,7 +1,7 @@
 import "../../Budget.css";
 import "./Update.css";
 
-import React, { useState, useEffect, useRef, FormEvent, ChangeEvent } from "react";
+import React, { useState, useEffect, useRef, FormEvent, ChangeEvent, SetStateAction, Dispatch, RefObject } from "react";
 import { useHistory } from "react-router";
 import { History } from "history";
 
@@ -19,20 +19,36 @@ type Category = {
   label: string;
 }
 
-const UpdateExpense = ({
-  edit,
-  setEdit,
-  mariageID,
-  setMessage,
-  setMessageType,
-  operations,
-  setOperations,
-  calculateTotal
-}) => {
-  const history: History = useHistory();
-  const [input, setInput] = useState<OperationType>(edit ? edit : null);
+interface UpdateExpenseProps {
+    edit: OperationType | null;
+    setEdit: (value: OperationType | null) => void;
+    mariageID: string;
+    setMessage: Dispatch<SetStateAction<string | undefined>>;
+    setMessageType: Dispatch<SetStateAction<"error" | "success" | undefined>>;
+    operations: OperationType[];
+    setOperations: Dispatch<SetStateAction<OperationType[]>>;
+    calculateTotal: (operations: OperationType[]) => void;
+    setOperationId: Dispatch<SetStateAction<string | null>>;
+    setIsDisabled?: Dispatch<SetStateAction<boolean>>;
+}
 
-  const inputRef = useRef<HTMLDivElement>(null);
+const UpdateExpense = (props: UpdateExpenseProps) => {
+  const { 
+    edit, 
+    setEdit, 
+    mariageID, 
+    setMessage, 
+    setMessageType, 
+    operations, 
+    setOperations, 
+    calculateTotal, 
+    setOperationId,
+    setIsDisabled } = props;
+    
+  const history: History = useHistory();
+  const [input, setInput] = useState<OperationType | null>(edit ? edit : null);
+
+  const inputRef:RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     inputRef?.current?.focus();
@@ -41,35 +57,55 @@ const UpdateExpense = ({
   const handlePriceChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const { value, name } = e.target;
     const float: number = parseFloat(value);
-      const price: number = Math.round(float * 100);
-      setInput((prevState) => ({
-        ...prevState,
-        [name]: price,
-      }));
+    const price: number = Math.round(float * 100);
+  
+    setInput((prevState) => {
+      if (prevState) {
+        return {
+          ...prevState,
+          [name]: price,
+        };
+      }
+      return prevState;
+    });
   };
-
+  
   const handleTextChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const { value, name } = e.target;
-
-    setInput((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+  
+    setInput((prevState) => {
+      if (prevState && name in prevState) {
+        return {
+          ...prevState,
+          [name]: value,
+        };
+      }
+      return prevState;
+    });
   };
-
+  
   const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>): void => {
     const { value, name } = e.target;
-
-    setInput((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+  
+    setInput((prevState) => {
+      if (prevState && name in prevState) {
+        return {
+          ...prevState,
+          [name]: value,
+        };
+      }
+      return prevState;
+    });
   };
+  
 
   const editExpense = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
+    
+    setOperationId(input?._id as string);
+    setIsDisabled && setIsDisabled(true);
 
-    const { _id, description, price, category } = input;
+    const { _id, description, price, category } = input as OperationType;
     const updatedExpenses: OperationType[] = [...operations].map((obj) => {
       if (obj._id === _id) {
         obj.description = description;
@@ -85,6 +121,13 @@ const UpdateExpense = ({
     if(!success) {
       setMessageType("error");
       setMessage(message);
+      
+      setTimeout(() => {
+        setOperationId(null);
+        setMessageType(undefined);
+        setMessage(undefined);
+        setIsDisabled && setIsDisabled(false); 
+      }, 2000)
       return;
     }
 
@@ -93,23 +136,38 @@ const UpdateExpense = ({
       setMessage(message);
     }
 
+    setOperations(updatedExpenses);
+    calculateTotal(updatedExpenses);
+    setEdit(null);
+
     setTimeout(() => {
-      setOperations(updatedExpenses);
-      calculateTotal(updatedExpenses);
-      setEdit(null);
-    }, 1000);
+      setOperationId(null);
+      setMessageType(undefined);
+      setMessage(undefined);
+      setIsDisabled && setIsDisabled(false); 
+    }, 2000);
 
     const currentPosition: number = window.scrollY;
     history.replace(`/mariage/${mariageID}/budget`, { currentPosition })
     };
 
     const deleteExpense = async (id: string): Promise<void> => {
+      setOperationId(id);
+      setIsDisabled && setIsDisabled(true);
+
       const response = await deleteOperation({ id })
       const { success, message } =  response;
   
       if(!success) {
         setMessageType("error");
         setMessage(message);
+
+        setTimeout(() => {
+          setOperationId(null);
+          setMessageType(undefined);
+          setMessage(undefined); 
+          setIsDisabled && setIsDisabled(false); 
+        }, 2000)
         return;
       }
 
@@ -124,6 +182,13 @@ const UpdateExpense = ({
       setOperations(updatedExpenses);
       calculateTotal(updatedExpenses);
       setEdit(null);
+
+      setTimeout(() => {
+        setOperationId(null);
+        setMessageType(undefined);
+        setMessage(undefined);
+        setIsDisabled && setIsDisabled(false); 
+        }, 2000);
     };
 
   return (
@@ -132,7 +197,7 @@ const UpdateExpense = ({
         <div className="budget___select">
           <select
             name="category"
-            value={input.category}
+            value={input?.category}
             onChange={handleSelectChange}
           >
             {categories.map((category: Category) => (
@@ -147,7 +212,7 @@ const UpdateExpense = ({
           type="text"
           name="description"
           onChange={handleTextChange}
-          value={input.description}
+          value={input?.description}
           ref={inputRef}
           style={{ background: "#fff", width: "100%" }}
         />
@@ -158,14 +223,14 @@ const UpdateExpense = ({
           name="price"
           type="number"
           onChange={handlePriceChange}
-          value={input.price as number / 100}
+          value={input?.price as number / 100}
           ref={inputRef}
           style={{ background: "#fff", width: "100%" }}
         />
 
         <div className="action-buttons">
           <IconButton
-            onClick={() => deleteExpense(edit._id)}
+            onClick={() => deleteExpense(edit?._id as string)}
             style={{ backgroundColor: "darkred", borderRadius: "20px", flexGrow: 1 }}
           >
             <DeleteIcon style={{ color: "#F4F4F4" }} />

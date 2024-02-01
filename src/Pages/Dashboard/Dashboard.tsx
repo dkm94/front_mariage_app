@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 
 import { Container, Row } from "react-bootstrap";
 
-import Card from "./Card/Card.jsx";
+import Card from "./Card/Card";
 import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
 
 import { getGuests, getTables, getTodos, getWedding, getOperations, getFoods } from "../../services";
@@ -19,12 +19,12 @@ type Food = {
 }
 
 const Dashboard = (props: IDashboardProps) => { // Ce composant est rendu beaucoup trop de fois
-  const id = props?.userInfos?.mariageID;
-  const userId = props?.userInfos?.id;
+  const id: string | undefined = props?.userInfos?.mariageID;
+  const userId: string | undefined = props?.userInfos?.id;
 
   const [sum, setSum] = useState<string>("");
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const [starters, setStarters] = useState<Food[]>([]);
   const [maincourses, setMaincourses] = useState<Food[]>([]);
@@ -46,23 +46,23 @@ const Dashboard = (props: IDashboardProps) => { // Ce composant est rendu beauco
   useEffect(() => {
     if(operations.length > 0) {
     let spending: number = operations.map((operation: OperationType) => operation?.price as number).reduce((a: number, b:number) => a + b) / 100;
-    const formattedSum = floatToEuro(spending);
+    const formattedSum:string = floatToEuro(spending);
     setSum(formattedSum)
     }
   }, [operations])
 
-  const isCompleted = tasks?.filter((task: TaskType) => task?.isCompleted);
-  const notCompleted = tasks?.filter((task: TaskType) => !task?.isCompleted);
+  const isCompleted:TaskType[] = tasks?.filter((task: TaskType) => task?.isCompleted);
+  const notCompleted:TaskType[] = tasks?.filter((task: TaskType) => !task?.isCompleted);
 
-  const firstFamilyGuests = guests?.filter((guest: GuestType) => guest?.family === "1");
-  const secondFamilyGuests = guests?.filter((guest: GuestType) => guest?.family === "2");
+  const firstFamilyGuests:GuestType[] = guests?.filter((guest: GuestType) => guest?.family === "1");
+  const secondFamilyGuests:GuestType[]  = guests?.filter((guest: GuestType) => guest?.family === "2");
 
-  const getAllKindsOfFoods = (foods: Food[]) => {
-    const starters = foods?.filter((food: Food) => food?.category === "starter");
-    const maincourses = foods?.filter((food: Food) => food?.category === "maincourse");
-    const desserts = foods?.filter((food: Food) => food?.category === "dessert");
-    const apetizers = foods?.filter((food: Food) => food?.category === "apetizer");
-    const beverages = foods?.filter((food: Food) => food?.category === "beverage");
+  const getAllKindsOfFoods = (foods: Food[]): void => {
+    const starters: Food[] = foods?.filter((food) => food?.category === "starter");
+    const maincourses: Food[] = foods?.filter((food) => food?.category === "maincourse");
+    const desserts: Food[] = foods?.filter((food) => food?.category === "dessert");
+    const apetizers: Food[] = foods?.filter((food) => food?.category === "apetizer");
+    const beverages: Food[] = foods?.filter((food) => food?.category === "beverage");
     
     if(starters) setStarters(starters);
     if(maincourses) setMaincourses(maincourses);

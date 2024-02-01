@@ -1,28 +1,57 @@
 import "./Card.css";
 
-import React from "react";
+import React, { ReactNode } from "react";
 import { Link } from "react-router-dom";
 
 import { Col, Container } from "react-bootstrap";
-import { Button } from "@mui/material";
 
-const Card = ({
-  title,
-  content,
-  array,
-  extraProp,
-  resume,
-  subArrayOne,
-  subArrayTwo,
-  subArrayThree,
-  subArrayFour,
-  subArrayFive,
-  path,
-  firstPerson,
-  secondPerson,
-  firstFamilyGuests,
-  secondFamilyGuests,
-}) => {
+import { CustomButton } from "../../../components/Buttons";
+
+import { GuestType } from "../../../../types";
+
+
+interface Section {
+  _id: string;
+  description: string;
+}
+
+interface DashboardCardProps {
+  title: string;
+  path: string;
+  content: number | string;
+  array?: any[];
+  extraProp: string;
+  resume: string;
+  subArrayOne?: number;
+  subArrayTwo?: number;
+  subArrayThree?: number;
+  subArrayFour?: number;
+  subArrayFive?: number;
+  firstPerson?: string;
+  secondPerson?: string;
+  elements?: string;
+  firstFamilyGuests?: GuestType[];
+  secondFamilyGuests?: GuestType[];
+}
+
+const Card = (props: DashboardCardProps) => {
+  const { 
+    title,
+    content,
+    array,
+    extraProp,
+    resume,
+    subArrayOne,
+    subArrayTwo,
+    subArrayThree,
+    subArrayFour,
+    subArrayFive,
+    path,
+    firstPerson,
+    secondPerson,
+    firstFamilyGuests,
+    secondFamilyGuests,
+  } = props
   const subContent = (
     <div>
       <span>{subArrayOne}</span>
@@ -70,7 +99,7 @@ const Card = ({
     return getLast;
   };
 
-  const reception = (
+  const reception: JSX.Element = (
     <div>
       <span>Entrées </span>
       <span style={{ fontWeight: "bold" }}>{`(${subArrayOne})`}</span>
@@ -90,7 +119,7 @@ const Card = ({
     </div>
   );
 
-  const returnDescription = (array) => {
+  const returnDescription = (array: Section[] | undefined): ReactNode => {
     const getElement = array?.map((el) => (
       <li className="overflow" key={el?._id}>
         {el?.description}
@@ -100,7 +129,7 @@ const Card = ({
     return getLast;
   };
 
-  const resumeTitle = (resume) => {
+  const resumeTitle = (resume: string): string | null => {
     switch (resume) {
       case "tables":
         return "Récemment ajouté";
@@ -117,7 +146,7 @@ const Card = ({
     }
   };
 
-  const returnContent = (extraProp) => {
+  const returnContent = (extraProp: string): any | null => {
     switch (extraProp) {
       case "name":
         return guests;
@@ -137,7 +166,7 @@ const Card = ({
   };
 
   return (
-    <Col sm={6} md={6} lg={4} style={{ marginTop: "2rem" }}>
+    <Col sm={6} md={6} lg={4} className="db-card-container">
       <Container
         className="dashboard-cards db-component-style"
         id="dashboard-cards"
@@ -159,9 +188,7 @@ const Card = ({
         </div>
         <div className="dashbord-view-details">
           <Link to={`/${path}`}>
-            <Button type="button" variant="contained">
-              Voir détails
-            </Button>
+            <CustomButton text={"Voir détails"} type="button" variant="contained" />
           </Link>
         </div>
       </Container>

@@ -125,7 +125,11 @@ input {
 
 .login__signup {
 	color: #ABA8AE;
-	height: 15%
+	height: 15%;
+	margin-top: 2rem;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
 }
 
 .login__signup:nth-child(even) {
