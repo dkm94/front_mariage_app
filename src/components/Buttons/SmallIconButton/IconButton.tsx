@@ -6,18 +6,18 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import CheckIcon from "@mui/icons-material/Check";
 import ReplayIcon from "@mui/icons-material/Replay";
 
-import { TaskType } from '../../../../types';
+// import { GuestType, TaskType } from '../../../../types';
 
 interface IconButtonProps {
     buttonType: string;
-    obj?: TaskType;
+    obj?: any;
     onClick: any;
     type: "submit" | "button" | "reset" | undefined;
 }
 
 const CustomIconButton = (props: IconButtonProps) => {
     const { buttonType, obj, onClick, type, ...rest } = props;
-    
+
     const editStyle = {
         backgroundColor: obj?.isCompleted ? "lightgrey" : "#fff",
         border: "1px solid lightgray",
@@ -72,6 +72,7 @@ const CustomIconButton = (props: IconButtonProps) => {
         : buttonType === "delete" ? deleteStyle
         : buttonType === "cancel" ? cancelStyle
         : {}
+        
     }
     >
         <RenderButton />

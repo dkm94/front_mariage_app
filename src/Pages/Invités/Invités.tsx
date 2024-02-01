@@ -46,8 +46,6 @@ const Guests = (props: GuestsProps) => {
     
   const [editPicture, seteditPicture] = useState<string>("null");
   const [searchValue, setSearchValue] = useState<string>("");
-  const [user, setUser] = useState<GuestType | {}>({});
-  const [isOpen, setisOpen] = useState<boolean>(false);
   const [guestId, setGuestId] = useState<string | null>(null);
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
@@ -61,11 +59,10 @@ const Guests = (props: GuestsProps) => {
     src={"guests"} 
     message={message} 
     messageType={messageType} 
-    // id={(user as { _id?: string })?._id || ""} 
     id={guestId || ""}
     >
       <>
-        <Container style={{ padding: "2rem 50px" }} fluid>
+        <Container id="guest-section" fluid>
           <Row>
             <Col xs={12} sm={10} md={6} className="guest-form">
               <AddForm 
@@ -100,10 +97,8 @@ const Guests = (props: GuestsProps) => {
               mariageID={mariageID}
               firstPerson={firstPerson}
               secondPerson={secondPerson}
-              setisOpen={setisOpen}
               setMessage={setMessage}
               setMessageType={setMessageType}
-              setUser={setUser}
               setGuestId={setGuestId}
               />
           </div>

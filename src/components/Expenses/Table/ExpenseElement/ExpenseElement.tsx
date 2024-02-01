@@ -70,7 +70,7 @@ const ExpenseElement = (props: ExpenseElementProps) => {
     return Number(fixed).toFixed(2);
   }
 
-  const handleCloseModal = () => {
+  const handleCloseModal = (): void => {
     setEdit(obj);
     const currentPosition: number = window.scrollY;
     history.replace(`/mariage/${mariageID}/budget/edit/${expenseId}`, { currentPosition })

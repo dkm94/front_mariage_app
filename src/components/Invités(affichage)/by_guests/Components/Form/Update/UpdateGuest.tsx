@@ -1,23 +1,20 @@
 import "../../../guests.css";
 import "./Update.css";
 
-import React, { useState, useRef, useEffect, useContext, FormEvent, ChangeEvent, Dispatch, SetStateAction } from "react";
+import React, { useState, useRef, useEffect, FormEvent, ChangeEvent, Dispatch, SetStateAction } from "react";
+import { useHistory } from "react-router";
 import { History } from "history";
 import axios from "axios";
-import { Button, Grid, IconButton } from "@mui/material";
+import { Grid } from "@mui/material";
 import TextField from "@mui/material/TextField";
-import DeleteIcon from "@mui/icons-material/Delete";
 
 import { ClearButton, CustomButton } from "../../../../../Buttons";
 
-import checkIcon from "../../../../../../img/green-check.png";
-import { useFetch } from "../../../../../../hooks";
-import { deleteGuest, getWedding, updateGuest, updateGuestMedia } from "../../../../../../services";
-import { GuestType, UserType, WeddingType } from "../../../../../../../types";
-// import { UserContext } from "../../../../../../App";
-import RedButton from "../../../../../Buttons/RedButton/RedButton";
+import { deleteGuest, updateGuest } from "../../../../../../services";
+import { GuestType, UserType } from "../../../../../../../types";
 import { useCurrentUser } from "../../../../../../ctx/userCtx";
-import { useHistory, useLocation } from "react-router";
+
+import checkIcon from "../../../../../../img/green-check.png";
 
 type FileState = File | null;
 
@@ -31,10 +28,8 @@ const UpdateGuest = ({
   uploadImg,
   seteditPicture,
   guestId,
-  setisOpen,
   setMessage,
   setMessageType,
-  setUser, 
   setGuestId
 }) => {
   const history: History = useHistory();
@@ -101,12 +96,6 @@ const UpdateGuest = ({
         );
         
         setFile(null);
-        setUser({
-          _id: data.data._id,
-          name: data.data.name,
-          family: data.data.family,
-          media: data.data.media,
-        });
         setGuests(updatedGuestList);
       }
     } catch (error) {
@@ -179,7 +168,6 @@ const UpdateGuest = ({
   const deleteGuestfn = async (id: string): Promise<void> => {
     try{
       setGuestId(id);
-      setUser({ _id: id });
       const response = await deleteGuest({ id });
       const { success, message } = response;
 
@@ -187,7 +175,6 @@ const UpdateGuest = ({
         setMessageType("success");
         setMessage(message);
         setGuests(guests.filter((guest: GuestType) => guest?._id !== id));
-        setisOpen(false);
 
         setTimeout(() => {
           setGuestId(null);
@@ -206,7 +193,6 @@ const UpdateGuest = ({
 
   const handleCancel = () => {
     setEdit({ id: null });
-    setisOpen(false);
     const currentPosition: number = window.scrollY;
     history.replace(`/mariage/${mariageID}/invites`, { currentPosition });
   }

@@ -22,6 +22,7 @@ interface UpdateFoodProps {
     setFoods: any;
     setMessage: Dispatch<SetStateAction<string | undefined>>;
     setMessageType: Dispatch<SetStateAction<"error" | "success" | undefined>>;
+    setFoodId: Dispatch<SetStateAction<string | null>>;
 }
 
 const enableStyle = {
@@ -39,7 +40,7 @@ const disableStyle = {
 }
 
 const UpdateFood = (props: UpdateFoodProps) => {
-  const { edit, setEdit, foods, setFoods, setMessage, setMessageType } = props;
+  const { edit, setEdit, foods, setFoods, setMessage, setMessageType, setFoodId } = props;
 
   const history = useHistory();
   const{ mariageID } = useCurrentUser();
@@ -62,11 +63,14 @@ const UpdateFood = (props: UpdateFoodProps) => {
   }, [input])
 
   const handleChange = (e) => {
+    
     setInput(e.target.value);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setFoodId(edit.id);
 
     if(input === ""){
         setMessageType("error");
@@ -82,6 +86,12 @@ const UpdateFood = (props: UpdateFoodProps) => {
     if(!success){
         setMessageType("error");
         setMessage(message);
+
+        setTimeout(() => {
+          setMessage(undefined);
+          setMessageType(undefined);
+          setFoodId(null);
+        }, 2000);
         return;
     }
 
@@ -100,6 +110,12 @@ const UpdateFood = (props: UpdateFoodProps) => {
         setMessageType("success");
         setMessage(message);
       }
+
+      setTimeout(() => {
+        setMessage(undefined);
+        setMessageType(undefined);
+        setFoodId(null);
+      }, 2000);
 
     const currentPosition: number = window.scrollY;
     history.replace(`/mariage/${mariageID}/carte`, { currentPosition })

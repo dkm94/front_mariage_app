@@ -1,15 +1,16 @@
 import "./ReceptionCard.css";
 
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
+import { useHistory, useParams } from "react-router";
+import { History } from "history";
 
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 
 import CustomIconButton from "../../Buttons/SmallIconButton/IconButton";
 
 import { deleteFood } from "../../../services";
-import Toast from "../../Toast/Toast";
-import { useHistory, useParams } from "react-router";
 import { useCurrentUser } from "../../../ctx/userCtx";
+import { FoodType } from "../../../../types";
 
 type Food = {
     _id?: string;
@@ -18,128 +19,163 @@ type Food = {
     category: string;
 }
 
+type EditType = {
+    id: string;
+    name: string;
+  };
+
 interface CardPropos {
-    img: any;
+    setFoodId: Dispatch<SetStateAction<string | null>>;
+    img: string;
     type: string;
-    array: any;
-    setArray: any;
-    edit: any;
-    getUpdatedId: any;
-    even: boolean
-    addForm: any;
-    editForm: any;
+    array: FoodType[];
+    setArray: Dispatch<SetStateAction<FoodType[]>>;
+    edit: EditType;
+    getUpdatedId: (objId: string, objName: string) => void;
+    even: boolean;
+    addForm: JSX.Element;
+    editForm: JSX.Element;
+    setMessage: Dispatch<SetStateAction<string | undefined>>;
+    setMessageType: Dispatch<SetStateAction<"error" | "success" | undefined>>;
 }
 
 const ReceptionCard = (props: CardPropos) => {
-    const history = useHistory();
+    const history: History = useHistory();
+    
     const { mariageID } = useCurrentUser();
     const { id: foodId } = useParams<{id: string}>();
 
-    const { array, setArray, edit, getUpdatedId, even, img, editForm, addForm, type } = props;
-
-    const [message, setMessage] = useState<string | undefined>(undefined);
-    const [messageType, setMessageType] = useState<"error" | "success" | undefined>(undefined);
+    const { 
+        array, 
+        setArray, 
+        edit, 
+        getUpdatedId, 
+        even, 
+        img, 
+        editForm, 
+        addForm, 
+        type, 
+        setFoodId,
+        setMessage,
+        setMessageType
+    } = props;
     
-  const deleteElement = async (id: string) => {
+    const deleteElement = async (id: string): Promise<void> => {
+    setFoodId(id);
+    
     const response = await deleteFood({ id });
     const { success, message, statusCode } = response;
 
     if(!success){
-      setMessageType("error");
-      setMessage(message);
-      return;
+    setMessageType("error");
+    setMessage(message);
+
+    setTimeout(() => {
+        setFoodId(null);
+        setMessage(undefined);
+        setMessageType(undefined);
+    }, 2000);
+    return;
     }
 
     if(success && statusCode === 200){
         setArray(array.filter((food: Food) => food._id !== id));
+
+        setTimeout(() => {
+            setFoodId(null);
+            setMessage(undefined);
+            setMessageType(undefined);
+        }, 2000);
     }
-  };
+    };
 
-  return (
-    <div className={even ? "forms" : "forms forms_reverse"}>
-        {/* Image */}
-        <Toast message={message} messageType={messageType} />
-        <div className={even ? "reception-form-even" : "reception-form-odd"}>
-            <img src={img} alt="" />
-        </div>
+    const handleEdit = (food: FoodType):void => {
+        getUpdatedId(food?._id || '', food?.name || '');
+        const currentPosition: number = window.scrollY;
+        history.replace(`/mariage/${mariageID}/carte/edit/${foodId}`, { currentPosition })
+    }
 
-        {/* Section's title */}
-        <div className="reception-title-container fade-in">
-        {array.length === 0 || array.length === 1 ? (
-            <h3 className={even ? "reception-title-even" : "reception-title-odd" }>{type}</h3>
-        ) : (
-            <h3 className={even ? "reception-title-even" : "reception-title-odd"}>{`${type}s`}</h3>
-        )}
-
-        {/* Form */}
-        <div className="reception-add-form">
-            {addForm}
-        </div>
-
-        {/* Is empty or list */}
-        {array.length === 0 ? (
-            <div className="empty-div">
-            <span>{`Vos ${type}s ici`}</span>
+    return (
+        <div className={even ? "forms" : "forms forms_reverse"}>
+        
+            {/* Image */}
+            <div className={even ? "reception-form-even" : "reception-form-odd"}>
+                <img src={img} alt="" />
             </div>
-        ) : (
-            <Grid2 xs={12} component={"ul"} container className="reception-list">
-            {array.map((starter) => (
-                <Grid2
-                xs={12}
-                key={starter._id}
-                component={"li"}
-                display={"flex"}
-                flexDirection={"row"}
-                minHeight="36px"
-                alignItems={"center"}
-                className="reception-list-item"
-                >
-                {edit.id === starter._id ? editForm : (
-                    <Grid2
-                    lg={8}
-                    md={8}
-                    xs={8}
-                    component={"span"}
-                    width={"100%"}
-                    >
-                    {starter.name}
-                    </Grid2>
-                )}
 
-                {/* Buttons */}
-                <Grid2
-                    lg={4}
+            {/* Section's title */}
+            <div className="reception-title-container fade-in">
+            {array.length === 0 || array.length === 1 ? (
+                <h3 className={even ? "reception-title-even" : "reception-title-odd" }>{type}</h3>
+            ) : (
+                <h3 className={even ? "reception-title-even" : "reception-title-odd"}>{`${type}s`}</h3>
+            )}
+
+            {/* Form */}
+            <div className="reception-add-form">
+                {addForm}
+            </div>
+
+            {/* Is empty or list */}
+            {array.length === 0 ? (
+                <div className="empty-div">
+                <span>{`Vos ${type}s ici`}</span>
+                </div>
+            ) : (
+                <Grid2 xs={12} component={"ul"} container className="reception-list">
+                {array.map((food) => (
+                    <Grid2
+                    xs={12}
+                    key={food?._id}
+                    component={"li"}
                     display={"flex"}
                     flexDirection={"row"}
-                    gap={"7px"}
-                >
-                    {!edit.id && (
-                    <>
-                        <CustomIconButton
-                        type="button"
-                        buttonType={"edit"}
-                        onClick={() => {
-                            getUpdatedId(starter._id, starter.name);
-                            const currentPosition: number = window.scrollY;
-                            history.replace(`/mariage/${mariageID}/carte/edit/${foodId}`, { currentPosition })
-                        }}
-                        />
-                        <CustomIconButton 
-                        type="submit"
-                        buttonType="delete"
-                        onClick={() => deleteElement(starter._id)}
-                        /> 
-                    </>
+                    minHeight="36px"
+                    alignItems={"center"}
+                    className="reception-list-item"
+                    >
+                    {edit.id === food?._id ? editForm : (
+                        <Grid2
+                        lg={8}
+                        md={8}
+                        xs={8}
+                        component={"span"}
+                        width={"100%"}
+                        >
+                        {food?.name}
+                        </Grid2>
                     )}
 
+                    {/* Buttons */}
+                    <Grid2
+                        lg={4}
+                        display={"flex"}
+                        flexDirection={"row"}
+                        gap={"7px"}
+                    >
+                        {!edit.id && (
+                        <>
+                            <CustomIconButton
+                            type="button"
+                            buttonType={"edit"}
+                            onClick={() => handleEdit(food)}
+                            />
+                            <CustomIconButton 
+                            type="submit"
+                            buttonType="delete"
+                            onClick={() => deleteElement(food?._id || '')}
+                            /> 
+                        </>
+                        )}
+
+                    </Grid2>
+                    </Grid2>
+                ))}
                 </Grid2>
-                </Grid2>
-            ))}
-            </Grid2>
-        )}
+            )}
+            </div>
         </div>
-    </div>
-  )
+    )
 }
 
 export default ReceptionCard

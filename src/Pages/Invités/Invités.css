@@ -1,3 +1,7 @@
+#guest-section {
+    padding: 2rem 50px;
+}
+
 /* appear - on page load */
 .fade-appear {
     opacity: 0;
