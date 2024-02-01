@@ -120,6 +120,12 @@
     flex-direction: column;
     word-break: break-word;
 }
+.nameField > div {
+    display: flex;
+    flex-direction: column;
+    line-height: 25px;
+    margin-top: 12px;
+}
 
 #guest-name {
     color: #000;

@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
-import { useHistory, useParams } from "react-router";
+import { useHistory } from "react-router";
 import { History } from "history";
 
 import { Box } from "@material-ui/core";
@@ -10,11 +10,19 @@ import CreateIcon from "@mui/icons-material/Create";
 import Form from "../Form/Update/UpdateGuest";
 import DefaultModal from "../../../../Modals/Default/DefaultModal";
 
-import avatar from "../../../../../img/avatar.jpg";
-import uploadImg from "../../../../../img/upload-icon-20624.png";
 import { GuestType } from "../../../../../../types";
 
+import avatar from "../../../../../img/avatar.jpg";
+import uploadImg from "../../../../../img/upload-icon-20624.png";
+
 const IconWrapper = styled(IconButton)({
+  backgroundColor: "#fff",
+  border: "1px solid lightgray",
+  borderRadius: "5px",
+  color: "#262626",
+  position: "absolute",
+  right: "20px",
+  top: "20px",
   "&:hover": {
     background: "none",
   },
@@ -24,7 +32,6 @@ type Edit = {
   id: string;
   name: string;
 }
-
 interface GuestsProps {
   guests: GuestType[];
   setGuests: Dispatch<SetStateAction<GuestType[]>>;
@@ -53,16 +60,19 @@ const Guests = (props: GuestsProps) => {
     searchValue, 
     mariageID } = props;
     
-  const { id } = useParams<{id: string}>();
   const history: History = useHistory();
 
   const [edit, setEdit] = useState<Edit | null>(null);
   const [selected, setSelected] = useState<string>("tous");
 
-  const handleCloseModal = (): void => {
-    setEdit(null);
+  const handlePosition = () => {
     const currentPosition: number = window.scrollY;
     history.replace(`/mariage/${mariageID}/invites`, { currentPosition });
+  }
+
+  const handleCloseModal = (): void => {
+    setEdit(null);
+    handlePosition()
   }
 
   const handleEditGuest = (guest: GuestType): void => {
@@ -72,9 +82,7 @@ const Guests = (props: GuestsProps) => {
         name: guest.name,
       });
     }
-
-    const currentPosition: number = window.scrollY;
-    history.replace(`/mariage/${mariageID}/invites/edit/${id}`,{ currentPosition })
+    handlePosition();
   }
 
   return (
@@ -122,21 +130,9 @@ const Guests = (props: GuestsProps) => {
               })
               .map((guest) => {
                 return (
-                    
                     <div className="guest-wrapper" key={guest?._id}>
                       <div className={`fade-in guest-card-style`}>
-                        <IconWrapper
-                          onClick={() => handleEditGuest(guest)}
-                          style={{
-                            backgroundColor: "#fff",
-                            border: "1px solid lightgray",
-                            borderRadius: "5px",
-                            color: "#262626",
-                            position: "absolute",
-                            right: "20px",
-                            top: "20px",
-                          }}
-                        >
+                        <IconWrapper onClick={() => handleEditGuest(guest)}>
                           <CreateIcon fontSize="small" />
                         </IconWrapper>
                      
@@ -152,14 +148,7 @@ const Guests = (props: GuestsProps) => {
                         )}
                       </div>
                       <div className="nameField">
-                        <Box
-                          style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            lineHeight: "25px",
-                            marginTop: "12px",
-                          }}
-                        >
+                        <Box>
                           <span id="guest-name">{guest?.name}</span>
                           {guest?.family === "1" ? (
                             <span className="guest-family">{`Invité(e) de ${firstPerson}`}</span>
@@ -195,7 +184,7 @@ const Guests = (props: GuestsProps) => {
                 );
               })}
           </div>
-        </Box>}
+      </Box>}
     </>
   );
 };
