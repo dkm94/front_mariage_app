@@ -1,5 +1,5 @@
 import Home from "./Homepage/Home";
-import Invités from "./Invités/Invités";
+import Invités from "./Guests/Guests";
 import Tables from "./Tables/Tables";
 import Todo from "./Todo/Todos";
 import Menus from "./Menu/Menu";

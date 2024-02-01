@@ -1,5 +1,3 @@
-
-
 /* enter */
 .fade-enter {
     opacity: 0;
@@ -17,9 +15,9 @@
     z-index: 1;
   }
   .slide-enter.slide-enter-active {
-      opacity: 1;
-      transform: scale(1) translateY(0);
-      transition: opacity 3000ms linear 1000ms, transform 3000ms ease-in-out 1000ms;
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    transition: opacity 3000ms linear 1000ms, transform 3000ms ease-in-out 1000ms;
   } */
 .item-fadeout {
     -webkit-animation: fadeout .3s linear forwards;
@@ -368,10 +366,6 @@
 
 
 @media (max-width: 700px) { 
-    .guest-wrapper {
-        /* height: 220px; */
-      }
-
     .guest-picture > img {
         height: 8rem;
         width: 8rem;
@@ -388,18 +382,9 @@
     height: 6rem;
     width: 100%;
     }
-    /* #guest-name {
-        font-size: 1rem;
-    }
-    .guest-family {
-        font-size: 0.8rem;
-    } */
    }
 
 @media (max-width: 600px) { 
- .div-guest___container {
-    /* display: none; */
- }
  .guest-wrapper {
     flex-basis: 33.33%;
   }
