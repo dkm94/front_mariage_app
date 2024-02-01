@@ -5,6 +5,7 @@ import React, { useState, useRef, useEffect, FormEvent, ChangeEvent, Dispatch, S
 import { useHistory } from "react-router";
 import { History } from "history";
 import axios from "axios";
+
 import { Grid } from "@mui/material";
 import TextField from "@mui/material/TextField";
 
@@ -18,23 +19,44 @@ import checkIcon from "../../../../../../img/green-check.png";
 
 type FileState = File | null;
 
-const UpdateGuest = ({
-  edit,
-  guests,
-  setGuests,
-  setEdit,
-  mariageID,
-  guestFamily,
-  uploadImg,
-  seteditPicture,
-  guestId,
-  setMessage,
-  setMessageType,
-  setGuestId
-}) => {
+type Edit = {
+  id: string;
+  name: string;
+}
+
+interface UpdateGuestProps {
+  guests: GuestType[];
+  setGuests: Dispatch<SetStateAction<GuestType[]>>;
+  edit: Edit | null;
+  setEdit: Dispatch<SetStateAction<Edit | null>>;
+  mariageID: string;
+  guestFamily: string | undefined;
+  uploadImg: string;
+  seteditPicture: Dispatch<SetStateAction<string>>;
+  guestId: string | undefined;
+  setMessage:Dispatch<SetStateAction<string | undefined>>;
+  setMessageType: Dispatch<SetStateAction<"error" | "success" | undefined>>;
+  setGuestId: Dispatch<SetStateAction<string | null>>;
+}
+
+const UpdateGuest = (props: UpdateGuestProps) => {
+  const { 
+    edit, 
+    guests, 
+    setGuests, 
+    setEdit, 
+    mariageID, 
+    guestFamily, 
+    uploadImg, 
+    seteditPicture, 
+    guestId, 
+    setMessage, 
+    setMessageType, 
+    setGuestId } = props;
+
   const history: History = useHistory();
 
-  const [radioValue, setRadioValue] = useState<string>(guestFamily);
+  const [radioValue, setRadioValue] = useState<string>(guestFamily || "");
 
   const user:UserType = useCurrentUser();
   const { firstPerson, secondPerson } = user as { firstPerson: string, secondPerson: string };
@@ -50,7 +72,7 @@ const UpdateGuest = ({
     inputRef?.current?.focus();
   });
 
-  const handleFile = (file: FileState) => {
+  const handleFile = (file: FileState): void => {
     setFile(file);
   };
 
@@ -81,7 +103,7 @@ const UpdateGuest = ({
       // const response = await updateGuestMedia({ id: id, formData });
 
       if(data){
-        setEdit({ id: "" });
+        setEdit(null);
         setInput("");
 
         const updatedGuestList: GuestType[] = [...guests].map((guest: GuestType) =>
@@ -108,7 +130,8 @@ const UpdateGuest = ({
   const handleSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
 
-    setGuestId(edit.id);
+    if(edit){
+      setGuestId(edit.id);
 
     if(input === ""){
       setMessageType("error");
@@ -118,7 +141,7 @@ const UpdateGuest = ({
 
     input.trim();
 
-    const response = await updateGuest({ id: edit.id, name: input, family: radioValue });
+    const response = await updateGuest({ id: edit?.id, name: input, family: radioValue });
     const { message, statusCode } = response;
 
     if(statusCode !== 200){
@@ -138,12 +161,12 @@ const UpdateGuest = ({
       setMessage(message);
     }
 
-    setEdit({ id: "" });
+    setEdit(null);
     setInput("");
 
     uploadPicture(edit.id)
     
-    const updatedGuestlist: GuestType[] = [...guests].map((guest: GuestType) => {
+    const updatedGuestlist: GuestType[] = [...guests].map((guest) => {
       if (guest?._id === edit.id) {
         if (guest) {
           guest.name = input;
@@ -163,6 +186,7 @@ const UpdateGuest = ({
       setMessage(undefined);
       setGuestId(null);
     }, 2000);
+    }
   };
 
   const deleteGuestfn = async (id: string): Promise<void> => {
@@ -191,8 +215,8 @@ const UpdateGuest = ({
     }
   };
 
-  const handleCancel = () => {
-    setEdit({ id: null });
+  const handleCancel = (): void => {
+    setEdit(null);
     const currentPosition: number = window.scrollY;
     history.replace(`/mariage/${mariageID}/invites`, { currentPosition });
   }
@@ -217,7 +241,7 @@ const UpdateGuest = ({
                 name="media"
                 onChange={(e: ChangeEvent<HTMLInputElement>) => handleFileInput(e, setUploadedFile)}
                 style={{ display: "none" }}
-                onClick={() => seteditPicture(guestId)}
+                onClick={() => seteditPicture(guestId || "")}
               />
             </div>
           </Grid>
@@ -265,7 +289,7 @@ const UpdateGuest = ({
             <CustomButton 
               text="Supprimer"
               variant="contained"
-              onClick={() => deleteGuestfn(edit.id)}
+              onClick={() => edit && deleteGuestfn(edit.id)}
               type="button"
               backgroundColor="darkred"
               width="48%"
