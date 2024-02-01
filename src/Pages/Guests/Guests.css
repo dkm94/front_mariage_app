@@ -1,3 +1,7 @@
+#guest-section {
+    padding: 2rem 50px;
+}
+
 /* appear - on page load */
 .fade-appear {
     opacity: 0;
@@ -99,13 +103,6 @@
     }    
 }
 
-@media (max-width: 788px) {
-.guest-container {
-    
-}
-      
-}
-
 @media (max-width: 768px) {
    
     .guest-form > form > label {
@@ -145,12 +142,12 @@
 
 @media (max-width: 459px) {
 
-    .div-guest___container {
+    /* .div-guest___container {
         display: flex;
         width: 100%;
         margin-top: 0;
         flex-direction: row;
-    }
+    } */
     .dropdown > a {
         position: absolute;
         top: -15px;

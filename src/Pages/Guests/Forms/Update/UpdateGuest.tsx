@@ -1,45 +1,62 @@
-import "../../../guests.css";
+import "../../style/guests.css";
 import "./Update.css";
 
-import React, { useState, useRef, useEffect, useContext, FormEvent, ChangeEvent, Dispatch, SetStateAction } from "react";
+import React, { useState, useRef, useEffect, FormEvent, ChangeEvent, Dispatch, SetStateAction } from "react";
+import { useHistory } from "react-router";
 import { History } from "history";
 import axios from "axios";
-import { Button, Grid, IconButton } from "@mui/material";
+
+import { Grid } from "@mui/material";
 import TextField from "@mui/material/TextField";
-import DeleteIcon from "@mui/icons-material/Delete";
 
-import { ClearButton, CustomButton } from "../../../../../Buttons";
+import { ClearButton, CustomButton } from "../../../../components/Buttons";
 
-import checkIcon from "../../../../../../img/green-check.png";
-import { useFetch } from "../../../../../../hooks";
-import { deleteGuest, getWedding, updateGuest, updateGuestMedia } from "../../../../../../services";
-import { GuestType, UserType, WeddingType } from "../../../../../../../types";
-// import { UserContext } from "../../../../../../App";
-import RedButton from "../../../../../Buttons/RedButton/RedButton";
-import { useCurrentUser } from "../../../../../../ctx/userCtx";
-import { useHistory, useLocation } from "react-router";
+import { deleteGuest, updateGuest } from "../../../../services";
+import { GuestType, UserType } from "../../../../../types";
+import { useCurrentUser } from "../../../../ctx/userCtx";
+
+import checkIcon from "../../../../img/green-check.png";
 
 type FileState = File | null;
 
-const UpdateGuest = ({
-  edit,
-  guests,
-  setGuests,
-  setEdit,
-  mariageID,
-  guestFamily,
-  uploadImg,
-  seteditPicture,
-  guestId,
-  setisOpen,
-  setMessage,
-  setMessageType,
-  setIsOpen,
-  setUser, 
-}) => {
+type Edit = {
+  id: string;
+  name: string;
+}
+
+interface UpdateGuestProps {
+  guests: GuestType[];
+  setGuests: Dispatch<SetStateAction<GuestType[]>>;
+  edit: Edit | null;
+  setEdit: Dispatch<SetStateAction<Edit | null>>;
+  mariageID: string;
+  guestFamily: string | undefined;
+  uploadImg: string;
+  seteditPicture: Dispatch<SetStateAction<string>>;
+  guestId: string | undefined;
+  setMessage:Dispatch<SetStateAction<string | undefined>>;
+  setMessageType: Dispatch<SetStateAction<"error" | "success" | undefined>>;
+  setGuestId: Dispatch<SetStateAction<string | null>>;
+}
+
+const UpdateGuest = (props: UpdateGuestProps) => {
+  const { 
+    edit, 
+    guests, 
+    setGuests, 
+    setEdit, 
+    mariageID, 
+    guestFamily, 
+    uploadImg, 
+    seteditPicture, 
+    guestId, 
+    setMessage, 
+    setMessageType, 
+    setGuestId } = props;
+
   const history: History = useHistory();
 
-  const [radioValue, setRadioValue] = useState<string>(guestFamily);
+  const [radioValue, setRadioValue] = useState<string>(guestFamily || "");
 
   const user:UserType = useCurrentUser();
   const { firstPerson, secondPerson } = user as { firstPerson: string, secondPerson: string };
@@ -55,7 +72,7 @@ const UpdateGuest = ({
     inputRef?.current?.focus();
   });
 
-  const handleFile = (file: FileState) => {
+  const handleFile = (file: FileState): void => {
     setFile(file);
   };
 
@@ -70,7 +87,7 @@ const UpdateGuest = ({
     }
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setInput(e.target.value);
   };
 
@@ -82,32 +99,27 @@ const UpdateGuest = ({
     try {
       const formData = new FormData();
       formData.append("media", file);
-      const { data, status } = await axios.post(`/api/admin/guests/edit/${id}`, formData);
+      const { data } = await axios.post(`/api/admin/guests/edit/${id}`, formData);
       // const response = await updateGuestMedia({ id: id, formData });
-      // const { message, statusCode, data } = response;
 
-      setEdit({ id: "" });
-      setInput("");
+      if(data){
+        setEdit(null);
+        setInput("");
 
-      const updatedGuestList: GuestType[] = [...guests].map((guest: GuestType) =>
+        const updatedGuestList: GuestType[] = [...guests].map((guest: GuestType) =>
         guest?._id === id
-          ? {
-              _id: data._id,
-              name: data.name,
-              family: data.family,
-              media: data.media,
-            }
-          : guest
-      );
-      
-      setFile(null);
-      setUser({
-        _id: data._id,
-        name: data.name,
-        family: data.family,
-        media: data.media,
-      });
-      setGuests(updatedGuestList);
+        ? {
+          _id: data.data._id,
+          name: data.data.name,
+          family: data.data.family,
+          media: data.data.media,
+        }
+        : guest
+        );
+        
+        setFile(null);
+        setGuests(updatedGuestList);
+      }
     } catch (error) {
       setMessageType("error");
       setMessage("La photo n'a pas été chargée");
@@ -118,6 +130,9 @@ const UpdateGuest = ({
   const handleSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
 
+    if(edit){
+      setGuestId(edit.id);
+
     if(input === ""){
       setMessageType("error");
       setMessage("Veuillez entrer un nom");
@@ -126,12 +141,18 @@ const UpdateGuest = ({
 
     input.trim();
 
-    const response = await updateGuest({ id: edit.id, name: input, family: radioValue });
+    const response = await updateGuest({ id: edit?.id, name: input, family: radioValue });
     const { message, statusCode } = response;
 
     if(statusCode !== 200){
       setMessageType("error");
       setMessage(message);
+
+      setTimeout(() => {
+        setGuestId(null);
+        setMessageType(undefined);
+        setMessage(undefined);
+      }, 2000);
       return;
     }
 
@@ -140,12 +161,12 @@ const UpdateGuest = ({
       setMessage(message);
     }
 
-    setEdit({ id: "" });
+    setEdit(null);
     setInput("");
 
     uploadPicture(edit.id)
     
-    const updatedGuestlist: GuestType[] = [...guests].map((guest: GuestType) => {
+    const updatedGuestlist: GuestType[] = [...guests].map((guest) => {
       if (guest?._id === edit.id) {
         if (guest) {
           guest.name = input;
@@ -160,13 +181,17 @@ const UpdateGuest = ({
     const currentPosition: number = window.scrollY;
     history.replace(`/mariage/${mariageID}/invites`, { currentPosition });
 
-    setMessageType(undefined);
-    setMessage(undefined);
+    setTimeout(() => {
+      setMessageType(undefined);
+      setMessage(undefined);
+      setGuestId(null);
+    }, 2000);
+    }
   };
 
   const deleteGuestfn = async (id: string): Promise<void> => {
     try{
-      setUser({ _id: id });
+      setGuestId(id);
       const response = await deleteGuest({ id });
       const { success, message } = response;
 
@@ -174,13 +199,30 @@ const UpdateGuest = ({
         setMessageType("success");
         setMessage(message);
         setGuests(guests.filter((guest: GuestType) => guest?._id !== id));
-        setisOpen(false);
+
+        setTimeout(() => {
+          setGuestId(null);
+          setMessageType(undefined);
+          setMessage(undefined);
+        }, 2000);
+
+        const currentPosition: number = window.scrollY;
+        history.replace(`/mariage/${mariageID}/invites`, { currentPosition });
       }
     } catch (e) {
-      setMessageType("error");
-      setMessage("Oups, une erreur est survenue lors de la suppression de l'invité");
+      setTimeout(() => {
+        setGuestId(null);
+        setMessageType("error");
+        setMessage("Oups, une erreur est survenue lors de la suppression de l'invité");
+      }, 2000);
     }
   };
+
+  const handleCancel = (): void => {
+    setEdit(null);
+    const currentPosition: number = window.scrollY;
+    history.replace(`/mariage/${mariageID}/invites`, { currentPosition });
+  }
 
   return (
     <>
@@ -189,26 +231,10 @@ const UpdateGuest = ({
           <Grid>
             <div id="upload-avatar">
               {uploadedFile ? (
-                <img
-                  alt="icone vérification"
-                  src={checkIcon}
-                  style={{ height: "4rem", width: "fit-content" }}
-                />
+                <img alt="icone vérification" src={checkIcon} />
               ) : (
-                <label
-                  htmlFor="file-input"
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    cursor: "pointer",
-                  }}
-                >
-                  <img
-                    alt="telecharger avatar"
-                    src={uploadImg}
-                    style={{ height: "4rem", width: "fit-content" }}
-                  />
+                <label htmlFor="file-input">
+                  <img alt="telecharger avatar" src={uploadImg}/>
                   <span>Télécharger une photo</span>
                 </label>
               )}
@@ -218,7 +244,7 @@ const UpdateGuest = ({
                 name="media"
                 onChange={(e: ChangeEvent<HTMLInputElement>) => handleFileInput(e, setUploadedFile)}
                 style={{ display: "none" }}
-                onClick={() => seteditPicture(guestId)}
+                onClick={() => seteditPicture(guestId || "")}
               />
             </div>
           </Grid>
@@ -263,36 +289,26 @@ const UpdateGuest = ({
             </div>
           </div>
           <div className="action-buttons">
-            
-            <RedButton 
-            type="button"
-            text="Supprimer"
-            handleClick={() => deleteGuestfn(edit.id)}
+            <CustomButton 
+              text="Supprimer"
+              variant="contained"
+              onClick={() => edit && deleteGuestfn(edit.id)}
+              type="button"
+              backgroundColor="darkred"
+              width="48%"
             />
 
             <CustomButton
-              text={"Enregistrer"}
-              type={"submit"}
+              text="Enregistrer"
               variant="contained"
-              sx={{ flexGrow: 1 }}
+              type="submit"
+              width="48%"
             />
 
             <ClearButton
-              text={"Annuler"}
-              type={"button"}
-              onClick={() => {
-                setEdit({ id: null });
-                setisOpen(false);
-                const currentPosition: number = window.scrollY;
-                history.replace(`/mariage/${mariageID}/invites`, { currentPosition });
-              }}
-              variant="outlined"
-              style={{
-                width: "100% !important",
-              }}
-              sx={{ width: "100% !important" }}
+              text="Annuler"
+              onClick={handleCancel}
               />
-              
           </div>
         </form>
       </div>

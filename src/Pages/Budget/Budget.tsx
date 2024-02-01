@@ -8,7 +8,7 @@ import * as Yup from "yup";
 import Grow from "@mui/material/Grow";
 
 import PieChart from "../../components/Expenses/Graph/PieChart";
-import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
+import SearchBar from "../Guests/SearchBar/SearchBar";
 import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
 import PriceCard from "../../components/Expenses/PriceCard/PriceCard";
 import AddExpenseForm from "../../components/Expenses/Forms/AddExpenseForm/AddExpenseForm";

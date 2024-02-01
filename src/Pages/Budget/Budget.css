@@ -63,7 +63,7 @@
 
 .budget-form___add-btn, .budget-form___submit {
     margin-top: 1.5rem;
-    text-align: end;
+    text-align: flex-end;
 }
 
 .budget-form___submit {
@@ -187,7 +187,7 @@
 }
 .search-bar-wrapper {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
 }
 .budget-list #empty {
     text-align: center;

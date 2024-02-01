@@ -13,7 +13,7 @@ import { ScrollToTopButton } from "./components/Buttons";
 import { Loader } from "./components/Loader/Loader";
 import ScrollToTop from "./helpers/ScrollToTop";
 import Page from "./components/Page/Page";
-import UpdateGuest from "./components/Invités(affichage)/by_guests/Components/Form/Update/UpdateGuest";
+import UpdateGuest from "./Pages/Guests/Forms/Update/UpdateGuest";
 import EditTableForm from "./Pages/Tables/Forms/Edit/Edit";
 import UpdateFood from "./Pages/Menu/Forms/Update/UpdateFood";
 

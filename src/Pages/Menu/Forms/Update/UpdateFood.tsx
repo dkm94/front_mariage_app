@@ -1,45 +1,27 @@
-import React, { useState, useRef, useEffect, Dispatch, SetStateAction } from "react";
+import React, { useState, useRef, useEffect, Dispatch, SetStateAction, ChangeEvent, FormEvent } from "react";
 import { useHistory } from "react-router";
 
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
-import CheckIcon from "@mui/icons-material/Check";
-import ReplayIcon from "@mui/icons-material/Replay";
-import { IconButton, TextField, styled } from "@mui/material";
+import { TextField } from "@mui/material";
+
+import CustomIconButton from "../../../../components/Buttons/SmallIconButton/IconButton";
 
 import { updateFood } from "../../../../services";
 import { useCurrentUser } from "../../../../ctx/userCtx";
-
-const IconWrapper = styled(IconButton)({
-  "&:hover": {
-    background: "none",
-  },
-});
+import { FoodType } from "../../../../../types";
 
 interface UpdateFoodProps {
     edit: any;
     setEdit: any;
-    foods: any;
-    setFoods: any;
+    foods: FoodType[];
+    setFoods: Dispatch<SetStateAction<FoodType[]>>;
     setMessage: Dispatch<SetStateAction<string | undefined>>;
     setMessageType: Dispatch<SetStateAction<"error" | "success" | undefined>>;
-}
-
-const enableStyle = {
-    backgroundColor: "#262626",
-    border: "1px solid lightgray",
-    borderRadius: "5px",
-    color: "#fff",
-}
-
-const disableStyle = {
-    backgroundColor: "#ccc9c9",
-    border: "1px solid lightgray",
-    borderRadius: "5px",
-    color: "#fff",
+    setFoodId: Dispatch<SetStateAction<string | null>>;
 }
 
 const UpdateFood = (props: UpdateFoodProps) => {
-  const { edit, setEdit, foods, setFoods, setMessage, setMessageType } = props;
+  const { edit, setEdit, foods, setFoods, setMessage, setMessageType, setFoodId } = props;
 
   const history = useHistory();
   const{ mariageID } = useCurrentUser();
@@ -61,12 +43,14 @@ const UpdateFood = (props: UpdateFoodProps) => {
     }
   }, [input])
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setInput(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
+
+    setFoodId(edit.id);
 
     if(input === ""){
         setMessageType("error");
@@ -82,12 +66,18 @@ const UpdateFood = (props: UpdateFoodProps) => {
     if(!success){
         setMessageType("error");
         setMessage(message);
+
+        setTimeout(() => {
+          setMessage(undefined);
+          setMessageType(undefined);
+          setFoodId(null);
+        }, 2000);
         return;
     }
 
     if(success && statusCode === 200){
         const foodsCopy = [...foods];
-        const selectedFood = foodsCopy.find((food) => food._id === edit.id);
+        const selectedFood = foodsCopy.find((food) => food?._id === edit.id);
         if (selectedFood) {
             selectedFood.name = input;
             setTimeout(() => {
@@ -101,10 +91,23 @@ const UpdateFood = (props: UpdateFoodProps) => {
         setMessage(message);
       }
 
+      setTimeout(() => {
+        setMessage(undefined);
+        setMessageType(undefined);
+        setFoodId(null);
+      }, 2000);
+
     const currentPosition: number = window.scrollY;
     history.replace(`/mariage/${mariageID}/carte`, { currentPosition })
   };
 }
+
+  const handleCancel = () => {
+    setEdit({ id: "", name: "" })
+    setInput("");
+    const currentPosition: number = window.scrollY;
+    history.replace(`/mariage/${mariageID}/carte`, { currentPosition })
+  }
 
   return (
     <Grid2
@@ -134,30 +137,17 @@ const UpdateFood = (props: UpdateFoodProps) => {
         xs={4}
         gap={"7px"}
       >
-        <IconWrapper
-          type="submit"
-          style={isDisabled ? disableStyle : enableStyle}
-          disabled={isDisabled}
-        >
-          <CheckIcon fontSize="small" />
-        </IconWrapper>
-        <IconWrapper
-          style={{
-            backgroundColor: "#fff",
-            border: "1px solid lightgray",
-            borderRadius: "5px",
-            color: "#262626",
-          }}
-          onClick={() => {
-            setEdit({ id: "", name: "" })
-            setInput("");
+        <CustomIconButton 
+        type="submit"
+        buttonType="save"
+        disabled={isDisabled}
+        />
 
-            const currentPosition: number = window.scrollY;
-            history.replace(`/mariage/${mariageID}/carte`, { currentPosition })
-          }}
-        >
-          <ReplayIcon fontSize="small" />
-        </IconWrapper>
+        <CustomIconButton 
+        type="button"
+        buttonType='cancel'
+        onClick={handleCancel}
+        />
       </Grid2>
     </Grid2>
   );

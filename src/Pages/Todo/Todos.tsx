@@ -1,41 +1,36 @@
 import "./Todo.css";
 
-import React, { useState } from "react";
-import axios from "axios";
+import React, { ChangeEvent, useState } from "react";
 
 import { Row, Col } from "react-bootstrap";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
-import { Select, MenuItem, Container, Divider } from "@mui/material";
+import { Select, MenuItem, Container } from "@mui/material";
 import Grow from "@mui/material/Grow";
 
 import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
-import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
+import SearchBar from "../Guests/SearchBar/SearchBar";
 import AddForm from "./Add/Form";
-import List from "./List/List";
+import Todo from "./Todo/Todo";
 
 import { useFetch } from "../../hooks";
 import { TaskType } from "../../../types";
 import { getTodos } from "../../services";
-import Toast from "../../components/Toast/Toast";
 
-const Todo = () => {
-  const { data: todos, setData: setTodos } = useFetch<void, TaskType[]>(getTodos, []);
-  const [todo, setTodo] = useState<TaskType | null>(null);
+const Todos = () => {
+  const { data: todos, setData: setTodos, loading } = useFetch<void, TaskType[]>(getTodos, []);
+  const [todo, setTodo] = useState<string | null>(null);
 
   const [message, setMessage] = useState<string | undefined>(undefined);
   const [messageType, setMessageType] = useState<"error" | "success" | undefined>(undefined);
 
   const [searchValue, setSearchValue] = useState<string>("");
   const [selected, setSelected] = useState<any>("all");
-  const [isOpen, setisOpen] = useState<boolean>(false);
 
-  const [loading, setLoading] = useState<boolean>(false);
-
-  const handleSearch = (e) => {
+  const handleSearch = (e: ChangeEvent<HTMLInputElement>): void => {
     setSearchValue(e.target.value);
   };
 
-  const completedTasks = todos.filter((todo: TaskType) => todo.isCompleted).length;
+  const completedTasks: number = todos.filter((todo: TaskType) => todo.isCompleted).length;
 
   return (
     <ContentLayout 
@@ -44,8 +39,8 @@ const Todo = () => {
     src={"todos"} 
     message={message} 
     messageType={messageType} 
-    id={todo?._id || ""}>
-      <Container style={{ padding: "2rem 4rem" }}>
+    id={todo || ""}>
+      <Container className="form-and-search">
         <Row>
           <AddForm
             todos={todos}
@@ -96,27 +91,14 @@ const Todo = () => {
         </Row>
       </Container> */}
       <Grow in={!loading} timeout={3000}>
-        <Container style={{ padding: "0 4rem" }}>
-          <Row
-            style={{
-              display: "flex",
-              justifyContent: "flex-end",
-            }}
-          >
+        <Container id="result-select-section">
+          <Row id="result-select">
             {todos && (
-              <Col md={6} style={{ marginBottom: "1rem" }}>
-                <span
-                  className="tasks-title"
-                  style={{ fontSize: "1.3rem", marginBottom: "1rem" }}
-                >
-                  Tâches complétées {completedTasks}/{todos?.length}
-                </span>
+              <Col md={6}>
+                <span className="tasks-title">Tâches complétées {completedTasks}/{todos?.length}</span>
               </Col>
             )}
-            <Col
-              md={6}
-              style={{ display: "flex", justifyContent: "flex-end" }}
-            >
+            <Col md={6}>
               <Select
                 style={{
                   fontFamily: "Playfair Display, serif !important",
@@ -144,19 +126,8 @@ const Todo = () => {
       </Grow>
 
       <Grow in={!loading} timeout={4000}>
-        <Row
-          style={{
-            marginRight: 0,
-            paddingLeft: "50px",
-            paddingRight: "50px",
-          }}
-          className="task-container"
-        >
-          <Container
-            maxWidth="sm"
-            style={{ maxWidth: "700px" }}
-            className="task-container__"
-          >
+        <Row className="task-container">
+          <Container maxWidth="sm" className="task-container__">
             <div className="tasks__list">
               <Grid2
                 container
@@ -166,21 +137,8 @@ const Todo = () => {
                 justifyContent={"center"}
                 width={"100%"}
               >
-                <Divider
-                  style={{
-                    borderColor: "grey",
-                    marginLeft: "3rem",
-                    width: "85%",
-                  }}
-                />
                 {todos?.length === 0 && (
-                  <span
-                    style={{
-                      alignSelf: "center",
-                      marginTop: "5rem",
-                      fontSize: "1.3rem",
-                    }}
-                  >
+                  <span id="empty-task">
                     Vos tâches ici
                   </span>
                 )}
@@ -202,20 +160,15 @@ const Todo = () => {
                       return task;
                     }
                   })
-                  .map((todo: TaskType, i) => (
-                    <List
-                      i={i}
-                      todos={todos}
-                      obj={todo}
-                      key={todo._id}
-                      setTodos={setTodos}
-                      searchValue={searchValue}
-                      setSearchValue={setSearchValue}
-                      isOpen={isOpen}
-                      setisOpen={setisOpen}
-                      setMessage={setMessage}
-                      setMessageType={setMessageType}
-                      setTodo={setTodo}
+                  .map((todo: TaskType) => (
+                    <Todo
+                    todos={todos}
+                    key={todo._id}
+                    setTodos={setTodos}
+                    setMessage={setMessage}
+                    setMessageType={setMessageType}
+                    setTodo={setTodo}
+                    todo={todo}
                       />
                   ))}
               </Grid2>
@@ -227,4 +180,4 @@ const Todo = () => {
   );
 };
 
-export default Todo;
+export default Todos;

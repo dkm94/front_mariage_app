@@ -39,7 +39,15 @@ const Menus = () => {
   const [apetizers, setApetizers] = useState<Food[]>([]);
   const [beverages, setBeverages] = useState<Food[]>([]);
 
-  const { data: foods, setMessage, setMessageType, message, messageType } = useFetch<void, Food[]>(getFoods, []);
+  const [foodId, setFoodId] = useState<string | null>(null);
+
+  const { 
+    data: foods, 
+    setMessage, 
+    setMessageType, 
+    message, 
+    messageType
+   } = useFetch<void, Food[]>(getFoods, []);
 
   useEffect(() => {
     setLoading(true);
@@ -67,7 +75,6 @@ const Menus = () => {
     name: "",
   });
 
-
   const getUpdatedId = (objId: string, objName: string) => {
     setEdit({
       id: objId,
@@ -82,19 +89,22 @@ const Menus = () => {
     src={"reception"} 
     message={message} 
     messageType={messageType} 
-    id={""}>
+    id={foodId || ""}>
       <Grow in={!loading} timeout={2000}>
         <div className="reception-container">
           <div className="reception">
 
             <ReceptionCard 
+            setFoodId={setFoodId}
             img={starterImg} 
             type={"entrée"} 
             array={starters}
             setArray={setStarters}
             edit={edit} 
             getUpdatedId={getUpdatedId} 
-            even={true} 
+            even={true}
+            setMessage={setMessage}
+            setMessageType={setMessageType}
             addForm={
             <AddFoodForm 
             foods={starters} 
@@ -110,10 +120,13 @@ const Menus = () => {
             setFoods={setStarters} 
             foods={starters} 
             setMessage={setMessage}
-            setMessageType={setMessageType} />}            
+            setMessageType={setMessageType}
+            setFoodId={setFoodId}
+            />}            
             />
 
             <ReceptionCard 
+            setFoodId={setFoodId}
             img={maincourseImg} 
             type={"plat"} 
             array={maincourses} 
@@ -121,6 +134,8 @@ const Menus = () => {
             edit={edit} 
             getUpdatedId={getUpdatedId} 
             even={false} 
+            setMessage={setMessage}
+            setMessageType={setMessageType}
             addForm={
             <AddFoodForm 
             foods={maincourses} 
@@ -137,10 +152,12 @@ const Menus = () => {
             setFoods={setMaincourses}
             setMessage={setMessage}
             setMessageType={setMessageType}
+            setFoodId={setFoodId}
             />}            
             />
 
             <ReceptionCard 
+            setFoodId={setFoodId}
             img={dessertImg} 
             type={"dessert"} 
             array={desserts} 
@@ -148,6 +165,8 @@ const Menus = () => {
             edit={edit} 
             getUpdatedId={getUpdatedId} 
             even={true} 
+            setMessage={setMessage}
+            setMessageType={setMessageType}
             addForm={
             <AddFoodForm 
             foods={desserts} 
@@ -164,10 +183,12 @@ const Menus = () => {
             setFoods={setDesserts} 
             setMessage={setMessage}
             setMessageType={setMessageType}
+            setFoodId={setFoodId}
             />} 
             />
 
             <ReceptionCard 
+            setFoodId={setFoodId}
             img={apetizerImg}
             type={"apéritif"} 
             array={apetizers} 
@@ -175,6 +196,8 @@ const Menus = () => {
             edit={edit} 
             getUpdatedId={getUpdatedId} 
             even={false} 
+            setMessage={setMessage}
+            setMessageType={setMessageType}
             addForm={
             <AddFoodForm 
             foods={apetizers} 
@@ -191,10 +214,12 @@ const Menus = () => {
             setFoods={setApetizers}
             setMessage={setMessage}
             setMessageType={setMessageType}
+            setFoodId={setFoodId}
             />}            
             />
 
             <ReceptionCard 
+            setFoodId={setFoodId}
             img={beverageImg} 
             type={"boisson"} 
             array={beverages}
@@ -202,6 +227,8 @@ const Menus = () => {
             edit={edit} 
             getUpdatedId={getUpdatedId} 
             even={true} 
+            setMessage={setMessage}
+            setMessageType={setMessageType}
             addForm={
             <AddFoodForm 
             foods={beverages} 
@@ -218,6 +245,7 @@ const Menus = () => {
             setFoods={setBeverages}
             setMessage={setMessage}
             setMessageType={setMessageType}
+            setFoodId={setFoodId}
             />} 
             />
 

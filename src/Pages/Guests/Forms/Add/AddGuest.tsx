@@ -1,14 +1,14 @@
-import "../../../../../Pages/Invités/Invités.css";
+import "../../Guests.css";
 
 import React, { useState, useRef, Dispatch, SetStateAction, FormEvent, ChangeEvent } from "react";
 
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 
-import { GreyButton } from "../../../../Buttons";
+import { GreyButton } from "../../../../components/Buttons";
 
-import { GuestType } from "../../../../../../types";
-import { addGuest } from "../../../../../services";
-import { ApiResponse } from "../../../../../helpers/requestHandler";
+import { GuestType } from "../../../../../types";
+import { addGuest } from "../../../../services";
+import { ApiResponse } from "../../../../helpers/requestHandler";
 
 interface FormProps {
   newUser: string;
