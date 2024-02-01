@@ -5,13 +5,13 @@ import { Link, useLocation } from "react-router-dom";
 
 import { ISidebarProps, NavigationDataType } from "../../../../types/index";
 import { NavigationData } from "./NavigationData";
+
 import profilePicture from "../../../img/couple-img.jpg";
 
 const Sidebar = ({ userInfos, loading }: ISidebarProps) => {
-  // TODO: startsWith() path
   const location = useLocation();
 
-  const [selectedTab, setSelectedTab] = useState<string | undefined>(`/mariage/${userInfos?.id}/carte`);
+  const [selectedTab, setSelectedTab] = useState<string | undefined>(location.pathname);
   const tabs: NavigationDataType[] = NavigationData;
   
   useEffect(() => {
@@ -19,10 +19,8 @@ const Sidebar = ({ userInfos, loading }: ISidebarProps) => {
     setSelectedTab(path);
   }, [location]);
   
-  const isTabActive = (tabName: string) => {
-    return selectedTab === tabName;
-  };
-  
+  const isTabActive = (tabName: string) => selectedTab?.includes(tabName);
+
   return (
     <nav className="sidebar" style={{ animation: "fadeIn 2s", opacity: 1 }}>
       <div className="sidebar__greetings">
@@ -38,11 +36,9 @@ const Sidebar = ({ userInfos, loading }: ISidebarProps) => {
           return (
             <li 
             key={key} 
-            className={`menu-row ${isTabActive(`/mariage/${userInfos?.id}${val.pathname}`) ? "active" : ""}`}
+            className={`menu-row ${isTabActive(`/mariage/${userInfos?.mariageID}${val.pathname}`) ? "active" : ""}`}
             >
-              <Link
-                to={`/mariage/${userInfos?.id}${val.pathname}`}
-              >
+              <Link to={`/mariage/${userInfos?.mariageID}${val.pathname}`}>
                 {val?.title}
               </Link>
             </li>

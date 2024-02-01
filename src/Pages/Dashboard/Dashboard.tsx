@@ -20,7 +20,6 @@ type Food = {
 
 const Dashboard = (props: IDashboardProps) => { // Ce composant est rendu beaucoup trop de fois
   const id: string | undefined = props?.userInfos?.mariageID;
-  const userId: string | undefined = props?.userInfos?.id;
 
   const [sum, setSum] = useState<string>("");
 
@@ -91,7 +90,7 @@ const Dashboard = (props: IDashboardProps) => { // Ce composant est rendu beauco
             array={guests}
             resume={"repartition"}
             extraProp={"name"}
-            path={`mariage/${userId}/invites`}
+            path={`mariage/${id}/invites`}
             firstPerson={wedding?.firstPerson}
             secondPerson={wedding?.secondPerson}
             firstFamilyGuests={firstFamilyGuests}
@@ -103,7 +102,7 @@ const Dashboard = (props: IDashboardProps) => { // Ce composant est rendu beauco
             array={tables}
             resume={"tables"}
             extraProp={"tables"}
-            path={`mariage/${userId}/tables`}
+            path={`mariage/${id}/tables`}
           />
           <Card
             title={"Réception"}
@@ -115,7 +114,7 @@ const Dashboard = (props: IDashboardProps) => { // Ce composant est rendu beauco
             subArrayFive={beverages?.length}
             resume={"composition"}
             extraProp={"composition"}
-            path={`mariage/${userId}/carte`}
+            path={`mariage/${id}/carte`}
           />
           <Card
             title={"Tâches"}
@@ -126,7 +125,7 @@ const Dashboard = (props: IDashboardProps) => { // Ce composant est rendu beauco
             elements={"text"}
             resume={"status"}
             extraProp={"tache"}
-            path={`mariage/${userId}/taches`}
+            path={`mariage/${id}/taches`}
           />
           <Card
             title={"Dépenses"}
@@ -135,7 +134,7 @@ const Dashboard = (props: IDashboardProps) => { // Ce composant est rendu beauco
             elements={"description"}
             resume={"expenses"}
             extraProp={"description"}
-            path={`mariage/${userId}/budget`}
+            path={`mariage/${id}/budget`}
           />
         </Row>
       </Container>
