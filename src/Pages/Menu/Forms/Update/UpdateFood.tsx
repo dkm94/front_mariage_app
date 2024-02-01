@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, Dispatch, SetStateAction } from "react";
+import React, { useState, useRef, useEffect, Dispatch, SetStateAction, ChangeEvent, FormEvent } from "react";
 import { useHistory } from "react-router";
 
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
@@ -43,12 +43,11 @@ const UpdateFood = (props: UpdateFoodProps) => {
     }
   }, [input])
 
-  const handleChange = (e) => {
-    
+  const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setInput(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
 
     setFoodId(edit.id);

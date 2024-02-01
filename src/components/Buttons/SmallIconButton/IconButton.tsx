@@ -5,9 +5,6 @@ import CreateIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CheckIcon from "@mui/icons-material/Check";
 import ReplayIcon from "@mui/icons-material/Replay";
-
-// import { GuestType, TaskType } from '../../../../types';
-
 interface IconButtonProps {
     buttonType: string;
     obj?: any;
