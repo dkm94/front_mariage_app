@@ -103,13 +103,6 @@
     }    
 }
 
-@media (max-width: 788px) {
-.guest-container {
-    
-}
-      
-}
-
 @media (max-width: 768px) {
    
     .guest-form > form > label {
