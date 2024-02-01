@@ -1,11 +1,11 @@
-.todo-form {
+#todo-form {
     width: 100%;
     display: flex;
     flex-direction: row;
     gap: 7px;
 }
 
-.todo-form > input {
+#todo-form > input {
     background: transparent;
 }
 
@@ -14,6 +14,6 @@
     flex-direction: column;
 }
 
-.todo-form > div > button:nth-child(2){
+#todo-form > div > button:nth-child(2){
     background: transparent;
 }

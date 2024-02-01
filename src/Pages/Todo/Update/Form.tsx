@@ -94,7 +94,7 @@ const UpdateTask = (props: UpdateTaskFormProps) => {
       p={"1rem 3rem"}
       width={"100%"}
     >
-      <form onSubmit={editTodo} className="todo-form">
+      <form onSubmit={editTodo} id="todo-form">
         <Grid2 width={"100%"}>
           <TextField
             size="small"
