@@ -13,7 +13,6 @@ import DefaultModal from "../../../../Modals/Default/DefaultModal";
 import avatar from "../../../../../img/avatar.jpg";
 import uploadImg from "../../../../../img/upload-icon-20624.png";
 import { GuestType } from "../../../../../../types";
-import CustomIconButton from "../../../../Buttons/SmallIconButton/IconButton";
 
 const IconWrapper = styled(IconButton)({
   "&:hover": {

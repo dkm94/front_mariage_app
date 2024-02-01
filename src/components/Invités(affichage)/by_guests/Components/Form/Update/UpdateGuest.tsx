@@ -87,7 +87,7 @@ const UpdateGuest = (props: UpdateGuestProps) => {
     }
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setInput(e.target.value);
   };
 
@@ -205,6 +205,9 @@ const UpdateGuest = (props: UpdateGuestProps) => {
           setMessageType(undefined);
           setMessage(undefined);
         }, 2000);
+        
+        const currentPosition: number = window.scrollY;
+        history.replace(`/mariage/${mariageID}/invites`, { currentPosition });
       }
     } catch (e) {
       setTimeout(() => {
