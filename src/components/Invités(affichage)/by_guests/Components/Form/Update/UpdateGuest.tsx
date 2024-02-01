@@ -34,8 +34,8 @@ const UpdateGuest = ({
   setisOpen,
   setMessage,
   setMessageType,
-  setIsOpen,
   setUser, 
+  setGuestId
 }) => {
   const history: History = useHistory();
 
@@ -84,30 +84,31 @@ const UpdateGuest = ({
       formData.append("media", file);
       const { data, status } = await axios.post(`/api/admin/guests/edit/${id}`, formData);
       // const response = await updateGuestMedia({ id: id, formData });
-      // const { message, statusCode, data } = response;
 
-      setEdit({ id: "" });
-      setInput("");
+      if(data){
+        setEdit({ id: "" });
+        setInput("");
 
-      const updatedGuestList: GuestType[] = [...guests].map((guest: GuestType) =>
+        const updatedGuestList: GuestType[] = [...guests].map((guest: GuestType) =>
         guest?._id === id
-          ? {
-              _id: data._id,
-              name: data.name,
-              family: data.family,
-              media: data.media,
-            }
-          : guest
-      );
-      
-      setFile(null);
-      setUser({
-        _id: data._id,
-        name: data.name,
-        family: data.family,
-        media: data.media,
-      });
-      setGuests(updatedGuestList);
+        ? {
+          _id: data.data._id,
+          name: data.data.name,
+          family: data.data.family,
+          media: data.data.media,
+        }
+        : guest
+        );
+        
+        setFile(null);
+        setUser({
+          _id: data.data._id,
+          name: data.data.name,
+          family: data.data.family,
+          media: data.data.media,
+        });
+        setGuests(updatedGuestList);
+      }
     } catch (error) {
       setMessageType("error");
       setMessage("La photo n'a pas été chargée");
@@ -117,6 +118,8 @@ const UpdateGuest = ({
 
   const handleSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
+
+    setGuestId(edit.id);
 
     if(input === ""){
       setMessageType("error");
@@ -132,6 +135,12 @@ const UpdateGuest = ({
     if(statusCode !== 200){
       setMessageType("error");
       setMessage(message);
+
+      setTimeout(() => {
+        setGuestId(null);
+        setMessageType(undefined);
+        setMessage(undefined);
+      }, 2000);
       return;
     }
 
@@ -160,12 +169,16 @@ const UpdateGuest = ({
     const currentPosition: number = window.scrollY;
     history.replace(`/mariage/${mariageID}/invites`, { currentPosition });
 
-    setMessageType(undefined);
-    setMessage(undefined);
+    setTimeout(() => {
+      setMessageType(undefined);
+      setMessage(undefined);
+      setGuestId(null);
+    }, 2000);
   };
 
   const deleteGuestfn = async (id: string): Promise<void> => {
     try{
+      setGuestId(id);
       setUser({ _id: id });
       const response = await deleteGuest({ id });
       const { success, message } = response;
@@ -175,12 +188,28 @@ const UpdateGuest = ({
         setMessage(message);
         setGuests(guests.filter((guest: GuestType) => guest?._id !== id));
         setisOpen(false);
+
+        setTimeout(() => {
+          setGuestId(null);
+          setMessageType(undefined);
+          setMessage(undefined);
+        }, 2000);
       }
     } catch (e) {
-      setMessageType("error");
-      setMessage("Oups, une erreur est survenue lors de la suppression de l'invité");
+      setTimeout(() => {
+        setGuestId(null);
+        setMessageType("error");
+        setMessage("Oups, une erreur est survenue lors de la suppression de l'invité");
+      }, 2000);
     }
   };
+
+  const handleCancel = () => {
+    setEdit({ id: null });
+    setisOpen(false);
+    const currentPosition: number = window.scrollY;
+    history.replace(`/mariage/${mariageID}/invites`, { currentPosition });
+  }
 
   return (
     <>
@@ -189,26 +218,10 @@ const UpdateGuest = ({
           <Grid>
             <div id="upload-avatar">
               {uploadedFile ? (
-                <img
-                  alt="icone vérification"
-                  src={checkIcon}
-                  style={{ height: "4rem", width: "fit-content" }}
-                />
+                <img alt="icone vérification" src={checkIcon} />
               ) : (
-                <label
-                  htmlFor="file-input"
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    cursor: "pointer",
-                  }}
-                >
-                  <img
-                    alt="telecharger avatar"
-                    src={uploadImg}
-                    style={{ height: "4rem", width: "fit-content" }}
-                  />
+                <label htmlFor="file-input">
+                  <img alt="telecharger avatar" src={uploadImg}/>
                   <span>Télécharger une photo</span>
                 </label>
               )}
@@ -263,36 +276,26 @@ const UpdateGuest = ({
             </div>
           </div>
           <div className="action-buttons">
-            
-            <RedButton 
-            type="button"
-            text="Supprimer"
-            handleClick={() => deleteGuestfn(edit.id)}
+            <CustomButton 
+              text="Supprimer"
+              variant="contained"
+              onClick={() => deleteGuestfn(edit.id)}
+              type="button"
+              backgroundColor="darkred"
+              width="48%"
             />
 
             <CustomButton
-              text={"Enregistrer"}
-              type={"submit"}
+              text="Enregistrer"
               variant="contained"
-              sx={{ flexGrow: 1 }}
+              type="submit"
+              width="48%"
             />
 
             <ClearButton
-              text={"Annuler"}
-              type={"button"}
-              onClick={() => {
-                setEdit({ id: null });
-                setisOpen(false);
-                const currentPosition: number = window.scrollY;
-                history.replace(`/mariage/${mariageID}/invites`, { currentPosition });
-              }}
-              variant="outlined"
-              style={{
-                width: "100% !important",
-              }}
-              sx={{ width: "100% !important" }}
+              text="Annuler"
+              onClick={handleCancel}
               />
-              
           </div>
         </form>
       </div>

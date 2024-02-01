@@ -36,8 +36,8 @@ const Guests = ({
   setisOpen,
   setMessage,
   setMessageType,
-  setIsOpen,
   setUser,
+  setGuestId
 }) => {
   const { id } = useParams<{id: string}>();
   const history: History = useHistory();
@@ -81,7 +81,7 @@ const Guests = ({
               //searchbar filter
               .filter((guest) => {
                 return (
-                  guest.name.toLowerCase().indexOf(searchValue.toLowerCase()) >=
+                  guest?.name?.toLowerCase().indexOf(searchValue.toLowerCase()) >=
                   0
                 );
               })
@@ -182,8 +182,8 @@ const Guests = ({
                           setisOpen={setisOpen}
                           setMessage={setMessage}
                           setMessageType={setMessageType}
-                          setIsOpen={setIsOpen}
                           setUser={setUser}
+                          setGuestId={setGuestId}
                         />
                       </DefaultModal>}
                     </div>

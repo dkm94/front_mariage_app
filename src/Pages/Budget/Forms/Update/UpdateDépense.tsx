@@ -5,8 +5,7 @@ import React, { useState, useEffect, useRef, FormEvent, ChangeEvent, SetStateAct
 import { useHistory } from "react-router";
 import { History } from "history";
 
-import { Button, TextField, IconButton } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
+import { TextField } from "@mui/material";
 
 import { ClearButton, CustomButton } from "../../../../components/Buttons";
 
@@ -250,7 +249,7 @@ const UpdateExpense = (props: UpdateExpenseProps) => {
             backgroundColor="darkred"
             width="48%"
           />
-          
+
           <CustomButton
             text="Enregistrer"
             variant="contained"

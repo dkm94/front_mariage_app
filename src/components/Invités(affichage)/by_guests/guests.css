@@ -181,6 +181,20 @@
     background-repeat: no-repeat;
     background-color: #f6f6f6;
 }
+#upload-avatar > label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+#upload-avatar > img {
+    height: 4rem;
+    width: fit-content;
+}
+#upload-avatar > label > img {
+    height: 4rem;
+    width: fit-content;
+}
 
 .guest-picture > div > button {
     border-radius: 50%;

@@ -20,7 +20,7 @@ const CustomButton = styled(Button)({
 
 const ClearButton = ({ text, ...rest }) => {
   return (
-    <CustomButton {...rest}>{text}</CustomButton>
+    <CustomButton {...rest} type="button">{text}</CustomButton>
   );
 };
 

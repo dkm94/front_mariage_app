@@ -1,20 +1,19 @@
 import "./Invités.css";
 import "../../components/Invités(affichage)/by_guests/guests.css";
 
-import React, { useState, useEffect, ChangeEvent } from "react";
+import React, { useState, ChangeEvent } from "react";
 
 import { Container, Row, Col } from "react-bootstrap";
 
 import { GuestType } from "../../../types";
 import { getGuests } from "../../services/guestRequests";
+import { useFetch } from "../../hooks";
 
 import AddForm from "../../components/Invités(affichage)/by_guests/Components/Form/AddGuest";
 import GuestList from "../../components/Invités(affichage)/by_guests/Components/Guests/Guests";
 import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
-import { useFetch } from "../../hooks";
 import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
-import Toast from "../../components/Toast/Toast";
-import { useSearchParam } from "react-use";
+
 
 type NewUser = string;
 
@@ -23,14 +22,14 @@ type UserType = {
   secondPerson: string;
   mariageID: string;
 }
-interface ByGuestsProps {
+interface GuestsProps {
   page: string;
   token: string;
   userRole: string;
   userInfos: UserType;
 }
 
-const Byguests = (props: ByGuestsProps) => {
+const Guests = (props: GuestsProps) => {
   const { firstPerson, secondPerson, mariageID } = props.userInfos;
 
   const [newUser, setNewUser] = useState<NewUser>("");
@@ -43,19 +42,13 @@ const Byguests = (props: ByGuestsProps) => {
     messageType,
     setMessage,
     setMessageType,
-    fetchData } = useFetch<void, GuestType[]>(getGuests,[]);
+    } = useFetch<void, GuestType[]>(getGuests,[]);
     
   const [editPicture, seteditPicture] = useState<string>("null");
   const [searchValue, setSearchValue] = useState<string>("");
   const [user, setUser] = useState<GuestType | {}>({});
-  const [appear, setAppear] = useState<boolean>(false);
   const [isOpen, setisOpen] = useState<boolean>(false);
-
-  useEffect(() => { // TODO: problème de performances, trop de re rendus (search bar, update picture...)
-    if (guests && guests.length > 0) {
-      setAppear(true);
-    }
-  }, [user]);
+  const [guestId, setGuestId] = useState<string | null>(null);
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
@@ -68,7 +61,9 @@ const Byguests = (props: ByGuestsProps) => {
     src={"guests"} 
     message={message} 
     messageType={messageType} 
-    id={(user as { _id?: string })?._id || ""} >
+    // id={(user as { _id?: string })?._id || ""} 
+    id={guestId || ""}
+    >
       <>
         <Container style={{ padding: "2rem 50px" }} fluid>
           <Row>
@@ -108,8 +103,8 @@ const Byguests = (props: ByGuestsProps) => {
               setisOpen={setisOpen}
               setMessage={setMessage}
               setMessageType={setMessageType}
-              setIsOpen={setisOpen}
               setUser={setUser}
+              setGuestId={setGuestId}
               />
           </div>
         </div>
@@ -118,4 +113,4 @@ const Byguests = (props: ByGuestsProps) => {
   );
 };
 
-export default Byguests;
+export default Guests;
