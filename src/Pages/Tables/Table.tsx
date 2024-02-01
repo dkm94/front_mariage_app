@@ -16,7 +16,6 @@ type EditType = {
   id: string;
   name: string;
 }
-
 interface TableProps {
   tables: TableType[];
   table: TableType;
@@ -33,7 +32,7 @@ interface TableProps {
   setisOpen: Dispatch<SetStateAction<boolean>>;
   setMessage: Dispatch<SetStateAction<string>>;
   setMessageType: Dispatch<SetStateAction<"error" | "success" | undefined>>;
-  setTable: Dispatch<SetStateAction<TableType | null>>;
+  setTable: Dispatch<SetStateAction<string | null>>;
 }
 
 const Table = (props: TableProps) => {
@@ -112,8 +111,6 @@ const Table = (props: TableProps) => {
           guests={guests}
           setGuests={setGuests}
           setEdit={setEdit}
-          getUpdatedId={getUpdatedId}
-          isOpen={isOpen}
           setisOpen={setisOpen}
           setMessage={setMessage}
           setMessageType={setMessageType}

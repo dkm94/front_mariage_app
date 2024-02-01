@@ -27,7 +27,7 @@ const Tables = (props) => {
   const [searchValue, setSearchValue] = useState<string>("");
   const [edit, setEdit] = useState<EditType | null>(null);
   const [input, setInput] = useState<string>("");
-  const [table, setTable]= useState<TableType | null>(null);
+  const [table, setTable]= useState<string | null>(null);
 
   const [isOpen, setisOpen] = useState(false);
 
@@ -76,7 +76,7 @@ const Tables = (props) => {
       src={"tables"}
       message={tableMessage || guestMessage} 
       messageType={tableTypeMessage || guestTypeMessage} 
-      id={table?._id || ""}    
+      id={table || ""}    
     >
       <Container style={{ padding: "2rem 50px" }} fluid>
         <Row>

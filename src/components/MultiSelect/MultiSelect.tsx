@@ -9,7 +9,7 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
 
-import { FormattedGuestType } from '../../../types';
+import { FormattedGuestType, GuestType } from '../../../types';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -32,7 +32,7 @@ function getStyles(name: string, guestValues: readonly string[], theme: Theme) {
 }
 
 interface MultipleSelectProps {
-  guests: FormattedGuestType[];
+  guests: GuestType[];
   setGuestsIds: (ids) => any;
   edit: FormattedGuestType;
 }
@@ -41,12 +41,13 @@ const MultipleSelect = (props: MultipleSelectProps) => {
   const { guests, setGuestsIds, edit } = props;
   const theme = useTheme();
 
-  const [isDisabled, setIsDisabled] = useState<boolean>(false);
+  const tableGuests = guests.filter((guest) => guest?.tableID === edit.id && guest?.name !== undefined);
+  const initialListWithNames: string[] = tableGuests
+  .map((guest) => guest!.name)  // Utilisation de l'opérateur "!" pour indiquer que guest.name ne peut pas être undefined ici
+  .slice()
+  .sort();
 
-  const tableGuests = guests.filter((guest) => guest.tableID === edit.id);
-  const initialListWithNames = tableGuests.map((guest) => guest.name).slice().sort();
-
-  const [guestValues, setGuestValues] = React.useState<string[]>(initialListWithNames);
+  const [guestValues, setGuestValues] = useState<string[]>(initialListWithNames);
 
   const handleChange = (event: SelectChangeEvent<typeof guestValues>) => {
     const {
@@ -94,12 +95,12 @@ const MultipleSelect = (props: MultipleSelectProps) => {
         >
           {guests.map((guest) => (
             <MenuItem
-              key={guest.id}
-              value={guest.name}
-              style={getStyles(guest.name, guestValues, theme)}
-              disabled={guest.tableID !== null && guest.tableID !== edit.id}
+              key={guest?._id}
+              value={guest?.name}
+              style={guest && getStyles(guest.name, guestValues, theme)}
+              disabled={guest?.tableID !== null && guest?.tableID !== edit.id}
             >
-              {guest.name}
+              {guest?.name}
             </MenuItem>
           ))}
         </Select>
