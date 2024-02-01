@@ -5,6 +5,9 @@
     width: 50%;
     border-radius: 5px;
   }
+  .form-and-search {
+    padding: 2rem 4rem;
+  }
 
   .add-task-form > form > div > button {
     margin-left: 10px;
@@ -32,7 +35,25 @@
 .add-task-form > form > div > button:active {
     color: #D18476;
 }
-
+#result-select-section {
+  padding: 0 4rem;
+}
+#result-select {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+}
+#result-select > div:nth-child(1) {
+  margin-right: 1rem;
+}
+#result-select > div:nth-child(1) > span {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+#result-select > div:nth-child(2) {
+  display: flex;
+  justify-content: flex-end;
+}
 .select-tasks {
   padding-left: 15px;
   padding-right: 15px;
@@ -92,13 +113,20 @@
   }
 
   .task-container {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
+    margin-right: 0;
+    padding-left: 0px;
+    padding-right: 0px;
   }
-
+  
   .task-container__ {
     padding: 0 !important;
+    max-width: 700px;
   }
+}
+#empty-task {
+  align-self: center;
+  margin-top: 5rem;
+  font-size: 1.3rem;
 }
 
 @media (max-width: 414px) {
