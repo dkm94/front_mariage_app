@@ -11,12 +11,13 @@ import ReplayIcon from "@mui/icons-material/Replay";
 interface IconButtonProps {
     buttonType: string;
     obj?: any;
-    onClick: any;
+    onClick?: any;
     type: "submit" | "button" | "reset" | undefined;
+    disabled?: boolean;
 }
 
 const CustomIconButton = (props: IconButtonProps) => {
-    const { buttonType, obj, onClick, type, ...rest } = props;
+    const { buttonType, obj, onClick, type, disabled, ...rest } = props;
 
     const editStyle = {
         backgroundColor: obj?.isCompleted ? "lightgrey" : "#fff",
@@ -64,6 +65,7 @@ const CustomIconButton = (props: IconButtonProps) => {
   return (
     <IconWrapper
     {...rest}
+    disabled={disabled}
     type={type}
     onClick={onClick}
     style={

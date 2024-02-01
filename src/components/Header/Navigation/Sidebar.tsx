@@ -8,6 +8,7 @@ import { NavigationData } from "./NavigationData";
 import profilePicture from "../../../img/couple-img.jpg";
 
 const Sidebar = ({ userInfos, loading }: ISidebarProps) => {
+  // TODO: startsWith() path
   const location = useLocation();
 
   const [selectedTab, setSelectedTab] = useState<string | undefined>(`/mariage/${userInfos?.id}/carte`);
