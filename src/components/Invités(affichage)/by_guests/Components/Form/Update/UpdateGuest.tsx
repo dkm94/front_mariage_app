@@ -99,7 +99,7 @@ const UpdateGuest = (props: UpdateGuestProps) => {
     try {
       const formData = new FormData();
       formData.append("media", file);
-      const { data, status } = await axios.post(`/api/admin/guests/edit/${id}`, formData);
+      const { data } = await axios.post(`/api/admin/guests/edit/${id}`, formData);
       // const response = await updateGuestMedia({ id: id, formData });
 
       if(data){
@@ -205,7 +205,7 @@ const UpdateGuest = (props: UpdateGuestProps) => {
           setMessageType(undefined);
           setMessage(undefined);
         }, 2000);
-        
+
         const currentPosition: number = window.scrollY;
         history.replace(`/mariage/${mariageID}/invites`, { currentPosition });
       }

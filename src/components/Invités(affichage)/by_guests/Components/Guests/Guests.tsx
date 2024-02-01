@@ -65,6 +65,18 @@ const Guests = (props: GuestsProps) => {
     history.replace(`/mariage/${mariageID}/invites`, { currentPosition });
   }
 
+  const handleEditGuest = (guest: GuestType): void => {
+    if(guest){
+      setEdit({
+        id: guest._id,
+        name: guest.name,
+      });
+    }
+
+    const currentPosition: number = window.scrollY;
+    history.replace(`/mariage/${mariageID}/invites/edit/${id}`,{ currentPosition })
+  }
+
   return (
     <>
       <div className="select-guest">
@@ -114,16 +126,7 @@ const Guests = (props: GuestsProps) => {
                     <div className="guest-wrapper" key={guest?._id}>
                       <div className={`fade-in guest-card-style`}>
                         <IconWrapper
-                          onClick={() => {
-                            const currentPosition: number = window.scrollY;
-                            history.replace(`/mariage/${mariageID}/invites/edit/${id}`,{ currentPosition })
-                            if(guest){
-                              setEdit({
-                                id: guest._id,
-                                name: guest.name,
-                              });
-                            }
-                          }}
+                          onClick={() => handleEditGuest(guest)}
                           style={{
                             backgroundColor: "#fff",
                             border: "1px solid lightgray",
