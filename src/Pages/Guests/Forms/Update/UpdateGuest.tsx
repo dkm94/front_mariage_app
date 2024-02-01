@@ -1,4 +1,4 @@
-import "../../../guests.css";
+import "../../style/guests.css";
 import "./Update.css";
 
 import React, { useState, useRef, useEffect, FormEvent, ChangeEvent, Dispatch, SetStateAction } from "react";
@@ -9,13 +9,13 @@ import axios from "axios";
 import { Grid } from "@mui/material";
 import TextField from "@mui/material/TextField";
 
-import { ClearButton, CustomButton } from "../../../../../Buttons";
+import { ClearButton, CustomButton } from "../../../../components/Buttons";
 
-import { deleteGuest, updateGuest } from "../../../../../../services";
-import { GuestType, UserType } from "../../../../../../../types";
-import { useCurrentUser } from "../../../../../../ctx/userCtx";
+import { deleteGuest, updateGuest } from "../../../../services";
+import { GuestType, UserType } from "../../../../../types";
+import { useCurrentUser } from "../../../../ctx/userCtx";
 
-import checkIcon from "../../../../../../img/green-check.png";
+import checkIcon from "../../../../img/green-check.png";
 
 type FileState = File | null;
 

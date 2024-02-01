@@ -1,6 +1,8 @@
-import React from "react";
-import magnifyingGlass from "../../../../../img/magnifying-glass.png";
 import "./SearchBar.css";
+
+import React from "react";
+
+import magnifyingGlass from "../../../img/magnifying-glass.png";
 
 const SearchBar = ({ className, value, name, onChange, type, placeholder }) => {
   return (

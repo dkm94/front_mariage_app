@@ -1,3 +1,5 @@
+import "../../style/guests.css";
+
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { useHistory } from "react-router";
 import { History } from "history";
@@ -7,13 +9,13 @@ import styled from "@emotion/styled";
 import { IconButton } from "@mui/material";
 import CreateIcon from "@mui/icons-material/Create";
 
-import Form from "../../../components/Invités(affichage)/by_guests/Components/Form/Update/UpdateGuest";
-import DefaultModal from "../../../components/Modals/Default/DefaultModal";
+import Form from "../../Forms/Update/UpdateGuest";
+import DefaultModal from "../../../../components/Modals/Default/DefaultModal";
 
-import { GuestType } from "../../../../types";
+import { GuestType } from "../../../../../types";
 
-import avatar from "../../../img/avatar.jpg"
-import uploadImg from "../../../img/upload-icon-20624.png";
+import avatar from "../../../../img/avatar.jpg"
+import uploadImg from "../../../../img/upload-icon-20624.png";
 
 const IconWrapper = styled(IconButton)({
   backgroundColor: "#fff",

@@ -1,0 +1,23 @@
+.guest__sm {
+    display: none !important;
+}
+
+@media screen and (max-width: 600px) {
+    .guest__sm {
+        display: flex !important;
+        flex-direction: row;
+    }
+
+    .guest__sm > div > img {
+        height: 8rem;
+        width: 8rem;
+        object-fit: cover;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .guest__sm > div > img {
+        height: 6rem;
+        width: 6rem;
+    }
+}

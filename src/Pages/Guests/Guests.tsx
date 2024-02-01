@@ -1,5 +1,5 @@
 import "./Guests.css";
-import "../../components/Invités(affichage)/by_guests/guests.css";
+import "./style/guests.css";
 
 import React, { useState, ChangeEvent } from "react";
 
@@ -9,11 +9,10 @@ import { GuestType } from "../../../types";
 import { getGuests } from "../../services/guestRequests";
 import { useFetch } from "../../hooks";
 
-import AddForm from "../../components/Invités(affichage)/by_guests/Components/Form/AddGuest";
-import GuestList from "./Guest/Guest";
-import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
+import AddForm from "./Forms/Add/AddGuest";
+import SearchBar from "./SearchBar/SearchBar";
 import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
-import Guest from "./Guest/Guest";
+import Guest from "./Cards/MainCard/MainCard";
 import { Box } from "@mui/material";
 
 

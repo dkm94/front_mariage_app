@@ -435,7 +435,7 @@
         padding: 0 !important;
     }
     .guest-card-style > button {
-        right: 5px !important;
+        /* right: 5px !important; */
         top: 5px !important;
     }
     .guest-wrapper {

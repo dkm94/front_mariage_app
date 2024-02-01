@@ -15,7 +15,7 @@ import { useFetch } from "../../hooks";
 
 import AddTableForm from "./Forms/Add";
 import Table from "./Table";
-import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
+import SearchBar from "../Guests/SearchBar/SearchBar";
 import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
 
 type EditType = {

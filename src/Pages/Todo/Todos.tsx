@@ -8,7 +8,7 @@ import { Select, MenuItem, Container } from "@mui/material";
 import Grow from "@mui/material/Grow";
 
 import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
-import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
+import SearchBar from "../Guests/SearchBar/SearchBar";
 import AddForm from "./Add/Form";
 import Todo from "./Todo/Todo";
 
