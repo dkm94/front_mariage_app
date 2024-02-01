@@ -1,39 +1,67 @@
 import "./Tables.css";
 
-import React from "react";
+import React, { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { useHistory, useParams } from "react-router";
 
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 
 import { CustomButton } from "../../components/Buttons";
 import DefaultModal from "../../components/Modals/Default/DefaultModal";
 import EditForm from "./Forms/Edit/Edit";
-import { useHistory, useParams } from "react-router";
-import { useCurrentUser } from "../../ctx/userCtx";
 
-const Table = ({
-  tables,
-  table,
-  id,
-  edit,
-  handleUpdatedTable,
-  input,
-  setTables,
-  guests,
-  setGuests,
-  setEdit,
-  getUpdatedId,
-  isOpen,
-  setisOpen,
-  setMessage, 
-  setMessageType,
-  setTable
-}) => {
+import { useCurrentUser } from "../../ctx/userCtx";
+import { TableType, GuestType } from "../../../types";
+
+type EditType = {
+  id: string;
+  name: string;
+}
+
+interface TableProps {
+  tables: TableType[];
+  table: TableType;
+  id: string;
+  edit: EditType | null;
+  handleUpdatedTable: (e: ChangeEvent<HTMLInputElement>) => void;
+  input: string;
+  setTables: Dispatch<SetStateAction<TableType[]>>;
+  guests: GuestType[];
+  setGuests: Dispatch<SetStateAction<GuestType[]>>;
+  setEdit: Dispatch<SetStateAction<EditType | null>>;
+  getUpdatedId: (tableId: string, tableName: string) => void;
+  isOpen: boolean;
+  setisOpen: Dispatch<SetStateAction<boolean>>;
+  setMessage: Dispatch<SetStateAction<string>>;
+  setMessageType: Dispatch<SetStateAction<"error" | "success" | undefined>>;
+  setTable: Dispatch<SetStateAction<TableType | null>>;
+}
+
+const Table = (props: TableProps) => {
+  const { 
+    tables, 
+    table, 
+    id, 
+    edit, 
+    handleUpdatedTable, 
+    input, 
+    setTables, 
+    guests, 
+    setGuests, 
+    setEdit, 
+    getUpdatedId, 
+    isOpen, 
+    setisOpen, 
+    setMessage, 
+    setMessageType, 
+    setTable } = props;
+
   const history = useHistory();
+
   const { id: tableId } = useParams<{id: string}>();
   const { mariageID } = useCurrentUser();
 
   const returnName = (id: string) => {
-    const guest = guests?.find((guest) => guest._id === id);
+    const guest = guests?.find((guest) => guest?._id === id);
     return guest?.name;
   }
 

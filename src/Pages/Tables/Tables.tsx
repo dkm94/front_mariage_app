@@ -2,7 +2,6 @@ import "./Tables.css";
 
 import React, { useState, ChangeEvent } from "react";
 import { withRouter } from "react-router-dom";
-import axios from "axios";
 
 import { Container, Row, Col } from "react-bootstrap";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
@@ -18,7 +17,6 @@ import AddTableForm from "./Forms/Add";
 import Table from "./Table";
 import SearchBar from "../../components/Invités(affichage)/by_guests/Components/SearchBar/SearchBar";
 import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
-import Toast from "../../components/Toast/Toast";
 
 type EditType = {
   id: string;
@@ -28,7 +26,7 @@ type EditType = {
 const Tables = (props) => {
   const [searchValue, setSearchValue] = useState<string>("");
   const [edit, setEdit] = useState<EditType | null>(null);
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState<string>("");
   const [table, setTable]= useState<TableType | null>(null);
 
   const [isOpen, setisOpen] = useState(false);
@@ -56,14 +54,14 @@ const Tables = (props) => {
       return nameA.localeCompare(nameB);
     });
 
-  const handleUpdatedTable = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleUpdatedTable = (e: ChangeEvent<HTMLInputElement>): void => {
     setInput(e.target.value);
   };
-  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleSearch = (e: ChangeEvent<HTMLInputElement>): void => {
     setSearchValue(e.target.value);
   };
 
-  const getUpdatedId = (tableId: string, tableName: string) => {
+  const getUpdatedId = (tableId: string, tableName: string): void => {
     setEdit({
       id: tableId,
       name: tableName,
