@@ -320,30 +320,48 @@
 
 .guest-wrapper {
     height: 290px;
-    flex-basis: 20%;
-    -ms-flex: auto;
-    width: 250px;
-    position: relative;
-    padding: 10px;
+    transition: filter 0.5s ease;
+    display: flex;
+    cursor: pointer;
+    background: var(--light);
+    box-shadow: var(--shadow);
+    color: var(--dark);
+    text-align: center;
+    font-family: sans-serif;
+    flex-direction: column-reverse;
+    align-items: stretch;
     box-sizing: border-box;
 }
 
 
 .guests-container {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: flex-start;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(50px, 200px));
+    grid-gap: 15px 15px;
+    justify-content: center;
+    align-items: baseline;
  }
+ .select-guest {
+    display: flex;
+    justify-content: flex-end;
+}
 
  @media(max-width: 1366px) {
-    .guest-wrapper {
-      flex-basis: 25%;
+    .guests-container {
+        grid-template-columns: repeat(auto-fill, minmax(50px, 145px));
+     }
+  }
+
+
+  @media(max-width: 954px) {
+    .byguests___block {
+        padding: 0;
     }
   }
 
-  @media(max-width: 1211px) {
-    .guest-wrapper {
-      flex-basis: 33.33%;
+  @media(max-width: 845px) {
+    .guests-container {
+        /* grid-template-columns: repeat(auto-fill, minmax(50px, 135px)); */
     }
   }
 
@@ -384,37 +402,32 @@
     }
    }
 
-@media (max-width: 600px) { 
- .guest-wrapper {
-    flex-basis: 33.33%;
-  }
-
- .guest-card-style {
-    min-width: unset !important;
-    width: 100% !important;
-    max-width: unset !important;
- }
-
- .guests-container > div {
-    box-shadow: none !important;
- }
- 
- .select-guest {
-    display: flex;
-    justify-content: flex-end;
-    padding-right: 50px;
-    padding-left: 50px;
-}
- 
-}
-
 @media (max-width: 600px) {
+    .guest-wrapper {
+       flex-basis: 33.33%;
+     }
+    
+    .guest-card-style {
+       min-width: unset !important;
+       width: 100% !important;
+       max-width: unset !important;
+    }
+    
+    .guests-container > div {
+       box-shadow: none !important;
+    }
     .action-buttons {
         background-color: unset;
+    }
+    .guests-container {
+        grid-template-columns: repeat(auto-fill, minmax(50px, 135px));
     }
 }
 
 @media (max-width: 480px) { 
+    .guests-container {
+        grid-template-columns: repeat(auto-fill, minmax(50px, 85px));
+    }
     .guest-wrapper {
         padding: 0;
     }
@@ -435,7 +448,7 @@
         padding: 0 !important;
     }
     .guest-card-style > button {
-        /* right: 5px !important; */
+        right: 5px !important;
         top: 5px !important;
     }
     .guest-wrapper {

@@ -349,5 +349,8 @@ a:-webkit-any-link {
     .byguests___block {
         padding: 0 !important;
     }
+    .search__container {
+        max-width: unset;
+    }
  }
 
