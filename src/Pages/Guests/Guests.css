@@ -124,6 +124,9 @@
     .guest-container {
         padding: 0 !important;
     }
+    #guest-section {
+        padding: 0;
+    }
 }
 
 @media (max-width: 540px) {
