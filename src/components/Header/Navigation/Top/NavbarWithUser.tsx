@@ -39,7 +39,7 @@ const NavbarWithUser = (props:NavbarWithUserProps) => {
         <img alt="logo" src={Logo} id="logo" />
       </div>
       <ul className="navbar__links">
-        {links && links.map(({ title, pathname }, i) => <NavbarLink key={i} idx={i} path={pathname} title={title} handleClick={handleShowLinks} />)}
+        {links && links.map(({ title, pathname }, i) => <NavbarLink key={i} idx={i} path={`/mariage/${userInfos?.mariageID}${pathname}`} title={title} handleClick={handleShowLinks} />)}
         <li className="navbar__item hidden-links slideDown-7" id="showNavLinks">
           <Link
             className="navbar__link"
