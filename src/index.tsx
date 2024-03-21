@@ -1,20 +1,22 @@
 import "../src/App.css";
 import "../src/index.css";
 
-import React from "react";
+import React, { Fragment, StrictMode } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 
 import App from "./App";
 import Layout from "./Layout";
 
+const StrictModeWrapper = process.env.NODE_ENV === 'development' ? StrictMode : Fragment;
+
 ReactDOM.render(
-  // <React.StrictMode>
+  <StrictModeWrapper>
     <BrowserRouter>
       <Layout>
         <App />
       </Layout>
-    </BrowserRouter>,
-  // </React.StrictMode>,
+    </BrowserRouter>
+  </StrictModeWrapper>,
   document.getElementById("root")
 );
