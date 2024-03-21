@@ -4,6 +4,7 @@ import { requestHandler } from "../helpers/requestHandler";
 interface LoginParams {
   email: string;
   password: string;
+  signal: AbortSignal;
 }
 
 interface RegisterParams {
@@ -32,7 +33,9 @@ export const login = requestHandler<LoginParams, any>((params) => {
       data: {
         email: params?.email,
         password: params?.password
-      }
+      },
+      signal: params?.signal,
+      timeout: 4000
     });
   });
 
@@ -46,7 +49,8 @@ export const register = requestHandler<RegisterParams, any>((params) => {
       password: params?.password,
       firstPerson: params?.firstPerson,
       secondPerson: params?.secondPerson
-    }
+    },
+    signal: new AbortController().signal
   });
 });
 
@@ -73,5 +77,6 @@ export const deleteAccount = requestHandler<DeleteUserParams, any>((params) => {
   return Promise.resolve({
   method: 'delete',
   url: `/api/admin/admin/deleteAccount/${params?.id}`,
+  signal: new AbortController().signal
   });
 });

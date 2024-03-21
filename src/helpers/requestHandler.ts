@@ -26,11 +26,18 @@ export const requestHandler = <TParams, TResult>(
         token: response.data.token,
       };
     } catch (error) {
-      return {
-        statusCode: error.response ? error.response.status : 500,
-        success: error.response.data.success,
-        message: error.response.data.message,
-      };
+      if(error.name === "CanceledError"){
+        return {
+          statusCode: 499,
+          success: false,
+        };
+      } else {
+        return {
+          statusCode: error.response ? error.response.status : 500,
+          success: error.response.data.success,
+          message: error.response.data.message,
+        };
+      }
     }
   };
 };

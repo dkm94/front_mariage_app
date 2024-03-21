@@ -26,7 +26,8 @@ export const addFood = requestHandler<FoodParams, any>((params) => {
     data: {
     name: params?.name,
     category: params?.category
-    }
+    },
+    signal: new AbortController().signal
     });
 });
 
@@ -37,7 +38,8 @@ export const updateFood = requestHandler<FoodParams, any>((params) => {
     data: {
         name: params?.name
     },
-    params: params
+    params: params,
+    signal: new AbortController().signal
     });
 });
 
@@ -45,6 +47,7 @@ export const deleteFood = requestHandler<FoodParams, any>((params) => {
     return Promise.resolve({
     method: 'delete',
     url: `/api/reception/food/delete/${params?.id}`,
-    params: params
+    params: params,
+    signal: new AbortController().signal
     });
 });

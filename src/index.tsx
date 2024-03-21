@@ -9,12 +9,12 @@ import App from "./App";
 import Layout from "./Layout";
 
 ReactDOM.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <BrowserRouter>
       <Layout>
         <App />
       </Layout>
-    </BrowserRouter>
-  </React.StrictMode>,
+    </BrowserRouter>,
+  // </React.StrictMode>,
   document.getElementById("root")
 );

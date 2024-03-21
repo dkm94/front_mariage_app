@@ -16,7 +16,7 @@ import Toast from "../../../components/Toast/Toast";
 import { UserType } from "../../../../types";
 import { login } from "../../../services";
 import { ApiResponse } from "../../../helpers/requestHandler";
-
+import { generateUuid } from "../../../helpers/generateUUID";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required("Veuillez compléter ce champ."),
@@ -39,9 +39,12 @@ const Login = (props: LoginProps) => {
 
   const history: History = useHistory();
 
+  const [abortController, setAbortController] = useState<AbortController | null>(null);
+
   const [loadingButton, setLoadingButton] = useState<boolean>(false);
   const [message, setMessage] = useState<string | undefined>(undefined);
   const [messageType, setMessageType] = useState<"error" | "success" | undefined>(undefined);
+  const [generatedId, setGeneratedId] = useState<string | undefined>(undefined);
 
   const handleSwitch = (): void => {
     setShowForm("register");
@@ -60,13 +63,26 @@ const Login = (props: LoginProps) => {
   const onSubmit = async (form: Auth): Promise<void> => {
     setLoadingButton(true);
 
-    const authResponse:ApiResponse<Auth> = await login({ email: form.email, password: form.password });
+    if (abortController) {
+      abortController.abort(); // Annuler la requête en cours
+    }
+
+    const newAbortController = new AbortController();
+    setAbortController(newAbortController);
+
+    const authResponse:ApiResponse<Auth> = await login({ email: form.email, password: form.password, signal: newAbortController.signal });
     const { success, statusCode, message, token } = authResponse;
     
     if(!success) {
       setLoadingButton(false);
-      setMessageType("error");
-      setMessage(message);
+      
+      if(message){
+        setMessageType("error");
+        setMessage(message);
+        setGeneratedId(generateUuid());
+      }
+
+      setAbortController(null);
       return;
     }
     
@@ -84,15 +100,24 @@ const Login = (props: LoginProps) => {
       }
     }
 
+    setAbortController(null);
+
     setTimeout(() => {
       setMessageType(undefined);
       setMessage(undefined);
     }, 3000);
   };
 
+  function disableFormButton(){
+    if(loadingButton){
+      return true;
+    }
+    return false;
+  }
+
   return (
     <div className="login-page">
-      {message === undefined ? null : <Toast message={message} messageType={messageType} /> }
+      {message === undefined ? null : <Toast message={message} messageType={messageType} id={generatedId} setGeneratedId={setGeneratedId} /> }
       <div className="login-grid">
         <div className="grid-item-2">
           <div className="login">
@@ -128,6 +153,7 @@ const Login = (props: LoginProps) => {
                     type="submit"
                     variant="contained"
                     text={loadingButton ? "..." : "Se connecter"}  
+                    disabled={disableFormButton()}
                   />
                 </div>
                 <div className="login__signup">

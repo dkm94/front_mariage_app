@@ -1,6 +1,6 @@
 import 'react-toastify/dist/ReactToastify.css'; 
 
-import React, { useEffect } from 'react';
+import React, { Dispatch, SetStateAction, useEffect } from 'react';
 import { Zoom, ToastContainer, toast, ToastOptions } from 'react-toastify';
 
 interface ToastProps {
@@ -8,10 +8,11 @@ interface ToastProps {
   messageType: "error" | "success" | undefined;
   options?: Partial<ToastOptions>;
   id?: string | undefined;
+  setGeneratedId?: Dispatch<SetStateAction<string | undefined>>;
 }
 
 const Toast = (props: ToastProps) => {
-  const { message, messageType, id, options } = props;
+  const { message, messageType, id, options, setGeneratedId } = props;
   
   useEffect(() => {
     const showToast = messageType === "error" ? toast.error : toast.success;
@@ -32,6 +33,12 @@ const Toast = (props: ToastProps) => {
         ...options,
         toastId: id
       });
+    }
+
+    return () => {
+      if(id && setGeneratedId){
+        setGeneratedId(undefined)
+      }
     }
 }, [id]);
 
