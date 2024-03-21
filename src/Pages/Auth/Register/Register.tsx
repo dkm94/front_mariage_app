@@ -17,6 +17,7 @@ import { register as customRegister } from "../../../services/authRequests";
 import { useFetch } from "../../../hooks";
 import { getAdmins } from "../../../services/adminRequests";
 import { ApiResponse } from "../../../helpers/requestHandler";
+import { generateUuid } from "../../../helpers/generateUUID";
 
 type Auth = {
   email: string;
@@ -37,6 +38,7 @@ const Register = (props: RegisterProps) => {
   const [loadingButton, setLoadingButton] = useState(false);
   const [message, setMessage] = useState<string | undefined>(undefined);
   const [messageType, setMessageType] = useState<"error" | "success" | undefined>(undefined);
+  const [generatedId, setGeneratedId] = useState<string | undefined>(undefined);
 
   const [tempArr, setTempArr] = useState<UserType[]>([]);
 
@@ -104,12 +106,14 @@ const Register = (props: RegisterProps) => {
       setLoadingButton(false);
       setMessageType("error");
       setMessage(message);
+      setGeneratedId(generateUuid());
     }
 
     if(success){
       setLoadingButton(false);
       setMessageType("success");
       setMessage(message);
+      setGeneratedId(generateUuid());
       setTimeout(() => {
         setShowForm("login")
       }, 4500);
@@ -118,7 +122,7 @@ const Register = (props: RegisterProps) => {
 
   return (
     <div className="register-page">
-      {message === undefined ? null : <Toast message={message} messageType={messageType} />}
+      {message === undefined ? null : <Toast message={message} messageType={messageType} id={generatedId} setGeneratedId={setGeneratedId} />}
       <div className="register-grid">
         <div className="grid-item-2">
           <div className="register">

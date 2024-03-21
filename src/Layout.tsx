@@ -27,6 +27,7 @@ const Layout = ({ children }) => {
   axios.defaults.baseURL = "https://my-wedding-backend.onrender.com/";
   // axios.defaults.baseURL = 'http://localhost:3050';
   axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+  // axios.defaults.timeout = 4000;
 
   return (
     <Router>
