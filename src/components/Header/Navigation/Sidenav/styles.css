@@ -25,7 +25,7 @@ width: 100%;
 .custom-sidebar-header {
 display: block;
 align-items: center;
-height: 74px;
+height: 60px;
 background: rgb(0 0 0 / 15%);
 }
 
@@ -36,7 +36,7 @@ padding: 0;
 cursor: pointer;
 
 width: 60px;
-height: 72px;
+height: 60px;
 display: grid;
 place-items: center;
 color: grey;
