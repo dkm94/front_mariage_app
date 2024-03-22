@@ -46,7 +46,8 @@ export interface ProtectedRouteProps {
 export type NavigationDataType = {
     idx: number;
     title: string;
-    icon: ElementType;
+    // icon: ElementType;
+    icon: string;
     pathname: string;
 }
 
