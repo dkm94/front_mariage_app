@@ -5,8 +5,7 @@ import decode from "jwt-decode";
 
 import TopNav from "./components/Header/Navigation/Top/NavbarWithUser";
 import LoggedOutNavigation from "./components/Header/Navigation/Log_out";
-import Sidebar from "./components/Header/Navigation/Sidebar";
-import { Sidebar1 } from "./components/Header/Navigation/Responsive/VerticalNavbar2/VerticalNavbar2";
+import { SideNavigation } from "./components/Header/Navigation/Sidenav/Sidenavigation";
 
 import { UserType } from "../types/index";
 
@@ -36,7 +35,7 @@ const Layout = ({ children }) => {
         <div className={token ? "body-content" : "body-content___home"}>
           {/* {token && <Sidebar userInfos={user} loading={loading} />} */}
           {/* {token && <VerticalNavbar userInfos={user} loading={loading} />} */}
-          {token && <Sidebar1 userInfos={user} loading={loading} />}
+          {token && <SideNavigation userInfos={user} loading={loading} />}
           {children}
         </div>
       </div>
