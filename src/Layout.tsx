@@ -33,8 +33,6 @@ const Layout = ({ children }) => {
       <div className="navigation-layout">
         {token ? <TopNav userInfos={user} /> : <LoggedOutNavigation />}
         <div className={token ? "body-content" : "body-content___home"}>
-          {/* {token && <Sidebar userInfos={user} loading={loading} />} */}
-          {/* {token && <VerticalNavbar userInfos={user} loading={loading} />} */}
           {token && <SideNavigation userInfos={user} loading={loading} />}
           {children}
         </div>
