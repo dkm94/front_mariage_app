@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import Logo from ".././../../../img/logo-2023-no-shadow.png";
-import { NavigationData } from "../NavigationData";
-import { NavigationDataType, UserType } from "../../../../../types/index";
-import NavbarLink from "./NavbarLink";
+import { UserType } from "../../../../../types/index";
 import MenuGrid from "./MenuGrid/MenuGrid";
 
 const win: Window = window;
@@ -17,9 +15,9 @@ const NavbarWithUser = (props:NavbarWithUserProps) => {
   const { userInfos } = props;
 
   const [showLinks, setShowLinks] = useState<boolean>(false);
-  const [links, setLinks] = useState<NavigationDataType[]>([]);
+  // const [links, setLinks] = useState<NavigationDataType[]>([]);
 
-  useEffect(() => setLinks(NavigationData), []);
+  // useEffect(() => setLinks(NavigationData), []);
 
   const LogOut = (): void => {
     console.log("déconnexion...");
