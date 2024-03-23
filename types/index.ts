@@ -46,9 +46,9 @@ export interface ProtectedRouteProps {
 export type NavigationDataType = {
     idx: number;
     title: string;
-    // icon: ElementType;
     icon: string;
     pathname: string;
+    color: string;
 }
 
 export interface IDashboardProps {

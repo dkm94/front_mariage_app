@@ -15,6 +15,7 @@ interface SideNavigationProps {
   
   export const SideNavigation = (props: SideNavigationProps) => {
     const [isOpen, setIsOpen] = useState(true);
+    // handle open state when path changes
     return (
       <aside className={`custom-sidebar ${isOpen ? "open" : ""}`}>
         <div className="custom-sidebar-inner">

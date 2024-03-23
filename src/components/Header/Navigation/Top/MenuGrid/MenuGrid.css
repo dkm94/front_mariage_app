@@ -1,0 +1,43 @@
+.menu-grid {
+    display: none;
+    /* grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); */
+    grid-template: 'dashboard guests'
+                'tables todos'
+                'reception expenses';
+    row-gap: 1rem;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+.menu-grid-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    cursor: pointer;
+    height: 150px;
+}
+.grid-item-0 {
+    grid-area: dashboard;
+}
+.grid-item-1 {
+    grid-area: guests;
+}
+.grid-item-2 {
+    grid-area: tables;
+}
+.grid-item-3 {
+    grid-area: todos;
+}
+.grid-item-4 {
+    grid-area: reception;
+}
+.grid-item-5 {
+    grid-area: expenses;
+}
+
+@media screen and (max-width: 600px) {
+    .menu-grid {
+        display: grid;
+    }
+}
