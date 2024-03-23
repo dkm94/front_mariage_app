@@ -39,7 +39,9 @@ const Dashboard = (props: IDashboardProps) => { // Ce composant est rendu beauco
   const { data: foods, message: foodsMessage, messageType: foodsMessageType } = useFetch<void, Food[]>(getFoods, []);
 
   useEffect(() => {
+    setLoading(true);
     fetchWedding({ id });
+    setLoading(false);
   }, [id]);
 
   useEffect(() => {

@@ -2,7 +2,7 @@ import "./CustomButton.css";
 
 import React from "react";
 
-import { Button, ButtonProps } from "@mui/material";
+import { Button } from "@mui/material";
 
 // import { IBlackButton } from "../../../../types";
 

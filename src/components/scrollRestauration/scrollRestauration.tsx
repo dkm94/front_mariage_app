@@ -1,9 +1,8 @@
 import React from 'react';
 import { useEffect } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const ScrollRestoration = ({ children }) => {
-  const history = useHistory();
   const location = useLocation<{ currentPosition?: number }>();
 
   useEffect(() => {
