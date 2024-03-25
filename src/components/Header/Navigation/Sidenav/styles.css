@@ -57,18 +57,17 @@ gap: 16px;
 align-items: center;
 height: 56px;
 width: 100%;
-font-family: "Poppins";
-font-size: 17px;
 line-height: 1;
 padding: 0 10px;
 border-radius: 8px;
-color: grey;
+color: #534a43;
 opacity: 0.8;
 background-color: unset;
 }
 
 .custom-sidebar-button:hover {
-background: rgb(0 0 0 / 30%);
+background: #e0dedb;
+/* color: #fcfaf7; */
 opacity: 1;
 }
 

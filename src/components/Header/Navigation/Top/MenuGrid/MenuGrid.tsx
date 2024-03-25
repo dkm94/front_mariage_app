@@ -1,7 +1,7 @@
 import "./MenuGrid.css";
 
-import React, { HTMLAttributes } from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { HTMLAttributes, useEffect } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 
 import { NavigationData } from '../../NavigationData';
 
@@ -18,6 +18,7 @@ interface GridItemProps extends HTMLAttributes<HTMLUListElement> {
 interface MenuGridProps extends HTMLAttributes<HTMLDataListElement> {
     mariageID: string;
     userId: string;
+    showMenu: (show: boolean) => void;
     logout: () => void;
 }
 export const GridItem = (props: GridItemProps) => {
@@ -33,9 +34,10 @@ export const GridItem = (props: GridItemProps) => {
                     flexDirection: "column", 
                     justifyContent: "center", 
                     alignItems: "center", 
-                    backgroundColor: "unset"}} 
+                    backgroundColor: "unset",
+                    gap: "8px"}} 
                 >
-                    <span className="material-symbols-outlined" style={{ textAlign: "center", color: "grey", fontSize: "3rem" }}>{icon}</span>
+                    <span className="material-symbols-outlined" style={{ textAlign: "center", color: "grey", fontSize: "2rem" }}>{icon}</span>
                     <span>Déconnexion</span>
                 </button>
             </li>
@@ -48,19 +50,20 @@ export const GridItem = (props: GridItemProps) => {
                 style={{ 
                     display: "flex", 
                     flexDirection: "column", 
-                    justifyContent: "center"}} 
+                    justifyContent: "center",
+                    gap: "8px"}} 
                 >
-                    <span className="material-symbols-outlined" style={{ textAlign: "center", color: "#FFF", fontSize: "3rem" }}>{icon}</span>
-                    <span style={{ color: "#FFF"}}>{title}</span>
+                    <span className="material-symbols-outlined" style={{ textAlign: "center", color: "#FFF", fontSize: "2rem" }}>{icon}</span>
+                    <span style={{ color: "#534a43", backgroundColor: "#FFF", padding: "1px 15px", textAlign: "center"}}>{title}</span>
                 </NavLink>
             </li>
         )
     }  else {
         return (
             <li key={idx} style={{ backgroundColor: color }} className={`menu-grid-item grid-item-${idx}`}>
-                <NavLink to={`/mariage/${mariageID}${path}`} style={{ display: "flex", flexDirection: "column", justifyContent: "center"}}> 
-                    <span className="material-symbols-outlined" style={{ textAlign: "center", color: "#FFF", fontSize: "3rem" }}>{icon}</span>
-                    <span style={{ color: "#FFF"}}>{title}</span>
+                <NavLink to={`/mariage/${mariageID}${path}`} style={{ display: "flex", flexDirection: "column", justifyContent: "center", gap: "8px"}}> 
+                    <span className="material-symbols-outlined" style={{ textAlign: "center", color: "#FFF", fontSize: "2rem" }}>{icon}</span>
+                    <span style={{ color: "#534a43", backgroundColor: "#FFF", padding: "1px 15px", borderRadius: "3px", textAlign: "center", width: "max-content"}}>{title === "Tableau de bord" ? "Accueil" : title}</span>
                 </NavLink>
             </li>
         )
@@ -69,7 +72,13 @@ export const GridItem = (props: GridItemProps) => {
 }
 
 const MenuGrid = (props: MenuGridProps) => {
-    const { mariageID, userId, logout} = props;
+    const { mariageID, userId, showMenu, logout} = props;
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+        showMenu(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [pathname]);
   return (
     <ul className='menu-grid'>
         {NavigationData.map((item, i) => {

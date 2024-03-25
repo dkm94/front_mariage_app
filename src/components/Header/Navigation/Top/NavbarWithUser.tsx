@@ -38,8 +38,7 @@ const NavbarWithUser = (props:NavbarWithUserProps) => {
         <img alt="logo" src={Logo} id="logo" />
       </div>
       <div className="navbar__links glass">
-        <MenuGrid mariageID={userInfos?.mariageID!} userId={userInfos?.id!} logout={LogOut} />
-        {/* {links && links.map(({ title, pathname }, i) => <NavbarLink key={i} idx={i} path={`/mariage/${userInfos?.mariageID}${pathname}`} title={title} handleClick={handleShowLinks} />)} */}
+        <MenuGrid mariageID={userInfos?.mariageID!} userId={userInfos?.id!} showMenu={setShowLinks} logout={LogOut} />
         {!showLinks && (
           <>
             <li className="navbar__item hidden-links slideDown-7" id="showNavLinks">
