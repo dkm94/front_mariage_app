@@ -57,7 +57,7 @@ export const register = requestHandler<RegisterParams, any>((params) => {
 export const updatePassword = requestHandler<UpdatePasswordParams, any>((params) => {
   return Promise.resolve({
   method: 'post',
-  url: `/api/admin/admin/editAccount/${params?.id}`,
+  url: `/api/admin/editAccount/${params?.id}`,
   data: {
       password: params?.password
   },
@@ -68,7 +68,7 @@ export const updatePassword = requestHandler<UpdatePasswordParams, any>((params)
 export const getUser = requestHandler<GetUserParams, AccountType>((params) => {
   return Promise.resolve({
   method: 'get',
-  url: `/api/admin/admin/myAccount/${params?.id}`,
+  url: `/api/admin/myAccount/${params?.id}`,
   params: params || {},
   });
 });
@@ -76,7 +76,7 @@ export const getUser = requestHandler<GetUserParams, AccountType>((params) => {
 export const deleteAccount = requestHandler<DeleteUserParams, any>((params) => {
   return Promise.resolve({
   method: 'delete',
-  url: `/api/admin/admin/deleteAccount/${params?.id}`,
+  url: `/api/admin/deleteAccount/${params?.id}`,
   signal: new AbortController().signal
   });
 });

@@ -10,7 +10,7 @@ interface WeddingParams {
 export const getWedding = requestHandler<WeddingParams, WeddingType>((params) => {
     return Promise.resolve({
     method: 'get',
-    url: `/api/admin/wedding/${params?.id}`,
+    url: `/api/wedding/${params?.id}`,
     params: params,
     });
 });
@@ -18,7 +18,7 @@ export const getWedding = requestHandler<WeddingParams, WeddingType>((params) =>
 export const updateWedding = requestHandler<WeddingParams, any>((params) => {
     return Promise.resolve({
     method: 'post',
-    url: `/api/admin/wedding/edit/${params?.id}`,
+    url: `/api/wedding/edit/${params?.id}`,
     data: {
         firstPerson: params?.firstPerson,
         secondPerson: params?.secondPerson,

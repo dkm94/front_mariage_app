@@ -10,14 +10,14 @@ interface TodoParams {
 export const getTodos = requestHandler<void, TaskType[]>((params) => {
     return Promise.resolve({
     method: 'get',
-    url: '/api/admin/todolist/',
+    url: '/api/todolist/',
     });
 });
 
 export const addTodo = requestHandler<TodoParams, any>((params) => {
     return Promise.resolve({
     method: 'post',
-    url: '/api/admin/todolist/add',
+    url: '/api/todolist/add',
     params: params || {},
     data: {
         text: params?.text,
@@ -28,7 +28,7 @@ export const addTodo = requestHandler<TodoParams, any>((params) => {
 export const updateTodo = requestHandler<TodoParams, any>((params) => {
     return Promise.resolve({
     method: 'post',
-    url: `/api/admin/todolist/edit/${params?.id}`,
+    url: `/api/todolist/edit/${params?.id}`,
     data: {
         text: params?.text
     },
@@ -39,7 +39,7 @@ export const updateTodo = requestHandler<TodoParams, any>((params) => {
 export const updateTodosStatus = requestHandler<TodoParams, any>((params) => {
     return Promise.resolve({
     method: 'post',
-    url: `/api/admin/todolist/edit/${params?.id}`,
+    url: `/api/todolist/edit/${params?.id}`,
     data: {
         isCompleted: params?.isCompleted
     },
@@ -50,7 +50,7 @@ export const updateTodosStatus = requestHandler<TodoParams, any>((params) => {
 export const deleteTodo = requestHandler<TodoParams, any>((params) => {
     return Promise.resolve({
     method: 'delete',
-    url: `/api/admin/todolist/delete/${params?.id}`,
+    url: `/api/todolist/delete/${params?.id}`,
     params: params
     });
 });

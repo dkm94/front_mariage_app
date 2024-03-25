@@ -14,7 +14,7 @@ interface TableParams {
 export const getTables = requestHandler<void, TableType[]>((params) => {
     return Promise.resolve({
     method: 'get',
-    url: '/api/admin/tables/',
+    url: '/api/tables/',
     params: params || {}, // params is optional, provide an empty object if not provided
     });
 });
@@ -41,7 +41,7 @@ export const deleteTable = requestHandler<TableParams, any>((params) => {
 export const updateTableWithGuests = requestHandler<AddGuestsParams, any>((params) => {
     return Promise.resolve({
     method: 'post',
-    url: `/api/admin/guests/addtable/${params?.id}`,
+    url: `/api/guests/addtable/${params?.id}`,
     data: {
         guestIds: params?.guestIds,
     },
@@ -52,7 +52,7 @@ export const updateTableWithGuests = requestHandler<AddGuestsParams, any>((param
 export const updateTablesName = requestHandler<TableParams, any>((params) => {
     return Promise.resolve({
     method: 'post',
-    url: `/api/admin/tables/edit/${params?.id}`,
+    url: `/api/tables/edit/${params?.id}`,
     data: {
         name: params?.name
     },

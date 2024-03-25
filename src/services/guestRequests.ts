@@ -23,7 +23,7 @@ interface UpdateMedia {
 export const getGuests = requestHandler<void, GuestType[]>((params) => {
     return Promise.resolve({
       method: 'get',
-      url: '/api/admin/guests',
+      url: '/api/guests',
       params: params || {}, // params is optional, provide an empty object if not provided
     });
   });
@@ -31,7 +31,7 @@ export const getGuests = requestHandler<void, GuestType[]>((params) => {
 export const addGuest = requestHandler<AddGuestParams, any>((params) => {
   return Promise.resolve({
     method: 'post',
-    url: '/api/admin/guests/add',
+    url: '/api/guests/add',
     params: params || {},
     data: {
       name: params?.name,
@@ -42,7 +42,7 @@ export const addGuest = requestHandler<AddGuestParams, any>((params) => {
 export const updateGuest = requestHandler<UpdateGuestParams, any>((params) => {
   return Promise.resolve({
   method: 'post',
-  url: `api/admin/guests/edit/${params?.id}`,
+  url: `api/guests/edit/${params?.id}`,
   data: {
     _id: params?.id,
     name: params?.name,
@@ -55,7 +55,7 @@ export const updateGuest = requestHandler<UpdateGuestParams, any>((params) => {
 export const updateGuestMedia = requestHandler<UpdateMedia, any>((params) => {
   return Promise.resolve({
   method: 'post',
-  url: `api/admin/guests/edit/${params?.id}`,
+  url: `api/guests/edit/${params?.id}`,
   formData: params?.formData,
   params: params,
   headers: {'Content-Type': 'multipart/form-data' }
@@ -65,7 +65,7 @@ export const updateGuestMedia = requestHandler<UpdateMedia, any>((params) => {
 export const deleteGuest = requestHandler<DeleteGuestParams, any>((params) => {
   return Promise.resolve({
   method: 'delete',
-  url: `/api/admin/guests/delete/${params?.id}`,
+  url: `/api/guests/delete/${params?.id}`,
   params: params
   });
 });
