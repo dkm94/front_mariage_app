@@ -247,12 +247,36 @@
     }
 
 @media screen and (max-width: 600px) {
+    .glass {
+        position: relative;
+        background: inherit;
+        overflow: hidden;
+        width: 70%;
+        height: 70%;
+    
+        /* z-index: 1; */
+      }
+      
+      .glass:before {
+        content: '';
+        position: absolute;
+        background: inherit;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: -20px;
+        box-shadow: inset 0 0 500px rgba(255, 255, 255, .4); 
+        filter: blur(10px);
+        z-index: -1;
+      }
+
+      
     .hidden-links {
         display: block;
     }
     .navbar__links {
         flex-direction: column;
-        justify-content: center;
         align-items: center;
         position: fixed;
         visibility: hidden;
@@ -262,7 +286,7 @@
         width: 0;
         height: 100vh;
         padding: 2rem;
-        background: #BCBCAD;
+        /* background: #BCBCAD; */
         /* slide in and out nav */
         transition: all .8s ease-out;
     }

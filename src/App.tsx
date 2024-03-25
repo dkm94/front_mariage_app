@@ -81,7 +81,7 @@ function App() {
   const TodoList = () => user?.id ? <Page title="Liste des tâches" userInfos={user} auth={role} component={TodoPage} /> : null;
 
   return (
-    <div className={token ? "App-home" : "App"}>
+    <main className={token ? "App-home" : "App"}>
       <AuthenticationContext.Provider value={role}>
         <CurrentUserContext.Provider value={user}>
           <ScrollButtonContext.Provider value={scrollButton}>
@@ -175,7 +175,7 @@ function App() {
         </CurrentUserContext.Provider>
       </AuthenticationContext.Provider>
       <Footer token={token} />
-    </div>
+    </main>
   );
 }
 

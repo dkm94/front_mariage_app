@@ -1,0 +1,22 @@
+.menu-grid {
+    display: none;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 1rem;
+    padding: 0;
+    margin-top: 50px;
+    width: 100%;
+}
+.menu-grid-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    cursor: pointer;
+    height: 120px;
+}
+
+@media screen and (max-width: 600px) {
+    .menu-grid {
+        display: grid;
+    }
+}

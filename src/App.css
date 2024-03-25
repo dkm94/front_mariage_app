@@ -317,6 +317,10 @@ a:-webkit-any-link {
     .searchbar, .guest-form  {
         width: 100% !important;
     }
+    .App-home {
+        position: absolute;
+        left: 70px;
+    }
  }
 
  .add-input, .search__container {
@@ -351,6 +355,10 @@ a:-webkit-any-link {
     }
     .search__container {
         max-width: unset;
+    }
+    .App-home {
+        position: unset;
+        left: unset;
     }
  }
 
