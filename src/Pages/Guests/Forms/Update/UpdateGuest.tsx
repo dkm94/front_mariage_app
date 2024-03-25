@@ -99,7 +99,7 @@ const UpdateGuest = (props: UpdateGuestProps) => {
     try {
       const formData = new FormData();
       formData.append("media", file);
-      const { data } = await axios.post(`/api/admin/guests/edit/${id}`, formData);
+      const { data } = await axios.post(`/api/guests/edit/${id}`, formData);
       // const response = await updateGuestMedia({ id: id, formData });
 
       if(data){

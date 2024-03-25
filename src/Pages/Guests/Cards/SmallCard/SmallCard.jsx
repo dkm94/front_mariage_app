@@ -17,7 +17,7 @@ const SmallGuestCard = (props) => {
           <img
             alt="notre mariage"
             width={"100%"}
-            src={`https://my-wedding-backend.onrender.com/api/admin/guests/media/${guest?.media}`}
+            src={`https://my-wedding-backend.onrender.com/api/guests/media/${guest?.media}`}
           />
         )}
       </Grid2>

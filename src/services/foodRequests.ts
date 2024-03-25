@@ -14,7 +14,7 @@ interface FoodParams {
 export const getFoods = requestHandler<void, Food[]>((params) => {
     return Promise.resolve({
     method: 'get',
-    url: '/api/admin/reception/food',
+    url: '/api/reception/food',
     });
 });
 

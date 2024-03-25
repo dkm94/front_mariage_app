@@ -102,7 +102,7 @@ const Guest = (props: GuestsProps) => {
             ) : (
               <img
                 alt="notre mariage"
-                src={`https://my-wedding-backend.onrender.com/api/admin/guests/media/${guest?.media}`}
+                src={`https://my-wedding-backend.onrender.com/api/guests/media/${guest?.media}`}
               />
             )}
           </div>

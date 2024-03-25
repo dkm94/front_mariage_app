@@ -12,7 +12,7 @@ interface OperationParams {
 export const getOperations = requestHandler<void, OperationType[]>((params) => {
   return Promise.resolve({
     method: 'get',
-    url: '/api/admin/budget/operations',
+    url: '/api/budget/operations',
     params: params || {},
   });
 });
@@ -20,7 +20,7 @@ export const getOperations = requestHandler<void, OperationType[]>((params) => {
 export const addOperation = requestHandler<OperationParams, any>((params) => {
   return Promise.resolve({
   method: 'post',
-  url: '/api/admin/budget/operations/add',
+  url: '/api/budget/operations/add',
   params: params || {},
   data: {
       category: params?.category,
@@ -33,7 +33,7 @@ export const addOperation = requestHandler<OperationParams, any>((params) => {
 export const updateOperation = requestHandler<OperationParams, any>((params) => {
   return Promise.resolve({
   method: 'post',
-  url: `/api/admin/budget/operations/edit/${params?.id}`,
+  url: `/api/budget/operations/edit/${params?.id}`,
   data: {
       category: params?.category,
       price: params?.price,
@@ -46,7 +46,7 @@ export const updateOperation = requestHandler<OperationParams, any>((params) => 
 export const deleteOperation = requestHandler<OperationParams, any>((params) => {
   return Promise.resolve({
   method: 'delete',
-  url: `/api/admin/budget/operations/delete/${params?.id}`,
+  url: `/api/budget/operations/delete/${params?.id}`,
   params: params
   });
 });
