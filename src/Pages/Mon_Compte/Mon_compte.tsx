@@ -137,6 +137,8 @@ const MyAccount = (props: AccountProps) => {
             updateAccountData(account)
         }
     }, [updateAccountData, account]);
+
+    // handle edit account
     
     const onSubmitAccount = async () => {
         const response = await updatePassword({ id, password: newPassword })

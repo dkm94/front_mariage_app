@@ -74,18 +74,18 @@ h1 {
     display: flex;
     flex-direction: row;
     width: 100%;
-    /* position: relative; */
     position: absolute;
     top: 0;
 }
 
+.nav-open .App-home {
+    margin-left: 330px; /* Réduit la marge lorsque la navigation est ouverte */
+  }
 .App-home {
     min-height: 91vh;
-    width: 100%;
-    height: fit-content;
-    /* position: absolute; */
-    /* left: 20%; */
-    /* background-color: #FFF; */
+    flex: 1;
+    margin-left: 70px; /* Marge pour laisser de la place à la sidebar */
+    transition: margin-left 0.3s ease; /* Animation de transition de marge */
 }
 
 .App {
@@ -319,7 +319,11 @@ a:-webkit-any-link {
     }
     .App-home {
         position: absolute;
-        left: 70px;
+        width: 100%;
+        left: 0px !important;
+    }
+    .nav-open .App-home {
+        margin-left: 70px !important;
     }
  }
 
