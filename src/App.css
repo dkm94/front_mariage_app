@@ -323,7 +323,7 @@ a:-webkit-any-link {
         left: 0px !important;
     }
     .nav-open .App-home {
-        margin-left: 70px !important;
+        margin-left: 70px;
     }
  }
 
@@ -363,6 +363,7 @@ a:-webkit-any-link {
     .App-home {
         position: unset;
         left: unset;
+        margin: 0px !important;
     }
  }
 
