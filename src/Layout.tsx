@@ -12,6 +12,7 @@ import { UserType } from "../types/index";
 const Layout = ({ children }) => {
   let user:UserType;
   const [loading, setLoading] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState(true);
   const token: string | null = localStorage.getItem("token");
   
   if(token){
@@ -32,8 +33,8 @@ const Layout = ({ children }) => {
     <Router>
       <div className="navigation-layout">
         {token ? <TopNav userInfos={user} /> : <LoggedOutNavigation />}
-        <div className={token ? "body-content" : "body-content___home"}>
-          {token && <SideNavigation userInfos={user} loading={loading} />}
+        <div className={`${token ? "body-content" : "body-content___home"} ${isOpen ? 'nav-open' : ''}`}>
+          {token && <SideNavigation userInfos={user} loading={loading} setIsOpen={setIsOpen} isOpen={isOpen} />}
           {children}
         </div>
       </div>

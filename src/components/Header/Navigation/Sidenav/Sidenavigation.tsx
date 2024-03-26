@@ -11,10 +11,12 @@ import profilePicture from "../../../../img/couple-img.jpg";
 interface SideNavigationProps {
     userInfos?: UserType | null;
     loading: boolean;
+    setIsOpen: (isOpen: boolean) => void;
+    isOpen: boolean;
   }
   
   export const SideNavigation = (props: SideNavigationProps) => {
-    const [isOpen, setIsOpen] = useState(true);
+    const { isOpen, setIsOpen } = props;
     // handle open state when path changes
 
     return (
