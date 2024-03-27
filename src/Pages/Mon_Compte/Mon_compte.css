@@ -49,8 +49,7 @@
     width: 100%;
 }
 .account-container {
-    box-shadow: rgba(0, 0, 0, 0.14) 0px 2px 10px 0px;
-    padding: 90px;
+    padding: 40px;
     max-width: 950px;
 }
 .settings-img-container > div {
@@ -61,7 +60,7 @@
 }
 .settings-img-container > div > img {
     border-radius: 50%;
-    height: 15rem;
+    height: 11rem;
     width: auto;
     object-fit: contain;
 }
@@ -74,7 +73,12 @@
     flex-direction: column;
     gap: 50px;
 }
-
+#settings-img-lock {
+    display: none;
+}
+.settings-title {
+    font-size: 1.5rem;
+}
 @media (max-width: 1200px) {
 	.settings-img-container {
         flex-grow: unset;

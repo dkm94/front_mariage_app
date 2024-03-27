@@ -1,6 +1,6 @@
 import "./ExpenseElement.css";
 
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useHistory, useParams } from "react-router";
 import { History } from "history";
 
@@ -36,7 +36,8 @@ const ExpenseElement = (props: ExpenseElementProps) => {
     operations, 
     setOperations, 
     calculateTotal, 
-    setOperationId } = props;
+    setOperationId,
+    } = props;
 
   const history: History = useHistory();
   const{ mariageID } = useCurrentUser();
@@ -127,36 +128,6 @@ const ExpenseElement = (props: ExpenseElementProps) => {
         setIsDisabled={setIsDisabled}
         />
       </DefaultModal>}
-    </li>
-    <li key={obj._id} className="fade-in table-row responsive-card">
-      <div>
-        <span>Categorie</span>
-        <span>
-          <CustomChip
-          label={obj.category}
-          style={{ backgroundColor: renderSwitchColors(obj.category), width: "100%", maxWidth: "150px", borderRadius: "10px" }} />
-        </span>
-      </div>
-      <div>
-        <span>Prix</span>
-        <span>{fixPrice(obj.price)} €</span>
-      </div>
-      <div>
-        <span>Date</span>
-        <span>{obj.date}</span>
-      </div>
-      <div>
-        <span id="tr-description">Description</span>
-        <span>{obj.description}</span>
-      </div>
-      <div>
-        <span>Gérer</span>
-        <span>
-          <IconButton onClick={handleCloseModal} disabled={isDisabled}>
-            <CreateIcon fontSize="small" />
-          </IconButton>  
-        </span>
-      </div>
     </li>
     </>
   )

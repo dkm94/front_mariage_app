@@ -1,3 +1,7 @@
+#tables-section {
+    padding: 2rem 50px;
+}
+
 .tables-form > form > label {
     font-size: 20px;
     font-weight: bold;
@@ -206,6 +210,7 @@
 }
 
 .render-tables {
+    border-radius: 20px;
     box-shadow: 0 2px 10px 0 rgb(0 0 0 / 14%);
     border: solid 1px rgb(151, 151, 151, 0.18);
     padding: 3rem 5rem !important;
@@ -289,3 +294,9 @@
         min-width: 200px !important;
     }
  }
+
+ @media (max-width: 600px) {
+    #tables-section {
+        padding: 0;
+    }
+}
