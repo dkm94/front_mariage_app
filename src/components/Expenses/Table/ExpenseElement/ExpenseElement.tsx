@@ -1,6 +1,6 @@
 import "./ExpenseElement.css";
 
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { useHistory, useParams } from "react-router";
 import { History } from "history";
 
