@@ -78,6 +78,20 @@
 }
 .settings-title {
     font-size: 1.5rem;
+}   
+.settings-container {
+    container-type: inline-size;
+    padding: 2rem 50px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 30px; 
+    border-radius: 10px; 
+    border: 1px solid #dedbdb; 
+    background-color: #fbfbfb; 
+    max-width: 1000px; width: 100%;
+}
+#settings-divider {
+    display: none;
 }
 @media (max-width: 1200px) {
 	.settings-img-container {
@@ -107,10 +121,10 @@
     .account___form-style {
         padding-right: 1.5rem;
     }
-    .account-container .row {
+    /* .account-container .row {
         flex-direction: column;
         gap: 20px;
-    }
+    } */
     .settings-content-container {
         width: 100%;
     }
@@ -120,5 +134,35 @@
     .settings-img-container > div > img {
         width: auto;
         height: 8rem;
+    }
+}
+@container (max-width: 570px){
+    .account-container .row {
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+        margin-top: 50px;
+    }
+    .settings-content-container {
+        width: 100%;
+    }
+    #settings-divider {
+        display: flex;
+        background-color: #c5c4c4;
+        width: 100%;
+    }
+    .account-container {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+@media (max-width: 500px) { 
+    .settings-container {
+        padding: 2rem 30px;
+        border: unset;
+        padding: unset;
+    }
+    .account-container {
+        padding-top: 20px;
     }
 }
