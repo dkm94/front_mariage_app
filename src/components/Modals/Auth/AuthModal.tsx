@@ -24,7 +24,7 @@ export default function AuthModal({
         <div
           className="auth-modal-close"
         >
-          <IconButton onClick={close}>
+          <IconButton onClick={close} style={{ float: "inline-end"}}>
             <CloseIcon />
           </IconButton>
         </div>

@@ -39,8 +39,8 @@
     box-sizing: border-box;
     margin-right: auto;
     display: block;
-    padding-top: 100px;
-    padding-bottom: 100px;
+    padding-top: 50px;
+    padding-bottom: 50px;
     max-height: 700px;
  }
 
@@ -67,7 +67,7 @@
 
  .intro-section > .container > .intro > h1 {
     font-size: 2.5rem;
-    /* text-shadow: 1px 1px 1px rgb(0 0 0 / 15%); */
+    font-weight: 900;
     line-height: 1em;
 }
 
@@ -77,7 +77,7 @@
 
  .intro-section > .container > .intro > p > span {
     display: block;
-    font-size: 1.3rem;
+    /* font-size: 1.3rem; */
     text-wrap: balance;
 }
 
@@ -91,6 +91,7 @@
 .intro-img > img {
     width: auto;
     height: 100%;
+    max-height: 400px;
 }
 
 .home-btn {
@@ -145,10 +146,12 @@ a:hover {
 
 .section-2___titre {
     text-align: center;
+    margin-bottom: 25px;
 }
 
 .section-2___titre > h2 {
     font-size: 2.5rem !important;
+    font-weight: 900;
 }
 
 .section-2___sous-titre {
@@ -165,17 +168,15 @@ a:hover {
     border: solid 1px rgb(151, 151, 151, 0.18);
     padding: 3rem 5rem !important;
     flex-direction: column;
-    align-items: center;
     max-width: 400px;
     height: 100%;
-    justify-items: center;
-    text-align: center;
     display: flex;
+    border-radius: 10px;
 }
 
 .home-cards__img {
-    height: 7rem;
-    width: 7rem;
+    height: 3rem;
+    width: 3rem;
     border-radius: 50%;
     background: #f7f6f4;
     display: flex;
@@ -183,16 +184,15 @@ a:hover {
     justify-content: center;
 }
 
-.home-cards__img > img{
-    height: 65%;
+.home-cards__title {
+    margin-top: 20px;
 }
-
 .home-cards__title > h3 {
     font-size: 1.2rem;
-    text-transform: uppercase;
+    font-weight: 900;
 }
 
-#intro-card{
+.intro-card{
     padding: 3rem 2rem !important;
     background-color: #FFF;
     gap: 7px;
@@ -203,11 +203,10 @@ a:hover {
 }
 
 .presentation-section > .container > .cards-container {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 10px;
-    flex-wrap: wrap;
-    padding-left: 150px;
+    justify-items: center;
 }
 
 @media (max-width: 1199.98px) { 
@@ -241,11 +240,8 @@ a:hover {
         padding-left: 3rem;
         padding-right: 3rem;
     }
-    #intro-card {
+    .intro-card {
         max-width: 240px;
-    }
-    .presentation-section > .container > .cards-container {
-        padding-left: 100px;
     }
   }
 
@@ -269,10 +265,9 @@ a:hover {
 
     .intro > h1 {
         width: 100%;
-        font-size: 1.4rem !important;
     }
-    #intro-card {
-        max-width: unset;
+    .intro-card {
+        max-width: 300px;
         width: 100%;
         padding: 1rem !important;
     }
@@ -315,22 +310,24 @@ a:hover {
 
     .presentation-section > .container > .cards-container {
         padding-left: 0;
+        grid-template-columns: repeat(2, 1fr);
     }
     .home-cards__title > h3 {
         font-size: 1rem;
-    }
-    .home-cards__img > img {
-        height: 40%;
     }
     .home-cards__img {
         height: 4rem;
         width: 4rem;
     }
     .section-2___titre > h2 {
-        font-size: 1.4rem !important;
     }
     .section-2___sous-titre > span {
         font-size: 1.2rem;
+    }
+    .presentation-section > .container {
+       margin: 0;
+       width: 100%;
+       max-width: unset;
     }
    }
 

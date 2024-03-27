@@ -73,12 +73,12 @@ const Home = () => {
           <div className="section-2___titre">
             <h2>Comment ça fonctionne</h2>
           </div>
-          <div className="section-2___sous-titre">
+          {/* <div className="section-2___sous-titre">
             <span>
               Votre tableau de bord vous apporte une vue d'ensemble des éléments
               ajoutés aux différentes catégories.
             </span>
-          </div>
+          </div> */}
           <div className='cards-container'>
               {dashboardCards.map((card, i) => {
                 return (
