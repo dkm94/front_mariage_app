@@ -126,12 +126,14 @@
     height: fit-content;
     justify-items: center;
     text-align: center;
-    border-radius: 0;
+    /* border-radius: 0; */
 }
 
 .budget-list {
     width: 100%;
     margin-top: 50px;
+    padding: 0;
+    container-type: inline-size;
 }
 
 .budget-list li {
@@ -160,27 +162,27 @@
     align-items: center;
 }
 .budget-list .cols-2 {
-    width: 20%;
+    width: 15%;
     align-self: center;
     padding-left: 5px;
     padding-right: 5px;
-    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    /* font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
 }
 .budget-list .cols-3 {
-    width: 20%;
+    width: 15%;
     align-self: center;
     padding-left: 5px;
     padding-right: 5px;
-    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    /* font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
 }
 .budget-list .cols-4 {
-    width: 35%;
+    width: 40%;
     align-self: center;
     padding-left: 5px;
     padding-right: 5px;
 }
 .budget-list .cols-5 {
-    width: 5%;
+    width: 10%;
     align-self: center;
     padding-left: 5px;
     padding-right: 5px;
@@ -201,7 +203,8 @@
         padding: 0;
     }
 }
-@media (max-width: 768px) {
+
+@container (max-width: 768px){
     .budget-list li {
         padding-left: 10px ;
     }
@@ -217,6 +220,31 @@
     .budget-list .cols-5 {
         width: 10%;
     }
+    .budget-list .table-header {
+        display: none;
+   }
+    .budget-list li {
+        display: block;
+   }
+    .budget-list .cols  {
+        width: 100%;
+        align-items: center;
+   }
+    .budget-list .cols  {
+        display: flex;
+        padding: 10px 0;
+   }
+    .budget-list .cols:before {
+        color: #6c7a89;
+        padding-right: 10px;
+        content: attr(data-label);
+        width: 50%;
+        text-align: right;
+   }
+   .budget___col-2 {
+    padding-left: 0px;
+    padding-right: 0px;
+}
 }
 
 @media (max-width: 768px) { 
@@ -232,6 +260,7 @@
     }
     .chart-component {
         margin-top: 3rem;
+        padding: 0;
     }
     .pie > canvas {
         height: 20rem;
@@ -259,35 +288,32 @@
         padding-right: 0;
     }
     .budget___col-1, .pie {
-        padding-left: 20px;
-        padding-right: 20px;
+        padding-left: 0px;
+        padding-right: 0px;
     }
-    .budget___col-2 {
-        padding-left: 20px;
-        padding-right: 20px;
+ }
+
+@media (max-width: 600px) {
+    .search-bar-section {
+        padding: 0;
     }
+    .budget___col-1 {
+        padding: 0;
+    }
+    .budget-form {
+        padding: 0;
+    }
+    .card-expense-component {
+        margin-top: 30px;
+    }
+}
+
+@container (max-width: 768px) { /* inférieur à 768px */
     .budget-list .table-header {
         display: none;
-   }
-    .budget-list li {
-        display: block;
-   }
-    .budget-list .cols  {
-        width: 100%;
-        align-items: center;
-   }
-    .budget-list .cols  {
-        display: flex;
-        padding: 10px 0;
-   }
-    .budget-list .cols:before {
-        color: #6c7a89;
-        padding-right: 10px;
-        content: attr(data-label);
-        width: 50%;
-        text-align: right;
-   }
- }
+    }
+    
+  }
 
 @media (max-width: 414px) { 
     .budget-form > form {
@@ -302,12 +328,7 @@
     .budget-list .cols  {
         text-align-last: start;
    }
-   .search-bar-section {
-        padding: 0;
-    }
-    .budget___col-1 {
-        padding: 0;
-    }
+    
     .budget___col-2 {
         padding: 0;
     }

@@ -2,15 +2,15 @@
     width: 330px;
 }
 .custom-sidebar {
-width: 70px; /* Largeur réduite lorsque la navigation est ouverte */
-height: 100vh; /* Prend toute la hauteur de l'écran */
+width: 70px;
+height: 100vh;
 position: fixed;
 top: 64px;
 left: 0;
 /* height: 100%; */
 background: #fcfaf7;
 transition: width 0.3s;
-/* overflow: hidden; */
+overflow: auto;
 }
 
 .custom-sidebar.open {
@@ -22,6 +22,7 @@ position: absolute;
 top: 0;
 left: 0;
 width: 100%;
+border: 1px solid #f3f1f0;
 }
 
 .custom-sidebar-header {

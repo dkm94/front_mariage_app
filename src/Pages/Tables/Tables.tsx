@@ -78,7 +78,7 @@ const Tables = (props) => {
       messageType={tableTypeMessage || guestTypeMessage} 
       id={table || ""}    
     >
-      <Container style={{ padding: "2rem 50px" }} fluid>
+      <Container id="tables-section" fluid>
         <Row>
           <Col xs={12} sm={10} md={6} className="table-form">
             <AddTableForm tables={tables} setTables={setTables} setMessage={setMessageTable} setMessageType={setMessageTypeTable} />

@@ -1,7 +1,7 @@
 import "../../Budget.css";
 import "./Update.css";
 
-import React, { useState, useEffect, useRef, FormEvent, ChangeEvent, SetStateAction, Dispatch, RefObject } from "react";
+import React, { useState, useEffect, useRef, FormEvent, ChangeEvent, SetStateAction, Dispatch } from "react";
 import { useHistory } from "react-router";
 import { History } from "history";
 
@@ -47,7 +47,7 @@ const UpdateExpense = (props: UpdateExpenseProps) => {
   const history: History = useHistory();
   const [input, setInput] = useState<OperationType | null>(edit ? edit : null);
 
-  const inputRef:RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     inputRef?.current?.focus();

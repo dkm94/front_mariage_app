@@ -192,14 +192,16 @@ const MyAccount = (props: AccountProps) => {
         messageType={messageTypeWedding || messageTypeAccount}
         id={id || ""}
         >
-            <div style={{ padding: "2rem 50px", display: "flex", flexDirection: "column", gap: "30px" }}>
+            <div style={{ padding: "2rem 50px", display: "flex", flexDirection: "column", gap: "30px", borderRadius: "10px", border: "1px solid #dedbdb", backgroundColor: "#fbfbfb" }}>
                 <Container className="account-container" fluid>
+                    <h3 className="settings-title">Modifier le profil</h3>
                     <Row>
                         <Col className="settings-img-container">
                             <div>
                                 <img 
                                 alt="profile" 
                                 src={profilePicture}
+                                id="settings-img-profile"
                                 />
                             </div>
                         </Col>
@@ -242,10 +244,11 @@ const MyAccount = (props: AccountProps) => {
                     </Row>
                 </Container>
                 <Container fluid className="account-container">
+                    <h3 className="settings-title">Modifier le mot de passe</h3>
                     <Row>
                         <Col className="settings-img-container">
                                 <div>
-                                    <img src={changePwdIcon} alt="change password icon" />
+                                    <img src={changePwdIcon} alt="change password icon" id="settings-img-lock" />
                                 </div>
                         </Col>
                         <Col className="settings-content-container">
@@ -302,7 +305,7 @@ const MyAccount = (props: AccountProps) => {
                     </Row>
                 </Container>
                 <Container fluid style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", marginTop: "50px", maxWidth: "950px" }}>
-                    <CustomButton text="Supprimer le compte" onClick={() => setOpenModal(true)} style={{ backgroundColor: "darkred", borderRadius: "5px" }} />
+                    <CustomButton text="Supprimer le compte" backgroundColor="darkred" onClick={() => setOpenModal(true)} style={{ borderRadius: "5px" }} />
                 </Container>
             </div>
             {openModal && (
