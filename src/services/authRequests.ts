@@ -57,7 +57,7 @@ export const register = requestHandler<RegisterParams, any>((params) => {
 export const updatePassword = requestHandler<UpdatePasswordParams, any>((params) => {
   return Promise.resolve({
   method: 'post',
-  url: `/api/admin/editAccount/${params?.id}`,
+  url: `/api/admin/editPassword/${params?.id}`,
   data: {
       password: params?.password
   },
