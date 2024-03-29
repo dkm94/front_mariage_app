@@ -8,6 +8,7 @@ import Dashboard from "./Dashboard/Dashboard";
 import Myaccount from "./Mon_Compte/Mon_compte";
 import NotFount from "./PageNotFound/NotFound";
 import Reset from "./Auth/Reset/Reset";
+import HomeAlt from "./Homepage/Home2";
 
 export { 
     Home as Homepage, 
@@ -19,5 +20,6 @@ export {
     Dashboard as DashboardPage,
     Myaccount as SettingsPage,
     NotFount as NotFoundPage,
-    Reset as ResetPage
+    Reset as ResetPage,
+    HomeAlt as HomepageAlt
 };

@@ -28,7 +28,8 @@ import {
   DashboardPage, 
   SettingsPage, 
   NotFoundPage, 
-  ResetPage 
+  ResetPage,
+  HomepageAlt
 } from "./Pages";
 
 // <------- Types ---------->
@@ -70,6 +71,7 @@ function App() {
   let loader: LoaderType = <Loader />;
 
   const Home = () => <Page title="Accueil" component={Homepage} token={token} />
+  const HomeAlt = () => <Page title="Accueil" component={HomepageAlt} token={token} />
   const ResetPassword = () => <Page title="Réinitialiser le mot de passe" component={ResetPage} token={token} />
 
   const Dashboard = () => user?.id ? <Page title="Tableau de bord" userInfos={user} auth={role} component={DashboardPage} token={token} /> : null;
@@ -91,13 +93,13 @@ function App() {
                 <ScrollRestoration>
                   <Switch>
                     <Route exact path="/">
-                      {token && user?.id ? <Redirect to={`/mariage/${user?.id}/tableau-de-bord`} /> : Home}
+                      {token && user?.id ? <Redirect to={`/mariage/${user?.id}/tableau-de-bord`} /> : HomeAlt}
                     </Route>
                     <Route path="/login" component={Login}>
-                      {token && user?.id ? <Redirect to={`/mariage/${user?.id}/tableau-de-bord`} /> : Home}
+                      {token && user?.id ? <Redirect to={`/mariage/${user?.id}/tableau-de-bord`} /> : HomeAlt}
                     </Route>
                     <Route path="/register" component={Register}>
-                      {token && user?.id ? <Redirect to={`/mariage/${user?.id}/tableau-de-bord`} /> : Home}
+                      {token && user?.id ? <Redirect to={`/mariage/${user?.id}/tableau-de-bord`} /> : HomeAlt}
                     </Route>
                     <Route path="/reset-password">
                       {token ? <Redirect to="/compte/:id/configuration" /> : ResetPassword}

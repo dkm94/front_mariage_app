@@ -1,0 +1,5 @@
+.home-container {
+    background-color: #F0EEEC;
+    display: flex;
+    flex-direction: column;
+}
