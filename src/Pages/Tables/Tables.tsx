@@ -102,7 +102,6 @@ const Tables = (props) => {
         </Row>
       </Container>
 
-      <SwitchEditMode checked={checked} onChange={switchHandler} />
 
       <Grow in={!loadingTables} timeout={2000}>
         <Box
@@ -115,6 +114,7 @@ const Tables = (props) => {
           >
           {/* {errorGuests && <div style={{ alignSelf: "center" }}><span style={{ color: "darkred"}}>{errorMessageGuests}</span></div>} */}
 
+          <SwitchEditMode checked={checked} onChange={switchHandler} />
           {tables?.length === 0 || null ? (
             <div
               className="block"

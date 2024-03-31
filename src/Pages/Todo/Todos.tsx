@@ -15,6 +15,7 @@ import Todo from "./Todo/Todo";
 import { useFetch } from "../../hooks";
 import { TaskType } from "../../../types";
 import { getTodos } from "../../services";
+import { SwitchEditMode } from "../../components/Buttons";
 
 const Todos = () => {
   const { data: todos, setData: setTodos, loading } = useFetch<void, TaskType[]>(getTodos, []);
@@ -25,6 +26,11 @@ const Todos = () => {
 
   const [searchValue, setSearchValue] = useState<string>("");
   const [selected, setSelected] = useState<any>("all");
+  const [checked, setChecked] = useState<boolean>(false);
+
+  const switchHandler = (event) => {
+    setChecked(event.target.checked);
+  };
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>): void => {
     setSearchValue(e.target.value);
@@ -125,8 +131,13 @@ const Todos = () => {
         </Container>
       </Grow>
 
+
       <Grow in={!loading} timeout={4000}>
         <Row className="task-container">
+          <div style={{ padding: "0 4rem", marginTop: "20px" }}>
+            <SwitchEditMode checked={checked} onChange={switchHandler} />
+          </div>
+            
           <Container maxWidth="sm" className="task-container__">
             <div className="tasks__list">
               <Grid2
@@ -169,6 +180,7 @@ const Todos = () => {
                     setMessageType={setMessageType}
                     setTodo={setTodo}
                     todo={todo}
+                    checked={checked}
                       />
                   ))}
               </Grid2>

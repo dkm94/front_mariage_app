@@ -28,6 +28,7 @@ interface TodosProps {
   setMessage: Dispatch<SetStateAction<string | undefined>>;
   setMessageType: Dispatch<SetStateAction<"error" | "success" | undefined>>;
   setTodo: Dispatch<SetStateAction<string | null>>;
+  checked: boolean;
 }
 
 const Todo = (props: TodosProps) => {
@@ -37,7 +38,8 @@ const Todo = (props: TodosProps) => {
     todo, 
     setMessage, 
     setMessageType, 
-    setTodo } = props;
+    setTodo,
+    checked } = props;
 
   const history: History = useHistory();
   const { mariageID } = useCurrentUser();
@@ -171,8 +173,7 @@ const Todo = (props: TodosProps) => {
             )}
             <span>{todo.text}</span>
           </Grid2>
-          <Grid2 className="todolist___checkbox_span">
-            
+          {checked && <Grid2 className="todolist___checkbox_span">
             <CustomIconButton
             type="submit"
             buttonType='edit' 
@@ -186,7 +187,7 @@ const Todo = (props: TodosProps) => {
             onClick={() => deleteTodoFn(todo._id)} 
             />
 
-          </Grid2>
+          </Grid2>}
         </Grid2>
       )}
     </Grid2>

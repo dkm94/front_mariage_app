@@ -21,12 +21,16 @@ const CustomIconButton = (props: IconButtonProps) => {
         border: "1px solid lightgray",
         borderRadius: "5px",
         color: obj?.isCompleted ? "grey" : "#262626",
+        maxHeight: "34px",
+        height: "100%"
     }
 
     const deleteStyle = {
         backgroundColor: "darkred",
         borderRadius: "5px",
         color: "#fff",
+        maxHeight: "34px",
+        height: "100%"
     }
 
     const saveStyle = {
