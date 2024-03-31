@@ -1,9 +1,9 @@
 import dashboardBanner from "../img/orchids.jpg";
-import tablesBanner from "../img/tables/table-2.jpg";
-import guestBanner from "../img/demoiselles.jpg";
-import todosBanner from "../img/todo-bg.png";
-import budgetBanner from "../img/white-wallpaper.jpg";
-import receptionBanner from "../img/menus/menu-4.jpg";
+import tablesBanner from "../img/table.jpg";
+import guestBanner from "../img/white-envelop.jpg";
+import todosBanner from "../img/todo.jpg";
+import budgetBanner from "../img/shoes.png";
+import receptionBanner from "../img/verre-2.jpg";
 import accountBanner from "../img/dashboard-bg.jpg";
 
 const bannerElements = [

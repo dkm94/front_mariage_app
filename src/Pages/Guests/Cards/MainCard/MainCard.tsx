@@ -47,6 +47,7 @@ interface GuestsProps {
   setMessage:Dispatch<SetStateAction<string | undefined>>;
   setMessageType: Dispatch<SetStateAction<"error" | "success" | undefined>>;
   setGuestId: Dispatch<SetStateAction<string | null>>;
+  checked: boolean;
 }
 
 const Guest = (props: GuestsProps) => {
@@ -62,6 +63,7 @@ const Guest = (props: GuestsProps) => {
     editPicture, 
     seteditPicture, 
     // searchValue, 
+    checked,
     mariageID } = props;
     
   const history: History = useHistory();
@@ -91,9 +93,9 @@ const Guest = (props: GuestsProps) => {
   return (
     <div className="guest-wrapper" key={guest?._id}>
       <div className={`fade-in guest-card-style`}>
-        <IconWrapper onClick={() => handleEditGuest(guest)}>
+        {checked && <IconWrapper onClick={() => handleEditGuest(guest)}>
           <CreateIcon fontSize="small" />
-        </IconWrapper>
+        </IconWrapper>}
       
         <div className="div-guest___container">
           <div className="guest-picture center-x">

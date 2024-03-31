@@ -37,7 +37,7 @@ const ContentLayout = (props: ContentLayoutProps) => {
             {scrollBtn}
 
             <PageTitle loading={loading} title={title} />
-            <PageBanner loading={loading} src={src} />
+            {title !== "Paramètres du compte" && <PageBanner loading={loading} src={src} />}
 
             <Grow in={!loading} timeout={2000}>
                 <div className="page-container">
@@ -45,7 +45,7 @@ const ContentLayout = (props: ContentLayoutProps) => {
                 </div>
             </Grow>
 
-            {/* Créer un state tableau pour stocker les messages et les types pour pouvoir display plusieurs messages à la fois */}
+            {/* TODO: Créer un state tableau pour stocker les messages et les types pour pouvoir display plusieurs messages à la fois */}
             {message ? <Toast message={message} messageType={messageType} id={id} /> : null}
         </div>
     )
