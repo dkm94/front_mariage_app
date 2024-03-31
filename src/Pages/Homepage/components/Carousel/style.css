@@ -1,0 +1,36 @@
+#home-screens-wrapper {
+    display: flex;
+    justify-content: center;
+}
+#home-screens {
+    position: relative;
+    max-width: 1175px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+#home-screens img:nth-child(1) {
+    width: 100%;
+    max-width: 900px;
+}
+#home-screens img:nth-child(2) {
+    position: absolute;
+    right: 20%;
+    max-height: 430px;
+    height: 50%;
+    bottom: 15%;
+}
+#home-screens img:nth-child(3) {
+    position: absolute;
+    right: 10%;
+    max-height: 430px;
+    height: 50%;
+    bottom: 5%;
+}
+
+@media (max-width: 960px){
+    #home-screens-wrapper{
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+}
