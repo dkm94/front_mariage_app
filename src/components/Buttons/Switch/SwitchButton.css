@@ -1,0 +1,8 @@
+#guest-edition {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 30px;
+}
+#guest-edition label{
+    margin: 0;
+}

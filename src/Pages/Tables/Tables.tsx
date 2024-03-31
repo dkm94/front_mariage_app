@@ -17,6 +17,7 @@ import AddTableForm from "./Forms/Add";
 import Table from "./Table";
 import SearchBar from "../Guests/SearchBar/SearchBar";
 import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
+import { SwitchEditMode } from "../../components/Buttons";
 
 type EditType = {
   id: string;
@@ -30,6 +31,11 @@ const Tables = (props) => {
   const [table, setTable]= useState<string | null>(null);
 
   const [isOpen, setisOpen] = useState(false);
+  const [checked, setChecked] = useState<boolean>(false);
+
+  const switchHandler = (event) => {
+    setChecked(event.target.checked);
+  };
 
   const { 
     data: tables, 
@@ -96,6 +102,7 @@ const Tables = (props) => {
         </Row>
       </Container>
 
+
       <Grow in={!loadingTables} timeout={2000}>
         <Box
           sx={{
@@ -107,6 +114,7 @@ const Tables = (props) => {
           >
           {/* {errorGuests && <div style={{ alignSelf: "center" }}><span style={{ color: "darkred"}}>{errorMessageGuests}</span></div>} */}
 
+          <SwitchEditMode checked={checked} onChange={switchHandler} />
           {tables?.length === 0 || null ? (
             <div
               className="block"
@@ -146,6 +154,7 @@ const Tables = (props) => {
                     setMessage={setMessageTable}
                     setMessageType={setMessageTypeTable}
                     setTable={setTable}
+                    checked={checked}
                   />
                 ))}
             </Grid2>

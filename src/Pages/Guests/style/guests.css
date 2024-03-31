@@ -127,11 +127,12 @@
 
 #guest-name {
     color: #000;
-    font-family: 'Italiana', serif;
-    font-size: 1rem;
-    font-weight: 600;
+    /* font-family: 'Italiana', serif; */
+    font-family: Playfair Display, serif;
+    font-size: 1.1rem;
+    font-weight: 900;
     word-break: break-word;
-    word-spacing: 4px;
+    /* word-spacing: 4px; */
 }
 
 .guest-family {
@@ -316,6 +317,7 @@
     /* box-sizing: initial; */
     position: relative;
     box-sizing: border-box;
+    border-radius: 5px;
 }
 
 .guest-wrapper {

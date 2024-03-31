@@ -125,8 +125,11 @@
 
 .presentation-section {
     background-color: #F0EEEC;
-    padding-top: 100px;
+    padding-top: 150px;
     padding-bottom: 100px;
+    /* border-radius: 400px 400px 0 0; */
+    border-top-left-radius: 70%;
+    border-top-right-radius: 70%;
 }
 
 
@@ -243,6 +246,10 @@ a:hover {
     .intro-card {
         max-width: 240px;
     }
+    .presentation-section {
+        border-top-left-radius: 300px;
+        border-top-right-radius: 300px;
+    }
   }
 
   @media (max-width: 767.98px) { 
@@ -320,6 +327,7 @@ a:hover {
         width: 4rem;
     }
     .section-2___titre > h2 {
+        font-size: 2rem !important;
     }
     .section-2___sous-titre > span {
         font-size: 1.2rem;
@@ -328,6 +336,11 @@ a:hover {
        margin: 0;
        width: 100%;
        max-width: unset;
+    }
+    .presentation-section {
+        padding-top: 100px;
+        border-top-left-radius: 100px;
+        border-top-right-radius: 100px;
     }
    }
 

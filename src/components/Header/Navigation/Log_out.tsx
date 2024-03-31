@@ -2,12 +2,12 @@ import "../Header.css";
 
 import React, { useEffect, useState } from "react";
 import { Link, useHistory, withRouter } from "react-router-dom";
-import { Button } from "@mui/material";
 
 import Login from "../../../Pages/Auth/Login/Login";
 import Register from "../../../Pages/Auth/Register/Register";
 import AuthModal from "../../Modals/Auth/AuthModal";
 import { Logo } from "../../../img";
+import { CustomButton } from "../../Buttons";
 
 const Logout = () => {
   const path: string = window.location.pathname;
@@ -32,31 +32,30 @@ const Logout = () => {
       className="header header-style"
       style={
         path === "/"
-          ? { backgroundColor: "#e8e8e4" }
+          ? { backgroundColor: "#D2C5C5" }
           : { backgroundColor: "#FFF" }
       }
     >
-      <div className="navigation">
+      <div className="navigation" style={
+        path === "/"
+          ? { backgroundColor: "#F0EEEC" }
+          : { backgroundColor: "#FFF" }
+      }>
         <div id="brand">
           <Link to={{ pathname: "/" }}>
             <img alt="logo" src={Logo} id="logo" />
           </Link>
         </div>
         <ul className="navbar-menu">
-          <Button
-            variant="outlined"
-            className="li-style"
+          <CustomButton
             id="login"
-            sx={{ "&:hover": { backgroundColor: "inherit" } }}
-            style={{ fontFamily: "none", color: "#000", border: "none", textTransform: "unset"}}
             onClick={() => {
               setisOpen(true);
               setShowForm("login");
               history.push("/login")
             }}
-          >
-            Connexion
-          </Button>
+            text={"Connexion"}
+          />
         </ul>
       </div>
 

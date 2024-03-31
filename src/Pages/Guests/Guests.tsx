@@ -14,7 +14,7 @@ import SearchBar from "./SearchBar/SearchBar";
 import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
 import Guest from "./Cards/MainCard/MainCard";
 import { Box } from "@mui/material";
-
+import { SwitchEditMode } from "../../components/Buttons";
 
 type NewUser = string;
 
@@ -49,6 +49,12 @@ const Guests = (props: GuestsProps) => {
   const [searchValue, setSearchValue] = useState<string>("");
   const [guestId, setGuestId] = useState<string | null>(null);
   const [selected, setSelected] = useState<string>("tous");
+  const [checked, setChecked] = useState<boolean>(false);
+
+  const switchHandler = (event) => {
+    setChecked(event.target.checked);
+  };
+
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
@@ -102,6 +108,8 @@ const Guests = (props: GuestsProps) => {
                 </select>
               </div>
 
+              <SwitchEditMode checked={checked} onChange={switchHandler} />
+
               {guests.length === 0 && (
                 <div className="block">
                   <span>Vos invités ici.</span>
@@ -146,6 +154,7 @@ const Guests = (props: GuestsProps) => {
                           editPicture={editPicture}
                           seteditPicture={seteditPicture}
                           mariageID={mariageID}
+                          checked={checked}
                           />
                         )
                       })}

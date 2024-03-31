@@ -18,6 +18,8 @@ interface SideNavigationProps {
     const { isOpen, setIsOpen } = props;
     // handle open state when path changes
 
+    //TODO: image loading
+
     return (
       <aside className={`custom-sidebar ${isOpen ? "open" : ""}`}>
         <div className="custom-sidebar-inner">
@@ -37,7 +39,7 @@ interface SideNavigationProps {
                 <img alt="profile" src={profilePicture} className={isOpen ? "" : "xs-img"} />
             </div>
           </div>
-          <div style={{ textAlign: "center" }}>
+          <div style={{ textAlign: "center", paddingLeft: "10px", paddingRight: "10px" }}>
             <span style={{
                   marginTop: "15px",
                   fontWeight: 500,
