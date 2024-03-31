@@ -33,6 +33,7 @@ interface TableProps {
   setMessage: Dispatch<SetStateAction<string>>;
   setMessageType: Dispatch<SetStateAction<"error" | "success" | undefined>>;
   setTable: Dispatch<SetStateAction<string | null>>;
+  checked: boolean;
 }
 
 const Table = (props: TableProps) => {
@@ -52,7 +53,8 @@ const Table = (props: TableProps) => {
     setisOpen, 
     setMessage, 
     setMessageType, 
-    setTable } = props;
+    setTable,
+    checked } = props;
 
   const history = useHistory();
 
@@ -75,7 +77,7 @@ const Table = (props: TableProps) => {
         </ul>
       </div>
 
-      <div className="table-card__button-container">
+      {checked && <div className="table-card__button-container">
         <CustomButton
           onClick={() => {
             getUpdatedId(table._id, table.name);
@@ -87,7 +89,7 @@ const Table = (props: TableProps) => {
           text="Modifier"
           sx={{ "&:hover": { backgroundColor: "#333232" } }}
         />
-      </div>
+      </div>}
       { edit?.id === table._id && <DefaultModal
         open={isOpen}
         setOpen={setisOpen}

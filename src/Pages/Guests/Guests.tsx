@@ -14,7 +14,7 @@ import SearchBar from "./SearchBar/SearchBar";
 import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
 import Guest from "./Cards/MainCard/MainCard";
 import { Box } from "@mui/material";
-import { GuestEditionButton } from "../../components/Buttons";
+import { SwitchEditMode } from "../../components/Buttons";
 
 type NewUser = string;
 
@@ -50,7 +50,6 @@ const Guests = (props: GuestsProps) => {
   const [guestId, setGuestId] = useState<string | null>(null);
   const [selected, setSelected] = useState<string>("tous");
   const [checked, setChecked] = useState<boolean>(false);
-  console.log("🚀 ~ Guests ~ checked:", checked)
 
   const switchHandler = (event) => {
     setChecked(event.target.checked);
@@ -109,7 +108,7 @@ const Guests = (props: GuestsProps) => {
                 </select>
               </div>
 
-              <GuestEditionButton checked={checked} onChange={switchHandler} />
+              <SwitchEditMode checked={checked} onChange={switchHandler} />
 
               {guests.length === 0 && (
                 <div className="block">

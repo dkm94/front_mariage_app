@@ -11,5 +11,5 @@ export {
     GreyButton, 
     ScrollToTopButton, 
     AuthSwitchButton,
-    SwitchButton as GuestEditionButton
+    SwitchButton as SwitchEditMode
 };
