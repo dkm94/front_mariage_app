@@ -19,7 +19,7 @@ const NavbarWithUser = (props:NavbarWithUserProps) => {
 
   // useEffect(() => setLinks(NavigationData), []);
 
-  const LogOut = (): void => {
+  const logout = (): void => {
     console.log("déconnexion...");
     localStorage.removeItem("token");
     win.location = "/";
@@ -38,7 +38,7 @@ const NavbarWithUser = (props:NavbarWithUserProps) => {
         <img alt="logo" src={Logo} id="logo" />
       </div>
       <div className="navbar__links glass">
-        <MenuGrid mariageID={userInfos?.mariageID!} userId={userInfos?.id!} showMenu={setShowLinks} logout={LogOut} />
+        <MenuGrid mariageID={userInfos?.mariageID!} userId={userInfos?.id!} showMenu={setShowLinks} />
         {!showLinks && (
           <>
             <li className="navbar__item hidden-links slideDown-7" id="showNavLinks">
@@ -51,7 +51,7 @@ const NavbarWithUser = (props:NavbarWithUserProps) => {
               </Link>
             </li>
             <li className="navbar__item hidden-links slideDown-8"  id="showNavLinks">
-              <button className="navbar__link" type="submit" onClick={LogOut}>
+              <button className="navbar__link" type="submit" onClick={logout}>
                 Déconnexion
               </button>
             </li>
