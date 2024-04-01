@@ -13,22 +13,28 @@ interface GridItemProps extends HTMLAttributes<HTMLUListElement> {
     icon: string;
     mariageID?: string;
     userId?: string;
-    logout?: () => void;
 }
 interface MenuGridProps extends HTMLAttributes<HTMLDataListElement> {
     mariageID: string;
     userId: string;
     showMenu: (show: boolean) => void;
-    logout: () => void;
 }
 export const GridItem = (props: GridItemProps) => {
-    const { idx, title, color, path, icon, mariageID, userId, logout } = props;
+    const { idx, title, color, path, icon, mariageID, userId } = props;
+
+    const win: Window = window;
+    const logout = (): void => { // TODO: create logout function (back)
+        console.log("déconnexion...");
+        localStorage.removeItem("token");
+        win.location = "/";
+      };
+
     if(title === "Déconnexion"){
         return (
             <li key={idx} style={{ backgroundColor: color }} className={`menu-grid-item grid-item-${idx}`}>
-                <button 
+                <button     
                 type="submit" 
-                onClick={() => logout && logout()} 
+                onClick={logout} 
                 style={{ 
                     display: "flex", 
                     flexDirection: "column", 
@@ -72,7 +78,7 @@ export const GridItem = (props: GridItemProps) => {
 }
 
 const MenuGrid = (props: MenuGridProps) => {
-    const { mariageID, userId, showMenu, logout} = props;
+    const { mariageID, userId, showMenu } = props;
     const { pathname } = useLocation();
 
     useEffect(() => {
@@ -91,7 +97,6 @@ const MenuGrid = (props: MenuGridProps) => {
                 path={item.pathname} 
                 icon={item.icon}
                 mariageID={mariageID} 
-                logout={logout}
                 />
             )
         })}
@@ -101,7 +106,7 @@ const MenuGrid = (props: MenuGridProps) => {
         color={"#DDDFE0"} 
         icon={"settings"} 
         userId={userId} 
-        logout={logout} />
+        />
         <GridItem 
         idx={7} 
         title={"Déconnexion"} 

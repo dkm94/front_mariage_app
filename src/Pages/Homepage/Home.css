@@ -246,10 +246,10 @@ a:hover {
     .intro-card {
         max-width: 240px;
     }
-    .presentation-section {
+    /* .presentation-section {
         border-top-left-radius: 300px;
         border-top-right-radius: 300px;
-    }
+    } */
   }
 
   @media (max-width: 767.98px) { 
@@ -338,9 +338,11 @@ a:hover {
        max-width: unset;
     }
     .presentation-section {
-        padding-top: 100px;
-        border-top-left-radius: 100px;
-        border-top-right-radius: 100px;
+        padding-top: 150px;
+        padding-left: 40px;
+        padding-right: 40px;
+        border-top-left-radius: 45%;
+        border-top-right-radius: 45%;
     }
    }
 
@@ -358,13 +360,34 @@ a:hover {
     .content-home > .banner-section > .banner-text > span:nth-child(3) {
         font-size: 2.4rem;
     }
-    .intro > h1 {
-        /* font-size: 2.5rem; */
+    .section-2___titre > h2 {
+        font-size: 1.5rem !important;
     }
     .home__picture > img {
         height: auto;
         width: inherit;
     }
-
-   
+    .presentation-section {
+        border-radius: 0;
+        padding-top: 90px;
     }
+}
+
+@media (max-width: 500px){
+    .presentation-section {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+@media (max-width: 400px){
+    .presentation-section {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .section-2___titre {
+
+    }
+    .presentation-section > .container > .cards-container {
+        grid-template-columns: 1fr;
+    }
+}

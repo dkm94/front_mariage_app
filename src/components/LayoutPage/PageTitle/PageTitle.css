@@ -13,7 +13,7 @@
     font-family: 'Italiana', serif;
     position: sticky;
     top: 64px;
-    z-index: 1000;
+    z-index: 100;
 }
 .titles > h2 {
     font-size: 1.2rem;
