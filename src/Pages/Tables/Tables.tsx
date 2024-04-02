@@ -4,7 +4,6 @@ import React, { useState, ChangeEvent } from "react";
 import { withRouter } from "react-router-dom";
 
 import { Container, Row, Col } from "react-bootstrap";
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { Box } from "@mui/material";
 import Grow from "@mui/material/Grow";
 
@@ -14,10 +13,10 @@ import { getTables } from "../../services/tableRequests";
 import { useFetch } from "../../hooks";
 
 import AddTableForm from "./Forms/Add";
-import Table from "./Table";
 import SearchBar from "../Guests/SearchBar/SearchBar";
 import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
 import { SwitchEditMode } from "../../components/Buttons";
+import TableList from "./Tablelist/TableList";
 
 type EditType = {
   id: string;
@@ -28,7 +27,7 @@ const Tables = (props) => {
   const [searchValue, setSearchValue] = useState<string>("");
   const [edit, setEdit] = useState<EditType | null>(null);
   const [input, setInput] = useState<string>("");
-  const [table, setTable]= useState<string | null>(null);
+  const [table, setTable]= useState<any>(null);
 
   const [isOpen, setisOpen] = useState(false);
   const [checked, setChecked] = useState<boolean>(false);
@@ -123,41 +122,27 @@ const Tables = (props) => {
               <span>Vos tables ici.</span>
             </div>
           ) : (
-            <Grid2 container gap={3} justifyContent={"center"}>
-              {tables
-                .sort((a:TableType, b:TableType) => {
-                  return a.name > b.name ? 1 : -1;
-                })
-                .filter((table) => {
-                  return (
-                    table.name
-                      .toLowerCase()
-                      .indexOf(searchValue.toLowerCase()) >= 0
-                  );
-                })
-                .map((table) => (
-                  <Table
-                    tables={tables}
-                    table={table}
-                    id={table._id}
-                    key={table._id}
-                    edit={edit}
-                    handleUpdatedTable={handleUpdatedTable}
-                    input={input}
-                    setTables={setTables}
-                    guests={orderedGuests}
-                    setGuests={setGuests}
-                    setEdit={setEdit}
-                    getUpdatedId={getUpdatedId}
-                    isOpen={isOpen}
-                    setisOpen={setisOpen}
-                    setMessage={setMessageTable}
-                    setMessageType={setMessageTypeTable}
-                    setTable={setTable}
-                    checked={checked}
-                  />
-                ))}
-            </Grid2>
+            <TableList 
+                tables={tables}
+                table={table}
+                searchValue={searchValue}
+                edit={edit}
+                handleUpdatedTable={handleUpdatedTable}
+                input={input}
+                setTables={setTables}
+                guests={orderedGuests}
+                setGuests={setGuests}
+                setEdit={setEdit}
+                getUpdatedId={getUpdatedId}
+                isOpen={isOpen}
+                setisOpen={setisOpen}
+                setMessage={setMessageTable}
+                setMessageType={setMessageTypeTable}
+                setTable={setTable}
+                checked={checked} 
+                setMessageTable={setMessageTable}
+                setMessageTypeTable={setMessageTypeTable}
+                />
           )}
         </Box>
       </Grow>

@@ -10,6 +10,7 @@ import NotFount from "./PageNotFound/NotFound";
 import Reset from "./Auth/Reset/Reset";
 import HomeAlt from "./Homepage/Home2";
 import Guestlist from "./Guests/Guestlist/Guestlist";
+import TableList from "./Tables/Tablelist/TableList";
 
 export { 
     // Home as Homepage, 
@@ -23,5 +24,6 @@ export {
     NotFount as NotFoundPage,
     Reset as ResetPage,
     HomeAlt as HomepageAlt,
-    Guestlist
+    Guestlist,
+    TableList
 };

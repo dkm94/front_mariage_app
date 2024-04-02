@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { ElementType, ReactNode } from "react";
 import { FormikErrors } from "formik";
 import { ButtonPropsSizeOverrides } from "@mui/material";
@@ -224,3 +224,27 @@ export interface GuestsProps {
     setGuestId: React.Dispatch<React.SetStateAction<string | null>>;
     checked: boolean;
 }
+
+export type EditType = {
+    id: string;
+    name: string;
+  }
+export interface TableProps {
+    tables: TableType[];
+    table: any;
+    id?: string;
+    edit: EditType | null;
+    handleUpdatedTable: (e: ChangeEvent<HTMLInputElement>) => void;
+    input: string;
+    setTables: Dispatch<SetStateAction<TableType[]>>;
+    guests: GuestType[];
+    setGuests: Dispatch<SetStateAction<GuestType[]>>;
+    setEdit: Dispatch<SetStateAction<EditType | null>>;
+    getUpdatedId: (tableId: string, tableName: string) => void;
+    isOpen: boolean;
+    setisOpen: Dispatch<SetStateAction<boolean>>;
+    setMessage: Dispatch<SetStateAction<string>>;
+    setMessageType: Dispatch<SetStateAction<"error" | "success" | undefined>>;
+    setTable: Dispatch<SetStateAction<string | null>>;
+    checked: boolean;
+  }

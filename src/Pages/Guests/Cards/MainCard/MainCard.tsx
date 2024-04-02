@@ -1,6 +1,6 @@
 import "../../style/guests.css";
 
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router";
 import { History } from "history";
 

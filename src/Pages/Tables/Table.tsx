@@ -10,31 +10,7 @@ import DefaultModal from "../../components/Modals/Default/DefaultModal";
 import EditForm from "./Forms/Edit/Edit";
 
 import { useCurrentUser } from "../../ctx/userCtx";
-import { TableType, GuestType } from "../../../types";
-
-type EditType = {
-  id: string;
-  name: string;
-}
-interface TableProps {
-  tables: TableType[];
-  table: TableType;
-  id: string;
-  edit: EditType | null;
-  handleUpdatedTable: (e: ChangeEvent<HTMLInputElement>) => void;
-  input: string;
-  setTables: Dispatch<SetStateAction<TableType[]>>;
-  guests: GuestType[];
-  setGuests: Dispatch<SetStateAction<GuestType[]>>;
-  setEdit: Dispatch<SetStateAction<EditType | null>>;
-  getUpdatedId: (tableId: string, tableName: string) => void;
-  isOpen: boolean;
-  setisOpen: Dispatch<SetStateAction<boolean>>;
-  setMessage: Dispatch<SetStateAction<string>>;
-  setMessageType: Dispatch<SetStateAction<"error" | "success" | undefined>>;
-  setTable: Dispatch<SetStateAction<string | null>>;
-  checked: boolean;
-}
+import { TableProps } from "../../../types";
 
 const Table = (props: TableProps) => {
   const { 
@@ -67,7 +43,7 @@ const Table = (props: TableProps) => {
   }
 
   return (
-    <Grid2 xs={12} sm={4} md={3} className="render-tables" key={id}>
+    <div className="render-tables" key={id}>
       <div className="div-table-name-span">
         <span className="table-name-span">{table.name}</span>
       </div>
@@ -120,7 +96,7 @@ const Table = (props: TableProps) => {
           setTable={setTable}
         />
       </DefaultModal>}
-    </Grid2>
+    </div>
   );
 };
 

@@ -4,6 +4,7 @@ import React from 'react';
 import { GuestsProps } from "../../../../types";
 
 import Guest from "../Cards/MainCard/MainCard";
+import { SectionTitle } from "../../../components";
 
 interface GuestListProps extends GuestsProps {
     searchValue: string;
@@ -28,9 +29,7 @@ const Guestlist = (props: GuestListProps) => {
     } = props;
   return (
     <section id="guestlist-container">
-        <div className="box-content__title">
-            <h3>Liste d'invités</h3>
-        </div>
+        <SectionTitle title="Liste d'invités" />
         <div id="guestlist-content">
         {guests
             //searchbar filter
