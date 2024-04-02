@@ -47,7 +47,7 @@ const Table = (props: TableProps) => {
       </div>
       <div style={{ marginBottom: "60px" }}>
         <ul style={{ padding: "0"}}>
-          {table?.guestID?.map((guestId: string) => <li key={guestId}>{returnName(guestId)}</li>)}
+          {table?.guestID?.map((guestId: string) => <li style={{ listStyle: "none"}} key={guestId}>{returnName(guestId)}</li>)}
         </ul>
       </div>
 

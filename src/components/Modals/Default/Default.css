@@ -28,8 +28,10 @@
 .modal-head {
     display: flex;
     justify-content: space-between;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     padding-right: 5px;
-    background-color: #323535;
+    background-color: #b5a894;
     padding-top: 15px;
     padding-bottom: 15px;
     padding-left: 3rem;

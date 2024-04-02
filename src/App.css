@@ -20,6 +20,9 @@ h1 {
     font-weight: 600 !important;
     text-align: center;
 } */
+li {
+    list-style: none;
+}
 
 .content {
     display: flex;
@@ -328,8 +331,16 @@ a:-webkit-any-link {
         margin-left: 70px;
     }
  }
-
- .add-input, .search__container {
+ .add-input{
+    width: 100%;
+    display: flex;
+    border: lightgray 1px solid;
+    border-radius: 5px;
+    background: #FFFFFF;
+    padding: 0.3rem 0.7rem;
+    text-align: center;
+ }
+ .search__container {
     width: 100%;
     max-width: 27rem;
     display: flex;

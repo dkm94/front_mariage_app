@@ -7,22 +7,34 @@ import { GreyButton } from "../../../../components/Buttons";
 import { FoodType } from "../../../../../types";
 import { addFood } from "../../../../services/foodRequests";
 import { ApiResponse } from "../../../../helpers/requestHandler";
+import { TextField } from "@mui/material";
+import { SelectFood } from "./SelectFood";
 
 type Category = "starter" | "maincourse" | "dessert" | "apetizer" | "beverage";
 
 interface AddFoodsFormProps {
   foods: FoodType[];
   setFoods: Dispatch<SetStateAction<FoodType[]>>;
-  category: Category;
+  category: Category | string;
+  setCategoryName: Dispatch<SetStateAction<Category | string>>;
   setMessage: Dispatch<SetStateAction<string | undefined>>;
   setMessageType: Dispatch<SetStateAction<"error" | "success" | undefined>>;
+  handleModal: () => void;
 }
 
+// const placeholders: string[] = [
+//   "Petits fours...",
+//   "Entrées...",
+//   "Plats principaux...",
+//   "Desserts...",
+//   "Boissons..."
+// ];
+
 const AddFoodForm = (props: AddFoodsFormProps) => {
-  const { foods, setFoods, category, setMessage, setMessageType } = props;
+  const { foods, setFoods, category, setMessage, setMessageType, setCategoryName, handleModal } = props;
 
   const [input, setInput] = useState<string>("");
-  const inputRef: RefObject<HTMLInputElement> = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -32,7 +44,7 @@ const AddFoodForm = (props: AddFoodsFormProps) => {
   const handleSumbit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
     setLoading(true);
-
+    
     const response:ApiResponse<FoodType> = await addFood({ name: input, category });
     const { data: newFood, success, message } = response;
 
@@ -45,27 +57,29 @@ const AddFoodForm = (props: AddFoodsFormProps) => {
 
     setFoods([...foods, newFood]);
     setInput("");
+    handleModal();
     setLoading(false);
   };
 
   return (
     <>
       <form
+        id="food-form"
         onSubmit={handleSumbit}
-        className="mt-4"
-        style={{ display: "flex", flexDirection: "row", alignItems: "center" }}
       >
-        <div className="add-input">
-          <input
-            type="text"
-            name="name"
-            value={input}
-            onChange={handleChange}
-            ref={inputRef}
-            placeholder="Petits fours..."
-            required
-          />
-        </div>
+        <TextField
+          label="Plat/boisson"
+          size="small"
+          fullWidth
+          type="text"
+          name="name"
+          value={input}
+          onChange={handleChange}
+          ref={inputRef}
+          placeholder="Petits fours..."
+          required
+        />
+        <SelectFood selectedFood={category} setCategoryName={setCategoryName} />
         <GreyButton
           variant="contained"
           size="small"
@@ -76,7 +90,7 @@ const AddFoodForm = (props: AddFoodsFormProps) => {
             paddingTop: "0.5rem",
             paddingBottom: "0.5rem",
             height: "97%", 
-            borderRadius: "5px 20px 20px 5px"
+            borderRadius: "5px 5px"
           }}
         />
       </form>
