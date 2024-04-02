@@ -133,7 +133,7 @@
     width: 100%;
     margin-top: 50px;
     padding: 0;
-    container-type: inline-size;
+    /* container-type: inline-size; */
 }
 
 .budget-list li {

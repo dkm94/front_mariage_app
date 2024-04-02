@@ -1,9 +1,7 @@
 import "./Tables.css";
 
-import React, { ChangeEvent, Dispatch, SetStateAction } from "react";
+import React from "react";
 import { useHistory, useParams } from "react-router";
-
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 
 import { CustomButton } from "../../components/Buttons";
 import DefaultModal from "../../components/Modals/Default/DefaultModal";

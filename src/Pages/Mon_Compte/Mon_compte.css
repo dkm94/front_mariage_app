@@ -81,7 +81,7 @@
     font-weight: 900;
 }   
 .settings-container {
-    container-type: inline-size;
+    /* container-type: inline-size; */
     padding: 2rem 50px; 
     display: flex; 
     flex-direction: column; 

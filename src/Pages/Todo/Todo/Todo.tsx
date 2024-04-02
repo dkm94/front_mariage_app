@@ -1,6 +1,6 @@
 import "./Todo.css";
 
-import React, { useState, Dispatch, SetStateAction } from "react";
+import React, { useState } from "react";
 import { useHistory, useParams } from "react-router";
 import { History } from "history";
 
@@ -13,22 +13,12 @@ import CustomIconButton from "../../../components/Buttons/SmallIconButton/IconBu
 import UpdateForm from "../Update/Form";
 
 import { updateTodosStatus, deleteTodo } from '../../../services';
-import { TaskType } from "../../../../types";
+import { TaskType, TodosProps } from "../../../../types";
 import { useCurrentUser } from "../../../ctx/userCtx";
 
 type EditType = {
   id?: string;
   text?: string;
-}
-
-interface TodosProps {
-  todos: TaskType[];
-  setTodos: Dispatch<SetStateAction<TaskType[]>>;
-  todo: TaskType;
-  setMessage: Dispatch<SetStateAction<string | undefined>>;
-  setMessageType: Dispatch<SetStateAction<"error" | "success" | undefined>>;
-  setTodo: Dispatch<SetStateAction<string | null>>;
-  checked: boolean;
 }
 
 const Todo = (props: TodosProps) => {
@@ -132,15 +122,15 @@ const Todo = (props: TodosProps) => {
     <Grid2
       component="div" // Add the component prop with value "div"
       xs={12}
-      key={todo._id}
+      key={todo?._id}
       className={
-        todo.isCompleted
+        todo?.isCompleted
           ? "tasks-list__li__done fade-in"
           : "tasks-list__li fade-in"
       }
-      style={edit === todo._id ? { backgroundColor: `#F5F5F5` } : undefined} // Change null to undefined
+      style={edit === todo?._id ? { backgroundColor: `#F5F5F5` } : undefined} // Change null to undefined
     >
-      {edit?.id === todo._id ? (
+      {edit?.id === todo?._id ? (
         <UpdateForm
           edit={edit}
           setEdit={setEdit}
@@ -162,29 +152,29 @@ const Todo = (props: TodosProps) => {
           flexWrap={"inherit"}
         >
           <Grid2 display={"flex"} alignItems={"center"} width={"100%"}>
-            {todo.isCompleted ? (
-              <IconButton onClick={() => toggleCompleted(todo)}>
+            {todo?.isCompleted ? (
+              <IconButton onClick={() => toggleCompleted(todo!)}>
                 <CheckCircleIcon fontSize="small" />
               </IconButton>
             ) : (
-              <IconButton onClick={() => toggleCompleted(todo)}>
+              <IconButton onClick={() => toggleCompleted(todo!)}>
                 <RadioButtonUncheckedIcon />
               </IconButton>
             )}
-            <span>{todo.text}</span>
+            <span>{todo?.text}</span>
           </Grid2>
           {checked && <Grid2 className="todolist___checkbox_span">
             <CustomIconButton
             type="submit"
             buttonType='edit' 
             obj={todo} 
-            onClick={() => handleEditTodo(todo)} 
+            onClick={() => handleEditTodo(todo!)} 
             />
 
             <CustomIconButton 
             type="submit"
             buttonType="delete"
-            onClick={() => deleteTodoFn(todo._id)} 
+            onClick={() => deleteTodoFn(todo?._id ?? '')} 
             />
 
           </Grid2>}

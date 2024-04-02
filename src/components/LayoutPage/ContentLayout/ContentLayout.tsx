@@ -40,9 +40,11 @@ const ContentLayout = (props: ContentLayoutProps) => {
             {title !== "Paramètres du compte" && <PageBanner loading={loading} src={src} />}
 
             <Grow in={!loading} timeout={2000}>
-                <div className="page-container">
-                    {children}
-                </div>
+                <section id="main-content">
+                    <div className="page-container">
+                        {children}
+                    </div>
+                </section>
             </Grow>
 
             {/* TODO: Créer un state tableau pour stocker les messages et les types pour pouvoir display plusieurs messages à la fois */}

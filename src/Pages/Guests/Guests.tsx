@@ -14,6 +14,7 @@ import SearchBar from "./SearchBar/SearchBar";
 import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
 import { SwitchEditMode } from "../../components/Buttons";
 import Guestlist from "./Guestlist/Guestlist";
+import { SectionTitle } from "../../components";
 
 type NewUser = string;
 
@@ -109,10 +110,8 @@ const Guests = (props: GuestsProps) => {
 
               <SwitchEditMode checked={checked} onChange={switchHandler} />
 
-              {guests.length === 0 && (
-                <div className="block">
-                  <span>Vos invités ici.</span>
-                </div>)}
+              <SectionTitle title="Liste d'invités" />
+
                 {/*TODO: Change guestlist design */}
                 {guests && guests.length > 0 && (
                 <Guestlist 

@@ -1,8 +1,8 @@
-#guest-edition {
+#edition-button {
     display: flex;
     justify-content: flex-end;
     margin-bottom: 30px;
 }
-#guest-edition label{
+#edition-button label{
     margin: 0;
 }

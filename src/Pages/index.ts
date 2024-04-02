@@ -11,6 +11,7 @@ import Reset from "./Auth/Reset/Reset";
 import HomeAlt from "./Homepage/Home2";
 import Guestlist from "./Guests/Guestlist/Guestlist";
 import TableList from "./Tables/Tablelist/TableList";
+import Todolist from "./Todo/Todolist/Todolist";
 
 export { 
     // Home as Homepage, 
@@ -25,5 +26,6 @@ export {
     Reset as ResetPage,
     HomeAlt as HomepageAlt,
     Guestlist,
-    TableList
+    TableList,
+    Todolist
 };
