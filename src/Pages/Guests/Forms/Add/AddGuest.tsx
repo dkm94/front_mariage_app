@@ -19,7 +19,7 @@ interface FormProps {
   setMessageType: Dispatch<SetStateAction<"error" | "success" | undefined>>;
 }
 
-const AddGuestForm = (props:FormProps) => {
+const AddGuestForm = (props:FormProps) => { // TODO: add check name length
   const { newUser, setNewUser, setMessage, setMessageType, guests, setGuests } = props;
   const [loading, setLoading] = useState(false);
   const inputRef = useRef(null);

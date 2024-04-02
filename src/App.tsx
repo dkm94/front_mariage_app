@@ -19,7 +19,7 @@ import UpdateFood from "./Pages/Menu/Forms/Update/UpdateFood";
 
 // <------- Pages ---------->
 import { 
-  Homepage, 
+  // Homepage, 
   TodoPage, 
   GuestsPage, 
   TablesPage, 
@@ -70,7 +70,7 @@ function App() {
   let scrollButton: ScrollButtonType = <ScrollToTopButton />;
   let loader: LoaderType = <Loader />;
 
-  const Home = () => <Page title="Accueil" component={Homepage} token={token} />
+  // const Home = () => <Page title="Accueil" component={Homepage} token={token} />
   const HomeAlt = () => <Page title="Accueil" component={HomepageAlt} token={token} />
   const ResetPassword = () => <Page title="Réinitialiser le mot de passe" component={ResetPage} token={token} />
 

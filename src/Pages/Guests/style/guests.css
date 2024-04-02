@@ -132,6 +132,7 @@
     font-size: 1.1rem;
     font-weight: 900;
     word-break: break-word;
+    line-height: 1.4;
     /* word-spacing: 4px; */
 }
 
@@ -321,7 +322,8 @@
 }
 
 .guest-wrapper {
-    height: 290px;
+    min-height: 270px;
+    height: 100%;
     transition: filter 0.5s ease;
     display: flex;
     cursor: pointer;
@@ -380,29 +382,9 @@
         line-height: normal;
     }
     .guest-wrapper {
-        height: 250px;
+        min-height: unset;
     }
   }
-
-
-@media (max-width: 700px) { 
-    .guest-picture > img {
-        height: 8rem;
-        width: 8rem;
-    }
-   }
-
-   @media (max-width: 667px) { 
-    .guest-wrapper {
-        flex-basis: 33.33%;
-        height: 230px;
-      }
-
-    .guest-picture > img {
-    height: 6rem;
-    width: 100%;
-    }
-   }
 
 @media (max-width: 600px) {
     .guest-wrapper {
@@ -425,13 +407,45 @@
         grid-template-columns: repeat(auto-fill, minmax(50px, 135px));
     }
 }
+@container (max-width: 600px){
+    .guest-picture > img {
+        height: 5rem;
+    }
+    .guest-wrapper {
+        min-height: unset;
+    }
+}
+
+@media (max-width: 500px){
+    .div-guest___container {
+        flex-direction: row;
+    }
+    .nameField {
+        margin-top: 0;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+    .guest-card-style {
+        padding: 0 !important;
+        box-shadow: unset;
+    }
+    .guest-picture > img {
+        width: 5rem;
+        border-radius: 50%;
+    }
+    .guest-picture {
+        width: fit-content;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .guest-wrapper {
+        border: unset;
+    }
+}
 
 @media (max-width: 480px) { 
     .guests-container {
         grid-template-columns: repeat(auto-fill, minmax(50px, 109px));
-    }
-    .guest-wrapper {
-        padding: 0;
     }
     .guest-card-style {
         box-shadow: none;
@@ -442,24 +456,10 @@
     .guests-container {
         margin: 0 -4px -4px 0;
     }
-    .guest-wrapper {
-        border-right: 1px solid rgb(224, 224, 224);
-	    border-bottom: 1px solid rgb(224, 224, 224) !important;
-    }
-    .guest-card-style {
-        padding: 0 !important;
-    }
+  
     .guest-card-style > button {
         right: 5px !important;
         top: 5px !important;
-    }
-    .guest-wrapper {
-        /* height: 180px; */
-    }
-    .nameField {
-        margin-top: 0;
-        padding-left: 8px;
-        padding-right: 8px;
     }
     .nameField > div {
         gap: 5px;

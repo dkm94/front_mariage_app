@@ -88,19 +88,13 @@
 }
 
 @media (max-width: 913px) {
-
     .guest-form > form > label {
         font-size: 1rem;
     }
     .guest-container > .container-fluid .row {
         display: flex;
         justify-content: center;
-    }
-
-    .guest-picture > img {
-        width: 8rem;
-        height: 8rem;
-    }    
+    }  
 }
 
 @media (max-width: 768px) {

@@ -1,4 +1,4 @@
-import Home from "./Homepage/Home";
+// import Home from "./Homepage/Home";
 import Invités from "./Guests/Guests";
 import Tables from "./Tables/Tables";
 import Todo from "./Todo/Todos";
@@ -9,9 +9,11 @@ import Myaccount from "./Mon_Compte/Mon_compte";
 import NotFount from "./PageNotFound/NotFound";
 import Reset from "./Auth/Reset/Reset";
 import HomeAlt from "./Homepage/Home2";
+import Guestlist from "./Guests/Guestlist/Guestlist";
+import TableList from "./Tables/Tablelist/TableList";
 
 export { 
-    Home as Homepage, 
+    // Home as Homepage, 
     Invités as GuestsPage, 
     Tables as TablesPage, 
     Todo as TodoPage, 
@@ -21,5 +23,7 @@ export {
     Myaccount as SettingsPage,
     NotFount as NotFoundPage,
     Reset as ResetPage,
-    HomeAlt as HomepageAlt
+    HomeAlt as HomepageAlt,
+    Guestlist,
+    TableList
 };

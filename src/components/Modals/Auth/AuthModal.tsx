@@ -19,7 +19,7 @@ export default function AuthModal({
 
   return ReactDom.createPortal(
     <>
-      <div className="auth-overlay" onClick={close} />
+      <div className="auth-overlay" onClick={() => close()} />
       <div className="auth-modal">
         <div
           className="auth-modal-close"

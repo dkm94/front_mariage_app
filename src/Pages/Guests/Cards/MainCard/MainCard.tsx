@@ -1,6 +1,6 @@
 import "../../style/guests.css";
 
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router";
 import { History } from "history";
 
@@ -12,7 +12,7 @@ import CreateIcon from "@mui/icons-material/Create";
 import Form from "../../Forms/Update/UpdateGuest";
 import DefaultModal from "../../../../components/Modals/Default/DefaultModal";
 
-import { GuestType } from "../../../../../types";
+import { GuestType, GuestsProps } from "../../../../../types";
 
 import avatar from "../../../../img/avatar.jpg"
 import uploadImg from "../../../../img/upload-icon-20624.png";
@@ -33,21 +33,6 @@ const IconWrapper = styled(IconButton)({
 type Edit = {
   id: string;
   name: string;
-}
-interface GuestsProps {
-  guest: GuestType;
-  guests: GuestType[];
-  setGuests: Dispatch<SetStateAction<GuestType[]>>;
-  editPicture: string;
-  seteditPicture: Dispatch<SetStateAction<string>>;
-  // searchValue: string;
-  mariageID: string;
-  firstPerson: string;
-  secondPerson: string;
-  setMessage:Dispatch<SetStateAction<string | undefined>>;
-  setMessageType: Dispatch<SetStateAction<"error" | "success" | undefined>>;
-  setGuestId: Dispatch<SetStateAction<string | null>>;
-  checked: boolean;
 }
 
 const Guest = (props: GuestsProps) => {
