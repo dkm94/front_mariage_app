@@ -12,7 +12,7 @@ import { TextField } from "@mui/material";
 import Toast from "../../../components/Toast/Toast";
 import { AuthSwitchButton, CustomButton } from "../../../components/Buttons";
 
-import { UserType } from "../../../../types";
+import { RegisterProps, UserType } from "../../../../types";
 import { register as customRegister } from "../../../services/authRequests";
 import { useFetch } from "../../../hooks";
 import { getAdmins } from "../../../services/adminRequests";
@@ -27,12 +27,9 @@ type Auth = {
   confirmPassword: string;
 }
 
-interface RegisterProps {
-  setShowForm: Dispatch<SetStateAction<string>>
-}
-
 const Register = (props: RegisterProps) => {
-  const { setShowForm } = props;
+  const { setShowForm, email } = props;
+  console.log("🚀 ~ Register ~ props:", props)
   const history: History = useHistory();
 
   const [loadingButton, setLoadingButton] = useState(false);
@@ -161,6 +158,8 @@ const Register = (props: RegisterProps) => {
                     id="email"
                     name="email"
                     type="email"
+                    value={email}
+                    autoComplete="off"
                   />
                   <span>{errors.email?.message}</span>
                 </div>
@@ -172,6 +171,7 @@ const Register = (props: RegisterProps) => {
                     id="password"
                     name="password"
                     type="password"
+                    autoComplete="off"
                   />
                   <span>{errors.password?.message}</span>
                 </div>
@@ -180,7 +180,7 @@ const Register = (props: RegisterProps) => {
                     label="Confirmer le mot de passe"
                     size="small"
                     {...register("confirmPassword", { required: true })}
-                    id="password"
+                    id="confirmPassword"
                     name="confirmPassword"
                     type="password"
                   />

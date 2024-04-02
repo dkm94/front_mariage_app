@@ -205,3 +205,22 @@ export interface IUpdateExpensesFormProps {
     onSubmit: (obj: any) => void
     deleteExpense: (id: string) => Promise<void>
 }
+export interface RegisterProps {
+    setShowForm: React.Dispatch<React.SetStateAction<string>>;
+    email?: string;
+  }
+  
+export interface GuestsProps {
+    guest?: GuestType;
+    guests: GuestType[];
+    setGuests: React.Dispatch<React.SetStateAction<GuestType[]>>;
+    editPicture: string;
+    seteditPicture: React.Dispatch<React.SetStateAction<string>>;
+    mariageID: string;
+    firstPerson: string;
+    secondPerson: string;
+    setMessage:React.Dispatch<React.SetStateAction<string | undefined>>;
+    setMessageType: React.Dispatch<React.SetStateAction<"error" | "success" | undefined>>;
+    setGuestId: React.Dispatch<React.SetStateAction<string | null>>;
+    checked: boolean;
+}

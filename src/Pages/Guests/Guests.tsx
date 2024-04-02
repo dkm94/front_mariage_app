@@ -12,9 +12,8 @@ import { useFetch } from "../../hooks";
 import AddForm from "./Forms/Add/AddGuest";
 import SearchBar from "./SearchBar/SearchBar";
 import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
-import Guest from "./Cards/MainCard/MainCard";
-import { Box } from "@mui/material";
 import { SwitchEditMode } from "../../components/Buttons";
+import Guestlist from "./Guestlist/Guestlist";
 
 type NewUser = string;
 
@@ -114,52 +113,24 @@ const Guests = (props: GuestsProps) => {
                 <div className="block">
                   <span>Vos invités ici.</span>
                 </div>)}
-
-                {guests && guests.length > 0 && <Box className="guest-container" sx={{ minHeight: guests ? "0px" : "600px" }}>
-                  <div className="guests-container">
-                    {guests
-                      //searchbar filter
-                      .filter((guest) => {
-                        return (
-                          guest &&
-                          guest.name &&
-                          guest.name.toLowerCase().indexOf(searchValue.toLowerCase()) >= 0
-                        );
-                      })
-                      //select filter
-                      .filter((guest) => {
-                        if (selected === "1") {
-                          return guest?.family === "1";
-                        } else if (selected === "2") {
-                          return guest?.family === "2";
-                        } else {
-                          return guest;
-                        }
-                      })
-                      .sort((a, b) => {
-                        return (a && b && a.name > b.name) ? 1 : -1;
-                      })
-                      .map((guest) => {
-                        return (
-                          <Guest 
-                          key={guest?._id} 
-                          guest={guest}
-                          firstPerson={firstPerson}
-                          secondPerson={secondPerson}
-                          guests={guests}
-                          setGuests={setGuests}
-                          setMessage={setMessage}
-                          setMessageType={setMessageType}
-                          setGuestId={setGuestId}
-                          editPicture={editPicture}
-                          seteditPicture={seteditPicture}
-                          mariageID={mariageID}
-                          checked={checked}
-                          />
-                        )
-                      })}
-                  </div>
-              </Box>}
+                {/*TODO: Change guestlist design */}
+                {guests && guests.length > 0 && (
+                <Guestlist 
+                  guests={guests}
+                  firstPerson={firstPerson}
+                  secondPerson={secondPerson}
+                  setGuests={setGuests}
+                  setMessage={setMessage}
+                  setMessageType={setMessageType}
+                  setGuestId={setGuestId}
+                  editPicture={editPicture}
+                  seteditPicture={seteditPicture}
+                  mariageID={mariageID}
+                  checked={checked} 
+                  searchValue={searchValue} 
+                  selected={selected}                
+                  />
+                )}
           </div>
         </div>
       </>

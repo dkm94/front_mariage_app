@@ -28,6 +28,7 @@
     background-color: white;
     color: darkgrey;
     z-index: 999;
+    max-width: 1920px;
 }
 .topNavbar > div {
     padding: 1rem;
