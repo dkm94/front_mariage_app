@@ -1,0 +1,21 @@
+.food-element {
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: relative;
+}
+.food-element span {
+    /* position: absolute;
+    left: 50%;
+    transform: translateX(-50%); */
+}
+.food-element button {
+    position: absolute;
+    right: 0;
+    border-radius: 5px;
+    border: 1px solid rgba(193, 189, 189, 0.2);
+    height: 30px;
+    /* box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); */
+    /* margin-right: 5px; */
+}

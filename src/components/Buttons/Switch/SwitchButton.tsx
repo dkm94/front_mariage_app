@@ -61,7 +61,7 @@ const IOSSwitch = styled((props: SwitchProps) => (
 
 const SwitchButton = (props: SwitchButtonProps) => {
     return (
-        <div id="edition-button">
+        <div className="edition-button">
             <FormControlLabel
             control={<IOSSwitch sx={{ m: 1 }} {...props} />}
             label="Mode edition"

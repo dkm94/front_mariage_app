@@ -257,3 +257,5 @@ export interface TableProps {
     setTodo: Dispatch<SetStateAction<string | null>>;
     checked: boolean;
   }
+
+export type Category = "starter" | "maincourse" | "dessert" | "apetizer" | "beverage";

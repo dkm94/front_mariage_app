@@ -14,14 +14,14 @@ const foodType = [
 
 interface SelectFoodProps {
     selectedFood: string;
-    setCategoryName: (value: string) => void;
+    setSelectedCategory: (value: string) => void;
 }
 
 export const SelectFood = (props: SelectFoodProps) => {
-    const { selectedFood, setCategoryName } = props;
+    const { selectedFood, setSelectedCategory } = props;
 
   const handleChange = (event: SelectChangeEvent) => {
-    setCategoryName(event.target.value);
+    setSelectedCategory(event.target.value);
   };
 
   return (

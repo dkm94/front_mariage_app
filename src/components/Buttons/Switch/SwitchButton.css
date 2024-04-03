@@ -1,8 +1,8 @@
-#edition-button {
+.edition-button {
     display: flex;
     justify-content: flex-end;
     margin-bottom: 30px;
 }
-#edition-button label{
+.edition-button label{
     margin: 0;
 }

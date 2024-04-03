@@ -24,9 +24,9 @@ export default function DefaultModal({ children, close, setOpen, title, setEdit 
       <div className="modal-default">
         <div className="modal-head">
           <h2>{title}</h2>
-          <IconButton onClick={handleClose}>
+          {/* <IconButton onClick={handleClose}>
             <CloseIcon />
-          </IconButton>
+          </IconButton> */}
         </div>
         {children}
       </div>

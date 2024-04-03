@@ -6,9 +6,11 @@ import { TextField } from "@mui/material";
 
 import CustomIconButton from "../../../../components/Buttons/SmallIconButton/IconButton";
 
-import { updateFood } from "../../../../services";
+import { deleteFood, updateFood } from "../../../../services";
 import { useCurrentUser } from "../../../../ctx/userCtx";
 import { FoodType } from "../../../../../types";
+import { ClearButton, CustomButton } from "../../../../components/Buttons";
+import { Food } from "../../Menu";
 
 interface UpdateFoodProps {
     edit: any;
@@ -102,6 +104,35 @@ const UpdateFood = (props: UpdateFoodProps) => {
   };
 }
 
+const deleteElement = async (id: string): Promise<void> => {
+  setFoodId(id);
+  
+  const response = await deleteFood({ id });
+  const { success, message, statusCode } = response;
+
+  if(!success){
+  setMessageType("error");
+  setMessage(message);
+
+  setTimeout(() => {
+      setFoodId(null);
+      setMessage(undefined);
+      setMessageType(undefined);
+  }, 2000);
+  return;
+  }
+
+  if(success && statusCode === 200){
+      setFoods(foods.filter((food: Food) => food._id !== id));
+
+      setTimeout(() => {
+          setFoodId(null);
+          setMessage(undefined);
+          setMessageType(undefined);
+      }, 2000);
+  }
+  };
+
   const handleCancel = () => {
     setEdit({ id: "", name: "" })
     setInput("");
@@ -110,46 +141,71 @@ const UpdateFood = (props: UpdateFoodProps) => {
   }
 
   return (
-    <Grid2
-      lg={12}
-      component={"form"}
-      onSubmit={handleSubmit}
-      display={"flex"}
-      flexDirection={"row"}
-      gap={"23px"}
-    >
-      <TextField
-        required
-        size="small"
-        type="text"
-        name="name"
-        onChange={handleChange}
-        value={input}
-        ref={inputRef}
-        fullWidth
-        style={{ backgroundColor: "#fff" }}
-      />
-      <Grid2
-        display={"flex"}
-        flexDirection={"row"}
-        justifyContent={"end"}
-        width={"fit-content"}
-        xs={4}
-        gap={"7px"}
-      >
-        <CustomIconButton 
-        type="submit"
-        buttonType="save"
-        disabled={isDisabled}
+    <div className="modal-child">
+      <form id="update-food-form" onSubmit={handleSubmit}>
+        <TextField
+          label="Nom du plat/de la boisson"
+          required
+          size="small"
+          type="text"
+          name="name"
+          onChange={handleChange}
+          value={input}
+          ref={inputRef}
+          fullWidth
+          style={{ backgroundColor: "#fff" }}
         />
+        {/* <Grid2
+          display={"flex"}
+          flexDirection={"row"}
+          justifyContent={"end"}
+          width={"fit-content"}
+          xs={4}
+          gap={"7px"}
+        >
+          <CustomIconButton 
+          type="submit"
+          buttonType="save"
+          disabled={isDisabled}
+          />
 
-        <CustomIconButton 
-        type="button"
-        buttonType='cancel'
-        onClick={handleCancel}
-        />
-      </Grid2>
-    </Grid2>
+          <CustomIconButton 
+          type="button"
+          buttonType='cancel'
+          onClick={handleCancel}
+          />
+        </Grid2> */}
+        <div className="action-buttons">
+          <CustomButton 
+          text="Supprimer"
+          variant="outlined"
+          onClick={() => deleteElement(edit?.id)}
+          type="button"
+          backgroundColor="none"
+          width="48%" 
+          borderRadius="5px"
+          color="error"
+          border={true}
+          fontWeight={900}
+          />
+
+          <CustomButton
+            text="Enregistrer"
+            type="submit"
+            variant="contained" 
+            width="48%"
+            disabled={isDisabled}
+            borderRadius="5px"
+          />
+
+          <ClearButton
+            text={"Annuler"}     
+            onClick={handleCancel}
+            />
+          
+        </div>
+      </form>
+    </div>
   );
 }
 

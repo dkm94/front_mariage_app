@@ -1,37 +1,24 @@
 import "./Menu.css";
 
 import React, { useState, useEffect } from "react";
-import { useHistory, useParams } from "react-router";
+import { useHistory } from "react-router";
 import { History } from "history";
 
-import starterImg from "../../img/menus/starter_img.jpg";
-import maincourseImg from "../../img/menus/maincourse_img.jpg";
-import dessertImg from "../../img/menus/dessert_img.jpg";
-import apetizerImg from "../../img/menus/apetizers.jpg";
-import beverageImg from "../../img/menus/beverages.jpg";
-
 import Grow from "@mui/material/Grow";
+import { Button } from "@mui/material";
 
 import { useFetch } from "../../hooks";
 import { getFoods } from "../../services";
 
-import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
-import ReceptionCard from "../../components/Reception/Card/ReceptionCard";
-import AddFoodForm from "./Forms/Add/AddFood";
-import UpdateFood from "./Forms/Update/UpdateFood";
-import { SectionTitle } from "../../components";
-import { FoodType } from "../../../types";
-import { Button } from "@mui/material";
-import DefaultModal from "../../components/Modals/Default/DefaultModal";
 import { useCurrentUser } from "../../ctx/userCtx";
+import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
+import AddFoodForm from "./Forms/Add/AddFood";
+import { SectionTitle } from "../../components";
+import DefaultModal from "../../components/Modals/Default/DefaultModal";
+import FoodList from "./FoodList/FoodList";
+import { SwitchEditMode } from "../../components/Buttons";
 
-type EditType = {
-  id: string;
-  name: string;
-};
-
-
-type Food = {
+export type Food = {
   _id?: string;
   name: string;
   mariageID?: string;
@@ -40,23 +27,21 @@ type Food = {
 
 type Category = "starter" | "maincourse" | "dessert" | "apetizer" | "beverage";
 
-
 const Menus = () => {
   const history: History = useHistory();
   const{ mariageID } = useCurrentUser();
 
   const [loading, setLoading] = useState<boolean>(false);
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const [checked, setChecked] = useState<boolean>(false);
 
   const [foods, setFoods ] = useState<Food[]>([]);
-  const [starters, setStarters] = useState<Food[]>([]);
-  const [maincourses, setMaincourses] = useState<Food[]>([]);
-  const [desserts, setDesserts] = useState<Food[]>([]);
-  const [apetizers, setApetizers] = useState<Food[]>([]);
-  const [beverages, setBeverages] = useState<Food[]>([]);
-  const [category, setCategory] = useState<Category | string>("starter");
-
+  const [selectedCategory, setSelectedCategory] = useState<Category | string>("starter");
   const [foodId, setFoodId] = useState<string | null>(null);
+
+  const switchHandler = (event) => {
+    setChecked(event.target.checked);
+  };
 
   const { 
     data: fetchedFoods, 
@@ -66,43 +51,13 @@ const Menus = () => {
     messageType
    } = useFetch<void, Food[]>(getFoods, []);
 
-   
-  useEffect(() => {
-    if(fetchedFoods) setFoods(fetchedFoods);
-  }, [fetchedFoods])
-    
   useEffect(() => {
     setLoading(true);
-
-    if(foods) {
+    if(fetchedFoods) {
+      setFoods(fetchedFoods);
       setLoading(false);
-
-      const starters = foods?.filter((food: Food) => food?.category === "starter");
-      const maincourses = foods?.filter((food: Food) => food?.category === "maincourse");
-      const desserts = foods?.filter((food: Food) => food?.category === "dessert");
-      const apetizers = foods?.filter((food: Food) => food?.category === "apetizer");
-      const beverages = foods?.filter((food: Food) => food?.category === "beverage");
-
-      if(starters) setStarters(starters);
-      if(maincourses) setMaincourses(maincourses);
-      if(desserts) setDesserts(desserts);
-      if(apetizers) setApetizers(apetizers);
-      if(beverages) setBeverages(beverages);
-
     }
-  }, [foods])
-  
-  const [edit, setEdit] = useState<EditType>({
-    id: "",
-    name: "",
-  });
-
-  const getUpdatedId = (objId: string, objName: string) => {
-    setEdit({
-      id: objId,
-      name: objName,
-    });
-  };
+  }, [fetchedFoods])
 
   function handleModal(){
     setOpenModal(!openModal);
@@ -116,8 +71,8 @@ const Menus = () => {
     message={message} 
     messageType={messageType} 
     id={foodId || ""}>
-      <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "20px"}}>
-        <Button onClick={handleModal} style={{ backgroundColor: "#B2A9A9", color: "#fff", textTransform: "capitalize", border: "none", display: "flex", flexDirection: "row", gap: "10px", paddingRight: "15px"}}>
+      <div style={{ display: "flex", gap: "30px", flexDirection: "column", alignItems: "flex-end", marginBottom: "20px"}}>
+        <Button variant="contained" onClick={handleModal} style={{ backgroundColor: "#262626", width: "fit-content", color: "#fff", textTransform: "capitalize", border: "none", display: "flex", flexDirection: "row", gap: "10px", paddingRight: "15px", borderRadius: "36px"}}>
           <span className="material-symbols-outlined">add</span>
           <span>Ajouter</span>
         </Button>
@@ -135,167 +90,28 @@ const Menus = () => {
           setFoods={setFoods}
           setMessage={setMessage}
           setMessageType={setMessageType} 
-          category={category}
-          setCategoryName={setCategory}
+          setSelectedCategory={setSelectedCategory}
+          selectedCategory={selectedCategory}
           handleModal={handleModal}
+          mariageID={mariageID}
+          setOpenModal={setOpenModal}
           />
       </DefaultModal>}
+      <SwitchEditMode checked={checked} onChange={switchHandler} />
       </div>
       <Grow in={!loading} timeout={2000}>
-        <div className="reception-container">
+        <div id="reception-container">
           <SectionTitle title="Menu" />
-          <div className="reception">
-            <ReceptionCard 
-            setFoodId={setFoodId}
-            img={starterImg} 
-            type={"entrée"} 
-            array={starters}
-            setArray={setStarters}
-            edit={edit} 
-            getUpdatedId={getUpdatedId} 
-            even={true}
-            setMessage={setMessage}
-            setMessageType={setMessageType}
-            addForm={
-            <AddFoodForm 
-                foods={starters}
-                setFoods={setStarters}
-                category="starter"
-                setMessage={setMessage}
-                setMessageType={setMessageType} setCategoryName={setCategory} handleModal={handleModal}            />} 
-            editForm={
-            <UpdateFood 
-            edit={edit} 
-            setEdit={setEdit} 
-            setFoods={setStarters} 
-            foods={starters} 
-            setMessage={setMessage}
-            setMessageType={setMessageType}
-            setFoodId={setFoodId}
-            />}            
+            <FoodList 
+              foods={foods} 
+              setFoods={setFoods}
+              checked={checked}
+              setSelectedCategory={setSelectedCategory}
+              selectedCategory={selectedCategory}
+              setMessage={setMessage}
+              setMessageType={setMessageType}
+              setFoodId={setFoodId}
             />
-
-            <ReceptionCard 
-            setFoodId={setFoodId}
-            img={maincourseImg} 
-            type={"plat"} 
-            array={maincourses} 
-            setArray={setMaincourses}
-            edit={edit} 
-            getUpdatedId={getUpdatedId} 
-            even={false} 
-            setMessage={setMessage}
-            setMessageType={setMessageType}
-            addForm={
-            <AddFoodForm 
-                foods={maincourses}
-                setFoods={setMaincourses}
-                category="maincourse"
-                setMessage={setMessage}
-                setMessageType={setMessageType} setCategoryName={setCategory} handleModal={handleModal}            />} 
-            editForm={
-            <UpdateFood 
-            edit={edit} 
-            setEdit={setEdit} 
-            foods={maincourses} 
-            setFoods={setMaincourses}
-            setMessage={setMessage}
-            setMessageType={setMessageType}
-            setFoodId={setFoodId}
-            />}            
-            />
-
-            <ReceptionCard 
-            setFoodId={setFoodId}
-            img={dessertImg} 
-            type={"dessert"} 
-            array={desserts} 
-            setArray={setDesserts}
-            edit={edit} 
-            getUpdatedId={getUpdatedId} 
-            even={true} 
-            setMessage={setMessage}
-            setMessageType={setMessageType}
-            addForm={
-            <AddFoodForm 
-                foods={desserts}
-                setFoods={setDesserts}
-                category="dessert"
-                setMessage={setMessage}
-                setMessageType={setMessageType} setCategoryName={setCategory} handleModal={handleModal}            />} 
-            editForm={
-            <UpdateFood 
-            edit={edit} 
-            setEdit={setEdit} 
-            foods={desserts} 
-            setFoods={setDesserts} 
-            setMessage={setMessage}
-            setMessageType={setMessageType}
-            setFoodId={setFoodId}
-            />} 
-            />
-
-            <ReceptionCard 
-            setFoodId={setFoodId}
-            img={apetizerImg}
-            type={"apéritif"} 
-            array={apetizers} 
-            setArray={setApetizers}
-            edit={edit} 
-            getUpdatedId={getUpdatedId} 
-            even={false} 
-            setMessage={setMessage}
-            setMessageType={setMessageType}
-            addForm={
-            <AddFoodForm 
-                foods={apetizers}
-                setFoods={setApetizers}
-                category="apetizer"
-                setMessage={setMessage}
-                setMessageType={setMessageType} setCategoryName={setCategory} handleModal={handleModal}            />} 
-            editForm={
-            <UpdateFood 
-            edit={edit} 
-            setEdit={setEdit} 
-            foods={apetizers} 
-            setFoods={setApetizers}
-            setMessage={setMessage}
-            setMessageType={setMessageType}
-            setFoodId={setFoodId}
-            />}            
-            />
-
-            <ReceptionCard 
-            setFoodId={setFoodId}
-            img={beverageImg} 
-            type={"boisson"} 
-            array={beverages}
-            setArray={setBeverages} 
-            edit={edit} 
-            getUpdatedId={getUpdatedId} 
-            even={true} 
-            setMessage={setMessage}
-            setMessageType={setMessageType}
-            addForm={
-            <AddFoodForm 
-                foods={beverages}
-                setFoods={setBeverages}
-                category="beverage"
-                setMessage={setMessage}
-                setMessageType={setMessageType} setCategoryName={setCategory} handleModal={handleModal}            />} 
-            editForm={
-            <UpdateFood 
-            edit={edit} 
-            setEdit={setEdit} 
-            foods={beverages} 
-            setFoods={setBeverages}
-            setMessage={setMessage}
-            setMessageType={setMessageType}
-            setFoodId={setFoodId}
-            />} 
-            />
-
-          </div>
         </div>
       </Grow>
     </ContentLayout>
