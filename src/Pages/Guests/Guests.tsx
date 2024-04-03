@@ -104,25 +104,25 @@ const Guests = (props: GuestsProps) => {
           title={"Nouvel invité"}
           >
             <AddForm 
-                newUser={newUser} 
-                setNewUser={setNewUser}
-                guests={guests}
-                setGuests={setGuests} 
-                setMessage={setMessage} 
-                setMessageType={setMessageType}
-                mariageID={mariageID}
-                history={history}
-                setOpenModal={setOpenModal}
-                selectedValue={selectedValue}
-                setSelectedValue={setSelectedValue}
-                firstPerson={firstPerson}
-                secondPerson={secondPerson}
+              newUser={newUser} 
+              setNewUser={setNewUser}
+              guests={guests}
+              setGuests={setGuests} 
+              setMessage={setMessage} 
+              setMessageType={setMessageType}
+              mariageID={mariageID}
+              history={history}
+              setOpenModal={setOpenModal}
+              selectedValue={selectedValue}
+              setSelectedValue={setSelectedValue}
+              firstPerson={firstPerson}
+              secondPerson={secondPerson}
             />
           </DefaultModal>}
               <SearchBar
                 className="search__input"
                 type="text"
-                placeholder="Rechercher un invité"
+                placeholder="Rechercher"
                 name="searchbar"
                 value={searchValue}
                 onChange={handleSearch}

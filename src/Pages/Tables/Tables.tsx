@@ -2,8 +2,8 @@ import "./Tables.css";
 
 import React, { useState, ChangeEvent } from "react";
 import { withRouter } from "react-router-dom";
+import { useHistory } from "react-router";
 
-import { Container, Row, Col } from "react-bootstrap";
 import { Box } from "@mui/material";
 import Grow from "@mui/material/Grow";
 
@@ -12,11 +12,13 @@ import { getGuests } from "../../services/guestRequests";
 import { getTables } from "../../services/tableRequests";
 import { useFetch } from "../../hooks";
 
-import AddTableForm from "./Forms/Add";
-import SearchBar from "../Guests/SearchBar/SearchBar";
 import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
-import { SwitchEditMode } from "../../components/Buttons";
+import AddTableForm from "./Forms/Add/Add";
+import SearchBar from "../Guests/SearchBar/SearchBar";
+import { AddButton, SwitchEditMode } from "../../components/Buttons";
 import TableList from "./Tablelist/TableList";
+import DefaultModal from "../../components/Modals/Default/DefaultModal";
+import { useCurrentUser } from "../../ctx/userCtx";
 
 type EditType = {
   id: string;
@@ -24,6 +26,9 @@ type EditType = {
 }
 
 const Tables = (props) => {
+  const history = useHistory();
+  const{ firstPerson, secondPerson, mariageID } = useCurrentUser();
+
   const [searchValue, setSearchValue] = useState<string>("");
   const [edit, setEdit] = useState<EditType | null>(null);
   const [input, setInput] = useState<string>("");
@@ -31,6 +36,7 @@ const Tables = (props) => {
 
   const [isOpen, setisOpen] = useState(false);
   const [checked, setChecked] = useState<boolean>(false);
+  const [openModal, setOpenModal] = useState<boolean>(false);
 
   const switchHandler = (event) => {
     setChecked(event.target.checked);
@@ -74,6 +80,10 @@ const Tables = (props) => {
     setInput(tableName);
   };
 
+  function handleModal(){
+    setOpenModal(!openModal);
+  }
+
   return (
     <ContentLayout 
       loading={loadingTables}
@@ -83,24 +93,34 @@ const Tables = (props) => {
       messageType={tableTypeMessage || guestTypeMessage} 
       id={table || ""}    
     >
-      <Container id="tables-section" fluid>
-        <Row>
-          <Col xs={12} sm={10} md={6} className="table-form">
-            <AddTableForm tables={tables} setTables={setTables} setMessage={setMessageTable} setMessageType={setMessageTypeTable} />
-          </Col>
-          <Col xs={12} sm={10} md={6} className="searchbar">
-            <SearchBar
-              className="search__input"
-              type="text"
-              placeholder="Rechercher une table"
-              name="searchbar"
-              value={searchValue}
-              onChange={handleSearch}
-            />
-          </Col>
-        </Row>
-      </Container>
-
+      <div className="section-action-box">
+        <AddButton onClick={handleModal} />
+        {openModal && <DefaultModal
+        close={() => {
+            setOpenModal(false);
+            const currentPosition: number = window.scrollY;
+            history.replace(`/mariage/${mariageID}/tables`, { currentPosition } )
+        }}
+        setOpen={handleModal}
+        title={"Nouvelle table"}
+        >
+          <AddTableForm 
+          tables={tables} 
+          setTables={setTables} 
+          setMessage={setMessageTable} 
+          setMessageType={setMessageTypeTable}
+          setOpenModal={setOpenModal} 
+          />
+        </DefaultModal>}
+        <SearchBar
+          className="search__input"
+          type="text"
+          placeholder="Rechercher une table"
+          name="searchbar"
+          value={searchValue}
+          onChange={handleSearch}
+        />
+      </div>
 
       <Grow in={!loadingTables} timeout={2000}>
         <Box

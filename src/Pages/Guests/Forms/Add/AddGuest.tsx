@@ -117,7 +117,6 @@ const AddGuestForm = (props:FormProps) => { // TODO: add check name length
         placeholder={"Famille"} 
         array={selectArray} 
         label={"Sélectionner la famille"}
-        size={"medium"}
       />
       <CustomButton
           variant="contained"
