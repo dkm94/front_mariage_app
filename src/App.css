@@ -331,15 +331,6 @@ a:-webkit-any-link {
         margin-left: 70px;
     }
  }
- .add-input{
-    width: 100%;
-    display: flex;
-    border: lightgray 1px solid;
-    border-radius: 5px;
-    background: #FFFFFF;
-    padding: 0.3rem 0.7rem;
-    text-align: center;
- }
  .search__container {
     width: 100%;
     max-width: 27rem;
@@ -350,15 +341,6 @@ a:-webkit-any-link {
     padding: 0.3rem 0.7rem;
     text-align: center;
  }
- .add-input > img {
-    height: fit-content;
-    align-self: center;
-    padding-left: 5px
- }
- .add-input > input {
-    border: none !important;
- }
-
  .center-h-v{
     position: absolute;
     left: 50%;
@@ -372,6 +354,9 @@ a:-webkit-any-link {
     }
     .search__container {
         max-width: unset;
+    }
+    .select-guest {
+        max-width: unset !important;
     }
     .App-home {
         position: unset;

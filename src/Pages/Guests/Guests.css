@@ -1,5 +1,9 @@
-#guest-section {
-    padding: 2rem 50px;
+.section-action-box {
+    display: flex; 
+    gap: 20px; 
+    flex-direction: column; 
+    align-items: flex-end; 
+    margin-bottom: 20px
 }
 
 /* appear - on page load */
@@ -60,13 +64,10 @@
 }
 
 .select-family {
-    width: 15rem;
     border-radius: 5px;
     padding: 0.7rem;
     border-color: #ccc;
     align-self: flex-end;
-    margin-bottom: 3rem;
-    /* margin-right: 4rem; */
 }
 
 
@@ -118,7 +119,7 @@
     .guest-container {
         padding: 0 !important;
     }
-    #guest-section {
+    .section-action-box {
         padding: 0;
     }
 }

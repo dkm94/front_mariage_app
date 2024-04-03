@@ -39,9 +39,6 @@
     height: fit-content;
     display: flex;
     flex-direction: column;
-    padding-left: 50px;
-    padding-right: 50px;
-
 }
 
 .guest-card__delete-btn {
@@ -348,6 +345,11 @@
  .select-guest {
     display: flex;
     justify-content: flex-end;
+    width: 100%;
+    max-width: 27rem;
+}
+.select-guest div:nth-child(1) {
+    margin: 0;
 }
 
  @media(max-width: 1366px) {

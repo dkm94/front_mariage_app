@@ -5,7 +5,6 @@ import { useHistory } from "react-router";
 import { History } from "history";
 
 import Grow from "@mui/material/Grow";
-import { Button } from "@mui/material";
 
 import { useFetch } from "../../hooks";
 import { getFoods } from "../../services";
@@ -71,7 +70,7 @@ const Menus = () => {
     message={message} 
     messageType={messageType} 
     id={foodId || ""}>
-      <div style={{ display: "flex", gap: "30px", flexDirection: "column", alignItems: "flex-end", marginBottom: "20px"}}>
+      <div className="section-action-box">
         <AddButton onClick={handleModal} />
         {openModal && <DefaultModal
           close={() => {

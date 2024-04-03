@@ -78,7 +78,7 @@ function App() {
   const Account = () => user?.id ? <Page title="Paramètres du compte" userInfos={user} auth={role} component={SettingsPage} /> : null;
   const Tables = () => user?.id ? <Page title="Les tables" userInfos={user} auth={role} component={TablesPage} /> : null;
   const Guests = () => user?.id ? <Page title="Les invités" userInfos={user} auth={role} component={GuestsPage} /> : null;
-  const Carte = () => user?.id ? <Page title="Le repas" userInfos={user} auth={role} component={ReceptionPage} /> : null;
+  const Carte = () => user?.id ? <Page title="La réception" userInfos={user} auth={role} component={ReceptionPage} /> : null;
   const Budget = () => user?.id ? <Page title="Les dépenses" userInfos={user} auth={role} component={BudgetPage} /> : null;
   const TodoList = () => user?.id ? <Page title="Liste des tâches" userInfos={user} auth={role} component={TodoPage} /> : null;
 

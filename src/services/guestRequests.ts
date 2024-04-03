@@ -3,6 +3,7 @@ import { GuestType } from "../../types";
 
 interface AddGuestParams {
   name: string;
+  family: string;
 }
 
 interface UpdateGuestParams {
@@ -35,6 +36,7 @@ export const addGuest = requestHandler<AddGuestParams, any>((params) => {
     params: params || {},
     data: {
       name: params?.name,
+      family: params?.family
   }
   });
 });
