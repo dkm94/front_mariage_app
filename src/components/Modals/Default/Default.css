@@ -13,6 +13,7 @@
     width: 100%;
     max-width: 500px;
     min-height: fit-content;
+    padding: 25px;
 }
 
 .modal-overlay {
@@ -27,26 +28,21 @@
 
 .modal-head {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     padding-right: 5px;
-    background-color: #323535;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-left: 3rem;
-    padding-right: 3rem;
     height: fit-content;
-    text-transform: uppercase;
     font-family: 'Italiana', serif;
-    color: rgb(248, 248, 244);
     position: relative;
 }
 
 .modal-head > h2 {
     margin-bottom: 0;
     align-self: center;
-    font-size: 1rem;
-    font-weight: bold;
     letter-spacing: 1px;
+    font-weight: 900;
+    font-size: 1.3rem;
 }
 
 .modal-head > button {

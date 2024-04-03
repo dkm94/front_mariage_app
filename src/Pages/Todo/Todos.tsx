@@ -3,19 +3,19 @@ import "./Todo.css";
 import React, { ChangeEvent, useState } from "react";
 
 import { Row, Col } from "react-bootstrap";
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { Select, MenuItem, Container } from "@mui/material";
 import Grow from "@mui/material/Grow";
 
 import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
 import SearchBar from "../Guests/SearchBar/SearchBar";
 import AddForm from "./Add/Form";
-import Todo from "./Todo/Todo";
 
 import { useFetch } from "../../hooks";
 import { TaskType } from "../../../types";
 import { getTodos } from "../../services";
 import { SwitchEditMode } from "../../components/Buttons";
+import Todolist from "./Todolist/Todolist";
+import { SectionTitle } from "../../components";
 
 const Todos = () => {
   const { data: todos, setData: setTodos, loading } = useFetch<void, TaskType[]>(getTodos, []);
@@ -131,62 +131,27 @@ const Todos = () => {
         </Container>
       </Grow>
 
+      <div style={{ padding: "0 4rem", marginTop: "20px" }}>
+        <SwitchEditMode checked={checked} onChange={switchHandler} />
+      </div>
 
       <Grow in={!loading} timeout={4000}>
-        <Row className="task-container">
-          <div style={{ padding: "0 4rem", marginTop: "20px" }}>
-            <SwitchEditMode checked={checked} onChange={switchHandler} />
-          </div>
+        <div className="task-container">
             
-          <Container maxWidth="sm" className="task-container__">
             <div className="tasks__list">
-              <Grid2
-                container
-                gap={1}
-                display={"flex"}
-                flexDirection={"column"}
-                justifyContent={"center"}
-                width={"100%"}
-              >
-                {todos?.length === 0 && (
-                  <span id="empty-task">
-                    Vos tâches ici
-                  </span>
-                )}
-                {todos
-                  .filter((todo: TaskType) => {
-                    return (
-                      todo.text
-                        .toLowerCase()
-                        .indexOf(searchValue.toLowerCase()) >= 0
-                    );
-                  })
-                  .reverse()
-                  .filter((task) => {
-                    if (selected === "done") {
-                      return task.isCompleted;
-                    } else if (selected === "incomplete") {
-                      return !task.isCompleted;
-                    } else {
-                      return task;
-                    }
-                  })
-                  .map((todo: TaskType) => (
-                    <Todo
-                    todos={todos}
-                    key={todo._id}
-                    setTodos={setTodos}
-                    setMessage={setMessage}
-                    setMessageType={setMessageType}
-                    setTodo={setTodo}
-                    todo={todo}
-                    checked={checked}
-                      />
-                  ))}
-              </Grid2>
+              <SectionTitle title="Liste des tâches" />
+              <Todolist
+              todos={todos}
+              setTodos={setTodos}
+              searchValue={searchValue}
+              selected={selected}
+              checked={checked} 
+              setMessage={setMessage} 
+              setMessageType={setMessageType}  
+              setTodo={setTodo}                
+              />
             </div>
-          </Container>
-        </Row>
+        </div>
       </Grow>
     </ContentLayout>
   );

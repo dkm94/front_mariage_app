@@ -248,3 +248,14 @@ export interface TableProps {
     setTable: Dispatch<SetStateAction<string | null>>;
     checked: boolean;
   }
+  export interface TodosProps {
+    todos: TaskType[];
+    setTodos: Dispatch<SetStateAction<TaskType[]>>;
+    todo?: TaskType;
+    setMessage: Dispatch<SetStateAction<string | undefined>>;
+    setMessageType: Dispatch<SetStateAction<"error" | "success" | undefined>>;
+    setTodo: Dispatch<SetStateAction<string | null>>;
+    checked: boolean;
+  }
+
+export type Category = "starter" | "maincourse" | "dessert" | "apetizer" | "beverage";

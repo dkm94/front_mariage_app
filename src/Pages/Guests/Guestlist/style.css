@@ -1,5 +1,5 @@
 #guestlist-container {
-    container-type: inline-size;
+    /* container-type: inline-size; */
 }
 #guestlist-content {
     display: grid;

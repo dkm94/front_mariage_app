@@ -1,0 +1,29 @@
+#foodlist-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    border: solid 1px rgb(151, 151, 151, 0.18);
+    background-color: #ffffff;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
+    max-width: 600px;
+    width: 100%;
+    border-radius: 5px;
+}
+#foodlist-container .category {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.category h4{
+    margin-bottom: 20px;
+}
+.category ul {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    padding: 0;
+}
