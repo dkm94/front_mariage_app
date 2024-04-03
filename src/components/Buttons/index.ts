@@ -4,6 +4,7 @@ import GreyButton from "./Grey/GreyButton";
 import ScrollToTopButton from "./ScrollToTop/ScrollToTop";
 import AuthSwitchButton from "./AuthSwitch/AuthSwitchButton";
 import SwitchButton from "./Switch/SwitchButton";
+import AddButton from "./AddButton/AddButton";
 
 export { 
     CustomButton, 
@@ -11,5 +12,6 @@ export {
     GreyButton, 
     ScrollToTopButton, 
     AuthSwitchButton,
-    SwitchButton as SwitchEditMode
+    SwitchButton as SwitchEditMode,
+    AddButton
 };

@@ -16,7 +16,7 @@ import AddFoodForm from "./Forms/Add/AddFood";
 import { SectionTitle } from "../../components";
 import DefaultModal from "../../components/Modals/Default/DefaultModal";
 import FoodList from "./FoodList/FoodList";
-import { SwitchEditMode } from "../../components/Buttons";
+import { AddButton, SwitchEditMode } from "../../components/Buttons";
 
 export type Food = {
   _id?: string;
@@ -72,10 +72,7 @@ const Menus = () => {
     messageType={messageType} 
     id={foodId || ""}>
       <div style={{ display: "flex", gap: "30px", flexDirection: "column", alignItems: "flex-end", marginBottom: "20px"}}>
-        <Button variant="contained" onClick={handleModal} style={{ backgroundColor: "#262626", width: "fit-content", color: "#fff", textTransform: "capitalize", border: "none", display: "flex", flexDirection: "row", gap: "10px", paddingRight: "15px", borderRadius: "36px"}}>
-          <span className="material-symbols-outlined">add</span>
-          <span>Ajouter</span>
-        </Button>
+        <AddButton onClick={handleModal} />
         {openModal && <DefaultModal
           close={() => {
               setOpenModal(false);
