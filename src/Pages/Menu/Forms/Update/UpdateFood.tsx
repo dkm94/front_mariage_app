@@ -1,10 +1,7 @@
 import React, { useState, useRef, useEffect, Dispatch, SetStateAction, ChangeEvent, FormEvent } from "react";
 import { useHistory } from "react-router";
 
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { TextField } from "@mui/material";
-
-import CustomIconButton from "../../../../components/Buttons/SmallIconButton/IconButton";
 
 import { deleteFood, updateFood } from "../../../../services";
 import { useCurrentUser } from "../../../../ctx/userCtx";

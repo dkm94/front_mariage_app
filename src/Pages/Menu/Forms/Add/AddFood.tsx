@@ -6,7 +6,7 @@ import { History } from "history";
 
 import { TextField } from "@mui/material";
 
-import { ClearButton, CustomButton, GreyButton } from "../../../../components/Buttons";
+import { ClearButton, CustomButton } from "../../../../components/Buttons";
 import { Category, FoodType } from "../../../../../types";
 import { addFood } from "../../../../services/foodRequests";
 import { ApiResponse } from "../../../../helpers/requestHandler";
@@ -23,14 +23,6 @@ interface AddFoodsFormProps {
   mariageID: string;
   setOpenModal: (boolean) => void;
 }
-
-// const placeholders: string[] = [
-//   "Petits fours...",
-//   "Entrées...",
-//   "Plats principaux...",
-//   "Desserts...",
-//   "Boissons..."
-// ];
 
 const AddFoodForm = (props: AddFoodsFormProps) => {
   const { 
@@ -114,7 +106,6 @@ const AddFoodForm = (props: AddFoodsFormProps) => {
             text={"Annuler"}     
             onClick={handleCancel}
         />
-          
       </form>
     </>
   );
