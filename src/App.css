@@ -358,6 +358,9 @@ a:-webkit-any-link {
     .select-guest {
         max-width: unset !important;
     }
+    .select-family {
+        max-width: unset !important;
+    }
     .App-home {
         position: unset;
         left: unset;

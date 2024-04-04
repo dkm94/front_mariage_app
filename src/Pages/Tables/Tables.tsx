@@ -4,7 +4,6 @@ import React, { useState, ChangeEvent } from "react";
 import { withRouter } from "react-router-dom";
 import { useHistory } from "react-router";
 
-import { Box } from "@mui/material";
 import Grow from "@mui/material/Grow";
 
 import { GuestType, TableType } from "../../../types";
@@ -28,7 +27,7 @@ type EditType = {
 
 const Tables = (props) => {
   const history = useHistory();
-  const{ firstPerson, secondPerson, mariageID } = useCurrentUser();
+  const{ mariageID } = useCurrentUser();
 
   const [searchValue, setSearchValue] = useState<string>("");
   const [edit, setEdit] = useState<EditType | null>(null);

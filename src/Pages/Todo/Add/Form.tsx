@@ -1,18 +1,39 @@
 import "./Form.css";
 
-import React, { useState, useRef } from "react";
-import { Col } from "react-bootstrap";
-import EditNoteIcon from "@mui/icons-material/EditNote";
+import React, { useState, useRef, HTMLAttributes, SetStateAction, Dispatch, ChangeEvent } from "react";
 
-import { GreyButton } from "../../../components/Buttons";
+import { TextField } from "@mui/material";
+
+import { TaskType } from "../../../../types";
 import { addTodo } from "../../../services";
 
-const Form = ({ todos, setTodos, setMessage, setMessageType }) => {
+import { ClearButton, CustomButton } from "../../../components/Buttons";
+
+interface AddTodoFormProps extends HTMLAttributes<HTMLFormElement> {
+  todos: any[];
+  setTodos: Dispatch<SetStateAction<TaskType[]>>;
+  setMessage: Dispatch<SetStateAction<string | undefined>>;
+  setMessageType: Dispatch<SetStateAction<string | undefined>>;
+  mariageID: string;
+  history: any;
+  setOpenModal: Dispatch<SetStateAction<boolean>>;
+}
+
+const AddTodoForm = (props: AddTodoFormProps) => {
+  const { todos, 
+    setTodos, 
+    setMessage, 
+    setMessageType, 
+    mariageID, 
+    history, 
+    setOpenModal 
+  } = props;
+
   const [input, setInput] = useState("");
   const inputRef = useRef(null);
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
   };
 
@@ -34,31 +55,41 @@ const Form = ({ todos, setTodos, setMessage, setMessageType }) => {
     setLoading(false);
   };
 
+  const handleCancel = () => {
+    setInput("");
+    const currentPosition: number = window.scrollY;
+    history.replace(`/mariage/${mariageID}/taches`, { currentPosition })
+    setOpenModal(false);
+  }
+
   return (
-    <Col xs={12} sm={10} md={6} className="add-task-form">
-      <form onSubmit={handleSumbit} className="todo__form-input">
-        <div className="add-input">
-          <EditNoteIcon style={{ height: "auto", color: "#b2a9a9" }} />
-          <input
-            type="text"
-            name="text"
-            value={input}
-            onChange={handleChange}
-            className="form-control shadow-none"
-            placeholder="Nouvelle tâche"
-            ref={inputRef}
-            required
-          />
-        </div>
-        <GreyButton
-          variant="contained"
-          type="submit"
-          style={{ marginLeft: "12px", height: "97%", borderRadius: "5px 20px 20px 5px" }}
-          text={loading ? "..." : "Créer"}
-        />
-      </form>
-    </Col>
+    <form id="add-task-form" onSubmit={handleSumbit}>
+      <TextField
+        label="Tâche"
+        type="text"
+        name="text"
+        value={input}
+        onChange={handleChange}
+        className="form-control shadow-none"
+        placeholder="Appeler le traiteur"
+        ref={inputRef}
+        fullWidth
+        size="small"
+        required
+      />
+      <CustomButton
+        variant="contained"
+        type="submit"
+        text={loading ? "..." : "Valider"}
+        borderRadius="5px"
+        width="100%"
+      />
+      <ClearButton
+        text={"Annuler"}     
+        onClick={handleCancel}
+      />
+    </form>
   );
 };
 
-export default Form;
+export default AddTodoForm;
