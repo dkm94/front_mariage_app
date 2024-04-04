@@ -107,21 +107,19 @@ const Todos = () => {
 
       <Grow in={!loading} timeout={3000}>
         <div className="task-container">
-            <div className="tasks__list">
-              <SectionTitle title="Liste des tâches" />
-              {todos && todos.length > 0 && (
-              <Todolist
-              todos={todos}
-              setTodos={setTodos}
-              searchValue={searchValue}
-              selected={selected}
-              checked={checked} 
-              setMessage={setMessage} 
-              setMessageType={setMessageType}  
-              setTodo={setTodo}                
-              />
-              )}
-            </div>
+            <SectionTitle title="Liste des tâches" />
+            {todos && todos.length > 0 && (
+            <Todolist
+            todos={todos}
+            setTodos={setTodos}
+            searchValue={searchValue}
+            selected={selected}
+            checked={checked} 
+            setMessage={setMessage} 
+            setMessageType={setMessageType}  
+            setTodo={setTodo}                
+            />
+            )}
         </div>
       </Grow>
     </ContentLayout>

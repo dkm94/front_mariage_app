@@ -23,11 +23,6 @@
   font-family: Playfair Display, serif !important;
 }
 
-.tasks__list {
-  padding-left: 50px;
-  padding-right: 50px;
-}
-
 .tasks-title {
   display: flex;
 }
@@ -39,6 +34,11 @@
 }
 .select-family div:nth-child(1) {
   margin: 0;
+}
+.task-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 @media (max-width: 786px) {
   .tasks-title {
@@ -54,11 +54,6 @@
   .tasks-count {
     font-size: 1.3rem !important;
   }
-  .task-container {
-    margin-right: 0;
-    padding-left: 0px;
-    padding-right: 0px;
-  }
 }
 #empty-task {
   align-self: center;
@@ -66,10 +61,7 @@
   font-size: 1.3rem;
 }
 @container (max-width: 600px){
-  .tasks__list {
-    padding-left: 0px;
-    padding-right: 0px;
-  }
+ 
 }
 
 @media (max-width: 414px) {

@@ -54,7 +54,6 @@ const EditTableForm = (props: EditTableFormProps) => {
   const [isDisabled, setIsDisabled] = useState<boolean>(false);
   const inputRef = useRef<HTMLDivElement>(null);
 
-
   useEffect(() => {
     inputRef?.current?.focus();
   });
