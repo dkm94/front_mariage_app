@@ -48,6 +48,7 @@ const Todos = () => {
   };
 
   const completedTasks: number = todos.filter((todo: TaskType) => todo.isCompleted).length;
+  const incompleteTasks: number = todos.filter((todo: TaskType) => !todo.isCompleted).length;
 
   function handleModal(){
     setOpenModal(!openModal);
@@ -97,6 +98,8 @@ const Todos = () => {
             array={selectArray}
             size="medium"
             label="Sélectionner"
+            completedTasks={completedTasks}
+            incompleteTasks={incompleteTasks}
           />
         </div>
         <AddButton onClick={handleModal} />

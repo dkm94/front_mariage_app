@@ -17,6 +17,8 @@ interface SelectProps {
     array: SelectArray[];
     label?: string;
     size?: "small" | "medium" | undefined;
+    completedTasks?: number;
+    incompleteTasks?: number;
 }
 
 export const SingleSelect = (props: SelectProps) => {
@@ -26,8 +28,12 @@ export const SingleSelect = (props: SelectProps) => {
         placeholder,
         array,
         label,
-        size
+        size,
+        completedTasks,
+        incompleteTasks
     } = props;
+
+    const totalTasks: number = completedTasks! + incompleteTasks!;
 
     const handleChange = (event: SelectChangeEvent) => {
         setSelected(event.target.value);
@@ -45,8 +51,11 @@ return (
         fullWidth
         size={size ? size : "small"}
         >
-        {array.map((food) => (
-            <MenuItem key={food.value} value={food.value}>{food.name}</MenuItem>
+        {array.map((el) => (
+            <MenuItem 
+            key={el.value} 
+            value={el.value}>{el.name} {`(${el.value === "done" ? completedTasks : el.value === "incomplete" ? incompleteTasks : totalTasks})`}
+            </MenuItem>
         ))}
         </Select>
     </FormControl>
