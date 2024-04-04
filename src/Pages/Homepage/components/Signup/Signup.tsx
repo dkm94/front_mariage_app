@@ -14,10 +14,6 @@ const HomeSignup = () => {
   const [isOpen, setisOpen] = useState<boolean>(false);
   const [showForm, setShowForm] = useState<string>("");
   const [email, setEmail] = useState<string>("");
-  console.log("🚀 ~ HomeSignup ~ email:", email)
-  console.log(showForm === "register");
-  console.log("🚀 ~ HomeSignup ~ showForm:", showForm)
-  
 
   const handleRegisterButton = ():void => {
     setShowForm("register");

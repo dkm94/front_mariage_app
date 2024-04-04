@@ -3,7 +3,7 @@ import "./style.css";
 import React from 'react';
 
 import { TableProps, TableType } from "../../../../types";
-import { SectionTitle } from "../../../components";
+
 import Table from "../Table";
 
 interface TableListProps extends TableProps {

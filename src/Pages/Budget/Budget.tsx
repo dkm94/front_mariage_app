@@ -1,8 +1,8 @@
 import "./Budget.css";
 
 import React, { useState, useEffect, ChangeEvent } from "react";
+import { useHistory } from "react-router";
 import { useFormik } from "formik";
-import { Container, Row, Col } from "react-bootstrap";
 import * as Yup from "yup";
 
 import Grow from "@mui/material/Grow";
@@ -13,12 +13,15 @@ import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayo
 import PriceCard from "../../components/Expenses/PriceCard/PriceCard";
 import AddExpenseForm from "../../components/Expenses/Forms/AddExpenseForm/AddExpenseForm";
 import ExpenseElement from "../../components/Expenses/Table/ExpenseElement/ExpenseElement";
+import DefaultModal from "../../components/Modals/Default/DefaultModal";
 
 import { OperationType } from "../../../types/index";
 import { floatToEuro } from "../../helpers/formatCurrency";
 import { useFetch } from "../../hooks";
 import { addOperation, getOperations } from "../../services";
 import { categories, headerItems } from "../../data";
+import { useCurrentUser } from "../../ctx/userCtx";
+import { AddButton } from "../../components/Buttons";
 
 const operationValues: OperationType = {
   category: "",
@@ -27,9 +30,13 @@ const operationValues: OperationType = {
 };
 
 const Budget = () => {
+  const history = useHistory<any>();
+  const{ mariageID } = useCurrentUser();
+
   const [searchValue, setSearchValue] = useState<string>("");
   const [total, setTotal] = useState<string>("");
   const [operationId, setOperationId] = useState<string | null>(null);
+  const [openModal, setOpenModal] = useState<boolean>(false);
 
   const [edit, setEdit] = useState<OperationType | null>(null);
 
@@ -85,6 +92,7 @@ const Budget = () => {
       setOperations([...expensesCopy, newOperation]);
       calculateTotal([...expensesCopy, newOperation]);
       formik.resetForm();
+      setOpenModal(false);
     },
     validationSchema: operationSchema,
     enableReinitialize: true,
@@ -101,6 +109,10 @@ const Budget = () => {
     }
   }
 
+  function handleModal(){
+    setOpenModal(!openModal);
+  }
+
   return (
     <ContentLayout 
     loading={loading} 
@@ -111,40 +123,44 @@ const Budget = () => {
     id={operationId || ""}
     >
       <Grow in={!loading} timeout={2000}>
-        <Container className="search-bar-section" fluid>
-          <Row>
-            <Col xs={12} sm={10} md={6} />
-            <Col
-              xs={12}
-              sm={10}
-              md={6}
-              className="search-bar-wrapper"
+        <div className="section-action-box">
+          <SearchBar
+            className="search__input"
+            type="text"
+            placeholder="Rechercher une dépense"
+            name="searchbar"
+            value={searchValue}
+            onChange={handleSearch}
+          />
+          {openModal && <DefaultModal
+            close={() => {
+                setOpenModal(false);
+                const currentPosition: number = window.scrollY;
+                history.replace(`/mariage/${mariageID}/budget`, { currentPosition } )
+            }}
+            setOpen={handleModal}
+            title={"Nouvelle dépense"}
             >
-              <SearchBar
-                className="search__input"
-                type="text"
-                placeholder="Rechercher une dépense"
-                name="searchbar"
-                value={searchValue}
-                onChange={handleSearch}
+              <div id="add-expense-form">
+              <AddExpenseForm 
+              formik={formik} 
+              categories={categories}
+              mariageID={mariageID}
+              history={history}
+              setOpenModal={setOpenModal}
               />
-            </Col>
-          </Row>
-        </Container>
+            </div>
+            </DefaultModal>}
+          <AddButton onClick={handleModal} />
+        </div>
       </Grow>
 
       <Grow in={!loading} timeout={3000}>
-        <div className="budget-cols">
+        <div className="">
           <div className="budget___col-1">
-
             <div className="col card-expense-component">
               <PriceCard total={total} />
             </div>
-
-            <div className="col budget-form mb3">
-              <AddExpenseForm formik={formik} categories={categories} />
-            </div>
-                
           </div>
 
           {operations.length > 0 && <div className="col chart-component">

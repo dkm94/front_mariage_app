@@ -4,35 +4,6 @@
     padding: 1rem;
 }
 
-
-/* .glass-div {
-    background: linear-gradient(to bottom right,rgba(255,255,255,0.33333),rgba(255,255,255,0),rgba(255,255,255,0.33333));
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
-    transform: scale(1);
-    transform: translate(-50%, -50%);
-    border-radius: 18px;
-    border: 1px solid rgba(255,255,255,0.2);
-    position: absolute;
-    left: 50%;
-    top: 100%;
-    padding: 5rem;
-    transition: 250ms all;
-    text-shadow: 1px 1px 1px rgba(0,0,0,0.15);
-    box-shadow: 0 4px 10px 0 rgb(0 0 0 / 10%), 0 6px 20px 0 rgb(0 0 0 / 10%);
-} */
-
-.budget-form___style > span {
-    place-self: flex-end;
-}
-
-.budget-cols {
-    width: 100%;
-    padding-left: 50px;
-    padding-right: 50px;
-    min-height: 500px;
-}
-
 .budget___search {
     width: 100%;
     display: flex;
@@ -43,47 +14,19 @@
     display: flex;
 }
 
-.budget-form {
+#add-expense-form {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    align-items: flex-end;
-    width: 50%;
-    border-radius: 5px;
-}
-
-.budget-form > form {
+    align-items: center;
+    justify-content: center;
     width: 100%;
-    max-width: 27rem;
-    text-align: end;
+    padding-left: 20px;
+    padding-right: 20px;
+    gap: 10px;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
-.budget-form > form > div > input {
-    border-radius: 10px;
-}
-
-.budget-form___add-btn, .budget-form___submit {
-    margin-top: 1.5rem;
-    text-align: flex-end;
-}
-
-.budget-form___submit {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-}
-
-.budget-form___submit > button:hover {
-    color: #FFF;
-    animation: none;
-}
-.budget-form___submit > button:focus {
-    color: #FFF;
-    outline: none;
-}
-
-.budget-form___submit > button:active {
-    color: #D18476;
-}
 
 .budget___select {
     width: 100%;
@@ -106,6 +49,9 @@
 
 .budget___col-1 > .chart-component > .pie > canvas {
     height: 15rem;
+}
+.card-expense-component {
+    padding: 0;
 }
 .card-expense-component > .card {
     background-color: #f9f9f9;
@@ -187,21 +133,13 @@
     padding-left: 5px;
     padding-right: 5px;
 }
-.search-bar-section {
-    padding: 2rem 4rem;
-}
+
 .search-bar-wrapper {
     display: flex;
     justify-content: flex-end;
 }
 .budget-list #empty {
     text-align: center;
-}
-
-@media (max-width: 1200px){
-    .budget-cols {
-        padding: 0;
-    }
 }
 
 @container (max-width: 768px){
@@ -268,24 +206,11 @@
     .budget___col-2 > ul {
         padding: 0;
     }
-    .budget___col-2 > .budget-form {
-        padding: 0 5rem;
-    }
-    .budget-form {
-        width: 100%;
-    }
     .budget___search {
         justify-content: center;
     }
     .budget___search > div {
         width: 70%;
-    }
-    .budget___col-1 > .budget-form {
-        margin-top: 4rem;
-    }
-    .budget-cols {
-        padding-left: 0;
-        padding-right: 0;
     }
     .budget___col-1, .pie {
         padding-left: 0px;
@@ -294,13 +219,7 @@
  }
 
 @media (max-width: 600px) {
-    .search-bar-section {
-        padding: 0;
-    }
     .budget___col-1 {
-        padding: 0;
-    }
-    .budget-form {
         padding: 0;
     }
     .card-expense-component {
@@ -316,9 +235,7 @@
   }
 
 @media (max-width: 414px) { 
-    .budget-form > form {
-        margin-left: 0;
-    }
+
     .budget-form___style {
         font-size: 75%;
     }

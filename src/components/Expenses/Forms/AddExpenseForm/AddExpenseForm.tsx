@@ -1,19 +1,29 @@
 import "./AddExpenseForm.css";
 
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 
 import { FormikProvider, Form } from "formik";
 
 import TextField from "../../../Formik/TextField-Operations";
-import { CustomButton } from "../../../Buttons";
+import { ClearButton, CustomButton } from "../../../Buttons";
 
 interface AddExpenseFormProps {
     formik: any;
     categories: any;
+    mariageID: string;
+    history: any;
+    setOpenModal: Dispatch<SetStateAction<boolean>>;
 }
 
 const AddExpenseForm = (props: AddExpenseFormProps) => {
-    const { formik, categories } = props;
+    const { formik, categories, mariageID, history, setOpenModal } = props;
+
+    const handleCancel = () => {
+    formik.resetForm();
+    const currentPosition: number = window.scrollY;
+    history.replace(`/mariage/${mariageID}/budget`, { currentPosition })
+    setOpenModal(false);
+    }
 
   return (
     <FormikProvider value={formik}>
@@ -42,7 +52,6 @@ const AddExpenseForm = (props: AddExpenseFormProps) => {
                 )}
             </div>
             <TextField
-            size="40%"
             name="description"
             type="text"
             value={formik.values.description}
@@ -54,8 +63,7 @@ const AddExpenseForm = (props: AddExpenseFormProps) => {
             placeholder="Description"
             />
             <TextField
-            size="20%"
-            width="100%"
+            size="medium"
             name="price"
             type="number"
             value={formik.values.price}
@@ -67,13 +75,18 @@ const AddExpenseForm = (props: AddExpenseFormProps) => {
             placeholder="Montant"
             border-radius="10px"
             />
-            <div className="col-12 budget-form___submit">
+            <div style={{ display: "flex", flexDirection: "column", gap: "5px", marginTop: "5px"}}>
                 <CustomButton
+                variant="contained"
                 type="submit"
-                text={"Valider"}
-                variant={"contained"}
+                text={formik.isSubmitting ? "..." : "Valider"}
+                borderRadius="5px"
+                width="100%"
                 disabled={formik.isSubmitting}
-                size="medium"
+                />
+                <ClearButton
+                text={"Annuler"}     
+                onClick={handleCancel}
                 />
             </div>
         </Form>
