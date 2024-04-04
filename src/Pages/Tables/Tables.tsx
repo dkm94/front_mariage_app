@@ -2,9 +2,8 @@ import "./Tables.css";
 
 import React, { useState, ChangeEvent } from "react";
 import { withRouter } from "react-router-dom";
+import { useHistory } from "react-router";
 
-import { Container, Row, Col } from "react-bootstrap";
-import { Box } from "@mui/material";
 import Grow from "@mui/material/Grow";
 
 import { GuestType, TableType } from "../../../types";
@@ -12,11 +11,14 @@ import { getGuests } from "../../services/guestRequests";
 import { getTables } from "../../services/tableRequests";
 import { useFetch } from "../../hooks";
 
-import AddTableForm from "./Forms/Add";
-import SearchBar from "../Guests/SearchBar/SearchBar";
 import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
-import { SwitchEditMode } from "../../components/Buttons";
+import AddTableForm from "./Forms/Add/Add";
+import SearchBar from "../Guests/SearchBar/SearchBar";
+import { AddButton, SwitchEditMode } from "../../components/Buttons";
 import TableList from "./Tablelist/TableList";
+import DefaultModal from "../../components/Modals/Default/DefaultModal";
+import { useCurrentUser } from "../../ctx/userCtx";
+import { SectionTitle } from "../../components";
 
 type EditType = {
   id: string;
@@ -24,6 +26,9 @@ type EditType = {
 }
 
 const Tables = (props) => {
+  const history = useHistory();
+  const{ mariageID } = useCurrentUser();
+
   const [searchValue, setSearchValue] = useState<string>("");
   const [edit, setEdit] = useState<EditType | null>(null);
   const [input, setInput] = useState<string>("");
@@ -31,6 +36,7 @@ const Tables = (props) => {
 
   const [isOpen, setisOpen] = useState(false);
   const [checked, setChecked] = useState<boolean>(false);
+  const [openModal, setOpenModal] = useState<boolean>(false);
 
   const switchHandler = (event) => {
     setChecked(event.target.checked);
@@ -74,6 +80,10 @@ const Tables = (props) => {
     setInput(tableName);
   };
 
+  function handleModal(){
+    setOpenModal(!openModal);
+  }
+
   return (
     <ContentLayout 
       loading={loadingTables}
@@ -83,68 +93,66 @@ const Tables = (props) => {
       messageType={tableTypeMessage || guestTypeMessage} 
       id={table || ""}    
     >
-      <Container id="tables-section" fluid>
-        <Row>
-          <Col xs={12} sm={10} md={6} className="table-form">
-            <AddTableForm tables={tables} setTables={setTables} setMessage={setMessageTable} setMessageType={setMessageTypeTable} />
-          </Col>
-          <Col xs={12} sm={10} md={6} className="searchbar">
-            <SearchBar
-              className="search__input"
-              type="text"
-              placeholder="Rechercher une table"
-              name="searchbar"
-              value={searchValue}
-              onChange={handleSearch}
-            />
-          </Col>
-        </Row>
-      </Container>
-
+      <div className="section-action-box">
+        {openModal && <DefaultModal
+        close={() => {
+            setOpenModal(false);
+            const currentPosition: number = window.scrollY;
+            history.replace(`/mariage/${mariageID}/tables`, { currentPosition } )
+        }}
+        setOpen={handleModal}
+        title={"Nouvelle table"}
+        >
+          <AddTableForm 
+          tables={tables} 
+          setTables={setTables} 
+          setMessage={setMessageTable} 
+          setMessageType={setMessageTypeTable}
+          setOpenModal={setOpenModal} 
+          history={history}
+          mariageID={mariageID}
+          />
+        </DefaultModal>}
+        <SearchBar
+          className="search__input"
+          type="text"
+          placeholder="Rechercher une table"
+          name="searchbar"
+          value={searchValue}
+          onChange={handleSearch}
+        />
+        <AddButton onClick={handleModal} />
+        <SwitchEditMode checked={checked} onChange={switchHandler} />
+      </div>
 
       <Grow in={!loadingTables} timeout={2000}>
-        <Box
-          sx={{
-            minHeight: "500px",
-          }}
-          className="tables-grid"
-          pl={"50px"}
-          pr={"50px"}
-          >
+        <div id="tables-container">
+          <SectionTitle title="Plan de table" />
           {/* {errorGuests && <div style={{ alignSelf: "center" }}><span style={{ color: "darkred"}}>{errorMessageGuests}</span></div>} */}
-
-          <SwitchEditMode checked={checked} onChange={switchHandler} />
-          {tables?.length === 0 || null ? (
-            <div
-              className="block"
-              style={{ display: tables &&  "none" }}
-            >
-              <span>Vos tables ici.</span>
-            </div>
-          ) : (
-            <TableList 
-                tables={tables}
-                table={table}
-                searchValue={searchValue}
-                edit={edit}
-                handleUpdatedTable={handleUpdatedTable}
-                input={input}
-                setTables={setTables}
-                guests={orderedGuests}
-                setGuests={setGuests}
-                setEdit={setEdit}
-                getUpdatedId={getUpdatedId}
-                isOpen={isOpen}
-                setisOpen={setisOpen}
-                setMessage={setMessageTable}
-                setMessageType={setMessageTypeTable}
-                setTable={setTable}
-                checked={checked} 
-                setMessageTable={setMessageTable}
-                setMessageTypeTable={setMessageTypeTable}
-                />
+          {tables && tables.length > 0 && (
+          <TableList 
+              tables={tables}
+              table={table}
+              searchValue={searchValue}
+              edit={edit}
+              handleUpdatedTable={handleUpdatedTable}
+              input={input}
+              setTables={setTables}
+              guests={orderedGuests}
+              setGuests={setGuests}
+              setEdit={setEdit}
+              getUpdatedId={getUpdatedId}
+              isOpen={isOpen}
+              setisOpen={setisOpen}
+              setMessage={setMessageTable}
+              setMessageType={setMessageTypeTable}
+              setTable={setTable}
+              checked={checked} 
+              setMessageTable={setMessageTable}
+              setMessageTypeTable={setMessageTypeTable}
+              />
           )}
-        </Box>
+        </div>
       </Grow>
     </ContentLayout>
   );

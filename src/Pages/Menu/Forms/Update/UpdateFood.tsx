@@ -54,6 +54,7 @@ const UpdateFood = (props: UpdateFoodProps) => {
     if(input === ""){
         setMessageType("error");
         setMessage("Le champ doit être rempli");
+        return;
     }
  
     input.trim();
@@ -152,26 +153,6 @@ const deleteElement = async (id: string): Promise<void> => {
           fullWidth
           style={{ backgroundColor: "#fff" }}
         />
-        {/* <Grid2
-          display={"flex"}
-          flexDirection={"row"}
-          justifyContent={"end"}
-          width={"fit-content"}
-          xs={4}
-          gap={"7px"}
-        >
-          <CustomIconButton 
-          type="submit"
-          buttonType="save"
-          disabled={isDisabled}
-          />
-
-          <CustomIconButton 
-          type="button"
-          buttonType='cancel'
-          onClick={handleCancel}
-          />
-        </Grid2> */}
         <div className="action-buttons">
           <CustomButton 
           text="Supprimer"

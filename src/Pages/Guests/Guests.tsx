@@ -2,19 +2,20 @@ import "./Guests.css";
 import "./style/guests.css";
 
 import React, { useState, ChangeEvent } from "react";
-
-import { Container, Row, Col } from "react-bootstrap";
+import { useHistory } from "react-router";
 
 import { GuestType } from "../../../types";
 import { getGuests } from "../../services/guestRequests";
 import { useFetch } from "../../hooks";
+import { useCurrentUser } from "../../ctx/userCtx";
 
 import AddForm from "./Forms/Add/AddGuest";
 import SearchBar from "./SearchBar/SearchBar";
 import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
-import { SwitchEditMode } from "../../components/Buttons";
+import { AddButton, SwitchEditMode } from "../../components/Buttons";
 import Guestlist from "./Guestlist/Guestlist";
-import { SectionTitle } from "../../components";
+import { SectionTitle, SingleSelect } from "../../components";
+import DefaultModal from "../../components/Modals/Default/DefaultModal";
 
 type NewUser = string;
 
@@ -31,7 +32,23 @@ interface GuestsProps {
 }
 
 const Guests = (props: GuestsProps) => {
-  const { firstPerson, secondPerson, mariageID } = props.userInfos;
+  const history = useHistory();
+  const{ firstPerson, secondPerson, mariageID } = useCurrentUser();
+
+  const selectArray = [
+    {
+      value: "tous",
+      name: "Tous les invités"
+    },
+    {
+      value: "1",
+      name: `Invités de ${firstPerson}`
+    },
+    {
+      value: "2",
+      name: `Invités de ${secondPerson}`
+    }
+  ]
 
   const [newUser, setNewUser] = useState<NewUser>("");
 
@@ -50,15 +67,20 @@ const Guests = (props: GuestsProps) => {
   const [guestId, setGuestId] = useState<string | null>(null);
   const [selected, setSelected] = useState<string>("tous");
   const [checked, setChecked] = useState<boolean>(false);
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [selectedValue, setSelectedValue] = useState<string>("");
 
   const switchHandler = (event) => {
     setChecked(event.target.checked);
   };
 
-
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
   };
+
+  function handleModal(){
+    setOpenModal(!openModal);
+  }
 
   return (
     <ContentLayout 
@@ -69,70 +91,76 @@ const Guests = (props: GuestsProps) => {
     messageType={messageType} 
     id={guestId || ""}
     >
-      <>
-        <Container id="guest-section" fluid>
-          <Row>
-            <Col xs={12} sm={10} md={6} className="guest-form">
-              <AddForm 
-              newUser={newUser} 
-              setNewUser={setNewUser}
-              guests={guests}
-              setGuests={setGuests} 
-              setMessage={setMessage} 
-              setMessageType={setMessageType} 
-              />
-            </Col>
-            <Col xs={12} sm={10} md={6} className="searchbar">
-              <SearchBar
-                className="search__input"
-                type="text"
-                placeholder="Rechercher un invité"
-                name="searchbar"
-                value={searchValue}
-                onChange={handleSearch}
-              />
-            </Col>
-          </Row>
-        </Container>
-        <div className="guests___list">
-          <div className="byguests___block">
-              <div className="select-guest">
-                <select
-                  value={selected}
-                  onChange={(e) => setSelected(e.target.value)}
-                  className="select-family"
-                >
-                  <option value="tous">Tous les invités</option>
-                  <option value="1">{`Invités de ${firstPerson}`}</option>
-                  <option value="2">{`Invités de ${secondPerson}`}</option>
-                </select>
-              </div>
-
-              <SwitchEditMode checked={checked} onChange={switchHandler} />
-
-              <SectionTitle title="Liste d'invités" />
-
-                {/*TODO: Change guestlist design */}
-                {guests && guests.length > 0 && (
-                <Guestlist 
-                  guests={guests}
-                  firstPerson={firstPerson}
-                  secondPerson={secondPerson}
-                  setGuests={setGuests}
-                  setMessage={setMessage}
-                  setMessageType={setMessageType}
-                  setGuestId={setGuestId}
-                  editPicture={editPicture}
-                  seteditPicture={seteditPicture}
-                  mariageID={mariageID}
-                  checked={checked} 
-                  searchValue={searchValue} 
-                  selected={selected}                
-                  />
-                )}
-          </div>
+      <div className="section-action-box">
+        {openModal && <DefaultModal
+        close={() => {
+            setOpenModal(false);
+            const currentPosition: number = window.scrollY;
+            history.replace(`/mariage/${mariageID}/invites`, { currentPosition } )
+        }}
+        setOpen={handleModal}
+        title={"Nouvel invité"}
+        >
+          <AddForm 
+            newUser={newUser} 
+            setNewUser={setNewUser}
+            guests={guests}
+            setGuests={setGuests} 
+            setMessage={setMessage} 
+            setMessageType={setMessageType}
+            mariageID={mariageID}
+            history={history}
+            setOpenModal={setOpenModal}
+            selectedValue={selectedValue}
+            setSelectedValue={setSelectedValue}
+            firstPerson={firstPerson}
+            secondPerson={secondPerson}
+          />
+        </DefaultModal>}
+        <SearchBar
+          className="search__input"
+          type="text"
+          placeholder="Rechercher"
+          name="searchbar"
+          value={searchValue}
+          onChange={handleSearch}
+        />
+        <div className="select-guest">
+          <SingleSelect
+            selected={selected}
+            setSelected={setSelected}
+            placeholder="Tous les invités"
+            array={selectArray}
+            size="medium"
+            label="Sélectionner"
+          />
         </div>
-      </>
+        <AddButton onClick={handleModal} />
+        <SwitchEditMode checked={checked} onChange={switchHandler} />
+      </div>
+      <div className="guests___list">
+        <div className="byguests___block">
+            <SectionTitle title="Liste d'invités" />
+              {/*TODO: Change guestlist design */}
+              {guests && guests.length > 0 && (
+              <Guestlist 
+                guests={guests}
+                firstPerson={firstPerson}
+                secondPerson={secondPerson}
+                setGuests={setGuests}
+                setMessage={setMessage}
+                setMessageType={setMessageType}
+                setGuestId={setGuestId}
+                editPicture={editPicture}
+                seteditPicture={seteditPicture}
+                mariageID={mariageID}
+                checked={checked} 
+                searchValue={searchValue} 
+                selected={selected}                
+                />
+              )}
+        </div>
+      </div>
     </ContentLayout>
   );
 };

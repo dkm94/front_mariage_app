@@ -57,6 +57,7 @@ const UpdateGuest = (props: UpdateGuestProps) => {
   const history: History = useHistory();
 
   const [radioValue, setRadioValue] = useState<string>(guestFamily || "");
+  const [isDisabled, setIsDisabled] = useState<boolean>(false);
 
   const user:UserType = useCurrentUser();
   const { firstPerson, secondPerson } = user as { firstPerson: string, secondPerson: string };
@@ -66,7 +67,6 @@ const UpdateGuest = (props: UpdateGuestProps) => {
 
   const [uploadedFile, setUploadedFile] = useState<FileState>(null);
   const [file, setFile] = useState<FileState>(null);
-
 
   useEffect(() => {
     inputRef?.current?.focus();
@@ -289,24 +289,30 @@ const UpdateGuest = (props: UpdateGuestProps) => {
             </div>
           </div>
           <div className="action-buttons">
-            <CustomButton 
+              <CustomButton 
               text="Supprimer"
-              variant="contained"
+              variant="outlined"
               onClick={() => edit && deleteGuestfn(edit.id)}
               type="button"
-              backgroundColor="darkred"
-              width="48%"
-            />
+              backgroundColor="none"
+              width="48%" 
+              borderRadius="5px"
+              color="error"
+              border={true}
+              fontWeight={900}
+              />
 
-            <CustomButton
+              <CustomButton
               text="Enregistrer"
-              variant="contained"
               type="submit"
+              variant="contained" 
               width="48%"
-            />
+              disabled={isDisabled}
+              borderRadius="5px"
+              />
 
-            <ClearButton
-              text="Annuler"
+              <ClearButton
+              text={"Annuler"}     
               onClick={handleCancel}
               />
           </div>

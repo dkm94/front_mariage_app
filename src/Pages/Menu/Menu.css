@@ -19,3 +19,15 @@ ul {
     flex-direction: column;
     align-items: center;
 }
+.section-action-box {
+    display: flex; 
+    gap: 20px; 
+    flex-direction: column; 
+    align-items: flex-end; 
+    margin-bottom: 20px
+}
+@media (max-width: 600px) {
+    .section-action-box {
+        padding: 0;
+    }
+}

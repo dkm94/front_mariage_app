@@ -1,55 +1,15 @@
-  .add-task-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 50%;
-    border-radius: 5px;
-  }
-  .form-and-search {
-    padding: 2rem 4rem;
-  }
 
-  .add-task-form > form > div > button {
-    margin-left: 10px;
-    border-style: none;
-    border: 1px solid lightgrey;
-    border-radius: 10px;
-    background-color: #b2a9a9;
-    color: #FFF;
-    min-width: 8rem;
-    transition: 0.2s all ease-in-out;
-    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 26%);
-    text-shadow: 0px 0px 1px #333;
-}
-
-.add-task-form > form > div > button:hover {
-    background: #e0d9d9;
-    color: #FFF;
-    animation: none;
-}
-.add-task-form > form > div > button:focus {
-    color: #FFF;
-    outline: none;
-}
-
-.add-task-form > form > div > button:active {
-    color: #D18476;
-}
-#result-select {
+#add-task-form {
   display: flex;
-  justify-content: flex-end;
-  flex-wrap: nowrap;
-}
-#result-select > div:nth-child(1) {
-  margin-right: 1rem;
-}
-#result-select > div:nth-child(1) > span {
-  font-size: 1.3rem;
-  margin-bottom: 1rem;
-}
-#result-select > div:nth-child(2) {
-  display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+  gap: 10px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 .select-tasks {
   padding-left: 15px;
@@ -63,15 +23,23 @@
   font-family: Playfair Display, serif !important;
 }
 
-.tasks__list {
-  padding-left: 50px;
-  padding-right: 50px;
-}
-
 .tasks-title {
   display: flex;
 }
-
+.select-family {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  max-width: 27rem;
+}
+.select-family div:nth-child(1) {
+  margin: 0;
+}
+.task-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 @media (max-width: 786px) {
   .tasks-title {
     display: none;
@@ -86,11 +54,6 @@
   .tasks-count {
     font-size: 1.3rem !important;
   }
-  .task-container {
-    margin-right: 0;
-    padding-left: 0px;
-    padding-right: 0px;
-  }
 }
 #empty-task {
   align-self: center;
@@ -98,10 +61,7 @@
   font-size: 1.3rem;
 }
 @container (max-width: 600px){
-  .tasks__list {
-    padding-left: 0px;
-    padding-right: 0px;
-  }
+ 
 }
 
 @media (max-width: 414px) {

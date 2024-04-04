@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -31,7 +32,7 @@ export const SelectFood = (props: SelectFoodProps) => {
         labelId="demo-select-small-label"
         id="demo-select-small"
         value={selectedFood}
-        label="Age"
+        label="Plat/boisson"
         onChange={handleChange}
         fullWidth
       >

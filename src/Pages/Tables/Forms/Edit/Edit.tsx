@@ -1,7 +1,7 @@
 import "../../../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "../../Tables.css";
 
-import React, { Dispatch, FormEvent, SetStateAction, useState } from "react";
+import React, { Dispatch, FormEvent, SetStateAction, useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router";
 import { History } from "history";
 
@@ -50,12 +50,34 @@ const EditTableForm = (props: EditTableFormProps) => {
 
   const history: History = useHistory();
 
-  const [guestsIds, setGuestsIds] = useState<string[]>([])
+  const [guestsIds, setGuestsIds] = useState<string[]>([]);
+  const [isDisabled, setIsDisabled] = useState<boolean>(false);
+  const inputRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    inputRef?.current?.focus();
+  });
+
+  useEffect(() => {
+    if(input === ""){
+        setIsDisabled(true);
+    } else {
+        setIsDisabled(false);
+    }
+  }, [input])
   
   const handleSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
 
     setTable(tableId);
+
+    if(input === ""){
+      setMessageType("error");
+      setMessage("Le champ doit être rempli");
+      return;
+    }
+
+    input.trim();
     
     const tablesResponse = await updateTableWithGuests({ id: tableId, guestIds: guestsIds });
     const updateNameResponse = await updateTablesName({ id: tableId, name: input });
@@ -142,7 +164,7 @@ const EditTableForm = (props: EditTableFormProps) => {
           label="Table"
           size="small"
           required
-          // ref={ref}
+          ref={inputRef}
           type="text"
           name="name"
           onChange={handleUpdatedTable}
@@ -152,30 +174,38 @@ const EditTableForm = (props: EditTableFormProps) => {
           }}
         />
 
+          {/* TODO: actualiser la liste des invités sélectionnées si une table a été précédemment supprimée 
+          et actualiser les invités deselectionnés précédement dans une autre table maintenant disponibles
+          Problème de back ? */}
         <MultipleSelect guests={guests} setGuestsIds={setGuestsIds} edit={edit} />
 
         <div className="action-buttons">
           <CustomButton 
           text="Supprimer"
-          variant="contained"
+          variant="outlined"
           onClick={(e) => deleteTableFn(e, edit.id)}
           type="button"
-          backgroundColor="darkred"
+          backgroundColor="none"
           width="48%" 
+          borderRadius="5px"
+          color="error"
+          border={true}
+          fontWeight={900}
           />
 
           <CustomButton
-            text="Enregistrer"
-            type="submit"
-            variant="contained" 
-            width="48%"
-          />
+          text="Enregistrer"
+          type="submit"
+          variant="contained" 
+          width="48%"
+          disabled={isDisabled}
+          borderRadius="5px"
+        />
 
-          <ClearButton
-            text={"Annuler"}     
-            onClick={handleCancel}
-            />
-          
+        <ClearButton
+          text={"Annuler"}     
+          onClick={handleCancel}
+          />
         </div>
       </form>
     </div>

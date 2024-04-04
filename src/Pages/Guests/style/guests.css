@@ -39,9 +39,6 @@
     height: fit-content;
     display: flex;
     flex-direction: column;
-    padding-left: 50px;
-    padding-right: 50px;
-
 }
 
 .guest-card__delete-btn {
@@ -181,6 +178,7 @@
     flex-direction: column;
     align-items: center;
     padding: 1rem;
+    margin-bottom: 15px;
     background-image: repeating-linear-gradient(0deg, #bfbfbf, #bfbfbf 7px, transparent 7px, transparent 11px, #bfbfbf 11px), repeating-linear-gradient(90deg, #bfbfbf, #bfbfbf 7px, transparent 7px, transparent 11px, #bfbfbf 11px), repeating-linear-gradient(180deg, #bfbfbf, #bfbfbf 7px, transparent 7px, transparent 11px, #bfbfbf 11px), repeating-linear-gradient(270deg, #bfbfbf, #bfbfbf 7px, transparent 7px, transparent 11px, #bfbfbf 11px);
     background-size: 2px 100%, 100% 2px, 2px 100% , 100% 2px;
     background-position: 0 0, 0 0, 100% 0, 0 100%;
@@ -265,6 +263,7 @@
     flex-direction: column;
     gap: 7px;
     width: 100%;
+    margin-top: 15px;
 }
 .fam-input-container {
     display: flex;
@@ -348,6 +347,11 @@
  .select-guest {
     display: flex;
     justify-content: flex-end;
+    width: 100%;
+    max-width: 27rem;
+}
+.select-guest div:nth-child(1) {
+    margin: 0;
 }
 
  @media(max-width: 1366px) {

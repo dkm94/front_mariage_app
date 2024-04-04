@@ -1,3 +1,5 @@
+import './style.css';
+
 import React from 'react'
 import { TaskType, TodosProps } from '../../../../types'
 import Todo from '../Todo/Todo'
@@ -19,7 +21,7 @@ const Todolist = (props: TodolistProps) => {
     } = props
 
   return (
-    <section>
+    <section id="todolist-container">
         {todos
             .filter((todo: TaskType) => {
             return (
