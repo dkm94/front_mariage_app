@@ -71,7 +71,6 @@ const Menus = () => {
     messageType={messageType} 
     id={foodId || ""}>
       <div className="section-action-box">
-        <AddButton onClick={handleModal} />
         {openModal && <DefaultModal
           close={() => {
               setOpenModal(false);
@@ -93,6 +92,7 @@ const Menus = () => {
           setOpenModal={setOpenModal}
           />
       </DefaultModal>}
+      <AddButton onClick={handleModal} />
       <SwitchEditMode checked={checked} onChange={switchHandler} />
       </div>
       <Grow in={!loading} timeout={2000}>

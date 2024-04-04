@@ -19,6 +19,7 @@ import { AddButton, SwitchEditMode } from "../../components/Buttons";
 import TableList from "./Tablelist/TableList";
 import DefaultModal from "../../components/Modals/Default/DefaultModal";
 import { useCurrentUser } from "../../ctx/userCtx";
+import { SectionTitle } from "../../components";
 
 type EditType = {
   id: string;
@@ -94,7 +95,6 @@ const Tables = (props) => {
       id={table || ""}    
     >
       <div className="section-action-box">
-        <AddButton onClick={handleModal} />
         {openModal && <DefaultModal
         close={() => {
             setOpenModal(false);
@@ -110,6 +110,8 @@ const Tables = (props) => {
           setMessage={setMessageTable} 
           setMessageType={setMessageTypeTable}
           setOpenModal={setOpenModal} 
+          history={history}
+          mariageID={mariageID}
           />
         </DefaultModal>}
         <SearchBar
@@ -120,51 +122,38 @@ const Tables = (props) => {
           value={searchValue}
           onChange={handleSearch}
         />
+        <AddButton onClick={handleModal} />
+        <SwitchEditMode checked={checked} onChange={switchHandler} />
       </div>
 
       <Grow in={!loadingTables} timeout={2000}>
-        <Box
-          sx={{
-            minHeight: "500px",
-          }}
-          className="tables-grid"
-          pl={"50px"}
-          pr={"50px"}
-          >
+        <div id="tables-container">
+          <SectionTitle title="Plan de table" />
           {/* {errorGuests && <div style={{ alignSelf: "center" }}><span style={{ color: "darkred"}}>{errorMessageGuests}</span></div>} */}
-
-          <SwitchEditMode checked={checked} onChange={switchHandler} />
-          {tables?.length === 0 || null ? (
-            <div
-              className="block"
-              style={{ display: tables &&  "none" }}
-            >
-              <span>Vos tables ici.</span>
-            </div>
-          ) : (
-            <TableList 
-                tables={tables}
-                table={table}
-                searchValue={searchValue}
-                edit={edit}
-                handleUpdatedTable={handleUpdatedTable}
-                input={input}
-                setTables={setTables}
-                guests={orderedGuests}
-                setGuests={setGuests}
-                setEdit={setEdit}
-                getUpdatedId={getUpdatedId}
-                isOpen={isOpen}
-                setisOpen={setisOpen}
-                setMessage={setMessageTable}
-                setMessageType={setMessageTypeTable}
-                setTable={setTable}
-                checked={checked} 
-                setMessageTable={setMessageTable}
-                setMessageTypeTable={setMessageTypeTable}
-                />
+          {tables && tables.length > 0 && (
+          <TableList 
+              tables={tables}
+              table={table}
+              searchValue={searchValue}
+              edit={edit}
+              handleUpdatedTable={handleUpdatedTable}
+              input={input}
+              setTables={setTables}
+              guests={orderedGuests}
+              setGuests={setGuests}
+              setEdit={setEdit}
+              getUpdatedId={getUpdatedId}
+              isOpen={isOpen}
+              setisOpen={setisOpen}
+              setMessage={setMessageTable}
+              setMessageType={setMessageTypeTable}
+              setTable={setTable}
+              checked={checked} 
+              setMessageTable={setMessageTable}
+              setMessageTypeTable={setMessageTypeTable}
+              />
           )}
-        </Box>
+        </div>
       </Grow>
     </ContentLayout>
   );

@@ -93,7 +93,6 @@ const Guests = (props: GuestsProps) => {
     >
       <>
         <div className="section-action-box">
-          <AddButton onClick={handleModal} />
           {openModal && <DefaultModal
           close={() => {
               setOpenModal(false);
@@ -119,14 +118,14 @@ const Guests = (props: GuestsProps) => {
               secondPerson={secondPerson}
             />
           </DefaultModal>}
-              <SearchBar
-                className="search__input"
-                type="text"
-                placeholder="Rechercher"
-                name="searchbar"
-                value={searchValue}
-                onChange={handleSearch}
-              />
+          <SearchBar
+            className="search__input"
+            type="text"
+            placeholder="Rechercher"
+            name="searchbar"
+            value={searchValue}
+            onChange={handleSearch}
+          />
           <div className="select-guest">
             <SingleSelect
               selected={selected}
@@ -137,6 +136,7 @@ const Guests = (props: GuestsProps) => {
               label="Selectionner"
             />
           </div>
+          <AddButton onClick={handleModal} />
           <SwitchEditMode checked={checked} onChange={switchHandler} />
         </div>
         <div className="guests___list">

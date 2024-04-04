@@ -32,9 +32,7 @@ const TableList = (props: TableListProps) => {
         checked
     } = props;
   return (
-    <section id="tablelist-container">
-        <SectionTitle title="Plan de table" />
-        
+    <section id="tablelist-container">        
         <div id="tablelist-content">
             {tables
             .sort((a:TableType, b:TableType) => {

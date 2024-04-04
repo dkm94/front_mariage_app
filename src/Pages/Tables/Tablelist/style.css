@@ -1,5 +1,5 @@
 #tablelist-container {
-    /* container-type: inline-size; */
+    width: 100%;
 }
 #tablelist-content {
     display: grid;

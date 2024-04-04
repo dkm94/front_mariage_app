@@ -43,7 +43,7 @@ return (
         label={placeholder}
         onChange={handleChange}
         fullWidth
-        size={props.size ? props.size : "small"}
+        size={size ? size : "small"}
         >
         {array.map((food) => (
             <MenuItem key={food.value} value={food.value}>{food.name}</MenuItem>

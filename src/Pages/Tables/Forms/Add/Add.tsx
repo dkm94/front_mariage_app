@@ -4,7 +4,7 @@ import React, { useState, useRef, HTMLAttributes, ChangeEvent, Dispatch, SetStat
 
 import { addTable } from "../../../../services";
 
-import { CustomButton } from "../../../../components/Buttons";
+import { ClearButton, CustomButton } from "../../../../components/Buttons";
 import { TextField } from "@mui/material";
 
 interface AddTableProps extends HTMLAttributes<HTMLFormElement> {
@@ -13,10 +13,20 @@ interface AddTableProps extends HTMLAttributes<HTMLFormElement> {
   setMessage: any;
   setMessageType: any;
   setOpenModal: Dispatch<SetStateAction<boolean>>;
+  mariageID: string;
+  history: any;
 }
 
 const AddTableForm = (props: AddTableProps) => {
-  const { tables, setTables, setMessage, setMessageType, setOpenModal } = props;
+  const { 
+    tables, 
+    setTables, 
+    setMessage, 
+    setMessageType, 
+    setOpenModal,
+    mariageID,
+    history
+   } = props;
   const [input, setInput] = useState("");
   const inputRef = useRef(null);
   const [loading, setLoading] = useState(false);
@@ -46,6 +56,13 @@ const AddTableForm = (props: AddTableProps) => {
     setOpenModal(false);
   };
 
+  const handleCancel = () => {
+    setInput("");
+    const currentPosition: number = window.scrollY;
+    history.replace(`/mariage/${mariageID}/tables`, { currentPosition })
+    setOpenModal(false);
+  }
+
   return (
     <form
     id="add-table-form"
@@ -68,6 +85,10 @@ const AddTableForm = (props: AddTableProps) => {
           borderRadius="5px"
           width="100%"
         />
+      <ClearButton
+          text={"Annuler"}     
+          onClick={handleCancel}
+      />
     </form>
   );
 };
