@@ -295,7 +295,8 @@
         right: 0;
         width: 100vw;
         visibility: visible;
-        opacity: 0.9;
+        /* opacity: 0.9; */
+        justify-content: center;
     }
     
     .navbar__link {

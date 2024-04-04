@@ -37,14 +37,16 @@ export const GridItem = (props: GridItemProps) => {
                 onClick={logout} 
                 style={{ 
                     display: "flex", 
-                    flexDirection: "column", 
+                    flexDirection: "row", 
                     justifyContent: "center", 
                     alignItems: "center", 
                     backgroundColor: "unset",
-                    gap: "8px"}} 
+                    gap: "8px",
+                    width: "100%",
+                }} 
                 >
-                    <span className="material-symbols-outlined" style={{ textAlign: "center", color: "grey", fontSize: "2rem" }}>{icon}</span>
-                    <span>Déconnexion</span>
+                    <span className="material-symbols-outlined" style={{ textAlign: "end", color: "grey", fontSize: "2rem", width: "50%", paddingRight: "10px" }}>{icon}</span>
+                    <span style={{ width: "50%", textAlign: "start", alignSelf: "center", fontWeight: 900 }}>Déconnexion</span>
                 </button>
             </li>
         )
@@ -55,21 +57,23 @@ export const GridItem = (props: GridItemProps) => {
                 to={`/compte/${userId}/configuration`} 
                 style={{ 
                     display: "flex", 
-                    flexDirection: "column", 
+                    flexDirection: "row", 
                     justifyContent: "center",
-                    gap: "8px"}} 
+                    gap: "8px",
+                    width: "100%",
+                }} 
                 >
-                    <span className="material-symbols-outlined" style={{ textAlign: "center", color: "#FFF", fontSize: "2rem" }}>{icon}</span>
-                    <span style={{ color: "#534a43", backgroundColor: "#FFF", padding: "1px 15px", textAlign: "center"}}>{title}</span>
+                    <span className="material-symbols-outlined" style={{ textAlign: "end", color: "#FFF", fontSize: "2rem", width: "50%", paddingRight: "10px" }}>{icon}</span>
+                    <span style={{ color: "#534a43", textAlign: "start", width: "50%", alignSelf: "center", fontWeight: 900}}>{title}</span>
                 </NavLink>
             </li>
         )
     }  else {
         return (
             <li key={idx} style={{ backgroundColor: color }} className={`menu-grid-item grid-item-${idx}`}>
-                <NavLink to={`/mariage/${mariageID}${path}`} style={{ display: "flex", flexDirection: "column", justifyContent: "center", gap: "8px"}}> 
-                    <span className="material-symbols-outlined" style={{ textAlign: "center", color: "#FFF", fontSize: "2rem" }}>{icon}</span>
-                    <span style={{ color: "#534a43", backgroundColor: "#FFF", padding: "1px 15px", borderRadius: "3px", textAlign: "center", width: "max-content"}}>{title === "Tableau de bord" ? "Accueil" : title}</span>
+                <NavLink to={`/mariage/${mariageID}${path}`} style={{ display: "flex", flexDirection: "row", justifyContent: "center", gap: "8px", width: "100%"}}> 
+                    <span className="material-symbols-outlined" style={{ textAlign: "end", color: "#FFF", fontSize: "2rem", width: "50%", paddingRight: "10px" }}>{icon}</span>
+                    <span style={{ color: "#534a43", borderRadius: "3px", textAlign: "start", width: "50%", alignSelf: "center", fontWeight: 900}}>{title === "Tableau de bord" ? "Accueil" : title}</span>
                 </NavLink>
             </li>
         )
