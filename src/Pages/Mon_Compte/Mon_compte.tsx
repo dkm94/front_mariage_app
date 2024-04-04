@@ -11,7 +11,7 @@ import { deleteAccount, getUser, updatePassword, getWedding, updateWedding } fro
 import { useCurrentUser } from "../../ctx/userCtx";
 import { AccountType, UserType, WeddingType } from '../../../types';
 
-import { CustomButton } from "../../components/Buttons";
+import { ClearButton, CustomButton } from "../../components/Buttons";
 import DefaultModal from "../../components/Modals/Default/DefaultModal";
 import ContentLayout from "../../components/LayoutPage/ContentLayout/ContentLayout";
 
@@ -37,7 +37,9 @@ interface AccountProps {
 
 const MyAccount = (props: AccountProps) => {
     const user: UserType = useCurrentUser();
-    const { id, mariageID, firstPerson, secondPerson } = user as { id: string, mariageID: string, firstPerson: string, secondPerson: string};
+    const { id, mariageID, firstPerson, secondPerson, email } = user as { id: string, mariageID: string, firstPerson: string, secondPerson: string, email: string};
+    console.log("🚀 ~ MyAccount ~ email:", email)
+    console.log("🚀 ~ MyAccount ~ id:", id)
 
     const [newPassword, setNewPassword] = useState<string>("")
 
@@ -184,6 +186,10 @@ const MyAccount = (props: AccountProps) => {
         }
     }
 
+    const handleCancel = () => {
+        setOpenModal(false);
+    }
+
     return (
         <ContentLayout 
         loading={loading} 
@@ -315,29 +321,43 @@ const MyAccount = (props: AccountProps) => {
                 {openModal && (
                     <DefaultModal title="Supprimer votre compte" setOpen={() => setOpenModal(false)}>
                         <div id="modal-account">
-                            <span>La suppression du compte étant définitive, toutes les données seront perdues. Souhaitez-vous continuer ?</span>
-                            <div className="action-buttons">
-                                <CustomButton
-                                onClick={deleteAccountFn}
-                                text={"Supprimer"}
-                                variant="contained"
-                                style={{ borderRadius: "20px", padding: "6px 16px", flexGrow: 1, color: "#F4F4F4", backgroundColor: "darkred" }}
-                                />
-                                <CustomButton
-                                onClick={() => setOpenModal(false)}
-                                text={"Annuler"}
-                                type={"submit"}
-                                variant="contained"
-                                style={{ 
-                                color: "grey",
-                                border: "#e4e8e8 1px solid",
-                                borderRadius: "20px", 
-                                padding: "6px 16px",
-                                backgroundColor: "unset",
-                                boxShadow: "unset",
-                                flexGrow: 1 }}
-                                />
-                            </div>
+                        
+                            {id === "660832cdb68f18004dd08896" ? (
+                                <>
+                                    <span style={{ textAlign: "center"}}>Vous ne pouvez pas supprimer le compte test.</span>
+                                    <ClearButton
+                                    text={"Annuler"}     
+                                    onClick={handleCancel}
+                                    />
+                                </>
+                            ) : (
+                                <>
+                                    <span>La suppression du compte étant définitive, toutes les données seront perdues. Souhaitez-vous continuer ?</span>
+                                        <div className="action-buttons">
+                                            <CustomButton
+                                            onClick={deleteAccountFn}
+                                            text={"Supprimer"}
+                                            variant="contained"
+                                            style={{ borderRadius: "20px", padding: "6px 16px", flexGrow: 1, color: "#F4F4F4", backgroundColor: "darkred" }}
+                                            />
+                                            <CustomButton
+                                            onClick={() => setOpenModal(false)}
+                                            text={"Annuler"}
+                                            type={"submit"}
+                                            variant="contained"
+                                            style={{ 
+                                            color: "grey",
+                                            border: "#e4e8e8 1px solid",
+                                            borderRadius: "20px", 
+                                            padding: "6px 16px",
+                                            backgroundColor: "unset",
+                                            boxShadow: "unset",
+                                            flexGrow: 1 }}
+                                            />
+                                        </div>
+                                    </>
+                                )
+                            }
                         </div>
                     </DefaultModal>
                 )}

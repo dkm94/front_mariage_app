@@ -130,6 +130,7 @@ const Login = (props: LoginProps) => {
                   <TextField
                     size="small"
                     label="Email"
+                    defaultValue={"test@email.com"}
                     {...register("email", { required: true })}
                     id="email"
                     name="email"
@@ -141,6 +142,7 @@ const Login = (props: LoginProps) => {
                   <TextField
                     size="small"
                     label="Mot de passe"
+                    defaultValue={"Azertyuiop12!"}
                     {...register("password", { required: true })}
                     id="password"
                     name="password"
