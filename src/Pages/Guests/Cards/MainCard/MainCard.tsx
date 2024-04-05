@@ -78,7 +78,7 @@ const Guest = (props: GuestsProps) => {
   return (
     <div className="guest-wrapper" key={guest?._id}>
       <div className={`fade-in guest-card-style`}>
-        {checked && <IconWrapper onClick={() => handleEditGuest(guest)}>
+        {checked && <IconWrapper style={{ zIndex: "1000"}} onClick={() => handleEditGuest(guest)}>
           <CreateIcon fontSize="small" />
         </IconWrapper>}
       
