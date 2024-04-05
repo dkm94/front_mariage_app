@@ -69,7 +69,15 @@
 #signup-box-form button {
     border-radius: 5px !important;
 }
-
+#home-box-email::-webkit-input-placeholder {
+    color: #D2D3D1;
+}
+#home-box-email:-moz-placeholder {
+    color: #D2D3D1;
+}
+#home-box-email::placeholder {
+    color: #D2D3D1;
+}
 @media (max-width: 900px){
     #signup-box {
         /* border: unset; */

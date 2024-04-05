@@ -32,7 +32,7 @@ const HomeSignup = () => {
         <span>Inscrivez-vous dès maintenant !</span>
         <form id="signup-box-form">
           <label htmlFor="home-box-email">Email</label>
-          <input id="home-box-email" type="email" autoComplete="off" name="email" value={email} onChange={e => setEmail(e.target.value)} />
+          <input id="home-box-email" type="email" autoComplete="off" name="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="example@email.com" />
           <CustomButton text="Créer un compte" onClick={handleRegisterButton} />
         </form>
         <span id="signup-gutter">Inscrivez-vous gratuitement dès maintenant et commencez à planifier !</span>
