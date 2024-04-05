@@ -9,7 +9,6 @@ type SelectArray = {
     value: string;
     name: string;
 }
-
 interface SelectProps {
     selected: string;
     setSelected: Dispatch<SetStateAction<string>>;
@@ -19,6 +18,8 @@ interface SelectProps {
     size?: "small" | "medium" | undefined;
     completedTasks?: number;
     incompleteTasks?: number;
+    firstPersonGuests?: number;
+    secondPersonGuests?: number;
 }
 
 export const SingleSelect = (props: SelectProps) => {
@@ -30,10 +31,13 @@ export const SingleSelect = (props: SelectProps) => {
         label,
         size,
         completedTasks,
-        incompleteTasks
+        incompleteTasks,
+        firstPersonGuests,
+        secondPersonGuests,
     } = props;
 
     const totalTasks: number = completedTasks! + incompleteTasks!;
+    const totalGuests: number = firstPersonGuests! + secondPersonGuests!;
 
     const handleChange = (event: SelectChangeEvent) => {
         setSelected(event.target.value);
@@ -51,12 +55,16 @@ return (
         fullWidth
         size={size ? size : "small"}
         >
-        {array.map((el) => (
-            <MenuItem 
-            key={el.value} 
-            value={el.value}>{el.name} {`(${el.value === "done" ? completedTasks : el.value === "incomplete" ? incompleteTasks : totalTasks})`}
-            </MenuItem>
-        ))}
+        {array.map((el) => {
+            const calculatedTasksValue = el.value === "done" ? completedTasks : el.value === "incomplete" ? incompleteTasks : totalTasks;
+            const calculatedGuestsValue = el.value === "1" ? firstPersonGuests : el.value === "2" ? secondPersonGuests : totalGuests;
+            return(
+                <MenuItem 
+                key={el.value} 
+                value={el.value}>{el.name} {`(${calculatedGuestsValue || calculatedTasksValue})`}
+                </MenuItem>
+            )
+        })}
         </Select>
     </FormControl>
 );

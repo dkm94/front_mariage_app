@@ -24,7 +24,7 @@ const Guestlist = (props: GuestListProps) => {
         editPicture,
         seteditPicture,
         mariageID,
-        checked
+        checked,
     } = props;
   return (
     <section id="guestlist-container">
