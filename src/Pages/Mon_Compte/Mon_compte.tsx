@@ -38,8 +38,6 @@ interface AccountProps {
 const MyAccount = (props: AccountProps) => {
     const user: UserType = useCurrentUser();
     const { id, mariageID, firstPerson, secondPerson, email } = user as { id: string, mariageID: string, firstPerson: string, secondPerson: string, email: string};
-    console.log("🚀 ~ MyAccount ~ email:", email)
-    console.log("🚀 ~ MyAccount ~ id:", id)
 
     const [newPassword, setNewPassword] = useState<string>("")
 

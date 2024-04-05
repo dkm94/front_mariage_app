@@ -29,7 +29,6 @@ type Auth = {
 
 const Register = (props: RegisterProps) => {
   const { setShowForm, email } = props;
-  console.log("🚀 ~ Register ~ props:", props)
   const history: History = useHistory();
 
   const [loadingButton, setLoadingButton] = useState(false);

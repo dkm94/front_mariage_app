@@ -22,11 +22,8 @@ const HomeSignup = () => {
   }
 
   const handleCloseModal = () => {
-    console.log("close modal is called")
     setisOpen(false);
-    console.log("isOpen is set to false")
     setShowForm("");
-    console.log("showForm is set to empty string")
   }
 
   return (
