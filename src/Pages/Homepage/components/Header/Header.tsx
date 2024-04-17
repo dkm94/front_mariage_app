@@ -6,6 +6,7 @@ import img from "../../../../img/img-home.png";
 const HomeHeader = () => {
   return (
     <section id="home-header-wrapper">
+      <div id="home-header-wave">
         <div id="home-header">
           <div id="header-text">
             <div className="big-text">
@@ -30,6 +31,7 @@ const HomeHeader = () => {
             <span>My Wedding, l'outil indispensable pour ne rien oublier des préparatifs de l'un des plus beaux évènements de votre vie.</span>
           </div>
         </div>
+      </div>
     </section>
   )
 }

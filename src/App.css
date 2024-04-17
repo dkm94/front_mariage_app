@@ -12,9 +12,6 @@ html, body {
     background-color: #f9f9f9 !important;
 }
 
-body {
-}
-
 .roboto-regular {
     font-family: "Roboto", sans-serif;
     font-weight: 400;
@@ -81,6 +78,7 @@ li {
     width: 100%;
     position: absolute;
     top: 0;
+    background-color: #FFFFFF;
 }
 
 .nav-open .App-home {

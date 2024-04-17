@@ -127,9 +127,6 @@
     background-color: #F0EEEC;
     padding-top: 150px;
     padding-bottom: 100px;
-    /* border-radius: 400px 400px 0 0; */
-    border-top-left-radius: 70%;
-    border-top-right-radius: 70%;
 }
 
 
@@ -153,7 +150,7 @@ a:hover {
 }
 
 .section-2___titre > h2 {
-    font-size: 2.5rem !important;
+    font-size: 2rem !important;
     font-weight: 900;
 }
 
@@ -341,8 +338,6 @@ a:hover {
         padding-top: 150px;
         padding-left: 40px;
         padding-right: 40px;
-        border-top-left-radius: 45%;
-        border-top-right-radius: 45%;
     }
    }
 
