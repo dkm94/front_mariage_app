@@ -428,4 +428,8 @@
     .mywedding-nav > span {
         display: none;
     }
+    .navigation {
+        padding-left: 25px;
+        padding-right: 25px;
+    }
 }
