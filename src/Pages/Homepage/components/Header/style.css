@@ -1,11 +1,42 @@
 #home-header-wrapper {
     background-color: #F0EEEC;
     height: 750px;
-    border-bottom-left-radius:70%;
-    border-bottom-right-radius:70%;
-    overflow: hidden;
-    position: relative;
 }
+
+#home-header-wave {
+    display: block;
+    position: relative;
+    height: 750px;
+    width: 100%;
+    /* background: rgb(57, 27, 112); */
+    transform: scale(1, 1);
+}
+  
+  #home-header-wave:before {
+    content: "";
+    display: block;
+    position: absolute;
+    border-radius: 100%;
+    width: 100%;
+    height: 300px;
+    background-color: #ffffff ;
+    right: -25%;
+    top: 730px;
+  }
+  
+  #home-header-wave:after {
+    content: "";
+    display: block;
+    position: absolute;
+    border-radius: 100%;
+    width: 100%;
+    height: 300px;
+    /* background-color: rgb(57, 27, 112); */
+    background-color:#F0EEEC;
+    left: -25%;
+    top: 470px;
+    clip-path: ellipse(100% 15% at -15% 100%);
+  }
 
 #home-header {
     display: flex;
@@ -45,6 +76,7 @@
     flex-direction: column;
     max-inline-size: 70ch;
     text-wrap: balance;
+    font-size: 1.2rem;
 }
 
 #header-image {
@@ -66,11 +98,12 @@
     height: 100%;
     max-height: 500px;
     background-color: #97877D;
-    border-radius: 50%;
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
+    overflow: hidden;
 }
 #small-text-sm {
     display: none;
@@ -103,6 +136,15 @@
         padding: 0;
         gap: 30px;
     }
+    #home-header-wave {
+        height: 660px;
+    }
+    #home-header-wave:after {
+        top: 380px;
+    }
+    #home-header-wave:before {
+        top: 640px;
+    }
     #header-image {
         justify-content: end;
         flex: unset;
@@ -112,7 +154,7 @@
         max-width: unset;
         border-radius: 0;
         justify-content: unset;
-        /* height: 20vw; */
+        overflow: unset;
         height: 170px;
     }
     #header-text .small-text{
@@ -149,7 +191,7 @@
         font-weight: 900;
     }
     #home-header-wrapper{
-        padding-bottom: 150px;
+        /* padding-bottom: 150px; */
         height: fit-content;
     }
 }

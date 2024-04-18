@@ -1,6 +1,11 @@
 #home-screens-wrapper {
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    padding-bottom: 200px;
+    padding-left: 100px;
+    padding-right: 100px;
+    align-items: center;
 }
 #home-screens {
     position: relative;
@@ -9,28 +14,18 @@
     display: flex;
     justify-content: center;
 }
-#home-screens img:nth-child(1) {
+#home-screens img {
     width: 100%;
-    max-width: 900px;
-}
-#home-screens img:nth-child(2) {
-    position: absolute;
-    right: 20%;
-    max-height: 430px;
-    height: 50%;
-    bottom: 15%;
-}
-#home-screens img:nth-child(3) {
-    position: absolute;
-    right: 10%;
-    max-height: 430px;
-    height: 50%;
-    bottom: 5%;
+    max-width: 1120px;
+    box-shadow: 9px 11px 15px -3px rgba(0,0,0,0.1);
+    border-radius: 20px;
+    border: 1px solid #f2f0f0;
 }
 
 @media (max-width: 960px){
     #home-screens-wrapper{
         padding-left: 50px;
         padding-right: 50px;
+        padding-bottom: 150px;
     }
 }

@@ -1,6 +1,7 @@
 .home-container {
     /* background-color: #F0EEEC; */
-    background-color: #D2C5C5;
+    /* background-color: #D2C5C5; */
+    overflow: hidden;
     display: flex;
     flex-direction: column;
 }
