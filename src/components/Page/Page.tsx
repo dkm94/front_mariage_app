@@ -13,7 +13,7 @@ export default function Page({
     userInfos: infos,
   }: PageProps) {
 
-    const titlePrefix = "My Wedding | ";
+    const titlePrefix = "Mariage en main | ";
 
     useDocumentTitle(`${titlePrefix}${titre}`);
     

@@ -17,7 +17,7 @@ const HomeHeader = () => {
             <div className="small-text">
               <span>Simplifiez l'organisation de votre mariage</span>
               <span>Consultez et gérez facilement les étapes clés de votre mariage en quelques clics.</span>
-              <span>My Wedding, l'outil indispensable pour ne rien oublier des préparatifs de l'un des plus beaux évènements de votre vie.</span>
+              <span>Mariage en main, l'outil indispensable pour ne rien oublier des préparatifs de l'un des plus beaux évènements de votre vie.</span>
             </div>
           </div>
           <div id="header-image">
@@ -28,7 +28,7 @@ const HomeHeader = () => {
           <div id="small-text-sm">
             <span>Simplifiez l'organisation de votre mariage</span>
             <span>Consultez et gérez facilement les étapes clés de votre mariage en quelques clics.</span>
-            <span>My Wedding, l'outil indispensable pour ne rien oublier des préparatifs de l'un des plus beaux évènements de votre vie.</span>
+            <span>Mariage en main, l'outil indispensable pour ne rien oublier des préparatifs de l'un des plus beaux évènements de votre vie.</span>
           </div>
         </div>
       </div>
