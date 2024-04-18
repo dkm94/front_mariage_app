@@ -1,0 +1,112 @@
+#presentation-details {
+    container-type: inline-size;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    /* padding-top: 2rem;
+    padding-bottom: 2rem; */
+    width: 100%;
+    max-width: 1500px;
+}
+.presentation-wrapper {
+    max-width: 1200px;
+    width: 100%;
+}
+
+#details-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    width: 100%;
+    max-width: 400px;
+}
+#details-img img {
+    width: 100%;
+}
+
+#details-description {
+    flex: 1;
+    padding-left: 75px;
+}
+.presentation-wrapper > .description-cards {
+    display: none;
+}
+
+.description-cards > h2 {
+    font-size: 1rem;
+    font-weight: 900;
+    color: #b6aeae;
+    letter-spacing: 1px;
+    /* text-transform: uppercase; */
+}
+
+.description-cards > .title {
+    font-size: 2rem;
+    /* font-weight: 600; */
+    /* text-transform: uppercase; */
+}
+.description-screens {
+    z-index: 10;
+    margin-bottom: 100px;
+    text-align: center;
+}
+.description-screens > h2 {
+    font-size: 1rem;
+    font-weight: 900;
+    color: #b6aeae;
+    letter-spacing: 1px;
+    /* text-transform: uppercase; */
+}
+
+.description-screens > .title {
+    font-size: 2rem;
+    /* font-weight: 600; */
+    /* text-transform: uppercase; */
+}
+
+@media (max-width: 1200px) {
+    #details-img {
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 900px) {
+    .presentation-wrapper > .description-cards {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        margin-bottom: 75px;
+    }
+    .description-cards {
+        display: none;
+    }
+    #details-description {
+        padding-left: 50px;
+    }
+    #details-img {
+        max-width: 250px;
+    }
+    #presentation-details {
+        flex-direction: column;
+    }
+    #details-description {
+        padding: 0;
+        width: 100%;
+    }
+    .intro-card {
+        max-width: 300px;
+        width: 100%;
+        padding: 1rem !important;
+        background: none !important;
+        border: none !important;
+    }
+    #details-img > img {
+        height: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+}
