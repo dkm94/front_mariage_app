@@ -146,26 +146,26 @@ const Guests = (props: GuestsProps) => {
         <SwitchEditMode checked={checked} onChange={switchHandler} />
       </div>
       <div className="guests___list">
+        <SectionTitle title="Liste d'invités" />
         <div className="byguests___block">
-            <SectionTitle title="Liste d'invités" />
-              {/*TODO: Change guestlist design */}
-              {guests && guests.length > 0 && (
-              <Guestlist 
-                guests={guests}
-                firstPerson={firstPerson}
-                secondPerson={secondPerson}
-                setGuests={setGuests}
-                setMessage={setMessage}
-                setMessageType={setMessageType}
-                setGuestId={setGuestId}
-                editPicture={editPicture}
-                seteditPicture={seteditPicture}
-                mariageID={mariageID}
-                checked={checked} 
-                searchValue={searchValue} 
-                selected={selected}            
-                />
-              )}
+          {/*TODO: Change guestlist design */}
+          {guests && guests.length > 0 && (
+          <Guestlist 
+            guests={guests}
+            firstPerson={firstPerson}
+            secondPerson={secondPerson}
+            setGuests={setGuests}
+            setMessage={setMessage}
+            setMessageType={setMessageType}
+            setGuestId={setGuestId}
+            editPicture={editPicture}
+            seteditPicture={seteditPicture}
+            mariageID={mariageID}
+            checked={checked} 
+            searchValue={searchValue} 
+            selected={selected}            
+            />
+          )}
         </div>
       </div>
     </ContentLayout>
