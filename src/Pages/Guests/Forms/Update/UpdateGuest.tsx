@@ -298,7 +298,7 @@ const UpdateGuest = (props: UpdateGuestProps) => {
               width="48%" 
               borderRadius="5px"
               color="error"
-              border={true}
+              border={"1px solid #f44336"}
               fontWeight={900}
               />
 
