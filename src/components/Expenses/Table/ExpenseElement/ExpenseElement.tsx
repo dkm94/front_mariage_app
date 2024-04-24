@@ -24,6 +24,8 @@ interface ExpenseElementProps {
   setOperations: Dispatch<SetStateAction<OperationType[]>>;
   calculateTotal: (operations: OperationType[]) => void;
   setOperationId: Dispatch<SetStateAction<string | null>>;
+  checked: boolean;
+  setChecked: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const ExpenseElement = (props: ExpenseElementProps) => {
@@ -37,6 +39,8 @@ const ExpenseElement = (props: ExpenseElementProps) => {
     setOperations, 
     calculateTotal, 
     setOperationId,
+    checked,
+    setChecked
     } = props;
 
   const history: History = useHistory();
@@ -72,10 +76,18 @@ const ExpenseElement = (props: ExpenseElementProps) => {
   }
 
   const handleCloseModal = (): void => {
+      setEdit(null)
+      const currentPosition: number = window.scrollY;
+      history.replace(`/mariage/${mariageID}/budget`, { currentPosition } )
+  }
+
+  const handleEditExpense = () => {
     setEdit(obj);
     const currentPosition: number = window.scrollY;
     history.replace(`/mariage/${mariageID}/budget/edit/${expenseId}`, { currentPosition })
   }
+
+  console.log(edit?._id === obj?._id)
 
   return (
     <>
@@ -99,21 +111,20 @@ const ExpenseElement = (props: ExpenseElementProps) => {
           {obj.description}
       </div>
 
-      <div className='cols cols-5'  data-label="Gérer">
-        <IconButton onClick={handleCloseModal} disabled={isDisabled}>
+      {checked && <div className='cols cols-5'  data-label="Gérer">
+        <IconButton onClick={handleEditExpense} disabled={isDisabled}>
           <CreateIcon fontSize="small" />
         </IconButton>
-      </div>
+      </div>}
 
       {edit?._id === obj?._id && 
       <DefaultModal
       setEdit={setEdit}
-      close={() => {
-          setEdit(null)
-          const currentPosition: number = window.scrollY;
-          history.replace(`/mariage/${mariageID}/budget`, { currentPosition } )
-      }}
+      close={handleCloseModal}
+      selectedId={edit?._id}
       title={"Modifier une dépense"}
+      open={checked}
+      setOpen={setChecked}
       >
         <UpdateForm
         edit={edit}

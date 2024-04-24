@@ -1,15 +1,14 @@
 import "./Form.css";
 
-import React, { ChangeEvent, Dispatch, FormEvent, RefObject, SetStateAction, useEffect, useRef } from "react";
+import React, { ChangeEvent, Dispatch, FormEvent, RefObject, SetStateAction, useEffect, useRef, useState } from "react";
 import { useHistory } from 'react-router';
 
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { TextField } from "@mui/material";
 
-import { updateTodo } from "../../../services";
+import { deleteTodo, updateTodo } from "../../../services";
 import { TaskType } from "../../../../types";
 
-import CustomIconButton from '../../../components/Buttons/SmallIconButton/IconButton';
+import { ClearButton, CustomButton } from "../../../components/Buttons";
 
 type EditType = {
   id?: string;
@@ -26,6 +25,9 @@ interface UpdateTaskFormProps {
   setMessage:Dispatch<SetStateAction<string | undefined>>;
   setMessageType: Dispatch<SetStateAction<"error" | "success" | undefined>>;
   mariageID: string;
+  setTodo: Dispatch<SetStateAction<string | null>>;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+  handleCancel: () => void;
 }
 
 const UpdateTask = (props: UpdateTaskFormProps) => {
@@ -38,14 +40,28 @@ const UpdateTask = (props: UpdateTaskFormProps) => {
     todos, 
     setMessage, 
     setMessageType, 
-    mariageID } = props;
+    mariageID,
+    setTodo,
+    setOpen, 
+    handleCancel
+  } = props;
 
   const history = useHistory();
   const inputRef:RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
+  const [isDisabled, setIsDisabled] = useState<boolean>(false);
   
   useEffect(() => {
     inputRef?.current?.focus();
   });
+
+  useEffect(() => {
+    if(input === ""){
+        setIsDisabled(true);
+    } else {
+        setIsDisabled(false);
+    }
+  }, [input])
+
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setInput(e.target.value);
@@ -78,48 +94,81 @@ const UpdateTask = (props: UpdateTaskFormProps) => {
     history.replace(`/mariage/${mariageID}/taches`, { currentPosition })
   };
 
-  const handleCancel = () => {
-    setEdit(null);
-    setInput("");
+  const deleteTodoFn = async (id: string): Promise<void> => {
+    setTodo(id);
 
-    const currentPosition: number = window.scrollY;
-    history.replace(`/mariage/${mariageID}/taches`, { currentPosition })
-  }
+    const response = await deleteTodo({ id })
+    const { success, message } = response;
+
+    if(!success) {
+      setMessageType("error");
+      setMessage(message);
+
+      setTimeout(() => {
+        setMessage(undefined);
+        setMessageType(undefined);
+        setTodo(null);
+      }, 2000);
+      return;
+    }
+
+    setMessageType("success");
+    setMessage(message);
+    setTodos(todos.filter((todo: TaskType) => todo._id !== id));
+
+    setTimeout(() => {
+      setMessage(undefined);
+      setMessageType(undefined);
+      setTodo(null);
+    }, 2000);
+  };
 
   return (
-    <Grid2
-      container
-      display={"flex"}
-      flexDirection={"row"}
-      p={"1rem 3rem"}
-      width={"100%"}
-    >
+    <div className="modal-child">
       <form onSubmit={editTodo} id="todo-form">
-        <Grid2 width={"100%"}>
           <TextField
+            label="Tâche"
+            required
             size="small"
-            style={{
-              width: "100%",
-              backgroundColor: "#fff",
-            }}
             type="text"
             name="text"
             onChange={handleChange}
             value={input}
             ref={inputRef}
+            fullWidth
+            style={{ backgroundColor: "#fff" }}
           />
-        </Grid2>
+        <div className="action-buttons">
+            <CustomButton 
+            text="Supprimer"
+            variant="outlined"
+            onClick={() => deleteTodoFn(edit?.id ?? '')}
+            type="button"
+            backgroundColor="none"
+            width="48%" 
+            borderRadius="5px"
+            color="error"
+            border={"1px solid #f44336"}
+            fontWeight={900}
+            />
 
-        <Grid2 display={"flex"} gap={"7px"}>
-          <CustomIconButton type="submit" buttonType="save"/>
-          <CustomIconButton
-          type="reset" 
-          buttonType="cancel" 
-          onClick={handleCancel}
+          <CustomButton
+            text="Enregistrer"
+            type="submit"
+            variant="contained" 
+            width="48%"
+            disabled={isDisabled}
+            borderRadius="5px"
           />
-        </Grid2>
+
+          <ClearButton
+            text={"Annuler"}     
+            onClick={handleCancel}
+            />
+          
+        </div>
       </form>
-    </Grid2>
+    </div>
   );
 };
 

@@ -56,8 +56,67 @@
     right: 10px;
 }
 
+.motion-backdrop {
+    display: none;
+}
+
 @media (max-width: 500px) {
+    .initial-modal {
+        display: none;
+    }
+    .modal-divider{
+        background-color: #d8d5d5;
+        margin-top: 10px !important;
+    }
+    .motion-backdrop {
+        display: unset;
+        position: fixed;
+        inset: 0px;
+        z-index: 1000;
+        background-color: rgba(34, 44, 52, 0.7);
+    }
+    .motion-wrapper {
+        position: relative;
+        z-index: 0;
+        height: 100%;
+        overflow-y: scroll;
+        padding-top: 24px;
+    }
     .modal-default {
-        height: 100vh;
+        position: unset;
+        top: unset;
+        left: unset;
+        transform: unset;
+    }
+    .motion-child {
+        position: absolute;
+        bottom: 0;
+        height: 50vh;
+        width: 100%;
+        overflow: hidden;
+        border-radius: 20px 20px 0px 0px;
+        background-color: #FFFFFF;
+    }
+    .motion-child > .drag-handle {
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        top: 0px;
+        z-index: 10;
+        display: flex;
+        justify-content: center;
+        background-color: #FFFFFF;
+        padding: 16px;
+    }
+    .drag-handle > button {
+        height: 5px;
+        width: 48px;
+        cursor: grab;
+        touch-action: none;
+        border-radius: 20px;
+        background-color: #676363;
+    }
+    .drag-handle > button:active {
+        cursor: grabbing;
     }
 }

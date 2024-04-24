@@ -223,6 +223,7 @@ export interface GuestsProps {
     setMessageType: React.Dispatch<React.SetStateAction<"error" | "success" | undefined>>;
     setGuestId: React.Dispatch<React.SetStateAction<string | null>>;
     checked: boolean;
+    setChecked: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export type EditType = {
@@ -247,6 +248,7 @@ export interface TableProps {
     setMessageType: Dispatch<SetStateAction<"error" | "success" | undefined>>;
     setTable: Dispatch<SetStateAction<string | null>>;
     checked: boolean;
+    setChecked: Dispatch<SetStateAction<boolean>>;
   }
   export interface TodosProps {
     todos: TaskType[];
@@ -256,6 +258,7 @@ export interface TableProps {
     setMessageType: Dispatch<SetStateAction<"error" | "success" | undefined>>;
     setTodo: Dispatch<SetStateAction<string | null>>;
     checked: boolean;
+    setChecked: Dispatch<SetStateAction<boolean>>;
   }
 
 export type Category = "starter" | "maincourse" | "dessert" | "apetizer" | "beverage";

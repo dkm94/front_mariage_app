@@ -162,7 +162,8 @@ const Guests = (props: GuestsProps) => {
             mariageID={mariageID}
             checked={checked} 
             searchValue={searchValue} 
-            selected={selected}            
+            selected={selected}
+            setChecked={setChecked}           
             />
           )}
         </div>

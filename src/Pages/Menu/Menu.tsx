@@ -102,11 +102,13 @@ const Menus = () => {
               foods={foods} 
               setFoods={setFoods}
               checked={checked}
+              setChecked={setChecked}           
               setSelectedCategory={setSelectedCategory}
               selectedCategory={selectedCategory}
               setMessage={setMessage}
               setMessageType={setMessageType}
               setFoodId={setFoodId}
+              
             />
         </div>
       </Grow>

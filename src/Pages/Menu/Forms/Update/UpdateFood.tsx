@@ -17,10 +17,11 @@ interface UpdateFoodProps {
     setMessage: Dispatch<SetStateAction<string | undefined>>;
     setMessageType: Dispatch<SetStateAction<"error" | "success" | undefined>>;
     setFoodId: Dispatch<SetStateAction<string | null>>;
+    setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 const UpdateFood = (props: UpdateFoodProps) => {
-  const { edit, setEdit, foods, setFoods, setMessage, setMessageType, setFoodId } = props;
+  const { edit, setEdit, foods, setFoods, setMessage, setMessageType, setFoodId, setOpen } = props;
 
   const history = useHistory();
   const{ mariageID } = useCurrentUser();
@@ -134,6 +135,7 @@ const deleteElement = async (id: string): Promise<void> => {
   const handleCancel = () => {
     setEdit({ id: "", name: "" })
     setInput("");
+    setOpen(false);
     const currentPosition: number = window.scrollY;
     history.replace(`/mariage/${mariageID}/carte`, { currentPosition })
   }
@@ -163,7 +165,7 @@ const deleteElement = async (id: string): Promise<void> => {
           width="48%" 
           borderRadius="5px"
           color="error"
-          border={true}
+          border={"1px solid #f44336"}
           fontWeight={900}
           />
 

@@ -28,7 +28,9 @@ const Table = (props: TableProps) => {
     setMessage, 
     setMessageType, 
     setTable,
-    checked } = props;
+    checked,
+    setChecked
+  } = props;
 
   const history = useHistory();
 
@@ -38,6 +40,13 @@ const Table = (props: TableProps) => {
   const returnName = (id: string) => {
     const guest = guests?.find((guest) => guest?._id === id);
     return guest?.name;
+  }
+
+  const handleCloseModal = () => {
+    setEdit(null);
+    setisOpen(false);
+    const currentPosition: number = window.scrollY;
+    history.replace(`/mariage/${mariageID}/tables`, { currentPosition });
   }
 
   return (
@@ -66,15 +75,11 @@ const Table = (props: TableProps) => {
       </div>}
       { edit?.id === table._id && <DefaultModal
         open={isOpen}
-        setOpen={setisOpen}
-        close={() => {
-          setEdit(null);
-          setisOpen(false);
-          const currentPosition: number = window.scrollY;
-          history.replace(`/mariage/${mariageID}/tables`, { currentPosition });
-        }}
+        setOpen={setChecked}
+        close={handleCloseModal}
         setEdit={setEdit}
         title="Gérer les invités/la table"
+        selectedId={edit?.id}
       >
         <EditForm
           tables={tables}
@@ -87,7 +92,7 @@ const Table = (props: TableProps) => {
           guests={guests}
           setGuests={setGuests}
           setEdit={setEdit}
-          setisOpen={setisOpen}
+          setisOpen={setChecked}
           setMessage={setMessage}
           setMessageType={setMessageType}
           mariageID={mariageID}

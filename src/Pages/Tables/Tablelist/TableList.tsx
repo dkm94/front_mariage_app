@@ -29,7 +29,8 @@ const TableList = (props: TableListProps) => {
         setMessageTable,
         setMessageTypeTable,
         setTable,
-        checked
+        checked,
+        setChecked
     } = props;
   return (
     <section id="tablelist-container">        
@@ -65,6 +66,7 @@ const TableList = (props: TableListProps) => {
                 setMessageType={setMessageTypeTable}
                 setTable={setTable}
                 checked={checked}
+                setChecked={setChecked}
                 />
             ))}
         </div>

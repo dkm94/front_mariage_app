@@ -3,6 +3,6 @@ const headerItems = [
     "Prix",
     "Date",
     "Description",
-    "Gérer",
+    // "Gérer",
   ]
   export default headerItems;

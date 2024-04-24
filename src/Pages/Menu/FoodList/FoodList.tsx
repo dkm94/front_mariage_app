@@ -13,10 +13,11 @@ interface FoodListProps {
     setMessage: Dispatch<SetStateAction<string>>;
     setMessageType: Dispatch<SetStateAction<"error" | "success" | undefined>>;
     setFoodId: Dispatch<SetStateAction<string | null>>;
+    setChecked: Dispatch<SetStateAction<boolean>>;
 }
 
 const FoodList = (props: FoodListProps) => {
-    const { foods, checked, setFoods, setFoodId, setMessage, setMessageType } = props;
+    const { foods, checked, setChecked, setFoods, setFoodId, setMessage, setMessageType } = props;
 
     const titles = {
         apetizer: "Apéritif",
@@ -41,6 +42,7 @@ const FoodList = (props: FoodListProps) => {
                                 name={food?.name} 
                                 category={food?.category} 
                                 checked={checked} 
+                                setChecked={setChecked}
                                 foods={foods}
                                 setFoods={setFoods}
                                 setMessage={setMessage}
