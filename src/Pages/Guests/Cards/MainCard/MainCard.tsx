@@ -65,6 +65,7 @@ const Guest = (props: GuestsProps) => {
   const handleCloseModal = (): void => {
     setEdit(null);
     handlePosition()
+    setChecked(false);
   }
 
   const handleEditGuest = (guest: GuestType): void => {

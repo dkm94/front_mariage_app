@@ -181,6 +181,8 @@ const UpdateExpense = (props: UpdateExpenseProps) => {
       setOperations(updatedExpenses);
       calculateTotal(updatedExpenses);
       setEdit(null);
+      const currentPosition: number = window.scrollY;
+      history.replace(`/mariage/${mariageID}/budget`, { currentPosition });
 
       setTimeout(() => {
         setOperationId(null);

@@ -23,7 +23,8 @@ export default function DefaultModal(props) {
       y: [yStart, 500]
     })
     setOpen(false);
-    setEdit(null)
+    setEdit(null);
+    close && close();
   }
 
   return ReactDom.createPortal(

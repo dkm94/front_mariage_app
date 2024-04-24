@@ -14,6 +14,8 @@ import PriceCard from "../../components/Expenses/PriceCard/PriceCard";
 import AddExpenseForm from "../../components/Expenses/Forms/AddExpenseForm/AddExpenseForm";
 import ExpenseElement from "../../components/Expenses/Table/ExpenseElement/ExpenseElement";
 import DefaultModal from "../../components/Modals/Default/DefaultModal";
+import { AddButton } from "../../components/Buttons";
+import { SwitchEditMode } from "../../components/Buttons";
 
 import { OperationType } from "../../../types/index";
 import { floatToEuro } from "../../helpers/formatCurrency";
@@ -21,7 +23,7 @@ import { useFetch } from "../../hooks";
 import { addOperation, getOperations } from "../../services";
 import { categories, headerItems } from "../../data";
 import { useCurrentUser } from "../../ctx/userCtx";
-import { AddButton } from "../../components/Buttons";
+import Budgetlist from "./Budgetlist/Budgetlist";
 
 const operationValues: OperationType = {
   category: "",
@@ -37,7 +39,7 @@ const Budget = () => {
   const [total, setTotal] = useState<string>("");
   const [operationId, setOperationId] = useState<string | null>(null);
   const [openModal, setOpenModal] = useState<boolean>(false);
-
+  const [checked, setChecked] = useState<boolean>(false);
   const [edit, setEdit] = useState<OperationType | null>(null);
 
   const { 
@@ -54,7 +56,13 @@ const Budget = () => {
     if (operations.length > 0) {
       calculateTotal(operations);
     }
-  }, [operations])
+  }, [operations]);
+
+  const switchHandler = (event) => {
+    setChecked(event.target.checked);
+    setEdit(null);
+    handleCloseModal();
+  };
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>): void => {
     setSearchValue(e.target.value);
@@ -113,6 +121,12 @@ const Budget = () => {
     setOpenModal(!openModal);
   }
 
+  const handleCloseModal = () => {
+    setOpenModal(false);
+    const currentPosition: number = window.scrollY;
+    history.replace(`/mariage/${mariageID}/budget`, { currentPosition } )
+  }
+
   return (
     <ContentLayout 
     loading={loading} 
@@ -133,11 +147,7 @@ const Budget = () => {
             onChange={handleSearch}
           />
           {openModal && <DefaultModal
-            close={() => {
-                setOpenModal(false);
-                const currentPosition: number = window.scrollY;
-                history.replace(`/mariage/${mariageID}/budget`, { currentPosition } )
-            }}
+            close={handleCloseModal}
             setOpen={handleModal}
             title={"Nouvelle dépense"}
             >
@@ -152,6 +162,8 @@ const Budget = () => {
             </div>
             </DefaultModal>}
           <AddButton onClick={handleModal} />
+          <SwitchEditMode checked={checked} onChange={switchHandler} />
+
         </div>
       </Grow>
 
@@ -167,45 +179,23 @@ const Budget = () => {
             <PieChart operations={operations} />
           </div>}
 
-          <div className="budget___col-2">
-            <ul className="budget-list">
-              <li className="table-header">
-                {headerItems.map((item: string, index: number) => {
-                  return (
-                    <div key={index} className={`cols cols-${index + 1}`}>
-                      {item}
-                    </div>
-                  );
-                })}
-              </li>
-              {operations?.length === 0 && <div id="empty"><span>Vos dépenses ici</span></div>}
-              {operations
-                ?.filter((expense) => {
-                  return (
-                    expense.description
-                      .toLowerCase()
-                      .indexOf(searchValue.toLowerCase()) >= 0
-                  );
-                })
-                ?.reverse()
-                ?.map((obj) => {
-                  return (
-                    <ExpenseElement
-                    key={obj._id}
-                    obj={obj} 
-                    edit={edit} 
-                    setEdit={setEdit} 
-                    setMessage={setMessage}
-                    setMessageType={setMessageType}
-                    operations={operations}
-                    setOperations={setOperations}
-                    calculateTotal={calculateTotal}
-                    setOperationId={setOperationId}
-                    />
-                  );
-                })}
-            </ul>
-          </div>
+          {operations && operations?.length > 0 && (
+            <Budgetlist
+            headerItems={headerItems}
+            operations={operations}
+            searchValue={searchValue}
+            edit={edit}
+            setEdit={setEdit}
+            setMessage={setMessage}
+            setMessageType={setMessageType}
+            setOperations={setOperations}
+            calculateTotal={calculateTotal}
+            setOperationId={setOperationId}
+            checked={checked} 
+            setChecked={setChecked}           
+      
+            />
+          )}
         </div>
       </Grow>
     </ContentLayout>

@@ -12,6 +12,7 @@ import HomeAlt from "./Homepage/Home2";
 import Guestlist from "./Guests/Guestlist/Guestlist";
 import TableList from "./Tables/Tablelist/TableList";
 import Todolist from "./Todo/Todolist/Todolist";
+import Budgetlist from "./Budget/Budgetlist/Budgetlist";
 
 export { 
     // Home as Homepage, 
@@ -27,5 +28,6 @@ export {
     HomeAlt as HomepageAlt,
     Guestlist,
     TableList,
-    Todolist
+    Todolist,
+    Budgetlist
 };
