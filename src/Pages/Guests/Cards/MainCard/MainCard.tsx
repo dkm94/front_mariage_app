@@ -49,7 +49,9 @@ const Guest = (props: GuestsProps) => {
     seteditPicture, 
     // searchValue, 
     checked,
-    mariageID } = props;
+    mariageID,
+    setChecked
+   } = props;
     
   const history: History = useHistory();
 
@@ -105,9 +107,11 @@ const Guest = (props: GuestsProps) => {
           </div>
           {guest?._id === edit?.id && <DefaultModal
             setEdit={setEdit}
-            guestId={editPicture}
+            selectedId={edit?.id}
             close={handleCloseModal}
             title="Modifier l'invité"
+            open={checked}
+            setOpen={setChecked}
           >
             <Form
               edit={edit}

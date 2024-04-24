@@ -12,7 +12,6 @@ import { Button } from "@mui/material";
 // }
 
 const CustomButton = (props) => {
-console.log("🚀 ~ CustomButton ~ props:", props.border)
 
   return (
     <Button

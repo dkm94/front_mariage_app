@@ -67,7 +67,6 @@ const Guests = (props: GuestsProps) => {
   const [guestId, setGuestId] = useState<string | null>(null);
   const [selected, setSelected] = useState<string>("tous");
   const [checked, setChecked] = useState<boolean>(false);
-  console.log("🚀 ~ Guests ~ checked:", checked)
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [selectedValue, setSelectedValue] = useState<string>("");
 
@@ -102,8 +101,7 @@ const Guests = (props: GuestsProps) => {
             const currentPosition: number = window.scrollY;
             history.replace(`/mariage/${mariageID}/invites`, { currentPosition } )
         }}
-        setOpen={setOpenModal}
-        open={openModal}
+        setOpen={handleModal}
         title={"Nouvel invité"}
         >
           <AddForm 
@@ -164,7 +162,8 @@ const Guests = (props: GuestsProps) => {
             mariageID={mariageID}
             checked={checked} 
             searchValue={searchValue} 
-            selected={selected}            
+            selected={selected}
+            setChecked={setChecked}           
             />
           )}
         </div>

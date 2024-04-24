@@ -223,6 +223,7 @@ export interface GuestsProps {
     setMessageType: React.Dispatch<React.SetStateAction<"error" | "success" | undefined>>;
     setGuestId: React.Dispatch<React.SetStateAction<string | null>>;
     checked: boolean;
+    setChecked: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export type EditType = {
