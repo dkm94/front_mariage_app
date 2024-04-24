@@ -258,6 +258,7 @@ export interface TableProps {
     setMessageType: Dispatch<SetStateAction<"error" | "success" | undefined>>;
     setTodo: Dispatch<SetStateAction<string | null>>;
     checked: boolean;
+    setChecked: Dispatch<SetStateAction<boolean>>;
   }
 
 export type Category = "starter" | "maincourse" | "dessert" | "apetizer" | "beverage";

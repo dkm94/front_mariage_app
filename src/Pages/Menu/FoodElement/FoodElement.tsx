@@ -59,6 +59,7 @@ const FoodElement = (props: FoodElementProps) => {
     history.replace(`/mariage/${mariageID}/carte`, { currentPosition } )
   }
 
+  // TODO: remove "Gérer" button, add switch button instead
   return (
     <>
       <li className="food-element" style={{ position: checked ? "unset" : "relative" }} key={id}>

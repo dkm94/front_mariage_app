@@ -64,6 +64,10 @@
     .initial-modal {
         display: none;
     }
+    .modal-divider{
+        background-color: #d8d5d5;
+        margin-top: 10px !important;
+    }
     .motion-backdrop {
         display: unset;
         position: fixed;

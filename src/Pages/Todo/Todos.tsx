@@ -120,7 +120,8 @@ const Todos = () => {
             checked={checked} 
             setMessage={setMessage} 
             setMessageType={setMessageType}  
-            setTodo={setTodo}                
+            setTodo={setTodo}
+            setChecked={setChecked}                
             />
             )}
         </div>

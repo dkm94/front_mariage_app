@@ -4,6 +4,7 @@ import "../../Expenses/Graph/PieChart.css";
 import React from "react";
 import ReactDom from "react-dom";
 import { motion, useDragControls, useMotionValue, useAnimate } from "framer-motion";
+import Divider from '@mui/material/Divider';
 
 export default function DefaultModal(props) {
   const { children, close, setOpen, title, setEdit, open, selectedId } = props;
@@ -86,6 +87,7 @@ export default function DefaultModal(props) {
               <div className="modal-head">
                   <h2>{title}</h2>
               </div>
+              <Divider className="modal-divider"/>
               {children}
             </div>
           </div>

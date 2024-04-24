@@ -17,10 +17,10 @@ const CustomIconButton = (props: IconButtonProps) => {
     const { buttonType, obj, onClick, type, disabled, ...rest } = props;
 
     const editStyle = {
-        backgroundColor: obj?.isCompleted ? "lightgrey" : "#fff",
+        backgroundColor: "#fff",
         border: "1px solid lightgray",
         borderRadius: "5px",
-        color: obj?.isCompleted ? "grey" : "#262626",
+        color: "#262626",
         maxHeight: "34px",
         height: "100%"
     }
