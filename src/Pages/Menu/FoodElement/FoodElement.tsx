@@ -1,6 +1,6 @@
 import "./style.css";
 
-import React, { HTMLAttributes, useState } from 'react';
+import React, { Dispatch, HTMLAttributes, SetStateAction, useState } from 'react';
 import { useHistory } from "react-router";
 import { History } from "history";
 
@@ -19,6 +19,7 @@ interface FoodElementProps extends HTMLAttributes<HTMLLIElement> {
     setMessage: (value: string) => void;
     setMessageType: (value: "error" | "success" | undefined) => void;
     setFoodId: (value: string | null) => void;
+    setChecked: Dispatch<SetStateAction<boolean>>;
     // selected
 }
 
@@ -29,7 +30,7 @@ interface EditForm {
 }
 
 const FoodElement = (props: FoodElementProps) => {
-  const { id, name, checked, category, setFoods, foods, setMessage, setMessageType, setFoodId } = props;
+  const { id, name, checked, category, setFoods, foods, setMessage, setMessageType, setFoodId,setChecked } = props;
 
   const article = {
     starter: "l'entrée",
@@ -51,6 +52,13 @@ const FoodElement = (props: FoodElementProps) => {
   // .food-element: position: unset
   // .food-element button: position: unset
   // .food-element span: flex: 1
+
+  const handleCloseModal = () => {
+    setEdit(null);
+    const currentPosition: number = window.scrollY;
+    history.replace(`/mariage/${mariageID}/carte`, { currentPosition } )
+  }
+
   return (
     <>
       <li className="food-element" style={{ position: checked ? "unset" : "relative" }} key={id}>
@@ -60,12 +68,11 @@ const FoodElement = (props: FoodElementProps) => {
       {edit?.id === id && (
         <DefaultModal
           setEdit={setEdit}
-          close={() => {
-            setEdit(null);
-            const currentPosition: number = window.scrollY;
-            history.replace(`/mariage/${mariageID}/carte`, { currentPosition } )
-          }}
+          selectedId={edit?.id}
+          close={handleCloseModal}
           title={`Modifier ${article[category]}`}
+          open={checked}
+          setOpen={setChecked}
         >
           <UpdateFood 
             edit={edit} 
@@ -75,6 +82,7 @@ const FoodElement = (props: FoodElementProps) => {
             setMessage={setMessage}
             setMessageType={setMessageType}
             setFoodId={setFoodId}
+            setOpen={setChecked}
             />
         </DefaultModal>)}
     </>

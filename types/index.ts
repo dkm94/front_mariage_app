@@ -248,6 +248,7 @@ export interface TableProps {
     setMessageType: Dispatch<SetStateAction<"error" | "success" | undefined>>;
     setTable: Dispatch<SetStateAction<string | null>>;
     checked: boolean;
+    setChecked: Dispatch<SetStateAction<boolean>>;
   }
   export interface TodosProps {
     todos: TaskType[];
