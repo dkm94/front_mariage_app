@@ -11,6 +11,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 import CustomIconButton from "../../../components/Buttons/SmallIconButton/IconButton";
 import UpdateForm from "../Update/Form";
+import DefaultModal from "../../../components/Modals/Default/DefaultModal";
 
 import { updateTodosStatus, deleteTodo } from '../../../services';
 import { TaskType, TodosProps } from "../../../../types";
@@ -29,7 +30,8 @@ const Todo = (props: TodosProps) => {
     setMessage, 
     setMessageType, 
     setTodo,
-    checked } = props;
+    checked,
+    setChecked } = props;
 
   const history: History = useHistory();
   const { mariageID } = useCurrentUser();
@@ -81,36 +83,6 @@ const Todo = (props: TodosProps) => {
     }, 2000);
   };
 
-  const deleteTodoFn = async (id: string): Promise<void> => {
-    setTodo(id);
-
-    const response = await deleteTodo({ id })
-    const { success, message } = response;
-
-    if(!success) {
-      setMessageType("error");
-      setMessage(message);
-
-      setTimeout(() => {
-        setMessage(undefined);
-        setMessageType(undefined);
-        setTodo(null);
-      }, 2000);
-      return;
-    }
-
-    setMessageType("success");
-    setMessage(message);
-    setTodos(todos.filter((todo: TaskType) => todo._id !== id));
-
-    setTimeout(() => {
-      setMessage(undefined);
-      setMessageType(undefined);
-      setTodo(null);
-    }, 2000);
-  };
-
-
   const handleEditTodo = (todo: TaskType): void => {
     getUpdatedId(todo._id, todo.text);
 
@@ -118,10 +90,18 @@ const Todo = (props: TodosProps) => {
     history.replace(`/mariage/${mariageID}/taches/edit/${todoId}`, { currentPosition })
   };
 
+  const handleCloseModal = () => {
+    setEdit(null);
+    setInput("");
+    setChecked(false);
+
+    const currentPosition: number = window.scrollY;
+    history.replace(`/mariage/${mariageID}/taches`, { currentPosition })
+  }
+
   return (
-    <Grid2
-      component="div" // Add the component prop with value "div"
-      xs={12}
+    <>
+    <li
       key={todo?._id}
       className={
         todo?.isCompleted
@@ -130,24 +110,11 @@ const Todo = (props: TodosProps) => {
       }
       style={edit === todo?._id ? { backgroundColor: `#F5F5F5` } : undefined} // Change null to undefined
     >
-      {edit?.id === todo?._id ? (
-        <UpdateForm
-          edit={edit}
-          setEdit={setEdit}
-          input={input}
-          setInput={setInput}
-          setTodos={setTodos}
-          todos={todos}
-          setMessage={setMessage}
-          setMessageType={setMessageType}
-          mariageID={mariageID}
-        />
-      ) : (
-        <Grid2
+      <Grid2
           container
           display={"flex"}
           flexDirection={"row"}
-          p={"1rem 3rem"}
+          p={"1rem"}
           width={"100%"}
           flexWrap={"inherit"}
         >
@@ -170,17 +137,35 @@ const Todo = (props: TodosProps) => {
             obj={todo} 
             onClick={() => handleEditTodo(todo!)} 
             />
-
-            <CustomIconButton 
-            type="submit"
-            buttonType="delete"
-            onClick={() => deleteTodoFn(todo?._id ?? '')} 
-            />
-
           </Grid2>}
         </Grid2>
+      </li>
+      {edit?.id === todo?._id && (
+        <DefaultModal
+          setEdit={setEdit}
+          selectedId={edit?.id}
+          open={checked}
+          handleClose={handleCloseModal}
+          title="Modifier la tâche"
+          setOpen={setChecked}
+        >
+          <UpdateForm
+          edit={edit}
+          setEdit={setEdit}
+          input={input}
+          setInput={setInput}
+          setTodos={setTodos}
+          todos={todos}
+          setMessage={setMessage}
+          setMessageType={setMessageType}
+          mariageID={mariageID}
+          setTodo={setTodo}
+          setOpen={setChecked}
+          handleCancel={handleCloseModal}
+          />
+        </DefaultModal>
       )}
-    </Grid2>
+    </>
   );
 };
 

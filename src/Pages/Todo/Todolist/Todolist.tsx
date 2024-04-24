@@ -17,7 +17,8 @@ const Todolist = (props: TodolistProps) => {
         setMessage, 
         setMessageType, 
         setTodos, 
-        setTodo 
+        setTodo,
+        setChecked 
     } = props
 
   return (
@@ -50,6 +51,7 @@ const Todolist = (props: TodolistProps) => {
             setMessageType={setMessageType}
             setTodo={setTodo}
             checked={checked}
+            setChecked={setChecked}
             />
             ))}
     </section>

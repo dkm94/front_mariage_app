@@ -148,6 +148,7 @@ const Tables = (props) => {
               setMessageType={setMessageTypeTable}
               setTable={setTable}
               checked={checked} 
+              setChecked={setChecked}
               setMessageTable={setMessageTable}
               setMessageTypeTable={setMessageTypeTable}
               />

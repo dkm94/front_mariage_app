@@ -25,6 +25,7 @@ const Guestlist = (props: GuestListProps) => {
         seteditPicture,
         mariageID,
         checked,
+        setChecked
     } = props;
   return (
     <section id="guestlist-container">
@@ -67,6 +68,7 @@ const Guestlist = (props: GuestListProps) => {
                 seteditPicture={seteditPicture}
                 mariageID={mariageID}
                 checked={checked}
+                setChecked={setChecked}
                 />
             )
             })}

@@ -82,7 +82,6 @@ const Guests = (props: GuestsProps) => {
     setOpenModal(!openModal);
   }
 
-  const totalGuests = guests.length;
   const firstPersonGuests = guests.filter((guest) => guest?.family === "1").length;
   const secondPersonGuests = guests.filter((guest) => guest?.family === "2").length;
 
@@ -163,7 +162,8 @@ const Guests = (props: GuestsProps) => {
             mariageID={mariageID}
             checked={checked} 
             searchValue={searchValue} 
-            selected={selected}            
+            selected={selected}
+            setChecked={setChecked}           
             />
           )}
         </div>
