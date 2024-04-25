@@ -248,29 +248,27 @@ const UpdateExpense = (props: UpdateExpenseProps) => {
         />
 
         <div className="action-buttons">
+          <CustomButton
+          text="Enregistrer"
+          type="submit"
+          variant="contained" 
+          width="100%"
+          borderRadius="5px"
+          />
           <CustomButton 
           text="Supprimer"
           variant="outlined"
           onClick={() => deleteExpense(edit?._id as string)}
           type="button"
           backgroundColor="none"
-          width="48%" 
+          width="100%" 
           borderRadius="5px"
           color="error"
           border={"1px solid #f44336"}
           />
-
-          <CustomButton
-          text="Enregistrer"
-          type="submit"
-          variant="contained" 
-          width="48%"
-          borderRadius="5px"
-          />
-
           <ClearButton
-            text="Annuler"
-            onClick={handleCancel}
+          text="Annuler"
+          onClick={handleCancel}
           />
         </div>
       </form>
