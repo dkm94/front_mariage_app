@@ -3,7 +3,7 @@
 }
 #guestlist-content {
     display: grid;
-    gap: 5px;
+    gap: 20px;
     padding-left: 10px;
     padding-right: 10px;
     grid-template-columns: repeat(5, 1fr);

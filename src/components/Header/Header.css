@@ -240,7 +240,7 @@
     font-weight: 800;
     background: #000000;
     border-radius: 5px;
-  }
+    }
 
 @media only screen and (max-width : 1150px) {
     .sidebar {
@@ -250,6 +250,13 @@
     }
 
 @media screen and (max-width: 600px) {
+    .active {
+    background: unset;
+    border-radius: 5px;
+    }
+    .active > span {
+        font-weight: 900 !important;
+    }
     .glass {
         position: relative;
         background: inherit;

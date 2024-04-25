@@ -32,6 +32,7 @@ interface GuestsProps {
 }
 
 const Guests = (props: GuestsProps) => {
+  //TODO: add pagination
   const history = useHistory();
   const{ firstPerson, secondPerson, mariageID } = useCurrentUser();
 
@@ -150,7 +151,6 @@ const Guests = (props: GuestsProps) => {
       <div className="guests___list">
         <SectionTitle title="Liste d'invités" />
         <div className="byguests___block">
-          {/*TODO: Change guestlist design */}
           {guests && guests.length > 0 && (
           <Guestlist 
             guests={guests}
