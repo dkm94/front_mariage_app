@@ -142,8 +142,6 @@ const deleteElement = async (id: string): Promise<void> => {
     history.replace(`/mariage/${mariageID}/carte`, { currentPosition })
   }
 
-  // TODO: bug save button
-
   return (
     <div className="modal-child">
       <form id="update-food-form" onSubmit={handleSubmit}>
