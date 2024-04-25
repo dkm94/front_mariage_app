@@ -34,7 +34,7 @@ const Logout = () => {
             <img alt="logo" src={Logo} id="logo" />
           </Link>
         </div>
-        <ul className="navbar-menu">
+        <div className="navbar-menu">
           <CustomButton
             id="login"
             onClick={() => {
@@ -44,7 +44,7 @@ const Logout = () => {
             }}
             text={"Connexion"}
           />
-        </ul>
+        </div>
       </div>
 
       {showForm &&  (<AuthModal
