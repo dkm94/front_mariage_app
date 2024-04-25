@@ -26,6 +26,8 @@ const HomeSignup = () => {
     setShowForm("");
   }
 
+  const show = showForm === "login" || showForm === "register";
+
   return (
     <section id="home-signup-wrapper">
       <div id="signup-box">
@@ -37,14 +39,14 @@ const HomeSignup = () => {
         </form>
         <span id="signup-gutter">Inscrivez-vous gratuitement dès maintenant et commencez à planifier !</span>
       </div>
-      <AuthModal
+      {show && (<AuthModal
         open={isOpen}
         setOpen={setisOpen}
         close={handleCloseModal}
       >
         {showForm === "register" && <Register setShowForm={setShowForm} email={email} />}
         {showForm === "login" && <Login setShowForm={setShowForm} />}
-      </AuthModal>
+      </AuthModal>)}
     </section>
   )
 }

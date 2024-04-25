@@ -1,10 +1,9 @@
 import "../Header.css";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, useHistory, withRouter } from "react-router-dom";
 
 import Login from "../../../Pages/Auth/Login/Login";
-import Register from "../../../Pages/Auth/Register/Register";
 import AuthModal from "../../Modals/Auth/AuthModal";
 import { Logo } from "../../../img";
 import { CustomButton } from "../../Buttons";
@@ -14,18 +13,7 @@ const Logout = () => {
   const history = useHistory();
 
   const [isOpen, setisOpen] = useState<boolean>(false);
-  const [showForm, setShowForm] = useState<string>("");
-
-  useEffect(() => {
-    if (path === "/login") {
-      setisOpen(true);
-      setShowForm("login");
-    }
-    if (path === "/register") {
-      setisOpen(true);
-      setShowForm("register");
-    }
-  }, [path])
+  const [showForm, setShowForm] = useState<boolean>(false);
 
   return (
     <div
@@ -51,7 +39,7 @@ const Logout = () => {
             id="login"
             onClick={() => {
               setisOpen(true);
-              setShowForm("login");
+              setShowForm(true);
               history.push("/login")
             }}
             text={"Connexion"}
@@ -59,20 +47,19 @@ const Logout = () => {
         </ul>
       </div>
 
-      <AuthModal
+      {showForm &&  (<AuthModal
         open={isOpen}
         setOpen={setisOpen}
         close={() => {
           setisOpen(false);
-          setShowForm("");
+          setShowForm(false);
 
           const currentPosition: number = window.scrollY;
           history.replace("/", { currentPosition });
         }}
       >
-        {showForm === "login" && <Login setShowForm={setShowForm} />}
-        {showForm === "register" && <Register setShowForm={setShowForm} />}
-      </AuthModal>
+        {showForm && <Login setShowForm={setShowForm} />}
+      </AuthModal>)}
     </div>
   );
 };
