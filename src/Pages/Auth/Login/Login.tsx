@@ -31,7 +31,7 @@ type Auth = {
   password: string
 }
 interface LoginProps {
-  setShowForm: Dispatch<SetStateAction<string>>
+  setShowForm: Dispatch<SetStateAction<string | boolean>>
 }
 
 const Login = (props: LoginProps) => {

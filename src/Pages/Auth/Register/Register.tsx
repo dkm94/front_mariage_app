@@ -157,7 +157,7 @@ const Register = (props: RegisterProps) => {
                     id="email"
                     name="email"
                     type="email"
-                    value={email}
+                    // value={email}
                     autoComplete="off"
                   />
                   <span>{errors.email?.message}</span>

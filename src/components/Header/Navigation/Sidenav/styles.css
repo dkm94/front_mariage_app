@@ -83,7 +83,6 @@ opacity: 1;
 opacity: 0;
 transition: 0.3s;
 margin-bottom: 0;
-font-family: 'Playfair Display', serif;
 }
 
 .custom-sidebar.open :is(.custom-sidebar-button p, .custom-sidebar-logo) {

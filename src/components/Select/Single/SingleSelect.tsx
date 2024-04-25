@@ -61,7 +61,7 @@ return (
             return(
                 <MenuItem 
                 key={el.value} 
-                value={el.value}>{el.name} {`(${calculatedGuestsValue || calculatedTasksValue})`}
+                value={el.value}>{el.name} {`(${calculatedGuestsValue || calculatedTasksValue || 0})`}
                 </MenuItem>
             )
         })}

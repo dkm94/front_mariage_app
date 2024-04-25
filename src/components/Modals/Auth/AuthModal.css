@@ -14,6 +14,7 @@
     width: 100%;
     max-width: 500px;
     min-height: fit-content;
+    box-shadow: 13px 16px 15px -3px rgba(0,0,0,0.15);
 }
 
 .auth-overlay {
@@ -30,4 +31,62 @@
     display: flex;
     justify-content: flex-end;
     padding-right: 5px;
+}
+
+@media (max-width: 500px) {
+    .initial-modal {
+        display: none;
+    }
+    .motion-backdrop {
+        display: unset;
+        position: fixed;
+        inset: 0px;
+        z-index: 1000;
+        background-color: rgba(211, 211, 211, 0.8);
+    }
+    .motion-wrapper {
+        position: relative;
+        z-index: 0;
+        height: 100%;
+        overflow-y: scroll;
+        padding-top: 24px;
+    }
+    .modal-default {
+        position: unset;
+        top: unset;
+        left: unset;
+        transform: unset;
+        box-shadow: unset;
+    }
+    .motion-child {
+        position: absolute;
+        bottom: 0;
+        height: 75vh;
+        width: 100%;
+        overflow: hidden;
+        border-radius: 20px 20px 0px 0px;
+        background-color: #FFFFFF;
+    }
+    .motion-child > .drag-handle {
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        top: 0px;
+        z-index: 10;
+        display: flex;
+        justify-content: center;
+        background-color: #FFFFFF;
+        padding: 16px;
+    }
+    .drag-handle > button {
+        height: 5px;
+        width: 48px;
+        cursor: grab;
+        touch-action: none;
+        border-radius: 20px;
+        background-color: #676363;
+    }
+    .drag-handle > button:active {
+        cursor: grabbing;
+    }
 }

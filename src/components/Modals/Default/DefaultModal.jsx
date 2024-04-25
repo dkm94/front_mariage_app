@@ -29,8 +29,8 @@ export default function DefaultModal(props) {
 
   return ReactDom.createPortal(
     <>
-    <div className="initial-modal">
-      <div className="modal-overlay" onClick={handleClose} />
+      <div className="initial-modal">
+        <div className="modal-overlay" onClick={handleClose} />
         <div className="modal-default">
           <div className="modal-default">
             <div className="modal-head">

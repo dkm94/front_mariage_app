@@ -32,6 +32,7 @@ const HomeGrid = () => {
                 {dashboardCards.map((card, i) => {
                   return (
                     <Card
+                      key={i}
                       index={i}
                       icon={card.icon}
                       title={card.title}
