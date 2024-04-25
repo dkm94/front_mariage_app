@@ -119,6 +119,8 @@ const Guests = (props: GuestsProps) => {
             setSelectedValue={setSelectedValue}
             firstPerson={firstPerson}
             secondPerson={secondPerson}
+            firstPersonGuests={firstPersonGuests}
+            secondPersonGuests={secondPersonGuests}  
           />
         </DefaultModal>}
         <SearchBar
