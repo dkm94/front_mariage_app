@@ -29,6 +29,7 @@ interface UpdateExpenseProps {
     calculateTotal: (operations: OperationType[]) => void;
     setOperationId: Dispatch<SetStateAction<string | null>>;
     setIsDisabled?: Dispatch<SetStateAction<boolean>>;
+    setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 const UpdateExpense = (props: UpdateExpenseProps) => {
@@ -42,7 +43,9 @@ const UpdateExpense = (props: UpdateExpenseProps) => {
     setOperations, 
     calculateTotal, 
     setOperationId,
-    setIsDisabled } = props;
+    setIsDisabled,
+    setOpen
+  } = props;
     
   const history: History = useHistory();
   const [input, setInput] = useState<OperationType | null>(edit ? edit : null);
@@ -143,7 +146,8 @@ const UpdateExpense = (props: UpdateExpenseProps) => {
       setOperationId(null);
       setMessageType(undefined);
       setMessage(undefined);
-      setIsDisabled && setIsDisabled(false); 
+      setIsDisabled && setIsDisabled(false);
+      setOpen(false);
     }, 2000);
 
     const currentPosition: number = window.scrollY;
@@ -183,12 +187,13 @@ const UpdateExpense = (props: UpdateExpenseProps) => {
       setEdit(null);
       const currentPosition: number = window.scrollY;
       history.replace(`/mariage/${mariageID}/budget`, { currentPosition });
-
+      
       setTimeout(() => {
         setOperationId(null);
         setMessageType(undefined);
         setMessage(undefined);
         setIsDisabled && setIsDisabled(false); 
+        setOpen(false);
         }, 2000);
     };
 

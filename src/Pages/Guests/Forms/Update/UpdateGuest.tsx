@@ -37,6 +37,7 @@ interface UpdateGuestProps {
   setMessage:Dispatch<SetStateAction<string | undefined>>;
   setMessageType: Dispatch<SetStateAction<"error" | "success" | undefined>>;
   setGuestId: Dispatch<SetStateAction<string | null>>;
+  setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 const UpdateGuest = (props: UpdateGuestProps) => {
@@ -52,7 +53,9 @@ const UpdateGuest = (props: UpdateGuestProps) => {
     guestId, 
     setMessage, 
     setMessageType, 
-    setGuestId } = props;
+    setGuestId,
+    setOpen
+  } = props;
 
   const history: History = useHistory();
 
@@ -119,6 +122,7 @@ const UpdateGuest = (props: UpdateGuestProps) => {
         
         setFile(null);
         setGuests(updatedGuestList);
+        setOpen(false);
       }
     } catch (error) {
       setMessageType("error");
@@ -152,6 +156,7 @@ const UpdateGuest = (props: UpdateGuestProps) => {
         setGuestId(null);
         setMessageType(undefined);
         setMessage(undefined);
+        setOpen(false);
       }, 2000);
       return;
     }
@@ -214,6 +219,7 @@ const UpdateGuest = (props: UpdateGuestProps) => {
         setGuestId(null);
         setMessageType("error");
         setMessage("Oups, une erreur est survenue lors de la suppression de l'invité");
+        setOpen(false);
       }, 2000);
     }
   };

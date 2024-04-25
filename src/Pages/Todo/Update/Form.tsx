@@ -88,6 +88,7 @@ const UpdateTask = (props: UpdateTaskFormProps) => {
       setTodos([...todosCopy]);
       setEdit(null);
       setInput("");
+      setOpen(false);
     }, 1000);
 
     const currentPosition: number = window.scrollY;
@@ -120,6 +121,7 @@ const UpdateTask = (props: UpdateTaskFormProps) => {
       setMessage(undefined);
       setMessageType(undefined);
       setTodo(null);
+      setOpen(false);
     }, 2000);
   };
 

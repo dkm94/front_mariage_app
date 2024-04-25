@@ -87,8 +87,6 @@ const ExpenseElement = (props: ExpenseElementProps) => {
     history.replace(`/mariage/${mariageID}/budget/edit/${expenseId}`, { currentPosition })
   }
 
-  console.log(edit?._id === obj?._id)
-
   return (
     <>
     <li key={obj._id} className="fade-in table-row expense-card">
@@ -137,6 +135,7 @@ const ExpenseElement = (props: ExpenseElementProps) => {
         calculateTotal={calculateTotal}
         setOperationId={setOperationId}
         setIsDisabled={setIsDisabled}
+        setOpen={setChecked}
         />
       </DefaultModal>}
     </li>

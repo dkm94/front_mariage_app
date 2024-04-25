@@ -20,7 +20,6 @@ interface FoodElementProps extends HTMLAttributes<HTMLLIElement> {
     setMessageType: (value: "error" | "success" | undefined) => void;
     setFoodId: (value: string | null) => void;
     setChecked: Dispatch<SetStateAction<boolean>>;
-    // selected
 }
 
 interface EditForm {
@@ -47,6 +46,8 @@ const FoodElement = (props: FoodElementProps) => {
 
   function handleEdit() {
     setEdit({ id: id as string, name, category });
+    const currentPosition: number = window.scrollY;
+      history.replace(`/mariage/${mariageID}/carte/edit/${id}`, { currentPosition })
   }
   //si le mode édition est actif, 
   // .food-element: position: unset

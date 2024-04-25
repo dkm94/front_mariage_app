@@ -96,6 +96,7 @@ const UpdateFood = (props: UpdateFoodProps) => {
         setMessage(undefined);
         setMessageType(undefined);
         setFoodId(null);
+        setOpen(false);
       }, 2000);
 
     const currentPosition: number = window.scrollY;
@@ -128,6 +129,7 @@ const deleteElement = async (id: string): Promise<void> => {
           setFoodId(null);
           setMessage(undefined);
           setMessageType(undefined);
+          setOpen(false);
       }, 2000);
   }
   };
@@ -139,6 +141,8 @@ const deleteElement = async (id: string): Promise<void> => {
     const currentPosition: number = window.scrollY;
     history.replace(`/mariage/${mariageID}/carte`, { currentPosition })
   }
+
+  // TODO: bug save button
 
   return (
     <div className="modal-child">
@@ -181,7 +185,6 @@ const deleteElement = async (id: string): Promise<void> => {
             text={"Annuler"}     
             onClick={handleCancel}
             />
-          
         </div>
       </form>
     </div>

@@ -15,6 +15,7 @@ const CustomButton = (props) => {
 
   return (
     <Button
+      type={props.type ?? "button"}
       variant={props.variant}
       color={props.color && props.color}
       onClick={props.onClick}

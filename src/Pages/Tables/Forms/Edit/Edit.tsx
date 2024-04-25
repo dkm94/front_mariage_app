@@ -23,7 +23,7 @@ interface EditTableFormProps {
   guests: GuestType[];
   setGuests: Dispatch<SetStateAction<GuestType[]>>;
   setEdit: any;
-  setisOpen: any;
+  setOpen: any;
   setMessage:Dispatch<SetStateAction<string | undefined>>;
   setMessageType: Dispatch<SetStateAction<"error" | "success" | undefined>>;
   mariageID: string;
@@ -41,7 +41,7 @@ const EditTableForm = (props: EditTableFormProps) => {
     guests,
     setGuests,
     setEdit,
-    setisOpen,
+    setOpen,
     setMessage, 
     setMessageType,
     mariageID,
@@ -87,7 +87,6 @@ const EditTableForm = (props: EditTableFormProps) => {
       setMessage("Modifications enregistrées")
       setGuestsIds([]);
       setEdit(null);
-      setisOpen(false);
 
       const updatedTables = [...tables].map((table) => {
         if (table._id === tableId) {
@@ -110,6 +109,7 @@ const EditTableForm = (props: EditTableFormProps) => {
         setMessageType(undefined);
         setMessage(undefined);
         setTable(null);
+        setOpen(false);
       }, 2000);
 
       const currentPosition: number = window.scrollY;
@@ -144,6 +144,7 @@ const EditTableForm = (props: EditTableFormProps) => {
       setMessageType(undefined);
       setMessage(undefined);
       setTable(null);
+      setOpen(false);
     }, 2000);
 
     const currentPosition = window.scrollY;
@@ -152,7 +153,7 @@ const EditTableForm = (props: EditTableFormProps) => {
 
   const handleCancel = (): void => {
     setEdit(null);
-    setisOpen(false);
+    setOpen(false);
     const currentPosition: number = window.scrollY;
     history.replace(`/mariage/${mariageID}/tables`, { currentPosition })
   }
