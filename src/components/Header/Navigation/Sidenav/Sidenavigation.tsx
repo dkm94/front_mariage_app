@@ -1,7 +1,7 @@
 import "./styles.css";  
 
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 
 import { UserType } from "../../../../../types";
 import { NavigationData } from "../NavigationData";
@@ -15,8 +15,18 @@ interface SideNavigationProps {
   }
   
   export const SideNavigation = (props: SideNavigationProps) => {
-    const { isOpen, setIsOpen } = props;
-    // handle open state when path changes
+    const { isOpen, setIsOpen, userInfos } = props;
+    const location = useLocation();
+
+    const [selectedTab, setSelectedTab] = useState<string | undefined>(location.pathname);
+
+    useEffect(() => {
+      const path = location.pathname;
+      setSelectedTab(path);
+    }, [location]);
+    
+    const isTabActive = (tabName: string) => selectedTab?.includes(tabName);
+    // TODO: handle open state when path changes
 
     //TODO: image loading
 
@@ -51,8 +61,8 @@ interface SideNavigationProps {
           </div>
           <nav className="custom-sidebar-menu">
             {NavigationData.map((item) => (
-              <NavLink key={item.idx} type="button" className="custom-sidebar-button" to={`/mariage/${props.userInfos?.mariageID}${item.pathname}`}>
-                <span className="material-symbols-outlined">{item.icon}</span>
+              <NavLink key={item.idx} type="button" className={`custom-sidebar-button ${isTabActive(`/mariage/${userInfos?.mariageID}${item.pathname}`) ? "active" : ""}`} to={`/mariage/${props.userInfos?.mariageID}${item.pathname}`}>
+                <span className={`material-symbols-outlined ${isTabActive(`/mariage/${userInfos?.mariageID}${item.pathname}`) ? "active" : ""}`} >{item.icon}</span>
                 <p>{item.title}</p>
               </NavLink>
             ))}
