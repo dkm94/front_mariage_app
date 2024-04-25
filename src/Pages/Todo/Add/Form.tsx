@@ -53,6 +53,7 @@ const AddTodoForm = (props: AddTodoFormProps) => {
     setTodos([...todos, newTodo]);
     setInput("");
     setLoading(false);
+    setOpenModal(false);
   };
 
   const handleCancel = () => {

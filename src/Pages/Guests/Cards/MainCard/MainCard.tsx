@@ -66,6 +66,8 @@ const Guest = (props: GuestsProps) => {
     setEdit(null);
     handlePosition()
     setChecked(false);
+    const currentPosition: number = window.scrollY;
+    history.replace(`/mariage/${mariageID}/invites`, { currentPosition } )
   }
 
   const handleEditGuest = (guest: GuestType): void => {
@@ -74,8 +76,9 @@ const Guest = (props: GuestsProps) => {
         id: guest._id,
         name: guest.name,
       });
+      const currentPosition: number = window.scrollY;
+      history.replace(`/mariage/${mariageID}/invites/edit/${guest._id}`, { currentPosition })
     }
-    handlePosition();
   }
 
   return (
@@ -127,6 +130,7 @@ const Guest = (props: GuestsProps) => {
               setMessage={setMessage}
               setMessageType={setMessageType}
               setGuestId={setGuestId}
+              setOpen={setChecked}
             />
           </DefaultModal>}
         </div>

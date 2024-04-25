@@ -226,12 +226,13 @@
 }
 
 .table-name-span {
-    font-size: 1.3rem;
+    font-size: 1rem;
     text-align: center;
     line-height: 23px;
     margin-bottom: 2rem;
-    font-family: 'Italiana', serif;
-    font-weight: 600;
+    font-family: "Playfair Display", serif;
+    letter-spacing: 1px;
+    color: #878a8c;
     text-transform: uppercase;
 }
 
@@ -271,7 +272,7 @@
 }
 
 .MuiInputBase-input {
-    font-family: 'Playfair Display', serif !important;
+    /* font-family: 'Playfair Display', serif !important; */
 }
 #tables-container {
     display: flex;

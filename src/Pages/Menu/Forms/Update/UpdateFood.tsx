@@ -96,6 +96,7 @@ const UpdateFood = (props: UpdateFoodProps) => {
         setMessage(undefined);
         setMessageType(undefined);
         setFoodId(null);
+        setOpen(false);
       }, 2000);
 
     const currentPosition: number = window.scrollY;
@@ -128,6 +129,7 @@ const deleteElement = async (id: string): Promise<void> => {
           setFoodId(null);
           setMessage(undefined);
           setMessageType(undefined);
+          setOpen(false);
       }, 2000);
   }
   };
@@ -139,6 +141,8 @@ const deleteElement = async (id: string): Promise<void> => {
     const currentPosition: number = window.scrollY;
     history.replace(`/mariage/${mariageID}/carte`, { currentPosition })
   }
+
+  // TODO: bug save button
 
   return (
     <div className="modal-child">
@@ -156,33 +160,29 @@ const deleteElement = async (id: string): Promise<void> => {
           style={{ backgroundColor: "#fff" }}
         />
         <div className="action-buttons">
+          <CustomButton
+          text="Enregistrer"
+          type="submit"
+          variant="contained" 
+          width="100%"
+          disabled={isDisabled}
+          borderRadius="5px"
+          />
           <CustomButton 
           text="Supprimer"
           variant="outlined"
           onClick={() => deleteElement(edit?.id)}
           type="button"
           backgroundColor="none"
-          width="48%" 
+          width="100%" 
           borderRadius="5px"
           color="error"
           border={"1px solid #f44336"}
-          fontWeight={900}
           />
-
-          <CustomButton
-            text="Enregistrer"
-            type="submit"
-            variant="contained" 
-            width="48%"
-            disabled={isDisabled}
-            borderRadius="5px"
-          />
-
           <ClearButton
-            text={"Annuler"}     
-            onClick={handleCancel}
-            />
-          
+          text={"Annuler"}     
+          onClick={handleCancel}
+          />
         </div>
       </form>
     </div>

@@ -25,6 +25,8 @@ interface FormProps {
   setSelectedValue: Dispatch<SetStateAction<string>>;
   firstPerson: string;
   secondPerson: string;
+  firstPersonGuests: number;
+  secondPersonGuests: number;
 }
 
 const AddGuestForm = (props:FormProps) => { // TODO: add check name length
@@ -41,7 +43,9 @@ const AddGuestForm = (props:FormProps) => { // TODO: add check name length
     selectedValue,
     setSelectedValue,
     firstPerson,
-    secondPerson
+    secondPerson,
+    firstPersonGuests,
+    secondPersonGuests
   } = props;
 
   const [loading, setLoading] = useState(false);
@@ -117,6 +121,8 @@ const AddGuestForm = (props:FormProps) => { // TODO: add check name length
         placeholder={"Famille"} 
         array={selectArray} 
         label={"Sélectionner la famille"}
+        firstPersonGuests={firstPersonGuests}
+        secondPersonGuests={secondPersonGuests}
       />
       <CustomButton
           variant="contained"

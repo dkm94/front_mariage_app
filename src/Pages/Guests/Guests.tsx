@@ -84,6 +84,7 @@ const Guests = (props: GuestsProps) => {
 
   const firstPersonGuests = guests.filter((guest) => guest?.family === "1").length;
   const secondPersonGuests = guests.filter((guest) => guest?.family === "2").length;
+  // TODO: edit URL
 
   return (
     <ContentLayout 
@@ -118,6 +119,8 @@ const Guests = (props: GuestsProps) => {
             setSelectedValue={setSelectedValue}
             firstPerson={firstPerson}
             secondPerson={secondPerson}
+            firstPersonGuests={firstPersonGuests}
+            secondPersonGuests={secondPersonGuests}  
           />
         </DefaultModal>}
         <SearchBar
@@ -141,7 +144,7 @@ const Guests = (props: GuestsProps) => {
             // totalGuests={totalGuests} 
           />
         </div>
-        <AddButton onClick={handleModal} />
+        <AddButton onClick={handleModal} type="button" />
         <SwitchEditMode checked={checked} onChange={switchHandler} />
       </div>
       <div className="guests___list">

@@ -23,7 +23,7 @@ interface EditTableFormProps {
   guests: GuestType[];
   setGuests: Dispatch<SetStateAction<GuestType[]>>;
   setEdit: any;
-  setisOpen: any;
+  setOpen: any;
   setMessage:Dispatch<SetStateAction<string | undefined>>;
   setMessageType: Dispatch<SetStateAction<"error" | "success" | undefined>>;
   mariageID: string;
@@ -41,7 +41,7 @@ const EditTableForm = (props: EditTableFormProps) => {
     guests,
     setGuests,
     setEdit,
-    setisOpen,
+    setOpen,
     setMessage, 
     setMessageType,
     mariageID,
@@ -87,7 +87,6 @@ const EditTableForm = (props: EditTableFormProps) => {
       setMessage("Modifications enregistrées")
       setGuestsIds([]);
       setEdit(null);
-      setisOpen(false);
 
       const updatedTables = [...tables].map((table) => {
         if (table._id === tableId) {
@@ -110,6 +109,7 @@ const EditTableForm = (props: EditTableFormProps) => {
         setMessageType(undefined);
         setMessage(undefined);
         setTable(null);
+        setOpen(false);
       }, 2000);
 
       const currentPosition: number = window.scrollY;
@@ -144,6 +144,7 @@ const EditTableForm = (props: EditTableFormProps) => {
       setMessageType(undefined);
       setMessage(undefined);
       setTable(null);
+      setOpen(false);
     }, 2000);
 
     const currentPosition = window.scrollY;
@@ -152,7 +153,7 @@ const EditTableForm = (props: EditTableFormProps) => {
 
   const handleCancel = (): void => {
     setEdit(null);
-    setisOpen(false);
+    setOpen(false);
     const currentPosition: number = window.scrollY;
     history.replace(`/mariage/${mariageID}/tables`, { currentPosition })
   }
@@ -180,29 +181,26 @@ const EditTableForm = (props: EditTableFormProps) => {
         <MultipleSelect guests={guests} setGuestsIds={setGuestsIds} edit={edit} />
 
         <div className="action-buttons">
+          <CustomButton
+          text="Enregistrer"
+          type="submit"
+          variant="contained" 
+          width="100%"
+          disabled={isDisabled}
+          borderRadius="5px"
+          />
           <CustomButton 
           text="Supprimer"
           variant="outlined"
           onClick={(e) => deleteTableFn(e, edit.id)}
           type="button"
           backgroundColor="none"
-          width="48%" 
+          width="100%" 
           borderRadius="5px"
           color="error"
           border={"1px solid #f44336"}
-          fontWeight={900}
           />
-
-          <CustomButton
-          text="Enregistrer"
-          type="submit"
-          variant="contained" 
-          width="48%"
-          disabled={isDisabled}
-          borderRadius="5px"
-        />
-
-        <ClearButton
+          <ClearButton
           text={"Annuler"}     
           onClick={handleCancel}
           />

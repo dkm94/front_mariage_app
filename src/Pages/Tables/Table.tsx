@@ -92,7 +92,7 @@ const Table = (props: TableProps) => {
           guests={guests}
           setGuests={setGuests}
           setEdit={setEdit}
-          setisOpen={setChecked}
+          setOpen={setChecked}
           setMessage={setMessage}
           setMessageType={setMessageType}
           mariageID={mariageID}

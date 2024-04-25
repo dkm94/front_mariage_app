@@ -62,6 +62,12 @@ const Menus = () => {
     setOpenModal(!openModal);
   }
 
+  const handleCloseModal = () => {
+    setOpenModal(false);
+    const currentPosition: number = window.scrollY;
+    history.replace(`/mariage/${mariageID}/carte`, { currentPosition } )
+  }
+
   return (
     <ContentLayout 
     loading={loading} 
@@ -72,11 +78,7 @@ const Menus = () => {
     id={foodId || ""}>
       <div className="section-action-box">
         {openModal && <DefaultModal
-          close={() => {
-              setOpenModal(false);
-              const currentPosition: number = window.scrollY;
-              history.replace(`/mariage/${mariageID}/carte`, { currentPosition } )
-          }}
+          close={handleCloseModal}
           setOpen={handleModal}
           title={"Compléter la carte"}
         >
@@ -108,7 +110,6 @@ const Menus = () => {
               setMessage={setMessage}
               setMessageType={setMessageType}
               setFoodId={setFoodId}
-              
             />
         </div>
       </Grow>

@@ -14,6 +14,7 @@
     max-width: 500px;
     min-height: fit-content;
     padding: 25px;
+    box-shadow: 13px 16px 15px -3px rgba(0,0,0,0.15);
 }
 
 .modal-overlay {
@@ -22,7 +23,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(211, 211, 211, 0.8);
+    background-color: rgba(34, 44, 52, 0.7);
     z-index: 1000;
 }
 
@@ -33,16 +34,15 @@
     border-top-right-radius: 5px;
     padding-right: 5px;
     height: fit-content;
-    font-family: 'Italiana', serif;
+    /* font-family: 'Italiana', serif; */
     position: relative;
 }
 
 .modal-head > h2 {
     margin-bottom: 0;
     align-self: center;
-    letter-spacing: 1px;
-    font-weight: 900;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
+    font-weight: 400;
 }
 
 .modal-head > button {
@@ -87,6 +87,7 @@
         top: unset;
         left: unset;
         transform: unset;
+        box-shadow: unset;
     }
     .motion-child {
         position: absolute;

@@ -45,8 +45,8 @@ export const GridItem = (props: GridItemProps) => {
                     width: "100%",
                 }} 
                 >
-                    <span className="material-symbols-outlined" style={{ textAlign: "end", color: "grey", fontSize: "2rem", width: "50%", paddingRight: "10px" }}>{icon}</span>
-                    <span style={{ width: "50%", textAlign: "start", alignSelf: "center", fontWeight: 900 }}>Déconnexion</span>
+                    <span className="material-symbols-outlined" style={{ textAlign: "end", color: "grey", fontSize: "2rem", width: "45%" }}>{icon}</span>
+                    <span style={{ width: "55%", textAlign: "start", alignSelf: "center", fontWeight: 500 }}>Déconnexion</span>
                 </button>
             </li>
         )
@@ -63,8 +63,8 @@ export const GridItem = (props: GridItemProps) => {
                     width: "100%",
                 }} 
                 >
-                    <span className="material-symbols-outlined" style={{ textAlign: "end", color: "#FFF", fontSize: "2rem", width: "50%", paddingRight: "20px" }}>{icon}</span>
-                    <span style={{ color: "#534a43", textAlign: "start", width: "50%", alignSelf: "center", fontWeight: 900}}>{title}</span>
+                    <span className="material-symbols-outlined" style={{ textAlign: "end", color: "#FFF", fontSize: "2rem", width: "45%" }}>{icon}</span>
+                    <span style={{ color: "#534a43", textAlign: "start", width: "55%", alignSelf: "center", fontWeight: 500}}>{title}</span>
                 </NavLink>
             </li>
         )
@@ -72,8 +72,8 @@ export const GridItem = (props: GridItemProps) => {
         return (
             <li key={idx} style={{ backgroundColor: color }} className={`menu-grid-item grid-item-${idx}`}>
                 <NavLink to={`/mariage/${mariageID}${path}`} style={{ display: "flex", flexDirection: "row", justifyContent: "center", gap: "8px", width: "100%"}}> 
-                    <span className="material-symbols-outlined" style={{ textAlign: "end", color: "#FFF", fontSize: "2rem", width: "50%", paddingRight: "20px" }}>{icon}</span>
-                    <span style={{ color: "#534a43", borderRadius: "3px", textAlign: "start", width: "50%", alignSelf: "center", fontWeight: 900}}>{title === "Tableau de bord" ? "Accueil" : title}</span>
+                    <span className="material-symbols-outlined" style={{ textAlign: "end", color: "#FFF", fontSize: "2rem", width: "45%" }}>{icon}</span>
+                    <span style={{ color: "#534a43", borderRadius: "3px", textAlign: "start", width: "55%", alignSelf: "center", fontWeight: 500}}>{title === "Tableau de bord" ? "Accueil" : title}</span>
                 </NavLink>
             </li>
         )

@@ -15,6 +15,7 @@ const CustomButton = (props) => {
 
   return (
     <Button
+      type={props.type ?? "button"}
       variant={props.variant}
       color={props.color && props.color}
       onClick={props.onClick}
@@ -24,12 +25,10 @@ const CustomButton = (props) => {
       backgroundColor: props.backgroundColor ? props.backgroundColor : "#262626",
       color: props.color ? props.color : "#fff",
       fontFamily: "unset",
-      fontSize: "1rem",
       borderRadius: props.borderRadius ? props.borderRadius : "36px",
       paddingRight: "30px",
       paddingLeft: "30px",
       fontWeight: props?.fontWeight ? props.fontWeight : "unset",
-      // fontFamily: "Playfair Display serif",
       border: props.border ? props.border : "none",
       width: props.width ? props.width : "auto",
       }}

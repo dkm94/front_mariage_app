@@ -88,6 +88,7 @@ const UpdateTask = (props: UpdateTaskFormProps) => {
       setTodos([...todosCopy]);
       setEdit(null);
       setInput("");
+      setOpen(false);
     }, 1000);
 
     const currentPosition: number = window.scrollY;
@@ -120,6 +121,7 @@ const UpdateTask = (props: UpdateTaskFormProps) => {
       setMessage(undefined);
       setMessageType(undefined);
       setTodo(null);
+      setOpen(false);
     }, 2000);
   };
 
@@ -139,33 +141,29 @@ const UpdateTask = (props: UpdateTaskFormProps) => {
             style={{ backgroundColor: "#fff" }}
           />
         <div className="action-buttons">
-            <CustomButton 
-            text="Supprimer"
-            variant="outlined"
-            onClick={() => deleteTodoFn(edit?.id ?? '')}
-            type="button"
-            backgroundColor="none"
-            width="48%" 
-            borderRadius="5px"
-            color="error"
-            border={"1px solid #f44336"}
-            fontWeight={900}
-            />
-
           <CustomButton
-            text="Enregistrer"
-            type="submit"
-            variant="contained" 
-            width="48%"
-            disabled={isDisabled}
-            borderRadius="5px"
+          text="Enregistrer"
+          type="submit"
+          variant="contained" 
+          width="100%"
+          disabled={isDisabled}
+          borderRadius="5px"
           />
-
+          <CustomButton 
+          text="Supprimer"
+          variant="outlined"
+          onClick={() => deleteTodoFn(edit?.id ?? '')}
+          type="button"
+          backgroundColor="none"
+          width="100%" 
+          borderRadius="5px"
+          color="error"
+          border={"1px solid #f44336"}
+          />
           <ClearButton
-            text={"Annuler"}     
-            onClick={handleCancel}
-            />
-          
+          text={"Annuler"}     
+          onClick={handleCancel}
+          />
         </div>
       </form>
     </div>

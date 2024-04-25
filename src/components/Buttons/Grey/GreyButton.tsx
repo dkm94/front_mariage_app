@@ -14,7 +14,6 @@ const CustomButton = styled(MuiButton)({
   paddingRight: "30px",
   paddingLeft: "30px",
   fontWeight: "unset",
-  fontFamily: "Playfair Display serif",
   border: "none",
   width: "fit-content",
   ":hover": {

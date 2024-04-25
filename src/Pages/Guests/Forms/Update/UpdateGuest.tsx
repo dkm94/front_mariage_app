@@ -37,6 +37,7 @@ interface UpdateGuestProps {
   setMessage:Dispatch<SetStateAction<string | undefined>>;
   setMessageType: Dispatch<SetStateAction<"error" | "success" | undefined>>;
   setGuestId: Dispatch<SetStateAction<string | null>>;
+  setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 const UpdateGuest = (props: UpdateGuestProps) => {
@@ -52,7 +53,9 @@ const UpdateGuest = (props: UpdateGuestProps) => {
     guestId, 
     setMessage, 
     setMessageType, 
-    setGuestId } = props;
+    setGuestId,
+    setOpen
+  } = props;
 
   const history: History = useHistory();
 
@@ -119,6 +122,7 @@ const UpdateGuest = (props: UpdateGuestProps) => {
         
         setFile(null);
         setGuests(updatedGuestList);
+        setOpen(false);
       }
     } catch (error) {
       setMessageType("error");
@@ -152,6 +156,7 @@ const UpdateGuest = (props: UpdateGuestProps) => {
         setGuestId(null);
         setMessageType(undefined);
         setMessage(undefined);
+        setOpen(false);
       }, 2000);
       return;
     }
@@ -214,6 +219,7 @@ const UpdateGuest = (props: UpdateGuestProps) => {
         setGuestId(null);
         setMessageType("error");
         setMessage("Oups, une erreur est survenue lors de la suppression de l'invité");
+        setOpen(false);
       }, 2000);
     }
   };
@@ -289,28 +295,25 @@ const UpdateGuest = (props: UpdateGuestProps) => {
             </div>
           </div>
           <div className="action-buttons">
+              <CustomButton
+              text="Enregistrer"
+              type="submit"
+              variant="contained" 
+              width="100%"
+              disabled={isDisabled}
+              borderRadius="5px"
+              />
               <CustomButton 
               text="Supprimer"
               variant="outlined"
               onClick={() => edit && deleteGuestfn(edit.id)}
               type="button"
               backgroundColor="none"
-              width="48%" 
+              width="100%" 
               borderRadius="5px"
               color="error"
               border={"1px solid #f44336"}
-              fontWeight={900}
               />
-
-              <CustomButton
-              text="Enregistrer"
-              type="submit"
-              variant="contained" 
-              width="48%"
-              disabled={isDisabled}
-              borderRadius="5px"
-              />
-
               <ClearButton
               text={"Annuler"}     
               onClick={handleCancel}
