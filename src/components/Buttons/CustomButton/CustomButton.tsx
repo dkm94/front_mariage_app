@@ -25,7 +25,6 @@ const CustomButton = (props) => {
       backgroundColor: props.backgroundColor ? props.backgroundColor : "#262626",
       color: props.color ? props.color : "#fff",
       fontFamily: "unset",
-      fontSize: "1rem",
       borderRadius: props.borderRadius ? props.borderRadius : "36px",
       paddingRight: "30px",
       paddingLeft: "30px",

@@ -78,6 +78,9 @@
 }
 .settings-title {
     font-size: 1.3rem;
+    letter-spacing: -1px;
+    color: #878a8c;
+    font-weight: 300;
 }   
 .settings-container {
     /* container-type: inline-size; */

@@ -7,7 +7,7 @@ const StyledChip = styled(Chip)({
     '& .MuiChip-label': {
       display: 'block',
       fontFamily: "initial",
-      fontSize: '1.1rem',
+      fontSize: '1rem',
       padding: "5px"
     },
   });

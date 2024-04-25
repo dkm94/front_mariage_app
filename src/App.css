@@ -9,7 +9,7 @@ html, body {
     font-weight: 400 !important;
     font-size: 0.9rem;
     /* font-family: 'Playfair Display', serif !important; */
-    font-family: "Karla", sans-serif;
+    font-family: "Karla", sans-serif !important;
     font-optical-sizing: auto;
     font-style: normal;
     background-color: #f9f9f9 !important;
@@ -20,7 +20,7 @@ html, body {
 }
 .MuiChip-label {
     font-family: "Karla", sans-serif !important;
-    font-size: 1.1rem;
+    font-size: 1rem;
     letter-spacing: -1px;
 }
 

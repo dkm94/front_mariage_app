@@ -36,6 +36,7 @@ interface AccountProps {
 }
 
 const MyAccount = (props: AccountProps) => {
+    // TODO: Update URL
     const user: UserType = useCurrentUser();
     const { id, mariageID, firstPerson, secondPerson, email } = user as { id: string, mariageID: string, firstPerson: string, secondPerson: string, email: string};
 
