@@ -313,7 +313,7 @@ const MyAccount = (props: AccountProps) => {
                     </Container>
                     <Container fluid style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", marginTop: "50px", maxWidth: "950px" }}>
                         {/* TODO: Checker le mail test et renvoyer un message d'erreur au besoin (ajouter une fonction côté backend) */}
-                        <CustomButton text="Supprimer le compte" backgroundColor="darkred" onClick={() => setOpenModal(true)} style={{ borderRadius: "5px" }} />
+                        <CustomButton type={"button"} text="Supprimer le compte" backgroundColor="darkred" onClick={() => setOpenModal(true)} style={{ borderRadius: "5px" }} />
                     </Container>
                 </div>
                 {openModal && (

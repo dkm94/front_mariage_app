@@ -63,10 +63,10 @@ const Card = (props: DashboardCardProps) => {
   const tasks = (
     <div>
       <span>Completées </span>
-      <span style={{ fontWeight: "bold" }}>{`(${subArrayOne})`}</span>
+      <span>{`(${subArrayOne})`}</span>
       <br />
       <span>Restantes </span>
-      <span style={{ fontWeight: "bold" }}>{`(${subArrayTwo})`}</span>
+      <span>{`(${subArrayTwo})`}</span>
       <br />
     </div>
   );
@@ -74,14 +74,10 @@ const Card = (props: DashboardCardProps) => {
   const guests = (
     <div>
       <span>{firstPerson} </span>
-      <span
-        style={{ fontWeight: "bold" }}
-      >{`(${firstFamilyGuests?.length})`}</span>
+      <span>{`(${firstFamilyGuests?.length})`}</span>
       <br />
       <span>{secondPerson} </span>
-      <span
-        style={{ fontWeight: "bold" }}
-      >{`(${secondFamilyGuests?.length})`}</span>
+      <span>{`(${secondFamilyGuests?.length})`}</span>
       <br />
     </div>
   );
@@ -90,7 +86,7 @@ const Card = (props: DashboardCardProps) => {
     const getElement = array?.map((el) => (
       <li key={el?._id}>
         <span>{el?.name} </span>
-        <span style={{ fontWeight: "bold" }}>
+        <span>
           ({el?.guestID?.length} pers.)
         </span>
       </li>
@@ -102,19 +98,19 @@ const Card = (props: DashboardCardProps) => {
   const reception: JSX.Element = (
     <div>
       <span>Entrées </span>
-      <span style={{ fontWeight: "bold" }}>{`(${subArrayOne})`}</span>
+      <span>{`(${subArrayOne})`}</span>
       <br />
       <span>Plats </span>
-      <span style={{ fontWeight: "bold" }}>{`(${subArrayTwo})`}</span>
+      <span>{`(${subArrayTwo})`}</span>
       <br />
       <span>Desserts </span>
-      <span style={{ fontWeight: "bold" }}>{`(${subArrayThree})`}</span>
+      <span>{`(${subArrayThree})`}</span>
       <br />
       <span>Apéritifs </span>
-      <span style={{ fontWeight: "bold" }}>{`(${subArrayFour})`}</span>
+      <span>{`(${subArrayFour})`}</span>
       <br />
       <span>Boissons </span>
-      <span style={{ fontWeight: "bold" }}>{`(${subArrayFive})`}</span>
+      <span>{`(${subArrayFive})`}</span>
       <br />
     </div>
   );

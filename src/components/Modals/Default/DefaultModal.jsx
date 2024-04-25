@@ -23,29 +23,24 @@ export default function DefaultModal(props) {
       y: [yStart, 500]
     })
     setOpen(false);
-    setEdit(null);
+    setEdit && setEdit(null);
     close && close();
   }
 
   return ReactDom.createPortal(
     <>
     <div className="initial-modal">
-      {selectedId && (
-        <>
-          <div className="modal-overlay" onClick={handleClose} />
+      <div className="modal-overlay" onClick={handleClose} />
+        <div className="modal-default">
           <div className="modal-default">
-            <div className="modal-default">
-                <div className="modal-head">
-                    <h2>{title}</h2>
-                </div>
-                {children}
+            <div className="modal-head">
+              <h2>{title}</h2>
             </div>
+            {children}
           </div>
-        </>
-      )}
-    </div>
+        </div>
+      </div>
 
-    {selectedId && (
       <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -94,8 +89,6 @@ export default function DefaultModal(props) {
           </div>
         </motion.div>
       </motion.div>
-    )}
-        
     </>,
     document.getElementById("portal")
   );

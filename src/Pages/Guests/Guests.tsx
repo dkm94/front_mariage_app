@@ -142,7 +142,7 @@ const Guests = (props: GuestsProps) => {
             // totalGuests={totalGuests} 
           />
         </div>
-        <AddButton onClick={handleModal} />
+        <AddButton onClick={handleModal} type="button" />
         <SwitchEditMode checked={checked} onChange={switchHandler} />
       </div>
       <div className="guests___list">
