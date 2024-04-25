@@ -29,6 +29,7 @@
 .db-component-style > h3 {
     font-size: 1rem;
     text-transform: uppercase;
+    font-family: 'Playfair Display', serif;
 }
 
 .dashbord-content {

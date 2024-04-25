@@ -44,6 +44,7 @@ interface SideNavigationProps {
                   marginTop: "15px",
                   fontWeight: 500,
                   fontSize: "2.5rem",
+                  fontFamily: "'Playfair Display', serif"
                 }}>
               {!props.loading && isOpen ? `${props.userInfos?.firstPerson} & ${props.userInfos?.secondPerson}` : ""}
             </span>

@@ -299,7 +299,6 @@ const UpdateGuest = (props: UpdateGuestProps) => {
               borderRadius="5px"
               color="error"
               border={"1px solid #f44336"}
-              fontWeight={900}
               />
 
               <CustomButton

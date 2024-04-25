@@ -84,6 +84,7 @@ const Guests = (props: GuestsProps) => {
 
   const firstPersonGuests = guests.filter((guest) => guest?.family === "1").length;
   const secondPersonGuests = guests.filter((guest) => guest?.family === "2").length;
+  // TODO: edit URL
 
   return (
     <ContentLayout 

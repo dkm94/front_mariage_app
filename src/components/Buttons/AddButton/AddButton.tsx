@@ -16,6 +16,7 @@ const CustomButton = styled(MuiButton)({
     gap: "10px", 
     paddingRight: "15px", 
     borderRadius: "36px",
+    fontFamily: "'Karla', sans-serif",
     "&:hover": {
         background: "#333232",
       },

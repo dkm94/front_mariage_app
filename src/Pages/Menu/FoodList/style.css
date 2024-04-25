@@ -19,6 +19,13 @@
 }
 .category h4{
     margin-bottom: 20px;
+    font-size: 1.1rem;
+    text-align: center;
+    line-height: 23px;
+    font-family: "Playfair Display", serif;
+    /* font-weight: 900; */
+    color: #878a8c;
+    text-transform: uppercase;
 }
 .category ul {
     display: flex;

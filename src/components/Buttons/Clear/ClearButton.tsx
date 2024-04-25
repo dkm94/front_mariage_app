@@ -17,6 +17,7 @@ const CustomButton = styled(Button)({
   color: "#000000",
   width: "100%",
   textTransform: "unset",
+  fontWeight: 400
 });
 
 const ClearButton = ({ text, ...rest }) => {

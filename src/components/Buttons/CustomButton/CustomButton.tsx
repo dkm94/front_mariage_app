@@ -29,7 +29,6 @@ const CustomButton = (props) => {
       paddingRight: "30px",
       paddingLeft: "30px",
       fontWeight: props?.fontWeight ? props.fontWeight : "unset",
-      // fontFamily: "Playfair Display serif",
       border: props.border ? props.border : "none",
       width: props.width ? props.width : "auto",
       }}
