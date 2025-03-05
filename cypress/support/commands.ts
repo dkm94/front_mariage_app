@@ -27,7 +27,7 @@
 Cypress.Commands.add('openLoginForm', () => {
   const connexionBtn = cy.get('.navbar-menu'); // add id to button
   connexionBtn.should('be.visible').click();
-  cy.contains('Se connecter');
+  cy.contains('Se connecter').should('be.visible');
 });
 
 Cypress.Commands.add('openRegisterForm', () => {

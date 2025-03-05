@@ -3,9 +3,9 @@ describe('Login Form', () => {
         cy.visit('https://mariage-en-main.com/');
     });
 
-    it('should open the login form', () => {
+    it('should open the login form and match the URL "/login"', () => {
         cy.openLoginForm();
-        cy.contains('Se connecter').should('be.visible');
+        cy.url().should('include', '/login');
     });
 
     it('should close the login form', () => {
