@@ -25,11 +25,15 @@
 // // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 Cypress.Commands.add('openLoginForm', () => {
-    const connexionBtn = cy.get('.navbar-menu'); // add id to button
-    connexionBtn.should('be.visible').click();
-    cy.contains('Se connecter');
-  });
+  const connexionBtn = cy.get('.navbar-menu'); // add id to button
+  connexionBtn.should('be.visible').click();
+  cy.contains('Se connecter');
+});
 
+Cypress.Commands.add('openRegisterForm', () => {
+  const createAccountBtn = cy.get('#signup-box-form > button');
+  createAccountBtn.should('be.visible').click();
+});
 declare global {
   namespace Cypress {
     interface Chainable {
@@ -38,6 +42,7 @@ declare global {
     //   dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
     //   visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
       openLoginForm(): Chainable<void>
+      openRegisterForm(): Chainable<void>
     }
   }
 }
