@@ -13,4 +13,12 @@ describe('Login Form', () => {
         cy.get('.auth-modal-close > button').click();
         cy.contains('Se connecter').should('not.exist');
     });
+
+    it('should switch from register to login form when the bottom link is clicked', () => { 
+        // BEWARE !! This is not a link but a button !
+        cy.openRegisterForm();
+        const loginBtn = cy.get('.register__signup > button').contains('Connectez-vous');
+        loginBtn.should('be.visible').click();
+        cy.contains('Se connecter').should('be.visible');
+    });
 });

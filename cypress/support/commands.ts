@@ -33,6 +33,7 @@ Cypress.Commands.add('openLoginForm', () => {
 Cypress.Commands.add('openRegisterForm', () => {
   const createAccountBtn = cy.get('#signup-box-form > button');
   createAccountBtn.should('be.visible').click();
+  cy.contains('Inscrivez-vous').should('be.visible');
 });
 declare global {
   namespace Cypress {
