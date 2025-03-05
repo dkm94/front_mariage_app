@@ -2,6 +2,7 @@
     "compilerOptions": {
         "jsx": "react",
         "lib": ["es6", "dom"],
+        "types": ["cypress", "node"],
         "noImplicitAny": false,
         "noImplicitThis": true,
         "strictNullChecks": true,
@@ -9,5 +10,6 @@
         "paths": {
             "react": [ "./node_modules/@types/react" ]
           }
-    }
+    },
+    "include": ["**/*.ts", "cypress/**/*.ts"]
   }
