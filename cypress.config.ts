@@ -1,5 +1,4 @@
 import { defineConfig } from "cypress";
-// import { registerAIOTestsPlugin } from "cypress-aiotests-reporter/src";
 const { registerAIOTestsPlugin } = require('cypress-aiotests-reporter/src')
 import dotenv from 'dotenv';
 
