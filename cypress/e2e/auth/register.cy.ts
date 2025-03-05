@@ -3,7 +3,7 @@ describe('Register form', () => {
         cy.visit('https://mariage-en-main.com/');
     });
     
-    it('should open the registration form and match the URL "/register"', () => {
+    it('should open the registration form and match the URL "/register" (QASM-TC-7)', () => {
         cy.openRegisterForm();
         cy.url().should('include', '/register');
     });

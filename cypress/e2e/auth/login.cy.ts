@@ -3,7 +3,7 @@ describe('Login Form', () => {
         cy.visit('https://mariage-en-main.com/');
     });
 
-    it('should open the login form and match the URL "/login"', () => {
+    it('should open the login form and match the URL "/login" (QASM-TC-6)', () => {
         cy.openLoginForm();
         cy.url().should('include', '/login');
     });
@@ -14,7 +14,7 @@ describe('Login Form', () => {
         cy.contains('Se connecter').should('not.exist');
     });
 
-    it('should switch from register to login form when the bottom link is clicked and match the URL "/login"', () => { 
+    it('should switch from register to login form when the bottom link is clicked and match the URL "/login" (QASM-TC-8)', () => { 
         // BEWARE !! This is not a link but a button !
         cy.openRegisterForm();
         cy.url().should('include', '/register');
