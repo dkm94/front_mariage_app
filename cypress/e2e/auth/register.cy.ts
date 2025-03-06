@@ -1,11 +1,19 @@
 describe('Register form', () => {
+    const baseURL = "https://mariage-en-main.com";
+
     beforeEach(() => {
-        cy.visit('https://mariage-en-main.com/');
+        cy.visit(baseURL);
     });
     
     it('should open the registration form and match the URL "/register" (QASM-TC-7)', () => {
         cy.openRegisterForm();
-        cy.url().should('include', '/register');
+        cy.url().should('eq', `${baseURL}/register`);
+    });
+
+    it('should match the base URL "/" when the form is closed (QASM-TC-10)', () => {
+        cy.openLoginForm();
+        cy.get("#signup-box-form > button").click();
+        cy.url().should("eq", `${baseURL}/`);
     });
     
     // it('should submit the form with valid data', () => {    
