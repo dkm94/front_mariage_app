@@ -9,7 +9,7 @@ export default defineConfig({
     aioTests: {
       enableReporting: true, // Active le reporting AIO Tests
       cloud: {
-        apiKey: process.env.AIOTESTS_API_KEY,
+        apiKey: process.env.AIO_API_KEY,
       },
       jiraProjectId: process.env.JIRA_PROJECT_ID,
       cycleDetails: {
