@@ -15,7 +15,7 @@ export default defineConfig({
       cycleDetails: {
         cycleKey: process.env.CYCLE_KEY,
         createNewCycle: false,
-        cycleName: "Auth Automation",
+        cycleName: "Ad hoc",
       }
   }
 },
@@ -23,9 +23,25 @@ export default defineConfig({
     baseUrl: 'https://mariage-en-main.com',
     supportFile: 'cypress/support/e2e.ts',
     setupNodeEvents(on, config) {
-      // implement node event listeners here
       registerAIOTestsPlugin(on, config);
 
+      // if multiple reporters are needed (events like "on"), follow the instructions in the documentation:
+      //https://aiosupport.atlassian.net/wiki/spaces/AioTests/pages/2027192415/Cypress+AIO+Tests+Reporter#Using-multiple-reporters%3F
+
+      // implement node event listeners here
+      // Exécuter du code avant chaque test
+      // on('before:spec', (spec) => {
+      //   console.log(`Le test ${spec.name} va commencer.`);
+      // });
+
+      // Exécuter du code après chaque test
+      on("after:spec", (spec, results) => {
+        console.log(
+          `Le test ${spec.name} est terminé. Résultat : ${
+            results.stats.failures === 0 ? "Succès" : "Échec"
+          }`
+        );
+      });
       return config;
     },
   },
