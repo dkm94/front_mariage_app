@@ -35,6 +35,15 @@ Cypress.Commands.add('openRegisterForm', () => {
   createAccountBtn.should('be.visible').click();
   cy.contains('Inscrivez-vous').should('be.visible');
 });
+
+Cypress.Commands.add('login', () => {
+  const email = Cypress.env('email');
+  const password = Cypress.env('password');
+
+  cy.get('#login-box-form > div:nth-child(1) > input').type(email);
+  cy.get('#login-box-form > div:nth-child(2) > input').type(password);
+  cy.get('#login-box-form > button').click();
+})
 declare global {
   namespace Cypress {
     interface Chainable {
@@ -44,6 +53,7 @@ declare global {
     //   visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
       openLoginForm(): Chainable<void>
       openRegisterForm(): Chainable<void>
+      login(): Chainable<void>
     }
   }
 }

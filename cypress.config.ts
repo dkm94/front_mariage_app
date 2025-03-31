@@ -34,6 +34,9 @@ export default defineConfig({
       //   console.log(`Le test ${spec.name} va commencer.`);
       // });
 
+      config.env.userEmail = process.env.USER_EMAIL;
+      config.env.userPwd = process.env.USER_PWD;
+
       // Exécuter du code après chaque test
       on("after:spec", (spec, results) => {
         console.log(
