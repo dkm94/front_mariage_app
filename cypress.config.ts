@@ -38,13 +38,13 @@ export default defineConfig({
       config.env.userPwd = process.env.USER_PWD;
 
       // Exécuter du code après chaque test
-      on("after:spec", (spec, results) => {
-        console.log(
-          `Le test ${spec.name} est terminé. Résultat : ${
-            results.stats.failures === 0 ? "Succès" : "Échec"
-          }`
-        );
-      });
+      // on("after:spec", (spec, results) => {
+      //   console.log(
+      //     `Le test ${spec.name} est terminé. Résultat : ${
+      //       results.stats.failures === 0 ? "Succès" : "Échec"
+      //     }`
+      //   );
+      // });
       return config;
     },
   },

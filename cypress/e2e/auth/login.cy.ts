@@ -7,6 +7,10 @@ describe('Login Form', () => {
         cy.visit(baseURL);
     });
 
+    it('should open the login form when the "Connexion" button is clicked (QASM-TC-80)', () => {
+        cy.openLoginForm();
+    });
+
     it('should open the login form and match the URL "/login" (QASM-TC-6)', () => {
         cy.openLoginForm();
         cy.url().should('eq', `${baseURL}/login`);
@@ -35,7 +39,7 @@ describe('Login Form', () => {
         cy.url().should('eq', `${baseURL}/login`);
     });
 
-    it('should allow user to login with valid credentials (QASM-TC-14)', () => {
+    it('should allow user to login with valid credentials (QASM-TC-82)', () => {
         // cy.intercept({
         //     method: "POST",
         //     path: "/api/auth/adminLogin",
@@ -69,5 +73,44 @@ describe('Login Form', () => {
         // cy.wait("@loginRequest").then(() => {
         //     cy.url().should("include", "/tableau-de-bord");
         // });
+    });
+
+    it('should not allow user to login with invalid credentials (QASM-TC-79)', () => {
+        cy.openLoginForm();
+        cy.url().should('eq', `${baseURL}/login`);
+
+        const emailInput = cy.get('.auth-modal > .login-page > .login-grid > .grid-item-2 > .login > .login__form > form > :nth-child(1) > .MuiFormControl-root > .MuiInputBase-root > #email');
+        const pwdInput = cy.get('.auth-modal > .login-page > .login-grid > .grid-item-2 > .login > .login__form > form > :nth-child(2) > .MuiFormControl-root > .MuiInputBase-root > #password');
+        const button = cy.get('.auth-modal > .login-page > .login-grid > .grid-item-2 > .login > .login__form > form > :nth-child(3) > .MuiButtonBase-root').contains('Se connecter');
+
+        emailInput.invoke("val", "");
+        pwdInput.invoke("val", "");
+
+        emailInput.type("unregistered@mail.com");
+        pwdInput.type("Azertyuiop123!");
+        button.click();
+
+        cy.contains("Echec connexion").should("be.visible");
+        cy.url().should("eq", `${baseURL}/login`);
+    });
+
+    it('should redirect user to the homepage if unauthenticated (QASM-TC-78)', () => {
+        cy.visit(`https://mariage-en-main.com/mariage/660832cdb68f18004dd08896/tableau-de-bord`);
+        cy.url().should('eq', `${baseURL}/`);
+    });
+
+    it('should log out (QASM-TC-86)', () => {
+        cy.openLoginForm();
+        cy.url().should('eq', `${baseURL}/login`);
+
+        const button = cy.get('.auth-modal > .login-page > .login-grid > .grid-item-2 > .login > .login__form > form > :nth-child(3) > .MuiButtonBase-root').contains('Se connecter');
+        button.click();
+
+        cy.url().should("include", "/tableau-de-bord");
+
+        const logoutButton = cy.get('.slideDown-8 > button[type="submit"]').contains('Déconnexion'); 
+        logoutButton.click();
+        cy.url().should('eq', `${baseURL}/`);
+        cy.contains("Inscrivez-vous dès maintenant !").should("be.visible");
     });
 });
