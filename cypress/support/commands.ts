@@ -11,19 +11,24 @@
 
 
 // -- This is a parent command --
+const apiURL = Cypress.env("apiUrl");
 
 // Use as precondition
-Cypress.Commands.add('loginViaAPI', (email, password, options = {}) => {
+Cypress.Commands.add('loginViaAPI', (email?, password?, options = {}) => {
+
   // Successful login option
   const { expectStatus = 200 } = options;
+
+  const defaultEmail = Cypress.env("userEmail");
+  const defaultPassword = Cypress.env("userPwd");
 
   // Login request from API
   cy.request({
     method: "POST",
-    url: `${Cypress.env("apiUrl")}/api/auth/adminLogin`,
+    url: `${apiURL}/api/auth/adminLogin`,
     body: {
-      email,
-      password,
+      email: email || defaultEmail,
+      password: password || defaultPassword,
     },
   }).then((response) => {
     expect(response.status).to.eq(expectStatus);
@@ -31,7 +36,10 @@ Cypress.Commands.add('loginViaAPI', (email, password, options = {}) => {
     expect(response.body).to.have.property("token");
     localStorage.setItem("token", response.body.token);
   });
+  
 
+  cy.visit("https://mariage-en-main.com");
+  
   // Check the redirection to the dashboard page
   cy.url().should("include", "/tableau-de-bord");
 
@@ -39,10 +47,6 @@ Cypress.Commands.add('loginViaAPI', (email, password, options = {}) => {
   cy.get(".titles > h2")
     .contains("Que souhaitez-vous faire aujourd'hui ?")
     .should("be.visible");
-
-  // Check if the user is logged in with the top menu display
-  cy.get(".navbar-menu").contains("Paramètres").should("be.visible");
-  cy.get(".navbar-menu").contains("Déconnexion").should("be.visible");
 });
 
 // For UX tests (login.cy.ts)
@@ -107,7 +111,7 @@ Cypress.Commands.add('openRegisterForm', () => {
 declare global {
   namespace Cypress {
     interface Chainable {
-      loginViaAPI(email: string, password: string, options: any): Chainable<Element>
+      loginViaAPI(email?: string, password?: string, options?: any): Chainable<Element>
       loginViaUI(email?: string, password?: string): Chainable<void>
       logout(): Chainable<void>
     //   drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>

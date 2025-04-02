@@ -1,8 +1,9 @@
 import { defineConfig } from "cypress";
 const { registerAIOTestsPlugin } = require('cypress-aiotests-reporter/src')
-import dotenv from 'dotenv';
+// import dotenv from 'dotenv';
+import 'dotenv/config';
 
-dotenv.config();
+// dotenv.config();
 
 export default defineConfig({
   env: {
@@ -36,8 +37,8 @@ export default defineConfig({
 
       config.env.userEmail = process.env.USER_EMAIL;
       config.env.userPwd = process.env.USER_PWD;
-      config.env.baseUrl = process.env.BASE_URL;
-      config.env.apiUrl = process.env.API_URL;
+      config.env.baseUrl = process.env.MEM_BASE_UR;
+      config.env.apiUrl = process.env.MEM_API_URL;
 
       // Exécuter du code après chaque test
       // on("after:spec", (spec, results) => {
