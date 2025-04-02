@@ -1,10 +1,8 @@
 describe('Login Form', () => {
-    const baseURL = "https://mariage-en-main.com";
-    let userEmail;
-    let userPwd;
+    const baseURL = Cypress.config("baseUrl");
 
     beforeEach(() => {
-        cy.visit(baseURL);
+        cy.visit(baseURL || "mariage-en-main.com");
     });
 
     it('should open the login form when the "Connexion" button is clicked (QASM-TC-80)', () => {
@@ -40,55 +38,22 @@ describe('Login Form', () => {
     });
 
     it('should allow user to login with valid credentials (QASM-TC-82)', () => {
-        // cy.intercept({
-        //     method: "POST",
-        //     path: "/api/auth/adminLogin",
-        //     query: {
-        //       email: process.env.USER_EMAIL || '',
-        //       password: process.env.USER_PWD || '',
-        //       signal: "{}"
-        //     }
-        //   }).as("loginRequest");
 
         cy.openLoginForm();
         cy.url().should('eq', `${baseURL}/login`);
 
-        userEmail = Cypress.env('userEmail');
-        userPwd = Cypress.env('userPwd');
+        // The inputs are already prefilled with the valid user credentials
+        cy.loginViaUI();
 
-        const emailInput = cy.get('.auth-modal > .login-page > .login-grid > .grid-item-2 > .login > .login__form > form > :nth-child(1) > .MuiFormControl-root > .MuiInputBase-root > #email');
-        const pwdInput = cy.get('.auth-modal > .login-page > .login-grid > .grid-item-2 > .login > .login__form > form > :nth-child(2) > .MuiFormControl-root > .MuiInputBase-root > #password');
-        const button = cy.get('.auth-modal > .login-page > .login-grid > .grid-item-2 > .login > .login__form > form > :nth-child(3) > .MuiButtonBase-root').contains('Se connecter');
-
-        emailInput.invoke("val", "");
-        pwdInput.invoke("val", "");
-
-        emailInput.type(userEmail);
-        pwdInput.type(userPwd);
-        button.click();
-
+        // Check redirection to the dashboard page
         cy.url().should("include", "/tableau-de-bord");
-
-
-        // cy.wait("@loginRequest").then(() => {
-        //     cy.url().should("include", "/tableau-de-bord");
-        // });
     });
 
     it('should not allow user to login with invalid credentials (QASM-TC-79)', () => {
         cy.openLoginForm();
         cy.url().should('eq', `${baseURL}/login`);
 
-        const emailInput = cy.get('.auth-modal > .login-page > .login-grid > .grid-item-2 > .login > .login__form > form > :nth-child(1) > .MuiFormControl-root > .MuiInputBase-root > #email');
-        const pwdInput = cy.get('.auth-modal > .login-page > .login-grid > .grid-item-2 > .login > .login__form > form > :nth-child(2) > .MuiFormControl-root > .MuiInputBase-root > #password');
-        const button = cy.get('.auth-modal > .login-page > .login-grid > .grid-item-2 > .login > .login__form > form > :nth-child(3) > .MuiButtonBase-root').contains('Se connecter');
-
-        emailInput.invoke("val", "");
-        pwdInput.invoke("val", "");
-
-        emailInput.type("unregistered@mail.com");
-        pwdInput.type("Azertyuiop123!");
-        button.click();
+        cy.loginViaUI("unregistered@mail.com", "Azertyuiop123!");
 
         cy.contains("Echec connexion").should("be.visible");
         cy.url().should("eq", `${baseURL}/login`);
@@ -103,13 +68,10 @@ describe('Login Form', () => {
         cy.openLoginForm();
         cy.url().should('eq', `${baseURL}/login`);
 
-        const button = cy.get('.auth-modal > .login-page > .login-grid > .grid-item-2 > .login > .login__form > form > :nth-child(3) > .MuiButtonBase-root').contains('Se connecter');
-        button.click();
-
+        cy.loginViaUI();
         cy.url().should("include", "/tableau-de-bord");
 
-        const logoutButton = cy.get('.slideDown-8 > button[type="submit"]').contains('Déconnexion'); 
-        logoutButton.click();
+        cy.logout();
         cy.url().should('eq', `${baseURL}/`);
         cy.contains("Inscrivez-vous dès maintenant !").should("be.visible");
     });

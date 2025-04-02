@@ -11,9 +11,76 @@
 
 
 // -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
 
+// Use as precondition
+Cypress.Commands.add('loginViaAPI', (email, password, options = {}) => {
+  // Successful login option
+  const { expectStatus = 200 } = options;
 
+  // Login request from API
+  cy.request({
+    method: "POST",
+    url: `${Cypress.env("apiUrl")}/api/auth/adminLogin`,
+    body: {
+      email,
+      password,
+    },
+  }).then((response) => {
+    expect(response.status).to.eq(expectStatus);
+    // Check if the response body contains the token
+    expect(response.body).to.have.property("token");
+    localStorage.setItem("token", response.body.token);
+  });
+
+  // Check the redirection to the dashboard page
+  cy.url().should("include", "/tableau-de-bord");
+
+  // Check if the page content is correctly loaded
+  cy.get(".titles > h2")
+    .contains("Que souhaitez-vous faire aujourd'hui ?")
+    .should("be.visible");
+
+  // Check if the user is logged in with the top menu display
+  cy.get(".navbar-menu").contains("Paramètres").should("be.visible");
+  cy.get(".navbar-menu").contains("Déconnexion").should("be.visible");
+});
+
+// For UX tests (login.cy.ts)
+Cypress.Commands.add("loginViaUI", (email?: string, password?: string) => {
+
+  // email and password inputs
+  const emailInput = cy.get(
+    ".auth-modal > .login-page > .login-grid > .grid-item-2 > .login > .login__form > form > :nth-child(1) > .MuiFormControl-root > .MuiInputBase-root > #email"
+  );
+  const passwordInput = cy.get(
+    ".auth-modal > .login-page > .login-grid > .grid-item-2 > .login > .login__form > form > :nth-child(2) > .MuiFormControl-root > .MuiInputBase-root > #password"
+  );
+
+  // Form validation button
+  const button = cy
+    .get(
+      ".auth-modal > .login-page > .login-grid > .grid-item-2 > .login > .login__form > form > :nth-child(3) > .MuiButtonBase-root"
+    )
+    .contains("Se connecter");
+
+  // Passing unknown credentials
+  if (email && password) {
+    // Empty both inputs
+    emailInput.invoke("val", "");
+    passwordInput.invoke("val", "");
+
+    // Type the credentials
+    emailInput.type(email);
+    passwordInput.type(password);
+  }
+
+  button.click();
+});
+
+Cypress.Commands.add("logout", () => {
+  const logoutButton = cy.get('.slideDown-8 > button[type="submit"]').contains('Déconnexion'); 
+  logoutButton.click();
+});
 // // -- This is a child command --
 // Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
 
@@ -36,24 +103,19 @@ Cypress.Commands.add('openRegisterForm', () => {
   cy.contains('Inscrivez-vous').should('be.visible');
 });
 
-Cypress.Commands.add('login', () => {
-  const email = Cypress.env('email');
-  const password = Cypress.env('password');
 
-  cy.get('#login-box-form > div:nth-child(1) > input').type(email);
-  cy.get('#login-box-form > div:nth-child(2) > input').type(password);
-  cy.get('#login-box-form > button').click();
-})
 declare global {
   namespace Cypress {
     interface Chainable {
-    //   login(email: string, password: string): Chainable<void>
+      loginViaAPI(email: string, password: string, options: any): Chainable<Element>
+      loginViaUI(email?: string, password?: string): Chainable<void>
+      logout(): Chainable<void>
     //   drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
     //   dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
     //   visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
       openLoginForm(): Chainable<void>
       openRegisterForm(): Chainable<void>
-      login(): Chainable<void>
+      // loginWithEnv(): Chainable<void>
     }
   }
 }

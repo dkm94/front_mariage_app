@@ -36,6 +36,8 @@ export default defineConfig({
 
       config.env.userEmail = process.env.USER_EMAIL;
       config.env.userPwd = process.env.USER_PWD;
+      config.env.baseUrl = process.env.BASE_URL;
+      config.env.apiUrl = process.env.API_URL;
 
       // Exécuter du code après chaque test
       // on("after:spec", (spec, results) => {
