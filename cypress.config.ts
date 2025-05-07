@@ -16,7 +16,7 @@ export default defineConfig({
       cycleDetails: {
         cycleKey: process.env.CYCLE_KEY,
         createNewCycle: false,
-        cycleName: "Ad hoc",
+        cycleName: "MEM testing campaign - [Spring 2025]",
       }
   }
 },
